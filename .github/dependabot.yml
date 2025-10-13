@@ -35,6 +35,9 @@ updates:
     phpstan-dependencies:
       patterns:
         - "phpstan/*"
+    pagerfanta-dependencies:
+      patterns:
+        - "pagerfanta/*"
   ignore:
   - dependency-name: symfony/*
     update-types: [ "version-update:semver-major" ]
