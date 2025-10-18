@@ -18,8 +18,7 @@ RUN apt-get update \
       curl \
       gnupg \
       lsb-release \
-      openssl \
-      software-properties-common
+      openssl
 
 RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash -
 
@@ -41,7 +40,8 @@ RUN apt-get update && apt-get install -y \
         zlib1g-dev \
         git \
         build-essential \
-        nodejs
+        nodejs \
+        unzip
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
 RUN docker-php-ext-install -j "$(nproc)" \
         bcmath \
