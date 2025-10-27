@@ -25,6 +25,10 @@ class InstapaperController extends AbstractController
     #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, InstapaperImport $instapaper, Config $craueConfig, TranslatorInterface $translator)
     {
+        if (!$instapaper->isEnabled()) {
+            throw $this->createNotFoundException('Import is disabled');
+        }
+
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 

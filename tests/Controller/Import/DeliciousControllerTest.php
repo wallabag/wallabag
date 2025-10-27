@@ -200,4 +200,17 @@ class DeliciousControllerTest extends WallabagTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.failed', $body[0]);
     }
+
+    public function testImportDeliciousDisabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $client->getContainer()->get(Config::class)->set('delicious_enabled', 0);
+
+        $client->request('GET', '/import/delicious');
+
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+
+        $client->getContainer()->get(Config::class)->set('delicious_enabled', 1);
+    }
 }
