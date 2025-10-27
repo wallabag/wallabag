@@ -61,7 +61,7 @@
     "postcss-scss": "^4.0.9",
     "regenerator-runtime": "^0.14.1",
     "sass-embedded": "^1.93.2",
-    "sass-loader": "^16.0.5",
+    "sass-loader": "^16.0.6",
     "style-loader": "^4.0.0",
     "stylelint": "^15.11.0",
     "stylelint-config-standard": "^34.0.0",
