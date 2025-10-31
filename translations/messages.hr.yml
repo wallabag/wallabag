@@ -53,25 +53,25 @@ import:
     firefox:
         how_to: 'Odaberi datoteku sigurnosne kopije zabilježaka i pritisni donji gumb za uvoz datoteke. Napomena: uvoz može potrajati, jer se moraju dohvatiti svi članci.'
         page_title: Uvoz > Firefox
-        description: Ovaj uvoznik uvozi sve tvoje Firefox zabilješke. Idi na zabilješke (Ctrl+Shift+O), zatim u „Uvoz i sigurnosna kopija“, odaberi „Sigurnosna kopija …“. Dobit ćeš .json datoteku.
+        description: Ovaj uvoznik će uvesti sve tvoje Firefox zabilješke. Idi na zabilješke (Ctrl+Shift+O), zatim u „Uvoz i sigurnosna kopija“, odaberi „Sigurnosna kopija …“. Dobit ćeš .json datoteku.
     wallabag_v2:
-        description: Ovaj uvoznik uvozi sve tvoje članke wallabaga verzije 2. Idi na „Svi članci”, zatim na bočnoj traci za izvoz, pritisni „JSON”. Dobit ćeš datoteku „Svi članci.json”.
+        description: Ovaj uvoznik će uvesti sve tvoje članke wallabaga verzije 2. Idi na „Svi članci”, zatim na bočnoj traci za izvoz, pritisni „JSON”. Dobit ćeš datoteku „Svi članci.json”.
         page_title: Uvoz > Wallabag v2
     chrome:
         page_title: Uvoz > Chrome
         how_to: 'Odaberi datoteku sigurnosne kopije zabilježaka i pritisni donji gumb za uvoz datoteke. Napomena: uvoz može potrajati, jer se moraju dohvatiti svi članci.'
-        description: 'Ovaj uvoznik uvozi sve tvoje zabilješke iz Chromea. Mjesto datoteke ovisi o tvom operacijskom sustavu: Na Linuxu sustavu idi u mapu <code>~/.config/chromium/Default/</code></li><li>Na Windows sustavu mapa bi se trebala nalziti u <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>Na OS X sustavu trebala bi biti u <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Kad stigneš tamo, kopiraj datoteku <code>Bookmarks</code> na neko mjesto gdje ćeš je pronaći.<em><br>Ako koristiš Chromium umjesto Chromea, morat ćeš u skladu s time ispraviti staze.</em></p>'
+        description: 'Ovaj uvoznik će uvesti sve tvoje zabilješke iz Chromea. Mjesto datoteke ovisi o tvom operacijskom sustavu: Na Linuxu sustavu idi u mapu <code>~/.config/chromium/Default/</code></li><li>Na Windows sustavu mapa bi se trebala nalziti u <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>Na OS X sustavu trebala bi biti u <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Kad stigneš tamo, kopiraj datoteku <code>Bookmarks</code> na neko mjesto gdje ćeš je pronaći.<em><br>Ako koristiš Chromium umjesto Chromea, morat ćeš u skladu s time ispraviti staze.</em></p>'
     readability:
         how_to: Odaberi Readability izvoz i pritisni donji gumb za slanje i uvoz datoteke.
         page_title: Uvoz > Readability
-        description: Ovaj uvoznik uvozi sve tvoje Readability članke.
+        description: Ovaj uvoznik će uvesti sve tvoje Readability članke.
     worker:
         enabled: 'Uvoz se vrši asinkrono. Nakon što se uvoz zadatak pokrene, jedna vanjska usluga obradit će poslove jedan po jedan. Trenutačna usluga je:'
         download_images_warning: Aktivirao(la) si preuzimanje slika za članke. U kombinaciji s klasičnim uvozom, postupak može potrajati godinama (ili možda ne uspije). <strong>Preporučujemo</strong> aktivirati asinkroniziran uvoz za izbjegavanje grešaka.
     pinboard:
         page_title: Uvoz > Pinboard
         how_to: Odaberi Pinboard izvoz i pritisni donji gumb za slanje i uvoz datoteke.
-        description: Ovaj uvoznik uvozi sve tvoje Pinboard članke. Na stranici sigurnosne kopije (https://pinboard.in/settings/backup), pritisni „JSON” u odjeljku „Zabilješke”. Preuzet će se JSON datoteka (poput „pinboard_export”).
+        description: Ovaj uvoznik će uvesti sve tvoje Pinboard članke. Na stranici sigurnosne kopije (https://pinboard.in/settings/backup), pritisni „JSON” u odjeljku „Zabilješke”. Preuzet će se JSON datoteka (poput „pinboard_export”).
     instapaper:
         page_title: Uvoz > Instapaper
         how_to: Odaberi Instapaper izvoz i pritisni donji gumb za slanje i uvoz datoteke.
@@ -81,7 +81,7 @@ import:
             admin_message: Moraš definirati %keyurls%jedan pocket_consumer_key%keyurle% (ključ Pocket korisnika).
             description: Uvoz iz Pocketa nije konfiguriran.
             user_message: Administrator tvog poslužitelja mora definirati ključ za sučelje za Pocket.
-        description: Ovaj uvoznik uvozi sve tvoje Pocket podatke. Pocket nam ne dopušta dohvaćanje sadržaja iz njihove usluge, stoga će se čitljiv sadržaj svakog članka ponovno dohvatiti pomoću wallabaga.
+        description: Ovaj uvoznik će uvesti sve tvoje Pocket podatke. Pocket nam ne dopušta dohvaćanje sadržaja iz njihove usluge, stoga će se čitljiv sadržaj svakog članka ponovno dohvatiti pomoću wallabaga.
         authorize_message: Tvoje podatke možeš uvesti s tvog Pocket računa. Jednostavno pritisni donji gumb i autoriziraj program da se poveže na getpocket.com.
         connect_to_pocket: Spoji se na Pocket i uvezi podatke
         page_title: Uvoz > Pocket
@@ -93,30 +93,34 @@ import:
     wallabag_v1:
         page_title: Uvoz > Wallabag v1
         how_to: Odaberi wallabag izvoz i pritisni donji gumb za slanje i uvoz datoteke.
-        description: Ovaj uvoznik uvozi sve tvoje članke wallabaga verzije 1. Na tvojoj stranici konfiguracije, pritisni „JSON izvoz” u odjeljku „Izvezi svoje wallabag podatke”. Dobit ćeš datoteku „wallabag-export-1-xxxx-xx-xx.json”.
+        description: Ovaj uvoznik će uvesti sve tvoje članke wallabaga verzije 1. Na tvojoj stranici konfiguracije, pritisni „JSON izvoz” u odjeljku „Izvezi svoje wallabag podatke”. Dobit ćeš datoteku „wallabag-export-1-xxxx-xx-xx.json”.
     page_description: Dobro došao/dobro došla u wallabag uvoznik. Odaberi prethodnu uslugu s koje želiš premjestiti podatke.
     action:
         import_contents: Uvezi sadržaj
     elcurator:
-        description: Ovaj uvoznik uvozi sve tvoje elCurator članke.
+        description: Ovaj uvoznik će uvesti sve tvoje elCurator članke.
         page_title: Uvoz > elCurator
         how_to: Odaberi elCurator izvoz i pritisni donji gumb za slanje i uvoz datoteke.
     delicious:
         page_title: Uvoz > del.icio.us
-        description: Ovaj uvoznik uvozi sve tvoje Delicious zabilješke. Od 2021. godine nadalje, iz njega možeš ponovo izvesti podatke pomoću stranice za izvoz (https://del.icio.us/export). Odaberi format „JSON” i preuzmi ga (npr. „delicious_export.2021.02.06_21.10.json”).
+        description: Ovaj uvoznik će uvesti sve tvoje Delicious zabilješke. Od 2021. godine nadalje, iz njega možeš ponovo izvesti podatke pomoću stranice za izvoz (https://del.icio.us/export). Odaberi format „JSON” i preuzmi ga (npr. „delicious_export.2021.02.06_21.10.json”).
         how_to: Odaberi Delicious izvoz i pritisni donji gumb za slanje i uvoz datoteke.
     shaarli:
         page_title: Uvoz > Shaarli
-        description: Ovaj uvoznik uvozi sve tvoje Shaarli zabilješke. Idi na odjeljak „Alati”, zatim u „Izvezi bazu podataka”, odaberi tvoje zabilješke i izvezi ih. Dobit ćeš HTML datoteku.
+        description: Ovaj uvoznik će uvesti sve tvoje Shaarli zabilješke. Idi na odjeljak „Alati”, zatim u „Izvezi bazu podataka”, odaberi tvoje zabilješke i izvezi ih. Dobit ćeš HTML datoteku.
         how_to: Odaberi datoteku sigurnosne kopije zabilježaka i pritisni donji gumb za uvoz datoteke. Postupak može trajati dugo jer se moraju dohvatiti svi članci.
     pocket_html:
         page_title: Uvoz > Pocket HTML
         how_to: Odaberi datoteku sigurnosne kopije zabilježaka i pritisni donji gumb za uvoz. Postupak može trajati dugo jer se moraju dohvatiti svi članci.
-        description: Ovaj uvoznik uvozi sve tvoje Pocket zabilješke (putem HTML izvoza). Idi na https://getpocket.com/export, zatim izvezi HTML datoteku. Preuzet će se HTML datoteka (poput „ril_export.html”).
+        description: Ovaj uvoznik će uvesti sve tvoje Pocket zabilješke (putem HTML izvoza). Idi na https://getpocket.com/export, zatim izvezi HTML datoteku. Preuzet će se HTML datoteka (poput „ril_export.html”).
     omnivore:
         page_title: Uvoz > Omnivore
-        description: Ovaj uvoznik uvozi sve tvoje Omnivor članke.
+        description: Ovaj uvoznik će uvesti sve tvoje Omnivor članke.
         how_to: Raspakiraj tvoj Omnivore izvoz, a zatim prenesi svaku JSON datoteku s imenom „metadata_x_to_y.json” pojedinačno.
+    pocket_csv:
+        page_title: Uvoz > Pocket CSV
+        description: Ovaj uvoznik će uvesti sve tvoje Pocket zabilješke (putem CSV izvoza). Idi na https://getpocket.com/export, zatim izvezi datoteku. Preuzet će se ZIP datoteka (poput „pocket.zip”). Raspakiraj ju i dobit ćeš CSV datoteku s imenom „part_000000.csv”.
+        how_to: Odaberi sigurnosnu kopiju datotake zabilješki i klikni na donji gumb za uvoz. Imaj na umu da postupak može potrajati dugo jer se moraju dohvatiti svi članci.
 about:
     helping:
         description: 'wallabag je slobodan softver otvorenog koda. Možeš nam pomoći:'
@@ -431,6 +435,7 @@ flashes:
             feed_token_updated: Token feeda aktualiziran
             feed_updated: Podaci feeda aktualizirani
             tagging_rules_reset: Pravila označavanja resetirana
+            otp_code_invalid: Nevaljani kod za dvofaktorsku autentifikaciju
     site_credential:
         notice:
             deleted: Podaci za prijavu na stranicu „%host%” izbrisani
