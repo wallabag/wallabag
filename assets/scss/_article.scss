@@ -1,4 +1,5 @@
 @use "variables";
+@use 'mixins/article' as *;
 
 /* ==========================================================================
    Article
@@ -13,73 +14,7 @@
   box-shadow: 0 0 10px #ccc;
 
   article {
-    color: #424242;
-    font-size: 18px;
-    line-height: 1.7em;
-    overflow-wrap: break-word;
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      color: #212121;
-
-      strong {
-        font-weight: 500;
-      }
-    }
-
-    h6 {
-      font-size: 1.2rem;
-    }
-
-    h5 {
-      font-size: 1.6rem;
-    }
-
-    h4 {
-      font-size: 1.9rem;
-    }
-
-    h3 {
-      font-size: 2.2rem;
-    }
-
-    h2 {
-      font-size: 2.5rem;
-    }
-
-    h1 {
-      font-size: 2.7rem;
-    }
-
-    a {
-      border-bottom: 1px dotted variables.$blue-accent-color;
-      text-decoration: none;
-    }
-
-    a:hover {
-      border-bottom-style: solid;
-    }
-
-    ul {
-      padding-left: 30px;
-    }
-
-    ul,
-    ul li {
-      list-style-type: disc;
-    }
-
-    blockquote {
-      font-style: italic;
-    }
-
-    strong {
-      font-weight: bold;
-    }
+    @include article();
   }
 
   img,
