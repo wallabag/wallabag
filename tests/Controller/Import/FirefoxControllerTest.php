@@ -91,7 +91,7 @@ class FirefoxControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportWallabagWithFirefoxFile()
+    public function testImportFirefoxWithFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -129,7 +129,7 @@ class FirefoxControllerTest extends WallabagTestCase
         $this->assertCount(3, $content->getTags());
     }
 
-    public function testImportWallabagWithEmptyFile()
+    public function testImportFirefoxWithEmptyFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -151,5 +151,18 @@ class FirefoxControllerTest extends WallabagTestCase
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.failed', $body[0]);
+    }
+
+    public function testImportFirefoxDisabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $client->getContainer()->get(Config::class)->set('firefox_enabled', 0);
+
+        $client->request('GET', '/import/firefox');
+
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+
+        $client->getContainer()->get(Config::class)->set('firefox_enabled', 1);
     }
 }

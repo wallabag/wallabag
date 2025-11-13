@@ -11,7 +11,7 @@ use Wallabag\Entity\Entry;
 
 class WallabagV2ControllerTest extends WallabagTestCase
 {
-    public function testImportWallabag()
+    public function testImportWallabagV2()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -23,7 +23,7 @@ class WallabagV2ControllerTest extends WallabagTestCase
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportWallabagWithRabbitEnabled()
+    public function testImportWallabagV2WithRabbitEnabled()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -39,7 +39,7 @@ class WallabagV2ControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportWallabagBadFile()
+    public function testImportWallabagV2BadFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -56,7 +56,7 @@ class WallabagV2ControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportWallabagWithRedisEnabled()
+    public function testImportWallabagV2WithRedisEnabled()
     {
         $this->checkRedis();
         $this->logInAs('admin');
@@ -92,7 +92,7 @@ class WallabagV2ControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportWallabagWithFile()
+    public function testImportWallabagV2WithFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -158,7 +158,7 @@ class WallabagV2ControllerTest extends WallabagTestCase
         $this->assertTrue($content->isStarred(), 'Entry is starred');
     }
 
-    public function testImportWallabagWithEmptyFile()
+    public function testImportWallabagV2WithEmptyFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -180,5 +180,18 @@ class WallabagV2ControllerTest extends WallabagTestCase
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.failed', $body[0]);
+    }
+
+    public function testImportWallabagV2Disabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $client->getContainer()->get(Config::class)->set('wallabag_v2_enabled', 0);
+
+        $client->request('GET', '/import/wallabag_v2');
+
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+
+        $client->getContainer()->get(Config::class)->set('wallabag_v2_enabled', 1);
     }
 }

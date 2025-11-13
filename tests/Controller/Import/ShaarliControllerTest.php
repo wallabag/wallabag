@@ -91,7 +91,7 @@ class ShaarliControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportWallabagWithShaarliFile()
+    public function testImportShaarliWithFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -129,7 +129,7 @@ class ShaarliControllerTest extends WallabagTestCase
         $this->assertCount(2, $content->getTags());
     }
 
-    public function testImportWallabagWithEmptyFile()
+    public function testImportShaarliWithEmptyFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -151,5 +151,18 @@ class ShaarliControllerTest extends WallabagTestCase
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.failed', $body[0]);
+    }
+
+    public function testImportShaarliDisabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $client->getContainer()->get(Config::class)->set('shaarli_enabled', 0);
+
+        $client->request('GET', '/import/shaarli');
+
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+
+        $client->getContainer()->get(Config::class)->set('shaarli_enabled', 1);
     }
 }
