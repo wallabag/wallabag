@@ -38,7 +38,7 @@ here](https://addons.mozilla.org/firefox/addon/wallabagger/).
 ### Chrome
 
 You can download the [Chrome addon
-here](https://chrome.google.com/webstore/detail/wallabagger/gbmgphmejlcoihgedabhgjdkcahacjlj?hl=fr).
+here](https://chrome.google.com/webstore/detail/wallabagger/gbmgphmejlcoihgedabhgjdkcahacjlj).
 
 ### How to use our addon
 
