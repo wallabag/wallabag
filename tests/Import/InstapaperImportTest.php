@@ -64,6 +64,58 @@ class InstapaperImportTest extends TestCase
             ->method('updateEntry')
             ->willReturn($entry);
 
+        // Verify that assignTagsToEntry is called once for the entry with a folder tag
+        // (the other 3 entries have status folders: Unread, Archive, Starred which shouldn't become tags)
+        $this->tagsAssigner
+            ->expects($this->once())
+            ->method('assignTagsToEntry')
+            ->with($this->anything(), ['test_tag'], []);
+
+        $res = $instapaperImport->import();
+
+        $this->assertTrue($res);
+        $this->assertSame(['skipped' => 0, 'imported' => 4, 'queued' => 0], $instapaperImport->getSummary());
+    }
+
+    public function testImportNewFormat()
+    {
+        $instapaperImport = $this->getInstapaperImport(false, 4);
+        $instapaperImport->setFilepath(__DIR__ . '/../fixtures/Import/instapaper-export-new.csv');
+
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->exactly(4))
+            ->method('findByUrlAndUserId')
+            ->willReturn(false);
+
+        $this->em
+            ->expects($this->any())
+            ->method('getRepository')
+            ->willReturn($entryRepo);
+
+        $entry = $this->getMockBuilder(Entry::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->contentProxy
+            ->expects($this->exactly(4))
+            ->method('updateEntry')
+            ->willReturn($entry);
+
+        // Verify tags are assigned correctly from the new format (JSON array)
+        // Entry 1 has no tags (empty array), entries 2-4 have tags
+        // Note: entries are reversed in import(), so they're processed in reverse order
+        $this->tagsAssigner
+            ->expects($this->exactly(3))
+            ->method('assignTagsToEntry')
+            ->withConsecutive(
+                [$this->anything(), ['politics', 'twitter', 'news'], []],
+                [$this->anything(), ['social'], []],
+                [$this->anything(), ['react', 'javascript'], []]
+            );
+
         $res = $instapaperImport->import();
 
         $this->assertTrue($res);
