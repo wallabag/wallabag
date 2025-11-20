@@ -7,7 +7,7 @@ ARG ENVSUBST_VERSION=v1.3.0
 # flag -ldflags "-s -w" produces a smaller executable
 RUN go install -ldflags "-s -w" -v github.com/a8m/envsubst/cmd/envsubst@${ENVSUBST_VERSION}
 
-FROM php:8.2-fpm AS rootless
+FROM php:8.2-fpm-bookworm AS rootless
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NODE_VERSION=20
