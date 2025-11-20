@@ -3,10 +3,12 @@
 namespace Wallabag\Import;
 
 use Wallabag\Entity\Entry;
+use Wallabag\Entity\User;
 
 class InstapaperImport extends AbstractImport
 {
     private $filepath;
+    private $userId;
 
     public function getName()
     {
@@ -43,6 +45,9 @@ class InstapaperImport extends AbstractImport
             return false;
         }
 
+        // Store user ID to reattach user entity after em->clear()
+        $this->userId = $this->user->getId();
+
         if (!file_exists($this->filepath) || !is_readable($this->filepath)) {
             $this->logger->error('InstapaperImport: unable to read file', ['filepath' => $this->filepath]);
 
@@ -56,12 +61,16 @@ class InstapaperImport extends AbstractImport
                 continue;
             }
 
-            // last element in the csv is the folder where the content belong
-            // BUT it can also be the status (since status = folder in Instapaper)
-            // and we don't want archive, unread & starred to become a tag
+            // As of 11/20/25, Instapaper exports (from https://www.instapaper.com/user --> Download export file)
+            // have a CSV schema of URL,Title,Selection,Folder,Timestamp,Tags.
+
+            // Tags are a JSON array (e.g. '["programming", "go", "security"]')
             $tags = null;
-            if (false === \in_array($data[3], ['Archive', 'Unread', 'Starred'], true)) {
-                $tags = [$data[3]];
+            if (!empty($data[5])) {
+                $parsedTags = json_decode($data[5], true);
+                if (is_array($parsedTags) && !empty($parsedTags)) {
+                    $tags = $parsedTags;
+                }
             }
 
             $entries[] = [
@@ -70,6 +79,7 @@ class InstapaperImport extends AbstractImport
                 'is_archived' => 'Archive' === $data[3] || 'Starred' === $data[3],
                 'is_starred' => 'Starred' === $data[3],
                 'html' => false,
+                'created_at' => $data[4],
                 'tags' => $tags,
             ];
         }
@@ -107,6 +117,11 @@ class InstapaperImport extends AbstractImport
 
     public function parseEntry(array $importedEntry)
     {
+        // Reattach user entity if it was detached by em->clear() in AbstractImport
+        if (!$this->em->contains($this->user)) {
+            $this->user = $this->em->getReference(User::class, $this->userId);
+        }
+
         $existingEntry = $this->em
             ->getRepository(Entry::class)
             ->findByUrlAndUserId($importedEntry['url'], $this->user->getId());
@@ -134,6 +149,7 @@ class InstapaperImport extends AbstractImport
 
         $entry->updateArchived($importedEntry['is_archived']);
         $entry->setStarred($importedEntry['is_starred']);
+        $entry->setCreatedAt(\DateTime::createFromFormat('U', $importedEntry['created_at']));
 
         $this->em->persist($entry);
         ++$this->importedEntries;
