@@ -74,7 +74,7 @@ class InstapaperImport extends AbstractImport
             if ($hasNewFormat && !empty($data[5])) {
                 // New format: Tags column exists and contains JSON array
                 $parsedTags = json_decode($data[5], true);
-                if (is_array($parsedTags) && !empty($parsedTags)) {
+                if (\is_array($parsedTags) && !empty($parsedTags)) {
                     $tags = $parsedTags;
                 }
             } elseif (!$hasNewFormat && false === \in_array($data[3], ['Archive', 'Unread', 'Starred'], true)) {
