@@ -43,6 +43,7 @@ class EntryController extends AbstractController
         private readonly FilterBuilderUpdaterInterface $filterBuilderUpdater,
         private readonly ContentProxy $contentProxy,
         private readonly Security $security,
+        private readonly string $fetchingErrorMessage,
     ) {
     }
 
@@ -411,7 +412,7 @@ class EntryController extends AbstractController
         $this->updateEntry($entry, 'entry_reloaded');
 
         // if refreshing entry failed, don't save it
-        if ($this->getParameter('wallabag.fetching_error_message') === $entry->getContent()) {
+        if ($this->fetchingErrorMessage === $entry->getContent()) {
             $this->addFlash('notice', 'flashes.entry.notice.entry_reloaded_failed');
 
             return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));

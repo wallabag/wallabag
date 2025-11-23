@@ -20,7 +20,13 @@ services:
             $encryptionKeyPath: "%wallabag.site_credentials.encryption_key_path%"
             $fetchingErrorMessageTitle: "%wallabag.fetching_error_message_title%"
             $fetchingErrorMessage: '%wallabag.fetching_error_message%'
+            $version: "%wallabag.version%"
+            $paypalUrl: "%wallabag.paypal_url%"
             $languages: '%wallabag.languages%'
+            $feedLimit: "%wallabag.feed_limit%"
+            $apiLimitMassActions: "%wallabag.api_limit_mass_actions%"
+            $allowMimetypes: "%wallabag.allow_mimetypes%"
+            $resourceDir: "%wallabag.resource_dir%"
             $lifeTime: '%wallabag.cache_lifetime%'
             $logoPath: 'web/img/appicon/apple-touch-icon-152.png'
             $registrationEnabled: '%fosuser_registration%'
@@ -32,6 +38,7 @@ services:
             $fonts: '%wallabag.fonts%'
             $defaultIgnoreOriginInstanceRules: '%wallabag.default_ignore_origin_instance_rules%'
             $defaultUserAgent: "%wallabag_user_agent%"
+            $addonsUrl: "%addons_url%"
 
     Wallabag\:
         resource: '../../src/*'
