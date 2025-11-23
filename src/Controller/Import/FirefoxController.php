@@ -18,7 +18,10 @@ class FirefoxController extends BrowserController
         private readonly Config $craueConfig,
         private readonly RabbitMqProducer $rabbitMqProducer,
         private readonly RedisProducer $redisProducer,
+        array $allowMimetypes,
+        string $resourceDir,
     ) {
+        parent::__construct($allowMimetypes, $resourceDir);
     }
 
     #[Route(path: '/import/firefox', name: 'import_firefox', methods: ['GET', 'POST'])]

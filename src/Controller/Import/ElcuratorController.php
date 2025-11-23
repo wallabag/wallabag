@@ -18,7 +18,10 @@ class ElcuratorController extends WallabagController
         private readonly Config $craueConfig,
         private readonly RabbitMqProducer $rabbitMqProducer,
         private readonly RedisProducer $redisProducer,
+        array $allowMimetypes,
+        string $resourceDir,
     ) {
+        parent::__construct($allowMimetypes, $resourceDir);
     }
 
     #[Route(path: '/import/elcurator', name: 'import_elcurator', methods: ['GET', 'POST'])]
