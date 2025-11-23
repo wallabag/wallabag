@@ -46,14 +46,13 @@ abstract class WallabagApiTestCase extends WebTestCase
 
         /** @var UserManager $userManager */
         $userManager = $container->get('fos_user.user_manager');
-        $firewallName = $container->getParameter('fos_user.firewall_name');
 
         $adminUser = $userManager->findUserBy(['username' => 'admin']);
         \assert($adminUser instanceof User);
 
         $this->user = $adminUser;
 
-        $client->loginUser($adminUser, $firewallName);
+        $client->loginUser($adminUser);
 
         return $client;
     }
