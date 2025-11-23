@@ -7,16 +7,21 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StaticController extends AbstractController
 {
+    public function __construct(
+        private readonly array $addonsUrl,
+        private readonly string $version,
+        private readonly string $paypalUrl,
+    ) {
+    }
+
     #[Route(path: '/howto', name: 'howto', methods: ['GET'])]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function howtoAction()
     {
-        $addonsUrl = $this->getParameter('addons_url');
-
         return $this->render(
             'Static/howto.html.twig',
             [
-                'addonsUrl' => $addonsUrl,
+                'addonsUrl' => $this->addonsUrl,
             ]
         );
     }
@@ -28,8 +33,8 @@ class StaticController extends AbstractController
         return $this->render(
             'Static/about.html.twig',
             [
-                'version' => $this->getParameter('wallabag.version'),
-                'paypal_url' => $this->getParameter('wallabag.paypal_url'),
+                'version' => $this->version,
+                'paypal_url' => $this->paypalUrl,
             ]
         );
     }
