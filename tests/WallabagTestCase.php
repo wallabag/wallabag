@@ -53,7 +53,6 @@ abstract class WallabagTestCase extends WebTestCase
         $container = static::getContainer();
 
         $userManager = $container->get('fos_user.user_manager');
-        $firewallName = $container->getParameter('fos_user.firewall_name');
 
         $user = $userManager->findUserBy(['username' => $username]);
 
@@ -61,7 +60,7 @@ abstract class WallabagTestCase extends WebTestCase
             throw new \Exception('Unable to find user "' . $username . '". Does fixtures were loaded?');
         }
 
-        $this->client->loginUser($user, $firewallName);
+        $this->client->loginUser($user);
     }
 
     /**
