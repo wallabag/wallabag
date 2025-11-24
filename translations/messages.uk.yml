@@ -36,6 +36,7 @@ menu:
         theme_toggle_auto: Автоматичний вибір оформлення
         theme_toggle_dark: Темне оформлення
         theme_toggle_light: Світле оформлення
+        with_annotations: З анотаціями
     top:
         add_new_entry: Додати новий запис
         search: Пошук
@@ -64,6 +65,7 @@ config:
         ignore_origin: Правила ігнорування
         reset: Скидання налаштувань
         rss: RSS
+        article_display: Показ статті
     form:
         save: Зберегти
     form_settings:
@@ -87,6 +89,9 @@ config:
         help_reading_speed: ''
         help_language: ''
         help_pocket_consumer_key: ''
+        fontsize_label: Розмір шрифта
+        lineheight_label: Висота лінії
+        maxwidth_label: Максимальна ширина
     form_feed:
         description: RSS-стрічки wallabag надають можливість читати збережені статті вашим улюбленим RSS-читачем. Спочатку вам потрібно згенерувати особистий код.
         token_label: Особистий код для RSS
@@ -104,12 +109,12 @@ config:
     form_user:
         two_factor_description: Вмикання двофакторної аутентифікації означає, що вам буде потрібно зробити додаткову дію після введення пароля (ввести код або перейти по посиланню з листа).
         login_label: Логін
-        name_label: Ім'я
+        name_label: ім'я
         email_label: Електронна адреса
         two_factor:
             table_method: Метод
             table_state: Стан
-            table_action: Дії
+            table_action: Дія
             emailTwoFactor_label: Вхід з допомогою листа на електронну скриньку
             googleTwoFactor_label: Вхід з допомогою Google Authenticator
             state_enabled: Увімкнено
@@ -119,10 +124,10 @@ config:
         twoFactorAuthentication_label: Two factor authentication
         help_twoFactorAuthentication: If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email.
         delete:
-            title: ''
-            description: ''
-            confirm: ''
-            button: ''
+            title: 'Видалити мій акаунт (зона небезпеки)'
+            description: 'Якщо видаляється акаунт, УСІ статті, УСІ теги, УСІ анотації та акаунт - будуть НАЗАВЖДИ видалені (це НЕЗВОРОТНЯ дія). Тебе потім деавторизує.'
+            confirm: 'Дійсно? (ЦЕ НЕЗВОРОТНЯ ДІЯ)'
+            button: 'Видалити мій акаунт'
     otp:
         page_title: Двофакторна авторизація
         app:
@@ -131,7 +136,9 @@ config:
             two_factor_code_description_3: 'На той випадок, якщо щось трапиться із телефоном, збережіть ці коди доступу:'
             two_factor_code_description_4: 'Введіть сюди код із застосунка:'
             cancel: Скасувати
-            enable: Зберегти
+            enable: Активувати
+            two_factor_code_description_5: 'Якщо Ви не бачите QR-коду, введіть наступний пароль в Ваш додаток:'
+            qrcode_label: QR-код
     reset:
         title: Зона скидання (a.k.a зона небезпеки)
         description: Використовуючи ці кнопки ви матимете можливість видалити інформацію з вашого облікового запису. Враховуйте, що ці дії є НЕЗВОРОТНІМИ.
@@ -140,6 +147,7 @@ config:
         entries: Видалити ВСІ статті
         archived: Видалити ВСІ архівні статті
         confirm: Ви впевнені? (ЦЮ ДІЮ НЕ МОЖНА БУДЕ ПОВЕРНУТИ НАЗАД)
+        tagging_rules: Видалення УСІХ правил тегування
     form_password:
         description: Тут ви можете змінити пароль. Довжина нового пароля повинна бути не менше 8 символів.
         old_password_label: Поточний пароль
@@ -164,12 +172,12 @@ config:
         faq:
             title: Довідка
             tagging_rules_definition_title: Що таке « правила тегування »?
-            tagging_rules_definition_description: ''
+            tagging_rules_definition_description: 'Ось правила керування тегами, що використовує wallabag для автоматичного тегування нових записів.<br />Кожен раз, коли додається новий запис, спрацьовують усі правила тегування, які створено. Ось у чому полягає захист від ручної класифікації записів.'
             how_to_use_them_title: Як їх використовувати?
-            how_to_use_them_description: ''
+            how_to_use_them_description: 'Уявімо, що Ти хочеш тегнути нові записи як « <i>коротке читання</i> » коли читаєш не більше 3 хвилин.<br />У цьому випадку, створи « readingTime &lt;= 3 » у полі <i>Правило</i> та « <i>коротке читання</i> » у полі <i>Теги</i>.<br />Деякі теги можна додавати одночасно, розділивши комами: « <i>коротке читання, треба почитати</i> »<br />Складні правила можна написати, користуючись зазделегідь операндами: if « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » then tag as « <i>long reading, php</i> »'
             variables_available_title: Які змінні та оператори можна використовувати для написання правил?
-            variables_available_description: ''
-            meaning: Значення
+            variables_available_description: 'Поточні змінні та оператори можна використовувати для створення правил тегування:'
+            meaning: Тлумачення
             variable_description:
                 label: Змінна
                 title: Заголовок статті
@@ -183,40 +191,65 @@ config:
                 domainName: Доменне ім'я статті
             operator_description:
                 label: Оператор
-                less_than: ''
-                strictly_less_than: ''
-                greater_than: ''
-                strictly_greater_than: ''
-                equal_to: ''
-                not_equal_to: ''
-                or: ''
-                and: ''
-                matches: ''
-                notmatches: ""
+                less_than: 'Менше ніж…'
+                strictly_less_than: 'Сильно менше ніж…'
+                greater_than: 'Більше ніж…'
+                strictly_greater_than: 'Сильно більше ніж…'
+                equal_to: 'Дорівнює…'
+                not_equal_to: 'Не дорівнює…'
+                or: 'Одне правило АБО інше'
+                and: 'Одне правило ТА інше'
+                matches: 'Тести того що <i>тема</i> співпадає з<i>пошуком</i> (чутливо до регістру).<br />Приклад: <code>тема співпадає з "football"</code>'
+                notmatches: "Тест того, що <i>subject</i> doesn't match match a <i>search</i> (case-insensitive).<br />Приклад: <code>title notmatches \"football\"</code>"
+    form_ignore_origin_rules:
+        faq:
+            title: Часті запитання
+            ignore_origin_rules_definition_title: Що робить "ignore origin rules”?
+            ignore_origin_rules_definition_description: Користування wallabag для автоматичного ігнорування джерела після редиректу.<br />Якщо редирект відбудеться під час діставання нового запису, усі правила ігноруються (<i>user defined and instance defined</i>) та буде використано адресу першого джерела.
+            how_to_use_them_title: Як ними користуватись?
+            how_to_use_them_description: Уявімо, що Ти хочеш ігнорувати джерло редіректа з « <i>rss.example.com</i> » (<i>знаючи що після редіректа, справжня адреса - example.com</i>).<br />У цьому випадку,Тобі треба вказати « host = "rss.example.com" » у поле <i>Правило</i> .
+            variables_available_title: Які змінні та операнди можна використовувати в правилах?
+            variables_available_description: 'Поточні змінні та операнди можна використати для створення правил ігнорування джерел:'
+            meaning: Означає
+            variable_description:
+                label: Змінна
+                host: Адреса Хоста
+                _all: Повна адреса, зазвичай така як вказана
+            operator_description:
+                label: Оператор
+                equal_to: Дорівнює…
+                matches: 'Тест шо <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Приклад: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
 entry:
     default_title: Заголовок статті
     page_titles:
         unread: Непрочитані статті
         starred: Закладки
         archived: Архівні статті
-        filtered: ''
+        filtered: 'Фільтровані записи'
         filtered_tags: 'Знайдено за тегами:'
         filtered_search: 'Знайдено за запитом:'
         untagged: Статті без тегів
         all: Всі статті
+        with_annotations: Записи з анотаціями
+        same_domain: Якийсь домен
     list:
         number_on_the_page: '{0} Немає записів.|{1} Знайдено одну статтю.|]1,Inf[ Знайдено %count% статтю(ей).'
         reading_time: приблизний час читання
         reading_time_minutes: 'приблизний час читання: %readingTime% хв'
         reading_time_less_one_minute: 'приблизний час читання: &lt; 1 хв'
-        number_of_tags: ''
+        number_of_tags: '{1}та один тег|]1,Inf[та %count% інших тегів'
         reading_time_minutes_short: '%readingTime% хв'
         reading_time_less_one_minute_short: '&lt; 1 хв'
-        original_article: ''
+        original_article: 'першоджерело'
         toogle_as_read: Позначити як прочитану
         toogle_as_star: Додати в закладки
         delete: Видалити
         export_title: Експорт
+        show_same_domain: Показати статті у цьому ж домені
+        assign_search_tag: Призначити цей пошук як тег для кожного результату
+        toggle_mass_action: Виконати масову дію
+        mass_action_tags_input_placeholder: tag1, tag2, tag3
+        add_tags: Додати теги
     filters:
         title: Фільтри
         status_label: Статус
@@ -241,6 +274,8 @@ entry:
         action:
             clear: Очистити
             filter: Шукати
+        annotated_label: Анотовано
+        parsed_label: Не коректно вилучено
     view:
         left_menu:
             back_to_top: Назад догори
@@ -251,7 +286,7 @@ entry:
             view_original_article: Оригінальна стаття
             re_fetch_content: Завантажити ще раз
             delete: Видалити
-            add_a_tag: Додати тег
+            add_a_tag: Додай тег
             share_content: Поділитись
             share_email_label: Електронна пошта
             public_link: публічне посилання
@@ -261,6 +296,10 @@ entry:
             problem:
                 label: Виникли проблеми?
                 description: Стаття виглядає неправильно?
+            theme_toggle: Змінити тему
+            theme_toggle_light: Освітлення
+            theme_toggle_dark: Темно
+            theme_toggle_auto: Автоматично
         edit_title: Редагувати заголовок
         original_article: оригінальна
         annotations_on_the_entry: '{0} Немає анотацій|{1} Одна аннотація|]1,Inf[ %count% аннотації(ій)'
@@ -286,11 +325,14 @@ entry:
     confirm:
         delete: Ви дійсно бажаєте видалити цю статтю?
         delete_tag: Ви дійсно бажаєте видалити цей тег із статті?
+        delete_entries: Ви дійсно бажаєте видалити ці статті?
+        reload: Ви дійсно хочете перезавантажити цю статтю?
     metadata:
         reading_time: Приблизний час читання
         reading_time_minutes_short: '%readingTime% хв'
         address: Адреса
         added_on: Додано
+        published_on: Опубліковане
 about:
     page_title: Про wallabag
     top_menu:
@@ -326,11 +368,11 @@ howto:
         shortcuts: Використання гарячих клавіш
     page_description: 'Є декілька способів зберегти статтю:'
     top_menu:
-        browser_addons: ''
-        mobile_apps: ''
+        browser_addons: 'Аддони браузера'
+        mobile_apps: 'Мобільні додатки'
         bookmarklet: 'Букмарклет'
     form:
-        description: ''
+        description: 'Дякуємо за цю форму'
     browser_addons:
         firefox: Розширення для Firefox
         chrome: Розширення для Chrome
@@ -344,31 +386,31 @@ howto:
     bookmarklet:
         description: 'Перетягніть посилання на панель закладок:'
     shortcuts:
-        page_description: ''
-        shortcut: ''
-        action: ''
+        page_description: 'У wallabag є шорткати.'
+        shortcut: 'Шорткат'
+        action: 'Дія'
         all_pages_title: Гарячі клавіші доступні на всіх сторінках
         go_unread: Перейти до непрочитаних
         go_starred: Перейти до закладок
-        go_archive: ''
+        go_archive: 'До архіву'
         go_all: Перейти до всіх статтей
         go_tags: Перейти до тегів
-        go_config: ''
-        go_import: ''
-        go_developers: ''
-        go_howto: ''
-        go_logout: ''
+        go_config: 'До налаштувань'
+        go_import: 'До імпорту'
+        go_developers: 'До розробників'
+        go_howto: 'До Довідки (ця сторінка!)'
+        go_logout: 'Вийти'
         list_title: ''
-        search: ''
+        search: 'Показати форму пошуку'
         article_title: Гарячі клавіші на сторінці статті
-        open_original: ''
-        toggle_favorite: ''
-        toggle_archive: ''
+        open_original: 'Відкрити оригінальний УРЛ запису'
+        toggle_favorite: 'Змінити Зірку запису'
+        toggle_archive: 'Змінити статус прочитаності запису'
         delete: Видалити запис
         add_link: Додати нове посилання
-        hide_form: ''
+        hide_form: 'Сховати поточну форму (шукати або новий лінк)'
         arrows_navigation: Навігація по статтях
-        open_article: ''
+        open_article: 'Показати обраний запис'
 quickstart:
     page_title: Швидкий старт
     more: Більше…
@@ -379,17 +421,17 @@ quickstart:
     configure:
         title: Налаштуйте wallabag
         description: Щоб зробити застосунок зручнішим, прогляньте розділ конфігурації wallabag.
-        language: Змініть мову чи дизайн
+        language: Змініть мову чи інтерфейс
         feed: Увімкніть стрічки RSS
         tagging_rules: ''
     admin:
-        title: ''
+        title: 'Адміністрування'
         description: ''
-        new_user: ''
-        analytics: ''
-        sharing: ''
-        export: ''
-        import: ''
+        new_user: 'Створити нового користувача'
+        analytics: 'Сконфігурувати аналітику'
+        sharing: 'Налаштувати деякі параметри публікації статей'
+        export: 'Налаштувати експорт'
+        import: 'Налаштувати імпорт'
     first_steps:
         title: Перші кроки
         description: Тепер, коли wallabag добре налаштовано, час почати зберігати веб-мережу. Ви можете клікнути по знаку + у верхньому правому кутку, щоб додати посилання.
@@ -433,17 +475,17 @@ tag:
         placeholder: Ви можете додати кілька тегів розділених комами.
 export:
     footer_template: ''
-    unknown: ''
+    unknown: 'Невідомо'
 import:
     page_title: Імпорт
     page_description: ''
     action:
-        import_contents: ''
+        import_contents: 'Імпортувати контент'
     form:
-        mark_as_read_title: ''
+        mark_as_read_title: 'Помітити усе прочитаним?'
         mark_as_read_label: ''
-        file_label: ''
-        save_label: ''
+        file_label: 'Файл'
+        save_label: 'Завантажити файл'
     pocket:
         page_title: ''
         description: ''
@@ -534,47 +576,49 @@ developer:
             paragraph_8: Щоб ознайомитись зі всіма методами API, вам потрібно переглянути <a href="%link%">нашу документацію API</a>.
         back: Назад
 user:
-    page_title: ''
-    new_user: ''
-    edit_user: ''
+    page_title: 'Керування користувачами'
+    new_user: 'Створити нового користувача'
+    edit_user: 'Коригувати існуючого користувача'
     description: ''
     list:
         actions: Actions
-        edit_action: ''
-        yes: ''
-        no: ''
-        create_new_one: ''
+        edit_action: 'Змінити'
+        yes: 'Так'
+        no: 'Ні'
+        create_new_one: 'Створити нового користувача'
     form:
-        username_label: ''
+        username_label: 'ЛОГІН'
         name_label: ''
-        password_label: ''
-        repeat_new_password_label: ''
+        password_label: 'Пароль'
+        repeat_new_password_label: 'Повторіть пароль'
         plain_password_label: ????
-        email_label: ''
-        enabled_label: ''
-        last_login_label: ''
+        email_label: 'Пошта'
+        enabled_label: 'Активно'
+        last_login_label: 'Останній вхід'
         twofactor_label: Two factor authentication
         save: Зберегти
         delete: Delete
-        delete_confirm: ''
+        delete_confirm: 'Ви впевнені?'
         back_to_list: Назад до списку
+        twofactor_email_label: Two factor authentication по пошті
+        twofactor_google_label: Two factor authentication по OTP у додатку
     search:
         placeholder: ''
 site_credential:
-    page_title: ''
-    new_site_credential: ''
-    edit_site_credential: ''
+    page_title: 'Керування авторизаційними даними'
+    new_site_credential: 'Створити авторизаційні дані'
+    edit_site_credential: 'Змінити існуючі авторизаційні дані'
     description: ''
     list:
         actions: Actions
-        edit_action: ''
-        yes: ''
-        no: ''
-        create_new_one: ''
+        edit_action: 'Змінити'
+        yes: 'Так'
+        no: 'Ні'
+        create_new_one: 'Створити нові авторизаційні дані'
     form:
-        username_label: ''
-        host_label: ''
-        password_label: ''
+        username_label: 'користувач'
+        host_label: 'Хост (subdomain.example.org, .example.org, т.і.)'
+        password_label: 'Пароль'
         save: Зберегти
         delete: Видалити
         delete_confirm: Ви впевнені, що бажаєте продовжити?
@@ -600,6 +644,7 @@ flashes:
             otp_disabled: Вимкнено двофакторну авторизацію
             tagging_rules_not_imported: Виникла помилка з завантаженням правил для тегів
             tagging_rules_imported: Завантаження правил для тегів закінчено
+            tagging_rules_reset: Скидання правил тегування
     entry:
         notice:
             entry_already_saved: Стаття вже була збережена %date%
@@ -641,3 +686,15 @@ flashes:
             added: Додано обліковий запис для "%host%"
             updated: Оновлено обліковий запис для "%host%"
             deleted: Видалено обліковий запис для "%host%"
+ignore_origin_instance_rule:
+    list:
+        actions: Дії
+        edit_action: Змінити
+        yes: Так
+        no: Ні
+    form:
+        rule_label: Правило
+        save: Зберегти
+        delete: Видалити
+        delete_confirm: Впевнені?
+        back_to_list: Назад до списку
