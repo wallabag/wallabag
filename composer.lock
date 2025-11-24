@@ -5851,16 +5851,16 @@
         },
         {
             "name": "paragonie/constant_time_encoding",
-            "version": "v2.7.0",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/constant_time_encoding.git",
-                "reference": "52a0d99e69f56b9ec27ace92ba56897fe6993105"
+                "reference": "e30811f7bc69e4b5b6d5783e712c06c8eabf0226"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/52a0d99e69f56b9ec27ace92ba56897fe6993105",
-                "reference": "52a0d99e69f56b9ec27ace92ba56897fe6993105",
+                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/e30811f7bc69e4b5b6d5783e712c06c8eabf0226",
+                "reference": "e30811f7bc69e4b5b6d5783e712c06c8eabf0226",
                 "shasum": ""
             },
             "require": {
@@ -5914,7 +5914,7 @@
                 "issues": "https://github.com/paragonie/constant_time_encoding/issues",
                 "source": "https://github.com/paragonie/constant_time_encoding"
             },
-            "time": "2024-05-08T12:18:48+00:00"
+            "time": "2025-09-24T15:12:37+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -5968,16 +5968,16 @@
         },
         {
             "name": "php-amqplib/php-amqplib",
-            "version": "v3.7.3",
+            "version": "v3.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-amqplib/php-amqplib.git",
-                "reference": "9f50fe69a9f1a19e2cb25596a354d705de36fe59"
+                "reference": "381b6f7c600e0e0c7463cdd7f7a1a3bc6268e5fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/9f50fe69a9f1a19e2cb25596a354d705de36fe59",
-                "reference": "9f50fe69a9f1a19e2cb25596a354d705de36fe59",
+                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/381b6f7c600e0e0c7463cdd7f7a1a3bc6268e5fd",
+                "reference": "381b6f7c600e0e0c7463cdd7f7a1a3bc6268e5fd",
                 "shasum": ""
             },
             "require": {
@@ -6043,9 +6043,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-amqplib/php-amqplib/issues",
-                "source": "https://github.com/php-amqplib/php-amqplib/tree/v3.7.3"
+                "source": "https://github.com/php-amqplib/php-amqplib/tree/v3.7.4"
             },
-            "time": "2025-02-18T20:11:13+00:00"
+            "time": "2025-11-23T17:00:56+00:00"
         },
         {
             "name": "php-amqplib/rabbitmq-bundle",
@@ -6629,16 +6629,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.46",
+            "version": "3.0.47",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "56483a7de62a6c2a6635e42e93b8a9e25d4f0ec6"
+                "reference": "9d6ca36a6c2dd434765b1071b2644a1c683b385d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/56483a7de62a6c2a6635e42e93b8a9e25d4f0ec6",
-                "reference": "56483a7de62a6c2a6635e42e93b8a9e25d4f0ec6",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/9d6ca36a6c2dd434765b1071b2644a1c683b385d",
+                "reference": "9d6ca36a6c2dd434765b1071b2644a1c683b385d",
                 "shasum": ""
             },
             "require": {
@@ -6719,7 +6719,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.46"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.47"
             },
             "funding": [
                 {
@@ -6735,7 +6735,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-26T16:29:55+00:00"
+            "time": "2025-10-06T01:07:24+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
