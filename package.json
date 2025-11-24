@@ -44,7 +44,7 @@
     "@babel/core": "^7.28.5",
     "@babel/eslint-parser": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
-    "@symfony/webpack-encore": "^5.2.0",
+    "@symfony/webpack-encore": "^5.3.1",
     "autoprefixer": "^10.4.22",
     "babel-loader": "^10.0.0",
     "core-js": "^3.47.0",
