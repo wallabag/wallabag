@@ -26,7 +26,7 @@ menu:
         howto: How-To
         developer: API-Client-Verwaltung
         logout: Abmelden
-        about: Über
+        about: Info-Seite
         search: Suche
         save_link: Link speichern
         back_to_unread: Zurück zu ungelesenen Artikeln
@@ -51,7 +51,7 @@ footer:
     wallabag:
         elsewhere: Nimm wallabag mit dir mit
         social: Soziales
-        powered_by: angetrieben von
+        powered_by: basiert auf
         about: Über
     stats: Seit %user_creation% hast du %nb_archives% Artikel gelesen. Das sind ungefähr %per_day% pro Tag!
 config:
@@ -90,6 +90,16 @@ config:
         help_reading_speed: wallabag berechnet eine Lesezeit pro Artikel. Hier kannst du definieren, ob du ein schneller oder langsamer Leser bist. wallabag wird die Lesezeiten danach neu berechnen.
         help_language: Du kannst die Sprache der wallabag-Oberfläche ändern.
         help_pocket_consumer_key: Nötig für den Pocket-Import. Du kannst ihn in deinem Pocket account einrichten.
+        help_display_thumbnails: Du kannst entscheiden, ob Vorschaubilder der Artikel angezeigt werden oder nicht. Das kann bei langsamen Verbindungen helfen.
+        help_font: Du kannst die Schriftfamilie auswählen, die du verwenden möchtest.
+        help_fontsize: Du kannst die Schriftgröße auswählen, die du verwenden möchtest.
+        help_lineheight: Du kannst die Zeilenhöhe auswählen, die du verwenden möchtest.
+        help_maxwidth: Du kannst die maximale Breite auswählen, die du verwenden möchtest.
+        display_thumbnails_label: Artikel Vorschaubilder anzeigen (hilfreich bei langsamen Verbindungen).
+        font_label: Schriftfamilie
+        fontsize_label: Schriftgröße
+        lineheight_label: Zeilenhöhe
+        maxwidth_label: Maximale Breite
     form_user:
         two_factor_description: Wenn du die Zwei-Faktor-Authentifizierung aktivierst, erhältst du eine E-Mail mit einem Code bei jeder nicht vertrauenswürdigen Verbindung.
         name_label: Name
@@ -120,6 +130,7 @@ config:
         entries: Entferne ALLE Einträge
         archived: Entferne ALLE archivierten Einträge
         confirm: Bist du wirklich sicher? (DIES KANN NICHT RÜCKGÄNGIG GEMACHT WERDEN)
+        tagging_rules: Entferne ALLE Tagging-Regeln
     form_password:
         description: Hier kannst du dein Kennwort ändern. Dieses sollte mindestens acht Zeichen enthalten.
         old_password_label: Altes Kennwort
@@ -244,6 +255,9 @@ entry:
         export_title: Exportieren
         assign_search_tag: Weise diese Suche als einen Tag zu jedem Ergebnis hinzu
         show_same_domain: Zeigt Artikel mit der gleichen Domain
+        toggle_mass_action: Mehrfachaktionen umschalten
+        mass_action_tags_input_placeholder: Tag1, Tag2, Tag3
+        add_tags: Tags hinzufügen
     filters:
         title: Filter
         status_label: Status
@@ -269,6 +283,7 @@ entry:
             clear: Zurücksetzen
             filter: Filtern
         annotated_label: Angemerkt
+        parsed_label: Nicht fehlerfrei abgerufen
     view:
         left_menu:
             back_to_top: Nach oben
@@ -318,9 +333,11 @@ entry:
     confirm:
         delete: Bist du sicher, dass du diesen Artikel löschen möchtest?
         delete_tag: Bist du sicher, dass du diesen Tag vom Artikel entfernen möchtest?
+        delete_entries: Bist du sicher, dass du diese Artikel löschen willst?
+        reload: Bist du sicher, dass du den Artikel erneut abrufen willst?
     metadata:
         reading_time: Geschätzte Lesezeit
-        reading_time_minutes_short: '%readingTime% min'
+        reading_time_minutes_short: '%readingTime% Min'
         address: Adresse
         added_on: Hinzugefügt am
         published_on: Veröffentlicht am
@@ -345,7 +362,7 @@ about:
         support: <a href="https://github.com/wallabag/wallabag/issues">auf GitHub</a>
     helping:
         description: 'wallabag ist frei und Open Source. Du kannst uns helfen:'
-        by_paypal: via Liberapay
+        by_paypal: mit Liberapay
     contributors:
         description: Ein Dankeschön an die Unterstützer von wallabag
     third_party:
@@ -412,7 +429,7 @@ quickstart:
     configure:
         title: Anwendung konfigurieren
         description: Um die Applikation für dich anzupassen, schau in die Konfiguration von wallabag.
-        language: Sprache und Design ändern
+        language: Sprache und Oberfläche ändern
         rss: RSS-Feeds aktivieren
         tagging_rules: Schreibe Regeln, um deine Beiträge automatisch zu markieren (verschlagworten)
         feed: Feeds aktivieren
@@ -466,6 +483,8 @@ tag:
     new:
         add: Hinzufügen
         placeholder: Du kannst verschiedene Tags, getrennt von einem Komma, hinzufügen.
+    confirm:
+        delete: Lösche den %name% Tag
 export:
     footer_template: <div style="text-align:center;"><p>Generiert von wallabag mit Hilfe von %method%</p><p>Bitte öffne <a href="https://github.com/wallabag/wallabag/issues">ein Ticket</a> wenn du ein Problem mit der Darstellung von diesem E-Book auf deinem Gerät hast.</p></div>
     unknown: Unbekannt
@@ -497,7 +516,7 @@ import:
         description: Dieser Import wird all deine Artikel aus wallabag v2 importieren. Gehe auf "Alle Artikel" und dann, in der Exportieren-Seitenleiste auf "JSON". Dabei erhältst du eine "All articles.json"-Datei.
     readability:
         page_title: Aus Readability importieren
-        description: Dieser Importer wird all deine Artikel aus Readability importieren. Auf der Werkzeugseite (https://www.readability.com/tools/) klickst du auf „Exportiere deine Daten“ in dem Abschnitt „Datenexport“. Du wirst eine E-Mail mit einem Herunterladenlink zu einer json Datei, die aber nicht auf .json endet, erhalten.
+        description: Dieses Tool wird all deine Artikel aus Readability importieren.
         how_to: Bitte wähl deinen Readability-Export aus und klick den unteren Button für das Hochladen und Importieren dessen an.
     worker:
         enabled: 'Der Import erfolgt asynchron. Sobald der Import gestartet ist, wird diese Aufgabe extern abgearbeitet. Der aktuelle Service dafür ist:'
@@ -520,11 +539,28 @@ import:
         how_to: Bitte wähle deinen Pinboard-Export aus und klicke auf den nachfolgenden Button zum Importieren.
     elcurator:
         page_title: Importieren > elCurator
-        description: Dieses Tool wird all deine ElCurator-Artikel importieren. Öffne die Einstellungen in deinem ElCurator-Konto und exportiere dort den Inhalt; du wirst eine JSON-Datei erhalten.
+        description: Dieses Tool wird all deine ElCurator-Artikel importieren.
+        how_to: Bitte wähle deinen elCurator-Export aus und klicke unten auf die Schaltfläche, um diesen hochzuladen und zu importieren.
     delicious:
         page_title: Import > del.icio.us
         how_to: Bitte wählen deinen Delicious-Export aus und klicke den u.s. Button zum Importieren.
         description: Dieser Importer wird alle deine Delicious-Lesezeichen importieren. Seit 2021 kannst du deine Daten wieder von der Exportseite (https://del.icio.us/export) bekommen. Wähle das "JSON"-Format aus und lade es herunter (z.B. "delicious_export.2021.02.06_21.10.json").
+    omnivore:
+        page_title: Aus Omnivore importieren
+        description: Dieses Tool wird alle deine Artikel aus Omnivore importieren.
+        how_to: Bitte unzippe deinen Omnivore-Export, dann lade jede JSON-Datei mit dem Schema "metadata_x_to_y.json" einzeln hoch.
+    shaarli:
+        page_title: Aus Shaarli importieren
+        description: Dieses Tool importiert alle deine Shaarli Lesezeichen. Gehe zum Tools Bereich, dann auf "Export Database", wähle deine Lesezeichen und exportiere diese. Du erhältst eine HTML Datei.
+        how_to: Wähle bitte die Datei mit dem Lesezeichen Backup aus und klicke unten um sie zu importieren. Beachte, dass es sehr lange dauern kann, bis alle Artikel übertragen sind.
+    pocket_html:
+        page_title: Aus Pocket HTML importieren
+        description: Dieses Tool importiert deine Pocket Lesezeichen (aus HTML Export). Gehe zu https://getpocket.com/export, dann exportiere die HTML Datei, die du anschließend herunterladen kannst (z.B. "ril_export.html").
+        how_to: Wähle bitte die Datei mit dem Lesezeichen Backup aus und klicke unten um sie zu importieren. Beachte, dass es sehr lange dauern kann, bis alle Artikel übertragen sind.
+    pocket_csv:
+        page_title: Aus Pocket CSV importieren
+        description: Dieses Tool importiert deine Pocket Lesezeichen (aus CSV Export). Gehe zu https://getpocket.com/export, dann exportiere die Datei, die du als ZIP-Datei (z.B. "pocket.zip") herunterladen kannst. Entpacke diese, um das CSV File mit dem Namen "part_000000.csv" zu erhalten.
+        how_to: Wähle bitte die Datei mit dem Lesezeichen Backup aus und klicke unten um sie zu importieren. Beachte, dass es sehr lange dauern kann, bis alle Artikel übertragen sind.
 developer:
     page_title: API-Client-Verwaltung
     welcome_message: Willkomen zur wallabag API
@@ -648,6 +684,8 @@ flashes:
             otp_enabled: Zwei-Faktor-Authentifizierung aktiviert
             tagging_rules_not_imported: Fehler beim Importieren von Tagging-Regeln
             tagging_rules_imported: Tagging-Regeln importiert
+            tagging_rules_reset: Tagging-Regeln wurden zurückgesetzt
+            otp_code_invalid: Ungültiger Zwei-Faktor Authentifizierungs-Code
     entry:
         notice:
             entry_already_saved: Eintrag bereits am %date% gespeichert
@@ -666,6 +704,7 @@ flashes:
         notice:
             tag_added: Tag hinzugefügt
             tag_renamed: Tag umbenannt
+            too_much_tags: Um Leistungsproblem zu vermeiden, kannst du nicht mehr als %tags% Tags auf einmal angeben oder Tags mit mehr als %characters% Zeichen.
     import:
         notice:
             failed: Import fehlgeschlagen, bitte erneut probieren.
