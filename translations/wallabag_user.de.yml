@@ -6,5 +6,5 @@ auth_code:
             hello: Hallo %user%,
             first_para: Da du die Zwei-Faktor-Authentifizierung in deinem wallabag-Konto aktiviert hast und du dich gerade von einem neuen Gerät (Computer, Handy, etc.) anmeldest, senden wir dir einen Code, um deinen Zugriff zu prüfen.
             second_para: 'Hier ist der Code:'
-            support: 'Bitte zögere nicht, Kontakt mit uns aufzunehmen falls du ein Problem hast:'
+            support: 'Bitte zögere nicht, uns zu kontaktieren, falls du ein Problem hast:'
             signature: Das wallabag-Team
