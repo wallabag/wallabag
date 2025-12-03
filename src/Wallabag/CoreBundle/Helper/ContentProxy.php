@@ -51,21 +51,31 @@ class ContentProxy
     {
         $this->graby->toggleImgNoReferrer(true);
         if (!empty($content['html'])) {
+            $this->graby->setContentAsPrefetched($content['html']);
             $content['html'] = $this->graby->cleanupHtml($content['html'], $url);
         }
 
-        if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
-            $fetchedContent = $this->graby->fetchContent($url);
+        if (false === $disableContentUpdate) {
+            $fetchedContent = array_filter($this->graby->fetchContent($url), static function ($value, $key) {
+                if ('html' === $key) {
+                    return true;
+                }
 
-            $fetchedContent['title'] = $this->sanitizeContentTitle(
-                $fetchedContent['title'],
-                isset($fetchedContent['headers']['content-type']) ? $fetchedContent['headers']['content-type'] : ''
-            );
+                return $value;
+            }, \ARRAY_FILTER_USE_BOTH);
+
+            $title = $content['title'] ?? $fetchedContent['title'] ?? null;
+            if ($title) {
+                $fetchedContent['title'] = $this->sanitizeContentTitle(
+                    $title,
+                    $fetchedContent['headers']['content-type'] ?? ''
+                );
+            }
 
             // when content is imported, we have information in $content
             // in case fetching content goes bad, we'll keep the imported information instead of overriding them
-            if (empty($content) || $fetchedContent['html'] !== $this->fetchingErrorMessage) {
-                $content = $fetchedContent;
+            if ($fetchedContent['html'] !== $this->fetchingErrorMessage) {
+                $content = array_merge($fetchedContent, $content);
             }
         }
 
@@ -397,15 +407,5 @@ class ContentProxy
                 $entry->setUrl($url);
                 break;
         }
-    }
-
-    /**
-     * Validate that the given content has at least a title, an html and a url.
-     *
-     * @return bool true if valid otherwise false
-     */
-    private function validateContent(array $content)
-    {
-        return !empty($content['title']) && !empty($content['html']) && !empty($content['url']);
     }
 }
