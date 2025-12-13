@@ -276,6 +276,11 @@
                     <label for="entry_filter_createdAt_right_date" class="active">{{ 'entry.filters.created_at.to'|trans }}</label>
                 </div>
 
+                <div class="input-field col s12">
+                    {{ form_widget(form.tags, {'type': 'text', 'attr' : {'placeholder': 'tag1,tag2'} }) }}
+                    {{ form_label(form.tags) }}
+                </div>
+
                 <div class="col s6">
                     <button type="reset" class="center waves-effect waves-green btn-flat">{{ 'entry.filters.action.clear'|trans }}</button>
                 </div>
