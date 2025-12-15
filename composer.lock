@@ -15995,16 +15995,16 @@
         },
         {
             "name": "friendsoftwig/twigcs",
-            "version": "6.5.0",
+            "version": "v6.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/friendsoftwig/twigcs.git",
-                "reference": "aaa3ba112bf4fcee7b51a00d9b45b13bc2cc23bc"
+                "reference": "e9d169005d059e1949d4a828e9512c49845de19a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/friendsoftwig/twigcs/zipball/aaa3ba112bf4fcee7b51a00d9b45b13bc2cc23bc",
-                "reference": "aaa3ba112bf4fcee7b51a00d9b45b13bc2cc23bc",
+                "url": "https://api.github.com/repos/friendsoftwig/twigcs/zipball/e9d169005d059e1949d4a828e9512c49845de19a",
+                "reference": "e9d169005d059e1949d4a828e9512c49845de19a",
                 "shasum": ""
             },
             "require": {
@@ -16013,14 +16013,14 @@
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "ext-simplexml": "*",
-                "php": "~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
-                "symfony/console": "^4.4 || ^5.3 || ^6.0 || ^7.0",
-                "symfony/filesystem": "^4.4 || ^5.3 || ^6.0 || ^7.0",
-                "symfony/finder": "^4.4 || ^5.3 || ^6.0 || ^7.0"
+                "php": "~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
+                "symfony/console": "^4.4 || ^5.3 || ^6.0 || ^7.0 || ^8.0",
+                "symfony/filesystem": "^4.4 || ^5.3 || ^6.0 || ^7.0 || ^8.0",
+                "symfony/finder": "^4.4 || ^5.3 || ^6.0 || ^7.0 || ^8.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.6.19",
-                "symfony/phpunit-bridge": "^7.1.4"
+                "symfony/phpunit-bridge": "^7.2.0 || ^8.0"
             },
             "bin": [
                 "bin/twigcs"
@@ -16044,9 +16044,9 @@
             "description": "Checkstyle automation for Twig",
             "support": {
                 "issues": "https://github.com/friendsoftwig/twigcs/issues",
-                "source": "https://github.com/friendsoftwig/twigcs/tree/6.5.0"
+                "source": "https://github.com/friendsoftwig/twigcs/tree/v6.6.0"
             },
-            "time": "2024-11-27T21:59:24+00:00"
+            "time": "2025-12-11T21:14:59+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
