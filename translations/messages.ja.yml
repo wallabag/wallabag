@@ -83,6 +83,8 @@ config:
         help_reading_speed: wallabag は、各記事を読む時間を計算します。あなたの読む速度が速い、または遅い場合は、このリストのおかげで、ここで定義することができます。 wallabag は、各記事の読む時間を再計算します。
         help_language: wallabag のインターフェイスの言語を変更することができます。
         help_pocket_consumer_key: Pocket のインポートに必要です。 Pocket のアカウントで作成することができます。
+        help_display_thumbnails: 記事のサムネイル画像を表示するかどうかを選択できます。低速な接続環境で役立ちます。
+        display_thumbnails_label: 記事のサムネイルを表示する(通信速度が遅い場合は、非表示にすると快適に使えます)
         action_mark_as_read:
             redirect_homepage: ホームページに戻る
             redirect_current_page: 現在のページに留まる
@@ -235,9 +237,11 @@ entry:
         reading_time_less_one_minute: 推定される読了時間。&lt; 1分
         export_title: エクスポート
         delete: 削除
+        show_same_domain: 同じドメインの記事を表示する
         toogle_as_star: スター有無の切り替え
         original_article: オリジナル
         reading_time: 所要時間
+        toggle_mass_action: 一括操作のON/OFF
     filters:
         title: フィルター
         status_label: ステータス
