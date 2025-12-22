@@ -14473,35 +14473,35 @@
         },
         {
             "name": "willdurand/hateoas",
-            "version": "3.12.0",
+            "version": "3.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/Hateoas.git",
-                "reference": "4cb096e52603de2e3c7f6dc3128fe01bb944634e"
+                "reference": "4f19c5407d111de52c45e7b6dbea019ef072e3cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/4cb096e52603de2e3c7f6dc3128fe01bb944634e",
-                "reference": "4cb096e52603de2e3c7f6dc3128fe01bb944634e",
+                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/4f19c5407d111de52c45e7b6dbea019ef072e3cd",
+                "reference": "4f19c5407d111de52c45e7b6dbea019ef072e3cd",
                 "shasum": ""
             },
             "require": {
                 "jms/metadata": "^2.0",
                 "jms/serializer": "^3.18.2",
                 "php": "^8.1",
-                "symfony/expression-language": "^3.4.47 || ~4.0 || ~5.0 || ~6.0 || ~7.0"
+                "symfony/expression-language": "^5.4 || ^6.4 || ^7.3 || ^8.0"
             },
             "require-dev": {
                 "doctrine/annotations": "^1.13.2 || ^2.0",
-                "doctrine/coding-standard": "^12.0",
+                "doctrine/coding-standard": "^13.0.1",
                 "doctrine/persistence": "^1.3.4 | ^2.0 | ^3.0",
                 "pagerfanta/core": "^2.4 || ^3.0 || ^4.0",
                 "phpdocumentor/type-resolver": "^1.5.1",
                 "phpspec/prophecy": "^1.16",
                 "phpspec/prophecy-phpunit": "^2.0.1",
                 "phpunit/phpunit": "^10.5.38",
-                "symfony/routing": "^3.4.47 || ~4.0 || ~5.0 || ~6.0 || ~7.0",
-                "symfony/yaml": "^3.4.47 || ~4.0 || ~5.0 || ~6.0 || ~7.0",
+                "symfony/routing": "^5.4 || ^6.4 || ^7.3 || ^8.0",
+                "symfony/yaml": "^5.4 || ^6.4 || ^7.3 || ^8.0",
                 "twig/twig": "^1.43 || ^2.13 || ^3.0"
             },
             "suggest": {
@@ -14541,9 +14541,9 @@
             "description": "A PHP library to support implementing representations for HATEOAS REST web services",
             "support": {
                 "issues": "https://github.com/willdurand/Hateoas/issues",
-                "source": "https://github.com/willdurand/Hateoas/tree/3.12.0"
+                "source": "https://github.com/willdurand/Hateoas/tree/3.13.0"
             },
-            "time": "2024-11-09T06:05:24+00:00"
+            "time": "2025-12-20T19:05:59+00:00"
         },
         {
             "name": "willdurand/hateoas-bundle",
