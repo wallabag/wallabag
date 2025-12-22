@@ -221,7 +221,7 @@ class EntryControllerTest extends WallabagTestCase
      */
     public function testPostWithMultipleAuthors()
     {
-        $url = 'https://www.liberation.fr/planete/2017/04/05/donald-trump-et-xi-jinping-tentative-de-flirt-en-floride_1560768';
+        $url = 'https://www.theguardian.com/global-development/ng-interactive/2025/dec/22/childbirth-under-attack-how-women-and-babies-became-targets-in-conflicts-around-the-world';
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
@@ -245,11 +245,13 @@ class EntryControllerTest extends WallabagTestCase
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
         $this->assertInstanceOf(Entry::class, $content);
+        $this->assertSame('2025-12-22', $content->getPublishedAt()->format('Y-m-d'));
+        $this->assertSame('en', $content->getLanguage());
         $authors = $content->getPublishedBy();
-        $this->assertSame('2017-04-05', $content->getPublishedAt()->format('Y-m-d'));
-        $this->assertSame('fr', $content->getLanguage());
-        $this->assertStringContainsString('Balenieri', $authors[0]);
-        $this->assertStringContainsString('Autran', $authors[1]);
+        $this->assertStringContainsString('Cookman', $authors[0]);
+        $this->assertStringContainsString('Levitt', $authors[1]);
+        $this->assertStringContainsString('Osman', $authors[2]);
+        $this->assertStringContainsString('Salih', $authors[3]);
     }
 
     public function testPostNewOkUrlExist()
