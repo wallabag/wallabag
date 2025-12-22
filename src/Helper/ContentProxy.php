@@ -44,21 +44,30 @@ class ContentProxy
     {
         $this->graby->toggleImgNoReferrer(true);
         if (!empty($content['html'])) {
+            $this->graby->setContentAsPrefetched($content['html']);
             $content['html'] = $this->graby->cleanupHtml($content['html'], $url);
         }
 
-        if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
-            $fetchedContent = $this->graby->fetchContent($url);
+        if (false === $disableContentUpdate) {
+            $fetchedContent = array_filter($this->graby->fetchContent($url), function($value, $key) {
+                if($key === 'html') {
+                    return true;
+                }
+                return $value;
+            }, ARRAY_FILTER_USE_BOTH);
 
-            $fetchedContent['title'] = $this->sanitizeContentTitle(
-                $fetchedContent['title'],
-                $fetchedContent['headers']['content-type'] ?? ''
-            );
+            $title = $content['title'] ?? $fetchedContent['title'] ?? null;
+            if($title) {
+                $fetchedContent['title'] = $this->sanitizeContentTitle(
+                    $title,
+                    $fetchedContent['headers']['content-type'] ?? ''
+                );
+            }
 
             // when content is imported, we have information in $content
             // in case fetching content goes bad, we'll keep the imported information instead of overriding them
-            if (empty($content) || $fetchedContent['html'] !== $this->fetchingErrorMessage) {
-                $content = $fetchedContent;
+            if ($fetchedContent['html'] !== $this->fetchingErrorMessage) {
+                $content = array_merge($fetchedContent, $content);
             }
         }
 
