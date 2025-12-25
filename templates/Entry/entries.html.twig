@@ -277,6 +277,22 @@
                 </div>
 
                 <div class="col s6">
+                    {{ form_label(form.sortType) }}
+                </div>
+
+                <div class="col s6">
+                    {{ form_label(form.sortOrder) }}
+                </div>
+
+                <div class="col s6">
+                    {{ form_widget(form.sortType) }}
+                </div>
+
+                <div class="col s6">
+                    {{ form_widget(form.sortOrder) }}
+                </div>
+
+                <div class="col s6">
                     <button type="reset" class="center waves-effect waves-green btn-flat">{{ 'entry.filters.action.clear'|trans }}</button>
                 </div>
 
