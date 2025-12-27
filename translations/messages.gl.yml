@@ -70,7 +70,7 @@ about:
         website: sitio web
         developped_by: Desenvolto por
     top_menu:
-        third_party: Bibliotecas de terceiros
+        third_party: Bibliotecas alleas
         contributors: Colaboradoras
         helping: Axudar a wallabag
         getting_help: Obter axuda
@@ -361,7 +361,7 @@ config:
         article_display: Visualización do artigo
     page_title: Configuración
 footer:
-    stats: Desde %user_creation% liches %nb_archives% artigos. Que ven sendo %per_day% ao día!
+    stats: Desde %user_creation% liches %nb_archives% artigos. Que vén sendo %per_day% ao día!
     wallabag:
         about: Sobre
         powered_by: grazas a
