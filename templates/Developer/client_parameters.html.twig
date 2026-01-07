@@ -1,0 +1,41 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'developer.client_parameter.page_title'|trans }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
+            <div class="row">
+                <p>{{ 'developer.client_parameter.page_description'|trans }}</p>
+
+                <table class="striped">
+                    <tr>
+                        <td>{{ 'developer.client_parameter.field_name'|trans }}</td>
+                        <td><strong><code>{{ client_name }}</code></strong></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'developer.client_parameter.field_id'|trans }}</td>
+                        <td>
+                            <strong><code>{{ client_id }}</code></strong>
+                            <button class="btn" data-controller="clipboard" data-clipboard-text="{{ client_id }}">{{ 'developer.client.copy_to_clipboard'|trans }}</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'developer.client_parameter.field_secret'|trans }}</td>
+                        <td>
+                            <strong><code>{{ client_secret }}</code></strong>
+                            <button class="btn" data-controller="clipboard" data-clipboard-text="{{ client_secret }}">{{ 'developer.client.copy_to_clipboard'|trans }}</button>
+                        </td>
+                    </tr>
+                </table>
+
+                <br/>
+
+                <a href="{{ path('developer') }}" class="waves-effect waves-light grey btn">{{ 'developer.client_parameter.back'|trans }}</a>
+                <a href="{{ path('developer_howto_firstapp') }}" class="btn waves-effect waves-light">{{ 'developer.client_parameter.read_howto'|trans }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

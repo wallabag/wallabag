@@ -1,0 +1,52 @@
+<div class="card-action">
+    <div class="reading-time grey-text">
+        <div class="card-reading-time">{% include "Entry/_reading_time.html.twig" with {'entry': entry} only %}</div>
+        <div class="card-created-at">
+            <i class="material-icons" title="{{ 'entry.view.created_at'|trans }}">today</i>
+            <span>&nbsp;{{ entry.createdAt|date('Y-m-d') }}</span>
+        </div>
+    </div>
+
+    {% set current_path = app.request.requesturi %}
+
+    <ul class="tools right">
+        {% if is_granted('LIST_ENTRIES') %}
+            <li>
+                <a title="{{ 'entry.list.show_same_domain'|trans }}" class="tool grey-text" href="{{ path('same_domain', {'id': entry.id, redirect: current_path}) }}" data-action="same_domain" data-entry-id="{{ entry.id }}"><i class="material-icons">language</i></a>
+            </li>
+        {% endif %}
+        {% if is_granted('ARCHIVE', entry) %}
+            <li>
+                <form action="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
+                    <input type="hidden" name="token" value="{{ csrf_token('archive-entry') }}"/>
+
+                    <button type="submit" class="btn-link tool grey-text" title="{{ 'entry.list.toogle_as_read'|trans }}">
+                        <i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
+                    </button>
+                </form>
+            </li>
+        {% endif %}
+        {% if is_granted('STAR', entry) %}
+            <li>
+                <form action="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
+                    <input type="hidden" name="token" value="{{ csrf_token('star-entry') }}"/>
+
+                    <button type="submit" class="btn-link tool grey-text" title="{{ 'entry.list.toogle_as_star'|trans }}">
+                        <i class="material-icons">{% if entry.isStarred == 0 %}star_border{% else %}star{% endif %}</i>
+                    </button>
+                </form>
+            </li>
+        {% endif %}
+        {% if is_granted('DELETE', entry) %}
+            <li>
+                <form action="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
+                    <input type="hidden" name="token" value="{{ csrf_token('delete-entry') }}"/>
+
+                    <button type="submit" class="btn-link tool grey-text" title="{{ 'entry.list.delete'|trans }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </form>
+            </li>
+        {% endif %}
+    </ul>
+</div>

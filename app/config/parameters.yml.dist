@@ -1,7 +1,7 @@
 # This file is a "template" of what your parameters.yml file should look like
 parameters:
     # Uncomment these settings or manually update your parameters.yml
-    # to use docker-compose
+    # to use Docker Compose
     #
     # database_driver: %env.database_driver%
     # database_host: %env.database_host%
@@ -28,6 +28,8 @@ parameters:
 
     mailer_dsn: smtp://127.0.0.1
 
+    wallabag_user_agent: "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2"
+
     locale: en
 
     # A secret key that's used to generate certain security-related tokens
@@ -47,8 +49,6 @@ parameters:
 
     from_email: no-reply@wallabag.org
 
-    rss_limit: 50
-
     # RabbitMQ processing
     rabbitmq_host: localhost
     rabbitmq_port: 5672
@@ -57,7 +57,7 @@ parameters:
     rabbitmq_prefetch_count: 10
 
     # Redis processing
-    redis_scheme: tcp
+    redis_scheme: redis
     redis_host: localhost
     redis_port: 6379
     redis_path: null

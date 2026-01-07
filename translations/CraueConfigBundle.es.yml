@@ -32,3 +32,4 @@ restricted_access: Activar autenticación para websites con paywall
 api_user_registration: Permitir el registro de usuarios utilizando el API
 shaarli_share_origin_url: Activar compartir en Shaarli, si el servicio está habilitado
 store_article_headers: Activar si wallabag almacena encabezados HTTP para cada artículo
+share_linkding: Habilitar compartir con Linkding

@@ -2,15 +2,15 @@ includes:
     - phpstan-baseline.neon
 
 parameters:
-    level: 3
+    level: 5
     paths:
         - src
         - tests
 
     symfony:
-        container_xml_path: %rootDir%/../../../var/cache/test/appAppKernelTestDebugContainer.xml
+        container_xml_path: %rootDir%/../../../var/cache/dev/AppKernelDevDebugContainer.xml
 
-    bootstrapFiles:
-        - vendor/bin/.phpunit/phpunit-8.5-0/vendor/autoload.php
+    doctrine:
+        objectManagerLoader: tests/object-manager.php
 
     inferPrivatePropertyTypeFromConstructor: true

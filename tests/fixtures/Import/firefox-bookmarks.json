@@ -1,0 +1,63 @@
+{
+  "guid": "root________",
+  "title": "",
+  "index": 0,
+  "dateAdded": 1388166091504000,
+  "lastModified": 1472897622350000,
+  "id": 1,
+  "type": "text/x-moz-place-container",
+  "root": "placesRoot",
+  "children": [
+    {
+      "guid": "toolbar_____",
+      "title": "Barre personnelle",
+      "index": 1,
+      "dateAdded": 1388166091504000,
+      "lastModified": 1472897622263000,
+      "id": 3,
+      "annos": [
+        {
+          "name": "bookmarkProperties/description",
+          "flags": 0,
+          "expires": 4,
+          "value": "Ajoutez des marque-pages dans ce dossier pour les voir apparaître sur votre barre personnelle"
+        }
+      ],
+      "type": "text/x-moz-place-container",
+      "root": "toolbarFolder",
+      "children": [
+        {
+          "guid": "tard77lzbC5H",
+          "title": "Tarn : Des lapins ravagent le terrain, le match de rugby doit être annulé",
+          "index": 1,
+          "dateAdded": 1388166091644000,
+          "lastModified": 1388166091644000,
+          "tags": "test,tag",
+          "id": 4,
+          "type": "text/x-moz-place",
+          "uri": "https://www.20minutes.fr/sport/4002755-20220928-tarn-lapins-ravagent-terrain-match-rugby-doit-etre-annule"
+        },
+        {
+          "guid": "E385l9vZ_LVn",
+          "title": "JO Paris 2024 : Où courir dans la capitale maintenant que les quais sont fermés ?",
+          "index": 1,
+          "dateAdded": 1388166091544000,
+          "lastModified": 1388166091545000,
+          "id": 5,
+          "type": "text/x-moz-place",
+          "uri": "https://www.20minutes.fr/paris/4100740-20240715-jo-paris-2024-courir-capitale-maintenant-quais-fermes"
+        }
+      ]
+    },
+    {
+      "guid": "unfiled_____",
+      "title": "Autres marque-pages",
+      "index": 3,
+      "dateAdded": 1388166091504000,
+      "lastModified": 1388166091542000,
+      "id": 6,
+      "type": "text/x-moz-place-container",
+      "root": "unfiledBookmarksFolder"
+    }
+  ]
+}

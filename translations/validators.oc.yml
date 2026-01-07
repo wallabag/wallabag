@@ -5,4 +5,3 @@ validator:
     item_per_page_too_high: "Aquò li agradarà pas a l'aplicacion"
     feed_limit_too_high: "Aquò li agradarà pas a l'aplicacion"
     quote_length_too_high: 'Aquesta citacion es tròpa longa. Cal que faga {{ limit }} caractèrs o mens.'
-    rss_limit_too_high: Aquò matarà segurament l’aplicacion

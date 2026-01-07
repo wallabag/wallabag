@@ -3,5 +3,5 @@ validator:
     password_too_short: Parolanız en az 8 karakter olmalıdır.
     password_wrong_value: Girdiğiniz mevcut parolanız hatalı.
     item_per_page_too_high: Bu uygulamayı tam olarak kapatacak
-    rss_limit_too_high: Bu uygulamayı tam olarak kapatacak
+    feed_limit_too_high: Bu uygulamayı tam olarak kapatacak
     quote_length_too_high: Alıntı çok uzun. En fazla {{ limit }} karakter olmalıdır.

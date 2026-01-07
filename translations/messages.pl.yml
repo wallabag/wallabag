@@ -51,7 +51,7 @@ footer:
     wallabag:
         elsewhere: Weż wallabag ze sobą
         social: Społeczność
-        powered_by: Kontrolowany przez
+        powered_by: działa dzięki
         about: O nas
     stats: Od %user_creation% przeczytałeś %nb_archives% artykułów. To jest %per_day% dziennie!
 config:
@@ -100,19 +100,6 @@ config:
         lineheight_label: Wysokość linii
         maxwidth_label: Maksymalna szerokość
         help_fontsize: Możesz wybrać rozmiar czcionek do użycia.
-    form_rss:
-        description: Kanały RSS prowadzone przez wallabag pozwalają Ci na czytanie twoich zapisanych artykułów w twoim ulubionym czytniku RSS. Musisz najpierw wygenerować tokena.‌
-        token_label: Token RSS
-        no_token: Brak tokena
-        token_create: Stwórz tokena
-        token_reset: Zresetuj swojego tokena
-        rss_links: RSS links
-        rss_link:
-            unread: Nieprzeczytane
-            starred: Oznaczone gwiazdką
-            archive: Archiwum
-            all: Wszystkie
-        rss_limit: Link do RSS
     form_user:
         two_factor_description: Włączenie autoryzacji dwuetapowej oznacza, że będziesz otrzymywał maile z kodem przy każdym nowym, niezaufanym połączeniu.
         name_label: Nazwa
@@ -143,6 +130,7 @@ config:
         entries: Usuń WSZYTSTKIE wpisy
         archived: Usuń WSZYSTKIE zarchiwizowane wpisy
         confirm: Jesteś pewien? (tej operacji NIE MOŻNA cofnąć)
+        tagging_rules: Usuń WSZYSTKIE reguły tagowania
     form_password:
         description: Tutaj możesz zmienić swoje hasło. Twoje nowe hasło powinno mieć conajmniej 8 znaków.
         old_password_label: Stare hasło
@@ -243,13 +231,13 @@ entry:
     default_title: Tytuł wpisu
     page_titles:
         unread: Nieprzeczytane wpisy
-        starred: Wpisy wyróżnione
+        starred: Wyróżnione wpisy
         archived: Zarchiwizowane wpisy
         filtered: Odfiltrowane wpisy
         filtered_tags: 'Filtrowane po tagach:'
         filtered_search: 'Filtrowanie po wyszukiwaniu:'
-        untagged: Odtaguj wpisy
-        all: Wszystkie przedmioty
+        untagged: Nieotagowane wpisy
+        all: Wszystkie wpisy
         with_annotations: Wpisy z adnotacjami
         same_domain: Ta sama domena
     list:
@@ -484,13 +472,13 @@ quickstart:
         description: Jeżeli potrzebujesz pomocy, jesteśmy tutaj dla ciebie.
         github: na GitHubie
         email: przez e-mail
-        gitter: na Gitterze
+        matrix: Na Matriksie
 tag:
     page_title: Tagi
     list:
         number_on_the_page: '{0} Nie ma tagów.|{1} Jest jeden tag.|]1,Inf[ Są %count% tagi.'
         see_untagged_entries: Zobacz nieotagowane wpisy
-        untagged: Odtaguj wpisy
+        untagged: Nieotagowane wpisy
         no_untagged_entries: Nie ma nieoznaczonych wpisów.
     new:
         add: Dodaj
@@ -525,7 +513,7 @@ import:
         how_to: Wybierz swój plik eksportu z wallabag i kliknij przycisk poniżej, aby go przesłać i zaimportować.
     wallabag_v2:
         page_title: Importuj > Wallabag v2
-        description: Ten importer, zaimportuje wszystkie twoje artykułu z wallabag v2. Idź do wszystkich artykułów, a następnie na panelu exportu kliknij na "JSON". Otrzymasz plik "All articles.json".
+        description: Ten importer zaimportuje wszystkie Twoje artykuły z wallabag v2. Przejdź do Wszyskie, a następnie na pasku bocznym eksportu kliknij „JSON”. Otrzymasz plik „All articles.json”.
     readability:
         page_title: Importuj > Readability
         description: Ten importer zaimportuje wszystkie twoje artykuły z Readability.
@@ -552,6 +540,7 @@ import:
     elcurator:
         page_title: Importuj > elCurator
         description: Ten importer zaimportuje wszystkie twoje artykuły z elCurator.
+        how_to: Wybierz plik eksportowany przez elCurator i kliknij poniższy przycisk, aby go przesłać i zaimportować.
     delicious:
         page_title: Importuj > del.icio.us
         description: Ten importer zaimportuje wszystkie zakładki Delicious. Od 2021 r. możesz ponownie wyeksportować z niego swoje dane za pomocą strony eksportu (https://del.icio.us/export). Wybierz format "JSON" i pobierz go (np. "delicious_export.2021.02.06_21.10.json").
@@ -564,6 +553,14 @@ import:
         page_title: Importuj > Pocket HTML
         description: Ten importer zaimportuje wszystkie zakładki Pocket (za pośrednictwem eksportu HTML). Po prostu przejdź do https://getpocket.com/export, a następnie wyeksportuj plik HTML. Plik HTML zostanie pobrany (np. „ril_export.html”).
         how_to: Wybierz swój plik z zakładkami i naciśnij poniższy przycisk, aby je zaimportować. Może to zająć dłuższą chwilę, zanim wszystkie artykuły zostaną przeniesione.
+    omnivore:
+        description: Ten importer zaimportuje wszystkie Twoje artykuły z Omnivore.
+        page_title: Importuj > Omnivore
+        how_to: Rozpakuj eksport z Omnivore, a następnie prześlij po kolei wszystkie pliki JSON o nazwie „metadata_x_to_y.json”.
+    pocket_csv:
+        description: Ten importer zaimportuje wszystkie zakładki Pocket (poprzez eksport CSV). Po prostu przejdź do https://getpocket.com/export, a następnie wyeksportuj plik. Zostanie pobrany plik ZIP (taki jak „pocket.zip”). Wypakuj go, otrzymasz plik CSV o nazwie „part_000000.csv”.
+        page_title: Importuj > Pocket CSV
+        how_to: Wybierz plik kopii zapasowej zakładek i kliknij przycisk poniżej, aby go zaimportować. Należy pamiętać, że proces ten może potrwać długo, ponieważ wszystkie artykuły muszą zostać pobrane.
 developer:
     page_title: Zarządzanie klientami API
     welcome_message: Witaj w API wallabag
@@ -687,6 +684,8 @@ flashes:
             otp_disabled: Wyłączono uwierzytelnianie dwuskładnikowe
             tagging_rules_not_imported: Błąd podczas importowania zasad tagowania
             ignore_origin_rules_deleted: Usunięto zasadę ignorowania pochodzenia
+            tagging_rules_reset: Reguły tagowania zostały zresetowane
+            otp_code_invalid: Nieprawidłowy kod uwierzytelniania dwuskładnikowego
     entry:
         notice:
             entry_already_saved: Wpis już został dodany %date%

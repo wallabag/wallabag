@@ -32,3 +32,4 @@ restricted_access: Увімкнути аутентифікацію для сай
 api_user_registration: Дозволити користувачам реєструватись через API
 store_article_headers: Увімкнути зберігання HTTP-заголовків для кожної статті
 shaarli_share_origin_url: Увімкнути можливість ділитись оригінальним лінком в Shaarli, якщо сервіс увімкнено
+share_linkding: Увімкнути обмін посиланням

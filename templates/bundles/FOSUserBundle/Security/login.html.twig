@@ -5,11 +5,11 @@
     <div class="card-content">
 
         {% if error %}
-            <script>Materialize.toast('{{ error.messageKey|trans(error.messageData, 'security') }}', 4000)</script>
+            <p class="hidden" data-controller="materialize--toast">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
         {% endif %}
 
         {% for flash_message in app.session.flashbag.get('notice') %}
-            <script>Materialize.toast('{{ flash_message }}')</script>
+            <p class="hidden" data-controller="materialize--toast">{{ flash_message }}</p>
         {% endfor %}
 
         <div class="row">
@@ -24,9 +24,11 @@
                 <input type="password" id="password" name="_password" />
             </div>
 
-            <div class="input-field col s12">
-                <input type="checkbox" id="remember_me" name="_remember_me" checked />
-                <label for="remember_me">{{ 'security.login.keep_logged_in'|trans }}</label>
+            <div class="input-field col s12 with-checkbox">
+                <label for="remember_me">
+                    <input type="checkbox" id="remember_me" name="_remember_me" checked/>
+                    <span>{{ 'security.login.keep_logged_in'|trans }}</span>
+                </label>
             </div>
 
         </div>

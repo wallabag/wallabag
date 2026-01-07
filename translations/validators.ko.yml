@@ -1,6 +1,6 @@
 validator:
     quote_length_too_high: 인용이 너무 깁니다. {{limit}} 자 이하로 해야합니다.
-    rss_limit_too_high: 확실히 앱을 종료합니다
+    feed_limit_too_high: 확실히 앱을 종료합니다
     item_per_page_too_high: 확실히 앱을 종료합니다
     password_wrong_value: 현재 비밀번호가 잘못되었습니다.
     password_too_short: 비밀번호는 8자 이상이어야합니다.

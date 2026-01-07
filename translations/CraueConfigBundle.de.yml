@@ -18,7 +18,6 @@ share_twitter: Freigabe für Twitter aktivieren
 share_unmark: Freigabe für Unmark.it aktivieren
 show_printlink: Link anzeigen, um den Inhalt auszudrucken
 wallabag_support_url: Support-URL für wallabag
-wallabag_url: URL von *deiner* wallabag-Instanz
 entry: Artikel
 export: Export
 import: Import
@@ -32,5 +31,5 @@ download_images_enabled: Bilder lokal herunterladen
 restricted_access: Authentifizierung für Webseiten mit Paywall aktivieren
 api_user_registration: Registrierung eines Benutzers über die API ermöglichen
 store_article_headers: Speichern von HTTP-Headern für jeden Artikel aktivieren
-shaarli_share_origin_url: Original-URL mit Shaarli teilen, wenn der Service aktiviert
-  ist
+shaarli_share_origin_url: Original-URL mit Shaarli teilen, wenn der Service aktiviert ist
+share_linkding: Freigabe zu Linkding aktivieren

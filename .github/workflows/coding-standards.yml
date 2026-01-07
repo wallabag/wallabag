@@ -13,42 +13,78 @@ permissions:
 jobs:
   coding-standards:
     name: "CS Fixer, PHPStan & TwigCS"
-    runs-on: "ubuntu-20.04"
+    runs-on: ubuntu-latest
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v5"
 
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
           coverage: "none"
-          php-version: "7.4"
+          php-version: "8.2"
           tools: cs2pr, pecl
           extensions: pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: "Install Node"
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: ".nvmrc"
+          cache: 'yarn'
+
+      - name: "Setup MySQL"
+        run: |
+          sudo systemctl start mysql.service
+          sudo mysql -u root -proot -h 127.0.0.1 -e "CREATE DATABASE wallabag_test"
+          cp app/config/tests/parameters_test.mysql.yml app/config/parameters_test.yml
+
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v2"
+        id: composer-install
+        uses: "ramsey/composer-install@v3"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
+      - name: "Install dependencies with Yarn"
+        id: yarn-install
+        run: yarn install
+
+      - name: "Run Composer validate"
+        if: always() && steps.composer-install.outcome == 'success'
+        run: "composer validate"
+
+      - name: "Run Composer dependency analyser"
+        if: always() && steps.composer-install.outcome == 'success'
+        run: "bin/composer-dependency-analyser"
+
       - name: "Run PHP CS Fixer"
+        if: always() && steps.composer-install.outcome == 'success'
         run: "bin/php-cs-fixer fix --verbose --dry-run --format=checkstyle | cs2pr"
 
       - name: "Generate test cache for PHPStan"
+        id: test-cache
+        if: always() && steps.composer-install.outcome == 'success'
         run: "php bin/console cache:clear --env=test"
 
-      - name: "Install PHPUnit for PHPStan"
-        run: "php bin/simple-phpunit install"
-
       - name: "Run PHPStan"
+        if: always() && steps.test-cache.outcome == 'success'
         run: "php bin/phpstan analyse --no-progress --error-format=checkstyle | cs2pr"
 
       - name: "Run TwigCS"
+        if: always() && steps.composer-install.outcome == 'success'
         run: "php bin/twigcs --severity=error --display=blocking --reporter checkstyle app/ src/ | cs2pr"
 
       - name: "Run ergebnis/composer-normalize"
+        if: always() && steps.composer-install.outcome == 'success'
         run: "composer normalize --dry-run --no-check-lock"
+
+      - name: "Run ESLint"
+        if: always() && steps.yarn-install.outcome == 'success'
+        run: "yarn lint:js"
+
+      - name: "Run Stylelint"
+        if: always() && steps.yarn-install.outcome == 'success'
+        run: "yarn lint:scss"

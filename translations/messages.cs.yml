@@ -82,7 +82,7 @@ entry:
         reading_time_less_one_minute: 'odhadovaný čas čtení: &lt; 1 min'
         reading_time_minutes: 'odhadovaný čas čtení: %readingTime% min'
         reading_time: odhadovaný čas čtení
-        number_on_the_page: '{0} Nemáte žádné položky.|{1} Máte jednu položku.|]1,4[ Máte %count% položky.|]4,Inf[ Máte %count% položek.'
+        number_on_the_page: '{0} Nemáte žádné položky.|{1} Máte jednu položku.|]1,4] Máte %count% položky.|[5,Inf] Máte %count% položek.'
         show_same_domain: Zobrazit články se stejnou doménou
         assign_search_tag: Přiřadit toto hledání jako štítek ke každému výsledku
         toggle_mass_action: Přepnout hromadnou akci
@@ -251,14 +251,6 @@ config:
         old_password_label: Aktuální heslo
         description: Zde můžete změnit své heslo. Vaše nové heslo by mělo být alespoň 8 znaků dlouhé.
         repeat_new_password_label: Zopakujte nové heslo
-    form_rss:
-        rss_limit: Počet položek v novinkovém kanálu
-        rss_link:
-            all: Všechny
-            archive: Archivované
-            unread: Nepřečtené
-        token_create: Vytvořit váš token
-        no_token: Žádný token
     tab_menu:
         rss: RSS
         settings: Nastavení
@@ -309,6 +301,7 @@ config:
         annotations: Odebrat VŠECHNY anotace
         description: Stisknutím níže uvedených tlačítek budete mít možnost odebrat některé informace ze svého účtu. Uvědomte si, že tyto akce jsou NEVRATNÉ.
         title: Oblast obnovení (alias nebezpečná zóna)
+        tagging_rules: Odstranit VŠECHNA pravidla štítkování
     form_feed:
         feed_limit: Počet položek v kanálu
         feed_link:
@@ -348,16 +341,16 @@ tag:
         untagged: Položky bez štítků
         no_untagged_entries: Nejsou žádné položky bez štítků.
         see_untagged_entries: Zobrazit položky bez štítků
-        number_on_the_page: '{0}Nejsou žádné štítky.|{1} Je jeden štítek.|]1,4[ Jsou %count% štítky.|]4,Inf[ Je %count% štítků.'
+        number_on_the_page: '{0}Nejsou žádné štítky.|{1} Je jeden štítek.|]1,4] Jsou %count% štítky.|[5,Inf] Je %count% štítků.'
     confirm:
         delete: Odstranit štítek %name%
 quickstart:
     support:
         title: Podpora
-        gitter: Na Gitteru
         email: E-mailem
         github: Na GitHubu
         description: Pokud potřebujete pomoc, jsme tu pro vás.
+        matrix: Na Matrixu
     docs:
         title: Úplná dokumentace
         all_docs: A spousta dalších článků!
@@ -550,6 +543,7 @@ import:
     elcurator:
         description: Tento importér naimportuje všechny vaše články z elCurator.
         page_title: Import > elCurator
+        how_to: Vyberte svůj export z elCuratoru a kliknutím na níže uvedené tlačítko jej nahrajte a importujte.
     wallabag_v2:
         description: Tento importér naimportuje všechny vaše články z wallabagu v2. Přejděte na Všechny články a pak na postranním panelu pro export klikněte na „JSON“. Získáte soubor „All articles.json“.
         page_title: Import > Wallabag v2
@@ -564,7 +558,15 @@ import:
     pocket_html:
         how_to: Zvolte soubor zálohy záložek a kliknutím na níže uvedené tlačítko jej naimportujte. Pamatujte na to, že tento proces může trvat dlouho, protože je třeba načíst všechny články.
         page_title: Import > Pocket HTML
-        description: Tento importér naimportuje všechny vaše záložky z Pocket. Stačí přejít na https://getpocket.com/export) a exportovat soubor HTML, který bude stažen (například „ril_export.html“).
+        description: Tento importér naimportuje všechny vaše záložky z Pocketu (prostřednictvím HTML exportu). Stačí přejít na https://getpocket.com/export a exportovat soubor HTML, který bude stažen (například „ril_export.html“).
+    omnivore:
+        how_to: Rozbalte prosím svůj export z Omnivoru, následně nahrajte jeden po druhém všechny JSON soubory s názevem "metadata_x_to_y.json".
+        page_title: Import > Omnivore
+        description: Tento importér naimportuje všechny vaše články z Omnivore.
+    pocket_csv:
+        page_title: Import > Pocket CSV
+        description: Tento importér naimportuje všechny vaše záložky z Pocketu (prostřednictvím CSV exportu). Stačí přejít na https://getpocket.com/export a exportovat soubor. Stáhne se ZIP soubor (např. „pocket.zip“). Po rozbalení získáte CSV soubor, nazvaný „part_000000.csv“.
+        how_to: Zvolte soubor zálohy záložek a kliknutím na níže uvedené tlačítko jej naimportujte. Pamatujte na to, že tento proces může trvat dlouho, protože je třeba načíst všechny články.
 flashes:
     config:
         notice:
@@ -586,6 +588,8 @@ flashes:
             tagging_rules_updated: Pravidla štítkování byla aktualizována
             user_updated: Informace byla aktualizována
             config_saved: Konfigurace byla uložena.
+            tagging_rules_reset: Pravidla štítkování byla obnovena
+            otp_code_invalid: Neplatný dvoufaktorový autentizační kód
     ignore_origin_instance_rule:
         notice:
             deleted: Globální pravidlo ignorování bylo odstraněno

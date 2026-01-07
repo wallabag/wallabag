@@ -1,0 +1,41 @@
+{# Override `vendor/scheb/two-factor-bundle/Resources/views/Authentication/form.html.twig` #}
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+<form class="form" action="{{ path("2fa_login_check") }}" method="post">
+    <div class="card-content">
+        <div class="row">
+
+            {% for flash_message in app.session.flashbag.get("two_factor") %}
+            <p class="error">{{ flash_message|trans }}</p>
+            {% endfor %}
+
+            {# Authentication errors #}
+            {% if authenticationError %}
+            <p class="error">{{ authenticationError|trans(authenticationErrorData, 'SchebTwoFactorBundle') }}</p>
+            {% endif %}
+
+            <div class="input-field col s12">
+                <label for="_auth_code">{{ "auth_code"|trans({}, 'SchebTwoFactorBundle') }}</label>
+                <input id="_auth_code" type="text" autocomplete="off" name="{{ authCodeParameterName }}" />
+            </div>
+
+            {% if displayTrustedOption %}
+            <div class="input-field col s12 with-checkbox">
+                <label for="_trusted">
+                    <input id="_trusted" type="checkbox" name="{{ trustedParameterName }}"/>
+                    <span>{{ "trusted"|trans({}, 'SchebTwoFactorBundle') }}</span>
+                </label>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card-action center">
+        <a href="{{ path('fos_user_security_logout') }}" class="waves-effect waves-light grey btn">{{ 'security.login.cancel'|trans }}</a>
+        <button class="btn waves-effect waves-light" type="submit" name="send">
+            {{ "login"|trans({}, 'SchebTwoFactorBundle') }}
+            <i class="material-icons right">send</i>
+        </button>
+    </div>
+</form>
+{% endblock %}

@@ -25,7 +25,7 @@ matomo_host: Host de seu website Matomo
 matomo_site_id: ID de seu website Matomo
 matomo_enabled: Habilitar Matomo
 restricted_access: Habilitar autenticação para sites com paywall
-download_images_enabled: Baixar imagens localmente
+download_images_enabled: Descarregar imagens localmente
 import_with_redis: Habilitar Redis para importar dados assincronamente
 import_with_rabbitmq: Permitir que RabbitMQ importe dados assincronamente
 settings_changed: Configuração atualizada

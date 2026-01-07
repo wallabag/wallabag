@@ -1,0 +1,85 @@
+/* ==========================================================================
+   Sidenav
+   ========================================================================== */
+
+.sidenav {
+  width: 240px;
+
+  li {
+    padding: 0;
+
+    &.logo > a:hover {
+      background: initial;
+    }
+
+    & button > i.material-icons.theme-toggle-icon,
+    & > a > i.material-icons.theme-toggle-icon {
+      float: none;
+      margin-left: 0;
+    }
+  }
+
+  a {
+    margin: 0;
+  }
+
+  &.sidenav-fixed button,
+  &.sidenav-fixed a {
+    font-size: 13px;
+    line-height: 44px;
+    height: 44px;
+  }
+
+  .collapsible-header,
+  &.sidenav-fixed .collapsible-header {
+    height: 45px;
+    line-height: 44px;
+    padding: 0 20px;
+  }
+
+  > li.logo {
+    line-height: 0;
+    text-align: center;
+  }
+}
+
+// adapted from anchor styles from node_modules/@materializecss/materialize/sass/components/_sidenav.scss
+.sidenav li button {
+  color: rgba(0 0 0 / 87%);
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 (16px * 2);
+  width: 100%;
+  text-align: left;
+
+  &:hover {
+    background-color: rgba(0 0 0 / 5%);
+  }
+
+  & > i,
+  & > i.material-icons {
+    float: left;
+    height: 48px;
+    line-height: 48px;
+    margin: 0 (16px * 2) 0 0;
+    width: 24px;
+    color: rgba(0 0 0 / 54%);
+  }
+}
+
+.bold > a,
+.bold > button {
+  font-weight: bold;
+}
+
+.items-number {
+  float: right;
+}
+
+.button-filters .sidenav-trigger,
+.button-export .sidenav-trigger {
+  display: block;
+}

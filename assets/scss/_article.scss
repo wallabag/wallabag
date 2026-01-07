@@ -1,0 +1,277 @@
+@use "variables";
+
+/* ==========================================================================
+   Article
+   ========================================================================== */
+
+#article, #preview-article {
+  font-size: 20px;
+  margin: 0 auto;
+  max-width: 45em;
+  padding: 5px 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px #ccc;
+
+  article {
+    color: #424242;
+    font-size: 18px;
+    line-height: 1.7em;
+    overflow-wrap: break-word;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #212121;
+
+      strong {
+        font-weight: 500;
+      }
+    }
+
+    h6 {
+      font-size: 1.2rem;
+    }
+
+    h5 {
+      font-size: 1.6rem;
+    }
+
+    h4 {
+      font-size: 1.9rem;
+    }
+
+    h3 {
+      font-size: 2.2rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+    }
+
+    h1 {
+      font-size: 2.7rem;
+    }
+
+    a {
+      border-bottom: 1px dotted variables.$blue-accent-color;
+      text-decoration: none;
+    }
+
+    a:hover {
+      border-bottom-style: solid;
+    }
+
+    ul {
+      padding-left: 30px;
+    }
+
+    ul,
+    ul li {
+      list-style-type: disc;
+    }
+
+    blockquote {
+      font-style: italic;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+  }
+
+  img,
+  figure {
+    max-width: 100%;
+    height: auto;
+  }
+
+  pre {
+    box-sizing: border-box;
+    margin: 0 0 1.75em;
+    border: #e3f2fd 1px solid;
+    width: 100%;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 0.8em;
+    white-space: pre;
+    overflow: auto;
+    background: #f5f5f5;
+    border-radius: 3px;
+  }
+
+  > header > h1 {
+    font-size: 2em;
+    margin: 2.1rem 0 0.68rem;
+  }
+
+  .entry-info {
+    .tools {
+      display: flex;
+      margin: 8px 5px 5px;
+      flex-wrap: wrap;
+
+      .stats {
+        margin: 0;
+        font-size: 0.7em;
+
+        li {
+          display: inline-flex;
+          vertical-align: middle;
+          margin: 3px 5px;
+
+          i.material-icons {
+            color: #3e3e3e;
+            margin-right: 3px;
+            font-size: 18px;
+          }
+        }
+
+        a {
+          color: #000;
+          text-decoration: none;
+        }
+      }
+
+      .tags {
+        display: flex;
+        margin: 0;
+        align-items: center;
+        gap: 5px;
+      }
+    }
+
+    .chip {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      height: 25px;
+      line-height: 25px;
+      align-items: center;
+      background-color: transparent;
+
+      a,
+      i {
+        color: #fff;
+      }
+
+      i.material-icons {
+        font-size: 16px;
+        vertical-align: sub;
+      }
+    }
+
+    .chip-label {
+        padding-left: 10px;
+        padding-right: 5px;
+        background-color: #9e9e9e;
+        border-radius: 6px 0 0 6px;
+    }
+
+    .chip-action {
+      padding: 0 5px;
+      background-color: #868686;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .chip-label,
+    .chip-action {
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .chip-label:hover,
+    .chip-label:active,
+    .chip-label:focus,
+    .chip-action:hover,
+    .chip-action:active,
+    .chip-action:focus {
+      background-color: #5e5e5e;
+    }
+  }
+}
+
+.entry-info {
+  margin-bottom: 40px;
+}
+
+.reader-mode {
+  width: 70px !important;
+  transition: width 0.2s ease;
+
+  .collapsible-body {
+    height: 0;
+    overflow: hidden;
+  }
+
+  span {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover {
+    width: 260px !important;
+
+    span {
+      opacity: 1;
+    }
+  }
+
+  .collapsible-body {
+    height: auto;
+
+    li a i.material-icons {
+      margin: auto 5px auto -8px;
+    }
+  }
+}
+
+.progress {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 3px;
+  margin: 0;
+  z-index: 9999;
+}
+
+.tags-add-form {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+@media only screen and (max-width: 640px) {
+  .entry-info {
+    margin-bottom: 20px;
+  }
+
+  #article .entry-info .tools {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #article .entry-info .tools .tags {
+    gap: 10px;
+  }
+
+  #article .entry-info .chip {
+    height: 32px;
+    line-height: 32px;
+  }
+
+  #article .entry-info .chip-label,
+  #article .entry-info .chip-action {
+    min-width: 40px;
+  }
+
+  .tags-add-form {
+    display: block;
+  }
+
+  .tags-add-form-submit {
+    margin-top: 10px;
+  }
+}

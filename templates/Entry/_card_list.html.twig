@@ -1,0 +1,53 @@
+<div class="card-stacked{% if currentRoute in routes and entry.isArchived %} archived{% endif %}">
+    {% include "Entry/Card/_mass_checkbox.html.twig" with {'entry': entry} only %}
+    {% if app.user.config.displayThumbnails %}
+    <div class="card-preview">
+        {% set preview_class_modifier = entry.previewPicture ? '' : ' preview--default' %}
+        {% if is_granted('VIEW', entry) %}
+            <a href="{{ path('view', {'id': entry.id}) }}">
+                <span class="preview{{ preview_class_modifier }}" style="background-image: url({{ entry.previewPicture|default(asset('img/logo-square.svg')) }})"></span>
+            </a>
+        {% else %}
+            <span class="preview{{ preview_class_modifier }}" style="background-image: url({{ entry.previewPicture|default(asset('img/logo-square.svg')) }})"></span>
+        {% endif %}
+    </div>
+    {% endif %}
+    {% include "Entry/Card/_content.html.twig" with {'entry': entry, 'withMetadata': true, 'subClass': 'metadata'} only %}
+
+    {% set current_path = app.request.requesturi %}
+
+    <ul class="tools-list hide-on-small-only">
+        <li>
+            {% if is_granted('LIST_ENTRIES') %}
+                <a title="{{ 'entry.list.show_same_domain'|trans }}" class="tool grey-text" href="{{ path('same_domain', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">language</i></a>
+            {% endif %}
+            {% if is_granted('ARCHIVE', entry) %}
+                <form action="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
+                    <input type="hidden" name="token" value="{{ csrf_token('archive-entry') }}"/>
+
+                    <button type="submit" class="btn-link tool grey-text" title="{{ 'entry.list.toogle_as_read'|trans }}">
+                        <i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
+                    </button>
+                </form>
+            {% endif %}
+            {% if is_granted('STAR', entry) %}
+                <form action="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
+                    <input type="hidden" name="token" value="{{ csrf_token('star-entry') }}"/>
+
+                    <button type="submit" class="btn-link tool grey-text" title="{{ 'entry.list.toogle_as_star'|trans }}">
+                        <i class="material-icons">{% if entry.isStarred == 0 %}star_border{% else %}star{% endif %}</i>
+                    </button>
+                </form>
+            {% endif %}
+            {% if is_granted('DELETE', entry) %}
+                <form action="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
+                    <input type="hidden" name="token" value="{{ csrf_token('delete-entry') }}"/>
+
+                    <button type="submit" class="btn-link tool grey-text" title="{{ 'entry.list.delete'|trans }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </form>
+            {% endif %}
+        </li>
+    </ul>
+</div>

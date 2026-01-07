@@ -1,0 +1,35 @@
+settings_changed: Канфігурацыя абноўлена
+download_pictures: Пампаваць карцінкі на ваш сэрвэр
+diaspora_url: diaspora* URL, калі сэрвіс уключаны
+export_xml: Уключыць экспарт XML
+import_with_rabbitmq: Уключыць RabbitMQ для асінхроннага ймпарту даных
+shaarli_url: Shaarli URL, калі сэрвіс уключаны
+share_shaarli: Уключыць магчымасьць пашырэньня ў Shaarli
+share_twitter: Уключыць магчымасьць пашырэньня ў Twitter
+share_unmark: Уключыць магчымасьць пашырэньня ў Unmark.it
+share_linkding: Уключыць магчымасьць пашырэньня ў Linkding
+show_printlink: Адлюстроўваць спасылкі ў вэрсыйі для друку
+modify_settings: ужыць
+matomo_enabled: Уключыць Matomo
+share_public: Дазволіць агульнадаступныя спасылкі для запісаў
+restricted_access: Уключыць аўтэнтыфікацыю для платных вэб-сайтаў
+shaarli_share_origin_url: Уключыць адпраўку URL-адрасу крыніцы ў Shaarlі, калі сэрвіс ўключаны
+export_epub: Уключыць экспарт ePub
+export_pdf: Уключыць экспарт PDF
+export_json: Уключыць экспарт JSON
+export_txt: Уключыць экспарт TXT
+import_with_redis: Уключыць Redis для асынхроннага ймпарту даных
+export_csv: Уключыць экспарт CSV
+unmark_url: Unmark URL, калі сэрвіс уключаны
+share_mail: Уключыць магчымасьць пашырэньня праз e-mail
+share_diaspora: Уключыць магчымасьць пашырэньня ў diaspora*
+wallabag_support_url: Падтрымка URL для wallabag
+export: экспарт
+matomo_site_id: Ідэнтыфікатар вашага сайта ў Matomo
+entry: артыкул
+import: імпарт
+misc: рознае
+matomo_host: Разьмяшчэньне вашага сайта ў Matomo (без http:// альбо https://)
+download_images_enabled: Спампоўваць выявы лякальна
+api_user_registration: Уключыць рэгістрацыю карыстальніка праз APІ
+store_article_headers: Уключыце, калі wallabag захоўвае HTTP загалоўкі для кожнага артыкула

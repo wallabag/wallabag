@@ -1,0 +1,292 @@
+{% extends "layout.html.twig" %}
+
+{% set has_filters = form is not null %}
+{% set has_exports = craue_setting('export_epub') or craue_setting('export_pdf') or craue_setting('export_json') or craue_setting('export_csv') or craue_setting('export_txt') or craue_setting('export_xml') or craue_setting('export_md') %}
+
+{% block head %}
+    {{ parent() }}
+    {% if tag is defined and app.user.config.feedToken %}
+        <link rel="alternate" type="application/atom+xml" href="{{ path('tag_feed', {'username': app.user.username, 'token': app.user.config.feedToken, 'slug': tag.slug}) }}" />
+    {% endif %}
+{% endblock %}
+
+{% block title %}
+    {% set filter = '' %}
+    {% if tag is defined %}
+        {% set filter = tag.slug %}
+    {% endif %}
+    {% if searchTerm is defined and searchTerm is not empty %}
+        {% set filter = searchTerm %}
+    {% endif %}
+    {% include "Entry/_title.html.twig" with {'filter': filter} %}
+{% endblock %}
+
+{% block nav_panel_extra_actions %}
+    {% if active_route %}
+        <li>
+            <a class="waves-effect js-random-action" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': active_route}) }}">
+                <i class="material-icons">casino</i>
+            </a>
+        </li>
+    {% endif %}
+    {% if has_filters %}
+        <li class="button-filters">
+            <a class="nav-panel-menu sidenav-trigger js-filters-action" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-target="filters">
+                <i class="material-icons">filter_list</i>
+            </a>
+        </li>
+    {% endif %}
+    {% if has_exports %}
+        <li class="button-export">
+            <a class="nav-panel-menu sidenav-trigger js-export-action" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-target="export">
+                <i class="material-icons">file_download</i>
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% set current_path = app.request.requesturi %}
+    {% set list_mode = app.user.config.listMode %}
+    {% set entries_with_archived_class_routes = ['tag_entries', 'search', 'all'] %}
+    {% set current_route = app.request.attributes.get('_route') %}
+    {% if current_route == 'homepage' %}
+        {% set current_route = 'unread' %}
+    {% endif %}
+    <div data-controller="batch-edit entries-navigation">
+        <form id="form_mass_action" name="form_mass_action" action="{{ path('mass_action', {redirect: current_path}) }}" method="post">
+            <input type="hidden" name="token" value="{{ csrf_token('mass-action') }}"/>
+        </form>
+        <div class="results" data-entries-navigation-target="paginationWrapper">
+            <div class="nb-results">
+                {{ 'entry.list.number_on_the_page'|trans({'%count%': entries.count}) }}
+                {% if entries.count > 0 %}
+                    <form action="{{ path('switch_view_mode', {redirect: current_path}) }}" method="post" class="inline-block">
+                        <input type="hidden" name="token" value="{{ csrf_token('switch-view-mode') }}"/>
+
+                        <button type="submit" class="btn-link results-item">
+                            <i class="material-icons">{% if list_mode == 0 %}view_list{% else %}view_module{% endif %}</i>
+                        </button>
+                    </form>
+                {% endif %}
+                {% if entries.count > 0 and is_granted('EDIT_ENTRIES') %}
+                    <label for="mass-action-inputs-displayed" class="mass-action-toggle results-item" data-controller="materialize--tooltip" data-position="right" data-delay="50" data-tooltip="{{ 'entry.list.toggle_mass_action'|trans }}"><i class="material-icons">library_add_check</i></label>
+                {% endif %}
+                {% if app.user.config.feedToken %}
+                    {% include "Entry/_feed_link.html.twig" %}
+                {% endif %}
+            </div>
+            {% if current_route == 'search' and is_granted('CREATE_TAGS') %}
+                <form action="{{ path('tag_this_search', {'filter': searchTerm, 'currentRoute': app.request.get('currentRoute'), redirect: current_path}) }}" method="post">
+                    <input type="hidden" name="token" value="{{ csrf_token('tag-this-search') }}"/>
+
+                    <button type="submit" class="btn-link" title="{{ 'entry.list.assign_search_tag'|trans }}">{{ 'entry.list.assign_search_tag'|trans }}</button>
+                </form>
+            {% endif %}
+            {% if entries.getNbPages > 1 %}
+                {{ pagerfanta(entries, 'default_wallabag') }}
+            {% endif %}
+        </div>
+
+        {% if entries.count > 0 %}
+            <input id="mass-action-inputs-displayed" class="toggle-checkbox" type="checkbox" />
+            <div class="mass-action">
+                <div class="mass-action-group">
+                    <input type="checkbox" form="form_mass_action" class="entry-checkbox-input" data-action="batch-edit#toggleSelection" />
+                    <button class="mass-action-button btn cyan darken-1" type="submit" form="form_mass_action" name="toggle-read" title="{{ 'entry.list.toogle_as_read'|trans }}"><i class="material-icons">done</i></button>
+                    <button class="mass-action-button btn cyan darken-1" type="submit" form="form_mass_action" name="toggle-star" title="{{ 'entry.list.toogle_as_star'|trans }}" ><i class="material-icons">star</i></button>
+                    <button class="mass-action-button btn cyan darken-1" type="submit" form="form_mass_action" name="delete" onclick="return confirm('{{ 'entry.confirm.delete_entries'|trans|escape('js') }}')" title="{{ 'entry.list.delete'|trans }}"><i class="material-icons">delete</i></button>
+                </div>
+
+                <div class="mass-action-tags">
+                    <button class="btn cyan darken-1 mass-action-button mass-action-button--tags" type="submit" form="form_mass_action" name="tag" title="{{ 'entry.list.add_tags'|trans }}" data-batch-edit-target="tagAction"><i class="material-icons">label</i></button>
+                    <input type="text" form="form_mass_action" class="mass-action-tags-input" name="tags" placeholder="{{ 'entry.list.mass_action_tags_input_placeholder'|trans }}" data-action="keydown.enter->batch-edit#tagSelection:prevent:stop" />
+                </div>
+            </div>
+
+            <ol class="entries {% if list_mode == 1 %}collection{% else %}row entries-row data{% endif %}">
+
+                {% for entry in entries %}
+                    <li id="entry-{{ entry.id|e }}" class="{% if list_mode != 0 %}col collection-item{% endif %} s12" data-entry-id="{{ entry.id|e }}" data-test="entry" data-entries-navigation-target="card">
+                        {% if list_mode == 1 %}
+                            {% include "Entry/_card_list.html.twig" with {'entry': entry, 'currentRoute': current_route, 'routes': entries_with_archived_class_routes} only %}
+                        {% elseif not entry.previewPicture is null and entry.mimetype starts with 'image/' %}
+                            {% include "Entry/_card_full_image.html.twig" with {'entry': entry, 'currentRoute': current_route, 'routes': entries_with_archived_class_routes} only %}
+                        {% else %}
+                            {% include "Entry/_card_preview.html.twig" with {'entry': entry, 'currentRoute': current_route, 'routes': entries_with_archived_class_routes} only %}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+
+        {% if entries.getNbPages > 1 %}
+            <div class="results">
+                {{ pagerfanta(entries, 'default_wallabag') }}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Export -->
+    {% if has_exports and is_granted('EXPORT_ENTRIES') %}
+        <div id="export" class="sidenav" data-controller="materialize--sidenav" data-materialize--sidenav-edge-value="right">
+        {% set current_tag = null %}
+        {% if tag is defined %}
+            {% set current_tag = tag.slug %}
+        {% endif %}
+        {% set export_search_term = null %}
+        {% if searchTerm is defined %}
+            {% set export_search_term = searchTerm %}
+        {% endif %}
+        {% set entry = app.request.attributes.get('entry') %}
+        {% set previous_route = app.request.attributes.get('currentRoute') %}
+            <h4 class="center">{{ 'entry.list.export_title'|trans }}</h4>
+            <ul>
+                {% if craue_setting('export_epub') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'epub', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">EPUB</a></li>{% endif %}
+                {% if craue_setting('export_pdf') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'pdf', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">PDF</a></li>{% endif %}
+                {% if craue_setting('export_json') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'json', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">JSON</a></li>{% endif %}
+                {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'csv', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">CSV</a></li>{% endif %}
+                {% if craue_setting('export_txt') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'txt', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">TXT</a></li>{% endif %}
+                {% if craue_setting('export_xml') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'xml', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">XML</a></li>{% endif %}
+                {% if craue_setting('export_md') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'md', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">Markdown</a></li>{% endif %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <!-- Filters -->
+    {% if has_filters %}
+    <div id="filters" class="sidenav" data-controller="materialize--sidenav" data-materialize--sidenav-edge-value="right">
+        <form action="{{ path('all') }}">
+
+            <h4 class="center">{{ 'entry.filters.title'|trans }}</h4>
+
+            <div class="row">
+                {% if current_route != 'untagged' %}
+                    <div class="col s12 center-align">
+                        <a href="{{ path('untagged') }}">{{ 'tag.list.see_untagged_entries'|trans }}</a>
+                    </div>
+                {% endif %}
+
+                <div class="col s12">
+                    <label>{{ 'entry.filters.status_label'|trans }}</label>
+                </div>
+
+                <div class="input-field col s6 with-checkbox">
+                    <label for="{{ form.isArchived.vars.id }}">
+                        {{ form_widget(form.isArchived) }}
+                        <span>{{ form.isArchived.vars.label|trans }}</span>
+                    </label>
+                </div>
+
+                <div class="input-field col s6 with-checkbox">
+                    <label for="{{ form.isStarred.vars.id }}">
+                        {{ form_widget(form.isStarred) }}
+                        <span>{{ form.isStarred.vars.label|trans }}</span>
+                    </label>
+                </div>
+
+                <div class="input-field col s12 with-checkbox">
+                    <label for="{{ form.isUnread.vars.id }}">
+                        {{ form_widget(form.isUnread) }}
+                        <span>{{ form.isUnread.vars.label|trans }}</span>
+                    </label>
+                </div>
+
+                <div class="input-field col s12 with-checkbox">
+                    <label for="{{ form.isAnnotated.vars.id }}">
+                        {{ form_widget(form.isAnnotated) }}
+                        <span>{{ form.isAnnotated.vars.label|trans }}</span>
+                    </label>
+                </div>
+
+                <div class="input-field col s12 with-checkbox">
+                    <label for="{{ form.isNotParsed.vars.id }}">
+                        {{ form_widget(form.isNotParsed) }}
+                        <span>{{ form.isNotParsed.vars.label|trans }}</span>
+                    </label>
+                </div>
+
+                <div class="col s12">
+                    <label>{{ 'entry.filters.preview_picture_help'|trans }}</label>
+                </div>
+
+                <div class="input-field col s12 with-checkbox">
+                    <label for="{{ form.previewPicture.vars.id }}">
+                        {{ form_widget(form.previewPicture) }}
+                        <span>{{ form.previewPicture.vars.label|trans }}</span>
+                    </label>
+                </div>
+
+                <div class="col s12">
+                    <label>{{ 'entry.filters.is_public_help'|trans }}</label>
+                </div>
+
+                <div class="input-field col s12 with-checkbox">
+                    <label for="{{ form.isPublic.vars.id }}">
+                        {{ form_widget(form.isPublic) }}
+                        <span>{{ form.isPublic.vars.label|trans }}</span>
+                    </label>
+                </div>
+
+                <div class="col s12">
+                    {{ form_label(form.language) }}
+                </div>
+
+                <div class="input-field col s12">
+                    {{ form_widget(form.language) }}
+                </div>
+
+                <div class="col s12">
+                    {{ form_label(form.httpStatus) }}
+                </div>
+
+                <div class="input-field col s12">
+                    {{ form_widget(form.httpStatus) }}
+                </div>
+
+                <div class="col s12">
+                    {{ form_label(form.readingTime) }}
+                </div>
+
+                <div class="input-field col s6">
+                    {{ form_widget(form.readingTime.left_number, {'type': 'number'}) }}
+                    <label for="entry_filter_readingTime_left_number">{{ 'entry.filters.reading_time.from'|trans }}</label>
+                </div>
+
+                <div class="input-field col s6">
+                    {{ form_widget(form.readingTime.right_number, {'type': 'number'}) }}
+                    <label for="entry_filter_readingTime_right_number">{{ 'entry.filters.reading_time.to'|trans }}</label>
+                </div>
+
+                <div class="input-field col s12">
+                    {{ form_widget(form.domainName, {'type': 'text', 'attr': {'placeholder': 'website.com'}}) }}
+                    {{ form_label(form.domainName) }}
+                </div>
+
+                <div class="col s12">
+                    {{ form_label(form.createdAt) }}
+                </div>
+
+                <div class="input-field col s12">
+                    {{ form_widget(form.createdAt.left_date, {'type': 'date', 'attr': {'data-value': form.createdAt.left_date.vars.value}}) }}
+                    <label for="entry_filter_createdAt_left_date" class="active">{{ 'entry.filters.created_at.from'|trans }}</label>
+                </div>
+                <div class="input-field col s12">
+                    {{ form_widget(form.createdAt.right_date, {'type': 'date', 'attr': {'data-value': form.createdAt.right_date.vars.value}}) }}
+                    <label for="entry_filter_createdAt_right_date" class="active">{{ 'entry.filters.created_at.to'|trans }}</label>
+                </div>
+
+                <div class="col s6">
+                    <button type="reset" class="center waves-effect waves-green btn-flat">{{ 'entry.filters.action.clear'|trans }}</button>
+                </div>
+
+                <div class="col s6">
+                    <button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">{{ 'entry.filters.action.filter'|trans }}</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    {% endif %}
+
+{% endblock %}

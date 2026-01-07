@@ -1,4 +1,35 @@
-download_pictures: 下載圖片至你的服務器上
-diaspora_url: diaspora* URL(如果該服務已啟用)
-settings_changed: 已更新設定
+download_pictures: 下載圖片至你的伺服器
+diaspora_url: diaspora* 網址，如已啟用該服務
+settings_changed: 已更新設置
 export_epub: 啟用 ePub 輸出
+export_pdf: 啟用 PDF 輸出
+export_csv: 啟用 CSV 輸出
+export_json: 啟用 JSON 輸出
+export_txt: 啟用 TXT 輸出
+export_xml: 啟用 XML 輸出
+export: 匯出
+misc: 雜項
+import: 匯入
+entry: 文章
+modify_settings: 套用
+matomo_enabled: 啟用 Matomo
+import_with_rabbitmq: 啟用 RabbitMQ 以異步方式匯入資料
+import_with_redis: 啟用 Redis 以異步方式匯入資料
+shaarli_url: Shaarli 網址，如已啟用該服務
+unmark_url: Unmark 網址，如已啟用該服務
+share_diaspora: 啟用分享到 diaspora*
+share_mail: 啟用以電子郵件分享
+share_shaarli: 啟用分享到 Shaarli
+share_twitter: 啟用分享到 X（前 Twitter）
+share_unmark: 啟用分享到 Unmark.it
+matomo_host: 你的 Matomo 網路主機位址（省略 http:// 或 https://）
+matomo_site_id: 你的網站 Matomo ID
+api_user_registration: 允許經由 API 註冊
+download_images_enabled: 下載圖像到本機
+restricted_access: 啟用付費網站認證
+shaarli_share_origin_url: 啟用分享原文網址至 Shaarli，如已啟用該服務
+store_article_headers: 允許 wallabag 儲存每篇文章的 HTTP Header
+share_public: 允許公開條目連結
+show_printlink: 顯示列印用連結
+wallabag_support_url: wallabag 的支援連結
+share_linkding: 啟用分享至 Linkding

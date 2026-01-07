@@ -32,3 +32,4 @@ wallabag_support_url: Adresa URL pro podporu Wallabag
 show_printlink: Zobrazit odkaz pro vytištění obsahu
 import_with_redis: Povolit Redis pro asynchronní import dat
 import_with_rabbitmq: Povolit RabbitMQ pro asynchronní import dat
+share_linkding: Povolit sdílení na Linkding

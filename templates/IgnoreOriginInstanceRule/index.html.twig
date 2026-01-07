@@ -1,0 +1,46 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'ignore_origin_instance_rule.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <p class="help">{{ 'ignore_origin_instance_rule.description'|trans|raw }}</p>
+
+                        <table class="bordered">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'ignore_origin_instance_rule.form.rule_label'|trans }}</th>
+                                    <th>{{ 'ignore_origin_instance_rule.list.actions'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for rule in rules %}
+                                <tr>
+                                    <td>{{ rule.rule }}</td>
+                                    <td>
+                                        {% if is_granted('EDIT', rule) %}
+                                            <a href="{{ path('ignore_origin_instance_rules_edit', {'id': rule.id}) }}">{{ 'ignore_origin_instance_rule.list.edit_action'|trans }}</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% if is_granted('CREATE_IGNORE_ORIGIN_INSTANCE_RULES') %}
+                            <br />
+                            <p>
+                                <a href="{{ path('ignore_origin_instance_rules_new') }}" class="waves-effect waves-light btn">{{ 'ignore_origin_instance_rule.list.create_new_one'|trans }}</a>
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'site_credential.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <p class="help">{{ 'site_credential.description'|trans|raw }}</p>
+
+                        <table class="bordered">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'site_credential.form.host_label'|trans }}</th>
+                                    <th>{{ 'site_credential.list.actions'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for credential in credentials %}
+                                <tr>
+                                    <td>{{ credential.host }}</td>
+                                    <td>
+                                        {% if is_granted('EDIT', credential) %}
+                                            <a href="{{ path('site_credentials_edit', {'id': credential.id}) }}">{{ 'site_credential.list.edit_action'|trans }}</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% if is_granted('CREATE_SITE_CREDENTIALS') %}
+                            <br />
+                            <p>
+                                <a href="{{ path('site_credentials_new') }}" class="waves-effect waves-light btn">{{ 'site_credential.list.create_new_one'|trans }}</a>
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

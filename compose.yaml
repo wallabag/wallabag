@@ -1,0 +1,93 @@
+services:
+
+    php:
+        build:
+            context: docker/php
+            # Use target 'rootless' if you run rootless Docker
+            target: default
+        volumes:
+            - .:/var/www/html
+            # Volumes for data-related folders
+            - assets:/var/www/html/web/assets
+            - data:/var/www/html/data
+            - cache:/var/www/.cache
+            # Uncomment the following volume if you run rootless Docker
+            # A limitation blocks permissions on root docker, see
+            # https://github.com/moby/moby/issues/40881
+            # - type: tmpfs
+            #   target: /var/www/html/var/cache
+            # Override third-party libraries for dev
+            # - ../graby-site-config:/var/www/html/vendor/j0k3r/graby-site-config
+            # - ../php-readability:/var/www/html/vendor/j0k3r/php-readability
+            # - ../graby:/var/www/html/vendor/j0k3r/graby
+            # - ../HTMLawed:/var/www/html/vendor/fossar/htmlawed
+            # - ../PHPePub:/var/www/html/vendor/wallabag/phpepub
+            # - ../guzzle-site-authenticator:/var/www/html/vendor/bdunogier/guzzle-site-authenticator
+        env_file:
+            # Copy docker/php/env.example to docker/php/env and customize
+            - ./docker/php/env
+            # Uncomment the database engine you want, it will use sqlite if both are commented
+            # - ./docker/mariadb/env
+            # - ./docker/postgres/env
+            # Uncomment to enable Xdebug
+            # - ./docker/php/xdebug
+            # Uncomment to enable Blackfire
+            # - ./docker/php/blackfire
+        ports:
+            - 8000:8000
+            # Uncomment to permit Xdebug remote session
+            # - 9000:9000
+        depends_on:
+            # - mariadb
+            # - postgres
+            - redis
+
+    # postgres:
+    #     image: postgres:11-alpine
+    #     volumes:
+    #         - db-data:/var/lib/postgresql/data
+    #     env_file:
+    #         - ./docker/postgres/env
+    #     healthcheck:
+    #         test: ["CMD-SHELL", "pg_isready -U wallabag -q || exit 1"]
+    #         interval: 10s
+    #         timeout: 3s
+    #         retries: 3
+
+    # mariadb:
+    #    image: mariadb:10
+    #    ports:
+    #        - "3306:3306"
+    #    volumes:
+    #        - db-data:/var/lib/mysql
+    #    env_file:
+    #        - ./docker/mariadb/env
+
+    # rabbitmq:
+    #     image: rabbitmq:3-management-alpine
+    #     ports:
+    #         - "15672:15672"
+
+    redis:
+        image: redis:6-alpine
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            interval: 10s
+            timeout: 3s
+            retries: 3
+
+    # blackfire:
+    #     image: blackfire/blackfire:2
+    #     ports: [ "8307" ]
+    #     env_file:
+    #         - ./docker/php/blackfire
+
+volumes:
+    db-data:
+        driver: local
+    assets:
+        driver: local
+    data:
+        driver: local
+    cache:
+        driver: local

@@ -1,0 +1,467 @@
+security:
+    login:
+        page_title: Сардэчна запрашаем у wallabag!
+        keep_logged_in: Захаваць мяне ў сыстэме
+        forgot_password: Забыліся на пароль?
+        submit: Увайсьці
+        register: Зарэгістравацца
+        cancel: Скасаваць
+        username: Імя карыстальніка
+        password: Пароль
+    register:
+        page_title: Стварыць уліковы запіс
+        go_to_account: Перайсьці ва ўліковы запіс
+    resetting:
+        description: Увядзіце ніжэй свой адрас электроннай пошты, і мы вышлем вам інструкцыйі па скідзе пароля.
+menu:
+    left:
+        starred: Пазначаныя
+        archive: Архіў
+        with_annotations: З анатацыямі
+        internal_settings: Унутраныя налады
+        import: Імпарт
+        howto: Інструкцыя
+        developer: Кіраваньне кліентамі API
+        logout: Выйсьці
+        about: Аб wallabag
+        search: Пошук
+        save_link: Захаваць спасылку
+        back_to_unread: Вярнуцца да непрачытаных артыкулаў
+        users_management: Кіраваньне карыстальнікамі
+        site_credentials: Уліковыя даныя сайта
+        quickstart: Хуткі старт
+        theme_toggle_light: Сьветлая тэма
+        theme_toggle_dark: Цёмная тэма
+        theme_toggle_auto: Аўтаматычная тэма
+        config: Канфігурацыя
+        tags: Тэгі
+        unread: Непрачытанае
+        all_articles: Усе запісы
+        ignore_origin_instance_rules: Ґлябальныя правілы йґнараваньня крыніцы
+    top:
+        add_new_entry: Дадаць новы запіс
+        search: Пошук
+        filter_entries: Фільтраваць запісы
+        export: Экспарт
+        account: Мой уліковы запіс
+        random_entry: Перайсьці да выпадковага запісу з гэтага сьпісу
+    search_form:
+        input_label: Увядзіце шуканае тут
+footer:
+    wallabag:
+        elsewhere: Вазьміце wallabag з сабой
+        social: Сац. сеткі
+        about: Аб wallabag
+        powered_by: створана з дапамогай
+    stats: З %user_creation% вы прачыталі %nb_archives% артыкулаў. Гэта прыкладна %per_day% у дзень!
+config:
+    page_title: Канфігурацыя
+    tab_menu:
+        settings: Налады
+        feed: Стужкі
+        user_info: Інфармацыя аб карыстальніку
+        password: Пароль
+        rules: Правілы выстаўленьня тэгаў
+        new_user: Дадаць карыстальніка
+        ignore_origin: Іґнараваць правілы крыніцы
+        reset: Скінуць вобласьць
+        article_display: Адлюстраваньне артыкула
+    form_settings:
+        items_per_page_label: Запісаў на старонцы
+        reading_speed:
+            label: Хуткасьць чытаньня
+            help_message: 'Вы можаце выкарыстоўваць анлайн-інструмэнты для ацэнкі хуткасьці чытаньня:'
+            200_word: Я чытаю ~200 словаў у хвіліну
+            300_word: Я чытаю ~300 словаў у хвіліну
+            400_word: Я чытаю ~400 словаў у хвіліну
+            100_word: Я чытаю ~100 словаў у хвіліну
+        action_mark_as_read:
+            label: Што рабіць пасьля выдаленьня артыкула, пазначэньня яго зоркай або пазначэньня як прачытанага?
+            redirect_homepage: Да хатняй старонцы
+            redirect_current_page: Застацца на бягучай старонцы
+        pocket_consumer_key_label: Ключ ад Pocket для ймпарту кантэнту
+        android_configuration: Наладзьце сваю Android аплікацыю
+        help_items_per_page: Вы можаце зьмяніць колькасьць артыкулаў, якія адлюстроўваюцца на кожнай старонцы.
+        help_language: Вы можаце зьмяніць мову йнтэрфэйсу wallabag.
+        help_pocket_consumer_key: Патрабуецца для ймпарту з Pocket. Вы можаце стварыць яго ў сваім уліковым запісе Pocket.
+        help_display_thumbnails: Вы можаце вырашыць, ці хочаце вы каб мініятуры артыкулаў адлюстроўваліся. Карысна калі ў вас павольнае злучэньне зь сеткай.
+        help_font: Вы можаце абраць сямейства шрыфтоў, якое хочаце выкарыстоўваць.
+        help_fontsize: Вы можаце абраць памер шрыфта, які хочаце выкарыстоўваць.
+        help_lineheight: Вы можаце абраць вышыню лінійі, якую хочаце выкарыстоўваць.
+        help_maxwidth: Вы можаце абраць максымальную шырыню, якую хочаце выкарыстоўваць.
+        display_thumbnails_label: Адлюстраваньне мініятур артыкулаў (карысна калі ў вас павольнае злучэньне зь сеткай).
+        font_label: Сямейства шрыфтоў
+        fontsize_label: Памер шрыфта
+        lineheight_label: Вышыня лінійі
+        maxwidth_label: Максімальная шырыня
+        language_label: Мова
+        android_instruction: Націсьніце тут, каб прадусталяваць вашую Android аплікацыю
+        help_reading_speed: wallabag разьлічвае час чытаньня для кожнага артыкула. Вы можаце вызначыць тут, як хутка вы чытаеце. wallabag пералічыць час чытаньня для кожнага артыкула.
+    form_feed:
+        no_token: Няма токена
+        token_create: Стварыць свой токен
+        token_reset: Аднавіце свой токен
+        token_revoke: Адклікаць токен
+        feed_links: Спасылкі на стужкі
+        feed_link:
+            starred: Пазначаныя
+            archive: Архіваваныя
+            all: Усе
+            unread: Непрачытанае
+        feed_limit: Колькасьць элемэнтаў у стужцы
+        description: Навінавыя стужкі Atom, якія прадстаўляюцца wallabag, дазваляюць чытаць захаваныя артыкулы пры дапамозе ўпадабанай вамі Atom-чыталкі. Спачатку вам трэба зґенераваць токен.
+        token_label: Токен стужкі
+    form_user:
+        login_label: Лагін (ня можа быць зьменены)
+        name_label: Імя
+        email_label: Электронная пошта
+        two_factor:
+            googleTwoFactor_label: Выкарыстоўваючы праґраму OTP (адкрыйце праґраму, напрыклад Google Authenticator, Authy альбо FreeOTP, каб атрымаць аднаразовы код)
+            table_method: Мэтад
+            table_state: Стан
+            table_action: Дзеяньне
+            state_enabled: Уключана
+            state_disabled: Выключана
+            action_email: Выкарыстаць электронную пошту
+            action_app: Выкарыстаць OTP аплікацыю
+            emailTwoFactor_label: З дапамогай электроннай пошты (атрымаць код па электроннай пошце)
+        two_factor_description: Уключэньне двухфактарнай аўтэнтыфікацыйі азначае, што вы будзеце атрымліваць электронны ліст з кодам пры кожным новым ненадзейным злучэньні.
+        delete:
+            title: Выдаліць мой уліковы запіс (ці небясьпечная зона)
+            description: Калі вы выдаліце свой уліковы запіс, УСЕ вашыя АРТЫКУЛЫ, тэгі, АНАТАЦЫІ й ВАШ УЛІКОВЫ ЗАПІС будуць ПЕРМАНЕНТНА выдаленыя (ГЭТА НЕЛЬГА АДМЯНІЦЬ). Таксама, потым вы выйдзеце з сыстэмы.
+            button: Выдаліць мой уліковы запіс
+            confirm: Вы ўпэўненыя? (ГЭТА НЕЛЬГА АДМЯНІЦЬ)
+    reset:
+        title: Зона скіду (ці небясьпечная зона)
+        annotations: Выдаліць УСЕ анатацыйі
+        tags: Выдаліць УСЕ тэгі
+        tagging_rules: Выдаліць УСЕ правілы тэгаў
+        entries: Выдаліць УСЕ запісы
+        confirm: Вы ўпэўненыя? (ГЭТА НЕЛЬГА СКАСАВАЦЬ)
+        description: Націскаючы кнопку ніжэй, вы зможаце выдаліць некаторую йнфармацыю са свайго ўліковага запісу. Майце на ўвазе, што гэтыя дзеяньні НЕЗВАРОТНЫЯ.
+        archived: Выдаліць УСЕ запісы з архіва
+    form:
+        save: Захаваць
+    form_rules:
+        card:
+            export_tagging_rules_detail: Гэта спампуе файл JSON, які вы можаце выкарыстоўваць для ймпарту правілаў тэгінга ў іншым месцы або для йх рэзэрвовага капіяваньня.
+            export_tagging_rules: Экспартаваць правілы тэгінга
+            import_tagging_rules: Імпартаваць правілы тэгінга
+            new_tagging_rule: Стварыць правіла тэгінга
+            import_tagging_rules_detail: Вы павінны абраць файл JSON, які вы раней экспартавалі.
+        faq:
+            meaning: Сэнс
+            variable_description:
+                label: Зьменныя
+                title: Назва запісу
+                isArchived: Незалежна ад таго, заархіваваны запіс ці не
+                isStarred: Незалежна ад таго, пазначаны запіс ці не
+                content: Зьмест запісу
+                language: Мова запісу
+                mimetype: Тып мэдыя запісу
+                domainName: Дамэннае ймя запісу
+                url: Спасылка на запіс
+                readingTime: Прыблізны час чытаньня запісу ў хвілінах
+            operator_description:
+                label: Апэратар
+                less_than: Менш за…
+                strictly_less_than: Строга менш за…
+                greater_than: Больш за…
+                strictly_greater_than: Строга больш, чым…
+                equal_to: Роўна…
+                not_equal_to: Ня роўна…
+                or: Адно правіла АЛЬБО йншае
+                and: Адно правіла Й другое
+                notmatches: 'Тэсты, у якіх <i>тэма</i> не адпавядае <i>пошуку</i> (без уліка рэгістра).<br />Прыклад: <code>назва адпавядае "футбол"</code>'
+                matches: 'Тэсты, у якіх <i>тэма</i> адпавядае <i>пошуку</i> (без уліка рэгістра).<br />Прыклад: <code>назва адпавядае "футбол"</code>'
+            variables_available_title: Якія зьменныя й апэратараў я магу выкарыстоўваць для напісаньня правілаў?
+            variables_available_description: 'Наступныя зьменныя й апэратары могуць быць выкарыстаны для стварэньня правілаў пазначэньня:'
+        if_label: калі
+        then_tag_as_label: тады тэг
+        edit_rule_label: рэдагаваць
+        rule_label: Правіла
+        tags_label: Тэгі
+        delete_rule_label: выдаліць
+    form_ignore_origin_rules:
+        faq:
+            title: Пытаньні якія часта задаюць
+            ignore_origin_rules_definition_title: Што значыць «правілы йгнараньня крыніцы»?
+    form_password:
+        description: Вы можаце зьмяніць свой пароль тут. Ваш новы пароль павінен быць ня менш за 8 сымбаляў.
+        old_password_label: Бягучы пароль
+        new_password_label: Новы пароль
+        repeat_new_password_label: Паўтарыце новы пароль
+entry:
+    list:
+        number_on_the_page: '{0} Няма запісаў.|{1} Ёсьць адзін запіс.|]1,Inf[ Ёсьць %count% запіса/аў.'
+        reading_time: разьліковы час чытаньня
+        reading_time_less_one_minute: 'разьліковы час чытаньня: < 1 хв'
+        reading_time_minutes: 'разьліковы час чытаньня: %readingTime% хв'
+        number_of_tags: '{1}і яшчэ адзін тэг|]1,Inf[і %count% іншыя тэгі'
+        reading_time_minutes_short: '%readingTime% хв'
+        reading_time_less_one_minute_short: '&lt; 1 хв'
+        original_article: арыґінал
+        toogle_as_read: Пазначыць як прачытанае
+        toogle_as_star: Пазначыць
+        delete: Выдаліць
+        export_title: Экспарт
+        show_same_domain: Паказаць артыкулы з аднолькавым дамэнам
+        assign_search_tag: Прызначце гэты пошук у якасьці тэга да кожнага выніку
+        toggle_mass_action: Масавае ўзаемадзеяньне
+        mass_action_tags_input_placeholder: тэг1, тэг2, тэг3
+        add_tags: Дадаць тэгі
+    filters:
+        title: Фільтры
+        status_label: Статус
+        archived_label: Заархівавана
+        starred_label: Пазначаны
+        unread_label: Непрачытаны
+        annotated_label: Анатаваны
+        parsed_label: Атрымана некарэктна
+        preview_picture_label: Мае малюнак папярэдняга прагляду
+        preview_picture_help: Малюнак папярэдняга прагляду
+        is_public_help: Публічная спасылка
+        language_label: Мова
+        http_status_label: Статус HTTP
+        reading_time:
+            from: ад
+            to: да
+            label: Час чытаньня ў хвілінах
+        domain_label: Дамэннае ймя
+        created_at:
+            label: Дата стварэньня
+            from: ад
+            to: да
+        action:
+            clear: Ачысьціць
+            filter: Фільтраваць
+        is_public_label: Мае публічную спасылку
+    view:
+        left_menu:
+            back_to_top: Вернуцца ў пачатак
+            back_to_homepage: Назад
+            set_as_read: Пазначыць як прачытанае
+            set_as_unread: Пазначыць як непрачытанае
+            view_original_article: Арыґінальны артыкул
+            re_fetch_content: Паўторная загрузка зьмесьціва
+            delete: Выдаліць
+            add_a_tag: Дадаць тэг
+            share_content: Абагуліць
+            delete_public_link: выдаліць публічную спасылку
+            export: Экспарт
+            print: Раздрукаваць
+            theme_toggle: Пераключэньне тэмы
+            theme_toggle_light: Сьветлая
+            theme_toggle_dark: Цёмная
+            theme_toggle_auto: Аўтаматычная
+            problem:
+                label: Праблемы?
+                description: Штосьці ня так з гэтым артыкулам?
+            set_as_starred: Пазначыць
+            share_email_label: Электронная пошта
+            public_link: публічная спасылка
+        edit_title: Рэдагаваць назву
+        original_article: арыґінал
+        annotations_on_the_entry: '{0} Няма анатацыяў|{1} Адна анатацыя|]1,Inf[ %count% анатацыйі/яў'
+        created_at: Дата стварэньня
+        published_at: Дата публікацыйі
+        published_by: Выдавец
+        provided_by: Прадастаўлена
+    new:
+        page_title: Захаваць новы запіс
+        placeholder: http://website.com
+        form_new:
+            url_label: URL-адрас
+    search:
+        placeholder: Што вы шукаеце?
+    edit:
+        page_title: Рэдагаваць запіс
+        title_label: Назва
+        url_label: URL-адрас
+        origin_url_label: Зыходны URL (дзе вы знайшлі гэты запіс)
+        save_label: Захаваць
+    public:
+        shared_by_wallabag: "%username% падзяліўся гэтым артыкулам з <a href='%wallabag_instance%'>wallabag</a>"
+    confirm:
+        delete: Вы ўпэўненыя, што хочаце выдаліць гэты артыкул?
+        delete_tag: Вы ўпэўненыя, што хочаце выдаліць гэты тэг з артыкула?
+        delete_entries: Вы ўпэўненыя, што хочаце выдаліць гэтыя артыкулы?
+        reload: Вы ўпэўненыя, што хочаце перазагрузіць гэты артыкул?
+    metadata:
+        reading_time: Разьліковы час чытаньня
+        reading_time_minutes_short: '%readingTime% хв'
+        address: Адрас
+        added_on: Дададзена на
+        published_on: Апублікавана на
+about:
+    page_title: Аб
+    top_menu:
+        who_behind_wallabag: Хто стаіць за wallabag
+        getting_help: Дапамога
+        helping: Дапамоч wallabag
+        contributors: Укладальнікі
+        third_party: Бібліятэкі трэціх асоб
+    who_behind_wallabag:
+        developped_by: Распрацавана
+        website: вэб-сайт
+        many_contributors: І многія йншыя ўдзельнікі ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">на GitHub</a>
+        project_website: Вэб-сайт праекта
+        license: Ліцэнзыя
+        version: Вэрсыя
+    getting_help:
+        documentation: Дакумэнтацыя
+        bug_reports: Тэхнічныя справаздачы
+        support: <a href="https://github.com/wallabag/wallabag/issues">на GitHub</a>
+    helping:
+        by_paypal: праз Liberapay
+        description: 'wallabag мае бясплатны й адкрыты зыходны код. Вы можаце дапамагчы нам:'
+    contributors:
+        description: Дзякуй вам за ўклад у вэб-аплікацыю wallabag
+    third_party:
+        package: Пакет
+        license: Ліцэнзыя
+        description: 'Вось сьпіс іншых бібліятэк, якія выкарыстоўваюцца ў wallabag (зь іх ліцэнзыямі):'
+howto:
+    page_title: Інструкцыя
+    tab_menu:
+        add_link: Дадаць спасылку
+        shortcuts: Выкарыстоўваць гарачыя клявішы
+    page_description: 'Захаваць артыкул можна некалькімі спосабамі:'
+    top_menu:
+        browser_addons: Дапаўненьні для браўзара
+        mobile_apps: Мабільныя аплікацыйі
+        bookmarklet: Закладка
+    form:
+        description: Дзякуй за гэтую форму
+    browser_addons:
+        firefox: Пашырэньні для Firefox
+        chrome: Пашырэньні для Chrome
+        opera: Пашырэньні для Opera
+    mobile_apps:
+        android:
+            via_f_droid: праз F-Droid
+            via_google_play: праз Google Play
+        ios: у App Store
+        windows: у Microsoft Store
+    shortcuts:
+        page_description: Тут гарачыя клявішы даступныя ў wallabag.
+        shortcut: Гарачыя клявішы
+        action: Дзеяньні
+        go_unread: Перайсьці да непрачытаных
+        go_starred: Перайсьці да пазначаных
+        go_archive: Перайсьці ў архіў
+        go_all: Перайсьці да ўсіх запісаў
+        go_tags: Перайсьці да тэгаў
+        go_config: Перайсьці да канфігурацыйі
+        go_import: Перайсьці да ймпарту
+        go_developers: Перайсьці да распрацоўшчыкаў
+        go_howto: Перайсьці да йнструкцый (гэтая старонка!)
+        go_logout: Выйсьці
+        list_title: Гарачыя клявішы, даступныя на старонках сьпісаў
+        search: Адлюстраваньне формы пошуку
+        article_title: Гарачыя клявішы даступныя падчас прагляду запісу
+        open_original: Адкрыць зыходны URL запісу
+        toggle_favorite: Статус зоркі для запісу
+        toggle_archive: Пазнака аб чытаньні для запісу
+        delete: Выдаліць запіс
+        add_link: Дадайць новую спасылку
+        hide_form: Схаваць бягучую форму (пошукавую ці новай спасылкі)
+        arrows_navigation: Навіґацыя па артыкулах
+        open_article: Адлюствоўваць абраны запіс
+        all_pages_title: Гарачыя клявішы даступныя на ўсіх старонках
+    bookmarklet:
+        description: 'Перацягніце гэтую спасылку на панэль закладак:'
+quickstart:
+    page_title: Хуткі старт
+    more: Больш…
+    intro:
+        title: Сардэчна запрашаем у wallabag!
+        paragraph_2: Сачыце за намі!
+        paragraph_1: Мы будзем суправаджаць вас падчас вашага візыту ў wallabag і пакажам некаторыя функцыйі, якія могуць вас зацікавіць.
+    configure:
+        title: Наладзіць аплікацыю
+        description: Каб мець аплікацыю, якая вам падыходзіць, зазірніце ў канфігурацыю wallabag.
+        language: Зьмяніць мову й інтэрфэйс
+        feed: Уключыць стужкі
+        tagging_rules: Напішыце правілы для аўтаматычнай пазнакі вашых артыкулаў
+    admin:
+        description: 'Як адміністратар, вы маеце прывілейі на wallabag. Вы можаце:'
+        new_user: Стварыць новага карыстальніка
+        analytics: Наладзіць аналітыку
+        sharing: Уключыць некаторыя парамэтры пашырэньня артыкулаў
+        export: Наладзіць экспарт
+        import: Наладзіць імпарт
+        title: Адміністраваньне
+    first_steps:
+        title: Першыя крокі
+        unread_articles: І клясыфікуйце!
+        new_article: Захавайце свой першы артыкул
+        description: Цяпер wallabag добра наладжаны, надыйшоў час архіваваць Інтэрнэт. Вы можаце націснуць на верхні правы знак +, каб дадаць спасылку.
+    migrate:
+        title: Пераход з існуючай службы
+        description: Вы карыстаецеся іншым сэрвісам? Мы дапаможам вам атрымаць вашыя даныя каб перанесьці йх у wallabag.
+        pocket: Перанос з Pocket
+        wallabag_v1: Пераход з wallabag v1
+        wallabag_v2: Пераход з wallabag v2
+        readability: Пераход з Readability
+        instapaper: Пераход з Instapaper
+    developer:
+        title: Распрацоўшчыкам
+        description: 'Мы таксама падумалі аб распрацоўшчыках: Docker, API, пераклады, і г.д.'
+        use_docker: Выкарыстоўваць Docker для ўсталёўкі wallabag
+        create_application: Стварыць сваю пабочную аплікацыю
+    docs:
+        title: Поўная дакумэнтацыя
+        description: У wallabag шмат функцый. Не саромейцеся чытаць кіраўніцтва, каб ведаць іх і вучыцца ймі карыстацца.
+        annotate: Камэнтаваньне свайго артыкула
+        export: Пераўтварыце свае артыкулы ў ePUB або PDF
+        fetching_errors: Што я магу зрабіць, калі ў артыкуле ўзьнікаюць памылкі падчас выбаркі?
+        all_docs: І шмат іншых артыкулаў!
+        search_filters: Паглядзіце, як можна шукаць артыкул з дапамогай пошукавай сыстэмы й фільтраў
+    support:
+        title: Падтрымка
+        description: Калі вам патрэбна дапамога, мы тут каб дапамагчы вам.
+        github: На GitHub
+        email: Па электроннай пошце
+        gitter: На Gitter
+tag:
+    confirm:
+        delete: Выдаліць тэг %name%
+    page_title: Тэгі
+    list:
+        number_on_the_page: '{0} Няма тэгаў.|{1} Ёсьць адзін тэг.|]1,Inf[ Ёсьць %count% тэгаў.'
+        see_untagged_entries: Глядзець запісы без тэгаў
+        no_untagged_entries: Няма запісаў без тэгаў.
+        untagged: Запісы без тэгаў
+    new:
+        placeholder: Вы можаце дадаць некалькі тэгаў, дзелячы йх коскай.
+        add: Дадаць
+export:
+    unknown: Невядомы
+    footer_template: <div style="text-align:center;"><p>Створана wallabag з дапамогай %method%</p><p> Калі ласка, адкрыйце <a href="https://github.com/wallabag/wallabag/issues">праблемы</a>, калі ў вас узьніклі праблемы з адлюстраваньнем гэтай электроннай кнігі на вашым прыладзе.</p></div>
+import:
+    page_title: Імпарт
+    page_description: Сардэчна запрашаем у ймпарцёр wallabag. Выберыце папярэднюю службу, зь якой вы хочаце перайсьці вышыя даныя.
+    action:
+        import_contents: Імпарт зьмесьціва
+    form:
+        mark_as_read_title: Пазначыць усё як прачытанае?
+        mark_as_read_label: Пазначыць усе ймпартаваныя запісы як прачытаныя
+        save_label: Загрузіць файл
+        file_label: Файл
+    pocket:
+        connect_to_pocket: Падключыцеся да Pocket і ймпартуйце даныя
+        page_title: Імпарт у Pocket
+        description: Гэты імпартэр імпартуе ўсе вашы даныя Pocket. Pocket не дазваляе атрымліваць зьмесьціва зь іх сэрвісу, таму даступны для чытаньня зьмест кожнага артыкула будзе паўторна атрыманы wallabag.
+        config_missing:
+            description: Імпарт з Pocket не наладжаны.
+            admin_message: Вам трэба вызначыць %keyurls%a pocket_consumer_key%keyurle%.
+            user_message: Адміністратар вашага сэрвэра павінен вызначыць API ключ для Pocket.
+        authorize_message: Вы можаце імпартаваць свае даныя з уліковага запісу Pocket. Вам проста трэба націснуць на кнопку ніжэй і аўтарызаваць прыкладаньне для падлучэньня да getpocket.com.
+    wallabag_v1:
+        page_title: Імпарт > Wallabag v1
+        how_to: Калі ласка, абярыце свой файл з наладамі экспарту wallabag і націсьніце кнопку ніжэй, каб загрузіць файл і пачаць імпарт.
+        description: Гэты ймпарцёр імпартуе ўсе вашыя артыкулы wallabag v1. На старонцы канфігурацыйі націсьніце «Экспарт JSON» у разьдзеле «Экспарт вашых даных wallabag». У вас зьявіцца файл "wallabag-export-1-xxxx-xx-xx.json".
+    wallabag_v2:
+        page_title: Імпарт > Wallabag v2
+        description: Гэты ймпарцёр імпартуе ўсе вашыя артыкулы wallabag v2. На старонцы канфігурацыйі націсьніце «Экспарт JSON» у разьдзеле «Экспарт вашых даных wallabag». У вас зьявіцца файл "All articles.json".

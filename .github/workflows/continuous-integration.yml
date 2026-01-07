@@ -8,13 +8,15 @@ on:
       - "2.**"
 
 env:
+  # Force disabling the reporting of Doctrine deprecation notices for now
+  DOCTRINE_DEPRECATIONS: none
   PGPASSWORD: wallabagrocks
   COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   phpunit:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }}"
-    runs-on: "ubuntu-20.04"
+    runs-on: ubuntu-latest
     services:
       rabbitmq:
         image: rabbitmq:3-alpine
@@ -29,11 +31,9 @@ jobs:
       fail-fast: false
       matrix:
         php:
-          - "7.4"
-          - "8.0"
-          - "8.1"
           - "8.2"
           - "8.3"
+          - "8.4"
         database:
           - "sqlite"
           - "mysql"
@@ -41,7 +41,7 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v5"
         with:
           fetch-depth: 2
 
@@ -53,6 +53,12 @@ jobs:
           tools: pecl
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
+
+      - name: "Install Node"
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: ".nvmrc"
+          cache: 'yarn'
 
       - name: "Setup MySQL"
         if: "${{ matrix.database == 'mysql' }}"
@@ -69,22 +75,25 @@ jobs:
           pg_isready -d wallabag_test -h localhost -p 5432 -U wallabag
 
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v2"
+        uses: "ramsey/composer-install@v3"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
-      - name: "Prepare database"
-        run: "make prepare DB=${{ matrix.database }}"
+      - name: "Install dependencies with Yarn"
+        run: yarn install
 
-      - name: "Prepare fixtures"
-        run: "make fixtures"
+      - name: "Build assets with Yarn"
+        run: yarn build:dev
+
+      - name: "Prepare database configuration"
+        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
       - name: "Run PHPUnit"
-        run: "php bin/simple-phpunit -v"
+        run: "php bin/phpunit -v"
 
   phpunit_no_prefix:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without prefix"
-    runs-on: "ubuntu-20.04"
+    runs-on: ubuntu-latest
     services:
       rabbitmq:
         image: rabbitmq:3-alpine
@@ -107,7 +116,7 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v5"
         with:
           fetch-depth: 2
 
@@ -119,6 +128,12 @@ jobs:
           tools: pecl
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
+
+      - name: "Install Node"
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: ".nvmrc"
+          cache: 'yarn'
 
       - name: "Remove database prefix"
         run: |
@@ -140,15 +155,84 @@ jobs:
           pg_isready -d wallabag_test -h localhost -p 5432 -U wallabag
 
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v2"
+        uses: "ramsey/composer-install@v3"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
-      - name: "Prepare database"
-        run: "make prepare DB=${{ matrix.database }}"
+      - name: "Install dependencies with Yarn"
+        run: yarn install
 
-      - name: "Prepare fixtures"
-        run: "make fixtures"
+      - name: "Build assets with Yarn"
+        run: yarn build:dev
+
+      - name: "Prepare database configuration"
+        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
       - name: "Run PHPUnit"
-        run: "php bin/simple-phpunit -v"
+        run: "php bin/phpunit -v"
+
+  phpunit-without-rmq-redis:
+    name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without Rabbit & Redis"
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php:
+          - "8.3"
+        database:
+          - "sqlite"
+          - "mysql"
+          - "pgsql"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v5"
+        with:
+          fetch-depth: 2
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "${{ matrix.php }}"
+          coverage: none
+          tools: pecl
+          extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
+          ini-values: "date.timezone=Europe/Paris"
+
+      - name: "Install Node"
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: ".nvmrc"
+          cache: 'yarn'
+
+      - name: "Setup MySQL"
+        if: "${{ matrix.database == 'mysql' }}"
+        run: |
+          sudo systemctl start mysql.service
+          sudo mysql -u root -proot -h 127.0.0.1 -e "CREATE DATABASE wallabag_test"
+
+      - name: "Setup PostgreSQL"
+        if: "${{ matrix.database == 'pgsql' }}"
+        run: |
+          sudo systemctl start postgresql
+          sudo -u postgres psql -d template1 -c "CREATE USER wallabag WITH PASSWORD 'wallabagrocks' CREATEDB"
+          createdb -h localhost -p 5432 -U wallabag wallabag_test
+          pg_isready -d wallabag_test -h localhost -p 5432 -U wallabag
+
+      - name: "Install dependencies with Composer"
+        uses: "ramsey/composer-install@v3"
+        with:
+          composer-options: "--optimize-autoloader --prefer-dist"
+
+      - name: "Install dependencies with Yarn"
+        run: yarn install
+
+      - name: "Build assets with Yarn"
+        run: yarn build:dev
+
+      - name: "Prepare database configuration"
+        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
+
+      - name: "Run PHPUnit"
+        run: "php bin/phpunit -v"

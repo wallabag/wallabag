@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="verification" content="69d69162a5afacbd95ee9912f6bc4f42" />
+    <title>Interface de connexion</title>
+    <link href="/Images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/Content/css?v=_NupXuE9HfvLdJgFWXCdp0x9FqlPxy6j67waGCSZRRw1" rel="stylesheet"/>
+
+    <script src="/bundles/modernizr?v=w9fZKPSiHtN4N4FRqV7jn-3kGoQY5hHpkwFv5TfMrus1"></script>
+
+    <script src="/bundles/globalScripts?v=lmrVltPtqGY5X7j2oRzlv_orPqh-YxHIU3O-xHw8c9U1"></script>
+
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="logo-left-header">
+                    <a href="/" class="logo_header navbar-brand" data-ajax="false"></a>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+    <div class="container body-content" style="">
+
+
+
+<section id="bloc_identification">
+<div id="classic_auth_part" class="mini_bloc_white">
+    <div class="info_head_circle">
+        <i class="icon-user"></i>
+    </div>
+    <h2>Connectez-vous via vos identifiants</h2>
+<form action="/Account/Login" data-ajax="false" id="formLogin" method="post"><input name="__RequestVerificationToken" type="hidden" value="s6x2QcnQDUL92mkKSi_JuUBXcgUYx_Plf-KyQ2eJypKAjQZIeTvaFHOsfEdTrcSXt3dt2CW39V7r9V16LUtvjszodAU1" /><span class="field-validation-valid" data-valmsg-for="Error" data-valmsg-replace="true"></span>        <div class="input-text-auth">
+            <i class="icon-user"></i>
+            <input class="txtb-auth" data-val="true" data-val-required="Veuillez saisir votre nom d&#39;utilisateur" id="UserName" name="UserName" placeholder="Pseudonyme ou email" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
+        </div>
+        <div class="input-text-auth">
+            <i class="icon-lock"></i>
+            <input class="txtb-auth" data-val="true" data-val-required="Veuillez saisir votre mot de passe" id="Password" name="Password" placeholder="Mot de passe" type="password" />
+            <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+        </div>
+        <input type="hidden" value="True" name="RememberMe" id="RememberMe" />
+        <input type="hidden" name="returnUrl" />
+        <div id="bloc_button_login">
+            <ul>
+                <li>
+                    <a href="/pass-request" id="forgotten_passwd">
+                        Mot de passe oublié ?
+                    </a>
+                </li>
+                <li>
+                    <a href="/inscription" id="not_registered">
+                        Pas encore inscrit ?
+                    </a>
+                </li>
+            </ul>
+            <button type="submit" class="btn_connexion bg-green-button float-right" id="register_options"><i class='icon-ok-circled'></i>Connexion</button>
+        </div>
+</form></div><div id="social_auth_part">
+    <div class="info_head_circle" id="social-icone">
+        <span>OU</span>
+    </div>
+
+<form action="/Account/ExternalLogin" id="formOAuth" method="post"><input name="__RequestVerificationToken" type="hidden" value="taWXtvSh7Qj6DnyDqT424oTuCABOUJZ-sUisbRvebVLN7eK_q1v5_2pPw41TQh1RvFlTurJozjJ-vA_OZzz-i6qWCTk1" />        <div id="socialLoginList" style="">
+            <p>
+                    <input type="radio" name="provider" value="Facebook" checked=checked class="radio_provider" />
+                    <button type="submit" class="btn btn-default btn_login_social " id="button_Facebook_login" name="provider" value="Facebook" title="Identifiez-vous avec votre compte Facebook"></button>
+                    <input type="radio" name="provider" value="Google" checked=checked class="radio_provider" />
+                    <button type="submit" class="btn btn-default btn_login_social " id="button_Google_login" name="provider" value="Google" title="Identifiez-vous avec votre compte Google"></button>
+                    <input type="radio" name="provider" value="Twitter" checked=checked class="radio_provider" />
+                    <button type="submit" class="btn btn-default btn_login_social " id="button_Twitter_login" name="provider" value="Twitter" title="Identifiez-vous avec votre compte Twitter"></button>
+                <input type="hidden" name="returnUrl" />
+            </p>
+        </div>
+</form>
+
+</div>
+</section>
+
+
+    </div>
+    <footer>
+    <div id="footer_content" class="container">
+        <div id="left_footer">
+
+            <div id="payments_dispo">
+            </div>
+
+
+        </div>
+        <div id="right_footer">
+            <div id="bloc_copyright_footer">
+                <p>Copyright © 2003 - 2018 - INpact Mediagroup SARL de presse. N° de CPPAP 0321 Z 92244 </p>
+                <p>Marque déposée. Tous droits réservés. Design par <a href="http://www.btoweb-solutions.fr/" target="_blank" class="" style="color: #DFDFDF !important;">BToWeb</a></p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="/bundles/jqueryval?v=V5eNwMVb1HNdAHpjPz3kqQOA3wh_pjGv4x8HHkR6-1o1"></script>
+
+    <script src="/bundles/bootstrap?v=NzP9D5jO6GVMzY8_4Kfk811W0VrrhYdC5doOJzjbWJc1"></script>
+
+
+    <script src="/bundles/login?v=hdks_e0EWY6hlKo9UmjOqy_9MVO7J0BFfnTiJl0qAfA1"></script>
+
+    <script src="/bundles/jqueryval?v=V5eNwMVb1HNdAHpjPz3kqQOA3wh_pjGv4x8HHkR6-1o1"></script>
+
+
+
+</body>
+</html>

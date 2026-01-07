@@ -64,7 +64,7 @@ import:
     readability:
         how_to: Odaberi Readability izvoz i pritisni donji gumb za slanje i uvoz datoteke.
         page_title: Uvoz > Readability
-        description: Ovaj će uvoznik uvesti sve tvoje Readability članke.
+        description: Ovaj uvoznik uvozi sve tvoje Readability članke.
     worker:
         enabled: 'Uvoz se vrši asinkrono. Nakon što se uvoz zadatak pokrene, jedna vanjska usluga obradit će poslove jedan po jedan. Trenutačna usluga je:'
         download_images_warning: Aktivirao(la) si preuzimanje slika za članke. U kombinaciji s klasičnim uvozom, postupak može potrajati godinama (ili možda ne uspije). <strong>Preporučujemo</strong> aktivirati asinkroniziran uvoz za izbjegavanje grešaka.
@@ -94,24 +94,29 @@ import:
         page_title: Uvoz > Wallabag v1
         how_to: Odaberi wallabag izvoz i pritisni donji gumb za slanje i uvoz datoteke.
         description: Ovaj uvoznik uvozi sve tvoje članke wallabaga verzije 1. Na tvojoj stranici konfiguracije, pritisni „JSON izvoz” u odjeljku „Izvezi svoje wallabag podatke”. Dobit ćeš datoteku „wallabag-export-1-xxxx-xx-xx.json”.
-    page_description: Dobro došao/dobro došla u uvoznik wallabaga. Odaberi prethodnu uslugu s koje želiš premjestiti podatke.
+    page_description: Dobro došao/dobro došla u wallabag uvoznik. Odaberi prethodnu uslugu s koje želiš premjestiti podatke.
     action:
-        import_contents: Sadržaj uvoza
+        import_contents: Uvezi sadržaj
     elcurator:
-        description: Ovaj će uvoznik uvesti sve tvoje elCurator članke.
-        page_title: Uvezi > elCurator
+        description: Ovaj uvoznik uvozi sve tvoje elCurator članke.
+        page_title: Uvoz > elCurator
+        how_to: Odaberi elCurator izvoz i pritisni donji gumb za slanje i uvoz datoteke.
     delicious:
         page_title: Uvoz > del.icio.us
-        description: Ovaj će uvoznik uvesti sve tvoje „Delicious” zabilješke. Od 2021. godine nadalje, iz njega možeš ponovo izvesti podatke pomoću stranice za izvoz (https://del.icio.us/export). Odaberi format „JSON” i preuzmi ga (npr. „delicious_export.2021.02.06_21.10.json”).
+        description: Ovaj uvoznik uvozi sve tvoje Delicious zabilješke. Od 2021. godine nadalje, iz njega možeš ponovo izvesti podatke pomoću stranice za izvoz (https://del.icio.us/export). Odaberi format „JSON” i preuzmi ga (npr. „delicious_export.2021.02.06_21.10.json”).
         how_to: Odaberi Delicious izvoz i pritisni donji gumb za slanje i uvoz datoteke.
     shaarli:
         page_title: Uvoz > Shaarli
-        description: Ovaj će uvoznik uvesti sve tvoje Shaarli zabilješke. Idi na odjeljak „Alati”, zatim u „Izvezi bazu podataka”, odaberi tvoje zabilješke i izvezi ih. Dobit ćete HTML datoteku.
+        description: Ovaj uvoznik uvozi sve tvoje Shaarli zabilješke. Idi na odjeljak „Alati”, zatim u „Izvezi bazu podataka”, odaberi tvoje zabilješke i izvezi ih. Dobit ćeš HTML datoteku.
         how_to: Odaberi datoteku sigurnosne kopije zabilježaka i pritisni donji gumb za uvoz datoteke. Postupak može trajati dugo jer se moraju dohvatiti svi članci.
     pocket_html:
         page_title: Uvoz > Pocket HTML
         how_to: Odaberi datoteku sigurnosne kopije zabilježaka i pritisni donji gumb za uvoz. Postupak može trajati dugo jer se moraju dohvatiti svi članci.
-        description: Ovaj će uvoznik uvesti sve tvoje Pocket zabilješke (putem HTML izvoza). Idi na https://getpocket.com/export, zatim izvezi HTML datoteku. Preuzet će se HTML datoteka (poput „ril_export.html”).
+        description: Ovaj uvoznik uvozi sve tvoje Pocket zabilješke (putem HTML izvoza). Idi na https://getpocket.com/export, zatim izvezi HTML datoteku. Preuzet će se HTML datoteka (poput „ril_export.html”).
+    omnivore:
+        page_title: Uvoz > Omnivore
+        description: Ovaj uvoznik uvozi sve tvoje Omnivor članke.
+        how_to: Raspakiraj tvoj Omnivore izvoz, a zatim prenesi svaku JSON datoteku s imenom „metadata_x_to_y.json” pojedinačno.
 about:
     helping:
         description: 'wallabag je slobodan softver otvorenog koda. Možeš nam pomoći:'
@@ -141,19 +146,6 @@ about:
         bug_reports: Izvještaji o greškama
     page_title: Informacije
 config:
-    form_rss:
-        rss_limit: Broj stavki u feedu
-        rss_link:
-            unread: Nepročitano
-            archive: Arhivirano
-            starred: Favorizirano
-            all: Sve
-        token_label: RSS token
-        description: RSS feedovi koje pruža wallabag dozvoljavaju ti čitati tvoje spremljene članke s tvojim omiljenim čitačem RSS-a. Najprije moraš generirati token.
-        no_token: Nema tokena
-        token_reset: Ponovo generiraj token
-        token_create: Stvori token
-        rss_links: RSS poveznice
     form_rules:
         faq:
             variable_description:
@@ -264,6 +256,7 @@ config:
         confirm: Stvarno? (OVO JE NEPOVRATNA RADNJA)
         annotations: Ukloni SVE napomene
         tags: Ukloni SVE oznake
+        tagging_rules: Ukloni SVA pravila označavanja
     form_password:
         repeat_new_password_label: Ponovi novu lozinku
         old_password_label: Trenutačna lozinka
@@ -437,6 +430,7 @@ flashes:
             feed_token_revoked: Token feeda opozvan
             feed_token_updated: Token feeda aktualiziran
             feed_updated: Podaci feeda aktualizirani
+            tagging_rules_reset: Pravila označavanja resetirana
     site_credential:
         notice:
             deleted: Podaci za prijavu na stranicu „%host%” izbrisani
@@ -645,10 +639,10 @@ quickstart:
         use_docker: Koristi Docker za instliranje wallabaga
     support:
         github: Na GitHubu
-        gitter: Na Gitteru
         title: Podrška
         email: Putem e-maila
         description: Ako trebaš pomoć, spremni smo ti pomoći.
+        matrix: Na Matrixu
     more: Više …
     intro:
         paragraph_1: Pratit ćemo te pri tvom posjetu wallabagu i pokazat ćemo ti neke funkcije koje bi te mogle zanimati.

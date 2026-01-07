@@ -138,6 +138,7 @@ config:
         description: By hitting buttons below you'll have ability to remove some information from your account. Be aware that these actions are IRREVERSIBLE.
         annotations: Remove ALL annotations
         tags: Remove ALL tags
+        tagging_rules: Remove ALL tagging rules
         entries: Remove ALL entries
         archived: Remove ALL archived entries
         confirm: Are you really sure? (THIS CAN'T BE UNDONE)
@@ -467,7 +468,7 @@ quickstart:
         description: If you need some help, we are here for you.
         github: On GitHub
         email: By email
-        gitter: On Gitter
+        matrix: On Matrix
 tag:
     confirm:
         delete: Delete the %name% tag
@@ -512,6 +513,11 @@ import:
     elcurator:
         page_title: 'Import > elCurator'
         description: 'This importer will import all your elCurator articles.'
+        how_to: Please select your elCurator export and click on the button below to upload and import it.
+    omnivore:
+        page_title: 'Import > Omnivore'
+        description: 'This importer will import all your Omnivore articles.'
+        how_to: Please unzip your Omnivore export, then upload each JSON file named "metadata_x_to_y.json" one by one.
     readability:
         page_title: Import > Readability
         description: This importer will import all your Readability articles.
@@ -546,6 +552,10 @@ import:
     pocket_html:
         page_title: Import > Pocket HTML
         description: This importer will import all your Pocket bookmarks (via HTML export). Just go to https://getpocket.com/export, then export the HTML file. An HTML file will be downloaded (like "ril_export.html").
+        how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
+    pocket_csv:
+        page_title: Import > Pocket CSV
+        description: This importer will import all your Pocket bookmarks (via CSV export). Just go to https://getpocket.com/export, then export the file. A ZIP file will be downloaded (like "pocket.zip"). Extract it, you will obtain a CSV file, called "part_000000.csv".
         how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
 developer:
     page_title: API clients management
@@ -676,10 +686,12 @@ flashes:
             feed_token_revoked: 'Feed token revoked'
             annotations_reset: Annotations reset
             tags_reset: Tags reset
+            tagging_rules_reset: Tagging rules reset
             entries_reset: Entries reset
             archived_reset: Archived entries deleted
             otp_enabled: Two-factor authentication enabled
             otp_disabled: Two-factor authentication disabled
+            otp_code_invalid: Invalid two-factor authentication code
             tagging_rules_imported: Tagging rules imported
             tagging_rules_not_imported: Error while importing tagging rules
             ignore_origin_rules_deleted: 'Ignore origin rule deleted'

@@ -1,37 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.8/phpunit.xsd"
-         backupGlobals="false"
-         colors="true"
-         bootstrap="vendor/autoload.php"
->
-
-    <testsuites>
-        <testsuite name="wallabag">
-            <directory>tests</directory>
-        </testsuite>
-    </testsuites>
-
-    <php>
-        <ini name="error_reporting" value="-1" />
-        <server name="KERNEL_CLASS" value="AppKernel" />
-        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
-    </php>
-
-    <filter>
-        <whitelist>
-            <directory>src</directory>
-            <exclude>
-                <directory>vendor</directory>
-                <directory>src/Wallabag/*Bundle/Resources</directory>
-                <directory>src/Wallabag/*Bundle/Tests</directory>
-                <directory>src/Wallabag/*Bundle/DataFixtures</directory>
-            </exclude>
-        </whitelist>
-    </filter>
-
-    <extensions>
-        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
-    </extensions>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" backupGlobals="false" colors="true" bootstrap="tests/bootstrap.php">
+  <coverage>
+    <include>
+      <directory>src</directory>
+    </include>
+    <exclude>
+      <directory>vendor</directory>
+      <directory>src/Wallabag/*Bundle/Resources</directory>
+      <directory>src/Wallabag/*Bundle/Tests</directory>
+      <directory>src/Wallabag/*Bundle/DataFixtures</directory>
+    </exclude>
+  </coverage>
+  <testsuites>
+    <testsuite name="wallabag">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+  <php>
+    <ini name="error_reporting" value="-1"/>
+    <server name="KERNEL_CLASS" value="AppKernel"/>
+    <server name="APP_ENV" value="test"/>
+    <server name="APP_DEBUG" value="0"/>
+    <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak"/>
+  </php>
+  <extensions>
+    <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
+  </extensions>
+  <listeners>
+    <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
+  </listeners>
 </phpunit>

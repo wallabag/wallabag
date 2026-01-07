@@ -66,6 +66,7 @@ config:
         reset: Zurücksetzen
         ignore_origin: Regeln fürs Ignorieren des Ursprungs
         feed: Feeds
+        article_display: Artikelanzeige
     form:
         save: Speichern
     form_settings:
@@ -89,19 +90,6 @@ config:
         help_reading_speed: wallabag berechnet eine Lesezeit pro Artikel. Hier kannst du definieren, ob du ein schneller oder langsamer Leser bist. wallabag wird die Lesezeiten danach neu berechnen.
         help_language: Du kannst die Sprache der wallabag-Oberfläche ändern.
         help_pocket_consumer_key: Nötig für den Pocket-Import. Du kannst ihn in deinem Pocket account einrichten.
-    form_rss:
-        description: Die RSS-Feeds von wallabag erlauben es dir, deine gespeicherten Artikel mit deinem bevorzugten RSS-Reader zu lesen. Vorher musst du jedoch einen Token erstellen.
-        token_label: RSS-Token
-        no_token: Kein Token
-        token_create: Token erstellen
-        token_reset: Token zurücksetzen
-        rss_links: RSS-Links
-        rss_link:
-            unread: Ungelesene
-            starred: Favoriten
-            archive: Archivierte
-            all: Alle
-        rss_limit: Anzahl der Einträge pro Feed
     form_user:
         two_factor_description: Wenn du die Zwei-Faktor-Authentifizierung aktivierst, erhältst du eine E-Mail mit einem Code bei jeder nicht vertrauenswürdigen Verbindung.
         name_label: Name
@@ -467,7 +455,7 @@ quickstart:
         description: Wenn du Hilfe brauchst, wir sind für dich da.
         github: Auf GitHub
         email: Über E-Mail
-        gitter: Auf Gitter
+        matrix: Auf Matrix
 tag:
     page_title: Tags
     list:

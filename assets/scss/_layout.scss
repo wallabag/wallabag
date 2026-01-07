@@ -1,0 +1,54 @@
+@use "variables";
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background: #fafafa;
+
+  &.login main {
+    padding: 0;
+    min-height: 100vh;
+  }
+}
+
+.border-bottom {
+  border-bottom: 1px solid #ddd;
+}
+
+a {
+  color: variables.$blue-accent-color;
+}
+
+main,
+#content,
+.valign-wrapper {
+  height: 100%;
+}
+
+.typo-logo {
+  max-width: 150px;
+}
+
+#main {
+  flex: 1 0 auto;
+
+  .logo {
+    a {
+      height: 100pt;
+    }
+
+    img {
+      height: 100pt;
+      width: 100pt;
+    }
+
+    &:hover {
+      background: transparent;
+    }
+  }
+}

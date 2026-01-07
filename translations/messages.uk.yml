@@ -421,7 +421,7 @@ quickstart:
         description: Якщо вам потрібна допомога, ми завжди поруч.
         github: На GitHub
         email: Електронною поштою
-        gitter: В Gitter
+        matrix: В Matrix
 tag:
     page_title: Теги
     list:

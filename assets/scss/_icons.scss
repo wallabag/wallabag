@@ -1,0 +1,191 @@
+/* ==========================================================================
+ * Icons
+ * ========================================================================== */
+
+/**
+ *
+ * Material icons
+ *
+ */
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  user-select: none;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizelegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: "liga";
+
+  .md-18 {
+    font-size: 18px;
+  }
+
+  .md-24 {
+    font-size: 24px;
+  }
+
+  .md-36 {
+    font-size: 36px;
+  }
+
+  .md-48 {
+    font-size: 48px;
+  }
+
+  .md-dark {
+    color: rgb(0 0 0 / 54%);
+
+    .md-inactive {
+      color: rgb(0 0 0 / 26%);
+    }
+  }
+
+  .md-light {
+    color: rgb(255 255 255 / 100%);
+
+    .md-inactive {
+      color: rgb(255 255 255 / 30%);
+    }
+  }
+}
+
+/**
+ *
+ * Icomoon icons
+ *
+ */
+[class^="icon-"]::before,
+[class*=" icon-"]::before {
+  font-family: icomoon;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  background-size: 24px;
+
+  /* Enable Ligatures ================ */
+  letter-spacing: 0;
+  font-feature-settings: "liga";
+}
+
+.icon-eye::before {
+  content: "\e9ce";
+}
+
+.icon-no-eye::before {
+  content: "\e9d1";
+}
+
+.icon-calendar::before {
+  content: "\e953";
+}
+
+.icon-mail::before {
+  content: "\ea86";
+}
+
+.icon-time::before {
+  content: "\e952";
+}
+
+a.icon-image {
+  background-repeat: no-repeat;
+  padding-right: 0.4em !important;
+  padding-left: 0 !important;
+  margin-left: 25px;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    float: left;
+    margin: 7px 1.5px 0 0;
+  }
+
+  &.diaspora::before {
+    background: url("../img/icons/diaspora-icon--black.png") no-repeat center/80%;
+  }
+
+  &.unmark::before {
+    background: url("../img/icons/unmark-icon--black.png") no-repeat center/80%;
+  }
+
+  &.linkding::before {
+    background: url("../img/icons/linkding.svg") no-repeat center/80%;
+    filter: grayscale(1);
+  }
+
+  &.shaarli::before {
+    background: url("../img/icons/shaarli.png") no-repeat center/80%;
+  }
+
+  &.scuttle::before {
+    background: url("../img/icons/scuttle.png") no-repeat center/80%;
+  }
+}
+
+.icon-google-plus2::before {
+  content: "\ea89";
+}
+
+.icon-facebook2::before {
+  content: "\ea8d";
+}
+
+.icon-twitter::before {
+  content: "\ea96";
+}
+
+.icon-apple::before {
+  content: "\eabf";
+}
+
+.icon-android::before {
+  content: "\eac1";
+}
+
+.icon-chrome::before {
+  content: "\eae5";
+}
+
+.icon-firefox::before {
+  content: "\eae6";
+}
+
+.icon-link::before {
+  content: "\e9cb";
+}
+
+footer [class^="icon-"],
+footer [class*=" icon-"] {
+  font-size: 2em;
+  transition: text-shadow 0.2s ease;
+  padding-right: 10px;
+}
+
+footer [class^="icon-"]:hover,
+footer [class*=" icon-"]:hover {
+  text-shadow: 0 0 10px rgb(0 0 0 / 30%);
+}

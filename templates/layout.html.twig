@@ -1,0 +1,192 @@
+{% extends "base.html.twig" %}
+
+{% set current_route = app.request.attributes.get('_route') %}
+{% set current_route_from_query_params = app.request.query.get('currentRoute') %}
+
+{% set active_route = null %}
+{% if current_route == 'all' or current_route_from_query_params == 'all' %}
+   {% set active_route = 'all' %}
+{% elseif current_route == 'annotated' or current_route_from_query_params == 'annotated' %}
+   {% set active_route = 'annotated' %}
+{% elseif current_route == 'archive' or current_route_from_query_params == 'archive' %}
+   {% set active_route = 'archive' %}
+{% elseif current_route == 'starred' or current_route_from_query_params == 'starred' %}
+   {% set active_route = 'starred' %}
+{% elseif current_route == 'unread' or current_route == 'homepage' or current_route_from_query_params == 'unread' %}
+   {% set active_route = 'unread' %}
+{% elseif current_route == 'untagged' %}
+   {% set active_route = 'untagged' %}
+{% endif %}
+
+{% block css %}
+    {{ parent() }}
+
+    {{ encore_entry_link_tags('main') }}
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('main') }}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block messages %}
+    {% for flash_message in app.session.flashbag.get('notice') %}
+        <p class="hidden" data-controller="materialize--toast">{{ flash_message|trans }}</p>
+    {% endfor %}
+{% endblock %}
+
+{% block body_class %}index{% endblock %}
+
+{% block menu %}
+    <nav class="cyan darken-1">
+        <ul id="slide-out" class="left-bar sidenav sidenav-fixed" data-controller="materialize--sidenav">
+            {% block logo %}
+                <li class="logo border-bottom">
+                    {% if is_granted('LIST_ENTRIES') %}
+                        <a title="{{ 'menu.left.back_to_unread'|trans }}" href="{{ path('unread') }}">
+                            <img src="{{ asset('img/logo-square.svg') }}" alt="wallabag logo" />
+                        </a>
+                    {% else %}
+                        <img src="{{ asset('img/logo-square.svg') }}" alt="wallabag logo"/>
+                    {% endif %}
+                </li>
+            {% endblock %}
+
+            {% if is_granted('LIST_ENTRIES') %}
+                <li class="bold {% if active_route == 'unread' %}active{% endif %}">
+                    <a class="waves-effect" href="{{ path('unread') }}">{{ 'menu.left.unread'|trans }} <span class="items-number grey-text">{{ count_entries('unread') }}</span></a>
+                </li>
+                <li class="bold {% if active_route == 'starred' %}active{% endif %}">
+                    <a class="waves-effect" href="{{ path('starred') }}">{{ 'menu.left.starred'|trans }} <span class="items-number grey-text">{{ count_entries('starred') }}</span></a>
+                </li>
+                <li class="bold {% if active_route == 'archive' %}active{% endif %}">
+                    <a class="waves-effect" href="{{ path('archive') }}">{{ 'menu.left.archive'|trans }} <span class="items-number grey-text">{{ count_entries('archive') }}</span></a>
+                </li>
+                <li class="bold {% if active_route == 'annotated' %}active{% endif %}">
+                    <a class="waves-effect" href="{{ path('annotated') }}">{{ 'menu.left.with_annotations'|trans }} <span class="items-number grey-text">{{ count_entries('annotated') }}</span></a>
+                </li>
+                <li class="bold {% if active_route == 'all' %}active{% endif %}">
+                    <a class="waves-effect" href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }} <span class="items-number grey-text">{{ count_entries('all') }}</span></a>
+                </li>
+            {% endif %}
+            {% if is_granted('LIST_TAGS') %}
+                <li class="bold {% if current_route == 'tags' %}active{% endif %}">
+                    <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }} <span class="items-number grey-text">{{ count_tags() }}</span></a>
+                </li>
+            {% endif %}
+        </ul>
+        <div class="nav-panels" data-controller="topbar">
+            <div class="nav-panel-actions nav-panel-item" data-topbar-target="actions">
+                <div class="nav-panel-top">
+                    <a href="#" data-target="slide-out" class="nav-panel-menu sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <h1 class="left action">
+                        {% block title %}
+                        {% endblock %}
+                    </h1>
+                </div>
+                <ul class="input-field nav-panel-buttom">
+                    <li class="bold toggle-add-url-container">
+                        <a class="waves-effect toggle-add-url" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" data-action="topbar#showAddUrl:prevent:stop" data-shortcuts-target="showAddUrl">
+                            <i class="material-icons">add</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.search'|trans }}" href="javascript: void(null);" data-action="topbar#showSearch:prevent:stop" data-shortcuts-target="showSearch">
+                            <i class="material-icons">search</i>
+                        </a>
+                    </li>
+                    {% block nav_panel_extra_actions '' %}
+                    <li class="bold">
+                        <a class="wave-effect dropdown-trigger" data-controller="materialize--dropdown materialize--tooltip" data-target="dropdown-account" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.account'|trans }}" href="#" id="news_menu">
+                            <i class="material-icons" id="news_link">account_circle</i>
+                        </a>
+                    </li>
+                </ul>
+                <ul id="dropdown-account" class="dropdown-content">
+                    {% if is_granted('EDIT_CONFIG') %}
+                        <li><a href="{{ path('config') }}"><i class="material-icons">settings</i> {{ 'menu.left.config'|trans }}</a></li>
+                    {% endif %}
+                    <li><a href="{{ path('developer') }}"><i class="material-icons">smartphone</i> {{ 'menu.left.developer'|trans }}</a></li>
+                    {% if is_granted('IMPORT_ENTRIES') %}
+                        <li><a href="{{ path('import') }}"><i class="material-icons">import_export</i> {{ 'menu.left.import'|trans }}</a></li>
+                    {% endif %}
+                    {% if craue_setting('restricted_access') and is_granted('LIST_SITE_CREDENTIALS') %}
+                        <li><a href="{{ path('site_credentials_index') }}"><i class="material-icons">vpn_key</i> {{ 'menu.left.site_credentials'|trans }}</a></li>
+                    {% endif %}
+                    <li class="divider"></li>
+                    {% set can_list_user = is_granted('LIST_USERS') %}
+                    {% set is_super_admin = is_granted('ROLE_SUPER_ADMIN') %}
+                    {% set can_list_ignore_origin_instance_rules = is_granted('LIST_IGNORE_ORIGIN_INSTANCE_RULES') %}
+                    {% if can_list_user %}
+                        <li><a href="{{ path('user_index') }}"><i class="material-icons">people</i>{{ 'menu.left.users_management'|trans }}</a></li>
+                    {% endif %}
+                    {% if is_super_admin %}
+                        <li><a href="{{ path('craue_config_settings_modify') }}"><i class="material-icons">settings</i> {{ 'menu.left.internal_settings'|trans }}</a></li>
+                    {% endif %}
+                    {% if can_list_ignore_origin_instance_rules %}
+                        <li><a href="{{ path('ignore_origin_instance_rules_index') }}"><i class="material-icons">build</i> {{ 'menu.left.ignore_origin_instance_rules'|trans }}</a></li>
+                    {% endif %}
+                    {% if can_list_user or is_super_admin or can_list_ignore_origin_instance_rules %}
+                        <li class="divider"></li>
+                    {% endif %}
+                    <li>
+                        <a href="#" data-action="click->dark-theme#useLight:prevent">
+                            <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
+                            <span>{{ 'menu.left.theme_toggle_light'|trans }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-action="click->dark-theme#useDark:prevent">
+                            <i class="theme-toggle-icon material-icons tiny">brightness_low</i>
+                            <span>{{ 'menu.left.theme_toggle_dark'|trans }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-action="click->dark-theme#useAuto:prevent">
+                            <i class="theme-toggle-icon material-icons tiny">brightness_auto</i>
+                            <span>{{ 'menu.left.theme_toggle_auto'|trans }}</span>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="{{ path('howto') }}"><i class="material-icons">live_help</i> {{ 'menu.left.howto'|trans }}</a></li>
+                    <li><a href="{{ path('quickstart') }}"><i class="material-icons">assistant_photo</i> {{ 'menu.left.quickstart'|trans }}</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}"><i class="material-icons">input</i> {{ 'menu.left.logout'|trans }}</a></li>
+                </ul>
+
+            </div>
+            {% if is_granted('LIST_ENTRIES') %}
+                {{ render(controller('Wallabag\\Controller\\EntryController::searchFormAction', {'currentRoute': current_route})) }}
+            {% endif %}
+            {% if is_granted('CREATE_ENTRIES') %}
+                {{ render(controller('Wallabag\\Controller\\EntryController::addEntryFormAction')) }}
+            {% endif %}
+        </div>
+    </nav>
+{% endblock %}
+
+{% block footer %}
+    <footer class="page-footer cyan darken-2">
+        <div class="footer-copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col m12 l8">
+                        <p class="footer-text">
+                            {{ display_stats() }}
+                        </p>
+                    </div>
+                    <div class="col s12 l4">
+                        <p class="footer-text">
+                            {{ 'footer.wallabag.powered_by'|trans }} <a target="_blank" rel="noopener" href="https://wallabag.org" class="grey-text text-lighten-4">wallabag</a> –
+                            <a class="grey-text text-lighten-4" href="{{ path('about') }}">{{ 'footer.wallabag.about'|trans|lower }}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

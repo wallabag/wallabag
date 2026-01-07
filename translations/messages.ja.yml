@@ -89,19 +89,6 @@ config:
             label: 記事に既読やスターをつけた後、どこに移動しますか？
         android_configuration: Androidアプリの設定をする
         android_instruction: ここをタッチするとあなたのAndroid アプリに自動入力します
-    form_rss:
-        description: wallabag が提供する RSS フィードは、お好みの RSS リーダーで保存した記事を読むできます。最初にトークンを生成する必要があります。
-        token_label: RSS トークン
-        no_token: トークンがありません
-        token_create: トークンを作成
-        token_reset: トークンを再生成
-        rss_links: RSS のリンク
-        rss_limit: フィード内のアイテムの数
-        rss_link:
-            unread: 未読
-            starred: スター付
-            archive: アーカイブ
-            all: すべて
     form_user:
         two_factor_description: 二要素認証を有効にすると、信頼されていない新しい接続ごとに、コードを記載したメールが届きます。
         help_twoFactorAuthentication: 二要素認証を有効にした場合、wallabag にログインするたびに、メールでコードを受信します。
@@ -462,7 +449,7 @@ quickstart:
         description: 何か助けが必要な場合は、私たちがお役に立ちます。
         github: GitHub 上で
         email: メールで
-        gitter: Gitter 上で
+        matrix: Matrix 上で
 tag:
     list:
         number_on_the_page: '{0} タグはありません。|{1} 1 つタグがあります。|]1,Inf[ %count% タグがあります。'

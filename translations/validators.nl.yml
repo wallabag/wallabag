@@ -1,6 +1,6 @@
 validator:
     quote_length_too_high: De quote is te lang. Het maximaal aantal tekens is {{ limit }}.
-    rss_limit_too_high: Dit breekt zeker de app
+    feed_limit_too_high: Dit breekt zeker de app
     password_must_match: De wachtwoordvelden moeten gelijk zijn.
     item_per_page_too_high: Dit breekt vrijwel zeker de app
     password_wrong_value: Verkeerd huidig wachtwoord opgegeven.

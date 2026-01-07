@@ -1,0 +1,374 @@
+@use "variables";
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
+main {
+  div#content {
+    padding: 0 0.5rem;
+  }
+}
+
+@mixin mixin-reading-time {
+  .reading-time {
+    display: inline-flex;
+    vertical-align: middle;
+
+    .card-reading-time,
+    .card-created-at {
+      display: inline-flex;
+    }
+
+    span {
+      margin-right: 5px;
+    }
+
+    @content;
+  }
+}
+
+.card {
+  .card-content {
+    padding-bottom: 12px;
+    flex-grow: 1;
+  }
+
+  .card-content .card-title,
+  .card-reveal .card-title {
+    line-height: 22.8px;
+    max-height: 80px;
+    font-size: 19px;
+    font-family: roberto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .card-stacked .card-content .card-title {
+    display: inline-block;
+  }
+
+  .card-content .activator,
+  .card-reveal .activator {
+    cursor: pointer;
+    font-family: "Material Icons";
+  }
+
+  .card-content i.right,
+  .card-reveal i.right {
+    margin-left: 0;
+  }
+
+  .card-content .original {
+    line-height: 24px;
+    font-size: 15px;
+  }
+
+  .card-entry-labels {
+    position: absolute;
+    top: 10px;
+    z-index: 90;
+    max-width: 50%;
+  }
+
+  .card-entry-labels-hidden {
+    margin: 2.5px auto;
+  }
+
+  .card-entry-labels-hidden li {
+    display: inline-block;
+    background-color: variables.$blue-accent-color;
+    margin: 0 5px;
+    padding: 5px 12px;
+    border-radius: 3px;
+    color: #fff;
+    max-height: 2em;
+    max-width: calc(100% - 15px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .card-action {
+    padding: 10px 10px 10px 15px;
+
+    ul.links {
+      margin: 0;
+      font-size: 24px;
+      line-height: 24px;
+    }
+
+    a {
+      color: #fff;
+      margin: 0;
+    }
+
+    a:hover {
+      color: #fff;
+    }
+
+    .tool {
+      display: flex;
+      margin-right: 0 !important;
+    }
+
+    @include mixin-reading-time;
+  }
+
+  .card-image {
+    height: 10em;
+  }
+
+  .card-fullimage {
+    height: 13.5em;
+  }
+
+  &.sw {
+    max-width: 370px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.card-body {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+a.original:not(.waves-effect) {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+}
+
+.card .card-image .preview,
+.card .card-fullimage .preview,
+.card-stacked .preview {
+  height: 100%;
+  background: no-repeat 50%/cover;
+  background-color: #efefef;
+  display: block;
+
+  &--default {
+    background-size: contain;
+  }
+}
+
+.card .card-content .card-title,
+.card-stacked .card-content .card-title {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.card-entry-labels li,
+.card-tag-labels li {
+  margin: 10px 10px 10px auto;
+  padding: 5px 12px 5px 16px !important;
+  background-color: variables.$blue-accent-color;
+  border-radius: 3px;
+  color: #fff;
+  cursor: default;
+  line-height: 20px;
+}
+
+.card-entry-labels li {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 0 3px 3px 0;
+  overflow: hidden;
+}
+
+.card-tag-labels li {
+  display: flex;
+}
+
+.card-entry-tags a,
+.card-entry-labels a,
+.card-tag-labels a,
+.card-tag-labels button,
+.card-entry-labels-hidden a,
+#list .chip a {
+  text-decoration: none;
+  font-weight: normal;
+  color: #fff;
+}
+
+.card-tag-labels button {
+  background: transparent;
+  border: none;
+  font-weight: normal;
+  color: #fff;
+  cursor: pointer;
+}
+
+.card-tag-link {
+  width: calc(100% - 24px);
+  line-height: 1.3;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.card-tag-form {
+  display: flex;
+  align-items: center;
+  min-width: 100px;
+  flex-grow: 1;
+}
+
+.card-tag-form input {
+  margin-bottom: 0;
+  height: 1.8rem;
+}
+
+.card-tag-icon {
+  display: flex;
+}
+
+.card-tag-delete {
+  margin-left: 10px;
+}
+
+.card-tag-labels {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.card-tag-labels li {
+  margin: 10px;
+  align-items: center;
+}
+
+.card-stacked {
+  display: flex;
+  flex-flow: row wrap;
+
+  &:hover ul.tools-list {
+    display: inline;
+    text-align: right;
+  }
+
+  .card-preview {
+    max-width: 100px;
+    max-height: 50px;
+    margin-right: 10px;
+    flex: 1;
+  }
+
+  div.metadata {
+    overflow: hidden;
+    height: 1.5em;
+    display: flex;
+
+    ul.tags {
+      margin-left: 4px;
+    }
+
+    .chip {
+      background-color: variables.$blue-accent-color;
+      padding: 0 7px;
+      margin: auto 1px;
+      border-radius: 6px;
+      line-height: 22px;
+      height: 22px;
+
+      a,
+      i {
+        color: #fff;
+      }
+
+      i.material-icons {
+        float: right;
+        font-size: 20px;
+        line-height: 32px;
+        padding-left: 8px;
+      }
+    }
+
+    @include mixin-reading-time {
+      & {
+        padding: 0 5px;
+        flex-wrap: wrap;
+        margin-left: auto;
+      }
+
+      i.material-icons {
+        font-size: 20px;
+      }
+    }
+  }
+
+  div.card-content {
+    flex: 4;
+  }
+
+  ul.tools-list {
+    flex: 1;
+    display: none;
+    flex-basis: 5em;
+    align-self: flex-end;
+    float: right;
+    max-width: 8em;
+  }
+
+  .tags {
+    display: inline-block;
+  }
+}
+
+.card.archived,
+.card-stacked.archived {
+  opacity: 0.5;
+}
+
+#content .collection .collection-item {
+  min-height: 65px;
+  height: auto;
+}
+
+.quickstart .card .card-action a,
+.quickstart .card .card-action a:hover {
+  color: #fff !important;
+}
+
+.settings .tabs-container {
+  padding-bottom: 15px;
+}
+
+.settings .settings-checkbox-col {
+  padding: 0;
+}
+
+.settings .settings-checkbox-label {
+  margin-bottom: 20px;
+  height: 3rem;
+}
+
+.settings .settings-range-label {
+  position: absolute;
+  top: -14px;
+  font-size: 0.8rem;
+}
+
+.entries-row {
+  display: grid;
+  margin: 0.4rem 0 0;
+  padding: 0 0.75rem;
+  gap: 20px;
+}
+
+.entry-card {
+  display: flex;
+  margin: 0;
+  height: 100%;
+  flex-direction: column;
+}
+
+
+.tools {
+  display: flex;
+  gap: 10px;
+}

@@ -1,6 +1,6 @@
 howto:
     shortcuts:
-        list_title: Atallos dispoñibles nas páxinas con listaxes
+        list_title: Atallos dispoñibles nas páxinas con listas
         go_logout: Saír
         go_howto: Ir ós titoriais (esta páxina!)
         go_developers: Ir a desenvolvedoras
@@ -11,7 +11,7 @@ howto:
         go_archive: Ir ó arquivo
         go_starred: Ir ós que teñen estrela
         go_unread: Ir a non lidos
-        all_pages_title: Atallos dispoñibles en tódalas páxinas
+        all_pages_title: Atallos dispoñibles en todas as páxinas
         action: Acción
         shortcut: Atallo
         page_description: Aquí están os atallos dispoñibles en wallabag.
@@ -34,15 +34,15 @@ howto:
             via_f_droid: vía F-Droid
             via_google_play: vía Google Play
     browser_addons:
-        opera: Engadido para Opera
-        chrome: Engadido para Chrome
-        firefox: Engadido para Firefox
+        opera: Complemento para Opera
+        chrome: Complemento para Chrome
+        firefox: Complemento para Firefox
     form:
         description: Grazas a este formulario
     top_menu:
         bookmarklet: Marcador activo
         mobile_apps: Apps móbiles
-        browser_addons: Engadidos do navegador
+        browser_addons: Complementos do navegador
     page_description: 'Hai varios xeitos de gardar un artigo:'
     tab_menu:
         shortcuts: Usar atallos
@@ -52,7 +52,7 @@ about:
     third_party:
         license: Licenza
         package: Paquete
-        description: 'Aquí tes unha listaxe das bibliotecas de terceiros que utiliza wallabag (coa súa licenza):'
+        description: 'Aquí tes unha lista cos compoñentes de terceiros que utiliza wallabag (coa súa licenza):'
     contributors:
         description: Grazas ás colaboradoras na aplicación web de wallabag
     helping:
@@ -75,7 +75,7 @@ about:
         helping: Axudar a wallabag
         getting_help: Obter axuda
         who_behind_wallabag: Quen está detrás de wallabag
-    page_title: Acerca de
+    page_title: Sobre
 entry:
     metadata:
         published_on: Publicado o
@@ -239,7 +239,7 @@ config:
             variables_available_description: 'Podes usar as seguintes variables e operadores para crear regras de etiquetado:'
             variables_available_title: Que variables e operadores se poden usar nas regras?
             how_to_use_them_title: Como se utilizan?
-            tagging_rules_definition_description: Son regras utilizadas por wallabag para etiquetar automáticamente novas entradas.<br />Cada vez que se engade un elemento usaranse tódalas regras de etiquetados configuradas, aforrándoche o traballo de clasificar manualmente as túas entradas.
+            tagging_rules_definition_description: Son regras utilizadas por wallabag para etiquetar automáticamente as novas entradas.<br />Cada vez que se engada un elemento usaranse todas as regras de etiquetado configuradas, aforrándoche o traballo de clasificar manualmente as túas entradas.
             tagging_rules_definition_title: Que significa "regras de etiquetado"?
             title: PMF
         export: Exportar
@@ -312,11 +312,12 @@ config:
         annotations: Eliminar TODAS as notas
         description: Premendo nos botóns poderás eliminar algunha información relativa á túa conta. Ten tino co que fas, xa que será IRREVERSIBLE.
         title: Área de restablecemento (Perigo!)
+        tagging_rules: Eliminar TODAS as regras de etiquetado
     form_user:
         delete:
             button: Eliminar a miña conta
             confirm: Seguro que desexas facelo? (NON TEN VOLTA)
-            description: Se eliminas a conta, TÓDOLOS teus artigos, TÓDALAS etiquetas e TÓDALAS notas da túa conta serán eliminadas PERMANENTEMENTE (non hai volta atrás!). Após, serás desconectada.
+            description: Se eliminas a conta, TODOS os teus artigos, TODAS as etiquetas e TODAS as notas da túa conta serán eliminadas PERMANENTEMENTE (non hai volta atrás!). Após, serás desconectada.
             title: Elimina a miña conta (a.k.a. Zona Perigosa)
         two_factor:
             action_app: Usar App OTP
@@ -333,36 +334,36 @@ config:
         name_label: Nome
         two_factor_description: Se activas o segundo factor de autenticación recibirás un email cun código en cada nova conexión que aínda non verificases.
     form_feed:
-        feed_limit: Número de elementos na fonte
+        feed_limit: Número de elementos na canle
         feed_link:
             all: Todo
             archive: Arquivado
             starred: Con estrela
             unread: Sen ler
-        feed_links: Ligazóns da fonte
+        feed_links: Ligazóns da canle
         token_revoke: Revogar o token
         token_reset: Volver a crear o token
         token_create: Crea o token
         no_token: Sen token
-        token_label: Token da fonte
-        description: As fontes Atom proporcionadas por wallabag permítenche ler no teu lector Atom favorito os artigos que gardaches. Primeiro tes que crear un token.
+        token_label: Token da canle
+        description: As canles Atom proporcionadas por wallabag permítenche ler no teu lector Atom favorito os artigos que gardaches. Primeiro debes crear un token.
     form:
         save: Gardar
     tab_menu:
-        reset: Restablecer área
+        reset: Restablecer
         ignore_origin: Ignorar regras de orixe
         new_user: Engadir usuaria
         rules: Regras de etiquetado
         password: Contrasinal
         user_info: Información da usuaria
-        feed: Fontes
+        feed: Canles
         settings: Axustes
         article_display: Visualización do artigo
     page_title: Configuración
 footer:
     stats: Desde %user_creation% liches %nb_archives% artigos. Que ven sendo %per_day% ao día!
     wallabag:
-        about: Acerca de
+        about: Sobre
         powered_by: grazas a
         social: Social
         elsewhere: Leva wallabag contigo
@@ -387,7 +388,7 @@ menu:
         back_to_unread: Volver ós artigos non lidos
         save_link: Gardar ligazón
         search: Buscar
-        about: Acerca de
+        about: Sobre
         logout: Saír
         developer: Xestión dos clientes API
         howto: Titoriais
@@ -467,6 +468,7 @@ import:
     elcurator:
         description: Este importador traerá todos os teus artigos de elCurator.
         page_title: Importar > elCurator
+        how_to: Selecciona a exportación desde elCurator e preme no botón inferior para subila e importala.
     delicious:
         page_title: Importar > del.icio.us
         how_to: Elixe a exportación de Delicious e preme no botón inferior para subilo e importalo.
@@ -479,9 +481,17 @@ import:
         page_title: Importar > Shaarli
         description: Este importador traerá todos os teus marcadores de Shaarli. Vai á sección Ferramentas, e despois en "Exportar base de datos", elixe os teus marcadores e expórtaos. Terás un ficheiro HTML.
         how_to: Elixe o ficheiro de copia de apoio cos marcadores para importalos. Ten en conta que o proceso podería demorarse porque hai que descargar todos os artigos.
+    omnivore:
+        page_title: Importar > Omnivore
+        how_to: Descomprime a exportación de Omnivore, e despois sube un a un cada ficheiro JSON con nome «metadata_x_to_y.json".
+        description: Este importador vai traer todos os teus artigos de Omnivore.
+    pocket_csv:
+        how_to: Selecciona o ficheiro de copia de apoio dos marcadores e preme no botón inferior para importalo. Ten en conta que o proceso podería demorarse xa que deben procesarse todos os artigos.
+        description: Con este asistente vas importar os teus marcadores desde Pocket (usando a exportación CSV). Só tes que ir a https://getpocket.com/export e exportar un ficheiro. Descargarás un ficheiro ZIP (tipo «pocket.zip»). Extrae o ficheiro CSV que contén, ten nome «part_000000.csv».
+        page_title: Importar > CSV desde Pocket
 export:
     unknown: Descoñecido
-    footer_template: <div style="text-align:center;"><p>Producido por wallabag con %method%</p><p>Abre <a href="https://github.com/wallabag/wallabag/issues">un issue</a> se tes problemas para visualizar este E-Book no teu dispositivo.</p></div>
+    footer_template: <div style="text-align:center;"><p>Creado por wallabag con %method%</p><p>Abre <a href="https://github.com/wallabag/wallabag/issues">unha incidencia</a> se tes problemas para visualizar este E-Book no teu dispositivo.</p></div>
 tag:
     new:
         placeholder: Podes engadir varias etiquetas, separadas por vírgulas.
@@ -496,7 +506,7 @@ tag:
         delete: Eliminar a etiqueta %name%
 quickstart:
     support:
-        gitter: En Gitter
+        matrix: En Matrix
         email: Por email
         github: En GitHub
         description: Se precisas axuda, aquí estamos para ti.
@@ -530,14 +540,14 @@ quickstart:
     admin:
         import: Configurar importación
         export: Configurar exportación
-        sharing: Activar parámetros para compartir artigos
+        sharing: Activar parámetros respecto a compartir artigos
         analytics: Configurar estatísticas
         new_user: Crear unha nova usuaria
         description: 'Como administradora, tes certos privilexios en wallabag. Podes:'
         title: Administración
     configure:
         tagging_rules: Establece regras para etiquetar automáticamente os artigos
-        feed: Activar fontes
+        feed: Activar canles
         language: Cambiar o idioma e interface
         description: Para poder adaptar a aplicación ás túas preferencias, entra nos axustes de wallabag.
         title: Configurar a aplicación
@@ -552,7 +562,7 @@ developer:
         field_grant_types: Tipos de acceso permitidos
         no_client: Sen clientes.
         field_uris: Redirixir URIs
-        field_secret: Segreda do cliente
+        field_secret: Chave secreta
         field_id: ID do cliente
         title: Clientes existentes
     howto:
@@ -570,7 +580,7 @@ developer:
     client_parameter:
         read_howto: Ler o titorial "Crear a miña primeira aplicación"
         back: Atrás
-        field_secret: Segreda do cliente
+        field_secret: Chave secreta
         field_id: ID do cliente
         field_name: Nome do cliente
         page_description: Aquí están os parámetros do cliente.
@@ -582,7 +592,7 @@ developer:
             save_label: Crear un novo cliente
             redirect_uris_label: URIs de redirección (optativo)
             name_label: Nome do cliente
-        page_description: Vas crear un novo cliene. Completa o campo inferior para a URI de redirección da túa aplicación.
+        page_description: Vas crear un novo cliente. Completa o campo inferior para a URI de redirección da túa aplicación.
         page_title: Xestión de clientes API > Novo cliente
     remove:
         action: Eliminar o cliente %name%
@@ -591,7 +601,7 @@ developer:
     clients:
         create_new: Crear un novo cliente
         title: Clientes
-    list_methods: Listaxe dos métodos API
+    list_methods: Lista dos métodos API
     full_documentation: Ver a documentación completa da API
     how_to_first_app: Como crear a miña primeira aplicación
     documentation: Documentación
@@ -639,8 +649,8 @@ flashes:
             entry_starred: Entrada marcada con estrela
             entry_unarchived: Entrada desarquivada
             entry_archived: Entrada arquivada
-            entry_reloaded_failed: Entrada recargada pero fallou a obtención do contido
-            entry_reloaded: Entrada recargada
+            entry_reloaded_failed: Volveuse a cargar o artigo pero fallou a obtención do contido
+            entry_reloaded: Volveuse a cargar o artigo
             entry_updated: Entrada actualizada
             entry_saved_failed: A entrada gardouse pero fallou a obtención do contido
             entry_saved: Entrada gardada
@@ -657,14 +667,16 @@ flashes:
             entries_reset: Restablecemento das entradas
             tags_reset: Restablecemento das etiquetas
             annotations_reset: Restablecemento das anotacións
-            feed_token_revoked: Revogado o token da fonte
-            feed_token_updated: Actualizado o token da fonte
-            feed_updated: Actualizada a información da fonte
+            feed_token_revoked: Revogado o token da canle
+            feed_token_updated: Actualizado o token da canle
+            feed_updated: Actualizada a información da canle
             tagging_rules_deleted: Regra de etiquetado eliminada
             tagging_rules_updated: Regras de etiquetado actualizadas
             user_updated: Información actualizada
             password_updated: Contrasinal actualizado
             config_saved: Gardouse o axuste.
+            tagging_rules_reset: Restablecer regras de etiquetado
+            otp_code_invalid: O código de autenticación 2FA non é válido
 error:
     page_title: Houbo un fallo
 ignore_origin_instance_rule:
@@ -699,7 +711,7 @@ site_credential:
         yes: Si
         edit_action: Editar
         actions: Accións
-    description: Aquí podes xestionar tódalas credenciais para sitios que as requiran (crear, editar e eliminar), como un valado de pagamento, autenticación, etc.
+    description: Aquí podes xestionar todas as credenciais para sitios que as requiran (crear, editar e eliminar), como un valado de pagamento, autenticación, etc.
     edit_site_credential: Editar unha credencial existente
     new_site_credential: Crear unha credencial
     page_title: Xestión das credenciais do sitio
@@ -727,7 +739,7 @@ user:
         yes: Si
         edit_action: Editar
         actions: Accións
-    description: Aquí podes xestionar tódalas usuarias (crear, editar e eliminar)
+    description: Aquí podes xestionar todas as usuarias (crear, editar e eliminar)
     edit_user: Editar usuaria existente
     new_user: Crear unha nova usuaria
     page_title: Xestión de usuarias

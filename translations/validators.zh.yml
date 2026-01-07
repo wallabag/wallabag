@@ -5,4 +5,3 @@ validator:
     item_per_page_too_high: '这会让应用十分卡顿'
     feed_limit_too_high: '这会让应用十分卡顿'
     quote_length_too_high: '引用内容过长，最多不能超过 {{ limit }} 个字符。'
-    rss_limit_too_high: 这肯定会杀死应用程序

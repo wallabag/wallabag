@@ -1,0 +1,53 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'site_credential.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <h4>{{ 'site_credential.new_site_credential'|trans }}</h4>
+
+                        <div id="set6" class="col s12">
+                            {{ form_start(form) }}
+                                {{ form_errors(form) }}
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(form.host) }}
+                                        {{ form_errors(form.host) }}
+                                        {{ form_widget(form.host) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(form.username) }}
+                                        {{ form_errors(form.username) }}
+                                        {{ form_widget(form.username) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(form.password) }}
+                                        {{ form_errors(form.password) }}
+                                        {{ form_widget(form.password) }}
+                                    </div>
+                                </div>
+
+                                {{ form_widget(form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                                {{ form_rest(form) }}
+                            </form>
+                            <p><a class="waves-effect waves-light btn blue-grey" href="{{ path('site_credentials_index') }}">{{ 'site_credential.form.back_to_list'|trans }}</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

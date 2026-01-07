@@ -370,7 +370,7 @@ quickstart:
         description: 'ถ้าคุณต้องการการชวยเหลอบางอย่าง, พวกเราจะอยู่ที่นี้เพื่อคุณ'
         github: 'บน GitHub'
         email: 'โดยอีเมล'
-        gitter: 'บน Gitter'
+        matrix: 'บน Matrix'
 tag:
     page_title: 'แท็ก'
     list:

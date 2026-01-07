@@ -1,0 +1,39 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'import.pocket.page_title'|trans }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
+            {% include 'Import/_information.html.twig' %}
+
+            {% if not has_consumer_key %}
+                <div class="card-panel red white-text">
+                    {{ 'import.pocket.config_missing.description'|trans }}
+
+                    {{ 'import.pocket.config_missing.admin_message'|trans({'%keyurls%': '<a href="' ~ path('config') ~ '" class="white-text"><strong>', '%keyurle%': '</strong></a>'})|raw }}
+                </div>
+            {% endif %}
+
+            <blockquote>{{ import.description|trans }}</blockquote>
+            <p>{{ 'import.pocket.authorize_message'|trans }}</p>
+
+            <form method="post" action="{{ path('import_pocket_auth') }}">
+                <div class="row">
+                    <h6 class="col s12">{{ 'import.form.mark_as_read_title'|trans }}</h6>
+                    <div class="col s6 with-checkbox">
+                        <label for="{{ form.mark_as_read.vars.id }}">
+                            {{ form_widget(form.mark_as_read) }}
+                            <span>{{ form.mark_as_read.vars.label|trans }}</span>
+                        </label>
+                    </div>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit" name="action" {% if not has_consumer_key %}disabled="disabled"{% endif %}>
+                    {{ 'import.pocket.connect_to_pocket'|trans }}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

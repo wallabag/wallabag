@@ -1,0 +1,56 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'developer.howto.page_title'|trans }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
+
+            <div class="row">
+                <p>{{ 'developer.howto.description.paragraph_1'|trans|raw }}</p>
+                <p>{{ 'developer.howto.description.paragraph_2'|trans }}</p>
+                <p>{{ 'developer.howto.description.paragraph_3'|trans({'%link%': path('developer_create_client')})|raw }}</p>
+                <p>{{ 'developer.howto.description.paragraph_4'|trans }}</p>
+                <div data-controller="highlight">
+                    <pre><code class="language-bash">http POST {{ wallabag_url }}/oauth/v2/token \
+    grant_type=password \
+    client_id=12_5um6nz50ceg4088c0840wwc0kgg44g00kk84og044ggkscso0k \
+    client_secret=3qd12zpeaxes8cwg8c0404g888co4wo8kc4gcw0occww8cgw4k \
+    username=yourUsername \
+    password=yourPassw0rd</code></pre>
+                </div>
+                <p>{{ 'developer.howto.description.paragraph_5'|trans }}</p>
+                <div data-controller="highlight">
+                    <pre><code class="language-bash">HTTP/1.1 200 OK
+Cache-Control: no-store, private
+Connection: close
+Content-Type: application/json
+Date: Tue, 06 Oct 2015 18:24:03 GMT
+Host: localhost:8000
+Pragma: no-cache
+X-Debug-Token: be00a1
+X-Debug-Token-Link: /profiler/be00a1
+X-Powered-By: PHP/5.5.9-1ubuntu4.13
+{
+    "access_token": "ZWFjNjA3ZWMwYWVmYzRkYTBlMmQ3NTllYmVhOGJiZDE0ZTg1NjE4MjczOTVlNzM0ZTRlMWQ0MmRlMmYwNTk5Mw",
+    "expires_in": 3600,
+    "refresh_token": "ODBjODU1NWUwNmUzZTBkNDQ5YWVlZTVlMjQ2Y2I0OWM2NTM1ZGM2M2Y3MDhjMTViM2U2MzYxYzRkMDk5ODRlZg",
+    "scope": null,
+    "token_type": "bearer"
+}</code></pre>
+                </div>
+                <p>{{ 'developer.howto.description.paragraph_6'|trans }}</p>
+                <div data-controller="highlight">
+                    <pre><code class="language-bash">http GET {{ wallabag_url }}/api/entries.json \
+    "Authorization:Bearer ZWFjNjA3ZWMwYWVmYzRkYTBlMmQ3NTllYmVhOGJiZDE0ZTg1NjE4MjczOTVlNzM0ZTRlMWQ0MmRlMmYwNTk5Mw"</code></pre>
+                </div>
+                <p>{{ 'developer.howto.description.paragraph_7'|trans }}</p>
+                <p>{{ 'developer.howto.description.paragraph_8'|trans({'%link%': path('nelmio_api_doc.swagger_ui')})|raw }}</p>
+                <p><a href="{{ path('developer') }}" class="waves-effect waves-light grey btn">{{ 'developer.howto.back'|trans }}</a></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

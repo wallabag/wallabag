@@ -1,18 +1,18 @@
 download_pictures: تصاویر را در کارگزار خودتان باربگیرید
 diaspora_url: نشانی Diaspora، اگر فعال بود
 export_epub: فعال‌سازی برون‌سپاری به ePub
-export_pdf:  فعال‌سازی برون‌سپاری به PDF
-export_csv:  فعال‌سازی برون‌سپاری به CSV
-export_json:  فعال‌سازی برون‌سپاری به JSON
-export_txt:  فعال‌سازی برون‌سپاری به TXT
-export_xml:  فعال‌سازی برون‌سپاری به XML
+export_pdf: فعال‌سازی برون‌سپاری به PDF
+export_csv: فعال‌سازی برون‌سپاری به CSV
+export_json: فعال‌سازی برون‌سپاری به JSON
+export_txt: فعال‌سازی برون‌سپاری به TXT
+export_xml: فعال‌سازی برون‌سپاری به XML
 shaarli_url: نشانی Shaarli، اگر فعال بود
 unmark_url: نشانی Unmark، اگر فعال بود
 share_diaspora: فعال‌سازی هم‌رسانی به Diaspora
-share_mail:  فعال‌سازی هم‌رسانی با ایمیل
-share_shaarli:  فعال‌سازی هم‌رسانی به Shaarli
-share_twitter:  فعال‌سازی هم‌رسانی به Twitter
-share_unmark:  فعال‌سازی هم‌رسانی به Unmark.it
+share_mail: فعال‌سازی هم‌رسانی با ایمیل
+share_shaarli: فعال‌سازی هم‌رسانی به Shaarli
+share_twitter: فعال‌سازی هم‌رسانی به Twitter
+share_unmark: فعال‌سازی هم‌رسانی به Unmark.it
 show_printlink: نمایش پیوندی برای چاپ مطلب
 wallabag_support_url: نشانی صفحهٔ پشتیبانی wallabag
 entry: "مقاله"
@@ -20,3 +20,16 @@ export: "برون‌سپاری"
 import: "درون‌ریزی"
 misc: "غیره"
 modify_settings: "اعمال"
+share_public: اعطای اجازهٔ نشانی عمومی برای ورودی‌ها
+matomo_host: میزبان وبگاه شما در Matomo (بدون ‭http://‬ یا ‭https://‬)
+api_user_registration: فعال‌سازی نام‌نویسی کاربر از راه API
+import_with_rabbitmq: برای درون‌ریزی ناهمگام داده، RabbitMQ را فعال کنید
+restricted_access: فعال‌سازی احراز هویت برای وبگاه‌های paywalled
+download_images_enabled: بارگیری محلی تصاویر
+matomo_enabled: فعال‌سازی Matomo
+settings_changed: پیکربندی روزآمد شد
+import_with_redis: برای درون‌ریزی ناهمگام داده، Redis را فعال کنید
+share_linkding: فعال‌سازی هم‌رسانی روی لینکدین
+matomo_site_id: شناسه (ID) وبگاه شما در Matomo
+store_article_headers: فعال‌سازی ذخیره‌ٔ سرآیندهای HTTP برای هر مقاله
+shaarli_share_origin_url: فعال‌سازی هم‌رسانی نشانی مبدأ در صورت فعال بودن این خدمت

@@ -1,7 +1,7 @@
 # wallabag
 
-![CI](https://github.com/wallabag/wallabag/workflows/CI/badge.svg)
-[![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/wallabag/wallabag)
+[![CI](https://github.com/wallabag/wallabag/actions/workflows/continuous-integration.yml/badge.svg?branch=master)](https://github.com/wallabag/wallabag/actions/workflows/continuous-integration.yml?query=branch%3Amaster)
+[![Matrix](https://matrix.to/img/matrix-badge.svg)](https://matrix.to/#/#wallabag:matrix.org)
 [![Donation Status](https://img.shields.io/liberapay/goal/wallabag.svg?logo=liberapay)](https://liberapay.com/wallabag/donate)
 [![Translation status](https://hosted.weblate.org/widgets/wallabag/-/svg-badge.svg)](https://hosted.weblate.org/engage/wallabag/?utm_source=widget)
 ![License](https://img.shields.io/github/license/wallabag/wallabag)
@@ -54,6 +54,10 @@ Feel free to help us [translating wallabag](https://hosted.weblate.org/projects/
 To learn more about developing wallabag, please refer to the [contribution guide](./.github/CONTRIBUTING.md).
 
 Content extraction relies on [Graby](https://github.com/j0k3r/graby), [php-readability](https://github.com/j0k3r/php-readability) and [ftr-site-config](https://github.com/fivefilters/ftr-site-config).
+
+## Sponsors
+
+<img src="https://api.blackfire.io/blackfire-logo.png" alt="Blackfire" width="200" />
 
 ## License
 Copyright © 2013-current Nicolas Lœuillet <nicolas@loeuillet.org>

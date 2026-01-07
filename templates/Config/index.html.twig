@@ -1,0 +1,723 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'config.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel settings">
+
+                <div class="row">
+                    <div class="tabs-container col s12">
+                        <ul class="tabs" data-controller="materialize--tabs">
+                            <li class="tab col s12 m6 l3"><a class="active" href="#set1">{{ 'config.tab_menu.settings'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set2">{{ 'config.tab_menu.feed'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set3">{{ 'config.tab_menu.user_info'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set4">{{ 'config.tab_menu.password'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set5">{{ 'config.tab_menu.rules'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set6">{{ 'config.tab_menu.ignore_origin'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set7">{{ 'config.tab_menu.reset'|trans }}</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="set1" class="col s12" data-controller="config">
+                        {{ form_start(form.config) }}
+                            {{ form_errors(form.config) }}
+
+                        <div class="row">
+                            <div class="input-field col s11">
+                                {{ form_errors(form.config.items_per_page) }}
+                                {{ form_widget(form.config.items_per_page) }}
+                                {{ form_label(form.config.items_per_page) }}
+                            </div>
+                            <div class="input-field col s1">
+                                <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_items_per_page'|trans }}">
+                                    <i class="material-icons">live_help</i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s11 settings-checkbox-col">
+                                {{ form_errors(form.config.display_thumbnails) }}
+                                <label for="{{ form.config.display_thumbnails.vars.id }}" class="settings-checkbox-label">
+                                    {{ form_widget(form.config.display_thumbnails) }}
+                                    <span>{{ form.config.display_thumbnails.vars.label|trans }}</span>
+                                </label>
+                            </div>
+                            <div class="input-field col s1">
+                                <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_display_thumbnails'|trans }}">
+                                    <i class="material-icons">live_help</i>
+                                </a>
+                            </div>
+                        </div>
+
+                            <div class="row">
+                                <div class="input-field col s11">
+                                    {{ form_errors(form.config.reading_speed) }}
+                                    {{ form_widget(form.config.reading_speed) }}
+                                    {{ form_label(form.config.reading_speed) }}
+                                    <p>
+                                        {{ 'config.form_settings.reading_speed.help_message'|trans }}
+                                        <a target="_blank" href="https://wallabag.github.io/myreadspeed/">myreadspeed</a>
+                                    </p>
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_reading_speed'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s11" data-controller="materialize--form-select">
+                                    {{ form_errors(form.config.action_mark_as_read) }}
+                                    {{ form_widget(form.config.action_mark_as_read) }}
+                                    {{ form_label(form.config.action_mark_as_read) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s11" data-controller="materialize--form-select">
+                                    {{ form_errors(form.config.language) }}
+                                    {{ form_widget(form.config.language) }}
+                                    {{ form_label(form.config.language) }}
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_language'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s11">
+                                    {{ form_errors(form.config.pocket_consumer_key) }}
+                                    {{ form_widget(form.config.pocket_consumer_key) }}
+                                    {{ form_label(form.config.pocket_consumer_key) }}
+                                    <p>
+                                        &raquo;
+                                        <a target="_blank" href="https://getpocket.com/developer/docs/authentication">https://getpocket.com/developer/docs/authentication</a>
+                                    </p>
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_pocket_consumer_key'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <h5>{{ 'config.form_settings.android_configuration'|trans }}</h5>
+                                    <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" class="waves-effect waves-light btn hide-on-large-only">{{ 'config.form_settings.android_instruction'|trans }}</a>
+                                    <img data-controller="qrcode" data-qrcode-url-value="wallabag://{{ app.user.username }}@{{ wallabag_url }}" class="hide-on-med-and-down" alt="{{ 'config.otp.app.qrcode_label'|trans }}" />
+                                </div>
+                            </div>
+
+                            <h5>{{ 'config.tab_menu.article_display'|trans }}</h5>
+
+                            <div class="row">
+                                <div class="input-field col s5" data-controller="materialize--form-select">
+                                    {{ form_errors(form.config.font) }}
+                                    {{ form_widget(form.config.font, {attr: {'data-config-target': 'font', 'data-action': 'config#updatePreview'}}) }}
+                                    {{ form_label(form.config.font) }}
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_font'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
+                                </div>
+
+                                <div class="input-field col s5">
+                                    {{ form_errors(form.config.lineHeight) }}
+                                    {{ form_widget(form.config.lineHeight, {attr: {'data-config-target': 'lineHeight', 'data-action': 'config#updatePreview'}}) }}
+                                    {{ form_label(form.config.lineHeight, null, {'label_attr': {'class': 'settings-range-label'}}) }}
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_lineheight'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s5">
+                                    {{ form_errors(form.config.fontsize) }}
+                                    {{ form_widget(form.config.fontsize, {attr: {'data-config-target': 'fontSize', 'data-action': 'config#updatePreview'}}) }}
+                                    {{ form_label(form.config.fontsize, null, {'label_attr': {'class': 'settings-range-label'}}) }}
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_fontsize'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
+                                </div>
+
+                                <div class="input-field col s5">
+                                    {{ form_errors(form.config.maxWidth) }}
+                                    {{ form_widget(form.config.maxWidth, {attr: {'data-config-target': 'maxWidth', 'data-action': 'config#updatePreview'}}) }}
+                                    {{ form_label(form.config.maxWidth, null, {'label_attr': {'class': 'settings-range-label'}}) }}
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_maxwidth'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <div id="preview-article" data-config-target="previewArticle">
+                                        <article id="preview-content" data-config-target="previewContent">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{ form_widget(form.config.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                            {{ form_rest(form.config) }}
+                        </form>
+                    </div>
+
+                    <div id="set2" class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                {{ 'config.form_feed.description'|trans }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s12">
+                                <h6 class="grey-text">{{ 'config.form_feed.token_label'|trans }}</h6>
+                                <div>
+                                    {% if feed.token %}
+                                        {{ feed.token }}
+                                    {% else %}
+                                        <em>{{ 'config.form_feed.no_token'|trans }}</em>
+                                    {% endif %}
+
+                                    {% if feed.token %}
+                                        –
+                                        <form action="{{ path('generate_token') }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('generate-token') }}"/>
+
+                                            <button type="submit" class="btn-link">{{ 'config.form_feed.token_reset'|trans }}</button>
+                                        </form>
+                                        –
+                                        <form action="{{ path('revoke_token') }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('revoke-token') }}"/>
+
+                                            <button type="submit" class="btn-link">{{ 'config.form_feed.token_revoke'|trans }}</button>
+                                        </form>
+                                    {% else %}
+                                        –
+                                        <form action="{{ path('generate_token') }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('generate-token') }}"/>
+
+                                            <button type="submit" class="btn-link">{{ 'config.form_feed.token_create'|trans }}</button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% if feed.token %}
+                        <div class="row">
+                            <div class="col s12">
+                                <h6 class="grey-text">{{ 'config.form_feed.feed_links'|trans }}</h6>
+                                <ul>
+                                    <li><a href="{{ path('unread_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.unread'|trans }}</a></li>
+                                    <li><a href="{{ path('starred_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.starred'|trans }}</a></li>
+                                    <li><a href="{{ path('archive_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.archive'|trans }}</a></li>
+                                    <li><a href="{{ path('all_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.all'|trans }}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {{ form_start(form.feed) }}
+                            {{ form_errors(form.feed) }}
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.feed.feed_limit) }}
+                                    {{ form_errors(form.feed.feed_limit) }}
+                                    {{ form_widget(form.feed.feed_limit) }}
+                                </div>
+                            </div>
+
+                            {{ form_widget(form.feed.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                            {{ form_rest(form.feed) }}
+                        </form>
+                    </div>
+
+                    <div id="set3" class="col s12">
+                        {{ form_start(form.user) }}
+                            {{ form_errors(form.user) }}
+
+                            <div class="row">
+                                <div class="col s12">
+                                    <h6 class="grey-text">{{ 'config.form_user.login_label'|trans }}</h6>
+                                    <div>
+                                        {{ app.user.username }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.user.name) }}
+                                    {{ form_errors(form.user.name) }}
+                                    {{ form_widget(form.user.name) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.user.email) }}
+                                    {{ form_errors(form.user.email) }}
+                                    {{ form_widget(form.user.email) }}
+                                </div>
+                            </div>
+
+                            {{ form_widget(form.user.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+
+                            {{ form_widget(form.user._token) }}
+
+                        {{ form_end(form.user) }}
+
+                        <br/>
+                        <br/>
+                        <div class="row">
+                            <h5>{{ 'config.otp.page_title'|trans }}</h5>
+
+                            <p>{{ 'config.form_user.two_factor_description'|trans }}</p>
+
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>{{ 'config.form_user.two_factor.table_method'|trans }}</th>
+                                        <th>{{ 'config.form_user.two_factor.table_state'|trans }}</th>
+                                        <th>{{ 'config.form_user.two_factor.table_action'|trans }}</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td>{{ 'config.form_user.two_factor.emailTwoFactor_label'|trans }}</td>
+                                        <td>{% if app.user.isEmailTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
+                                        <td>
+                                            <form action="{{ path('config_otp_email') }}" method="post" name="config_otp_email">
+                                                <input type="hidden" name="token" value="{{ csrf_token('otp') }}" />
+
+                                                <button class="waves-effect waves-light btn{% if app.user.isEmailTwoFactor %} disabled{% endif %}" type="submit">{{ 'config.form_user.two_factor.action_email'|trans }}</button>
+                                            </form>
+                                            {% if app.user.isEmailTwoFactor %}
+                                            <form action="{{ path('disable_otp_email') }}" method="post" name="disable_otp_email">
+                                                <input type="hidden" name="token" value="{{ csrf_token('otp') }}" />
+
+                                                <button class="waves-effect waves-light btn red" type="submit">Disable</button>
+                                            </form>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'config.form_user.two_factor.googleTwoFactor_label'|trans }}</td>
+                                        <td>{% if app.user.isGoogleTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
+                                        <td>
+                                            <form action="{{ path('config_otp_app') }}" method="post" name="config_otp_app">
+                                                <input type="hidden" name="token" value="{{ csrf_token('otp') }}" />
+
+                                                <button class="waves-effect waves-light btn{% if app.user.isGoogleTwoFactor %} disabled{% endif %}" type="submit">{{ 'config.form_user.two_factor.action_app'|trans }}</button>
+                                            </form>
+                                            {% if app.user.isGoogleTwoFactor %}
+                                            <form action="{{ path('disable_otp_app') }}" method="post" name="disable_otp_app">
+                                                <input type="hidden" name="token" value="{{ csrf_token('otp') }}" />
+
+                                                <button class="waves-effect waves-light btn red" type="submit">Disable</button>
+                                            </form>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="set4" class="col s12">
+                        {{ form_start(form.pwd) }}
+                            {{ form_errors(form.pwd) }}
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ 'config.form_password.description'|trans }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.pwd.old_password) }}
+                                    {{ form_errors(form.pwd.old_password) }}
+                                    {{ form_widget(form.pwd.old_password) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.pwd.new_password.first) }}
+                                    {{ form_errors(form.pwd.new_password.first) }}
+                                    {{ form_widget(form.pwd.new_password.first) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.pwd.new_password.second) }}
+                                    {{ form_errors(form.pwd.new_password.second) }}
+                                    {{ form_widget(form.pwd.new_password.second) }}
+                                </div>
+                            </div>
+
+                            {{ form_widget(form.pwd.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                            {{ form_rest(form.pwd) }}
+                        </form>
+                    </div>
+
+                    <div id="set5" class="col s12">
+                        {% if app.user.config.taggingRules is not empty %}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <ul>
+                                    {% for tagging_rule in app.user.config.taggingRules %}
+                                    <li>
+                                        {{ 'config.form_rules.if_label'|trans }}
+                                        « {{ tagging_rule.rule }} »
+                                        {{ 'config.form_rules.then_tag_as_label'|trans }}
+                                        « {{ tagging_rule.tags|join(', ') }} »
+
+                                        <a href="{{ path('edit_tagging_rule', {taggingRule: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit_tagging_rule">
+                                            <i class="tool grey-text material-icons">mode_edit</i>
+                                        </a>
+                                        <form action="{{ path('delete_tagging_rule', {taggingRule: tagging_rule.id}) }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('delete-tagging-rule') }}"/>
+
+                                            <button type="submit" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="btn-link">
+                                                <i class="tool grey-text material-icons">delete</i>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <ul class="row">
+                            <li class="col l6 m6 s12">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <span class="card-title">{{ 'config.form_rules.card.new_tagging_rule'|trans }}</span>
+
+                                        {{ form_start(form.new_tagging_rule) }}
+                                        {{ form_errors(form.new_tagging_rule) }}
+
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                {{ form_label(form.new_tagging_rule.rule) }}
+                                                {{ form_errors(form.new_tagging_rule.rule) }}
+                                                {{ form_widget(form.new_tagging_rule.rule) }}
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                {{ form_label(form.new_tagging_rule.tags) }}
+                                                {{ form_errors(form.new_tagging_rule.tags) }}
+                                                {{ form_widget(form.new_tagging_rule.tags) }}
+                                            </div>
+                                        </div>
+
+                                        {{ form_widget(form.new_tagging_rule.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                                        {{ form_rest(form.new_tagging_rule) }}
+                                    </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col l6 m6 s12">
+                                <div class="card z-depth-1">
+                                    <div class="card-content">
+                                        <span class="card-title">{{ 'config.form_rules.card.import_tagging_rules'|trans }}</span>
+                                        <p>{{ 'config.form_rules.card.import_tagging_rules_detail'|trans }}</p>
+                                        {{ form_start(form.import_tagging_rule) }}
+                                            {{ form_errors(form.import_tagging_rule) }}
+                                            <div class="row">
+                                                <div class="file-field input-field col s12">
+                                                    {{ form_errors(form.import_tagging_rule.file) }}
+                                                    <div class="btn">
+                                                        <span>{{ form.import_tagging_rule.file.vars.label|trans }}</span>
+                                                        {{ form_widget(form.import_tagging_rule.file) }}
+                                                    </div>
+                                                    <div class="file-path-wrapper">
+                                                        <input class="file-path validate" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {{ form_widget(form.import_tagging_rule.import, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+
+                                            {{ form_rest(form.import_tagging_rule) }}
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            {% if app.user.config.taggingRules is not empty %}
+                            <li class="col l6 m6 s12">
+                                <div class="card z-depth-1">
+                                    <div class="card-content">
+                                        <span class="card-title">{{ 'config.form_rules.card.export_tagging_rules'|trans }}</span>
+                                        <p>{{ 'config.form_rules.card.export_tagging_rules_detail'|trans }}</p>
+                                        <br/>
+                                        <p><a href="{{ path('export_tagging_rule') }}" class="waves-effect waves-light btn">{{ 'config.form_rules.export'|trans }}</a></p>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endif %}
+                        </ul>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <h4>{{ 'config.form_rules.faq.title'|trans }}</h4>
+
+                                <h5>{{ 'config.form_rules.faq.tagging_rules_definition_title'|trans }}</h5>
+                                <p class="help">{{ 'config.form_rules.faq.tagging_rules_definition_description'|trans|raw }}</p>
+
+                                <h5>{{ 'config.form_rules.faq.how_to_use_them_title'|trans }}</h5>
+                                <p class="help">{{ 'config.form_rules.faq.how_to_use_them_description'|trans|raw }}</p>
+
+                                <h5>{{ 'config.form_rules.faq.variables_available_title'|trans }}</h5>
+                                <p class="help">
+                                    {{ 'config.form_rules.faq.variables_available_description'|trans }}
+                                </p>
+
+                                <table class="bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>{{ 'config.form_rules.faq.variable_description.label'|trans }}</th>
+                                            <th>{{ 'config.form_rules.faq.meaning'|trans }}</th>
+                                            <th>{{ 'config.form_rules.faq.operator_description.label'|trans }}</th>
+                                            <th>{{ 'config.form_rules.faq.meaning'|trans }}</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td>title</td>
+                                            <td>{{ 'config.form_rules.faq.variable_description.title'|trans }}</td>
+                                            <td>&lt;=</td>
+                                            <td>{{ 'config.form_rules.faq.operator_description.less_than'|trans }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>url</td>
+                                            <td>{{ 'config.form_rules.faq.variable_description.url'|trans }}</td>
+                                            <td>&lt;</td>
+                                            <td>{{ 'config.form_rules.faq.operator_description.strictly_less_than'|trans }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>isArchived</td>
+                                            <td>{{ 'config.form_rules.faq.variable_description.isArchived'|trans }}</td>
+                                            <td>&gt;=</td>
+                                            <td>{{ 'config.form_rules.faq.operator_description.greater_than'|trans }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>isStarred</td>
+                                            <td>{{ 'config.form_rules.faq.variable_description.isStarred'|trans }}</td>
+                                            <td>&gt;</td>
+                                            <td>{{ 'config.form_rules.faq.operator_description.strictly_greater_than'|trans }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>content</td>
+                                            <td>{{ 'config.form_rules.faq.variable_description.content'|trans }}</td>
+                                            <td>=</td>
+                                            <td>{{ 'config.form_rules.faq.operator_description.equal_to'|trans }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>language</td>
+                                            <td>{{ 'config.form_rules.faq.variable_description.language'|trans }}</td>
+                                            <td>!=</td>
+                                            <td>{{ 'config.form_rules.faq.operator_description.not_equal_to'|trans }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>mimetype</td>
+                                            <td>{{ 'config.form_rules.faq.variable_description.mimetype'|trans }}</td>
+                                            <td>OR</td>
+                                            <td>{{ 'config.form_rules.faq.operator_description.or'|trans }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>readingTime</td>
+                                            <td>{{ 'config.form_rules.faq.variable_description.readingTime'|trans }}</td>
+                                            <td>AND</td>
+                                            <td>{{ 'config.form_rules.faq.operator_description.and'|trans }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>domainName</td>
+                                            <td>{{ 'config.form_rules.faq.variable_description.domainName'|trans }}</td>
+                                            <td>matches<br />notmaches</td>
+                                            <td>{{ 'config.form_rules.faq.operator_description.matches'|trans|raw }}<br />{{ 'config.form_rules.faq.operator_description.notmatches'|trans|raw }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="set6" class="col s12">
+                        {% if app.user.config.ignoreOriginRules is not empty %}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <ul>
+                                    {% for ignore_origin_rule in app.user.config.ignoreOriginRules %}
+                                    <li>
+                                        {{ 'config.form_rules.if_label'|trans }}
+                                        « {{ ignore_origin_rule.rule }} »
+                                        <a href="{{ path('edit_ignore_origin_rule', {ignoreOriginUserRule: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit">
+                                            <i class="tool grey-text material-icons">mode_edit</i>
+                                        </a>
+                                        <form action="{{ path('delete_ignore_origin_rule', {ignoreOriginUserRule: ignore_origin_rule.id}) }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('delete-ignore-origin-rule') }}"/>
+
+                                            <button type="submit" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="btn-link">
+                                                <i class="tool grey-text material-icons">delete</i>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {{ form_start(form.new_ignore_origin_user_rule) }}
+                            {{ form_errors(form.new_ignore_origin_user_rule) }}
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.new_ignore_origin_user_rule.rule) }}
+                                    {{ form_errors(form.new_ignore_origin_user_rule.rule) }}
+                                    {{ form_widget(form.new_ignore_origin_user_rule.rule) }}
+                                </div>
+                            </div>
+
+                            {{ form_widget(form.new_ignore_origin_user_rule.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                            {{ form_rest(form.new_ignore_origin_user_rule) }}
+                        </form>
+
+
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <h4>{{ 'config.form_ignore_origin_rules.faq.title'|trans }}</h4>
+
+                                <h5>{{ 'config.form_ignore_origin_rules.faq.ignore_origin_rules_definition_title'|trans }}</h5>
+                                <p class="help">{{ 'config.form_ignore_origin_rules.faq.ignore_origin_rules_definition_description'|trans|raw }}</p>
+
+                                <h5>{{ 'config.form_ignore_origin_rules.faq.how_to_use_them_title'|trans }}</h5>
+                                <p class="help">{{ 'config.form_ignore_origin_rules.faq.how_to_use_them_description'|trans|raw }}</p>
+
+                                <h5>{{ 'config.form_ignore_origin_rules.faq.variables_available_title'|trans }}</h5>
+                                <p class="help">
+                                    {{ 'config.form_ignore_origin_rules.faq.variables_available_description'|trans }}
+                                </p>
+
+                                <table class="bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>{{ 'config.form_ignore_origin_rules.faq.variable_description.label'|trans }}</th>
+                                            <th>{{ 'config.form_ignore_origin_rules.faq.meaning'|trans }}</th>
+                                            <th>{{ 'config.form_ignore_origin_rules.faq.operator_description.label'|trans }}</th>
+                                            <th>{{ 'config.form_ignore_origin_rules.faq.meaning'|trans }}</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td>host</td>
+                                            <td>{{ 'config.form_ignore_origin_rules.faq.variable_description.host'|trans }}</td>
+                                            <td>=</td>
+                                            <td>{{ 'config.form_ignore_origin_rules.faq.operator_description.equal_to'|trans }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>_all</td>
+                                            <td>{{ 'config.form_ignore_origin_rules.faq.variable_description._all'|trans }}</td>
+                                            <td>~</td>
+                                            <td>{{ 'config.form_ignore_origin_rules.faq.operator_description.matches'|trans|raw }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="set7" class="col s12">
+                        <div class="row">
+                            <h5>{{ 'config.reset.title'|trans }}</h5>
+                            <p>{{ 'config.reset.description'|trans }}</p>
+                            {% if app.user.config.taggingRules is not empty %}
+                            <p>
+                                <form action="{{ path('config_reset', {type: 'tagging_rules'}) }}" method="post" onsubmit="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" name="reset-tagging-rules">
+                                    <input type="hidden" name="token" value="{{ csrf_token('reset-area') }}" />
+
+                                    <button class="waves-effect waves-light btn red" type="submit">{{ 'config.reset.tagging_rules'|trans }}</button>
+                                </form>
+                            </p>
+                            {% endif %}
+                            <p>
+                                <form action="{{ path('config_reset', {type: 'annotations'}) }}" method="post" onsubmit="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" name="reset-annotations">
+                                    <input type="hidden" name="token" value="{{ csrf_token('reset-area') }}" />
+
+                                    <button class="waves-effect waves-light btn red" type="submit">{{ 'config.reset.annotations'|trans }}</button>
+                                </form>
+                            </p>
+                            <p>
+                                <form action="{{ path('config_reset', {type: 'tags'}) }}" method="post" onsubmit="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" name="reset-tags">
+                                    <input type="hidden" name="token" value="{{ csrf_token('reset-area') }}" />
+
+                                    <button class="waves-effect waves-light btn red" type="submit">{{ 'config.reset.tags'|trans }}</button>
+                                </form>
+                            </p>
+                            <p>
+                                <form action="{{ path('config_reset', {type: 'archived'}) }}" method="post" onsubmit="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" name="reset-archived">
+                                    <input type="hidden" name="token" value="{{ csrf_token('reset-area') }}" />
+
+                                    <button class="waves-effect waves-light btn red" type="submit">{{ 'config.reset.archived'|trans }}</button>
+                                </form>
+                            </p>
+                            <p>
+                                <form action="{{ path('config_reset', {type: 'entries'}) }}" method="post" onsubmit="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" name="reset-entries">
+                                    <input type="hidden" name="token" value="{{ csrf_token('reset-area') }}" />
+
+                                    <button class="waves-effect waves-light btn red" type="submit">{{ 'config.reset.entries'|trans }}</button>
+                                </form>
+                            </p>
+                        </div>
+
+                        {% if enabled_users > 1 %}
+                            <br /><hr /><br />
+
+                            <div class="row">
+                                <h5>{{ 'config.form_user.delete.title'|trans }}</h5>
+                                <p>{{ 'config.form_user.delete.description'|trans }}</p>
+                                <form action="{{ path('delete_account') }}" method="post" onsubmit="return confirm('{{ 'config.form_user.delete.confirm'|trans|escape('js') }}')" name="delete-account">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete-account') }}" />
+
+                                    <button class="waves-effect waves-light btn red" type="submit">{{ 'config.form_user.delete.button'|trans }}</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
