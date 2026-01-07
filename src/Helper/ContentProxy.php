@@ -28,14 +28,14 @@ class ContentProxy
         protected ValidatorInterface $validator,
         protected LoggerInterface $logger,
         protected $fetchingErrorMessage,
-        private $singleFileProxyUrl,
-        private $singleFileProxyAll,
-        private $singleFileProxySitesToProxy,
+        private $renderingProxyUrl,
+        private $renderingProxyAll,
+        private $renderingProxySitesToProxy,
         protected $storeArticleHeaders = false,
     ) {
         $this->mimeTypes = new MimeTypes();
-        $this->singleFileProxyUrl = preg_replace('~/*$~', '', $this->singleFileProxyUrl);
-        $this->singleFileProxySitesToProxy = array_map(fn ($url) => preg_replace('~/*$~', '', $url), $this->singleFileProxySitesToProxy);
+        $this->renderingProxyUrl = preg_replace('~/*$~', '', $this->renderingProxyUrl);
+        $this->renderingProxySitesToProxy = array_map(fn ($url) => preg_replace('~/*$~', '', $url), $this->renderingProxySitesToProxy);
     }
 
     /**
@@ -56,9 +56,9 @@ class ContentProxy
         if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
             // Check if URL has to be proxied through single-file
             preg_match('~^[^/]+://[^/]+~', $url, $matches);
-            $proxy = $this->singleFileProxyAll || \in_array($matches[0], $this->singleFileProxySitesToProxy, true);
+            $proxy = $this->renderingProxyAll || \in_array($matches[0], $this->renderingProxySitesToProxy, true);
 
-            $fetchedContent = $this->graby->fetchContent(($proxy ? $this->singleFileProxyUrl . '/' : '') . $url);
+            $fetchedContent = $this->graby->fetchContent(($proxy ? $this->renderingProxyUrl . '/' : '') . $url);
 
             // Set original URL in case it was proxied
             $fetchedContent['url'] = $url;

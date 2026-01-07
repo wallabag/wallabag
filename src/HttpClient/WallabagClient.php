@@ -18,7 +18,8 @@ class WallabagClient implements HttpClientInterface
         private readonly HttpBrowser $browser,
         private readonly Authenticator $authenticator,
         private readonly LoggerInterface $logger,
-        private $singleFileProxyUrl,
+        private readonly string $renderingProxyUrl,
+        private readonly int $renderingProxyTimeout,
     ) {
         $this->httpClient = HttpClient::create([
             'timeout' => 10,
@@ -29,8 +30,8 @@ class WallabagClient implements HttpClientInterface
     {
         $this->logger->log('debug', 'Restricted access config enabled?', ['enabled' => (int) $this->restrictedAccess]);
 
-        if (str_starts_with($url, $this->singleFileProxyUrl)) {
-            $options['timeout'] = 100;
+        if (str_starts_with($url, $this->renderingProxyUrl)) {
+            $options['timeout'] = $this->renderingProxyTimeout;
         }
 
         if (0 === (int) $this->restrictedAccess) {
