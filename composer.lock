@@ -8698,16 +8698,16 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v6.4.30",
+            "version": "v6.4.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "eb3272ed2daed13ed24816e862d73f73d995972a"
+                "reference": "a1b306757c34b96fe97c0c586f50dceed05c7adb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/eb3272ed2daed13ed24816e862d73f73d995972a",
-                "reference": "eb3272ed2daed13ed24816e862d73f73d995972a",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/a1b306757c34b96fe97c0c586f50dceed05c7adb",
+                "reference": "a1b306757c34b96fe97c0c586f50dceed05c7adb",
                 "shasum": ""
             },
             "require": {
@@ -8774,7 +8774,7 @@
                 "psr6"
             ],
             "support": {
-                "source": "https://github.com/symfony/cache/tree/v6.4.30"
+                "source": "https://github.com/symfony/cache/tree/v6.4.31"
             },
             "funding": [
                 {
@@ -8794,7 +8794,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-01T16:41:59+00:00"
+            "time": "2025-12-27T18:26:25+00:00"
         },
         {
             "name": "symfony/cache-contracts",
@@ -14473,16 +14473,16 @@
         },
         {
             "name": "willdurand/hateoas",
-            "version": "3.13.0",
+            "version": "3.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/Hateoas.git",
-                "reference": "4f19c5407d111de52c45e7b6dbea019ef072e3cd"
+                "reference": "d7ce7ec7759da610905e909cf7554b07903ed250"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/4f19c5407d111de52c45e7b6dbea019ef072e3cd",
-                "reference": "4f19c5407d111de52c45e7b6dbea019ef072e3cd",
+                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/d7ce7ec7759da610905e909cf7554b07903ed250",
+                "reference": "d7ce7ec7759da610905e909cf7554b07903ed250",
                 "shasum": ""
             },
             "require": {
@@ -14541,9 +14541,9 @@
             "description": "A PHP library to support implementing representations for HATEOAS REST web services",
             "support": {
                 "issues": "https://github.com/willdurand/Hateoas/issues",
-                "source": "https://github.com/willdurand/Hateoas/tree/3.13.0"
+                "source": "https://github.com/willdurand/Hateoas/tree/3.14.0"
             },
-            "time": "2025-12-20T19:05:59+00:00"
+            "time": "2026-01-10T10:10:03+00:00"
         },
         {
             "name": "willdurand/hateoas-bundle",
