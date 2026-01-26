@@ -1,6 +1,6 @@
 security:
     login:
-        page_title: Wallabag へようこそ!
+        page_title: wallabag へようこそ!
         keep_logged_in: ログインを維持
         forgot_password: パスワードをお忘れですか?
         submit: ログイン
@@ -90,12 +90,12 @@ config:
             label: 記事に既読やスターをつけた後、どこに移動しますか？
         android_configuration: Androidアプリの設定をする
         android_instruction: ここをタッチするとあなたのAndroid アプリに自動入力します
-        help_display_thumbnails: 記事のサムネイルを表示するかどうかを選択できます。低速接続時に便利です。
+        help_display_thumbnails: 記事のサムネイル画像を表示するかどうかを選択できます。低速な接続環境で役立ちます。
         help_font: 使用するフォントファミリーを選択できます。
-        help_fontsize: 使用するフォントサイズを選択できます。
-        help_lineheight: 使用したい行の高さを選択できます。
-        help_maxwidth: 使用する最大幅を選択できます。
-        display_thumbnails_label: 記事のサムネイルを表示する（低速接続時に有用）。
+        help_fontsize: 利用したいフォントサイズを選択できます。
+        help_lineheight: 利用したい行の高さを選択できます。
+        help_maxwidth: 利用したい最大幅を選択できます。
+        display_thumbnails_label: 記事のサムネイルを表示する(通信速度が遅い場合は、非表示にすると快適に使えます)
         font_label: フォントファミリー
         fontsize_label: フォントサイズ
         lineheight_label: 行間
