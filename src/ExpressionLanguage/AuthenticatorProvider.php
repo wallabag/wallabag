@@ -29,7 +29,7 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
     {
         return new ExpressionFunction(
             'request_html',
-            function (): void {
+            static function (): void {
                 throw new \Exception('Not supported');
             },
             fn (array $arguments, $uri) => $this->requestHtmlFunctionClient->request('GET', $uri)->getContent()
@@ -40,10 +40,10 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
     {
         return new ExpressionFunction(
             'preg_match',
-            function (): void {
+            static function (): void {
                 throw new \Exception('Not supported');
             },
-            function (array $arguments, $pattern, $html) {
+            static function (array $arguments, $pattern, $html) {
                 preg_match($pattern, $html, $matches);
 
                 if (2 !== \count($matches)) {
@@ -59,10 +59,10 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
     {
         return new ExpressionFunction(
             'xpath',
-            function (): void {
+            static function (): void {
                 throw new \Exception('Not supported');
             },
-            function (array $arguments, $xpathQuery, $html) {
+            static function (array $arguments, $xpathQuery, $html) {
                 try {
                     $crawler = new Crawler((string) $html);
 

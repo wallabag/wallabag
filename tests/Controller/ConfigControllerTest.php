@@ -1230,7 +1230,7 @@ class ConfigControllerTest extends WallabagTestCase
             ->willReturn('DUMMYSECRET');
         $googleAuthenticatorMock
             ->method('checkCode')
-            ->willReturnCallback(function ($user, $code) {
+            ->willReturnCallback(static function ($user, $code) {
                 return '123456' === $code;
             });
 
