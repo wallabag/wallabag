@@ -206,7 +206,7 @@ JSON, ['response_headers' => ['Content-Type: application/json']]),
         $this->em
             ->expects($this->any())
             ->method('persist')
-            ->with($this->callback(fn ($persistedEntry) => (bool) $persistedEntry->isArchived() && (bool) $persistedEntry->isStarred()));
+            ->with($this->callback(static fn ($persistedEntry) => (bool) $persistedEntry->isArchived() && (bool) $persistedEntry->isStarred()));
 
         $entry = new Entry($this->user);
 
@@ -295,7 +295,7 @@ JSON, ['response_headers' => ['Content-Type: application/json']]),
         $this->em
             ->expects($this->any())
             ->method('persist')
-            ->with($this->callback(fn ($persistedEntry) => (bool) $persistedEntry->isArchived()));
+            ->with($this->callback(static fn ($persistedEntry) => (bool) $persistedEntry->isArchived()));
 
         $entry = new Entry($this->user);
 

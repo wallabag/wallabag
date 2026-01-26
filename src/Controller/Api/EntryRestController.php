@@ -131,7 +131,7 @@ class EntryRestController extends WallabagRestController
         }
 
         if (false === $returnId) {
-            $results = array_map(fn ($v) => null !== $v, $results);
+            $results = array_map(static fn ($v) => null !== $v, $results);
         }
 
         $results = $this->replaceUrlHashes($results, $urlHashMap);

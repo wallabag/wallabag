@@ -73,7 +73,7 @@ class EntryController extends AbstractController
 
             if (isset($values['tags'])) {
                 $labels = array_filter(explode(',', (string) $values['tags']),
-                    function ($v) {
+                    static function ($v) {
                         $v = trim($v);
 
                         return '' !== $v;

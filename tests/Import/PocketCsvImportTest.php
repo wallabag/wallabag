@@ -95,7 +95,7 @@ class PocketCsvImportTest extends TestCase
         $this->em
             ->expects($this->any())
             ->method('persist')
-            ->with($this->callback(fn ($persistedEntry) => (bool) $persistedEntry->isArchived()));
+            ->with($this->callback(static fn ($persistedEntry) => (bool) $persistedEntry->isArchived()));
 
         $res = $pocketCsvImport
             ->setMarkAsRead(true)

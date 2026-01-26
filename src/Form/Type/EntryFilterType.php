@@ -46,7 +46,7 @@ class EntryFilterType extends AbstractType
                     'condition_operator' => FilterOperands::OPERATOR_LOWER_THAN_EQUAL,
                     'attr' => ['min' => 0],
                 ],
-                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) use ($user) {
+                'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) use ($user) {
                     $lower = $values['value']['left_number'][0];
                     $upper = $values['value']['right_number'][0];
 
@@ -93,7 +93,7 @@ class EntryFilterType extends AbstractType
                 'label' => 'entry.filters.created_at.label',
             ])
             ->add('domainName', TextFilterType::class, [
-                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) {
                     $value = $values['value'];
                     if (empty($value) || \strlen($value) <= 2) {
                         return false;
@@ -111,7 +111,7 @@ class EntryFilterType extends AbstractType
                 ],
             ])
             ->add('httpStatus', NumberFilterType::class, [
-                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) {
                     $value = (int) $values['value'];
                     if (false === \array_key_exists($value, Response::$statusTexts)) {
                         return false;
@@ -143,7 +143,7 @@ class EntryFilterType extends AbstractType
             ->add('isUnread', CheckboxFilterType::class, [
                 'label' => 'entry.filters.unread_label',
                 'data' => $options['filter_unread'],
-                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
                         return false;
                     }
@@ -158,7 +158,7 @@ class EntryFilterType extends AbstractType
             ->add('isAnnotated', CheckboxFilterType::class, [
                 'label' => 'entry.filters.annotated_label',
                 'data' => $options['filter_annotated'],
-                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
                         return false;
                     }
@@ -172,7 +172,7 @@ class EntryFilterType extends AbstractType
                 'data' => $options['filter_parsed'],
             ])
             ->add('previewPicture', CheckboxFilterType::class, [
-                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
                         return false;
                     }
@@ -186,7 +186,7 @@ class EntryFilterType extends AbstractType
                 'label' => 'entry.filters.preview_picture_label',
             ])
             ->add('isPublic', CheckboxFilterType::class, [
-                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
                         return false;
                     }

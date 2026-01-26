@@ -23,7 +23,7 @@ class TagRestControllerTest extends WallabagApiTestCase
         $this->assertArrayHasKey('label', $content[0]);
         $this->assertArrayHasKey('nbEntries', $content[0]);
 
-        $tagLabels = array_map(fn ($i) => $i['label'], $content);
+        $tagLabels = array_map(static fn ($i) => $i['label'], $content);
 
         $this->assertNotContains($this->otherUserTagLabel, $tagLabels, 'There is a possible tag leak');
     }

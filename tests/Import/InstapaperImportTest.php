@@ -97,7 +97,7 @@ class InstapaperImportTest extends TestCase
         $this->em
             ->expects($this->once())
             ->method('persist')
-            ->with($this->callback(fn ($persistedEntry) => (bool) $persistedEntry->isArchived()));
+            ->with($this->callback(static fn ($persistedEntry) => (bool) $persistedEntry->isArchived()));
 
         $res = $instapaperImport->setMarkAsRead(true)->import();
 

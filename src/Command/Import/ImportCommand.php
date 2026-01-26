@@ -77,7 +77,7 @@ class ImportCommand extends Command
 
         // Turning off doctrine default logs queries for saving memory
         $middlewares = $this->entityManager->getConnection()->getConfiguration()->getMiddlewares();
-        $middlewaresWithoutLogging = array_filter($middlewares, fn (Middleware $middleware) => !$middleware instanceof LoggingMiddleware);
+        $middlewaresWithoutLogging = array_filter($middlewares, static fn (Middleware $middleware) => !$middleware instanceof LoggingMiddleware);
         $this->entityManager->getConnection()->getConfiguration()->setMiddlewares($middlewaresWithoutLogging);
 
         if ($input->getOption('useUserId')) {
