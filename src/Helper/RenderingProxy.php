@@ -1,0 +1,71 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Wallabag\Helper;
+
+use Psr\Log\LoggerInterface;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\RenderingProxyHost;
+
+class RenderingProxy
+{
+    public function __construct(
+        protected LoggerInterface $logger,
+        private $renderingProxyUrl,
+        private $renderingProxyAll,
+    ) {
+        $this->renderingProxyUrl = preg_replace('~/*$~', '', $this->renderingProxyUrl);
+    }
+
+    /**
+     * Checks if given URL should be passed to rendering proxy and returns proxified URL
+     *
+     * @return array<string,bool>
+     */
+    public function considerUrl(Entry $entry, string $url): array
+    {
+        preg_match('~^[^/]+://([^/]+)~', $url, $matches);
+        $host = $matches[1];
+
+        $userHosts = $entry
+            ->getUser()
+            ->getConfig()
+            ->getRenderingProxyHosts()
+            ->map(fn(RenderingProxyHost $e) => $e->getHost())
+            ->toArray();
+
+        $proxy = $this->renderingProxyAll || \in_array($host, $userHosts);
+
+        if ($proxy) {
+            return [
+                $this->renderingProxyUrl . '/' . $url,
+                // This callback will post-process the output of Graby\fetchContent()
+                function ($fetchedContent) use ($url) {
+                    $fetchedContent['url'] = $url;
+                    $fetchedContent['html'] = $this->fixClientSideRenderedProxyResponse($fetchedContent['html']);
+                    return $fetchedContent;
+                },
+            ];
+        }
+
+        return [$url, null];
+    }
+
+    /**
+     * Try to fix the content retreived through the client-side rendering proxy.
+     * Some HTML tags will be escaped (ie: "&lt;img") in original content and
+     * their code will appear in the page body.
+     * This function processes the content to repair such escaped tags.
+     *
+     * @param string $content
+     *
+     * @return string
+     */
+    public function fixClientSideRenderedProxyResponse(string $content): string
+    {
+        $content = preg_replace('/&lt;img ([^&]+)&gt;/', '<img \1 >', $content);
+
+        return $content;
+    }
+}

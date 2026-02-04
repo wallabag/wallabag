@@ -48,10 +48,3 @@ parameters:
 
     # Sentry
     sentry_dsn: ${SENTRY_DSN:-~}
-
-    rendering_proxy_url: ${RENDERING_PROXY_URL:-null}
-    rendering_proxy_all: ${RENDERING_PROXY_ALL:-false}
-    rendering_proxy_timeout: ${RENDERING_PROXY_TIMEOUT:-100}
-    rendering_proxy_sites_to_proxy:
-        - https://www.blast-info.fr
-        - https://www.arretssurimage.net,

@@ -145,6 +145,13 @@ class Config
     #[ORM\OrderBy(['id' => 'ASC'])]
     private $ignoreOriginRules;
 
+    /**
+     * @var ArrayCollection<RenderingProxyHost>
+     */
+    #[ORM\OneToMany(targetEntity: RenderingProxyHost::class, mappedBy: 'config', cascade: ['remove'])]
+    #[ORM\OrderBy(['id' => 'ASC'])]
+    private $renderingProxyHosts;
+
     /*
      * @param User     $user
      */
@@ -495,5 +502,23 @@ class Config
     public function getIgnoreOriginRules()
     {
         return $this->ignoreOriginRules;
+    }
+
+    /**
+     * @return Config
+     */
+    public function addRenderingProxyHost(RenderingProxyHost $url)
+    {
+        $this->renderingProxyHosts[] = $url;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<RenderingProxyHost>
+     */
+    public function getRenderingProxyHosts()
+    {
+        return $this->renderingProxyHosts;
     }
 }

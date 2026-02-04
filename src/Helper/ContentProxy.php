@@ -27,15 +27,11 @@ class ContentProxy
         protected RuleBasedIgnoreOriginProcessor $ignoreOriginProcessor,
         protected ValidatorInterface $validator,
         protected LoggerInterface $logger,
+        protected RenderingProxy $renderingProxy,
         protected $fetchingErrorMessage,
-        private $renderingProxyUrl,
-        private $renderingProxyAll,
-        private $renderingProxySitesToProxy,
         protected $storeArticleHeaders = false,
     ) {
         $this->mimeTypes = new MimeTypes();
-        $this->renderingProxyUrl = preg_replace('~/*$~', '', $this->renderingProxyUrl);
-        $this->renderingProxySitesToProxy = array_map(fn ($url) => preg_replace('~/*$~', '', $url), $this->renderingProxySitesToProxy);
     }
 
     /**
@@ -54,22 +50,16 @@ class ContentProxy
         }
 
         if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
-            // Check if URL has to be proxied through single-file
-            preg_match('~^[^/]+://[^/]+~', $url, $matches);
-            $proxy = $this->renderingProxyAll || \in_array($matches[0], $this->renderingProxySitesToProxy, true);
-
-            $fetchedContent = $this->graby->fetchContent(($proxy ? $this->renderingProxyUrl . '/' : '') . $url);
-
-            // Set original URL in case it was proxied
-            $fetchedContent['url'] = $url;
+            [$url, $renderingProxyCallback] = $this->renderingProxy->considerUrl($entry, $url);
+            $fetchedContent = $this->graby->fetchContent($url);
 
             $fetchedContent['title'] = $this->sanitizeContentTitle(
                 $fetchedContent['title'],
                 $fetchedContent['headers']['content-type'] ?? ''
             );
 
-            if ($proxy) {
-                $fetchedContent['html'] = $this->fixClientSideRenderedProxyResponse($fetchedContent['html']);
+            if ($renderingProxyCallback) {
+                $fetchedContent = $renderingProxyCallback($fetchedContent);
             }
 
             // when content is imported, we have information in $content
@@ -212,23 +202,6 @@ class ContentProxy
         }
 
         return $this->sanitizeUTF8Text($title);
-    }
-
-    /**
-     * Try to fix the content retreived through the client-side rendering proxy.
-     * Some HTML tags will be escaped (ie: "&lt;img") in original content and
-     * their code will appear in the page body.
-     * This function processes the content to repair such escaped tags.
-     *
-     * @param string $content
-     *
-     * @return string
-     */
-    private function fixClientSideRenderedProxyResponse($content): string
-    {
-        $content = preg_replace('/&lt;img ([^&]+)&gt;/', '<img \1 >', $content);
-
-        return $content;
     }
 
     /**

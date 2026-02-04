@@ -150,19 +150,15 @@ parameters:
         -
             name: rendering_proxy_url
             value: ""
-            section: misc
+            section: rendering_proxy
         -
             name: rendering_proxy_timeout
             value: 100
-            section: misc
+            section: rendering_proxy
         -
             name: rendering_proxy_all
             value: 0
-            section: misc
-        -
-            name: rendering_proxy_sites_to_proxy
-            value: ""
-            section: misc
+            section: rendering_proxy
         -
             name: api_user_registration
             value: 0

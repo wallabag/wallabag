@@ -22,7 +22,6 @@ wallabag_support_url: Support URL for wallabag
 rendering_proxy_url: External rendering proxy URL
 rendering_proxy_timeout: Timeout for external rendering proxy requests
 rendering_proxy_all: Pass all sites to rendering proxy
-rendering_proxy_sites_to_proxy: Sites to pass to rendering proxy
 entry: article
 export: export
 import: import

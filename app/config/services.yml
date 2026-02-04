@@ -30,10 +30,9 @@ services:
             $storeArticleHeaders: '@=service(''craue_config'').get(''store_article_headers'')'
             $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
             $fonts: '%wallabag.fonts%'
-            $renderingProxyUrl: '%rendering_proxy_url%'
-            $renderingProxyAll: '%rendering_proxy_all%'
-            $renderingProxySitesToProxy: '%rendering_proxy_sites_to_proxy%'
-            $renderingProxyTimeout: '%rendering_proxy_timeout%'
+            $renderingProxyUrl: '@=service(''craue_config'').get(''rendering_proxy_url'')'
+            $renderingProxyAll: '@=service(''craue_config'').get(''rendering_proxy_all'')'
+            $renderingProxyTimeout: '@=service(''craue_config'').get(''rendering_proxy_timeout'')'
             $defaultIgnoreOriginInstanceRules: '%wallabag.default_ignore_origin_instance_rules%'
             $defaultUserAgent: "%wallabag_user_agent%"
 

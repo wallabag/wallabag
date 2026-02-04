@@ -17,7 +17,8 @@
                             <li class="tab col s12 m6 l3"><a href="#set4">{{ 'config.tab_menu.password'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set5">{{ 'config.tab_menu.rules'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set6">{{ 'config.tab_menu.ignore_origin'|trans }}</a></li>
-                            <li class="tab col s12 m6 l3"><a href="#set7">{{ 'config.tab_menu.reset'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set7">{{ 'config.tab_menu.rendering_proxy'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set8">{{ 'config.tab_menu.reset'|trans }}</a></li>
                         </ul>
                     </div>
 
@@ -659,6 +660,64 @@
                     </div>
 
                     <div id="set7" class="col s12">
+                        {% if app.user.config.renderingProxyHosts is not empty %}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <ul>
+                                    {% for host in app.user.config.renderingProxyHosts %}
+                                    <li>
+                                        {{ host.host }}
+                                        <a href="{{ path('edit_rendering_proxy_host', {renderingProxyHost: host.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit">
+                                            <i class="tool grey-text material-icons">mode_edit</i>
+                                        </a>
+                                        <form action="{{ path('delete_rendering_proxy_host', {renderingProxyHost: host.id}) }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('delete-rendering-proxy-host') }}"/>
+
+                                            <button type="submit" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="btn-link">
+                                                <i class="tool grey-text material-icons">delete</i>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {{ form_start(form.new_rendering_proxy_host) }}
+                            {{ form_errors(form.new_rendering_proxy_host) }}
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.new_rendering_proxy_host.host) }}
+                                    {{ form_errors(form.new_rendering_proxy_host.host) }}
+                                    {{ form_widget(form.new_rendering_proxy_host.host) }}
+                                </div>
+                            </div>
+
+                            {{ form_widget(form.new_rendering_proxy_host.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                            {{ form_rest(form.new_rendering_proxy_host) }}
+                        </form>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <h4>{{ 'config.form_rendering_proxy.faq.title'|trans }}</h4>
+
+                                <h5>{{ 'config.form_rendering_proxy.faq.rendering_proxy_definition_title'|trans }}</h5>
+                                <p class="help">{{ 'config.form_rendering_proxy.faq.rendering_proxy_definition_description'|trans|raw }}</p>
+
+                                <h5>{{ 'config.form_rendering_proxy.faq.how_to_use_title'|trans }}</h5>
+                                <p class="help">{{ 'config.form_rendering_proxy.faq.how_to_use_description'|trans|raw }}</p>
+
+                                <h5>{{ 'config.form_rendering_proxy.faq.what_about_site_credentials_title'|trans }}</h5>
+                                <p class="help">
+                                    {{ 'config.form_rendering_proxy.faq.what_about_site_credentials_description'|trans }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="set8" class="col s12">
                         <div class="row">
                             <h5>{{ 'config.reset.title'|trans }}</h5>
                             <p>{{ 'config.reset.description'|trans }}</p>
