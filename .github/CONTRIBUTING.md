@@ -22,6 +22,39 @@ You can now access your wallabag instance using that url: `http://127.0.0.1:8000
 
 If you want to test using an other database than SQLite, uncomment the `postgres` or `mariadb` code from the `compose.yaml` file at the root of the repo. Also uncomment related line in the `php` section so the database will be linked to your PHP instance.
 
+### Using Podman
+
+- Clone the repository
+- Copy `docker/php/env.example` to `docker/php/env` and customize
+- Bootstrap and build:
+
+```sh
+# Build container image
+(cd docker/php && podman build . -t wallabag-dev)
+
+# Bootstrap PHP dependencies
+podman run --replace --name wallabag_app --user 0:0 --env-file docker/php/env --volume "$(pwd):/var/www/html" wallabag-dev composer install
+
+# Bootstrap your installation
+podman run --replace --name wallabag_app --user 0:0 --env-file docker/php/env --volume "$(pwd):/var/www/html" wallabag-dev bin/console wallabag:install
+
+# Bootstrap frontend dependencies
+podman run --replace --name wallabag_app --user 0:0 --env-file docker/php/env --volume "$(pwd):/var/www/html" wallabag-dev yarn install
+
+# Build frontend assets
+podman run --replace --name wallabag_app --user 0:0 --env-file docker/php/env --volume "$(pwd):/var/www/html" wallabag-dev yarn build:dev
+```
+
+- Start the stack:
+
+```sh
+# Start Redis container
+podman run --replace --detach --name wallabag_redis -p 6379:6379 redis:6-alpine
+
+# Start Wallabag container
+podman run --replace --name wallabag_app -p 8000:8000 --user 0:0 --env-file docker/php/env --volume "$(pwd):/var/www/html" wallabag-dev
+```
+
 ### Using your own PHP server
 
 - Ensure you are running PHP >= 8.2.
