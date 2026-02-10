@@ -8,6 +8,7 @@ use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Symfony\Contracts\HttpClient\ResponseStreamInterface;
+use Wallabag\Helper\RenderingProxy;
 
 class WallabagClient implements HttpClientInterface
 {
@@ -18,8 +19,7 @@ class WallabagClient implements HttpClientInterface
         private readonly HttpBrowser $browser,
         private readonly Authenticator $authenticator,
         private readonly LoggerInterface $logger,
-        private readonly string $renderingProxyUrl,
-        private readonly int $renderingProxyTimeout,
+        protected RenderingProxy $renderingProxy,
     ) {
         $this->httpClient = HttpClient::create([
             'timeout' => 10,
@@ -30,8 +30,8 @@ class WallabagClient implements HttpClientInterface
     {
         $this->logger->log('debug', 'Restricted access config enabled?', ['enabled' => (int) $this->restrictedAccess]);
 
-        if (str_starts_with($url, $this->renderingProxyUrl)) {
-            $options['timeout'] = $this->renderingProxyTimeout;
+        if ($this->renderingProxy->ownsUrl($url)) {
+            $options['timeout'] = $this->renderingProxy->getTimeout();
         }
 
         if (0 === (int) $this->restrictedAccess) {

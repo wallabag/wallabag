@@ -12,11 +12,10 @@ class RenderingProxy
 {
     public function __construct(
         protected LoggerInterface $logger,
-        private $renderingProxyUrl,
-        private $renderingProxyAll,
-    ) {
-        $this->renderingProxyUrl = preg_replace('~/*$~', '', $this->renderingProxyUrl);
-    }
+        private readonly string $renderingProxyUrl,
+        private readonly int $renderingProxyAll,
+        private readonly int $renderingProxyTimeout,
+    ) {}
 
     /**
      * Checks if given URL should be passed to rendering proxy and returns proxified URL
@@ -39,7 +38,7 @@ class RenderingProxy
 
         if ($proxy) {
             return [
-                $this->renderingProxyUrl . '/' . $url,
+                str_replace('%u', $url, $this->renderingProxyUrl),
                 // This callback will post-process the output of Graby\fetchContent()
                 function ($fetchedContent) use ($url) {
                     $fetchedContent['url'] = $url;
@@ -50,6 +49,23 @@ class RenderingProxy
         }
 
         return [$url, null];
+    }
+
+    /**
+     * Checks if URL is an external rendering proxy one
+     */
+    public function ownsUrl(string $url): bool
+    {
+        $rendering_proxy_host = preg_replace('~/.*$~', '', $this->renderingProxyUrl);
+        return str_starts_with($url, $rendering_proxy_host);
+    }
+
+    /**
+     * Return timeout for externally rendered pages
+     */
+    public function getTimeout(): int
+    {
+        return $this->renderingProxyTimeout;
     }
 
     /**
