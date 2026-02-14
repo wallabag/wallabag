@@ -704,6 +704,28 @@ class EntryRestController extends WallabagRestController
      *             example="http://www.test.com/article.html"
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="reading_progress",
+     *         in="query",
+     *         description="Reading progress of the entry (0-100).",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="integer",
+     *             minimum=0,
+     *             maximum=100,
+     *             default=0
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="reading_progress_updated_at",
+     *         in="query",
+     *         description="Timestamp of the reading progress update. Unix timestamp or ISO 8601 datetime.",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="1708905600"
+     *         )
+     *     ),
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -774,6 +796,8 @@ class EntryRestController extends WallabagRestController
         if (!empty($data['origin_url'])) {
             $entry->setOriginUrl($data['origin_url']);
         }
+
+        $this->applyReadingProgress($entry, $data['readingProgress'], $data['readingProgressUpdatedAt']);
 
         if (null !== $data['isPublic']) {
             if (true === (bool) $data['isPublic'] && null === $entry->getUid()) {
@@ -927,6 +951,28 @@ class EntryRestController extends WallabagRestController
      *             example="http://www.test.com/article.html",
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="reading_progress",
+     *         in="query",
+     *         description="Reading progress of the entry (0-100).",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="integer",
+     *             minimum=0,
+     *             maximum=100,
+     *             default=0
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="reading_progress_updated_at",
+     *         in="query",
+     *         description="Timestamp of the reading progress update. Unix timestamp or ISO 8601 datetime.",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string",
+     *             example="1708905600",
+     *         )
+     *     ),
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -1006,6 +1052,8 @@ class EntryRestController extends WallabagRestController
         if (!empty($data['origin_url'])) {
             $entry->setOriginUrl($data['origin_url']);
         }
+
+        $this->applyReadingProgress($entry, $data['readingProgress'], $data['readingProgressUpdatedAt']);
 
         if (empty($entry->getDomainName())) {
             $contentProxy->setEntryDomainName($entry);
@@ -1377,6 +1425,26 @@ class EntryRestController extends WallabagRestController
         return $this->sendResponse($results);
     }
 
+    private function applyReadingProgress(Entry $entry, ?string $progress, ?string $timestamp): void
+    {
+        if (null !== $progress) {
+            $progressInt = (int) $progress;
+            $updatedAt = new \DateTime();
+            if (null !== $timestamp) {
+                if (is_numeric($timestamp)) {
+                    $updatedAt = (new \DateTime())->setTimestamp((int) $timestamp);
+                } else {
+                    try {
+                        $updatedAt = new \DateTime($timestamp);
+                    } catch (\Exception) {
+                        throw new BadRequestHttpException('Invalid timestamp format.');
+                    }
+                }
+            }
+            $entry->updateReadingProgress($progressInt, $updatedAt);
+        }
+    }
+
     /**
      * Replace the hashedUrl keys in $results with the unhashed URL from the
      * request, as recorded in $urlHashMap.
@@ -1415,6 +1483,8 @@ class EntryRestController extends WallabagRestController
             'publishedAt' => $request->request->get('published_at'),
             'authors' => $request->request->all()['authors'] ?? '',
             'origin_url' => $request->request->get('origin_url', ''),
+            'readingProgress' => $request->request->get('reading_progress'),
+            'readingProgressUpdatedAt' => $request->request->get('reading_progress_updated_at'),
         ];
     }
 }

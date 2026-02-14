@@ -578,6 +578,35 @@ class EntryController extends AbstractController
         ]));
     }
 
+    #[Route(path: '/reading-progress/{id}', name: 'reading_progress_entry', methods: ['POST'], requirements: ['id' => '\d+'])]
+    #[IsGranted('EDIT', subject: 'entry')]
+    public function updateReadingProgressAction(Request $request, Entry $entry): Response
+    {
+        if (!$this->isCsrfTokenValid('reading-progress', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
+        $progress = (int) $request->request->get('reading_progress', 0);
+        if ($progress < 0 || $progress > 100) {
+            return $this->json(['error' => 'Reading progress must be between 0 and 100'], 400);
+        }
+
+        $timestamp = $request->request->get('reading_progress_updated_at');
+
+        $updatedAt = new \DateTime();
+        if (null !== $timestamp && is_numeric($timestamp)) {
+            $updatedAt = (new \DateTime())->setTimestamp((int) $timestamp);
+        }
+
+        $entry->updateReadingProgress($progress, $updatedAt);
+        $this->entityManager->flush();
+
+        return $this->json([
+            'reading_progress' => $entry->getReadingProgress(),
+            'reading_progress_updated_at' => $entry->getReadingProgressUpdatedAt()?->format('c'),
+        ]);
+    }
+
     /**
      * Ability to view a content publicly.
      *

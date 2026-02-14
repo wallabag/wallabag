@@ -193,6 +193,14 @@ class Entry
     #[Groups(['entries_for_user', 'export_all'])]
     private $readingTime = 0;
 
+    #[ORM\Column(name: 'reading_progress', type: 'smallint', options: ['default' => 0])]
+    #[Groups(['entries_for_user', 'export_all'])]
+    private int $readingProgress = 0;
+
+    #[ORM\Column(name: 'reading_progress_updated_at', type: 'datetime', nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
+    private ?\DateTimeInterface $readingProgressUpdatedAt = null;
+
     /**
      * @var string|null
      */
@@ -590,6 +598,46 @@ class Entry
     public function setReadingTime($readingTime)
     {
         $this->readingTime = $readingTime;
+    }
+
+    public function getReadingProgress(): int
+    {
+        return $this->readingProgress;
+    }
+
+    public function setReadingProgress(int $readingProgress): self
+    {
+        $this->readingProgress = max(0, min(100, $readingProgress));
+
+        return $this;
+    }
+
+    public function getReadingProgressUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->readingProgressUpdatedAt;
+    }
+
+    public function setReadingProgressUpdatedAt(?\DateTimeInterface $readingProgressUpdatedAt): self
+    {
+        $this->readingProgressUpdatedAt = $readingProgressUpdatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Update reading progress only if the given timestamp is newer than the current one.
+     * Returns whether the update was applied.
+     */
+    public function updateReadingProgress(int $progress, \DateTimeInterface $updatedAt): bool
+    {
+        if (null !== $this->readingProgressUpdatedAt && $updatedAt <= $this->readingProgressUpdatedAt) {
+            return false;
+        }
+
+        $this->setReadingProgress($progress);
+        $this->readingProgressUpdatedAt = $updatedAt;
+
+        return true;
     }
 
     /**
