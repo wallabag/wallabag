@@ -1428,6 +1428,11 @@ class EntryRestController extends WallabagRestController
     private function applyReadingProgress(Entry $entry, ?string $progress, ?string $timestamp): void
     {
         if (null !== $progress) {
+            $lastUpdate = $entry->getReadingProgressUpdatedAt();
+            if (null !== $lastUpdate && (new \DateTime())->getTimestamp() - $lastUpdate->getTimestamp() < 5) {
+                throw new HttpException(429, 'Too many requests. Please wait before updating reading progress.');
+            }
+
             $progressInt = (int) $progress;
             $updatedAt = new \DateTime();
             if (null !== $timestamp) {
