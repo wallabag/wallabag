@@ -18,6 +18,14 @@ class RenderingProxy
     ) {}
 
     /**
+     * Checks if rendering proxy URL feature is enabled
+     */
+    public function isEnabled(): bool
+    {
+        return $this->renderingProxyUrl != null && $this->renderingProxyUrl != '';
+    }
+
+    /**
      * Checks if given URL should be passed to rendering proxy and returns proxified URL
      *
      * @return array<string,bool>

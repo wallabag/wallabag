@@ -36,6 +36,7 @@ use Wallabag\Form\Type\TaggingRuleImportType;
 use Wallabag\Form\Type\TaggingRuleType;
 use Wallabag\Form\Type\UserInformationType;
 use Wallabag\Helper\Redirect;
+use Wallabag\Helper\RenderingProxy;
 use Wallabag\Repository\AnnotationRepository;
 use Wallabag\Repository\ConfigRepository;
 use Wallabag\Repository\EntryRepository;
@@ -62,7 +63,7 @@ class ConfigController extends AbstractController
 
     #[Route(path: '/config', name: 'config', methods: ['GET', 'POST'])]
     #[IsGranted('EDIT_CONFIG')]
-    public function indexAction(Request $request, Config $craueConfig, TaggingRuleRepository $taggingRuleRepository, IgnoreOriginUserRuleRepository $ignoreOriginUserRuleRepository, UserRepository $userRepository, RenderingProxyHostRepository $renderingProxyHostRepository)
+    public function indexAction(Request $request, Config $craueConfig, TaggingRuleRepository $taggingRuleRepository, IgnoreOriginUserRuleRepository $ignoreOriginUserRuleRepository, UserRepository $userRepository, RenderingProxyHostRepository $renderingProxyHostRepository, RenderingProxy $renderingProxy)
     {
         $config = $this->getConfig();
         $user = $this->getUser();
@@ -273,7 +274,7 @@ class ConfigController extends AbstractController
                 'new_tagging_rule' => $newTaggingRule->createView(),
                 'import_tagging_rule' => $taggingRulesImportform->createView(),
                 'new_ignore_origin_user_rule' => $newIgnoreOriginUserRule->createView(),
-                'new_rendering_proxy_host' => $newRenderingProxyHost->createView(),
+                'new_rendering_proxy_host' => $renderingProxy->isEnabled() ? $newRenderingProxyHost->createView() : null,
             ],
             'feed' => [
                 'username' => $user->getUsername(),

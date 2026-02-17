@@ -17,7 +17,9 @@
                             <li class="tab col s12 m6 l3"><a href="#set4">{{ 'config.tab_menu.password'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set5">{{ 'config.tab_menu.rules'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set6">{{ 'config.tab_menu.ignore_origin'|trans }}</a></li>
+                            {% if(form.new_rendering_proxy_host) %}
                             <li class="tab col s12 m6 l3"><a href="#set7">{{ 'config.tab_menu.rendering_proxy'|trans }}</a></li>
+                            {% endif %}
                             <li class="tab col s12 m6 l3"><a href="#set8">{{ 'config.tab_menu.reset'|trans }}</a></li>
                         </ul>
                     </div>
@@ -684,6 +686,7 @@
                         </div>
                         {% endif %}
 
+                        {% if(form.new_rendering_proxy_host) %}
                         {{ form_start(form.new_rendering_proxy_host) }}
                             {{ form_errors(form.new_rendering_proxy_host) }}
 
@@ -715,6 +718,7 @@
                                 </p>
                             </div>
                         </div>
+                        {% endif %}
                     </div>
 
                     <div id="set8" class="col s12">
