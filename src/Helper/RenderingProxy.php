@@ -30,28 +30,30 @@ class RenderingProxy
      */
     public function considerUrl(Entry $entry, string $url): array
     {
-        preg_match('~^[^/]+://([^/]+)~', $url, $matches);
-        $host = $matches[1];
+        if ($this->isEnabled()) {
+            preg_match('~^[^/]+://([^/]+)~', $url, $matches);
+            $host = $matches[1];
 
-        $userHosts = $entry
-            ->getUser()
-            ->getConfig()
-            ->getRenderingProxyHosts()
-            ->map(fn(RenderingProxyHost $e) => $e->getHost())
-            ->toArray();
+            $userHosts = $entry
+                ->getUser()
+                ->getConfig()
+                ->getRenderingProxyHosts()
+                ->map(fn(RenderingProxyHost $e) => $e->getHost())
+                ->toArray();
 
-        $proxy = $this->renderingProxyAll || \in_array($host, $userHosts);
+            $proxy = $this->renderingProxyAll || \in_array($host, $userHosts);
 
-        if ($proxy) {
-            return [
-                str_replace('%u', $url, $this->renderingProxyUrl),
-                // This callback will post-process the output of Graby\fetchContent()
-                function ($fetchedContent) use ($url) {
-                    $fetchedContent['url'] = $url;
-                    $fetchedContent['html'] = $this->fixClientSideRenderedProxyResponse($fetchedContent['html']);
-                    return $fetchedContent;
-                },
-            ];
+            if ($proxy) {
+                return [
+                    str_replace('%u', $url, $this->renderingProxyUrl),
+                    // This callback will post-process the output of Graby\fetchContent()
+                    function ($fetchedContent) use ($url) {
+                        $fetchedContent['url'] = $url;
+                        $fetchedContent['html'] = $this->fixClientSideRenderedProxyResponse($fetchedContent['html']);
+                        return $fetchedContent;
+                    },
+                ];
+            }
         }
 
         return [$url, null];
@@ -62,8 +64,12 @@ class RenderingProxy
      */
     public function ownsUrl(string $url): bool
     {
-        $rendering_proxy_host = preg_replace('~/.*$~', '', $this->renderingProxyUrl);
-        return str_starts_with($url, $rendering_proxy_host);
+        if ($this->isEnabled()) {
+            $rendering_proxy_host = preg_replace('~/.*$~', '', $this->renderingProxyUrl);
+            return str_starts_with($url, $rendering_proxy_host);
+        }
+
+        return false;
     }
 
     /**
