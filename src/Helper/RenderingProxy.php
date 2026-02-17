@@ -10,7 +10,7 @@ use Wallabag\Entity\RenderingProxyHost;
 class RenderingProxy
 {
     public function __construct(
-        private readonly string $renderingProxyUrl,
+        private readonly null|string $renderingProxyUrl,
         private readonly int $renderingProxyAll,
         private readonly int $renderingProxyTimeout,
     ) {}
