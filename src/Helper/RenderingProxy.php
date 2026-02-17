@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace Wallabag\Helper;
 
-use Psr\Log\LoggerInterface;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\RenderingProxyHost;
 
 class RenderingProxy
 {
     public function __construct(
-        protected LoggerInterface $logger,
         private readonly string $renderingProxyUrl,
         private readonly int $renderingProxyAll,
         private readonly int $renderingProxyTimeout,
