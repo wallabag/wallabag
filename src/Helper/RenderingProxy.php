@@ -41,7 +41,11 @@ class RenderingProxy
                 ->map(fn(RenderingProxyHost $e) => $e->getHost())
                 ->toArray();
 
-            $proxy = $this->renderingProxyAll || \in_array($host, $userHosts);
+            $proxy = $this->renderingProxyAll ||
+                // host is in the list
+                in_array($host, $userHosts) ||
+                // Or host is a subhost of something in the list
+                array_find($userHosts, fn($h) => preg_match("/\.$h$/", $host) == 1);
 
             if ($proxy) {
                 return [
