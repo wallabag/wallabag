@@ -26,7 +26,7 @@
                     <input type="hidden" name="token" value="{{ csrf_token('archive-entry') }}"/>
 
                     <button type="submit" class="btn-link tool grey-text" title="{{ 'entry.list.toogle_as_read'|trans }}">
-                        <i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
+                        <i class="material-icons">{% if entry.isArchived == 0 %}archive{% else %}unarchive{% endif %}</i>
                     </button>
                 </form>
             {% endif %}
