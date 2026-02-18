@@ -50,7 +50,7 @@ class ContentProxy
         }
 
         if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
-            [$url, $renderingProxyCallback] = $this->renderingProxy->considerUrl($entry, $url);
+            [$url, $renderingProxyCallback] = $this->renderingProxy->considerUrl($entry->getUser()->getConfig(), $url);
             $fetchedContent = $this->graby->fetchContent($url);
 
             $fetchedContent['title'] = $this->sanitizeContentTitle(

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Wallabag\Helper;
 
-use Wallabag\Entity\Entry;
+use Wallabag\Entity\Config;
 use Wallabag\Entity\RenderingProxyHost;
 
 class RenderingProxy
@@ -28,15 +28,13 @@ class RenderingProxy
      *
      * @return array<string,bool>
      */
-    public function considerUrl(Entry $entry, string $url): array
+    public function considerUrl(Config $userConfig, string $url): array
     {
         if ($this->isEnabled()) {
             preg_match('~^[^/]+://([^/]+)~', $url, $matches);
             $host = $matches[1];
 
-            $userHosts = $entry
-                ->getUser()
-                ->getConfig()
+            $userHosts = $userConfig
                 ->getRenderingProxyHosts()
                 ->map(fn(RenderingProxyHost $e) => $e->getHost())
                 ->toArray();
