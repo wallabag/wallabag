@@ -1,0 +1,97 @@
+@use "../variables";
+
+/* ==========================================================================
+   Common style shared between _article.scss and wallabag-article.scss
+   ========================================================================== */
+
+@mixin article() {
+  color: #424242;
+  font-size: 18px;
+  line-height: 1.7em;
+  overflow-wrap: break-word;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #212121;
+
+    strong {
+      font-weight: 500;
+    }
+  }
+
+  h6 {
+    font-size: 1.2rem;
+  }
+
+  h5 {
+    font-size: 1.6rem;
+  }
+
+  h4 {
+    font-size: 1.9rem;
+  }
+
+  h3 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  h1 {
+    font-size: 2.7rem;
+  }
+
+  a {
+    border-bottom: 1px dotted variables.$blue-accent-color;
+    text-decoration: none;
+  }
+
+  a:hover {
+    border-bottom-style: solid;
+  }
+
+  ul {
+    padding-left: 30px;
+  }
+
+  ul,
+  ul li {
+    list-style-type: disc;
+  }
+
+  blockquote {
+    font-style: italic;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  strong {
+    font-weight: bold;
+  }
+
+  img,
+  figure {
+    max-width: 100%;
+    height: auto;
+  }
+
+  pre {
+    box-sizing: border-box;
+    margin: 0 0 1.75em;
+    border: #e3f2fd 1px solid;
+    width: 100%;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 0.8em;
+    white-space: pre;
+    overflow: auto;
+    background: #f5f5f5;
+    border-radius: 3px;
+  }
+}

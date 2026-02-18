@@ -6,6 +6,11 @@
 
 {% set current_path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
 
+{% block scripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('wallabag_article_component') }}
+{% endblock %}
+
 {% block menu %}
     <div class="progress">
         <div class="determinate" data-controller="scroll-indicator" data-action="scroll@window->scroll-indicator#updateWidth"></div>
@@ -358,8 +363,9 @@
             {% endif %}
 
         </aside>
-        <article
-            {% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}
+        <wallabag-article
+            content="{{ entry.content|escape('html_attr') }}"
+            stylesheet-urls="{{ encore_entry_css_files('wallabag_article_component')|map(file => asset(file))|json_encode|escape('html_attr') }}"
             data-controller="highlight annotations"
             data-annotations-entry-id-value="{{ entry.id }}"
             data-annotations-create-url-value="{{ path('annotations_post_annotation', {'entry': entry.id}) }}"
@@ -367,8 +373,7 @@
             data-annotations-destroy-url-value="{{ path('annotations_delete_annotation', {'annotation': 'idAnnotation'}) }}"
             data-annotations-search-url-value="{{ path('annotations_get_annotations', {'entry': entry.id}) }}"
         >
-            {{ entry.content|raw }}
-        </article>
+        </wallabag-article>
 
         <div class="fixed-action-btn horizontal click-to-toggle hide-on-large-only" data-controller="materialize--fab" data-action="scroll@window->materialize--fab#autoDisplay click->materialize--fab#click">
             <a class="btn-floating btn-large" data-toggle="actions">
