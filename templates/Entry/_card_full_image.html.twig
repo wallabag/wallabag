@@ -16,7 +16,7 @@
                 {% endif %}
             {% endif %}
         </div>
-        {% include "Entry/Card/_content.html.twig" with {'entry': entry} only %}
+        {% include "Entry/Card/_content.html.twig" with {'entry': entry, 'currentRoute': currentRoute} only %}
     </div>
 
     {% include "Entry/_card_actions.html.twig" with {'entry': entry} only %}
