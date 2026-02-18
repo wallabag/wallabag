@@ -336,6 +336,8 @@ entry:
         reading_time: Estimated reading time
         reading_time_minutes_short: '%readingTime% min'
         address: Address
+        internal_link: Internal link
+        public_link: Public link
         added_on: Added on
         published_on: "Published on"
 about:
