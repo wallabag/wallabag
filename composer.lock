@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a12372360ab0f0e62b5b8986af22a96",
+    "content-hash": "9dd51fac1815d44764267705f9e9803f",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -6731,16 +6731,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "1e0cd5370df5dd2e556a36b9c62f62e555870495"
+                "reference": "16dbf9937da8d4528ceb2145c9c7c0bd29e26374"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/1e0cd5370df5dd2e556a36b9c62f62e555870495",
-                "reference": "1e0cd5370df5dd2e556a36b9c62f62e555870495",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/16dbf9937da8d4528ceb2145c9c7c0bd29e26374",
+                "reference": "16dbf9937da8d4528ceb2145c9c7c0bd29e26374",
                 "shasum": ""
             },
             "require": {
@@ -6772,9 +6772,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.1"
             },
-            "time": "2025-08-30T15:50:23+00:00"
+            "time": "2026-01-12T11:33:04+00:00"
         },
         {
             "name": "phpzip/phpzip",
@@ -14545,23 +14545,24 @@
         },
         {
             "name": "willdurand/hateoas-bundle",
-            "version": "2.7.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/BazingaHateoasBundle.git",
-                "reference": "a797892b0a5e79f92e34c8fefe0e27e31114ca65"
+                "reference": "1ae8ff2388853fb9b35c8de5a1bbdb7f5554dfb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/a797892b0a5e79f92e34c8fefe0e27e31114ca65",
-                "reference": "a797892b0a5e79f92e34c8fefe0e27e31114ca65",
+                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/1ae8ff2388853fb9b35c8de5a1bbdb7f5554dfb8",
+                "reference": "1ae8ff2388853fb9b35c8de5a1bbdb7f5554dfb8",
                 "shasum": ""
             },
             "require": {
                 "jms/serializer-bundle": "^3.10 || ^4.2 || ^5.4",
                 "php": "^8.1",
-                "symfony/expression-language": "~3.0 || ~4.0 || ~5.0 || ~6.0 || ~7.0",
-                "symfony/framework-bundle": "~3.0 || ~4.0 || ~5.0 || ~6.0 || ~7.0",
+                "symfony/dependency-injection": "^5.4 || ^6.0 || ^7.0 || ~8.0",
+                "symfony/expression-language": "~5.0 || ~6.0 || ~7.0 || ~8.0",
+                "symfony/framework-bundle": "~5.0 || ~6.0 || ~7.0 || ~8.0",
                 "willdurand/hateoas": "^3.12@beta"
             },
             "conflict": {
@@ -14569,9 +14570,9 @@
             },
             "require-dev": {
                 "doctrine/annotations": "^1.13.2 || ^2.0",
-                "doctrine/coding-standard": "^12.0",
+                "doctrine/coding-standard": "^13.0.1",
                 "phpunit/phpunit": "^10.5.38",
-                "symfony/stopwatch": "~3.0 || ~4.0 || ~5.0 || ~6.0 || ~7.0",
+                "symfony/stopwatch": "~5.0 || ~6.0 || ~7.0 || ~8.0",
                 "twig/twig": "~1.12|~2.0|~3.0"
             },
             "type": "symfony-bundle",
@@ -14602,9 +14603,9 @@
             ],
             "support": {
                 "issues": "https://github.com/willdurand/BazingaHateoasBundle/issues",
-                "source": "https://github.com/willdurand/BazingaHateoasBundle/tree/2.7.0"
+                "source": "https://github.com/willdurand/BazingaHateoasBundle/tree/3.0.0"
             },
-            "time": "2024-11-07T21:08:08+00:00"
+            "time": "2025-12-21T12:15:53+00:00"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
