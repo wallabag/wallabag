@@ -1643,6 +1643,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(100, $content['reading_progress']);
 
         // Test clamping below 0
+        $this->client = $this->createAuthorizedClient();
         $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
             'reading_progress' => -10,
             'reading_progress_updated_at' => $now + 1,
@@ -1683,6 +1684,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(75, $content['reading_progress']);
 
         // Now try to set with older timestamp -- should be silently ignored
+        $this->client = $this->createAuthorizedClient();
         $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
             'reading_progress' => 25,
             'reading_progress_updated_at' => $olderTimestamp,
