@@ -1429,11 +1429,6 @@ class EntryRestController extends WallabagRestController
             return;
         }
 
-        $lastUpdate = $entry->getReadingProgressUpdatedAt();
-        if (null !== $lastUpdate && (new \DateTime())->getTimestamp() - $lastUpdate->getTimestamp() < 5) {
-            throw new HttpException(429, 'Too many requests. Please wait before updating reading progress.');
-        }
-
         $progressInt = (int) $progress;
         $updatedAt = $this->parseTimestamp($timestamp);
         $entry->updateReadingProgress($progressInt, $updatedAt);

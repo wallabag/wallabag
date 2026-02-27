@@ -1642,14 +1642,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
         $this->assertSame(100, $content['reading_progress']);
 
-        // Reset the timestamp to avoid hitting the 5-second rate limit
-        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
-        $entry = $em->getRepository(Entry::class)->find($entry->getId());
-        $entry->setReadingProgressUpdatedAt((new \DateTime())->modify('-10 seconds'));
-        $em->flush();
-
         // Test clamping below 0
-        $this->client = $this->createAuthorizedClient();
         $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
             'reading_progress' => -10,
             'reading_progress_updated_at' => $now + 1,
@@ -1689,14 +1682,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
         $this->assertSame(75, $content['reading_progress']);
 
-        // Reset the timestamp to avoid hitting the 5-second rate limit
-        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
-        $entry = $em->getRepository(Entry::class)->find($entry->getId());
-        $entry->setReadingProgressUpdatedAt((new \DateTime())->modify('-10 seconds'));
-        $em->flush();
-
         // Now try to set with older timestamp -- should be silently ignored
-        $this->client = $this->createAuthorizedClient();
         $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
             'reading_progress' => 25,
             'reading_progress_updated_at' => $olderTimestamp,

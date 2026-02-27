@@ -591,11 +591,6 @@ class EntryController extends AbstractController
             return $this->json(['error' => 'Reading progress must be between 0 and 100'], 400);
         }
 
-        $lastUpdate = $entry->getReadingProgressUpdatedAt();
-        if (null !== $lastUpdate && (new \DateTime())->getTimestamp() - $lastUpdate->getTimestamp() < 5) {
-            return $this->json(['error' => 'Too many requests. Please wait before updating reading progress.'], 429);
-        }
-
         $timestamp = $request->request->get('reading_progress_updated_at');
 
         $updatedAt = new \DateTime();
