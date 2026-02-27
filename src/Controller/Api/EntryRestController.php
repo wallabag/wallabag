@@ -707,13 +707,12 @@ class EntryRestController extends WallabagRestController
      *     @OA\Parameter(
      *         name="reading_progress",
      *         in="query",
-     *         description="Reading progress of the entry (0-100).",
+     *         description="Reading progress of the entry (0-100). Omit to leave unchanged.",
      *         required=false,
      *         @OA\Schema(
      *             type="integer",
      *             minimum=0,
-     *             maximum=100,
-     *             default=0
+     *             maximum=100
      *         )
      *     ),
      *     @OA\Parameter(
@@ -954,13 +953,12 @@ class EntryRestController extends WallabagRestController
      *     @OA\Parameter(
      *         name="reading_progress",
      *         in="query",
-     *         description="Reading progress of the entry (0-100).",
+     *         description="Reading progress of the entry (0-100). Omit to leave unchanged.",
      *         required=false,
      *         @OA\Schema(
      *             type="integer",
      *             minimum=0,
-     *             maximum=100,
-     *             default=0
+     *             maximum=100
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1427,26 +1425,34 @@ class EntryRestController extends WallabagRestController
 
     private function applyReadingProgress(Entry $entry, ?string $progress, ?string $timestamp): void
     {
-        if (null !== $progress) {
-            $lastUpdate = $entry->getReadingProgressUpdatedAt();
-            if (null !== $lastUpdate && (new \DateTime())->getTimestamp() - $lastUpdate->getTimestamp() < 5) {
-                throw new HttpException(429, 'Too many requests. Please wait before updating reading progress.');
-            }
+        if (null === $progress) {
+            return;
+        }
 
-            $progressInt = (int) $progress;
-            $updatedAt = new \DateTime();
-            if (null !== $timestamp) {
-                if (is_numeric($timestamp)) {
-                    $updatedAt = (new \DateTime())->setTimestamp((int) $timestamp);
-                } else {
-                    try {
-                        $updatedAt = new \DateTime($timestamp);
-                    } catch (\Exception) {
-                        throw new BadRequestHttpException('Invalid timestamp format.');
-                    }
-                }
-            }
-            $entry->updateReadingProgress($progressInt, $updatedAt);
+        $lastUpdate = $entry->getReadingProgressUpdatedAt();
+        if (null !== $lastUpdate && (new \DateTime())->getTimestamp() - $lastUpdate->getTimestamp() < 5) {
+            throw new HttpException(429, 'Too many requests. Please wait before updating reading progress.');
+        }
+
+        $progressInt = (int) $progress;
+        $updatedAt = $this->parseTimestamp($timestamp);
+        $entry->updateReadingProgress($progressInt, $updatedAt);
+    }
+
+    private function parseTimestamp(?string $timestamp): \DateTime
+    {
+        if (null === $timestamp) {
+            return new \DateTime();
+        }
+
+        if (is_numeric($timestamp)) {
+            return (new \DateTime())->setTimestamp((int) $timestamp);
+        }
+
+        try {
+            return new \DateTime($timestamp);
+        } catch (\Exception) {
+            throw new BadRequestHttpException('Invalid timestamp format.');
         }
     }
 

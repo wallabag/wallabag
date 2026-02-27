@@ -1586,6 +1586,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame('https://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html', $content['url']);
     }
 
+    /**
+     * Test that reading progress and its timestamp are persisted via PATCH.
+     */
     public function testPatchEntryReadingProgress()
     {
         $entry = $this->client->getContainer()
@@ -1612,6 +1615,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertNotNull($content['reading_progress_updated_at']);
     }
 
+    /**
+     * Test that reading progress values outside 0-100 are clamped to the nearest bound.
+     */
     public function testPatchEntryReadingProgressBounds()
     {
         $entry = $this->client->getContainer()
@@ -1655,6 +1661,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(0, $content['reading_progress']);
     }
 
+    /**
+     * Test that an update with an older timestamp does not overwrite newer progress (last-write-wins).
+     */
     public function testPatchEntryReadingProgressConflictResolution()
     {
         $entry = $this->client->getContainer()
@@ -1699,6 +1708,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(75, $content['reading_progress']);
     }
 
+    /**
+     * Test that the GET response includes reading_progress and reading_progress_updated_at fields.
+     */
     public function testGetEntryIncludesReadingProgress()
     {
         $entry = $this->client->getContainer()
