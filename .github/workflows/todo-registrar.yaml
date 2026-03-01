@@ -1,0 +1,56 @@
+name: TODO Registrar
+
+on:
+  push:
+    branches: [ "master" ]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  todo-registrar:
+    name: Register TODO
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Register TODOs
+        uses: Aeliot-Tm/todo-registrar-action@1.6.4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          config: |
+            paths:
+              in: .
+              exclude:
+                - var
+                - vendor
+            process:
+              glueSameTickets: true
+              glueSequentialComments: true
+            registrar:
+              type: GitHub
+              options:
+                issue:
+                  addTagToLabels: true
+                  labels:
+                    - needs-review
+                    - tech-debt
+                  tagPrefix: tag-
+                  showContext: numbered
+                  contextTitle: "## Added in position:"
+                service:
+                  personalAccessToken: "%env(GITHUB_TOKEN)%"
+                  repository: "${{ github.repository }}"
+            tags:
+              - todo
+              - fixme
+          env_vars: |
+            GITHUB_TOKEN
+          new_branch_name: 'todo-registrar'
