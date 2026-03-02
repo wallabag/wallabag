@@ -6978,16 +6978,16 @@
         },
         {
             "name": "predis/predis",
-            "version": "v3.4.0",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/predis/predis.git",
-                "reference": "1183f5732e6b10efd33f64984a96726eaecb59aa"
+                "reference": "0850f2f36ee179f0ff96c92c750e1366c6cd754c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/predis/predis/zipball/1183f5732e6b10efd33f64984a96726eaecb59aa",
-                "reference": "1183f5732e6b10efd33f64984a96726eaecb59aa",
+                "url": "https://api.github.com/repos/predis/predis/zipball/0850f2f36ee179f0ff96c92c750e1366c6cd754c",
+                "reference": "0850f2f36ee179f0ff96c92c750e1366c6cd754c",
                 "shasum": ""
             },
             "require": {
@@ -7029,7 +7029,7 @@
             ],
             "support": {
                 "issues": "https://github.com/predis/predis/issues",
-                "source": "https://github.com/predis/predis/tree/v3.4.0"
+                "source": "https://github.com/predis/predis/tree/v3.4.1"
             },
             "funding": [
                 {
@@ -7037,7 +7037,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-02-11T17:30:28+00:00"
+            "time": "2026-02-23T19:51:21+00:00"
         },
         {
             "name": "psr/cache",
@@ -19558,5 +19558,5 @@
         "ext-xml": "*"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
