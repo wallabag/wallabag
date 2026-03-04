@@ -14,14 +14,18 @@ class WallabagClient implements HttpClientInterface
 {
     private readonly HttpClientInterface $httpClient;
 
+    /**
+    * @param Symfony\Contracts\HttpClient\HttpClientInterface|null $httpClient
+    */
     public function __construct(
         private $restrictedAccess,
         private readonly HttpBrowser $browser,
         private readonly Authenticator $authenticator,
         private readonly LoggerInterface $logger,
         protected RenderingProxy $renderingProxy,
+        $httpClient = null
     ) {
-        $this->httpClient = HttpClient::create([
+        $this->httpClient = $httpClient ?? HttpClient::create([
             'timeout' => 10,
         ]);
     }

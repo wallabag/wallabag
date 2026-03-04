@@ -509,7 +509,10 @@ class Config
      */
     public function addRenderingProxyHost(RenderingProxyHost $url)
     {
-        $this->renderingProxyHosts[] = $url;
+        if ($this->renderingProxyHosts == null) {
+            $this->renderingProxyHosts = new ArrayCollection();
+        }
+        $this->renderingProxyHosts->add($url);
 
         return $this;
     }
@@ -519,6 +522,6 @@ class Config
      */
     public function getRenderingProxyHosts()
     {
-        return $this->renderingProxyHosts;
+        return $this->renderingProxyHosts ?? new ArrayCollection();
     }
 }

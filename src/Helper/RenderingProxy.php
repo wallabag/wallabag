@@ -28,16 +28,16 @@ class RenderingProxy
      *
      * @return array<string,bool>
      */
-    public function considerUrl(Config $userConfig, string $url): array
+    public function considerUrl(Config|null $userConfig, string $url): array
     {
         if ($this->isEnabled()) {
             preg_match('~^[^/]+://([^/]+)~', $url, $matches);
             $host = $matches[1];
 
-            $userHosts = $userConfig
+            $userHosts = $userConfig ? $userConfig
                 ->getRenderingProxyHosts()
                 ->map(fn(RenderingProxyHost $e) => $e->getHost())
-                ->toArray();
+                ->toArray() : [];
 
             $proxy = $this->renderingProxyAll ||
                 // host is in the list
@@ -51,7 +51,7 @@ class RenderingProxy
                     // This callback will post-process the output of Graby\fetchContent()
                     function ($fetchedContent) use ($url) {
                         $fetchedContent['url'] = $url;
-                        $fetchedContent['html'] = $this->fixClientSideRenderedProxyResponse($fetchedContent['html']);
+                        $fetchedContent['html'] = $this->fixResponse($fetchedContent['html']);
                         return $fetchedContent;
                     },
                 ];
@@ -67,8 +67,8 @@ class RenderingProxy
     public function ownsUrl(string $url): bool
     {
         if ($this->isEnabled()) {
-            $rendering_proxy_host = preg_replace('~/.*$~', '', $this->renderingProxyUrl);
-            return str_starts_with($url, $rendering_proxy_host);
+            $base = preg_replace("/%u.*$/", "", $this->renderingProxyUrl);
+            return $this->renderingProxyAll == 1 || (str_starts_with($url, $base) && preg_match("~^{$base}http[s]?://~", $url) == 1);
         }
 
         return false;
@@ -92,9 +92,9 @@ class RenderingProxy
      *
      * @return string
      */
-    public function fixClientSideRenderedProxyResponse(string $content): string
+    public function fixResponse(string $content): string
     {
-        $content = preg_replace('/&lt;img ([^&]+)&gt;/', '<img \1 >', $content);
+        $content = preg_replace('/&lt;img ([^&]+)&gt;/', '<img \1>', $content);
 
         return $content;
     }
