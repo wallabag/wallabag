@@ -43,6 +43,9 @@ dev: dev-setup run ## Install wallabag for development and run the built-in serv
 run: ## Run the built-in server in dev
 	@$(PHP) bin/console server:run --env=dev
 
+dev-watch: ## Watch frontend assets in dev
+	@$(YARN) watch
+
 build: ## Run webpack
 	@$(YARN) install
 	@$(YARN) build:$(ENV)
@@ -83,6 +86,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-docker-up dev-docker-down dev-setup fix-cs phpstan phpstan-baseline lint-js lint-scss
+.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup fix-cs phpstan phpstan-baseline lint-js lint-scss
 
 .DEFAULT_GOAL := install
