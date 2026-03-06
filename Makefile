@@ -5,12 +5,7 @@ RELEASE_FOLDER := wllbg-release
 
 # ensure the ENV variable is well defined
 AVAILABLE_ENV := prod dev test
-ifneq ($(filter $(ENV),$(AVAILABLE_ENV)),)
-	# all good
-else
-	# not good, force it to "prod"
-	override ENV = prod
-endif
+override ENV := $(if $(filter $(ENV),$(AVAILABLE_ENV)),$(ENV),prod)
 
 DOCKER_COMPOSE_RUNNING = $(shell docker compose ps -q 2>/dev/null | grep -q . && echo 1 || echo 0)
 PHP = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run --rm php php,php)
