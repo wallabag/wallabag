@@ -11,17 +11,10 @@ else
 	override ENV = prod
 endif
 
-DOCKER_COMPOSE_RUNNING := $(shell docker compose ps -q | grep -q . && echo 1 || echo 0)
-
-ifeq ($(DOCKER_COMPOSE_RUNNING), 1)
-  PHP := docker compose run --rm php php
-  PHP_NO_XDEBUG := docker compose run -e XDEBUG_MODE=off --rm php php
-  YARN := docker compose run --rm php yarn
-else
-  PHP := php
-  PHP_NO_XDEBUG := XDEBUG_MODE=off php
-  YARN := yarn
-endif
+DOCKER_COMPOSE_RUNNING = $(shell docker compose ps -q 2>/dev/null | grep -q . && echo 1 || echo 0)
+PHP = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run --rm php php,php)
+PHP_NO_XDEBUG = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run -e XDEBUG_MODE=off --rm php php,XDEBUG_MODE=off php)
+YARN = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run --rm php yarn,yarn)
 
 help: ## Display this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
