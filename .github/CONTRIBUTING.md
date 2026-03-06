@@ -7,13 +7,10 @@
 - Clone the repository
 - Ensure your Docker daemon is running
 - Copy `docker/php/env.example` to `docker/php/env` and customize
-- Launch `docker compose run --rm php composer install` to bootstrap php dependencies
-- Launch `docker compose run --rm php bin/console wallabag:install` to bootstrap your installation
-- Launch `docker compose run --rm php yarn install` to bootstrap dependencies for the frontend
-- Launch `docker compose run --rm php yarn build:dev` to build assets for the frontend
-- Launch `make dev-docker-up` to start the stack
+- Launch `make dev-docker-up`
+- Launch `make dev-setup`
 
-Use `make dev-docker-down` when you want to tear the stack down and reset Docker volumes.
+The Docker `php` service serves wallabag on `http://127.0.0.1:8000`. Use `make dev-docker-down` when you want to tear the stack down and reset Docker volumes.
 
 You'll then have:
 - a PHP daemon with standalone web server
@@ -28,11 +25,9 @@ If you want to test using an other database than SQLite, uncomment the `postgres
 
 - Ensure you are running PHP >= 8.2.
 - Clone the repository
-- Launch `composer install`
+- Launch `make dev-setup`
 - If you got some errors, fix them (they might be related to some missing PHP extension from your machine)
-- Then `php bin/console wallabag:install`
-- If you got some errors, fix them (they might be related to some missing PHP extension from your machine)
-- Run `php bin/console server:run`
+- Run `make run` to start the built-in server in `dev`
 
 You can now access your wallabag instance using that url: `http://127.0.0.1:8000`
 
