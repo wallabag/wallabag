@@ -8,6 +8,8 @@ AVAILABLE_ENV := prod dev test
 override ENV := $(if $(filter $(ENV),$(AVAILABLE_ENV)),$(ENV),prod)
 
 DOCKER_COMPOSE_RUNNING = $(shell docker compose ps -q 2>/dev/null | grep -q . && echo 1 || echo 0)
+COMPOSER_LOCAL = $(shell if command -v composer >/dev/null 2>&1; then printf '%s' composer; elif [ -f composer.phar ]; then printf '%s' ./composer.phar; fi)
+COMPOSER = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run --rm php composer,$(COMPOSER_LOCAL))
 PHP = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run --rm php php,php)
 PHP_NO_XDEBUG = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run -e XDEBUG_MODE=off --rm php php,XDEBUG_MODE=off php)
 YARN = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run --rm php yarn,yarn)
@@ -26,6 +28,13 @@ dev-docker-up: ## Start the Docker dev stack
 
 dev-docker-down: ## Stop the Docker dev stack
 	@docker compose down --remove-orphans --volumes
+
+dev-setup: ## Install wallabag for development
+	@[ -n "$(COMPOSER)" ] || { echo "composer command not found and ./composer.phar is missing." >&2; exit 1; }
+	@$(COMPOSER) install
+	@$(YARN) install
+	@$(YARN) build:dev
+	@$(PHP) bin/console wallabag:install --env=dev
 
 dev: ENV=dev
 dev: build ## Install the latest dev version
@@ -65,6 +74,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help install update build test release deploy run dev dev-docker-up dev-docker-down fix-cs phpstan phpstan-baseline lint-js lint-scss
+.PHONY: help install update build test release deploy run dev dev-docker-up dev-docker-down dev-setup fix-cs phpstan phpstan-baseline lint-js lint-scss
 
 .DEFAULT_GOAL := install
