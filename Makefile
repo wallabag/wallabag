@@ -8,6 +8,8 @@ AVAILABLE_ENV := prod dev test
 override ENV := $(if $(filter $(ENV),$(AVAILABLE_ENV)),$(ENV),prod)
 
 DOCKER_COMPOSE_RUNNING = $(shell docker compose ps -q 2>/dev/null | grep -q . && echo 1 || echo 0)
+COMPOSER_LOCAL = $(shell if command -v composer >/dev/null 2>&1; then printf '%s' composer; elif [ -f composer.phar ]; then printf '%s' ./composer.phar; fi)
+COMPOSER = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run --rm php composer,$(COMPOSER_LOCAL))
 PHP = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run --rm php php,php)
 PHP_NO_XDEBUG = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run -e XDEBUG_MODE=off --rm php php,XDEBUG_MODE=off php)
 YARN = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run --rm php yarn,yarn)
@@ -21,12 +23,28 @@ install: ## Install wallabag with the latest version
 update: ## Update the wallabag installation to the latest version
 	@./scripts/update.sh $(ENV)
 
-dev: ENV=dev
-dev: build ## Install the latest dev version
-	@./scripts/dev.sh
+dev-docker-up: ## Start the Docker dev stack
+	@docker compose up -d
 
-run: ## Run the wallabag built-in server
+dev-docker-down: ## Stop the Docker dev stack
+	@docker compose down --remove-orphans --volumes
+
+dev-setup: ## Install wallabag for development
+	@[ -n "$(COMPOSER)" ] || { echo "composer command not found and ./composer.phar is missing." >&2; exit 1; }
+	@$(COMPOSER) install
+	@$(YARN) install
+	@$(YARN) build:dev
+	@$(PHP) bin/console wallabag:install --env=dev
+
+.NOTPARALLEL: dev
+
+dev: dev-setup run ## Install wallabag for development and run the built-in server in dev
+
+run: ## Run the built-in server in dev
 	@$(PHP) bin/console server:run --env=dev
+
+dev-watch: ## Watch frontend assets in dev
+	@$(YARN) watch
 
 build: ## Run webpack
 	@$(YARN) install
@@ -59,6 +77,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help install update build test release deploy run dev fix-cs phpstan phpstan-baseline lint-js lint-scss
+.PHONY: help install update build test release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup fix-cs phpstan phpstan-baseline lint-js lint-scss
 
 .DEFAULT_GOAL := install
