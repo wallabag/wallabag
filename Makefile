@@ -1,6 +1,7 @@
-SHELL=bash
-TMP_FOLDER=/tmp
-RELEASE_FOLDER=wllbg-release
+# This file requires GNU make. Use gmake if your system's default make is not GNU make.
+SHELL := bash
+TMP_FOLDER := /tmp
+RELEASE_FOLDER := wllbg-release
 
 # ensure the ENV variable is well defined
 AVAILABLE_ENV := prod dev test
