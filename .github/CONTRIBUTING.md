@@ -25,9 +25,9 @@ If you want to test using an other database than SQLite, uncomment the `postgres
 
 - Ensure you are running PHP >= 8.2.
 - Clone the repository
-- Launch `make dev-setup`
+- Run `make dev` to bootstrap wallabag and start the built-in server in `dev`
 - If you got some errors, fix them (they might be related to some missing PHP extension from your machine)
-- Run `make run` to start the built-in server in `dev`
+- If you only need to start the built-in server later, run `make run`
 
 You can now access your wallabag instance using that url: `http://127.0.0.1:8000`
 

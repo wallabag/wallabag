@@ -36,11 +36,11 @@ dev-setup: ## Install wallabag for development
 	@$(YARN) build:dev
 	@$(PHP) bin/console wallabag:install --env=dev
 
-dev: ENV=dev
-dev: build ## Install the latest dev version
-	@./scripts/dev.sh
+.NOTPARALLEL: dev
 
-run: ## Run the wallabag built-in server
+dev: dev-setup run ## Install wallabag for development and run the built-in server in dev
+
+run: ## Run the built-in server in dev
 	@$(PHP) bin/console server:run --env=dev
 
 build: ## Run webpack
