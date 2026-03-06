@@ -2,10 +2,10 @@ import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
   connect() {
-    this.#choose();
-
     this.mql = window.matchMedia('(prefers-color-scheme: dark)');
     this.mql.addEventListener('change', this.#choose.bind(this));
+
+    this.#choose();
   }
 
   useLight() {
