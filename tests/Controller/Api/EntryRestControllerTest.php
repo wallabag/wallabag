@@ -1585,4 +1585,138 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertGreaterThan(0, $content['id']);
         $this->assertSame('https://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html', $content['url']);
     }
+
+    /**
+     * Test that reading progress and its timestamp are persisted via PATCH.
+     */
+    public function testPatchEntryReadingProgress()
+    {
+        $entry = $this->client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findOneByUser($this->getUserId());
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $now = time();
+
+        $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
+            'reading_progress' => 50,
+            'reading_progress_updated_at' => $now,
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertSame(50, $content['reading_progress']);
+        $this->assertNotNull($content['reading_progress_updated_at']);
+    }
+
+    /**
+     * Test that reading progress values outside 0-100 are clamped to the nearest bound.
+     */
+    public function testPatchEntryReadingProgressBounds()
+    {
+        $entry = $this->client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findOneByUser($this->getUserId());
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $now = time();
+
+        // Test clamping above 100
+        $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
+            'reading_progress' => 150,
+            'reading_progress_updated_at' => $now,
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+        $this->assertSame(100, $content['reading_progress']);
+
+        // Test clamping below 0
+        $this->client = $this->createAuthorizedClient();
+        $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
+            'reading_progress' => -10,
+            'reading_progress_updated_at' => $now + 1,
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+        $this->assertSame(0, $content['reading_progress']);
+    }
+
+    /**
+     * Test that an update with an older timestamp does not overwrite newer progress (last-write-wins).
+     */
+    public function testPatchEntryReadingProgressConflictResolution()
+    {
+        $entry = $this->client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findOneByUser($this->getUserId());
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $newerTimestamp = time();
+        $olderTimestamp = $newerTimestamp - 3600;
+
+        // First set progress with newer timestamp
+        $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
+            'reading_progress' => 75,
+            'reading_progress_updated_at' => $newerTimestamp,
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+        $this->assertSame(75, $content['reading_progress']);
+
+        // Now try to set with older timestamp -- should be silently ignored
+        $this->client = $this->createAuthorizedClient();
+        $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
+            'reading_progress' => 25,
+            'reading_progress_updated_at' => $olderTimestamp,
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+        $this->assertSame(75, $content['reading_progress']);
+    }
+
+    /**
+     * Test that the GET response includes reading_progress and reading_progress_updated_at fields.
+     */
+    public function testGetEntryIncludesReadingProgress()
+    {
+        $entry = $this->client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findOneByUser($this->getUserId());
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $this->client->request('GET', '/api/entries/' . $entry->getId() . '.json');
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey('reading_progress', $content);
+        $this->assertArrayHasKey('reading_progress_updated_at', $content);
+    }
 }
