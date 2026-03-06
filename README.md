@@ -37,6 +37,8 @@ git clone https://github.com/wallabag/wallabag.git
 cd wallabag && make install
 ```
 
+If your system's default `make` is not GNU make, use `gmake install` instead.
+
 Now, [configure a virtual host](https://doc.wallabag.org/en/admin/installation/virtualhosts.html) to use your wallabag.
 
 ### Other methods
