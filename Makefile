@@ -21,6 +21,12 @@ install: ## Install wallabag with the latest version
 update: ## Update the wallabag installation to the latest version
 	@./scripts/update.sh $(ENV)
 
+dev-docker-up: ## Start the Docker dev stack
+	@docker compose up -d
+
+dev-docker-down: ## Stop the Docker dev stack
+	@docker compose down --remove-orphans --volumes
+
 dev: ENV=dev
 dev: build ## Install the latest dev version
 	@./scripts/dev.sh
@@ -59,6 +65,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help install update build test release deploy run dev fix-cs phpstan phpstan-baseline lint-js lint-scss
+.PHONY: help install update build test release deploy run dev dev-docker-up dev-docker-down fix-cs phpstan phpstan-baseline lint-js lint-scss
 
 .DEFAULT_GOAL := install

@@ -11,7 +11,9 @@
 - Launch `docker compose run --rm php bin/console wallabag:install` to bootstrap your installation
 - Launch `docker compose run --rm php yarn install` to bootstrap dependencies for the frontend
 - Launch `docker compose run --rm php yarn build:dev` to build assets for the frontend
-- Launch `docker compose up -d` to start the stack
+- Launch `make dev-docker-up` to start the stack
+
+Use `make dev-docker-down` when you want to tear the stack down and reset Docker volumes.
 
 You'll then have:
 - a PHP daemon with standalone web server
