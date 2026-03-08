@@ -18,6 +18,9 @@
     <testsuite name="integration">
       <directory>tests/integration</directory>
     </testsuite>
+    <testsuite name="functional">
+      <directory>tests/functional</directory>
+    </testsuite>
     <testsuite name="wallabag">
       <directory>tests</directory>
     </testsuite>

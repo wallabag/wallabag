@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\Tests\Controller\Api;
+namespace Wallabag\Tests\Functional\Controller\Api;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Container;

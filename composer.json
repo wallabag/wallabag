@@ -216,6 +216,7 @@
         "psr-4": {
             "Wallabag\\DataFixtures\\": "fixtures/",
             "Wallabag\\Tests\\": "tests/",
+            "Wallabag\\Tests\\Functional\\": "tests/functional/",
             "Wallabag\\Tests\\Integration\\": "tests/integration/",
             "Wallabag\\Tests\\Unit\\": "tests/unit/"
         },
