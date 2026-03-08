@@ -1,9 +1,8 @@
 <?php
 
-namespace Wallabag\Tests\Import;
+namespace Wallabag\Tests\Unit\Import;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\UnitOfWork;
 use M6Web\Component\RedisMock\RedisMockFactory;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
@@ -15,38 +14,37 @@ use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
 use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\TagsAssigner;
-use Wallabag\Import\InstapaperImport;
+use Wallabag\Import\FirefoxImport;
 use Wallabag\Redis\Producer;
 use Wallabag\Repository\EntryRepository;
 
-class InstapaperImportTest extends TestCase
+class FirefoxImportTest extends TestCase
 {
     protected $user;
     protected $em;
     protected $logHandler;
     protected $contentProxy;
     protected $tagsAssigner;
-    protected $uow;
 
     public function testInit()
     {
-        $instapaperImport = $this->getInstapaperImport();
+        $firefoxImport = $this->getFirefoxImport();
 
-        $this->assertSame('Instapaper', $instapaperImport->getName());
-        $this->assertNotEmpty($instapaperImport->getUrl());
-        $this->assertSame('import.instapaper.description', $instapaperImport->getDescription());
+        $this->assertSame('Firefox', $firefoxImport->getName());
+        $this->assertNotEmpty($firefoxImport->getUrl());
+        $this->assertSame('import.firefox.description', $firefoxImport->getDescription());
     }
 
     public function testImport()
     {
-        $instapaperImport = $this->getInstapaperImport(false, 4);
-        $instapaperImport->setFilepath(__DIR__ . '/../fixtures/Import/instapaper-export.csv');
+        $firefoxImport = $this->getFirefoxImport(false, 2);
+        $firefoxImport->setFilepath(__DIR__ . '/../../fixtures/Import/firefox-bookmarks.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(4))
+        $entryRepo->expects($this->exactly(2))
             ->method('findByUrlAndUserId')
             ->willReturn(false);
 
@@ -60,28 +58,28 @@ class InstapaperImportTest extends TestCase
             ->getMock();
 
         $this->contentProxy
-            ->expects($this->exactly(4))
+            ->expects($this->exactly(2))
             ->method('updateEntry')
             ->willReturn($entry);
 
-        $res = $instapaperImport->import();
+        $res = $firefoxImport->import();
 
         $this->assertTrue($res);
-        $this->assertSame(['skipped' => 0, 'imported' => 4, 'queued' => 0], $instapaperImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 2, 'queued' => 0], $firefoxImport->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
     {
-        $instapaperImport = $this->getInstapaperImport(false, 1);
-        $instapaperImport->setFilepath(__DIR__ . '/../fixtures/Import/instapaper-export.csv');
+        $firefoxImport = $this->getFirefoxImport(false, 1);
+        $firefoxImport->setFilepath(__DIR__ . '/../../fixtures/Import/firefox-bookmarks.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(4))
+        $entryRepo->expects($this->exactly(2))
             ->method('findByUrlAndUserId')
-            ->will($this->onConsecutiveCalls(false, true, true, true));
+            ->will($this->onConsecutiveCalls(false, true));
 
         $this->em
             ->expects($this->any())
@@ -89,27 +87,27 @@ class InstapaperImportTest extends TestCase
             ->willReturn($entryRepo);
 
         $this->contentProxy
-            ->expects($this->once())
+            ->expects($this->exactly(1))
             ->method('updateEntry')
             ->willReturn(new Entry($this->user));
 
         // check that every entry persisted are archived
         $this->em
-            ->expects($this->once())
+            ->expects($this->any())
             ->method('persist')
             ->with($this->callback(static fn ($persistedEntry) => (bool) $persistedEntry->isArchived()));
 
-        $res = $instapaperImport->setMarkAsRead(true)->import();
+        $res = $firefoxImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
 
-        $this->assertSame(['skipped' => 3, 'imported' => 1, 'queued' => 0], $instapaperImport->getSummary());
+        $this->assertSame(['skipped' => 1, 'imported' => 1, 'queued' => 0], $firefoxImport->getSummary());
     }
 
     public function testImportWithRabbit()
     {
-        $instapaperImport = $this->getInstapaperImport();
-        $instapaperImport->setFilepath(__DIR__ . '/../fixtures/Import/instapaper-export.csv');
+        $firefoxImport = $this->getFirefoxImport();
+        $firefoxImport->setFilepath(__DIR__ . '/../../fixtures/Import/firefox-bookmarks.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -135,21 +133,21 @@ class InstapaperImportTest extends TestCase
             ->getMock();
 
         $producer
-            ->expects($this->exactly(4))
+            ->expects($this->exactly(1))
             ->method('publish');
 
-        $instapaperImport->setProducer($producer);
+        $firefoxImport->setProducer($producer);
 
-        $res = $instapaperImport->setMarkAsRead(true)->import();
+        $res = $firefoxImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 4], $instapaperImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 1], $firefoxImport->getSummary());
     }
 
     public function testImportWithRedis()
     {
-        $instapaperImport = $this->getInstapaperImport();
-        $instapaperImport->setFilepath(__DIR__ . '/../fixtures/Import/instapaper-export.csv');
+        $firefoxImport = $this->getFirefoxImport();
+        $firefoxImport->setFilepath(__DIR__ . '/../../fixtures/Import/firefox-bookmarks.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -173,68 +171,54 @@ class InstapaperImportTest extends TestCase
         $factory = new RedisMockFactory();
         $redisMock = $factory->getAdapter(Client::class, true);
 
-        $queue = new RedisQueue($redisMock, 'instapaper');
+        $queue = new RedisQueue($redisMock, 'firefox');
         $producer = new Producer($queue);
 
-        $instapaperImport->setProducer($producer);
+        $firefoxImport->setProducer($producer);
 
-        $res = $instapaperImport->setMarkAsRead(true)->import();
+        $res = $firefoxImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 4], $instapaperImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 1], $firefoxImport->getSummary());
 
-        $this->assertNotEmpty($redisMock->lpop('instapaper'));
+        $this->assertNotEmpty($redisMock->lpop('firefox'));
     }
 
     public function testImportBadFile()
     {
-        $instapaperImport = $this->getInstapaperImport();
-        $instapaperImport->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v1.jsonx');
+        $firefoxImport = $this->getFirefoxImport();
+        $firefoxImport->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1.jsonx');
 
-        $res = $instapaperImport->import();
+        $res = $firefoxImport->import();
 
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertStringContainsString('InstapaperImport: unable to read file', $records[0]['message']);
+        $this->assertStringContainsString('Wallabag Browser Import: unable to read file', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
     public function testImportUserNotDefined()
     {
-        $instapaperImport = $this->getInstapaperImport(true);
-        $instapaperImport->setFilepath(__DIR__ . '/../fixtures/Import/instapaper-export.csv');
+        $firefoxImport = $this->getFirefoxImport(true);
+        $firefoxImport->setFilepath(__DIR__ . '/../../fixtures/Import/firefox-bookmarks.json');
 
-        $res = $instapaperImport->import();
+        $res = $firefoxImport->import();
 
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertStringContainsString('InstapaperImport: user is not defined', $records[0]['message']);
+        $this->assertStringContainsString('Wallabag Browser Import: user is not defined', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    private function getInstapaperImport($unsetUser = false, $dispatched = 0)
+    private function getFirefoxImport($unsetUser = false, $dispatched = 0)
     {
         $this->user = new User();
 
         $this->em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->getMock();
-
-        $this->uow = $this->getMockBuilder(UnitOfWork::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->em
-            ->expects($this->any())
-            ->method('getUnitOfWork')
-            ->willReturn($this->uow);
-
-        $this->uow
-            ->expects($this->any())
-            ->method('getScheduledEntityInsertions')
-            ->willReturn([]);
 
         $this->contentProxy = $this->getMockBuilder(ContentProxy::class)
             ->disableOriginalConstructor()
@@ -255,12 +239,12 @@ class InstapaperImportTest extends TestCase
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
 
-        $import = new InstapaperImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher, $logger);
+        $wallabag = new FirefoxImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher, $logger);
 
         if (false === $unsetUser) {
-            $import->setUser($this->user);
+            $wallabag->setUser($this->user);
         }
 
-        return $import;
+        return $wallabag;
     }
 }

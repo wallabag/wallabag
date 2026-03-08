@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\Tests\Import;
+namespace Wallabag\Tests\Unit\Import;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\UnitOfWork;
@@ -40,7 +40,7 @@ class WallabagV2ImportTest extends TestCase
     public function testImport()
     {
         $wallabagV2Import = $this->getWallabagV2Import(false, 2);
-        $wallabagV2Import->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v2.json');
+        $wallabagV2Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -69,7 +69,7 @@ class WallabagV2ImportTest extends TestCase
     public function testImportAndMarkAllAsRead()
     {
         $wallabagV2Import = $this->getWallabagV2Import(false, 2);
-        $wallabagV2Import->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v2-read.json');
+        $wallabagV2Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2-read.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -105,7 +105,7 @@ class WallabagV2ImportTest extends TestCase
     public function testImportWithRabbit()
     {
         $wallabagV2Import = $this->getWallabagV2Import();
-        $wallabagV2Import->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v2.json');
+        $wallabagV2Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -141,7 +141,7 @@ class WallabagV2ImportTest extends TestCase
     public function testImportWithRedis()
     {
         $wallabagV2Import = $this->getWallabagV2Import();
-        $wallabagV2Import->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v2.json');
+        $wallabagV2Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -177,7 +177,7 @@ class WallabagV2ImportTest extends TestCase
     public function testImportBadFile()
     {
         $wallabagV1Import = $this->getWallabagV2Import();
-        $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v2.jsonx');
+        $wallabagV1Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2.jsonx');
 
         $res = $wallabagV1Import->import();
 
@@ -191,7 +191,7 @@ class WallabagV2ImportTest extends TestCase
     public function testImportUserNotDefined()
     {
         $wallabagV1Import = $this->getWallabagV2Import(true);
-        $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v2.json');
+        $wallabagV1Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2.json');
 
         $res = $wallabagV1Import->import();
 
@@ -205,7 +205,7 @@ class WallabagV2ImportTest extends TestCase
     public function testImportEmptyFile()
     {
         $wallabagV2Import = $this->getWallabagV2Import();
-        $wallabagV2Import->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v2-empty.json');
+        $wallabagV2Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2-empty.json');
 
         $res = $wallabagV2Import->import();
 
@@ -216,7 +216,7 @@ class WallabagV2ImportTest extends TestCase
     public function testImportWithExceptionFromGraby()
     {
         $wallabagV2Import = $this->getWallabagV2Import(false, 2);
-        $wallabagV2Import->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v2.json');
+        $wallabagV2Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()

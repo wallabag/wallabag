@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\Tests\Import;
+namespace Wallabag\Tests\Unit\Import;
 
 use Doctrine\ORM\EntityManager;
 use M6Web\Component\RedisMock\RedisMockFactory;
@@ -14,11 +14,11 @@ use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
 use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\TagsAssigner;
-use Wallabag\Import\ReadabilityImport;
+use Wallabag\Import\PocketHtmlImport;
 use Wallabag\Redis\Producer;
 use Wallabag\Repository\EntryRepository;
 
-class ReadabilityImportTest extends TestCase
+class PocketHtmlImportTest extends TestCase
 {
     protected $user;
     protected $em;
@@ -28,23 +28,23 @@ class ReadabilityImportTest extends TestCase
 
     public function testInit()
     {
-        $readabilityImport = $this->getReadabilityImport();
+        $pocketHtmlImport = $this->getPocketHtmlImport();
 
-        $this->assertSame('Readability', $readabilityImport->getName());
-        $this->assertNotEmpty($readabilityImport->getUrl());
-        $this->assertSame('import.readability.description', $readabilityImport->getDescription());
+        $this->assertSame('Pocket HTML', $pocketHtmlImport->getName());
+        $this->assertNotEmpty($pocketHtmlImport->getUrl());
+        $this->assertSame('import.pocket_html.description', $pocketHtmlImport->getDescription());
     }
 
     public function testImport()
     {
-        $readabilityImport = $this->getReadabilityImport(false, 3);
-        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/Import/readability.json');
+        $pocketHtmlImport = $this->getPocketHtmlImport(false, 2);
+        $pocketHtmlImport->setFilepath(__DIR__ . '/../../fixtures/Import/ril_export.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(3))
+        $entryRepo->expects($this->exactly(2))
             ->method('findByUrlAndUserId')
             ->willReturn(false);
 
@@ -58,20 +58,20 @@ class ReadabilityImportTest extends TestCase
             ->getMock();
 
         $this->contentProxy
-            ->expects($this->exactly(3))
+            ->expects($this->exactly(2))
             ->method('updateEntry')
             ->willReturn($entry);
 
-        $res = $readabilityImport->import();
+        $res = $pocketHtmlImport->import();
 
         $this->assertTrue($res);
-        $this->assertSame(['skipped' => 0, 'imported' => 3, 'queued' => 0], $readabilityImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 2, 'queued' => 0], $pocketHtmlImport->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
     {
-        $readabilityImport = $this->getReadabilityImport(false, 1);
-        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/Import/readability-read.json');
+        $pocketHtmlImport = $this->getPocketHtmlImport(false, 1);
+        $pocketHtmlImport->setFilepath(__DIR__ . '/../../fixtures/Import/ril_export.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -97,17 +97,19 @@ class ReadabilityImportTest extends TestCase
             ->method('persist')
             ->with($this->callback(static fn ($persistedEntry) => (bool) $persistedEntry->isArchived()));
 
-        $res = $readabilityImport->setMarkAsRead(true)->import();
+        $res = $pocketHtmlImport
+            ->setMarkAsRead(true)
+            ->import();
 
         $this->assertTrue($res);
 
-        $this->assertSame(['skipped' => 1, 'imported' => 1, 'queued' => 0], $readabilityImport->getSummary());
+        $this->assertSame(['skipped' => 1, 'imported' => 1, 'queued' => 0], $pocketHtmlImport->getSummary());
     }
 
     public function testImportWithRabbit()
     {
-        $readabilityImport = $this->getReadabilityImport();
-        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/Import/readability.json');
+        $pocketHtmlImport = $this->getPocketHtmlImport();
+        $pocketHtmlImport->setFilepath(__DIR__ . '/../../fixtures/Import/ril_export.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -133,21 +135,21 @@ class ReadabilityImportTest extends TestCase
             ->getMock();
 
         $producer
-            ->expects($this->exactly(3))
+            ->expects($this->exactly(2))
             ->method('publish');
 
-        $readabilityImport->setProducer($producer);
+        $pocketHtmlImport->setProducer($producer);
 
-        $res = $readabilityImport->setMarkAsRead(true)->import();
+        $res = $pocketHtmlImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 3], $readabilityImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 2], $pocketHtmlImport->getSummary());
     }
 
     public function testImportWithRedis()
     {
-        $readabilityImport = $this->getReadabilityImport();
-        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/Import/readability.json');
+        $pocketHtmlImport = $this->getPocketHtmlImport();
+        $pocketHtmlImport->setFilepath(__DIR__ . '/../../fixtures/Import/ril_export.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -171,48 +173,48 @@ class ReadabilityImportTest extends TestCase
         $factory = new RedisMockFactory();
         $redisMock = $factory->getAdapter(Client::class, true);
 
-        $queue = new RedisQueue($redisMock, 'readability');
+        $queue = new RedisQueue($redisMock, 'pocket_html');
         $producer = new Producer($queue);
 
-        $readabilityImport->setProducer($producer);
+        $pocketHtmlImport->setProducer($producer);
 
-        $res = $readabilityImport->setMarkAsRead(true)->import();
+        $res = $pocketHtmlImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 3], $readabilityImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 2], $pocketHtmlImport->getSummary());
 
-        $this->assertNotEmpty($redisMock->lpop('readability'));
+        $this->assertNotEmpty($redisMock->lpop('pocket_html'));
     }
 
     public function testImportBadFile()
     {
-        $readabilityImport = $this->getReadabilityImport();
-        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v1.jsonx');
+        $pocketHtmlImport = $this->getPocketHtmlImport();
+        $pocketHtmlImport->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1.jsonx');
 
-        $res = $readabilityImport->import();
+        $res = $pocketHtmlImport->import();
 
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertStringContainsString('ReadabilityImport: unable to read file', $records[0]['message']);
+        $this->assertStringContainsString('Pocket HTML Import: unable to read file', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
     public function testImportUserNotDefined()
     {
-        $readabilityImport = $this->getReadabilityImport(true);
-        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/Import/readability.json');
+        $pocketHtmlImport = $this->getPocketHtmlImport(true);
+        $pocketHtmlImport->setFilepath(__DIR__ . '/../../fixtures/Import/ril_export.html');
 
-        $res = $readabilityImport->import();
+        $res = $pocketHtmlImport->import();
 
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertStringContainsString('ReadabilityImport: user is not defined', $records[0]['message']);
+        $this->assertStringContainsString('Pocket HTML Import: user is not defined', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    private function getReadabilityImport($unsetUser = false, $dispatched = 0)
+    private function getPocketHtmlImport($unsetUser = false, $dispatched = 0)
     {
         $this->user = new User();
 
@@ -239,7 +241,7 @@ class ReadabilityImportTest extends TestCase
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
 
-        $wallabag = new ReadabilityImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher, $logger);
+        $wallabag = new PocketHtmlImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher, $logger);
 
         if (false === $unsetUser) {
             $wallabag->setUser($this->user);

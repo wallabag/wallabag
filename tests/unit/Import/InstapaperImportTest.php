@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\Tests\Import;
+namespace Wallabag\Tests\Unit\Import;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\UnitOfWork;
@@ -15,11 +15,11 @@ use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
 use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\TagsAssigner;
-use Wallabag\Import\WallabagV1Import;
+use Wallabag\Import\InstapaperImport;
 use Wallabag\Redis\Producer;
 use Wallabag\Repository\EntryRepository;
 
-class WallabagV1ImportTest extends TestCase
+class InstapaperImportTest extends TestCase
 {
     protected $user;
     protected $em;
@@ -27,30 +27,28 @@ class WallabagV1ImportTest extends TestCase
     protected $contentProxy;
     protected $tagsAssigner;
     protected $uow;
-    protected $fetchingErrorMessageTitle = 'No title found';
-    protected $fetchingErrorMessage = 'wallabag can\'t retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/master/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.';
 
     public function testInit()
     {
-        $wallabagV1Import = $this->getWallabagV1Import();
+        $instapaperImport = $this->getInstapaperImport();
 
-        $this->assertSame('wallabag v1', $wallabagV1Import->getName());
-        $this->assertNotEmpty($wallabagV1Import->getUrl());
-        $this->assertSame('import.wallabag_v1.description', $wallabagV1Import->getDescription());
+        $this->assertSame('Instapaper', $instapaperImport->getName());
+        $this->assertNotEmpty($instapaperImport->getUrl());
+        $this->assertSame('import.instapaper.description', $instapaperImport->getDescription());
     }
 
     public function testImport()
     {
-        $wallabagV1Import = $this->getWallabagV1Import(false, 1);
-        $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v1.json');
+        $instapaperImport = $this->getInstapaperImport(false, 4);
+        $instapaperImport->setFilepath(__DIR__ . '/../../fixtures/Import/instapaper-export.csv');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(2))
+        $entryRepo->expects($this->exactly(4))
             ->method('findByUrlAndUserId')
-            ->will($this->onConsecutiveCalls(false, true, false, false));
+            ->willReturn(false);
 
         $this->em
             ->expects($this->any())
@@ -62,28 +60,28 @@ class WallabagV1ImportTest extends TestCase
             ->getMock();
 
         $this->contentProxy
-            ->expects($this->exactly(1))
+            ->expects($this->exactly(4))
             ->method('updateEntry')
             ->willReturn($entry);
 
-        $res = $wallabagV1Import->import();
+        $res = $instapaperImport->import();
 
         $this->assertTrue($res);
-        $this->assertSame(['skipped' => 1, 'imported' => 1, 'queued' => 0], $wallabagV1Import->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 4, 'queued' => 0], $instapaperImport->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
     {
-        $wallabagV1Import = $this->getWallabagV1Import(false, 3);
-        $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v1-read.json');
+        $instapaperImport = $this->getInstapaperImport(false, 1);
+        $instapaperImport->setFilepath(__DIR__ . '/../../fixtures/Import/instapaper-export.csv');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(3))
+        $entryRepo->expects($this->exactly(4))
             ->method('findByUrlAndUserId')
-            ->will($this->onConsecutiveCalls(false, false, false));
+            ->will($this->onConsecutiveCalls(false, true, true, true));
 
         $this->em
             ->expects($this->any())
@@ -91,27 +89,27 @@ class WallabagV1ImportTest extends TestCase
             ->willReturn($entryRepo);
 
         $this->contentProxy
-            ->expects($this->exactly(3))
+            ->expects($this->once())
             ->method('updateEntry')
             ->willReturn(new Entry($this->user));
 
         // check that every entry persisted are archived
         $this->em
-            ->expects($this->any())
+            ->expects($this->once())
             ->method('persist')
             ->with($this->callback(static fn ($persistedEntry) => (bool) $persistedEntry->isArchived()));
 
-        $res = $wallabagV1Import->setMarkAsRead(true)->import();
+        $res = $instapaperImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
 
-        $this->assertSame(['skipped' => 0, 'imported' => 3, 'queued' => 0], $wallabagV1Import->getSummary());
+        $this->assertSame(['skipped' => 3, 'imported' => 1, 'queued' => 0], $instapaperImport->getSummary());
     }
 
     public function testImportWithRabbit()
     {
-        $wallabagV1Import = $this->getWallabagV1Import();
-        $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v1.json');
+        $instapaperImport = $this->getInstapaperImport();
+        $instapaperImport->setFilepath(__DIR__ . '/../../fixtures/Import/instapaper-export.csv');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -137,21 +135,21 @@ class WallabagV1ImportTest extends TestCase
             ->getMock();
 
         $producer
-            ->expects($this->exactly(2))
+            ->expects($this->exactly(4))
             ->method('publish');
 
-        $wallabagV1Import->setProducer($producer);
+        $instapaperImport->setProducer($producer);
 
-        $res = $wallabagV1Import->setMarkAsRead(true)->import();
+        $res = $instapaperImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 2], $wallabagV1Import->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 4], $instapaperImport->getSummary());
     }
 
     public function testImportWithRedis()
     {
-        $wallabagV1Import = $this->getWallabagV1Import();
-        $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v1.json');
+        $instapaperImport = $this->getInstapaperImport();
+        $instapaperImport->setFilepath(__DIR__ . '/../../fixtures/Import/instapaper-export.csv');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -175,48 +173,48 @@ class WallabagV1ImportTest extends TestCase
         $factory = new RedisMockFactory();
         $redisMock = $factory->getAdapter(Client::class, true);
 
-        $queue = new RedisQueue($redisMock, 'wallabag_v1');
+        $queue = new RedisQueue($redisMock, 'instapaper');
         $producer = new Producer($queue);
 
-        $wallabagV1Import->setProducer($producer);
+        $instapaperImport->setProducer($producer);
 
-        $res = $wallabagV1Import->setMarkAsRead(true)->import();
+        $res = $instapaperImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 2], $wallabagV1Import->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 4], $instapaperImport->getSummary());
 
-        $this->assertNotEmpty($redisMock->lpop('wallabag_v1'));
+        $this->assertNotEmpty($redisMock->lpop('instapaper'));
     }
 
     public function testImportBadFile()
     {
-        $wallabagV1Import = $this->getWallabagV1Import();
-        $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v1.jsonx');
+        $instapaperImport = $this->getInstapaperImport();
+        $instapaperImport->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1.jsonx');
 
-        $res = $wallabagV1Import->import();
+        $res = $instapaperImport->import();
 
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertStringContainsString('WallabagImport: unable to read file', $records[0]['message']);
+        $this->assertStringContainsString('InstapaperImport: unable to read file', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
     public function testImportUserNotDefined()
     {
-        $wallabagV1Import = $this->getWallabagV1Import(true);
-        $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v1.json');
+        $instapaperImport = $this->getInstapaperImport(true);
+        $instapaperImport->setFilepath(__DIR__ . '/../../fixtures/Import/instapaper-export.csv');
 
-        $res = $wallabagV1Import->import();
+        $res = $instapaperImport->import();
 
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertStringContainsString('WallabagImport: user is not defined', $records[0]['message']);
+        $this->assertStringContainsString('InstapaperImport: user is not defined', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    private function getWallabagV1Import($unsetUser = false, $dispatched = 0)
+    private function getInstapaperImport($unsetUser = false, $dispatched = 0)
     {
         $this->user = new User();
 
@@ -257,20 +255,12 @@ class WallabagV1ImportTest extends TestCase
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
 
-        $wallabag = new WallabagV1Import(
-            $this->em,
-            $this->contentProxy,
-            $this->tagsAssigner,
-            $dispatcher,
-            $logger,
-            $this->fetchingErrorMessageTitle,
-            $this->fetchingErrorMessage
-        );
+        $import = new InstapaperImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher, $logger);
 
         if (false === $unsetUser) {
-            $wallabag->setUser($this->user);
+            $import->setUser($this->user);
         }
 
-        return $wallabag;
+        return $import;
     }
 }

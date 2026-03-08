@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\Tests\Import;
+namespace Wallabag\Tests\Unit\Import;
 
 use Doctrine\ORM\EntityManager;
 use M6Web\Component\RedisMock\RedisMockFactory;
@@ -14,11 +14,11 @@ use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
 use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\TagsAssigner;
-use Wallabag\Import\FirefoxImport;
+use Wallabag\Import\ChromeImport;
 use Wallabag\Redis\Producer;
 use Wallabag\Repository\EntryRepository;
 
-class FirefoxImportTest extends TestCase
+class ChromeImportTest extends TestCase
 {
     protected $user;
     protected $em;
@@ -28,23 +28,23 @@ class FirefoxImportTest extends TestCase
 
     public function testInit()
     {
-        $firefoxImport = $this->getFirefoxImport();
+        $chromeImport = $this->getChromeImport();
 
-        $this->assertSame('Firefox', $firefoxImport->getName());
-        $this->assertNotEmpty($firefoxImport->getUrl());
-        $this->assertSame('import.firefox.description', $firefoxImport->getDescription());
+        $this->assertSame('Chrome', $chromeImport->getName());
+        $this->assertNotEmpty($chromeImport->getUrl());
+        $this->assertSame('import.chrome.description', $chromeImport->getDescription());
     }
 
     public function testImport()
     {
-        $firefoxImport = $this->getFirefoxImport(false, 2);
-        $firefoxImport->setFilepath(__DIR__ . '/../fixtures/Import/firefox-bookmarks.json');
+        $chromeImport = $this->getChromeImport(false, 1);
+        $chromeImport->setFilepath(__DIR__ . '/../../fixtures/Import/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(2))
+        $entryRepo->expects($this->exactly(1))
             ->method('findByUrlAndUserId')
             ->willReturn(false);
 
@@ -58,26 +58,26 @@ class FirefoxImportTest extends TestCase
             ->getMock();
 
         $this->contentProxy
-            ->expects($this->exactly(2))
+            ->expects($this->exactly(1))
             ->method('updateEntry')
             ->willReturn($entry);
 
-        $res = $firefoxImport->import();
+        $res = $chromeImport->import();
 
         $this->assertTrue($res);
-        $this->assertSame(['skipped' => 0, 'imported' => 2, 'queued' => 0], $firefoxImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 1, 'queued' => 0], $chromeImport->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
     {
-        $firefoxImport = $this->getFirefoxImport(false, 1);
-        $firefoxImport->setFilepath(__DIR__ . '/../fixtures/Import/firefox-bookmarks.json');
+        $chromeImport = $this->getChromeImport(false, 1);
+        $chromeImport->setFilepath(__DIR__ . '/../../fixtures/Import/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(2))
+        $entryRepo->expects($this->exactly(1))
             ->method('findByUrlAndUserId')
             ->will($this->onConsecutiveCalls(false, true));
 
@@ -97,17 +97,17 @@ class FirefoxImportTest extends TestCase
             ->method('persist')
             ->with($this->callback(static fn ($persistedEntry) => (bool) $persistedEntry->isArchived()));
 
-        $res = $firefoxImport->setMarkAsRead(true)->import();
+        $res = $chromeImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
 
-        $this->assertSame(['skipped' => 1, 'imported' => 1, 'queued' => 0], $firefoxImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 1, 'queued' => 0], $chromeImport->getSummary());
     }
 
     public function testImportWithRabbit()
     {
-        $firefoxImport = $this->getFirefoxImport();
-        $firefoxImport->setFilepath(__DIR__ . '/../fixtures/Import/firefox-bookmarks.json');
+        $chromeImport = $this->getChromeImport();
+        $chromeImport->setFilepath(__DIR__ . '/../../fixtures/Import/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -136,18 +136,18 @@ class FirefoxImportTest extends TestCase
             ->expects($this->exactly(1))
             ->method('publish');
 
-        $firefoxImport->setProducer($producer);
+        $chromeImport->setProducer($producer);
 
-        $res = $firefoxImport->setMarkAsRead(true)->import();
+        $res = $chromeImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 1], $firefoxImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 1], $chromeImport->getSummary());
     }
 
     public function testImportWithRedis()
     {
-        $firefoxImport = $this->getFirefoxImport();
-        $firefoxImport->setFilepath(__DIR__ . '/../fixtures/Import/firefox-bookmarks.json');
+        $chromeImport = $this->getChromeImport();
+        $chromeImport->setFilepath(__DIR__ . '/../../fixtures/Import/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -171,25 +171,25 @@ class FirefoxImportTest extends TestCase
         $factory = new RedisMockFactory();
         $redisMock = $factory->getAdapter(Client::class, true);
 
-        $queue = new RedisQueue($redisMock, 'firefox');
+        $queue = new RedisQueue($redisMock, 'chrome');
         $producer = new Producer($queue);
 
-        $firefoxImport->setProducer($producer);
+        $chromeImport->setProducer($producer);
 
-        $res = $firefoxImport->setMarkAsRead(true)->import();
+        $res = $chromeImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 1], $firefoxImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 1], $chromeImport->getSummary());
 
-        $this->assertNotEmpty($redisMock->lpop('firefox'));
+        $this->assertNotEmpty($redisMock->lpop('chrome'));
     }
 
     public function testImportBadFile()
     {
-        $firefoxImport = $this->getFirefoxImport();
-        $firefoxImport->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v1.jsonx');
+        $chromeImport = $this->getChromeImport();
+        $chromeImport->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1.jsonx');
 
-        $res = $firefoxImport->import();
+        $res = $chromeImport->import();
 
         $this->assertFalse($res);
 
@@ -200,10 +200,10 @@ class FirefoxImportTest extends TestCase
 
     public function testImportUserNotDefined()
     {
-        $firefoxImport = $this->getFirefoxImport(true);
-        $firefoxImport->setFilepath(__DIR__ . '/../fixtures/Import/firefox-bookmarks.json');
+        $chromeImport = $this->getChromeImport(true);
+        $chromeImport->setFilepath(__DIR__ . '/../../fixtures/Import/chrome-bookmarks');
 
-        $res = $firefoxImport->import();
+        $res = $chromeImport->import();
 
         $this->assertFalse($res);
 
@@ -212,7 +212,7 @@ class FirefoxImportTest extends TestCase
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    private function getFirefoxImport($unsetUser = false, $dispatched = 0)
+    private function getChromeImport($unsetUser = false, $dispatched = 0)
     {
         $this->user = new User();
 
@@ -239,7 +239,7 @@ class FirefoxImportTest extends TestCase
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
 
-        $wallabag = new FirefoxImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher, $logger);
+        $wallabag = new ChromeImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher, $logger);
 
         if (false === $unsetUser) {
             $wallabag->setUser($this->user);

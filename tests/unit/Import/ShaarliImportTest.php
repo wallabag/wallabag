@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\Tests\Import;
+namespace Wallabag\Tests\Unit\Import;
 
 use Doctrine\ORM\EntityManager;
 use M6Web\Component\RedisMock\RedisMockFactory;
@@ -14,11 +14,11 @@ use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
 use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\TagsAssigner;
-use Wallabag\Import\PocketHtmlImport;
+use Wallabag\Import\ShaarliImport;
 use Wallabag\Redis\Producer;
 use Wallabag\Repository\EntryRepository;
 
-class PocketHtmlImportTest extends TestCase
+class ShaarliImportTest extends TestCase
 {
     protected $user;
     protected $em;
@@ -28,17 +28,17 @@ class PocketHtmlImportTest extends TestCase
 
     public function testInit()
     {
-        $pocketHtmlImport = $this->getPocketHtmlImport();
+        $shaarliImport = $this->getShaarliImport();
 
-        $this->assertSame('Pocket HTML', $pocketHtmlImport->getName());
-        $this->assertNotEmpty($pocketHtmlImport->getUrl());
-        $this->assertSame('import.pocket_html.description', $pocketHtmlImport->getDescription());
+        $this->assertSame('Shaarli', $shaarliImport->getName());
+        $this->assertNotEmpty($shaarliImport->getUrl());
+        $this->assertSame('import.shaarli.description', $shaarliImport->getDescription());
     }
 
     public function testImport()
     {
-        $pocketHtmlImport = $this->getPocketHtmlImport(false, 2);
-        $pocketHtmlImport->setFilepath(__DIR__ . '/../fixtures/Import/ril_export.html');
+        $shaarliImport = $this->getShaarliImport(false, 2);
+        $shaarliImport->setFilepath(__DIR__ . '/../../fixtures/Import/shaarli-bookmarks.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -62,16 +62,16 @@ class PocketHtmlImportTest extends TestCase
             ->method('updateEntry')
             ->willReturn($entry);
 
-        $res = $pocketHtmlImport->import();
+        $res = $shaarliImport->import();
 
         $this->assertTrue($res);
-        $this->assertSame(['skipped' => 0, 'imported' => 2, 'queued' => 0], $pocketHtmlImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 2, 'queued' => 0], $shaarliImport->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
     {
-        $pocketHtmlImport = $this->getPocketHtmlImport(false, 1);
-        $pocketHtmlImport->setFilepath(__DIR__ . '/../fixtures/Import/ril_export.html');
+        $shaarliImport = $this->getShaarliImport(false, 1);
+        $shaarliImport->setFilepath(__DIR__ . '/../../fixtures/Import/shaarli-bookmarks.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -97,19 +97,19 @@ class PocketHtmlImportTest extends TestCase
             ->method('persist')
             ->with($this->callback(static fn ($persistedEntry) => (bool) $persistedEntry->isArchived()));
 
-        $res = $pocketHtmlImport
+        $res = $shaarliImport
             ->setMarkAsRead(true)
             ->import();
 
         $this->assertTrue($res);
 
-        $this->assertSame(['skipped' => 1, 'imported' => 1, 'queued' => 0], $pocketHtmlImport->getSummary());
+        $this->assertSame(['skipped' => 1, 'imported' => 1, 'queued' => 0], $shaarliImport->getSummary());
     }
 
     public function testImportWithRabbit()
     {
-        $pocketHtmlImport = $this->getPocketHtmlImport();
-        $pocketHtmlImport->setFilepath(__DIR__ . '/../fixtures/Import/ril_export.html');
+        $shaarliImport = $this->getShaarliImport();
+        $shaarliImport->setFilepath(__DIR__ . '/../../fixtures/Import/shaarli-bookmarks.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -138,18 +138,18 @@ class PocketHtmlImportTest extends TestCase
             ->expects($this->exactly(2))
             ->method('publish');
 
-        $pocketHtmlImport->setProducer($producer);
+        $shaarliImport->setProducer($producer);
 
-        $res = $pocketHtmlImport->setMarkAsRead(true)->import();
+        $res = $shaarliImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 2], $pocketHtmlImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 2], $shaarliImport->getSummary());
     }
 
     public function testImportWithRedis()
     {
-        $pocketHtmlImport = $this->getPocketHtmlImport();
-        $pocketHtmlImport->setFilepath(__DIR__ . '/../fixtures/Import/ril_export.html');
+        $shaarliImport = $this->getShaarliImport();
+        $shaarliImport->setFilepath(__DIR__ . '/../../fixtures/Import/shaarli-bookmarks.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -173,48 +173,48 @@ class PocketHtmlImportTest extends TestCase
         $factory = new RedisMockFactory();
         $redisMock = $factory->getAdapter(Client::class, true);
 
-        $queue = new RedisQueue($redisMock, 'pocket_html');
+        $queue = new RedisQueue($redisMock, 'shaarli');
         $producer = new Producer($queue);
 
-        $pocketHtmlImport->setProducer($producer);
+        $shaarliImport->setProducer($producer);
 
-        $res = $pocketHtmlImport->setMarkAsRead(true)->import();
+        $res = $shaarliImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 2], $pocketHtmlImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 2], $shaarliImport->getSummary());
 
-        $this->assertNotEmpty($redisMock->lpop('pocket_html'));
+        $this->assertNotEmpty($redisMock->lpop('shaarli'));
     }
 
     public function testImportBadFile()
     {
-        $pocketHtmlImport = $this->getPocketHtmlImport();
-        $pocketHtmlImport->setFilepath(__DIR__ . '/../fixtures/Import/wallabag-v1.jsonx');
+        $shaarliImport = $this->getShaarliImport();
+        $shaarliImport->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1.jsonx');
 
-        $res = $pocketHtmlImport->import();
+        $res = $shaarliImport->import();
 
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertStringContainsString('Pocket HTML Import: unable to read file', $records[0]['message']);
+        $this->assertStringContainsString('Wallabag HTML Import: unable to read file', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
     public function testImportUserNotDefined()
     {
-        $pocketHtmlImport = $this->getPocketHtmlImport(true);
-        $pocketHtmlImport->setFilepath(__DIR__ . '/../fixtures/Import/ril_export.html');
+        $shaarliImport = $this->getShaarliImport(true);
+        $shaarliImport->setFilepath(__DIR__ . '/../../fixtures/Import/shaarli-bookmarks.html');
 
-        $res = $pocketHtmlImport->import();
+        $res = $shaarliImport->import();
 
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertStringContainsString('Pocket HTML Import: user is not defined', $records[0]['message']);
+        $this->assertStringContainsString('Wallabag HTML Import: user is not defined', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    private function getPocketHtmlImport($unsetUser = false, $dispatched = 0)
+    private function getShaarliImport($unsetUser = false, $dispatched = 0)
     {
         $this->user = new User();
 
@@ -241,7 +241,7 @@ class PocketHtmlImportTest extends TestCase
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
 
-        $wallabag = new PocketHtmlImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher, $logger);
+        $wallabag = new ShaarliImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher, $logger);
 
         if (false === $unsetUser) {
             $wallabag->setUser($this->user);

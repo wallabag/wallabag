@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\Tests\SiteConfig;
+namespace Wallabag\Tests\Unit\SiteConfig;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\BrowserKit\HttpBrowser;
@@ -113,7 +113,7 @@ class LoginFormAuthenticatorTest extends TestCase
         $requestHtmlFunctionResponse = $this->getMockBuilder(ResponseInterface::class)->getMock();
         $requestHtmlFunctionResponse->expects($this->any())
             ->method('getContent')
-            ->willReturn(file_get_contents(__DIR__ . '/../fixtures/aoc.media.html'))
+            ->willReturn(file_get_contents(__DIR__ . '/../../fixtures/aoc.media.html'))
         ;
         $requestHtmlFunctionClient = $this->getMockBuilder(HttpClientInterface::class)->getMock();
         $requestHtmlFunctionClient->expects($this->any())
@@ -153,7 +153,7 @@ class LoginFormAuthenticatorTest extends TestCase
 
         $auth = new LoginFormAuthenticator($browser, $authenticatorProvider, 'Wallabag (Symfony HttpClient/5)');
 
-        $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'));
+        $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../../fixtures/nextinpact-login.html'));
 
         $this->assertFalse($loginRequired);
     }
@@ -179,7 +179,7 @@ class LoginFormAuthenticatorTest extends TestCase
 
         $auth = new LoginFormAuthenticator($browser, $authenticatorProvider, 'Wallabag (Symfony HttpClient/5)');
 
-        $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../fixtures/nextinpact-article.html'));
+        $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../../fixtures/nextinpact-article.html'));
 
         $this->assertTrue($loginRequired);
     }
@@ -222,7 +222,7 @@ class LoginFormAuthenticatorTest extends TestCase
         $requestHtmlFunctionResponse = $this->getMockBuilder(ResponseInterface::class)->getMock();
         $requestHtmlFunctionResponse->expects($this->any())
             ->method('getContent')
-            ->willReturn(file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'))
+            ->willReturn(file_get_contents(__DIR__ . '/../../fixtures/nextinpact-login.html'))
         ;
         $requestHtmlFunctionClient = $this->getMockBuilder(HttpClientInterface::class)->getMock();
         $requestHtmlFunctionClient->expects($this->any())

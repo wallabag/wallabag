@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\Tests\Helper;
+namespace Wallabag\Tests\Unit\Helper;
 
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
@@ -30,7 +30,7 @@ class DownloadImagesTest extends TestCase
      */
     public function testProcessHtml($html, $url)
     {
-        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']])]);
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']])]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
@@ -72,7 +72,7 @@ class DownloadImagesTest extends TestCase
      */
     public function testProcessSingleImage($header, $extension)
     {
-        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: ' . $header]])]);
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: ' . $header]])]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
@@ -111,7 +111,7 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessSingleImageFailAbsolute()
     {
-        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']])]);
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']])]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
@@ -124,7 +124,7 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessRealImage()
     {
-        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'))]);
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/image-no-content-type.jpg'))]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
@@ -144,9 +144,9 @@ class DownloadImagesTest extends TestCase
     public function testProcessImageWithSrcset()
     {
         $mockHttpClient = new MockHttpClient([
-            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')),
-            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')),
-            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')),
+            new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/image-no-content-type.jpg')),
+            new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/image-no-content-type.jpg')),
+            new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/image-no-content-type.jpg')),
         ]);
 
         $logHandler = new TestHandler();
@@ -161,9 +161,9 @@ class DownloadImagesTest extends TestCase
     public function testProcessImageWithTrickySrcset()
     {
         $mockHttpClient = new MockHttpClient([
-            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')),
-            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')),
-            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')),
+            new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/image-no-content-type.jpg')),
+            new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/image-no-content-type.jpg')),
+            new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/image-no-content-type.jpg')),
         ]);
 
         $logHandler = new TestHandler();
@@ -182,9 +182,9 @@ class DownloadImagesTest extends TestCase
     public function testProcessImageWithNumericHtmlEntitySeparator()
     {
         $mockHttpClient = new MockHttpClient([
-            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'), ['response_headers' => ['Content-Type: image/jpeg']]),
-            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'), ['response_headers' => ['Content-Type: image/jpeg']]),
-            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'), ['response_headers' => ['Content-Type: image/jpeg']]),
+            new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/image-no-content-type.jpg'), ['response_headers' => ['Content-Type: image/jpeg']]),
+            new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/image-no-content-type.jpg'), ['response_headers' => ['Content-Type: image/jpeg']]),
+            new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/image-no-content-type.jpg'), ['response_headers' => ['Content-Type: image/jpeg']]),
         ]);
 
         $logHandler = new TestHandler();
@@ -199,7 +199,7 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessImageWithNullPath()
     {
-        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'))]);
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/image-no-content-type.jpg'))]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
@@ -217,8 +217,8 @@ class DownloadImagesTest extends TestCase
     public function testEnsureOnlyFirstOccurrenceIsReplaced()
     {
         $mockHttpClient = new MockHttpClient([
-            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']]),
-            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']]),
+            new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']]),
+            new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']]),
         ]);
 
         $logHandler = new TestHandler();
@@ -236,7 +236,7 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessSingleImageWithSvg()
     {
-        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/modal-content.svg'), ['response_headers' => ['Content-Type: image/svg+xml']])]);
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/modal-content.svg'), ['response_headers' => ['Content-Type: image/svg+xml']])]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
@@ -249,7 +249,7 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessSingleImageWithBadSvg()
     {
-        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/svg+xml']])]);
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/svg+xml']])]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
