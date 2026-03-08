@@ -1,23 +1,22 @@
 <?php
 
-namespace Wallabag\Tests\Command\Import;
+namespace Wallabag\Tests\Integration\Command\Import;
 
 use M6Web\Component\RedisMock\RedisMockFactory;
 use Predis\Client;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
-class RedisWorkerCommandTest extends WallabagTestCase
+class RedisWorkerCommandTest extends WallabagKernelTestCase
 {
     public function testRunRedisWorkerCommandWithoutArguments()
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments (missing: "serviceName")');
 
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:import:redis-worker');
 
@@ -30,7 +29,7 @@ class RedisWorkerCommandTest extends WallabagTestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No queue or consumer found for service name');
 
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:import:redis-worker');
 
@@ -42,7 +41,7 @@ class RedisWorkerCommandTest extends WallabagTestCase
 
     public function testRunRedisWorkerCommand()
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $factory = new RedisMockFactory();
         $redisMock = $factory->getAdapter(Client::class, true);

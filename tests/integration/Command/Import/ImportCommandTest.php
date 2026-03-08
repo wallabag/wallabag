@@ -1,22 +1,21 @@
 <?php
 
-namespace Wallabag\Tests\Command\Import;
+namespace Wallabag\Tests\Integration\Command\Import;
 
 use Doctrine\ORM\NoResultException;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
-class ImportCommandTest extends WallabagTestCase
+class ImportCommandTest extends WallabagKernelTestCase
 {
     public function testRunImportCommandWithoutArguments()
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments');
 
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:import');
 
@@ -29,7 +28,7 @@ class ImportCommandTest extends WallabagTestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('not found');
 
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:import');
 
@@ -44,7 +43,7 @@ class ImportCommandTest extends WallabagTestCase
     {
         $this->expectException(NoResultException::class);
 
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:import');
 
@@ -57,14 +56,14 @@ class ImportCommandTest extends WallabagTestCase
 
     public function testRunImportCommand()
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:import');
 
         $tester = new CommandTester($command);
         $tester->execute([
             'username' => 'admin',
-            'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.project_dir') . '/tests/fixtures/Import/wallabag-v2-read.json',
+            'filepath' => static::getContainer()->getParameter('kernel.project_dir') . '/tests/fixtures/Import/wallabag-v2-read.json',
             '--importer' => 'v2',
         ]);
 
@@ -74,16 +73,15 @@ class ImportCommandTest extends WallabagTestCase
 
     public function testRunImportCommandWithUserId()
     {
-        $this->logInAs('admin');
-
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
+        $userId = $this->getUser('admin')->getId();
 
         $command = $application->find('wallabag:import');
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'username' => $this->getLoggedInUserId(),
-            'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.project_dir') . '/tests/fixtures/Import/wallabag-v2-read.json',
+            'username' => $userId,
+            'filepath' => static::getContainer()->getParameter('kernel.project_dir') . '/tests/fixtures/Import/wallabag-v2-read.json',
             '--useUserId' => true,
             '--importer' => 'v2',
         ]);

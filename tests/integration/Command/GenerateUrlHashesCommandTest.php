@@ -1,19 +1,16 @@
 <?php
 
-namespace Wallabag\Tests\Command;
+namespace Wallabag\Tests\Integration\Command;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Wallabag\Entity\Entry;
-use Wallabag\Entity\User;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
-class GenerateUrlHashesCommandTest extends WallabagTestCase
+class GenerateUrlHashesCommandTest extends WallabagKernelTestCase
 {
     public function testRunGenerateUrlHashesCommand()
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:generate-hashed-urls');
 
@@ -26,7 +23,7 @@ class GenerateUrlHashesCommandTest extends WallabagTestCase
 
     public function testRunGenerateUrlHashesCommandWithBadUsername()
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:generate-hashed-urls');
 
@@ -40,7 +37,7 @@ class GenerateUrlHashesCommandTest extends WallabagTestCase
 
     public function testRunGenerateUrlHashesCommandForUser()
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:generate-hashed-urls');
 
@@ -55,12 +52,8 @@ class GenerateUrlHashesCommandTest extends WallabagTestCase
     public function testGenerateUrls()
     {
         $url = 'http://www.lemonde.fr/sport/visuel/2017/05/05/rondelle-prison-blanchissage-comprendre-le-hockey-sur-glace_5122587_3242.html';
-        $client = $this->getTestClient();
-        $em = $client->getContainer()->get(EntityManagerInterface::class);
-
-        $this->logInAs('admin');
-
-        $user = $em->getRepository(User::class)->findOneById($this->getLoggedInUserId());
+        $em = $this->getEntityManager();
+        $user = $this->getUser('admin');
 
         $entry1 = new Entry($user);
         $entry1->setUrl($url);
@@ -68,7 +61,7 @@ class GenerateUrlHashesCommandTest extends WallabagTestCase
         $em->persist($entry1);
         $em->flush();
 
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:generate-hashed-urls');
 
@@ -80,6 +73,7 @@ class GenerateUrlHashesCommandTest extends WallabagTestCase
         $this->assertStringContainsString('Generated hashed urls for user: admin', $tester->getDisplay());
 
         $entry = $em->getRepository(Entry::class)->findOneByUrl($url);
+        $this->assertInstanceOf(Entry::class, $entry);
 
         $this->assertSame($entry->getHashedUrl(), hash('sha1', $url));
 

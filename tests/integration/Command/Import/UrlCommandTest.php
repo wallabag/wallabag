@@ -1,16 +1,14 @@
 <?php
 
-namespace Wallabag\Tests\Command\Import;
+namespace Wallabag\Tests\Integration\Command\Import;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
 use Wallabag\Entity\Entry;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
-class UrlCommandTest extends WallabagTestCase
+class UrlCommandTest extends WallabagKernelTestCase
 {
     private $url = 'https://www.20minutes.fr/sport/football/4158082-20250612-euro-espoirs-su-souffrir-ensemble-decimes-bleuets-retiennent-positif-apres-nul-face-portugal';
 
@@ -19,7 +17,7 @@ class UrlCommandTest extends WallabagTestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments');
 
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:import:url');
 
@@ -31,7 +29,7 @@ class UrlCommandTest extends WallabagTestCase
     {
         $this->expectException(NoResultException::class);
 
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:import:url');
 
@@ -44,7 +42,7 @@ class UrlCommandTest extends WallabagTestCase
 
     public function testRunUrlCommand()
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:import:url');
 
@@ -59,7 +57,7 @@ class UrlCommandTest extends WallabagTestCase
 
     public function testRunUrlCommandWithTags()
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:import:url');
 
@@ -72,24 +70,22 @@ class UrlCommandTest extends WallabagTestCase
 
         $this->assertStringContainsString('successfully imported', $tester->getDisplay());
 
-        $client = $this->getTestClient();
-        $em = $client->getContainer()->get(EntityManagerInterface::class);
-        $entry = $em->getRepository(Entry::class)->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+        $userId = $this->getUser('admin')->getId();
+        $entry = $this->getEntityManager()->getRepository(Entry::class)->findByUrlAndUserId($this->url, $userId);
         $this->assertContains('football', $entry->getTagsLabel());
         $this->assertNotContains('basketball', $entry->getTagsLabel());
     }
 
     public function testRunUrlCommandWithUserId()
     {
-        $this->logInAs('admin');
-
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
+        $userId = $this->getUser('admin')->getId();
 
         $command = $application->find('wallabag:import:url');
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'username' => $this->getLoggedInUserId(),
+            'username' => $userId,
             'url' => $this->url,
             '--useUserId' => true,
         ]);
