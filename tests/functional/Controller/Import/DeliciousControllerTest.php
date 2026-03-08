@@ -1,36 +1,36 @@
 <?php
 
-namespace Wallabag\Tests\Controller\Import;
+namespace Wallabag\Tests\Functional\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Wallabag\Entity\Entry;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Functional\WallabagTestCase;
 
-class InstapaperControllerTest extends WallabagTestCase
+class DeliciousControllerTest extends WallabagTestCase
 {
-    public function testImportInstapaper()
+    public function testImportDelicious()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/instapaper');
+        $crawler = $client->request('GET', '/import/delicious');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportInstapaperWithRabbitEnabled()
+    public function testImportDeliciousWithRabbitEnabled()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
-        $crawler = $client->request('GET', '/import/instapaper');
+        $crawler = $client->request('GET', '/import/delicious');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -39,12 +39,12 @@ class InstapaperControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportInstapaperBadFile()
+    public function testImportDeliciousBadFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/instapaper');
+        $crawler = $client->request('GET', '/import/delicious');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
         $data = [
@@ -56,14 +56,14 @@ class InstapaperControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportInstapaperWithRedisEnabled()
+    public function testImportDeliciousWithRedisEnabled()
     {
         $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getTestClient();
         $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
-        $crawler = $client->request('GET', '/import/instapaper');
+        $crawler = $client->request('GET', '/import/delicious');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -71,7 +71,7 @@ class InstapaperControllerTest extends WallabagTestCase
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/instapaper-export.csv', 'instapaper.csv');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/delicious_export.2021.02.06_21.10.json', 'delicious.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -86,20 +86,20 @@ class InstapaperControllerTest extends WallabagTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.instapaper'));
+        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.delicious'));
 
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportInstapaperWithFile()
+    public function testImportDeliciousWithFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/instapaper');
+        $crawler = $client->request('GET', '/import/delicious');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/instapaper-export.csv', 'instapaper.csv');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/delicious_export.2021.02.06_21.10.json', 'delicious.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -111,49 +111,36 @@ class InstapaperControllerTest extends WallabagTestCase
 
         $crawler = $client->followRedirect();
 
+        $content = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findByUrlAndUserId(
+                'https://feross.org/spoofmac/',
+                $this->getLoggedInUserId()
+            );
+
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $content = $client->getContainer()
-            ->get(EntityManagerInterface::class)
-            ->getRepository(Entry::class)
-            ->findByUrlAndUserId(
-                'https://www.theguardian.com/global-development/ng-interactive/2025/dec/22/childbirth-under-attack-how-women-and-babies-became-targets-in-conflicts-around-the-world',
-                $this->getLoggedInUserId()
-            );
-
         $this->assertInstanceOf(Entry::class, $content);
 
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.theguardian.com is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.theguardian.com is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.theguardian.com is ok');
-        $this->assertContains('foot', $content->getTagsLabel(), 'It includes the "foot" tag');
-        $this->assertCount(1, $content->getTags());
+        $tags = $content->getTagsLabel();
+        $this->assertContains('osx', $tags, 'It includes the "osx" tag');
+        $this->assertGreaterThanOrEqual(4, \count($tags));
+
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
-
-        $content = $client->getContainer()
-            ->get(EntityManagerInterface::class)
-            ->getRepository(Entry::class)
-            ->findByUrlAndUserId(
-                'https://www.20minutes.fr/high-tech/2077615-20170531-quoi-exactement-tweet-covfefe-donald-trump-persiste-signe',
-                $this->getLoggedInUserId()
-            );
-
-        $this->assertContains('foot', $content->getTagsLabel());
-        $this->assertContains('test_tag', $content->getTagsLabel());
-
-        $this->assertCount(2, $content->getTags());
+        $this->assertSame('2013-01-17', $content->getCreatedAt()->format('Y-m-d'));
     }
 
-    public function testImportInstapaperWithFileAndMarkAllAsRead()
+    public function testImportDeliciousWithFileAndMarkAllAsRead()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/instapaper');
+        $crawler = $client->request('GET', '/import/delicious');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/instapaper-export.csv', 'instapaper-read.csv');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/delicious_export.2021.02.06_21.10.json', 'delicious-read.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -170,35 +157,35 @@ class InstapaperControllerTest extends WallabagTestCase
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
-                'https://redditblog.com/2016/09/20/amp-and-reactredux/',
+                'https://stackoverflow.com/review/',
                 $this->getLoggedInUserId()
             );
 
-        $this->assertTrue($content1->isArchived());
+        $this->assertInstanceOf(Entry::class, $content1);
 
         $content2 = $client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
-                'https://medium.com/@the_minh/why-foursquare-swarm-is-still-my-favourite-social-network-e38228493e6c',
+                'https://addyosmani.com/basket.js/',
                 $this->getLoggedInUserId()
             );
 
-        $this->assertTrue($content2->isArchived());
+        $this->assertInstanceOf(Entry::class, $content2);
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
     }
 
-    public function testImportInstapaperWithEmptyFile()
+    public function testImportDeliciousWithEmptyFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/instapaper');
+        $crawler = $client->request('GET', '/import/delicious');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/test.txt', 'test.txt');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/test.txt', 'test.txt');
 
         $data = [
             'upload_import_file[file]' => $file,

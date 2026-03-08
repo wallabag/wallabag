@@ -1,11 +1,11 @@
 <?php
 
-namespace Wallabag\Tests\Controller\Import;
+namespace Wallabag\Tests\Functional\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Wallabag\Import\PocketImport;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Functional\WallabagTestCase;
 
 class PocketControllerTest extends WallabagTestCase
 {

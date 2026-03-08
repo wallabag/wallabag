@@ -1,13 +1,13 @@
 <?php
 
-namespace Wallabag\Tests\Controller\Import;
+namespace Wallabag\Tests\Functional\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Wallabag\Entity\Entry;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Functional\WallabagTestCase;
 
 class WallabagV1ControllerTest extends WallabagTestCase
 {
@@ -72,7 +72,7 @@ class WallabagV1ControllerTest extends WallabagTestCase
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/wallabag-v1.json', 'wallabag-v1.json');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/wallabag-v1.json', 'wallabag-v1.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -100,7 +100,7 @@ class WallabagV1ControllerTest extends WallabagTestCase
         $crawler = $client->request('GET', '/import/wallabag-v1');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/wallabag-v1.json', 'wallabag-v1.json');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/wallabag-v1.json', 'wallabag-v1.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -144,7 +144,7 @@ class WallabagV1ControllerTest extends WallabagTestCase
         $crawler = $client->request('GET', '/import/wallabag-v1');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/wallabag-v1-read.json', 'wallabag-v1-read.json');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/wallabag-v1-read.json', 'wallabag-v1-read.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -191,7 +191,7 @@ class WallabagV1ControllerTest extends WallabagTestCase
         $crawler = $client->request('GET', '/import/wallabag-v1');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/test.txt', 'test.txt');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/test.txt', 'test.txt');
 
         $data = [
             'upload_import_file[file]' => $file,

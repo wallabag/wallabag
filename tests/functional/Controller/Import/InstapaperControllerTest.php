@@ -1,36 +1,36 @@
 <?php
 
-namespace Wallabag\Tests\Controller\Import;
+namespace Wallabag\Tests\Functional\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Wallabag\Entity\Entry;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Functional\WallabagTestCase;
 
-class PinboardControllerTest extends WallabagTestCase
+class InstapaperControllerTest extends WallabagTestCase
 {
-    public function testImportPinboard()
+    public function testImportInstapaper()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/pinboard');
+        $crawler = $client->request('GET', '/import/instapaper');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportPinboardWithRabbitEnabled()
+    public function testImportInstapaperWithRabbitEnabled()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
-        $crawler = $client->request('GET', '/import/pinboard');
+        $crawler = $client->request('GET', '/import/instapaper');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -39,12 +39,12 @@ class PinboardControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportPinboardBadFile()
+    public function testImportInstapaperBadFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/pinboard');
+        $crawler = $client->request('GET', '/import/instapaper');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
         $data = [
@@ -56,14 +56,14 @@ class PinboardControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportPinboardWithRedisEnabled()
+    public function testImportInstapaperWithRedisEnabled()
     {
         $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getTestClient();
         $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
-        $crawler = $client->request('GET', '/import/pinboard');
+        $crawler = $client->request('GET', '/import/instapaper');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -71,7 +71,7 @@ class PinboardControllerTest extends WallabagTestCase
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/pinboard_export', 'pinboard.json');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/instapaper-export.csv', 'instapaper.csv');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -86,20 +86,20 @@ class PinboardControllerTest extends WallabagTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.pinboard'));
+        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.instapaper'));
 
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportPinboardWithFile()
+    public function testImportInstapaperWithFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/pinboard');
+        $crawler = $client->request('GET', '/import/instapaper');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/pinboard_export', 'pinboard.json');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/instapaper-export.csv', 'instapaper.csv');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -110,42 +110,50 @@ class PinboardControllerTest extends WallabagTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
         $content = $client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
-                'https://ma.ttias.be/varnish-explained/',
+                'https://www.theguardian.com/global-development/ng-interactive/2025/dec/22/childbirth-under-attack-how-women-and-babies-became-targets-in-conflicts-around-the-world',
                 $this->getLoggedInUserId()
             );
 
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
-
         $this->assertInstanceOf(Entry::class, $content);
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://ma.ttias.be is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://ma.ttias.be is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for https://ma.ttias.be is ok');
 
-        $tags = $content->getTagsLabel();
-        $this->assertContains('foot', $tags, 'It includes the "foot" tag');
-        $this->assertContains('varnish', $tags, 'It includes the "varnish" tag');
-        $this->assertContains('php', $tags, 'It includes the "php" tag');
-        $this->assertCount(3, $tags);
-
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.theguardian.com is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.theguardian.com is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.theguardian.com is ok');
+        $this->assertContains('foot', $content->getTagsLabel(), 'It includes the "foot" tag');
+        $this->assertCount(1, $content->getTags());
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
-        $this->assertSame('2016-10-26', $content->getCreatedAt()->format('Y-m-d'));
+
+        $content = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findByUrlAndUserId(
+                'https://www.20minutes.fr/high-tech/2077615-20170531-quoi-exactement-tweet-covfefe-donald-trump-persiste-signe',
+                $this->getLoggedInUserId()
+            );
+
+        $this->assertContains('foot', $content->getTagsLabel());
+        $this->assertContains('test_tag', $content->getTagsLabel());
+
+        $this->assertCount(2, $content->getTags());
     }
 
-    public function testImportPinboardWithFileAndMarkAllAsRead()
+    public function testImportInstapaperWithFileAndMarkAllAsRead()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/pinboard');
+        $crawler = $client->request('GET', '/import/instapaper');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/pinboard_export', 'pinboard-read.json');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/instapaper-export.csv', 'instapaper-read.csv');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -162,37 +170,35 @@ class PinboardControllerTest extends WallabagTestCase
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
-                'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+                'https://redditblog.com/2016/09/20/amp-and-reactredux/',
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf(Entry::class, $content1);
         $this->assertTrue($content1->isArchived());
 
         $content2 = $client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
-                'https://developers.google.com/web/updates/2016/07/infinite-scroller',
+                'https://medium.com/@the_minh/why-foursquare-swarm-is-still-my-favourite-social-network-e38228493e6c',
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf(Entry::class, $content2);
         $this->assertTrue($content2->isArchived());
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
     }
 
-    public function testImportPinboardWithEmptyFile()
+    public function testImportInstapaperWithEmptyFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/pinboard');
+        $crawler = $client->request('GET', '/import/instapaper');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/test.txt', 'test.txt');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/test.txt', 'test.txt');
 
         $data = [
             'upload_import_file[file]' => $file,

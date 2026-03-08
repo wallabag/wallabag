@@ -1,36 +1,36 @@
 <?php
 
-namespace Wallabag\Tests\Controller\Import;
+namespace Wallabag\Tests\Functional\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Wallabag\Entity\Entry;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Functional\WallabagTestCase;
 
-class ElcuratorControllerTest extends WallabagTestCase
+class ChromeControllerTest extends WallabagTestCase
 {
-    public function testImportElcurator()
+    public function testImportChrome()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/elcurator');
+        $crawler = $client->request('GET', '/import/chrome');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportElcuratorWithRabbitEnabled()
+    public function testImportChromeWithRabbitEnabled()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
-        $crawler = $client->request('GET', '/import/elcurator');
+        $crawler = $client->request('GET', '/import/chrome');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -39,12 +39,12 @@ class ElcuratorControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportElcuratorBadFile()
+    public function testImportChromeBadFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/elcurator');
+        $crawler = $client->request('GET', '/import/chrome');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
         $data = [
@@ -56,15 +56,14 @@ class ElcuratorControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportElcuratorWithRedisEnabled()
+    public function testImportChromeWithRedisEnabled()
     {
         $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getTestClient();
-
         $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
-        $crawler = $client->request('GET', '/import/elcurator');
+        $crawler = $client->request('GET', '/import/chrome');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -72,7 +71,7 @@ class ElcuratorControllerTest extends WallabagTestCase
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/elcurator.json', 'elcurator.json');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/chrome-bookmarks', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -87,20 +86,20 @@ class ElcuratorControllerTest extends WallabagTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.elcurator'));
+        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.chrome'));
 
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportElcuratorWithFile()
+    public function testImportWallabagWithChromeFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/elcurator');
+        $crawler = $client->request('GET', '/import/chrome');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/elcurator.json', 'elcurator.json');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/chrome-bookmarks', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -119,18 +118,41 @@ class ElcuratorControllerTest extends WallabagTestCase
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
-                'https://devblog.lexik.fr/git/qualite-de-code-integration-de-php-git-hooks-dans-symfony2-2842',
+                'https://www.20minutes.fr/sport/3256363-20220321-tournoi-vi-nations-trophee-gagne-xv-france-fini-fond-seine',
                 $this->getLoggedInUserId()
             );
 
         $this->assertInstanceOf(Entry::class, $content);
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.20minutes.fr is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.20minutes.fr is ok');
+        $this->assertCount(1, $content->getTags());
 
-        $this->assertStringContainsString('Qualité de code - Intégration de php-git-hooks dans Symfony2', $content->getTitle());
-        $this->assertSame('2015-09-09', $content->getCreatedAt()->format('Y-m-d'));
-        $this->assertTrue($content->isStarred(), 'Entry is starred');
+        $createdAt = $content->getCreatedAt();
+        $this->assertSame('2011', $createdAt->format('Y'));
+        $this->assertSame('07', $createdAt->format('m'));
+    }
 
-        $tags = $content->getTagsLabel();
-        $this->assertContains('tag1', $tags, 'It includes the "tag1" tag');
-        $this->assertContains('tag2', $tags, 'It includes the "tag2" tag');
+    public function testImportWallabagWithEmptyFile()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $crawler = $client->request('GET', '/import/chrome');
+        $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
+
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/test.txt', 'test.txt');
+
+        $data = [
+            'upload_import_file[file]' => $file,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertStringContainsString('flashes.import.notice.failed', $body[0]);
     }
 }

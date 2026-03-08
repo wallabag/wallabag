@@ -1,36 +1,36 @@
 <?php
 
-namespace Wallabag\Tests\Controller\Import;
+namespace Wallabag\Tests\Functional\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Wallabag\Entity\Entry;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Functional\WallabagTestCase;
 
-class ShaarliControllerTest extends WallabagTestCase
+class PocketCsvControllerTest extends WallabagTestCase
 {
-    public function testImportShaarli()
+    public function testImportPocketCsv()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/shaarli');
+        $crawler = $client->request('GET', '/import/pocket_csv');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportShaarliWithRabbitEnabled()
+    public function testImportPocketCsvWithRabbitEnabled()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
-        $crawler = $client->request('GET', '/import/shaarli');
+        $crawler = $client->request('GET', '/import/pocket_csv');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -39,12 +39,12 @@ class ShaarliControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportShaarliBadFile()
+    public function testImportPocketCsvBadFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/shaarli');
+        $crawler = $client->request('GET', '/import/pocket_csv');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
         $data = [
@@ -56,14 +56,14 @@ class ShaarliControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportShaarliWithRedisEnabled()
+    public function testImportPocketCsvWithRedisEnabled()
     {
         $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getTestClient();
         $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
-        $crawler = $client->request('GET', '/import/shaarli');
+        $crawler = $client->request('GET', '/import/pocket_csv');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -71,7 +71,7 @@ class ShaarliControllerTest extends WallabagTestCase
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/shaarli-bookmarks.html', 'Bookmarks');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/pocket.csv', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -86,20 +86,20 @@ class ShaarliControllerTest extends WallabagTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.shaarli'));
+        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.pocket_csv'));
 
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportWallabagWithShaarliFile()
+    public function testImportWallabagWithPocketCsvFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/shaarli');
+        $crawler = $client->request('GET', '/import/pocket_csv');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/shaarli-bookmarks.html', 'Bookmarks');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/pocket.csv', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -114,19 +114,32 @@ class ShaarliControllerTest extends WallabagTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $content = $client->getContainer()
+        $entries = $client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
-            ->findByUrlAndUserId(
-                'https://www.20minutes.fr/sport/4002755-20220928-tarn-lapins-ravagent-terrain-match-rugby-doit-etre-annule',
-                $this->getLoggedInUserId()
-            );
+            ->findBy(['user' => $this->getLoggedInUserId()]);
 
-        $this->assertInstanceOf(Entry::class, $content);
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for 20minutes.fr is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for 20minutes.fr is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for 20minutes.fr is ok');
-        $this->assertCount(2, $content->getTags());
+        $expectedEntries = [
+            'http://youmightnotneedjquery.com/,1600322788',
+            'https://jp-lambert.me/est-ce-que-jai-besoin-d-un-scrum-master-604f5a471c73',
+            'https://www.monde-diplomatique.fr/2020/09/HALIMI/62165',
+            'https://www.reddit.com/r/DataHoarder/comments/ioupbk/archivebox_question_how_do_i_import_links_from_a/',
+            'https://www.numerama.com/politique/646826-tu-vas-pleurer-les-premieres-fois-que-se-passe-t-il-au-sein-du-studio-dubisoft-derriere-trackmania.html#utm_medium=distibuted&utm_source=rss&utm_campaign=646826',
+            'https://www.nouvelobs.com/rue89/20200911.OBS33165/comment-konbini-s-est-fait-pieger-par-un-pere-masculiniste.html',
+            'https://reporterre.net/Des-abeilles-pour-resoudre-les-conflits-entre-les-humains-et-les-elephants',
+        ];
+
+        $matchedEntries = array_map(static function ($expectedUrl) use ($entries) {
+            foreach ($entries as $entry) {
+                if ($entry->getUrl() === $expectedUrl) {
+                    return $entry;
+                }
+            }
+
+            return null;
+        }, $expectedEntries);
+
+        $this->assertCount(\count($expectedEntries), $matchedEntries, 'Should have 7 entries imported from pocket.csv');
     }
 
     public function testImportWallabagWithEmptyFile()
@@ -134,10 +147,10 @@ class ShaarliControllerTest extends WallabagTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/shaarli');
+        $crawler = $client->request('GET', '/import/pocket_csv');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/test.html', 'test.html');
+        $file = new UploadedFile(__DIR__ . '/../../../fixtures/Import/test.csv', 'test.csv');
 
         $data = [
             'upload_import_file[file]' => $file,
