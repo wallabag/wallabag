@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\Import;
+namespace Wallabag\Tests\Import;
 
 use PHPUnit\Framework\TestCase;
 use Wallabag\Import\ImportChain;

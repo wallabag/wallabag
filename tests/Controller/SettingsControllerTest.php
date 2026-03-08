@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Wallabag\Controller;
+namespace Wallabag\Tests\Controller;
 
-use Tests\Wallabag\WallabagTestCase;
+use Wallabag\Tests\WallabagTestCase;
 
 /**
  * The controller `SettingsController` does not exist.

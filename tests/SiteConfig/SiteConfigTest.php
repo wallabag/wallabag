@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\SiteConfig;
+namespace Wallabag\Tests\SiteConfig;
 
 use PHPUnit\Framework\TestCase;
 use Wallabag\SiteConfig\SiteConfig;

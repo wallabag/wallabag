@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Wallabag\Controller;
+namespace Wallabag\Tests\Controller;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\SiteCredential;
+use Wallabag\Tests\WallabagTestCase;
 
 class SiteCredentialControllerTest extends WallabagTestCase
 {

@@ -1,13 +1,12 @@
 <?php
 
-namespace Tests\Wallabag\Controller;
+namespace Wallabag\Tests\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Annotation;
 use Wallabag\Entity\Config as ConfigEntity;
 use Wallabag\Entity\Entry;
@@ -15,6 +14,7 @@ use Wallabag\Entity\IgnoreOriginUserRule;
 use Wallabag\Entity\Tag;
 use Wallabag\Entity\TaggingRule;
 use Wallabag\Entity\User;
+use Wallabag\Tests\WallabagTestCase;
 
 class ConfigControllerTest extends WallabagTestCase
 {

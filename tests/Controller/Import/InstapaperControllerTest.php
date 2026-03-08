@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Wallabag\Controller\Import;
+namespace Wallabag\Tests\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Entry;
+use Wallabag\Tests\WallabagTestCase;
 
 class InstapaperControllerTest extends WallabagTestCase
 {

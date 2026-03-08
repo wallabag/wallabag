@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\Helper;
+namespace Wallabag\Tests\Helper;
 
 use Graby\Graby;
 use Monolog\Handler\TestHandler;

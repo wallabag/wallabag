@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\Event\Listener;
+namespace Wallabag\Tests\Event\Listener;
 
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Wallabag\Controller;
+namespace Wallabag\Tests\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Entry;
 use Wallabag\Repository\UserRepository;
+use Wallabag\Tests\WallabagTestCase;
 
 class ExportControllerTest extends WallabagTestCase
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Wallabag\Controller\Import;
+namespace Wallabag\Tests\Controller\Import;
 
-use Tests\Wallabag\WallabagTestCase;
+use Wallabag\Tests\WallabagTestCase;
 
 class ImportControllerTest extends WallabagTestCase
 {

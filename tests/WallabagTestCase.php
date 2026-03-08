@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag;
+namespace Wallabag\Tests;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
