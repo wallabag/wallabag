@@ -1,16 +1,16 @@
 <?php
 
-namespace Wallabag\Tests\Entity;
+namespace Wallabag\Tests\Unit\Entity;
 
+use PHPUnit\Framework\TestCase;
 use Wallabag\Entity\Entry;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Entity\User;
 
-class EntryTest extends WallabagTestCase
+class EntryTest extends TestCase
 {
     public function testGetLanguage()
     {
-        $this->logInAs('admin');
-        $entry = new Entry($this->getLoggedInUser());
+        $entry = new Entry(new User());
         $languages = [
             'en_GB' => 'en-GB',
             'en_US' => 'en-US',
