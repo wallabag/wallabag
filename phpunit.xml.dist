@@ -21,9 +21,6 @@
     <testsuite name="functional">
       <directory>tests/functional</directory>
     </testsuite>
-    <testsuite name="wallabag">
-      <directory>tests</directory>
-    </testsuite>
   </testsuites>
   <php>
     <ini name="error_reporting" value="-1"/>
