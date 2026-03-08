@@ -15,6 +15,12 @@ abstract class WallabagKernelTestCase extends KernelTestCase
         static::bootKernel();
     }
 
+    protected function rebootKernel(): void
+    {
+        static::ensureKernelShutdown();
+        static::bootKernel();
+    }
+
     protected function createApplication(): Application
     {
         return new Application(static::$kernel);

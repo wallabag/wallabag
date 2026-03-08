@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\Tests\Command;
+namespace Wallabag\Tests\Integration\Command;
 
 use DAMA\DoctrineTestBundle\Doctrine\DBAL\StaticDriver;
 use Doctrine\DBAL\Connection;
@@ -9,15 +9,14 @@ use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\Persistence\ManagerRegistry;
 use GuzzleHttp\Psr7\Uri;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Command\LazyCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Tester\CommandTester;
 use Wallabag\Command\InstallCommand;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
-class InstallCommandTest extends WallabagTestCase
+class InstallCommandTest extends WallabagKernelTestCase
 {
     public static function setUpBeforeClass(): void
     {
@@ -36,10 +35,10 @@ class InstallCommandTest extends WallabagTestCase
         parent::setUp();
 
         /** @var Connection $connection */
-        $connection = $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection();
+        $connection = static::getContainer()->get(ManagerRegistry::class)->getConnection();
 
-        $originalDatabaseUrl = $this->getTestClient()->getContainer()->getParameter('env(DATABASE_URL)');
-        $dbnameSuffix = $this->getTestClient()->getContainer()->getParameter('wallabag_dbname_suffix');
+        $originalDatabaseUrl = static::getContainer()->getParameter('env(DATABASE_URL)');
+        $dbnameSuffix = static::getContainer()->getParameter('wallabag_dbname_suffix');
         $tmpDatabaseName = 'wallabag_' . bin2hex(random_bytes(5));
 
         if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
@@ -56,8 +55,8 @@ class InstallCommandTest extends WallabagTestCase
             $connection->executeQuery('CREATE DATABASE ' . $tmpTestDatabaseName);
         }
 
-        // The environnement has been changed, recreate the client in order to update connection
-        $this->getNewClient();
+        // The environment has been changed, reboot the kernel to update the connection.
+        $this->rebootKernel();
     }
 
     protected function tearDown(): void
@@ -65,10 +64,10 @@ class InstallCommandTest extends WallabagTestCase
         $databaseUrl = getenv('DATABASE_URL');
 
         /** @var Connection $connection */
-        $connection = $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection();
+        $connection = static::getContainer()->get(ManagerRegistry::class)->getConnection();
 
         if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
-            // Remove the real environnement variable
+            // Remove the real environment variable.
             putenv('DATABASE_URL');
 
             $databasePath = parse_url($databaseUrl, \PHP_URL_PATH);
@@ -80,14 +79,13 @@ class InstallCommandTest extends WallabagTestCase
             $testDatabaseName = $connection->getDatabase();
             $connection->close();
 
-            // Remove the real environnement variable
+            // Remove the real environment variable.
             putenv('DATABASE_URL');
 
-            // Create a new client to avoid the error:
-            // Transaction commit failed because the transaction has been marked for rollback only.
-            $this->getNewClient();
+            // Reboot the kernel to avoid the rollback-only transaction state.
+            $this->rebootKernel();
 
-            $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->executeQuery('DROP DATABASE ' . $testDatabaseName);
+            static::getContainer()->get(ManagerRegistry::class)->getConnection()->executeQuery('DROP DATABASE ' . $testDatabaseName);
         }
 
         parent::tearDown();
@@ -144,17 +142,15 @@ class InstallCommandTest extends WallabagTestCase
 
     public function testRunInstallCommandWithNonExistingDatabase()
     {
-        if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof PostgreSQLPlatform) {
+        if (static::getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof PostgreSQLPlatform) {
             $this->markTestSkipped('PostgreSQL spotted: PostgreSQL requires that the database exists before connecting to it, skipping.');
         }
 
         // skipped SQLite check when database is removed because while testing for the connection,
         // the driver will create the file (so the database) before testing if database exist
-        if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof SqlitePlatform) {
+        if (static::getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof SqlitePlatform) {
             $this->markTestSkipped('SQLite spotted: can\'t test with database removed.');
         }
-
-        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $this->getCommand();
 
@@ -200,8 +196,6 @@ class InstallCommandTest extends WallabagTestCase
 
     public function testRunInstallCommandChooseNothing()
     {
-        $application = new Application($this->getTestClient()->getKernel());
-
         $command = $this->getCommand();
 
         $tester = new CommandTester($command);
@@ -216,7 +210,7 @@ class InstallCommandTest extends WallabagTestCase
         $this->assertStringContainsString('Administration setup.', $tester->getDisplay());
         $this->assertStringContainsString('Config setup.', $tester->getDisplay());
 
-        $databasePlatform = $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform();
+        $databasePlatform = static::getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform();
 
         if ($databasePlatform instanceof SqlitePlatform || $databasePlatform instanceof PostgreSQLPlatform) {
             // SQLite and PostgreSQL always have the database created, so we create the schema only
@@ -248,7 +242,7 @@ class InstallCommandTest extends WallabagTestCase
 
     private function getCommand(): InstallCommand
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:install');
 
@@ -263,7 +257,7 @@ class InstallCommandTest extends WallabagTestCase
 
     private function setupDatabase()
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
         $application->setAutoExit(false);
 
         $application->run(new ArrayInput([
@@ -284,12 +278,7 @@ class InstallCommandTest extends WallabagTestCase
             '--env' => 'test',
         ]), new NullOutput());
 
-        /*
-         * Recreate client to avoid error:
-         *
-         * [Doctrine\DBAL\ConnectionException]
-         * Transaction commit failed because the transaction has been marked for rollback only.
-         */
-        $this->getNewClient();
+        // Reboot the kernel to avoid the rollback-only transaction state.
+        $this->rebootKernel();
     }
 }

@@ -1,15 +1,13 @@
 <?php
 
-namespace Wallabag\Tests\Command;
+namespace Wallabag\Tests\Integration\Command;
 
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Wallabag\Entity\Entry;
 use Wallabag\Repository\EntryRepository;
-use Wallabag\Repository\UserRepository;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
-class ReloadEntryCommandTest extends WallabagTestCase
+class ReloadEntryCommandTest extends WallabagKernelTestCase
 {
     public $url = 'https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html';
 
@@ -37,29 +35,26 @@ class ReloadEntryCommandTest extends WallabagTestCase
     {
         parent::setUp();
 
-        $userRepository = static::getContainer()->get(UserRepository::class);
-
-        $user = $userRepository->findOneByUserName('admin');
-        $this->adminEntry = new Entry($user);
+        $this->adminEntry = new Entry($this->getUser('admin'));
         $this->adminEntry->setUrl($this->url);
         $this->adminEntry->setTitle('title foo');
         $this->adminEntry->setContent('');
         $this->getEntityManager()->persist($this->adminEntry);
 
-        $user = $userRepository->findOneByUserName('bob');
-        $this->bobEntry = new Entry($user);
+        $bob = $this->getUser('bob');
+        $this->bobEntry = new Entry($bob);
         $this->bobEntry->setUrl($this->url);
         $this->bobEntry->setTitle('title foo');
         $this->bobEntry->setContent('');
         $this->getEntityManager()->persist($this->bobEntry);
 
-        $this->bobParsedEntry = new Entry($user);
+        $this->bobParsedEntry = new Entry($bob);
         $this->bobParsedEntry->setUrl($this->url);
         $this->bobParsedEntry->setTitle('title foo');
         $this->bobParsedEntry->setContent('');
         $this->getEntityManager()->persist($this->bobParsedEntry);
 
-        $this->bobNotParsedEntry = new Entry($user);
+        $this->bobNotParsedEntry = new Entry($bob);
         $this->bobNotParsedEntry->setUrl($this->url);
         $this->bobNotParsedEntry->setTitle('title foo');
         $this->bobNotParsedEntry->setContent('');
@@ -74,7 +69,7 @@ class ReloadEntryCommandTest extends WallabagTestCase
      */
     public function testRunReloadEntryCommand()
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:entry:reload');
         $tester = new CommandTester($command);
@@ -98,7 +93,7 @@ class ReloadEntryCommandTest extends WallabagTestCase
      */
     public function testRunReloadEntryWithUsernameCommand()
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:entry:reload');
         $tester = new CommandTester($command);
@@ -121,7 +116,7 @@ class ReloadEntryCommandTest extends WallabagTestCase
 
     public function testRunReloadEntryWithNotParsedOption()
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:entry:reload');
         $tester = new CommandTester($command);
@@ -142,7 +137,7 @@ class ReloadEntryCommandTest extends WallabagTestCase
 
     public function testRunReloadEntryWithoutEntryCommand()
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:entry:reload');
         $tester = new CommandTester($command);
