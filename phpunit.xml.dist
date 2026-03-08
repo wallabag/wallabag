@@ -12,6 +12,9 @@
     </exclude>
   </coverage>
   <testsuites>
+    <testsuite name="unit">
+      <directory>tests/unit</directory>
+    </testsuite>
     <testsuite name="wallabag">
       <directory>tests</directory>
     </testsuite>

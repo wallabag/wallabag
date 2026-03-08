@@ -5,6 +5,10 @@ use Symfony\Component\Process\Process;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+if ('unit' === getCurrentTestSuite()) {
+    return;
+}
+
 (new Filesystem())->remove(__DIR__ . '/../var/cache/test');
 
 if (!isPartialRun()) {
