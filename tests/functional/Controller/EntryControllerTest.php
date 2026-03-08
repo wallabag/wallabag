@@ -1968,8 +1968,14 @@ class EntryControllerTest extends WallabagTestCase
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
+        $entry = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
 
-        $crawler = $client->request('GET', '/domain/1');
+        \assert($entry instanceof Entry);
+
+        $crawler = $client->request('GET', '/domain/' . $entry->getId());
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(4, $crawler->filter('ol.entries > li'));
     }

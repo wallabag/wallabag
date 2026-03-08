@@ -325,9 +325,15 @@ class ExportControllerTest extends WallabagTestCase
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
+        $entry = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
+
+        \assert($entry instanceof Entry);
 
         ob_start();
-        $crawler = $client->request('GET', '/export/same_domain.json?entry=1');
+        $crawler = $client->request('GET', '/export/same_domain.json?entry=' . $entry->getId());
         ob_end_clean();
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());

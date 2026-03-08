@@ -219,13 +219,16 @@ class FeedControllerTest extends WallabagTestCase
 
         $entry1 = $em
             ->getRepository(Entry::class)
-            ->find(1)
+            ->findByUrlAndUserId('http://0.0.0.0/entry1', $user->getId())
         ;
 
         $entry4 = $em
             ->getRepository(Entry::class)
-            ->find(4)
+            ->findByUrlAndUserId('http://0.0.0.0/entry4', $user->getId())
         ;
+
+        \assert($entry1 instanceof Entry);
+        \assert($entry4 instanceof Entry);
 
         $now = new \DateTimeImmutable('now');
 

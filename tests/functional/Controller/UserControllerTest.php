@@ -2,6 +2,8 @@
 
 namespace Wallabag\Tests\Functional\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Wallabag\Entity\User;
 use Wallabag\Tests\Functional\WallabagTestCase;
 
 class UserControllerTest extends WallabagTestCase
@@ -20,6 +22,8 @@ class UserControllerTest extends WallabagTestCase
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
+        $username = 'test_user_' . uniqid('', true);
+        $email = $username . '@test.io';
 
         // Create a new user in the database
         $crawler = $client->request('GET', '/users/list');
@@ -28,8 +32,8 @@ class UserControllerTest extends WallabagTestCase
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('user.form.save')->form([
-            'new_user[username]' => 'test_user',
-            'new_user[email]' => 'test@test.io',
+            'new_user[username]' => $username,
+            'new_user[email]' => $email,
             'new_user[plainPassword][first]' => 'testtest',
             'new_user[plainPassword][second]' => 'testtest',
         ]);
@@ -37,17 +41,23 @@ class UserControllerTest extends WallabagTestCase
         $client->submit($form);
         $client->followRedirect();
         $crawler = $client->request('GET', '/users/list');
+        $user = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(User::class)
+            ->findOneBy(['username' => $username]);
+
+        \assert($user instanceof User);
 
         // Check data in the show view
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("test_user")')->count(), 'Missing element td:contains("test_user")');
+        $this->assertGreaterThan(0, $crawler->filter('td:contains("' . $username . '")')->count(), 'Missing element td:contains("' . $username . '")');
 
         // Edit the user
-        $crawler = $client->click($crawler->selectLink('user.list.edit_action')->last()->link());
+        $crawler = $client->request('GET', '/users/' . $user->getId() . '/edit');
 
         $form = $crawler->selectButton('user.form.save')->form([
             'user[name]' => 'Foo User',
-            'user[username]' => 'test_user',
-            'user[email]' => 'test@test.io',
+            'user[username]' => $username,
+            'user[email]' => $email,
             'user[enabled]' => true,
         ]);
 
@@ -57,8 +67,7 @@ class UserControllerTest extends WallabagTestCase
         // Check the element contains an attribute with value equals "Foo User"
         $this->assertGreaterThan(0, $crawler->filter('[value="Foo User"]')->count(), 'Missing element [value="Foo User"]');
 
-        $crawler = $client->request('GET', '/users/list');
-        $crawler = $client->click($crawler->selectLink('user.list.edit_action')->last()->link());
+        $crawler = $client->request('GET', '/users/' . $user->getId() . '/edit');
 
         // Delete the user
         $client->submit($crawler->selectButton('user.form.delete')->form());

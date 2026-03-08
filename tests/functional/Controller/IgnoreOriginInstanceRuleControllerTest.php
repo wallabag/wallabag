@@ -2,6 +2,8 @@
 
 namespace Wallabag\Tests\Functional\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Wallabag\Entity\IgnoreOriginInstanceRule;
 use Wallabag\Tests\Functional\WallabagTestCase;
 
 class IgnoreOriginInstanceRuleControllerTest extends WallabagTestCase
@@ -25,6 +27,8 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagTestCase
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
+        $createdHost = 'foo-' . bin2hex(random_bytes(4)) . '.example.com';
+        $updatedHost = 'bar-' . bin2hex(random_bytes(4)) . '.example.com';
 
         // Creation
         $crawler = $client->request('GET', '/ignore-origin-instance-rules/new');
@@ -39,7 +43,7 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagTestCase
         $form = $crawler->filter('button[id=ignore_origin_instance_rule_save]')->form();
 
         $data = [
-            'ignore_origin_instance_rule[rule]' => 'host = "foo.example.com"',
+            'ignore_origin_instance_rule[rule]' => 'host = "' . $createdHost . '"',
         ];
 
         $client->submit($form, $data);
@@ -49,15 +53,19 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagTestCase
         $crawler = $client->followRedirect();
 
         $this->assertStringContainsString('flashes.ignore_origin_instance_rule.notice.added', $crawler->filter('body')->extract(['_text'])[0]);
+        $ignoreOriginInstanceRule = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(IgnoreOriginInstanceRule::class)
+            ->findOneBy(['rule' => 'host = "' . $createdHost . '"']);
+
+        \assert($ignoreOriginInstanceRule instanceof IgnoreOriginInstanceRule);
 
         // Edition
-        $editLink = $crawler->filter('div[id=content] table a')->last()->link();
-
-        $crawler = $client->click($editLink);
+        $crawler = $client->request('GET', '/ignore-origin-instance-rules/' . $ignoreOriginInstanceRule->getId() . '/edit');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $this->assertStringContainsString('foo.example.com', $crawler->filter('form[name=ignore_origin_instance_rule] input[type=text]')->extract(['value'])[0]);
+        $this->assertStringContainsString($createdHost, $crawler->filter('form[name=ignore_origin_instance_rule] input[type=text]')->extract(['value'])[0]);
 
         $body = $crawler->filter('body')->extract(['_text'])[0];
 
@@ -67,7 +75,7 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagTestCase
         $form = $crawler->filter('button[id=ignore_origin_instance_rule_save]')->form();
 
         $data = [
-            'ignore_origin_instance_rule[rule]' => 'host = "bar.example.com"',
+            'ignore_origin_instance_rule[rule]' => 'host = "' . $updatedHost . '"',
         ];
 
         $client->submit($form, $data);
@@ -77,14 +85,11 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagTestCase
         $crawler = $client->followRedirect();
 
         $this->assertStringContainsString('flashes.ignore_origin_instance_rule.notice.updated', $crawler->filter('body')->extract(['_text'])[0]);
-
-        $editLink = $crawler->filter('div[id=content] table a')->last()->link();
-
-        $crawler = $client->click($editLink);
+        $crawler = $client->request('GET', '/ignore-origin-instance-rules/' . $ignoreOriginInstanceRule->getId() . '/edit');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $this->assertStringContainsString('bar.example.com', $crawler->filter('form[name=ignore_origin_instance_rule] input[type=text]')->extract(['value'])[0]);
+        $this->assertStringContainsString($updatedHost, $crawler->filter('form[name=ignore_origin_instance_rule] input[type=text]')->extract(['value'])[0]);
 
         $deleteForm = $crawler->filter('body')->selectButton('ignore_origin_instance_rule.form.delete')->form();
 

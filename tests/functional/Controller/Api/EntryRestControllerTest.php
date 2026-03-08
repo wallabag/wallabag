@@ -677,7 +677,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testDeleteEntryExpectBadRequest()
     {
-        $this->client->request('DELETE', '/api/entries/1.json?expect=badrequest');
+        $this->client->request('DELETE', '/api/entries/' . $this->getEntryIdByUrl('http://0.0.0.0/entry1') . '.json?expect=badrequest');
 
         $this->assertSame(400, $this->client->getResponse()->getStatusCode());
     }
@@ -1219,7 +1219,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         return [
             'with_id' => [
                 'url' => '/api/entries/exists?url=http://0.0.0.0/entry2&return_id=1',
-                'expectedValue' => 2,
+                'expectedValue' => 'entry2-id',
             ],
             'without_id' => [
                 'url' => '/api/entries/exists?url=http://0.0.0.0/entry2',
@@ -1227,7 +1227,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             ],
             'hashed_url_with_id' => [
                 'url' => '/api/entries/exists?hashed_url=' . $url . '&return_id=1',
-                'expectedValue' => 2,
+                'expectedValue' => 'entry2-id',
             ],
             'hashed_url_without_id' => [
                 'url' => '/api/entries/exists?hashed_url=' . $url . '',
@@ -1241,6 +1241,10 @@ class EntryRestControllerTest extends WallabagApiTestCase
      */
     public function testGetEntriesExists($url, $expectedValue)
     {
+        if ('entry2-id' === $expectedValue) {
+            $expectedValue = $this->getEntryIdByUrl('http://0.0.0.0/entry2');
+        }
+
         $this->client->request('GET', $url);
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -1296,7 +1300,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertArrayHasKey(hash('sha1', $url1), $content);
         $this->assertArrayHasKey(hash('sha1', $url2), $content);
-        $this->assertSame(2, $content[hash('sha1', $url1)]);
+        $this->assertSame($this->getEntryIdByUrl($url1), $content[hash('sha1', $url1)]);
         $this->assertNull($content[hash('sha1', $url2)]);
     }
 
@@ -1584,5 +1588,17 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertGreaterThan(0, $content['id']);
         $this->assertSame('https://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html', $content['url']);
+    }
+
+    private function getEntryIdByUrl(string $url, string $username = 'admin'): int
+    {
+        $entry = $this->client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findByUrlAndUserId($url, $this->getUserId($username));
+
+        \assert($entry instanceof Entry);
+
+        return $entry->getId();
     }
 }
