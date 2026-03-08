@@ -119,17 +119,27 @@ class ConfigControllerTest extends WallabagTestCase
     public function dataForUpdateFailed()
     {
         return [
-            [[
-                'config[items_per_page]' => '',
-                'config[language]' => 'en',
-            ]],
+            [
+                [
+                    'config[items_per_page]' => '',
+                    'config[language]' => 'en',
+                ],
+                'This value should not be blank',
+            ],
+            [
+                [
+                    'config[items_per_page]' => 0,
+                    'config[language]' => 'en',
+                ],
+                'validator.item_per_page_too_low',
+            ],
         ];
     }
 
     /**
      * @dataProvider dataForUpdateFailed
      */
-    public function testUpdateFailed($data)
+    public function testUpdateFailed($data, $expectedMessage)
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -145,7 +155,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
-        $this->assertStringContainsString('This value should not be blank', $alert[0]);
+        $this->assertStringContainsString($expectedMessage, $alert[0]);
     }
 
     public function dataForChangePasswordFailed()
@@ -400,7 +410,7 @@ class ConfigControllerTest extends WallabagTestCase
                 [
                     'feed_config[feed_limit]' => 0,
                 ],
-                'This value should be between 1 and 100000.',
+                'validator.feed_limit_too_low',
             ],
             [
                 [
