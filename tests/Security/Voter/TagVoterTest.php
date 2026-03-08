@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\Security\Voter;
+namespace Wallabag\Tests\Security\Voter;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

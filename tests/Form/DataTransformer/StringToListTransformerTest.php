@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\Form\DataTransformer;
+namespace Wallabag\Tests\Form\DataTransformer;
 
 use PHPUnit\Framework\TestCase;
 use Wallabag\Form\DataTransformer\StringToListTransformer;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Wallabag\Controller\Api;
+namespace Wallabag\Tests\Controller\Api;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Api\Client;
 use Wallabag\Entity\User;
+use Wallabag\Tests\WallabagTestCase;
 
 class DeveloperControllerTest extends WallabagTestCase
 {

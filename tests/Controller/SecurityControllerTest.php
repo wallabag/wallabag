@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Wallabag\Controller;
+namespace Wallabag\Tests\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\User;
+use Wallabag\Tests\WallabagTestCase;
 
 class SecurityControllerTest extends WallabagTestCase
 {

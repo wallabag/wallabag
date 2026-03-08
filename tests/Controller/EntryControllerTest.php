@@ -1,11 +1,10 @@
 <?php
 
-namespace Tests\Wallabag\Controller;
+namespace Wallabag\Tests\Controller;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Annotation;
 use Wallabag\Entity\Config as ConfigEntity;
 use Wallabag\Entity\Entry;
@@ -14,6 +13,7 @@ use Wallabag\Entity\Tag;
 use Wallabag\Entity\User;
 use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\CryptoProxy;
+use Wallabag\Tests\WallabagTestCase;
 
 class EntryControllerTest extends WallabagTestCase
 {

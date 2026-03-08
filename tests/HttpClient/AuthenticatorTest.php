@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\HttpClient;
+namespace Wallabag\Tests\HttpClient;
 
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\Tools;
+namespace Wallabag\Tests\Tools;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;

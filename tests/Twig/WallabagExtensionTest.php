@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\Twig;
+namespace Wallabag\Tests\Twig;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;

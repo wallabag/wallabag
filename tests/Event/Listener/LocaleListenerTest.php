@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\Event\Listener;
+namespace Wallabag\Tests\Event\Listener;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;

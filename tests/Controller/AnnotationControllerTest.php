@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Wallabag\Controller;
+namespace Wallabag\Tests\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Annotation;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
+use Wallabag\Tests\WallabagTestCase;
 
 class AnnotationControllerTest extends WallabagTestCase
 {

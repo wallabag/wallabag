@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\Import;
+namespace Wallabag\Tests\Import;
 
 use Doctrine\ORM\EntityManager;
 use M6Web\Component\RedisMock\RedisMockFactory;
