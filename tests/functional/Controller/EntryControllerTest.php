@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\Tests\Controller;
+namespace Wallabag\Tests\Functional\Controller;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,7 +13,7 @@ use Wallabag\Entity\Tag;
 use Wallabag\Entity\User;
 use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\CryptoProxy;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Functional\WallabagTestCase;
 
 class EntryControllerTest extends WallabagTestCase
 {

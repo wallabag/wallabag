@@ -1,11 +1,11 @@
 <?php
 
-namespace Wallabag\Tests\Controller;
+namespace Wallabag\Tests\Functional\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Functional\WallabagTestCase;
 
 class FeedControllerTest extends WallabagTestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\Tests\Controller;
+namespace Wallabag\Tests\Functional\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
@@ -14,7 +14,7 @@ use Wallabag\Entity\IgnoreOriginUserRule;
 use Wallabag\Entity\Tag;
 use Wallabag\Entity\TaggingRule;
 use Wallabag\Entity\User;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Functional\WallabagTestCase;
 
 class ConfigControllerTest extends WallabagTestCase
 {
@@ -1388,7 +1388,7 @@ class ConfigControllerTest extends WallabagTestCase
         $crawler = $client->request('GET', '/config');
         $form = $crawler->filter('form[name=upload_tagging_rule_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/tagging_rules_admin.json', 'tagging_rules_admin.json');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/tagging_rules_admin.json', 'tagging_rules_admin.json');
 
         $data = [
             'upload_tagging_rule_file[file]' => $file,
