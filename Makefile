@@ -38,6 +38,9 @@ test: ## Launch wallabag testsuite
 test-unit: ## Launch unit testsuite
 	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit --testsuite unit -v
 
+test-integration: ## Launch integration testsuite
+	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit --testsuite integration -v
+
 fix-cs: ## Run PHP-CS-Fixer
 	@$(PHP_NO_XDEBUG) bin/php-cs-fixer fix
 
@@ -62,6 +65,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help install update build test test-unit release deploy run dev fix-cs phpstan phpstan-baseline lint-js lint-scss
+.PHONY: help install update build test test-unit test-integration release deploy run dev fix-cs phpstan phpstan-baseline lint-js lint-scss
 
 .DEFAULT_GOAL := install

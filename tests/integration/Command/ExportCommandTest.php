@@ -1,20 +1,27 @@
 <?php
 
-namespace Wallabag\Tests\Command;
+namespace Wallabag\Tests\Integration\Command;
 
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
-use Wallabag\Tests\WallabagTestCase;
+use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
-class ExportCommandTest extends WallabagTestCase
+class ExportCommandTest extends WallabagKernelTestCase
 {
+    protected function tearDown(): void
+    {
+        @unlink('admin-export.json');
+        @unlink('specialexport.json');
+
+        parent::tearDown();
+    }
+
     public function testExportCommandWithoutUsername()
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments (missing: "username")');
 
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:export');
 
@@ -24,7 +31,7 @@ class ExportCommandTest extends WallabagTestCase
 
     public function testExportCommandWithBadUsername()
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:export');
 
@@ -38,7 +45,7 @@ class ExportCommandTest extends WallabagTestCase
 
     public function testExportCommand()
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:export');
 
@@ -54,7 +61,7 @@ class ExportCommandTest extends WallabagTestCase
 
     public function testExportCommandWithSpecialPath()
     {
-        $application = new Application($this->getTestClient()->getKernel());
+        $application = $this->createApplication();
 
         $command = $application->find('wallabag:export');
 
