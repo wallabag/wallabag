@@ -21,7 +21,7 @@
     <server name="KERNEL_CLASS" value="AppKernel"/>
     <server name="APP_ENV" value="test"/>
     <server name="APP_DEBUG" value="0"/>
-    <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[total]=999999&amp;quiet[]=indirect&amp;quiet[]=other"/>
+    <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[self]=0&amp;max[direct]=0&amp;quiet[]=indirect&amp;quiet[]=other"/>
   </php>
   <extensions>
     <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
