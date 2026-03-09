@@ -6,16 +6,12 @@
 
 /**
  * Returns true if the current test run is a partial run.
- * A partial run is a run that only runs a subset of the tests using the --filter, --testsuite, --group or --exclude-group options.
+ * A partial run is a run that only runs a subset of the tests using the --filter, --group or --exclude-group options.
  */
 function isPartialRun(): bool
 {
     foreach ($_SERVER['argv'] as $arg) {
         if (str_starts_with((string) $arg, '--filter')) {
-            return true;
-        }
-
-        if (str_starts_with((string) $arg, '--testsuite')) {
             return true;
         }
 
