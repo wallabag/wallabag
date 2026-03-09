@@ -573,7 +573,7 @@ entry:
         url_label: Url
         save_label: Spremi
         page_title: Uredi jedan zapis
-        origin_url_label: URL izvora (mjesto gdje je taj zapis pronađen)
+        origin_url_label: URL izvora (mjesto otkud taj zapis potječe)
     new:
         placeholder: http://website.com
         form_new:
