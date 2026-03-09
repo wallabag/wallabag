@@ -619,7 +619,7 @@ class ContentProxyTest extends TestCase
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
                 'language' => 'fr',
-                'status' => '200',
+                'status' => 200,
                 // 'og_title' => 'my OG title',
                 'description' => 'OG desc',
                 'image' => 'http://3.3.3.3/cover.jpg',
@@ -633,6 +633,69 @@ class ContentProxyTest extends TestCase
         $this->assertSame('this is my title', $entry->getTitle());
         $this->assertStringNotContainsString($escapedString, $entry->getContent());
         $this->assertSame('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
+        $this->assertSame('text/html', $entry->getMimetype());
+        $this->assertSame('fr', $entry->getLanguage());
+        $this->assertSame(200, $entry->getHttpStatus());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
+        $this->assertFalse($entry->isNotParsed());
+    }
+
+    public function testWithPrefetchedContent()
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+
+        $html = <<<HTML
+        <!DOCTYPE html>
+        <html lang="fr">
+            <head>
+                <meta charset="utf-8">
+                <title>Amazing article ‒ wallabag test</title>
+                <meta name="author" content="wallabag user"/>
+                <meta property="og:image" content="http://1.1.1.1/avatar.jpg" />
+                <meta property="og:image:secure_url" content="http://1.1.1.1/avatar.jpg" />
+                <meta property="article:published_time" content="2025-03-20T17:30:00+00:00" />
+                <meta property="article:modified_time" content="2025-04-02T10:43:04+00:00" />
+                <meta name="twitter:image" content="http://1.1.1.1/avatar.jpg" />
+            </head>
+
+            <body>
+                <h1>Amazing article</h1>
+                <p>An amazing article to test wallabag. An amazing article to test wallabag. An amazing article to test wallabag. An amazing article to test wallabag. An amazing article to test wallabag.</p>
+            </body>
+        </html>
+        HTML;
+        $proxy = new ContentProxy(new Graby(), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry(
+            $entry,
+            'http://1.1.1.1',
+            [
+                'html' => $html,
+                'title' => 'Amazing article ‒ wallabag test',
+                'url' => 'http://1.1.1.1',
+                'language' => 'fr',
+                'status' => '200',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
+            ]
+        );
+
+        $content = <<<CONTENT
+        Amazing article ‒ wallabag test
+        <p>An amazing article to test wallabag. An amazing article to test wallabag. An amazing article to test wallabag. An amazing article to test wallabag. An amazing article to test wallabag.</p>
+        CONTENT;
+
+        $this->assertSame(['wallabag user'], $entry->getPublishedBy());
+        $this->assertSame('2025-03-20 17:30:00', $entry->getPublishedAt()->format('Y-m-d H:i:s'));
+        $this->assertSame($content, $entry->getContent());
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('Amazing article ‒ wallabag test', $entry->getTitle());
+        $this->assertSame('http://1.1.1.1/avatar.jpg', $entry->getPreviewPicture());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame('200', $entry->getHttpStatus());
