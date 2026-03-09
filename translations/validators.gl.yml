@@ -5,3 +5,5 @@ validator:
     password_wrong_value: O contrasinal escrito non é o actual.
     password_too_short: O teu contrasinal debe ter polo menos 8 caracteres.
     password_must_match: Os contrasinais deben concordar.
+    item_per_page_too_low: Este valor ten que ser igual ou maior que 1.
+    feed_limit_too_low: Este valor ten que ser igual ou maior que 1.
