@@ -7,6 +7,6 @@ export default class extends Controller {
   }
 
   disconnect() {
-    this.instance.dismissAll();
+    this.instance.dismiss();
   }
 }
