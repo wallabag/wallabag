@@ -28,7 +28,7 @@ class RenderingProxy
      *      - proxified URL
      *      - post-processing callback
      *
-     * @return array<string,callable>
+     * @return array{0: string, 1: null|\Closure(mixed): mixed}
      * @description callback takes Graby::fetchContent output as argument
      */
     public function considerUrl(Config|null $userConfig, string $url): array

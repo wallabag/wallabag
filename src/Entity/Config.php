@@ -524,6 +524,9 @@ class Config
      */
     public function getRenderingProxyHosts()
     {
-        return $this->renderingProxyHosts ?? new ArrayCollection();
+        if ($this->renderingProxyHosts == null) {
+            $this->renderingProxyHosts = new ArrayCollection();
+        }
+        return $this->renderingProxyHosts;
     }
 }

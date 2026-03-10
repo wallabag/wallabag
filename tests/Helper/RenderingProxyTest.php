@@ -54,7 +54,7 @@ class RenderingProxyTest extends TestCase
         $renderingProxy = new RenderingProxy('http://proxy/%u', 0, 100);
         $user = new User();
         $config = new Config($user);
-        $host = new RenderingProxyHost($user);
+        $host = new RenderingProxyHost();
         $host->setHost('test');
         $host->setConfig($config);
         $config->addRenderingProxyHost($host);
@@ -82,7 +82,7 @@ class RenderingProxyTest extends TestCase
         $renderingProxy = new RenderingProxy('http://proxy/%u', 0, 100);
         $user = new User();
         $config = new Config($user);
-        $host = new RenderingProxyHost($user);
+        $host = new RenderingProxyHost();
         $host->setHost('test');
         $host->setConfig($config);
         $config->addRenderingProxyHost($host);

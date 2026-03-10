@@ -14,9 +14,6 @@ class WallabagClient implements HttpClientInterface
 {
     private readonly HttpClientInterface $httpClient;
 
-    /**
-    * @param Symfony\Contracts\HttpClient\HttpClientInterface|null $httpClient
-    */
     public function __construct(
         private $restrictedAccess,
         private readonly HttpBrowser $browser,
