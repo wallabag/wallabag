@@ -24,9 +24,12 @@ class RenderingProxy
     }
 
     /**
-     * Checks if given URL should be passed to rendering proxy and returns proxified URL
+     * Checks if given URL should be passed to rendering proxy and returns
+     *      - proxified URL
+     *      - post-processing callback
      *
-     * @return array<string,bool>
+     * @return array<string,callable>
+     * @description callback takes Graby::fetchContent output as argument
      */
     public function considerUrl(Config|null $userConfig, string $url): array
     {
