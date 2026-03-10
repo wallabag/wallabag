@@ -90,18 +90,18 @@
                 </div>
                 <ul class="input-field nav-panel-buttom">
                     <li class="bold toggle-add-url-container">
-                        <a class="waves-effect toggle-add-url" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" data-action="topbar#showAddUrl:prevent:stop" data-shortcuts-target="showAddUrl">
+                        <a class="waves-effect toggle-add-url" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" data-action="topbar#showAddUrl:prevent:stop" data-shortcuts-target="showAddUrl">
                             <i class="material-icons">add</i>
                         </a>
                     </li>
                     <li>
-                        <a class="waves-effect" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.search'|trans }}" href="javascript: void(null);" data-action="topbar#showSearch:prevent:stop" data-shortcuts-target="showSearch">
+                        <a class="waves-effect" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.search'|trans }}" href="javascript: void(null);" data-action="topbar#showSearch:prevent:stop" data-shortcuts-target="showSearch">
                             <i class="material-icons">search</i>
                         </a>
                     </li>
                     {% block nav_panel_extra_actions '' %}
                     <li class="bold">
-                        <a class="wave-effect dropdown-trigger" data-controller="materialize--dropdown materialize--tooltip" data-target="dropdown-account" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.account'|trans }}" href="#" id="news_menu">
+                        <a class="wave-effect dropdown-trigger" data-controller="materialize--dropdown materialize--tooltip" data-target="dropdown-account" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.account'|trans }}" href="#" id="news_menu">
                             <i class="material-icons" id="news_link">account_circle</i>
                         </a>
                     </li>
