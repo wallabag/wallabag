@@ -35,6 +35,15 @@ build: ## Run webpack
 test: ## Launch wallabag testsuite
 	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit -v
 
+test-unit: ## Launch unit testsuite
+	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit --testsuite unit -v
+
+test-integration: ## Launch integration testsuite
+	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit --testsuite integration -v
+
+test-functional: ## Launch functional testsuite
+	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit --testsuite functional -v
+
 fix-cs: ## Run PHP-CS-Fixer
 	@$(PHP_NO_XDEBUG) bin/php-cs-fixer fix
 
@@ -59,6 +68,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help install update build test release deploy run dev fix-cs phpstan phpstan-baseline lint-js lint-scss
+.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev fix-cs phpstan phpstan-baseline lint-js lint-scss
 
 .DEFAULT_GOAL := install

@@ -14,6 +14,7 @@ use Wallabag\Helper\UrlHasher;
 
 /**
  * @method Entry[]    findById(int[] $id)
+ * @method Entry|null findOneByUrl(string $url)
  * @method Entry|null findOneByUser(int $userId)
  */
 class EntryRepository extends ServiceEntityRepository
