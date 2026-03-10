@@ -92,7 +92,7 @@ class RenderingProxy
      *
      * @return string
      */
-    public function fixResponse(string $content): string
+    private function fixResponse(string $content): string
     {
         $content = preg_replace('/&lt;img ([^&]+)&gt;/', '<img \1>', $content);
 
