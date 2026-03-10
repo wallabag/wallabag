@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Wallabag\Command\Import;
+namespace Wallabag\Tests\Command\Import;
 
 use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\WallabagTestCase;
+use Wallabag\Tests\WallabagTestCase;
 
 class ImportCommandTest extends WallabagTestCase
 {

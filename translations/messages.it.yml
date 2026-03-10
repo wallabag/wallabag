@@ -66,6 +66,7 @@ config:
         feed: Flussi
         reset: Area di reset
         ignore_origin: Ignora le regole di origine
+        article_display: Visualizzazione dell'articolo
     form:
         save: Salva
     form_settings:
@@ -195,6 +196,7 @@ config:
             unread: Non letti
             starred: Preferiti
             all: Tutti
+            archive: Archiviati
         feed_limit: Numero di elementi nel feed
     form_ignore_origin_rules:
         faq:

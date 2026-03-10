@@ -37,7 +37,7 @@ security:
             pattern: ^/login$
             anonymous:  ~
 
-        secured_area:
+        main:
             pattern: ^/
             form_login:
                 provider: fos_userbundle

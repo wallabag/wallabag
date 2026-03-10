@@ -1,6 +1,6 @@
 security:
     login:
-        page_title: Wallabag へようこそ!
+        page_title: wallabag へようこそ!
         keep_logged_in: ログインを維持
         forgot_password: パスワードをお忘れですか?
         submit: ログイン
@@ -66,6 +66,7 @@ config:
         reset: リセットエリア
         ignore_origin: 転送元無視ルール
         feed: フィード
+        article_display: 記事表示
     form:
         save: 保存
     form_settings:
@@ -89,6 +90,16 @@ config:
             label: 記事に既読やスターをつけた後、どこに移動しますか？
         android_configuration: Androidアプリの設定をする
         android_instruction: ここをタッチするとあなたのAndroid アプリに自動入力します
+        help_display_thumbnails: 記事のサムネイル画像を表示するかどうかを選択できます。低速な接続環境で役立ちます。
+        help_font: 使用するフォントファミリーを選択できます。
+        help_fontsize: 利用したいフォントサイズを選択できます。
+        help_lineheight: 利用したい行の高さを選択できます。
+        help_maxwidth: 利用したい最大幅を選択できます。
+        display_thumbnails_label: 記事のサムネイルを表示する(通信速度が遅い場合は、非表示にすると快適に使えます)
+        font_label: フォントファミリー
+        fontsize_label: フォントサイズ
+        lineheight_label: 行間
+        maxwidth_label: 最大幅
     form_user:
         two_factor_description: 二要素認証を有効にすると、信頼されていない新しい接続ごとに、コードを記載したメールが届きます。
         help_twoFactorAuthentication: 二要素認証を有効にした場合、wallabag にログインするたびに、メールでコードを受信します。
@@ -172,6 +183,7 @@ config:
         annotations: すべての注釈を削除する
         description: ボタンを押すとあなたのアカウントから情報を削除することができます。この操作は不可逆的であることに注意してください。
         title: リセットエリア（危険な操作です）
+        tagging_rules: すべてのタグ付けルールを削除する
     form_feed:
         feed_limit: フィードのアイテム数
         feed_link:
@@ -225,6 +237,8 @@ entry:
         untagged: タグがない記事
         all: すべての記事
         filtered_search: '検索による絞込み:'
+        with_annotations: 注釈付きエントリ
+        same_domain: 同一ドメイン
     list:
         number_on_the_page: '{0} 記事はありません。|{1} 1 つ記事があります。|]1,Inf[ %count% の記事があります。'
         reading_time_minutes: '推定の読む時間: %readingTime% 分'
@@ -238,6 +252,11 @@ entry:
         toogle_as_star: スター有無の切り替え
         original_article: オリジナル
         reading_time: 所要時間
+        show_same_domain: 同じドメインの記事を表示する
+        assign_search_tag: この検索を各結果にタグとして割り当てる
+        toggle_mass_action: 一括操作の切り替え
+        mass_action_tags_input_placeholder: タグ1、タグ2、タグ3
+        add_tags: タグを追加する
     filters:
         title: フィルター
         status_label: ステータス
@@ -262,6 +281,8 @@ entry:
         unread_label: 未読
         starred_label: スター付
         archived_label: アーカイブ
+        annotated_label: 注釈付き
+        parsed_label: 正しく取得されませんでした
     view:
         left_menu:
             back_to_top: トップへ戻る
@@ -313,6 +334,8 @@ entry:
     confirm:
         delete_tag: 本当にこのタグを記事から削除してよろしいですか？
         delete: 本当にこの記事を削除してよろしいですか？
+        delete_entries: これらの記事を本当に削除しますか？
+        reload: その記事を本当に再読み込みしますか？
     public:
         shared_by_wallabag: この記事は %username% が <a href='%wallabag_instance%'>wallabag</a> で共有しました
     search:
@@ -460,6 +483,8 @@ tag:
         placeholder: コンマで区切ると複数のタグを追加することができます。
         add: 追加
     page_title: タグ
+    confirm:
+        delete: '%name% タグを削除する'
 import:
     page_description: wallabag インポーターへようこそ。移行元となる前のサービスを選択してください。
     action:
@@ -512,6 +537,27 @@ import:
     elcurator:
         description: このインポーターは elCurator の記事すべてをインポートします。あなたのアカウントのpreferences へ行き、コンテンツをエクスポートします。JSONファイルができます。
         page_title: インポート > elCurator
+        how_to: お使いのelCuratorエクスポートを選択し、以下のボタンをクリックしてアップロードおよびインポートしてください。
+    omnivore:
+        page_title: インポート > Omnivore
+        description: このインポーターは、あなたのOmnivoreの記事をすべてインポートします。
+        how_to: Omnivoreのエクスポートファイルを解凍し、その後「metadata_x_to_y.json」という名前のJSONファイルを1つずつアップロードしてください。
+    delicious:
+        page_title: インポート > del.icio.us
+        description: このインポーターは、あなたのDeliciousブックマークをすべてインポートします。2021年以降、エクスポートページ（https://del.icio.us/export）からデータを再度エクスポートできます。「JSON」形式を選択し、ダウンロードしてください（例：「delicious_export.2021.02.06_21.10.json」）。
+        how_to: Deliciousのエクスポートファイルを選択し、下のボタンをクリックしてアップロードとインポートを行ってください。
+    shaarli:
+        page_title: インポート > Shaarli
+        description: このインポーターは、すべてのShaarliブックマークをインポートします。ツールセクションに移動し、「データベースのエクスポート」を選択、ブックマークを選択してエクスポートしてください。HTMLファイルが作成されます。
+        how_to: ブックマークのバックアップファイルを選択し、下のボタンをクリックしてインポートしてください。すべての記事を取得する必要があるため、処理に時間がかかる場合があります。
+    pocket_html:
+        page_title: インポート > Pocket HTML
+        description: このインポーターは、すべてのPocketブックマーク（HTMLエクスポート経由）をインポートします。https://getpocket.com/export にアクセスし、HTMLファイルをエクスポートしてください。HTMLファイル（「ril_export.html」のような名前）がダウンロードされます。
+        how_to: ブックマークのバックアップファイルを選択し、下のボタンをクリックしてインポートしてください。すべての記事を取得する必要があるため、処理に時間がかかる場合があります。
+    pocket_csv:
+        page_title: インポート > Pocket CSV
+        description: このインポーターは、すべてのPocketブックマーク（CSVエクスポート経由）をインポートします。https://getpocket.com/export にアクセスし、ファイルをエクスポートしてください。ZIPファイル（「pocket.zip」のような名前）がダウンロードされます。解凍すると、「part_000000.csv」という名前のCSVファイルが得られます。
+        how_to: ブックマークのバックアップファイルを選択し、下のボタンをクリックしてインポートしてください。すべての記事を取得する必要があるため、処理に時間がかかる場合があります。
 developer:
     welcome_message: wallabag API へようこそ
     how_to_first_app: 最初のアプリケーションを作成する方法
@@ -616,6 +662,8 @@ flashes:
             feed_token_revoked: フィードトークンを無効化しました
             feed_token_updated: フィードトークンを更新しました
             feed_updated: フィード情報を更新しました
+            tagging_rules_reset: タグ付けルールのリセット
+            otp_code_invalid: 無効な二要素認証コード
     entry:
         notice:
             entry_already_saved: 記事は %date% に既に保存されています
@@ -634,6 +682,7 @@ flashes:
         notice:
             tag_added: タグを追加しました
             tag_renamed: タグの名前を変更しました
+            too_much_tags: パフォーマンスの問題を避けるため、一度に追加できるタグは%tags%個まで、また1つのタグに含まれる文字数は%characters%文字までとします。
     import:
         notice:
             failed: インポートに失敗しました, もう一度やり直してください。

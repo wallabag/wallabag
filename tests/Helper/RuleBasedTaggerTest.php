@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\Helper;
+namespace Wallabag\Tests\Helper;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\QueryBuilder;

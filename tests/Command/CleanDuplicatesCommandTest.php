@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Wallabag\Command;
+namespace Wallabag\Tests\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
+use Wallabag\Tests\WallabagTestCase;
 
 class CleanDuplicatesCommandTest extends WallabagTestCase
 {

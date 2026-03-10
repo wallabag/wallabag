@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Wallabag\Controller\Import;
+namespace Wallabag\Tests\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Entry;
+use Wallabag\Tests\WallabagTestCase;
 
 class PocketCsvControllerTest extends WallabagTestCase
 {
@@ -129,7 +129,7 @@ class PocketCsvControllerTest extends WallabagTestCase
             'https://reporterre.net/Des-abeilles-pour-resoudre-les-conflits-entre-les-humains-et-les-elephants',
         ];
 
-        $matchedEntries = array_map(function ($expectedUrl) use ($entries) {
+        $matchedEntries = array_map(static function ($expectedUrl) use ($entries) {
             foreach ($entries as $entry) {
                 if ($entry->getUrl() === $expectedUrl) {
                     return $entry;

@@ -1,13 +1,12 @@
 <?php
 
-namespace Tests\Wallabag\Controller;
+namespace Wallabag\Tests\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Annotation;
 use Wallabag\Entity\Config as ConfigEntity;
 use Wallabag\Entity\Entry;
@@ -15,6 +14,7 @@ use Wallabag\Entity\IgnoreOriginUserRule;
 use Wallabag\Entity\Tag;
 use Wallabag\Entity\TaggingRule;
 use Wallabag\Entity\User;
+use Wallabag\Tests\WallabagTestCase;
 
 class ConfigControllerTest extends WallabagTestCase
 {
@@ -119,17 +119,27 @@ class ConfigControllerTest extends WallabagTestCase
     public function dataForUpdateFailed()
     {
         return [
-            [[
-                'config[items_per_page]' => '',
-                'config[language]' => 'en',
-            ]],
+            [
+                [
+                    'config[items_per_page]' => '',
+                    'config[language]' => 'en',
+                ],
+                'This value should not be blank',
+            ],
+            [
+                [
+                    'config[items_per_page]' => 0,
+                    'config[language]' => 'en',
+                ],
+                'validator.item_per_page_too_low',
+            ],
         ];
     }
 
     /**
      * @dataProvider dataForUpdateFailed
      */
-    public function testUpdateFailed($data)
+    public function testUpdateFailed($data, $expectedMessage)
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -145,7 +155,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
-        $this->assertStringContainsString('This value should not be blank', $alert[0]);
+        $this->assertStringContainsString($expectedMessage, $alert[0]);
     }
 
     public function dataForChangePasswordFailed()
@@ -400,7 +410,7 @@ class ConfigControllerTest extends WallabagTestCase
                 [
                     'feed_config[feed_limit]' => 0,
                 ],
-                'This value should be between 1 and 100000.',
+                'validator.feed_limit_too_low',
             ],
             [
                 [
@@ -1230,7 +1240,7 @@ class ConfigControllerTest extends WallabagTestCase
             ->willReturn('DUMMYSECRET');
         $googleAuthenticatorMock
             ->method('checkCode')
-            ->willReturnCallback(function ($user, $code) {
+            ->willReturnCallback(static function ($user, $code) {
                 return '123456' === $code;
             });
 

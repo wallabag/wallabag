@@ -5,3 +5,5 @@ validator:
     item_per_page_too_high: To może spowodować problemy z aplikacją
     feed_limit_too_high: To może spowodować problemy z aplikacją
     quote_length_too_high: Cytat jest zbyt długi. powinien mieć {{ limit }} znaków lub mniej.
+    item_per_page_too_low: Wartość ta powinna być większa lub równa 1.
+    feed_limit_too_low: Wartość ta powinna być większa lub równa 1.

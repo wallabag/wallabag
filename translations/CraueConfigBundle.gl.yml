@@ -12,7 +12,7 @@ misc: varios
 import: importar
 export: exportar
 entry: artigo
-wallabag_support_url: URL de axuda de wallabag
+wallabag_support_url: URL de apoio a wallabag
 show_printlink: Mostrar unha ligazón para imprimir o contido
 share_unmark: Activar a compartición en Unmark.it
 share_twitter: Activar a compartición en Twitter

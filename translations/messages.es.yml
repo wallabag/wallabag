@@ -554,6 +554,10 @@ import:
         page_title: Importar > Omnivore
         description: Este importador importará todos sus artículos de Omnivore.
         how_to: Por favor, descomprima su exportación de Omnivore y luego cargue cada archivo JSON llamado "metadata_x_to_y.json" uno por uno.
+    pocket_csv:
+        page_title: Importar > CSV de Pocket
+        description: Este importador importará todos tus marcadores de Pocket (empleando un CSV). Ve a https://getpocket.com/export y después exporta el fichero. Un fichero ZIP se descargará (con un nombre como "pocket.zip"). Extráelo, obtendrás un fichero CSV, llamado "part_000000.csv".
+        how_to: Por favor, selecciona una copia de seguridad de marcadores y después haz click en el botón inferior para importarlo. Ten en cuenta que el proceso puede llevar algo de tiempo puesto que todos los artículos tienen que ser buscados.
 developer:
     page_title: 'Gestión de clientes API'
     welcome_message: 'Bienvenido al API de wallabag'
@@ -678,6 +682,7 @@ flashes:
             ignore_origin_rules_deleted: Regla de origen ignorado eliminada
             ignore_origin_rules_updated: Regla de origen ignorado actualizada
             tagging_rules_reset: Se han restablecido las reglas de etiquetas
+            otp_code_invalid: Segundo factor de autenticación inválido
     entry:
         notice:
             entry_already_saved: 'Artículo ya guardado el %fecha%'

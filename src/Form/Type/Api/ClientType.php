@@ -28,8 +28,8 @@ class ClientType extends AbstractType
 
         $builder->get('redirect_uris')
             ->addModelTransformer(new CallbackTransformer(
-                fn ($originalUri) => $originalUri,
-                fn ($submittedUri) => [$submittedUri]
+                static fn ($originalUri) => $originalUri,
+                static fn ($submittedUri) => [$submittedUri]
             ))
         ;
     }

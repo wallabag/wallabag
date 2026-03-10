@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\Event\Listener;
+namespace Wallabag\Tests\Event\Listener;
 
 use Doctrine\ORM\EntityManager;
 use FOS\UserBundle\Event\FilterUserResponseEvent;

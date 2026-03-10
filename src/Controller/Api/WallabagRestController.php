@@ -28,6 +28,9 @@ class WallabagRestController extends AbstractFOSRestController
         protected TokenStorageInterface $tokenStorage,
         protected TranslatorInterface $translator,
         protected bool $registrationEnabled,
+        protected string $version,
+        protected int $apiLimitMassActions,
+        protected string $fetchingErrorMessage,
     ) {
     }
 
@@ -55,8 +58,7 @@ class WallabagRestController extends AbstractFOSRestController
     #[Route(path: '/api/version.{_format}', name: 'api_get_version', methods: ['GET'], defaults: ['_format' => 'json'])]
     public function getVersionAction()
     {
-        $version = $this->getParameter('wallabag.version');
-        $json = $this->serializer->serialize($version, 'json');
+        $json = $this->serializer->serialize($this->version, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -78,7 +80,7 @@ class WallabagRestController extends AbstractFOSRestController
     public function getInfoAction(Config $craueConfig)
     {
         $info = new ApplicationInfo(
-            $this->getParameter('wallabag.version'),
+            $this->version,
             $this->registrationEnabled && $craueConfig->get('api_user_registration'),
         );
 

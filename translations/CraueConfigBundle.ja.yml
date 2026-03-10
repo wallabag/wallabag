@@ -32,3 +32,4 @@ restricted_access: ペイウォールのあるウェブサイトへの認証を�
 api_user_registration: API を使ってユーザを登録できるようにする
 store_article_headers: wallabag が各記事の HTTP ヘッダーを格納するかどうかを有効にする
 shaarli_share_origin_url: サービスが有効な場合に Shaarli に元の url の共有を有効にする
+share_linkding: Linkdingへの共有を有効にする

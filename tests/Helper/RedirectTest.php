@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\Helper;
+namespace Wallabag\Tests\Helper;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Wallabag\Controller;
+namespace Wallabag\Tests\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Entry;
 use Wallabag\Repository\UserRepository;
+use Wallabag\Tests\WallabagTestCase;
 
 class ExportControllerTest extends WallabagTestCase
 {
@@ -175,7 +175,7 @@ class ExportControllerTest extends WallabagTestCase
         $this->assertSame('attachment; filename="Archive articles.csv"', $headers->get('content-disposition'));
         $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
-        $csv = str_getcsv((string) $client->getResponse()->getContent(), "\n");
+        $csv = str_getcsv((string) $client->getResponse()->getContent(), "\n", '"', '');
 
         $this->assertGreaterThan(1, $csv);
         // +1 for title line

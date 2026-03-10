@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\Event\Subscriber;
+namespace Wallabag\Tests\Event\Subscriber;
 
 use Doctrine\Common\EventManager;
 use Doctrine\DBAL\Platforms\MySQLPlatform;

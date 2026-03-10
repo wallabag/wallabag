@@ -50,6 +50,8 @@ Please fork wallabag and work with **the master branch**.
 
 All pull requests need to pass the tests and the code needs match the style guide.
 
+The repository uses a GNU make `Makefile`. If your system ships a non-GNU `make`, use `gmake` for the commands below.
+
 To run the tests locally run `make test`.
 
 To run the PHP formatter run `make fix-cs`.

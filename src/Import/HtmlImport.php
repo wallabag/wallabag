@@ -40,7 +40,7 @@ abstract class HtmlImport extends AbstractImport
             return false;
         }
 
-        $entries = $hrefs->each(fn (Crawler $node) => [
+        $entries = $hrefs->each(static fn (Crawler $node) => [
             'url' => $node->attr('href'),
             'tags' => $node->attr('tags'),
             'created_at' => $node->attr('add_date'),

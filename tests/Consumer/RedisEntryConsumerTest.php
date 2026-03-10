@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\Consumer;
+namespace Wallabag\Tests\Consumer;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;

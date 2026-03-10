@@ -48,7 +48,7 @@ class UrlCommand extends Command
     {
         // Turning off doctrine default logs queries for saving memory
         $middlewares = $this->entityManager->getConnection()->getConfiguration()->getMiddlewares();
-        $middlewaresWithoutLogging = array_filter($middlewares, fn (Middleware $middleware) => !$middleware instanceof LoggingMiddleware);
+        $middlewaresWithoutLogging = array_filter($middlewares, static fn (Middleware $middleware) => !$middleware instanceof LoggingMiddleware);
         $this->entityManager->getConnection()->getConfiguration()->setMiddlewares($middlewaresWithoutLogging);
 
         if ($input->getOption('useUserId')) {
@@ -100,7 +100,7 @@ class UrlCommand extends Command
 
         $this->entityManager->persist($entry);
 
-        $tags = explode(',', $input->getArgument('tags'));
+        $tags = explode(',', (string) $input->getArgument('tags'));
         if (\count($tags) > 1) {
             $this->tagsAssigner->assignTagsToEntry(
                 $entry,

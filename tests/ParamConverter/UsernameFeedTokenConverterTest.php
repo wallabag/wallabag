@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ParamConverter;
+namespace Wallabag\Tests\ParamConverter;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\Mapping\ClassMetadata;

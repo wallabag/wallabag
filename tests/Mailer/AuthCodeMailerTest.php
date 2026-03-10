@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\Mailer;
+namespace Wallabag\Tests\Mailer;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mailer\MailerInterface;

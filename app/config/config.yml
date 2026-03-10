@@ -190,7 +190,7 @@ nelmio_cors:
 
 fos_user:
     db_driver: orm
-    firewall_name: secured_area
+    firewall_name: main
     user_class: Wallabag\Entity\User
     registration:
         confirmation:
