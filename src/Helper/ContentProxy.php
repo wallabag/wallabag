@@ -4,7 +4,6 @@ namespace Wallabag\Helper;
 
 use Graby\Graby;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Mime\MimeTypes;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
 use Symfony\Component\Validator\Constraints\Url as UrlConstraint;
