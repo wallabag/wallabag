@@ -92,9 +92,11 @@ jobs:
         run: "php bin/phpunit --testsuite unit -v"
 
       - name: "Run PHPUnit integration tests"
+        if: ${{ !cancelled() }}
         run: "php bin/phpunit --testsuite integration -v"
 
       - name: "Run PHPUnit functional tests"
+        if: ${{ !cancelled() }}
         run: "php bin/phpunit --testsuite functional -v"
 
   phpunit_no_prefix:
@@ -178,9 +180,11 @@ jobs:
         run: "php bin/phpunit --testsuite unit -v"
 
       - name: "Run PHPUnit integration tests"
+        if: ${{ !cancelled() }}
         run: "php bin/phpunit --testsuite integration -v"
 
       - name: "Run PHPUnit functional tests"
+        if: ${{ !cancelled() }}
         run: "php bin/phpunit --testsuite functional -v"
 
   phpunit-without-rmq-redis:
@@ -250,7 +254,9 @@ jobs:
         run: "php bin/phpunit --testsuite unit -v"
 
       - name: "Run PHPUnit integration tests"
+        if: ${{ !cancelled() }}
         run: "php bin/phpunit --testsuite integration -v"
 
       - name: "Run PHPUnit functional tests"
+        if: ${{ !cancelled() }}
         run: "php bin/phpunit --testsuite functional -v"
