@@ -20,7 +20,7 @@ class WallabagClient implements HttpClientInterface
         private readonly Authenticator $authenticator,
         private readonly LoggerInterface $logger,
         protected RenderingProxy $renderingProxy,
-        $httpClient = null
+        $httpClient = null,
     ) {
         $this->httpClient = $httpClient ?? HttpClient::create([
             'timeout' => 10,

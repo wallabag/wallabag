@@ -25,7 +25,7 @@ use Wallabag\HttpClient\WallabagClient;
 
 class RenderingProxyTest extends TestCase
 {
-    public function test_proxy_is_not_used_when_not_configured(): void
+    public function testProxyIsNotUsedWhenNotConfigured(): void
     {
         $renderingProxy = new RenderingProxy(null, 0, 100);
         $user = new User();
@@ -33,11 +33,11 @@ class RenderingProxyTest extends TestCase
 
         [$url, $cb] = $renderingProxy->considerUrl($config, 'http://test/');
 
-        $this->assertEquals('http://test/', $url);
+        $this->assertSame('http://test/', $url);
         $this->assertNull($cb);
     }
 
-    public function test_proxy_is_not_used_when_configured_but_no_hosts_to_handle(): void
+    public function testProxyIsNotUsedWhenConfiguredButNoHostsToHandle(): void
     {
         $renderingProxy = new RenderingProxy('http://proxy/%u', 0, 100);
         $user = new User();
@@ -45,11 +45,11 @@ class RenderingProxyTest extends TestCase
 
         [$url, $cb] = $renderingProxy->considerUrl($config, 'http://test/');
 
-        $this->assertEquals('http://test/', $url);
+        $this->assertSame('http://test/', $url);
         $this->assertNull($cb);
     }
 
-    public function test_proxy_is_not_used_when_configured_but_given_host_is_not_in_list(): void
+    public function testProxyIsNotUsedWhenConfiguredButGivenHostIsNotInList(): void
     {
         $renderingProxy = new RenderingProxy('http://proxy/%u', 0, 100);
         $user = new User();
@@ -61,11 +61,11 @@ class RenderingProxyTest extends TestCase
 
         [$url, $cb] = $renderingProxy->considerUrl($config, 'http://test2/');
 
-        $this->assertEquals('http://test2/', $url);
+        $this->assertSame('http://test2/', $url);
         $this->assertNull($cb);
     }
 
-    public function test_proxy_is_used_when_configured_to_handle_all_hosts(): void
+    public function testProxyIsUsedWhenConfiguredToHandleAllHosts(): void
     {
         $renderingProxy = new RenderingProxy('http://proxy/%u', 1, 100);
         $user = new User();
@@ -73,11 +73,11 @@ class RenderingProxyTest extends TestCase
 
         [$url, $cb] = $renderingProxy->considerUrl($config, 'http://test/');
 
-        $this->assertEquals('http://proxy/http://test/', $url);
+        $this->assertSame('http://proxy/http://test/', $url);
         $this->assertIsCallable($cb);
     }
 
-    public function test_proxy_is_used_when_configured_to_handle_given_host(): void
+    public function testProxyIsUsedWhenConfiguredToHandleGivenHost(): void
     {
         $renderingProxy = new RenderingProxy('http://proxy/%u', 0, 100);
         $user = new User();
@@ -89,10 +89,10 @@ class RenderingProxyTest extends TestCase
 
         [$url] = $renderingProxy->considerUrl($config, 'http://test/');
 
-        $this->assertEquals('http://proxy/http://test/', $url);
+        $this->assertSame('http://proxy/http://test/', $url);
     }
 
-    public function test_proxy_is_used_when_configured_to_handle_parent_of_given_host(): void
+    public function testProxyIsUsedWhenConfiguredToHandleParentOfGivenHost(): void
     {
         $renderingProxy = new RenderingProxy('http://proxy/%u', 0, 100);
         $user = new User();
@@ -104,10 +104,10 @@ class RenderingProxyTest extends TestCase
 
         [$url] = $renderingProxy->considerUrl($config, 'http://subhost.test/');
 
-        $this->assertEquals('http://proxy/http://subhost.test/', $url);
+        $this->assertSame('http://proxy/http://subhost.test/', $url);
     }
 
-    public function test_proxy_url_is_recognized(): void
+    public function testProxyUrlIsRecognized(): void
     {
         $renderingProxy = new RenderingProxy('http://proxy/%u', 0, 100);
 
@@ -116,7 +116,7 @@ class RenderingProxyTest extends TestCase
         $this->assertTrue($res);
     }
 
-    public function test_non_proxy_url_is_recognized(): void
+    public function testNonProxyUrlIsRecognized(): void
     {
         $renderingProxy = new RenderingProxy('http://proxy/%u', 0, 100);
 
@@ -125,7 +125,7 @@ class RenderingProxyTest extends TestCase
         $this->assertFalse($res);
     }
 
-    public function test_timeout_is_not_changed_when_rendering_proxy_is_not_used(): void
+    public function testTimeoutIsNotChangedWhenRenderingProxyIsNotUsed(): void
     {
         $renderingProxy = new RenderingProxy('', 0, 100);
 
@@ -138,12 +138,12 @@ class RenderingProxyTest extends TestCase
 
         $client = new WallabagClient(0, $browser, $authenticator, new NullLogger(), $renderingProxy, $httpClient);
 
-        $client->request('GET', 'http://test', [ "timeout" => 10 ]);
+        $client->request('GET', 'http://test', ['timeout' => 10]);
 
-        $this->assertEquals(10, $mockResponse->getRequestOptions()['timeout']);
+        $this->assertSame(10, (int) $mockResponse->getRequestOptions()['timeout']);
     }
 
-    public function test_timeout_is_changed_when_rendering_proxy_is_used(): void
+    public function testTimeoutIsChangedWhenRenderingProxyIsUsed(): void
     {
         $renderingProxy = new RenderingProxy('http://proxy/%u', 0, 100);
 
@@ -156,18 +156,18 @@ class RenderingProxyTest extends TestCase
 
         $client = new WallabagClient(0, $browser, $authenticator, new NullLogger(), $renderingProxy, $httpClient);
 
-        $client->request('GET', 'http://proxy/http://test', [ "timeout" => 10 ]);
+        $client->request('GET', 'http://proxy/http://test', ['timeout' => 10]);
 
-        $this->assertEquals(100, $mockResponse->getRequestOptions()['timeout']);
+        $this->assertSame(100, (int) $mockResponse->getRequestOptions()['timeout']);
     }
 
-    public function test_proxy_url_is_removed()
+    public function testProxyUrlIsRemoved()
     {
         $tagger = $this->getMockBuilder(RuleBasedTagger::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $ruleBasedIgnoreOriginProcessor =  $this->getMockBuilder(RuleBasedIgnoreOriginProcessor::class)
+        $ruleBasedIgnoreOriginProcessor = $this->getMockBuilder(RuleBasedIgnoreOriginProcessor::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -187,7 +187,7 @@ class RenderingProxyTest extends TestCase
         $graby->expects($this->any())
             ->method('fetchContent')
             ->willReturn([
-                'html' => "",
+                'html' => '',
                 'title' => 'this is my title',
                 'url' => 'http://proxy/http://test',
                 'language' => 'fr',
@@ -208,13 +208,13 @@ class RenderingProxyTest extends TestCase
         $this->assertSame('http://test', $entry->getUrl());
     }
 
-    public function test_body_is_post_processed()
+    public function testBodyIsPostProcessed()
     {
         $tagger = $this->getMockBuilder(RuleBasedTagger::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $ruleBasedIgnoreOriginProcessor =  $this->getMockBuilder(RuleBasedIgnoreOriginProcessor::class)
+        $ruleBasedIgnoreOriginProcessor = $this->getMockBuilder(RuleBasedIgnoreOriginProcessor::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -234,7 +234,7 @@ class RenderingProxyTest extends TestCase
         $graby->expects($this->any())
             ->method('fetchContent')
             ->willReturn([
-                'html' => "&lt;img some-content &gt;",
+                'html' => '&lt;img some-content &gt;',
                 'title' => 'this is my title',
                 'url' => 'http://proxy/http://test',
                 'language' => 'fr',
@@ -252,6 +252,6 @@ class RenderingProxyTest extends TestCase
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://test');
 
-        $this->assertEquals('<img some-content >', $entry->getContent());
+        $this->assertSame('<img some-content >', $entry->getContent());
     }
 }

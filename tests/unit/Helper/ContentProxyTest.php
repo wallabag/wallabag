@@ -1138,7 +1138,7 @@ class ContentProxyTest extends TestCase
         return $mock;
     }
 
-    private function getRenderingProxy(string|null $url = null)
+    private function getRenderingProxy(?string $url = null)
     {
         return new RenderingProxy($url, 0, 100);
     }

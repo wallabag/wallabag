@@ -586,7 +586,7 @@ class ConfigController extends AbstractController
     }
 
     /**
-     * Edit a rendering proxy host
+     * Edit a rendering proxy host.
      *
      * @return RedirectResponse
      */
@@ -598,7 +598,7 @@ class ConfigController extends AbstractController
     }
 
     /**
-     * Delete a rendering proxy host
+     * Delete a rendering proxy host.
      *
      * @return RedirectResponse
      */

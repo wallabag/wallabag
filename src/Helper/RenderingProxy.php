@@ -10,28 +10,29 @@ use Wallabag\Entity\RenderingProxyHost;
 class RenderingProxy
 {
     public function __construct(
-        private readonly null|string $renderingProxyUrl,
+        private readonly ?string $renderingProxyUrl,
         private readonly int $renderingProxyAll,
         private readonly int $renderingProxyTimeout,
-    ) {}
+    ) {
+    }
 
     /**
-     * Checks if rendering proxy URL feature is enabled
+     * Checks if rendering proxy URL feature is enabled.
      */
     public function isEnabled(): bool
     {
-        return $this->renderingProxyUrl != null && $this->renderingProxyUrl != '';
+        return null !== $this->renderingProxyUrl && '' !== $this->renderingProxyUrl;
     }
 
     /**
      * Checks if given URL should be passed to rendering proxy and returns
      *      - proxified URL
-     *      - post-processing callback
+     *      - post-processing callback.
      *
-     * @return array{0: string, 1: null|\Closure(mixed): mixed}
+     * @return array{0: string, 1: \Closure(mixed): mixed|null}
      * @description callback takes Graby::fetchContent output as argument
      */
-    public function considerUrl(Config|null $userConfig, string $url): array
+    public function considerUrl(?Config $userConfig, string $url): array
     {
         if ($this->isEnabled()) {
             preg_match('~^[^/]+://([^/]+)~', $url, $matches);
@@ -39,14 +40,14 @@ class RenderingProxy
 
             $userHosts = $userConfig ? $userConfig
                 ->getRenderingProxyHosts()
-                ->map(fn(RenderingProxyHost $e) => $e->getHost())
+                ->map(fn (RenderingProxyHost $e) => $e->getHost())
                 ->toArray() : [];
 
-            $proxy = $this->renderingProxyAll ||
+            $proxy = $this->renderingProxyAll
                 // host is in the list
-                in_array($host, $userHosts) ||
+                || \in_array($host, $userHosts, true)
                 // Or host is a subhost of something in the list
-                array_find($userHosts, fn($h) => preg_match("/\.$h$/", $host) == 1);
+                || array_find($userHosts, fn ($h) => 1 === preg_match("/\.$h$/", $host));
 
             if ($proxy) {
                 return [
@@ -55,6 +56,7 @@ class RenderingProxy
                     function ($fetchedContent) use ($url) {
                         $fetchedContent['url'] = $url;
                         $fetchedContent['html'] = $this->fixResponse($fetchedContent['html']);
+
                         return $fetchedContent;
                     },
                 ];
@@ -65,20 +67,21 @@ class RenderingProxy
     }
 
     /**
-     * Checks if URL is an external rendering proxy one
+     * Checks if URL is an external rendering proxy one.
      */
     public function ownsUrl(string $url): bool
     {
         if ($this->isEnabled()) {
-            $base = preg_replace("/%u.*$/", "", $this->renderingProxyUrl);
-            return $this->renderingProxyAll == 1 || (str_starts_with($url, $base) && preg_match("~^{$base}http[s]?://~", $url) == 1);
+            $base = preg_replace('/%u.*$/', '', $this->renderingProxyUrl);
+
+            return 1 === $this->renderingProxyAll || (str_starts_with($url, $base) && 1 === preg_match("~^{$base}http[s]?://~", $url));
         }
 
         return false;
     }
 
     /**
-     * Return timeout for externally rendered pages
+     * Return timeout for externally rendered pages.
      */
     public function getTimeout(): int
     {
@@ -90,10 +93,6 @@ class RenderingProxy
      * Some HTML tags will be escaped (ie: "&lt;img") in original content and
      * their code will appear in the page body.
      * This function processes the content to repair such escaped tags.
-     *
-     * @param string $content
-     *
-     * @return string
      */
     private function fixResponse(string $content): string
     {

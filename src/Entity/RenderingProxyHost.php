@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\Repository\RenderingProxyHostRepository;
 
 /**
- * Rendering proxy host
+ * Rendering proxy host.
  */
 #[ORM\Table(name: '`rendering_proxy_host`')]
 #[ORM\Entity(repositoryClass: RenderingProxyHostRepository::class)]
@@ -44,7 +44,7 @@ class RenderingProxyHost
     }
 
     /**
-     * Set host
+     * Set host.
      *
      * @return RenderingProxyHost
      */
@@ -56,7 +56,7 @@ class RenderingProxyHost
     }
 
     /**
-     * Get host
+     * Get host.
      *
      * @return string
      */

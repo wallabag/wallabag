@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Wallabag\Doctrine\WallabagMigration;
 
 /**
- * Add settings for rendering proxy integration
+ * Add settings for rendering proxy integration.
  */
 final class Version20260127072053 extends WallabagMigration
 {
