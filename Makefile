@@ -13,6 +13,26 @@ COMPOSER = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run --rm ph
 PHP = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run --rm php php,php)
 PHP_NO_XDEBUG = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run -e XDEBUG_MODE=off --rm php php,XDEBUG_MODE=off php)
 YARN = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run --rm php yarn,yarn)
+PHPUNIT_TARGETS := test test-unit test-integration test-functional
+PHPUNIT_PRIMARY_TARGET := $(firstword $(MAKECMDGOALS))
+PHPUNIT_EXTRA_GOALS := $(if $(filter $(PHPUNIT_PRIMARY_TARGET),$(PHPUNIT_TARGETS)),$(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS)))
+PHPUNIT_PATH_ARGS := $(strip $(foreach goal,$(PHPUNIT_EXTRA_GOALS),$(if $(filter %.php,$(goal)),$(goal),$(if $(findstring /,$(goal)),$(goal)))))
+PHPUNIT_INVALID_GOALS := $(filter-out $(PHPUNIT_PATH_ARGS),$(PHPUNIT_EXTRA_GOALS))
+PHPUNIT_MISSING_PATH_ARGS := $(foreach goal,$(PHPUNIT_PATH_ARGS),$(if $(wildcard $(goal)),,$(goal)))
+
+ifneq ($(filter $(PHPUNIT_PRIMARY_TARGET),$(PHPUNIT_TARGETS)),)
+ifneq ($(strip $(PHPUNIT_INVALID_GOALS)),)
+$(error Invalid PHPUnit path argument(s): $(PHPUNIT_INVALID_GOALS). Use existing test file or directory paths)
+endif
+ifneq ($(strip $(PHPUNIT_MISSING_PATH_ARGS)),)
+$(error Missing PHPUnit path argument(s): $(PHPUNIT_MISSING_PATH_ARGS))
+endif
+endif
+
+.PHONY: FORCE
+FORCE:
+
+$(foreach goal,$(PHPUNIT_PATH_ARGS),$(eval $(goal): FORCE ; @:))
 
 help: ## Display this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -50,17 +70,17 @@ build: ## Run webpack
 	@$(YARN) install
 	@$(YARN) build:$(ENV)
 
-test: ## Launch wallabag testsuite
-	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit -v
+test: ## Launch wallabag testsuite (append test paths to narrow scope)
+	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit -v $(PHPUNIT_PATH_ARGS)
 
-test-unit: ## Launch unit testsuite
-	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit --testsuite unit -v
+test-unit: ## Launch unit testsuite (append test paths to narrow scope)
+	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit --testsuite unit -v $(PHPUNIT_PATH_ARGS)
 
-test-integration: ## Launch integration testsuite
-	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit --testsuite integration -v
+test-integration: ## Launch integration testsuite (append test paths to narrow scope)
+	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit --testsuite integration -v $(PHPUNIT_PATH_ARGS)
 
-test-functional: ## Launch functional testsuite
-	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit --testsuite functional -v
+test-functional: ## Launch functional testsuite (append test paths to narrow scope)
+	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit --testsuite functional -v $(PHPUNIT_PATH_ARGS)
 
 fix-cs: ## Run PHP-CS-Fixer
 	@$(PHP_NO_XDEBUG) bin/php-cs-fixer fix

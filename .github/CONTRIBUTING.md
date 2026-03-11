@@ -52,7 +52,7 @@ All pull requests need to pass the tests and the code needs match the style guid
 
 The repository uses a GNU make `Makefile`. If your system ships a non-GNU `make`, use `gmake` for the commands below.
 
-To run the tests locally run `make test`.
+To run the tests locally run `make test`. You can also narrow a run to specific files by appending them as extra goals, for example `make test-unit tests/unit/Helper/RedirectTest.php`.
 
 To run the PHP formatter run `make fix-cs`.
 
