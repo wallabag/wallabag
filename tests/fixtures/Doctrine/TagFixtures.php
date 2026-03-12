@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\DataFixtures;
+namespace Wallabag\Tests\Fixtures\Doctrine;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;

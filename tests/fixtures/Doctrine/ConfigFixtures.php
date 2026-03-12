@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\DataFixtures;
+namespace Wallabag\Tests\Fixtures\Doctrine;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -20,7 +20,7 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
         $adminConfig->setPocketConsumerKey('xxxxx');
         $adminConfig->setActionMarkAsRead(0);
         $adminConfig->setListMode(0);
-        $adminConfig->setDisplayThumbnails(0);
+        $adminConfig->setDisplayThumbnails(false);
 
         $manager->persist($adminConfig);
 
@@ -30,10 +30,9 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
         $bobConfig->setItemsPerPage(10);
         $bobConfig->setReadingSpeed(200);
         $bobConfig->setLanguage('fr');
-        $bobConfig->setPocketConsumerKey(null);
         $bobConfig->setActionMarkAsRead(1);
         $bobConfig->setListMode(1);
-        $bobConfig->setDisplayThumbnails(1);
+        $bobConfig->setDisplayThumbnails(true);
 
         $manager->persist($bobConfig);
 
@@ -43,10 +42,9 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
         $emptyConfig->setItemsPerPage(10);
         $emptyConfig->setReadingSpeed(100);
         $emptyConfig->setLanguage('en');
-        $emptyConfig->setPocketConsumerKey(null);
         $emptyConfig->setActionMarkAsRead(0);
         $emptyConfig->setListMode(0);
-        $emptyConfig->setDisplayThumbnails(0);
+        $emptyConfig->setDisplayThumbnails(false);
 
         $manager->persist($emptyConfig);
 

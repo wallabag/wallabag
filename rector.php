@@ -8,7 +8,6 @@ use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 return RectorConfig::configure()
     ->withPaths([
         __DIR__ . '/app',
-        __DIR__ . '/fixtures',
         __DIR__ . '/src',
         __DIR__ . '/tests',
         __DIR__ . '/web',
