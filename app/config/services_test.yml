@@ -5,10 +5,10 @@ services:
             - "%kernel.cache_dir%/doctrine/metadata"
 
     # fixtures
-    Wallabag\DataFixtures\:
+    Wallabag\Tests\Fixtures\Doctrine\:
         bind:
             $defaultIgnoreOriginInstanceRules: '%wallabag.default_ignore_origin_instance_rules%'
             $defaultInternalSettings: '%wallabag.default_internal_settings%'
-        resource: '../../fixtures/*'
+        resource: '../../tests/fixtures/Doctrine/*'
         tags: ['doctrine.fixture.orm']
         autowire: true
