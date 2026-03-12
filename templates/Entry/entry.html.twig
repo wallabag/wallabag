@@ -31,7 +31,7 @@
                             <input type="hidden" name="token" value="{{ csrf_token('archive-entry') }}"/>
 
                             <button type="submit" class="waves-effect" title="{{ 'entry.view.left_menu.set_as_read'|trans }}">
-                                <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
+                                <i class="material-icons small">{% if entry.isArchived == 0 %}archive{% else %}unarchive{% endif %}</i>
                             </button>
                         </form>
                     </li>
@@ -92,7 +92,7 @@
                     <input type="hidden" name="token" value="{{ csrf_token('archive-entry') }}"/>
 
                     <button type="submit" class="waves-effect collapsible-header markasread" title="{{ mark_as_read_label|trans }}" data-shortcuts-target="markAsRead">
-                        <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
+                        <i class="material-icons small">{% if entry.isArchived == 0 %}archive{% else %}unarchive{% endif %}</i>
                         <span>{{ mark_as_read_label|trans }}</span>
                     </button>
                 </form>
@@ -381,7 +381,7 @@
                           <input type="hidden" name="token" value="{{ csrf_token('archive-entry') }}"/>
 
                           <button type="submit" class="btn-floating">
-                              <i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
+                              <i class="material-icons">{% if entry.isArchived == 0 %}archive{% else %}unarchive{% endif %}</i>
                           </button>
                       </form>
                     </li>
