@@ -92,11 +92,14 @@ class EntriesExport
             return $this;
         }
 
-        $this->author = $this->entries[0]->getDomainName();
-
         $publishedBy = $this->entries[0]->getPublishedBy();
-        if (!empty($publishedBy)) {
+        $domainName = $this->entries[0]->getDomainName();
+        if (!empty($publishedBy) && !empty($publishedBy[0])) {
             $this->author = implode(', ', $publishedBy);
+        } elseif (!empty($domainName)) {
+            $this->author = $domainName;
+        } else {
+            $this->author = $this->translator->trans('export.unknown');
         }
 
         return $this;
@@ -135,16 +138,16 @@ class EntriesExport
         /*
          * Start and End of the book
          */
-        $content_start =
+        $chapterStart =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
             . "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\">\n"
             . '<head>'
             . "<meta http-equiv=\"Default-Style\" content=\"text/html; charset=utf-8\" />\n"
-            . "<title>wallabag articles book</title>\n"
+            . "<title>{$this->title}</title>\n"
             . "</head>\n"
             . "<body>\n";
 
-        $bookEnd = "</body>\n</html>\n";
+        $chapterEnd = "</body>\n</html>\n";
 
         $book = new EPub(EPub::BOOK_VERSION_EPUB3);
 
@@ -155,13 +158,8 @@ class EntriesExport
         $book->setTitle($this->title);
         // EPub specification requires BCP47-compliant languages, thus we replace _ with -
         $book->setLanguage(str_replace('_', '-', $this->language));
-        $book->setDescription('Some articles saved on my wallabag');
-
         $book->setAuthor($this->author, $this->author);
-
-        // I hope this is a non-existent address :)
-        $book->setPublisher('wallabag', 'wallabag');
-        // Strictly not needed as the book date defaults to time().
+        $book->setPublisher('wallabag', $this->wallabagUrl);
         $book->setDate(time());
         $book->setSourceURL($this->wallabagUrl);
 
@@ -170,6 +168,10 @@ class EntriesExport
 
         $entryIds = [];
         $entryCount = \count($this->entries);
+
+        if ($entryCount > 1) {
+            $book->setDescription("{$entryCount} articles saved on my wallabag");
+        }
         $i = 0;
 
         /*
@@ -180,23 +182,23 @@ class EntriesExport
         foreach ($this->entries as $entry) {
             ++$i;
 
-            /*
-             * Front page
-             * Set if there's only one entry in the given set
-             */
-            if (1 === $entryCount && null !== $entry->getPreviewPicture()) {
-                $book->setCoverImage($entry->getPreviewPicture());
-            }
+            $internalLink = $this->wallabagUrl . '/view/' . $entry->getId();
 
             foreach ($entry->getTags() as $tag) {
                 $book->setSubject($tag->getLabel());
             }
+
+            // use a hash of the original URL plus title as chapter filename inside the Epub
             $filename = sha1(\sprintf('%s:%s', $entry->getUrl(), $entry->getTitle()));
 
             $publishedBy = $entry->getPublishedBy();
-            $authors = $this->translator->trans('export.unknown');
-            if (!empty($publishedBy)) {
-                $authors = implode(',', $publishedBy);
+            $domainName = $entry->getDomainName();
+            if (!empty($publishedBy) && !empty($publishedBy[0])) {
+                $authors = implode(', ', $publishedBy);
+            } elseif (!empty($domainName)) {
+                $authors = $domainName;
+            } else {
+                $authors = $this->translator->trans('export.unknown');
             }
 
             $publishedAt = $entry->getPublishedAt();
@@ -207,28 +209,51 @@ class EntriesExport
 
             $readingTime = round($entry->getReadingTime() / $user->getConfig()->getReadingSpeed() * 200);
 
-            $titlepage = $content_start .
-                '<h1>' . $entry->getTitle() . '</h1>' .
-                '<dl>' .
+            if ($entryCount > 1) {
+                $chapterName = "{$i}. {$entry->getTitle()}";
+                $chapter = $chapterStart . "<h1>({$i}/{$entryCount}) {$entry->getTitle()}</h1>";
+                if (null !== $entry->getPreviewPicture()) {
+                    $chapter .= "<img src=\"{$entry->getPreviewPicture()}\">";
+                }
+            } else {
+                $book->setDescription($entry->getUrl());
+                if (null !== $entry->getPreviewPicture()) {
+                    $book->setCoverImage($entry->getPreviewPicture());
+                }
+                $chapterName = $entry->getTitle();
+                $chapter = $chapterStart . "<h1>{$entry->getTitle()}</h1>";
+            }
+
+            $chapter .= '<dl>' .
                 '<dt>' . $this->translator->trans('entry.view.published_by') . '</dt><dd>' . $authors . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.published_on') . '</dt><dd>' . $publishedDate . '</dd>' .
-                '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $readingTime]) . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $readingTime]) . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
-                '</dl>' .
-                $bookEnd;
-            $book->addChapter("Entry {$i} of {$entryCount}", "{$filename}_cover.html", $titlepage, true, EPub::EXTERNAL_REF_ADD);
-            $chapter = $content_start . $entry->getContent() . $bookEnd;
+                '<dt>' . $this->translator->trans('entry.metadata.internal_link') . '</dt><dd><a href="' . $internalLink . '">' . $internalLink . '</a></dd>';
+
+            if ($entry->isPublic()) {
+                $publicLink = $this->wallabagUrl . '/share/' . $entry->getUid();
+                $chapter .= '<dt>' . $this->translator->trans('entry.metadata.public_link') . '</dt><dd><a href="' . $publicLink . '">' . $publicLink . '</a></dd>';
+            }
+
+            $chapter .= '</dl>' .
+                "<h2>{$entry->getTitle()}</h2>" .
+                $entry->getContent() .
+                $chapterEnd;
 
             $entryIds[] = $entry->getId();
-            $book->addChapter($entry->getTitle(), "{$filename}.html", $chapter, true, EPub::EXTERNAL_REF_ADD);
+            $book->addChapter($chapterName, "{$filename}.xhtml", $chapter, true, EPub::EXTERNAL_REF_ADD);
         }
 
-        $book->addChapter('Notices', 'Cover2.html', $content_start . $this->getExportInformation('PHPePub') . $bookEnd);
+        $book->addChapter('Notices', 'CoverBack.xhtml', $chapterStart . $this->getExportInformation('PHPePub') . $chapterEnd);
 
-        // Could also be the ISBN number, prefered for published books, or a UUID.
+        // Set identifier to a hash of the wallabag server URL plus comma-separated entry IDs
         $hash = sha1(\sprintf('%s:%s', $this->wallabagUrl, implode(',', $entryIds)));
         $book->setIdentifier(\sprintf('urn:wallabag:%s', $hash), EPub::IDENTIFIER_URI);
+
+        // Do not add "Guide" chapter for "CoverPage"
+        $book->setisReferencesAddedToToc(false);
 
         return new Response(
             $book->getBook(),
@@ -271,7 +296,7 @@ class EntriesExport
 
             $publishedBy = $entry->getPublishedBy();
             $authors = $this->translator->trans('export.unknown');
-            if (!empty($publishedBy)) {
+            if (!empty($publishedBy) && !empty($publishedBy[0])) {
                 $authors = implode(',', $publishedBy);
             }
 
