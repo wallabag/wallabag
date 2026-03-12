@@ -64,6 +64,7 @@ config:
         new_user: Créer un compte
         feed: "Flux"
         ignore_origin: "Règles d'omission d'origine"
+        rendering_proxy: "Rendu externe"
         reset: "Réinitialisation"
         article_display: Affichage de l'article
     form:
@@ -154,6 +155,7 @@ config:
         edit_rule_label: éditer
         rule_label: Règle
         tags_label: Étiquettes
+        host_label: 'Site (subdomain.example.org, .example.org, etc.)'
         card:
             new_tagging_rule: Créer une règle d'étiquetage
             import_tagging_rules: Importer des règles
@@ -213,6 +215,15 @@ config:
                 label: "Opérateur"
                 equal_to: "Égal à…"
                 matches: "Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>_all ~ \"https?://rss.example.com/foobar/.*\"</code>"
+    form_rendering_proxy:
+        faq:
+            title: 'FAQ'
+            rendering_proxy_definition_title: Que signifie le rendu externe ?
+            rendering_proxy_definition_description: De plus en plus de sites reposent sur un rendu côté client (dans le navigateur Web). Wallabag n'est pas capable de récupérer leur contenu et les pages de ces sites ne peuvent donc pas être enregistrées. Cette fonctionnalité permet de contourner ce problème en déléguant le rendu des pages à un outil tiers qui fera le rendu dans un navigateur.
+            how_to_use_title: Comment l'utiliser ?
+            how_to_use_description: Si vous voyez cette page de configuration, alors la fonctionnalité a été activée au niveau de l'administration du serveur Wallabag. Vous n'avez qu'à définir la liste des sites pour lesquels vous voulez un rendu externe. Toutes les pages de ces sites seront alors passées de manière transparentes au proxy de rendu externe.
+            what_about_site_credentials_title: Qu'en est-il de la gestion des accès aux sites ?
+            what_about_site_credentials_description: Le rendu externe est malheureusement incompatible avec la gestion des accès aux sites. Vous ne pouvez pas accéder à des pages protégées par un paywall via le proxy de rendu externe.
     otp:
         page_title: Authentification à deux facteurs
         app:
@@ -678,6 +689,8 @@ flashes:
             tagging_rules_not_imported: Impossible d'importer les règles
             ignore_origin_rules_deleted: "Règle d'omission d'origine supprimée"
             ignore_origin_rules_updated: "Règle d'omission d'origine mise à jour"
+            rendering_proxy_hosts_updated: "Liste d'hôtes pour rendu externe mise à jour"
+            rendering_proxy_host_deleted: "Hôte pour rendu externe supprimé"
             tagging_rules_reset: Réinitialisation des règles de tags
             otp_code_invalid: Code d'authentification à deux facteurs invalide
     entry:

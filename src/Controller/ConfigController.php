@@ -24,20 +24,24 @@ use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Wallabag\Entity\Config as ConfigEntity;
 use Wallabag\Entity\IgnoreOriginUserRule;
+use Wallabag\Entity\RenderingProxyHost;
 use Wallabag\Entity\TaggingRule;
 use Wallabag\Event\ConfigUpdatedEvent;
 use Wallabag\Form\Type\ChangePasswordType;
 use Wallabag\Form\Type\ConfigType;
 use Wallabag\Form\Type\FeedType;
 use Wallabag\Form\Type\IgnoreOriginUserRuleType;
+use Wallabag\Form\Type\RederingProxyHostType;
 use Wallabag\Form\Type\TaggingRuleImportType;
 use Wallabag\Form\Type\TaggingRuleType;
 use Wallabag\Form\Type\UserInformationType;
 use Wallabag\Helper\Redirect;
+use Wallabag\Helper\RenderingProxy;
 use Wallabag\Repository\AnnotationRepository;
 use Wallabag\Repository\ConfigRepository;
 use Wallabag\Repository\EntryRepository;
 use Wallabag\Repository\IgnoreOriginUserRuleRepository;
+use Wallabag\Repository\RenderingProxyHostRepository;
 use Wallabag\Repository\TaggingRuleRepository;
 use Wallabag\Repository\TagRepository;
 use Wallabag\Repository\UserRepository;
@@ -59,7 +63,7 @@ class ConfigController extends AbstractController
 
     #[Route(path: '/config', name: 'config', methods: ['GET', 'POST'])]
     #[IsGranted('EDIT_CONFIG')]
-    public function indexAction(Request $request, Config $craueConfig, TaggingRuleRepository $taggingRuleRepository, IgnoreOriginUserRuleRepository $ignoreOriginUserRuleRepository, UserRepository $userRepository)
+    public function indexAction(Request $request, Config $craueConfig, TaggingRuleRepository $taggingRuleRepository, IgnoreOriginUserRuleRepository $ignoreOriginUserRuleRepository, UserRepository $userRepository, RenderingProxyHostRepository $renderingProxyHostRepository, RenderingProxy $renderingProxy)
     {
         $config = $this->getConfig();
         $user = $this->getUser();
@@ -228,6 +232,39 @@ class ConfigController extends AbstractController
             return $this->redirect($this->generateUrl('config') . '#set6');
         }
 
+        // handle rendering proxy hosts
+        $renderingProxyHost = new RenderingProxyHost();
+        $action = $this->generateUrl('config') . '#set7';
+
+        if ($request->query->has('rendering-proxy-host')) {
+            $renderingProxyHost = $renderingProxyHostRepository
+                ->find($request->query->get('rendering-proxy-host'));
+
+            if ($this->getUser()->getId() !== $renderingProxyHost->getConfig()->getUser()->getId()) {
+                return $this->redirect($action);
+            }
+
+            $action = $this->generateUrl('config', [
+                'rendering-proxy-host' => $renderingProxyHost->getId(),
+            ]) . '#set7';
+        }
+
+        $newRenderingProxyHost = $this->createForm(RederingProxyHostType::class, $renderingProxyHost, ['action' => $action]);
+        $newRenderingProxyHost->handleRequest($request);
+
+        if ($newRenderingProxyHost->isSubmitted() && $newRenderingProxyHost->isValid()) {
+            $renderingProxyHost->setConfig($config);
+            $this->entityManager->persist($renderingProxyHost);
+            $this->entityManager->flush();
+
+            $this->addFlash(
+                'notice',
+                'flashes.config.notice.rendering_proxy_hosts_updated'
+            );
+
+            return $this->redirect($this->generateUrl('config') . '#set7');
+        }
+
         return $this->render('Config/index.html.twig', [
             'form' => [
                 'config' => $configForm->createView(),
@@ -237,6 +274,7 @@ class ConfigController extends AbstractController
                 'new_tagging_rule' => $newTaggingRule->createView(),
                 'import_tagging_rule' => $taggingRulesImportform->createView(),
                 'new_ignore_origin_user_rule' => $newIgnoreOriginUserRule->createView(),
+                'new_rendering_proxy_host' => $renderingProxy->isEnabled() ? $newRenderingProxyHost->createView() : null,
             ],
             'feed' => [
                 'username' => $user->getUsername(),
@@ -545,6 +583,42 @@ class ConfigController extends AbstractController
     public function editIgnoreOriginRuleAction(IgnoreOriginUserRule $ignoreOriginUserRule)
     {
         return $this->redirect($this->generateUrl('config') . '?ignore-origin-user-rule=' . $ignoreOriginUserRule->getId() . '#set6');
+    }
+
+    /**
+     * Edit a rendering proxy host.
+     *
+     * @return RedirectResponse
+     */
+    #[Route(path: '/rendering-proxy-host/edit/{renderingProxyHost}', name: 'edit_rendering_proxy_host', methods: ['GET'], requirements: ['renderingProxyHost' => '\d+'])]
+    #[IsGranted('EDIT', subject: 'renderingProxyHost')]
+    public function editRenderingProxyHostAction(RenderingProxyHost $renderingProxyHost)
+    {
+        return $this->redirect($this->generateUrl('config') . '?rendering-proxy-host=' . $renderingProxyHost->getId() . '#set7');
+    }
+
+    /**
+     * Delete a rendering proxy host.
+     *
+     * @return RedirectResponse
+     */
+    #[Route(path: '/rendering-proxy-host/delete/{renderingProxyHost}', name: 'delete_rendering_proxy_host', methods: ['POST'], requirements: ['renderingProxyHost' => '\d+'])]
+    #[IsGranted('DELETE', subject: 'renderingProxyHost')]
+    public function deleteRenderingProxyHostAction(Request $request, RenderingProxyHost $renderingProxyHost)
+    {
+        if (!$this->isCsrfTokenValid('delete-rendering-proxy-host', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
+        $this->entityManager->remove($renderingProxyHost);
+        $this->entityManager->flush();
+
+        $this->addFlash(
+            'notice',
+            'flashes.config.notice.rendering_proxy_host_deleted'
+        );
+
+        return $this->redirect($this->generateUrl('config') . '#set7');
     }
 
     /**

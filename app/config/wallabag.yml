@@ -148,6 +148,18 @@ parameters:
             value: https://github.com/wallabag/wallabag/issues/new/choose
             section: misc
         -
+            name: rendering_proxy_url
+            value: ""
+            section: rendering_proxy
+        -
+            name: rendering_proxy_timeout
+            value: 100
+            section: rendering_proxy
+        -
+            name: rendering_proxy_all
+            value: 0
+            section: rendering_proxy
+        -
             name: api_user_registration
             value: 0
             section: api

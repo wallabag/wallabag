@@ -8,6 +8,7 @@ use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Symfony\Contracts\HttpClient\ResponseStreamInterface;
+use Wallabag\Helper\RenderingProxy;
 
 class WallabagClient implements HttpClientInterface
 {
@@ -18,8 +19,10 @@ class WallabagClient implements HttpClientInterface
         private readonly HttpBrowser $browser,
         private readonly Authenticator $authenticator,
         private readonly LoggerInterface $logger,
+        protected RenderingProxy $renderingProxy,
+        $httpClient = null,
     ) {
-        $this->httpClient = HttpClient::create([
+        $this->httpClient = $httpClient ?? HttpClient::create([
             'timeout' => 10,
         ]);
     }
@@ -27,6 +30,10 @@ class WallabagClient implements HttpClientInterface
     public function request(string $method, string $url, array $options = []): ResponseInterface
     {
         $this->logger->log('debug', 'Restricted access config enabled?', ['enabled' => (int) $this->restrictedAccess]);
+
+        if ($this->renderingProxy->ownsUrl($url)) {
+            $options['timeout'] = $this->renderingProxy->getTimeout();
+        }
 
         if (0 === (int) $this->restrictedAccess) {
             return $this->httpClient->request($method, $url, $options);
@@ -64,7 +71,7 @@ class WallabagClient implements HttpClientInterface
 
     public function withOptions(array $options): HttpClientInterface
     {
-        return new self($this->restrictedAccess, $this->browser, $this->authenticator, $this->logger);
+        return new self($this->restrictedAccess, $this->browser, $this->authenticator, $this->logger, $this->renderingProxy);
     }
 
     private function getCookieHeader(string $url): ?string
