@@ -30,6 +30,12 @@
             "name": "Kevin Decherf",
             "homepage": "https://kdecherf.com/",
             "role": "Developer"
+        },
+        {
+            "name": "Yassine Guedidi",
+            "email": "yassine@guedidi.com",
+            "homepage": "https://github.com/yguedidi",
+            "role": "Developer"
         }
     ],
     "homepage": "https://github.com/wallabag/wallabag",
