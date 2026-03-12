@@ -49,7 +49,7 @@ jobs:
         uses: "shivammathur/setup-php@v2"
         with:
           php-version: "${{ matrix.php }}"
-          coverage: none
+          coverage: pcov
           tools: pecl
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
@@ -88,16 +88,54 @@ jobs:
       - name: "Prepare database configuration"
         run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
+      - name: "Prepare coverage output directory"
+        run: mkdir -p .coverage
+
       - name: "Run PHPUnit unit tests"
-        run: "php bin/phpunit --testsuite unit -v"
+        run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml"
+
+      - name: "Upload unit coverage to Codecov"
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/unit.xml"
+          flags: "unit"
+          name: "phpunit-unit-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
 
       - name: "Run PHPUnit integration tests"
         if: ${{ !cancelled() }}
-        run: "php bin/phpunit --testsuite integration -v"
+        run: "php bin/phpunit --testsuite integration -v --coverage-clover=.coverage/integration.xml"
+
+      - name: "Upload integration coverage to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/integration.xml"
+          flags: "integration"
+          name: "phpunit-integration-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
 
       - name: "Run PHPUnit functional tests"
         if: ${{ !cancelled() }}
-        run: "php bin/phpunit --testsuite functional -v"
+        run: "php bin/phpunit --testsuite functional -v --coverage-clover=.coverage/functional.xml"
+
+      - name: "Upload functional coverage to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/functional.xml"
+          flags: "functional"
+          name: "phpunit-functional-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
 
   phpunit_no_prefix:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without prefix"
@@ -132,7 +170,7 @@ jobs:
         uses: "shivammathur/setup-php@v2"
         with:
           php-version: "${{ matrix.php }}"
-          coverage: none
+          coverage: pcov
           tools: pecl
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
@@ -176,16 +214,54 @@ jobs:
       - name: "Prepare database configuration"
         run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
+      - name: "Prepare coverage output directory"
+        run: mkdir -p .coverage
+
       - name: "Run PHPUnit unit tests"
-        run: "php bin/phpunit --testsuite unit -v"
+        run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml"
+
+      - name: "Upload unit coverage to Codecov"
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/unit.xml"
+          flags: "unit"
+          name: "phpunit-no-prefix-unit-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
 
       - name: "Run PHPUnit integration tests"
         if: ${{ !cancelled() }}
-        run: "php bin/phpunit --testsuite integration -v"
+        run: "php bin/phpunit --testsuite integration -v --coverage-clover=.coverage/integration.xml"
+
+      - name: "Upload integration coverage to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/integration.xml"
+          flags: "integration"
+          name: "phpunit-no-prefix-integration-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
 
       - name: "Run PHPUnit functional tests"
         if: ${{ !cancelled() }}
-        run: "php bin/phpunit --testsuite functional -v"
+        run: "php bin/phpunit --testsuite functional -v --coverage-clover=.coverage/functional.xml"
+
+      - name: "Upload functional coverage to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/functional.xml"
+          flags: "functional"
+          name: "phpunit-no-prefix-functional-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
 
   phpunit-without-rmq-redis:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without Rabbit & Redis"
@@ -211,7 +287,7 @@ jobs:
         uses: "shivammathur/setup-php@v2"
         with:
           php-version: "${{ matrix.php }}"
-          coverage: none
+          coverage: pcov
           tools: pecl
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
@@ -250,13 +326,73 @@ jobs:
       - name: "Prepare database configuration"
         run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
+      - name: "Prepare coverage output directory"
+        run: mkdir -p .coverage
+
       - name: "Run PHPUnit unit tests"
-        run: "php bin/phpunit --testsuite unit -v"
+        run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml"
+
+      - name: "Upload unit coverage to Codecov"
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/unit.xml"
+          flags: "unit"
+          name: "phpunit-without-rmq-redis-unit-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
 
       - name: "Run PHPUnit integration tests"
         if: ${{ !cancelled() }}
-        run: "php bin/phpunit --testsuite integration -v"
+        run: "php bin/phpunit --testsuite integration -v --coverage-clover=.coverage/integration.xml"
+
+      - name: "Upload integration coverage to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/integration.xml"
+          flags: "integration"
+          name: "phpunit-without-rmq-redis-integration-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
 
       - name: "Run PHPUnit functional tests"
         if: ${{ !cancelled() }}
-        run: "php bin/phpunit --testsuite functional -v"
+        run: "php bin/phpunit --testsuite functional -v --coverage-clover=.coverage/functional.xml"
+
+      - name: "Upload functional coverage to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/functional.xml"
+          flags: "functional"
+          name: "phpunit-without-rmq-redis-functional-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+  codecov-notify:
+    name: "Notify Codecov"
+    runs-on: ubuntu-latest
+    needs:
+      - phpunit
+      - phpunit_no_prefix
+      - phpunit-without-rmq-redis
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v6"
+        with:
+          fetch-depth: 2
+
+      - name: "Send Codecov notifications"
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          run_command: "send-notifications"
+          fail_ci_if_error: false
