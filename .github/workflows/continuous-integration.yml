@@ -380,6 +380,7 @@ jobs:
 
   codecov-notify:
     name: "Notify Codecov"
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     needs:
       - phpunit
