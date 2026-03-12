@@ -1,0 +1,45 @@
+codecov:
+  notify:
+    manual_trigger: true
+
+coverage:
+  status:
+    project:
+      default:
+        target: auto
+        informational: true
+      unit:
+        target: auto
+        informational: true
+        flags:
+          - unit
+      integration:
+        target: auto
+        informational: true
+        flags:
+          - integration
+      functional:
+        target: auto
+        informational: true
+        flags:
+          - functional
+    patch:
+      default:
+        target: auto
+        informational: true
+
+comment:
+  behavior: default
+  layout: "diff, flags, files"
+  require_changes: false
+
+flags:
+  unit:
+    paths:
+      - src/
+  integration:
+    paths:
+      - src/
+  functional:
+    paths:
+      - src/
