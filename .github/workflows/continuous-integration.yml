@@ -95,6 +95,7 @@ jobs:
         run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml"
 
       - name: "Upload unit coverage to Codecov"
+        if: ${{ !cancelled() }}
         uses: "codecov/codecov-action@v5"
         continue-on-error: true
         with:
@@ -221,6 +222,7 @@ jobs:
         run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml"
 
       - name: "Upload unit coverage to Codecov"
+        if: ${{ !cancelled() }}
         uses: "codecov/codecov-action@v5"
         continue-on-error: true
         with:
@@ -333,6 +335,7 @@ jobs:
         run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml"
 
       - name: "Upload unit coverage to Codecov"
+        if: ${{ !cancelled() }}
         uses: "codecov/codecov-action@v5"
         continue-on-error: true
         with:
