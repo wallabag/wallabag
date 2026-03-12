@@ -88,8 +88,16 @@ jobs:
       - name: "Prepare database configuration"
         run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
-      - name: "Run PHPUnit"
-        run: "php bin/phpunit -v"
+      - name: "Run PHPUnit unit tests"
+        run: "php bin/phpunit --testsuite unit -v"
+
+      - name: "Run PHPUnit integration tests"
+        if: ${{ !cancelled() }}
+        run: "php bin/phpunit --testsuite integration -v"
+
+      - name: "Run PHPUnit functional tests"
+        if: ${{ !cancelled() }}
+        run: "php bin/phpunit --testsuite functional -v"
 
   phpunit_no_prefix:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without prefix"
@@ -168,8 +176,16 @@ jobs:
       - name: "Prepare database configuration"
         run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
-      - name: "Run PHPUnit"
-        run: "php bin/phpunit -v"
+      - name: "Run PHPUnit unit tests"
+        run: "php bin/phpunit --testsuite unit -v"
+
+      - name: "Run PHPUnit integration tests"
+        if: ${{ !cancelled() }}
+        run: "php bin/phpunit --testsuite integration -v"
+
+      - name: "Run PHPUnit functional tests"
+        if: ${{ !cancelled() }}
+        run: "php bin/phpunit --testsuite functional -v"
 
   phpunit-without-rmq-redis:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without Rabbit & Redis"
@@ -234,5 +250,13 @@ jobs:
       - name: "Prepare database configuration"
         run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
-      - name: "Run PHPUnit"
-        run: "php bin/phpunit -v"
+      - name: "Run PHPUnit unit tests"
+        run: "php bin/phpunit --testsuite unit -v"
+
+      - name: "Run PHPUnit integration tests"
+        if: ${{ !cancelled() }}
+        run: "php bin/phpunit --testsuite integration -v"
+
+      - name: "Run PHPUnit functional tests"
+        if: ${{ !cancelled() }}
+        run: "php bin/phpunit --testsuite functional -v"
