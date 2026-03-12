@@ -61,6 +61,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
         - "@SpiriitFormFilter/Form/form_div_layout.html.twig"
+        - "Form/materialize_form_div_layout.html.twig"
     globals:
         wallabag_url: '%domain_name%'
         registration_enabled: '%fosuser_registration%'

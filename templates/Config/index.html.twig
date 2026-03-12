@@ -71,19 +71,19 @@
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s11" data-controller="materialize--form-select">
-                                    {{ form_errors(form.config.action_mark_as_read) }}
-                                    {{ form_widget(form.config.action_mark_as_read) }}
-                                    {{ form_label(form.config.action_mark_as_read) }}
-                                </div>
+                                {{ form_row(form.config.action_mark_as_read, {
+                                    row_attr: {
+                                        class: 'col s11'
+                                    }
+                                }) }}
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s11" data-controller="materialize--form-select">
-                                    {{ form_errors(form.config.language) }}
-                                    {{ form_widget(form.config.language) }}
-                                    {{ form_label(form.config.language) }}
-                                </div>
+                                {{ form_row(form.config.language, {
+                                    row_attr: {
+                                        class: 'col s11'
+                                    }
+                                }) }}
                                 <div class="input-field col s1">
                                     <a href="#" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="left" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'config.form_settings.help_language'|trans }}">
                                         <i class="material-icons">live_help</i>
@@ -119,11 +119,15 @@
                             <h5>{{ 'config.tab_menu.article_display'|trans }}</h5>
 
                             <div class="row">
-                                <div class="input-field col s5" data-controller="materialize--form-select">
-                                    {{ form_errors(form.config.font) }}
-                                    {{ form_widget(form.config.font, {attr: {'data-config-target': 'font', 'data-action': 'config#updatePreview'}}) }}
-                                    {{ form_label(form.config.font) }}
-                                </div>
+                                {{ form_row(form.config.font, {
+                                    row_attr: {
+                                        class: 'col s5'
+                                    },
+                                    attr: {
+                                        'data-config-target': 'font',
+                                        'data-action': 'config#updatePreview'
+                                    }
+                                }) }}
                                 <div class="input-field col s1">
                                     <a href="#" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="left" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'config.form_settings.help_font'|trans }}">
                                         <i class="material-icons">live_help</i>

@@ -228,13 +228,11 @@
                     </label>
                 </div>
 
-                <div class="col s12">
-                    {{ form_label(form.language) }}
-                </div>
-
-                <div class="input-field col s12">
-                    {{ form_widget(form.language) }}
-                </div>
+                {{ form_row(form.language, {
+                    row_attr: {
+                        class: 'col s12'
+                    }
+                }) }}
 
                 <div class="col s12">
                     {{ form_label(form.httpStatus) }}
