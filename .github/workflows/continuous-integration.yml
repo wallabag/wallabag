@@ -92,7 +92,7 @@ jobs:
         run: mkdir -p .coverage
 
       - name: "Run PHPUnit unit tests"
-        run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml"
+        run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml --log-junit=.coverage/unit.junit.xml"
 
       - name: "Upload unit coverage to Codecov"
         if: ${{ !cancelled() }}
@@ -106,9 +106,22 @@ jobs:
           disable_search: true
           fail_ci_if_error: false
 
+      - name: "Upload unit test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/unit.junit.xml"
+          flags: "unit,php-${{ matrix.php }},db-${{ matrix.database }},run-default"
+          name: "phpunit-test-results-unit-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
       - name: "Run PHPUnit integration tests"
         if: ${{ !cancelled() }}
-        run: "php bin/phpunit --testsuite integration -v --coverage-clover=.coverage/integration.xml"
+        run: "php bin/phpunit --testsuite integration -v --coverage-clover=.coverage/integration.xml --log-junit=.coverage/integration.junit.xml"
 
       - name: "Upload integration coverage to Codecov"
         if: ${{ !cancelled() }}
@@ -122,9 +135,22 @@ jobs:
           disable_search: true
           fail_ci_if_error: false
 
+      - name: "Upload integration test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/integration.junit.xml"
+          flags: "integration,php-${{ matrix.php }},db-${{ matrix.database }},run-default"
+          name: "phpunit-test-results-integration-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
       - name: "Run PHPUnit functional tests"
         if: ${{ !cancelled() }}
-        run: "php bin/phpunit --testsuite functional -v --coverage-clover=.coverage/functional.xml"
+        run: "php bin/phpunit --testsuite functional -v --coverage-clover=.coverage/functional.xml --log-junit=.coverage/functional.junit.xml"
 
       - name: "Upload functional coverage to Codecov"
         if: ${{ !cancelled() }}
@@ -135,6 +161,19 @@ jobs:
           files: ".coverage/functional.xml"
           flags: "functional"
           name: "phpunit-functional-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Upload functional test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/functional.junit.xml"
+          flags: "functional,php-${{ matrix.php }},db-${{ matrix.database }},run-default"
+          name: "phpunit-test-results-functional-php${{ matrix.php }}-${{ matrix.database }}"
           disable_search: true
           fail_ci_if_error: false
 
@@ -219,7 +258,7 @@ jobs:
         run: mkdir -p .coverage
 
       - name: "Run PHPUnit unit tests"
-        run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml"
+        run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml --log-junit=.coverage/unit.junit.xml"
 
       - name: "Upload unit coverage to Codecov"
         if: ${{ !cancelled() }}
@@ -233,9 +272,22 @@ jobs:
           disable_search: true
           fail_ci_if_error: false
 
+      - name: "Upload unit test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/unit.junit.xml"
+          flags: "unit,php-${{ matrix.php }},db-${{ matrix.database }},run-no-prefix"
+          name: "phpunit-no-prefix-test-results-unit-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
       - name: "Run PHPUnit integration tests"
         if: ${{ !cancelled() }}
-        run: "php bin/phpunit --testsuite integration -v --coverage-clover=.coverage/integration.xml"
+        run: "php bin/phpunit --testsuite integration -v --coverage-clover=.coverage/integration.xml --log-junit=.coverage/integration.junit.xml"
 
       - name: "Upload integration coverage to Codecov"
         if: ${{ !cancelled() }}
@@ -249,9 +301,22 @@ jobs:
           disable_search: true
           fail_ci_if_error: false
 
+      - name: "Upload integration test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/integration.junit.xml"
+          flags: "integration,php-${{ matrix.php }},db-${{ matrix.database }},run-no-prefix"
+          name: "phpunit-no-prefix-test-results-integration-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
       - name: "Run PHPUnit functional tests"
         if: ${{ !cancelled() }}
-        run: "php bin/phpunit --testsuite functional -v --coverage-clover=.coverage/functional.xml"
+        run: "php bin/phpunit --testsuite functional -v --coverage-clover=.coverage/functional.xml --log-junit=.coverage/functional.junit.xml"
 
       - name: "Upload functional coverage to Codecov"
         if: ${{ !cancelled() }}
@@ -262,6 +327,19 @@ jobs:
           files: ".coverage/functional.xml"
           flags: "functional"
           name: "phpunit-no-prefix-functional-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Upload functional test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/functional.junit.xml"
+          flags: "functional,php-${{ matrix.php }},db-${{ matrix.database }},run-no-prefix"
+          name: "phpunit-no-prefix-test-results-functional-php${{ matrix.php }}-${{ matrix.database }}"
           disable_search: true
           fail_ci_if_error: false
 
@@ -332,7 +410,7 @@ jobs:
         run: mkdir -p .coverage
 
       - name: "Run PHPUnit unit tests"
-        run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml"
+        run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml --log-junit=.coverage/unit.junit.xml"
 
       - name: "Upload unit coverage to Codecov"
         if: ${{ !cancelled() }}
@@ -346,9 +424,22 @@ jobs:
           disable_search: true
           fail_ci_if_error: false
 
+      - name: "Upload unit test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/unit.junit.xml"
+          flags: "unit,php-${{ matrix.php }},db-${{ matrix.database }},run-no-rmq-redis"
+          name: "phpunit-without-rmq-redis-test-results-unit-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
       - name: "Run PHPUnit integration tests"
         if: ${{ !cancelled() }}
-        run: "php bin/phpunit --testsuite integration -v --coverage-clover=.coverage/integration.xml"
+        run: "php bin/phpunit --testsuite integration -v --coverage-clover=.coverage/integration.xml --log-junit=.coverage/integration.junit.xml"
 
       - name: "Upload integration coverage to Codecov"
         if: ${{ !cancelled() }}
@@ -362,9 +453,22 @@ jobs:
           disable_search: true
           fail_ci_if_error: false
 
+      - name: "Upload integration test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/integration.junit.xml"
+          flags: "integration,php-${{ matrix.php }},db-${{ matrix.database }},run-no-rmq-redis"
+          name: "phpunit-without-rmq-redis-test-results-integration-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
       - name: "Run PHPUnit functional tests"
         if: ${{ !cancelled() }}
-        run: "php bin/phpunit --testsuite functional -v --coverage-clover=.coverage/functional.xml"
+        run: "php bin/phpunit --testsuite functional -v --coverage-clover=.coverage/functional.xml --log-junit=.coverage/functional.junit.xml"
 
       - name: "Upload functional coverage to Codecov"
         if: ${{ !cancelled() }}
@@ -375,6 +479,19 @@ jobs:
           files: ".coverage/functional.xml"
           flags: "functional"
           name: "phpunit-without-rmq-redis-functional-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Upload functional test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v5"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/functional.junit.xml"
+          flags: "functional,php-${{ matrix.php }},db-${{ matrix.database }},run-no-rmq-redis"
+          name: "phpunit-without-rmq-redis-test-results-functional-php${{ matrix.php }}-${{ matrix.database }}"
           disable_search: true
           fail_ci_if_error: false
 
