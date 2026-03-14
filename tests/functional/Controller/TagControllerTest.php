@@ -21,9 +21,23 @@ class TagControllerTest extends WallabagTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $client->request('GET', '/tag/list');
+        $tag = new Tag();
+        $tag->setLabel($this->tagName);
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://0.0.0.0/tag-list');
+        $entry->addTag($tag);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->request('GET', '/tag/list');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertCount(1, $crawler->filter('#tag-' . $tag->getId()));
+        $tagText = trim($crawler->filter('#tag-' . $tag->getId() . ' .card-tag-link')->text());
+
+        $this->assertStringContainsString($this->tagName, $tagText);
+        $this->assertStringContainsString('(1)', $tagText);
     }
 
     public function testAddTagToEntry()
