@@ -44,7 +44,7 @@ jobs:
 
       - name: "Install dependencies with Composer"
         id: composer-install
-        uses: "ramsey/composer-install@v3"
+        uses: "ramsey/composer-install@v4"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
