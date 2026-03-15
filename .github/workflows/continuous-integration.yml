@@ -12,6 +12,9 @@ env:
   DOCTRINE_DEPRECATIONS: none
   PGPASSWORD: wallabagrocks
   COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # codecov/codecov-action@v5 internally calls actions/github-script@v7 (Node.js 20);
+  # force Node.js 24 until codecov releases a fix
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   phpunit:
