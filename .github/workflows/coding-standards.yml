@@ -20,7 +20,7 @@ jobs:
         uses: "actions/checkout@v6"
 
       - name: "Install PHP"
-        uses: "shivammathur/setup-php@v2"
+        uses: "shivammathur/setup-php@2.37.0"
         with:
           coverage: "none"
           php-version: "8.2"
