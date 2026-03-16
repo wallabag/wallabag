@@ -100,6 +100,10 @@ class AppKernel extends Kernel
     {
         $loader->load($this->getProjectDir() . '/app/config/config_' . $this->getEnvironment() . '.yml');
 
+        if ('dev' === $this->getEnvironment()) {
+            $loader->load($this->getProjectDir() . '/app/config/services_dev.yml');
+        }
+
         $loader->load(function (ContainerBuilder $container): void {
             // $container->setParameter('container.autowiring.strict_mode', true);
             // $container->setParameter('container.dumper.inline_class_loader', true);
