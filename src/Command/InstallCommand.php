@@ -33,6 +33,7 @@ class InstallCommand extends Command
     private InputInterface $defaultInput;
     private SymfonyStyle $io;
     private bool $schemaIsNew = true;
+    private bool $adminUserCreated = false;
     private array $functionExists = [
         'curl_exec',
         'curl_multi_init',
@@ -46,6 +47,7 @@ class InstallCommand extends Command
         private readonly string $databaseDriver,
         private readonly array $defaultSettings,
         private readonly array $defaultIgnoreOriginInstanceRules,
+        private readonly string $environment,
     ) {
         parent::__construct();
     }
@@ -77,10 +79,33 @@ class InstallCommand extends Command
             ->setupConfig()
         ;
 
+        if ($this->adminUserCreated) {
+            $this->setupDevFixtures();
+        }
+
         $this->io->success('wallabag has been successfully installed.');
         $this->io->success('You can now configure your web server, see https://doc.wallabag.org');
 
         return 0;
+    }
+
+    private function setupDevFixtures(): void
+    {
+        if ('dev' !== $this->environment) {
+            return;
+        }
+
+        $this->io->section('Step 5: Dev fixtures (optional).');
+
+        if (!$this->io->confirm('Would you like to load dev fixtures with sample entries? (recommended for development)', true)) {
+            return;
+        }
+
+        $this->io->text('Loading dev fixtures...');
+
+        $this->runCommand('doctrine:fixtures:load', ['--append' => true, '--no-interaction' => true]);
+
+        $this->io->text('<info>Dev fixtures successfully loaded.</info>');
     }
 
     private function checkRequirements()
@@ -292,6 +317,8 @@ class InstallCommand extends Command
 
         // dispatch a created event so the associated config will be created
         $this->dispatcher->dispatch(new UserEvent($user), FOSUserEvents::USER_CREATED);
+
+        $this->adminUserCreated = true;
 
         $this->io->text('<info>Administration successfully setup.</info>');
 

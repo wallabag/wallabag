@@ -220,6 +220,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Wallabag\\Fixtures\\": "fixtures/",
             "Wallabag\\Tests\\Fixtures\\": "tests/fixtures/",
             "Wallabag\\Tests\\Functional\\": "tests/functional/",
             "Wallabag\\Tests\\Integration\\": "tests/integration/",
