@@ -1,4 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
+const { codecovWebpackPlugin } = require('@codecov/webpack-plugin');
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
   Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
@@ -22,6 +23,11 @@ Encore
     config.corejs = '3.23';
   })
   .enableSassLoader()
-  .enablePostCssLoader();
+  .enablePostCssLoader()
+  .addPlugin(codecovWebpackPlugin({
+    enableBundleAnalysis: typeof process.env.CODECOV_TOKEN !== 'undefined',
+    bundleName: 'wallabag',
+    uploadToken: process.env.CODECOV_TOKEN,
+  }));
 
 module.exports = Encore.getWebpackConfig();

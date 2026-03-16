@@ -495,6 +495,30 @@ jobs:
           disable_search: true
           fail_ci_if_error: false
 
+  bundle-analysis:
+    name: "Bundle analysis"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v6"
+        with:
+          fetch-depth: 2
+
+      - name: "Install Node"
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".nvmrc"
+          cache: 'yarn'
+
+      - name: "Install dependencies with Yarn"
+        run: yarn install
+
+      - name: "Build assets and upload bundle analysis"
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: yarn build:prod
+
   codecov-notify:
     name: "Notify Codecov"
     if: ${{ !cancelled() }}
