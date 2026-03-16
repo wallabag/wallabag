@@ -223,6 +223,26 @@ class InstallCommandTest extends WallabagKernelTestCase
         }
     }
 
+    public function testRunInstallCommandSchemaExistsNotReset()
+    {
+        $this->setupDatabase();
+
+        $command = $this->getCommand();
+
+        $tester = new CommandTester($command);
+        $tester->setInputs([
+            'n', // don't want to reset the entire database
+            'n', // don't want to reset the schema
+            // no further input — admin prompt must NOT appear
+        ]);
+        $tester->execute([]);
+
+        $this->assertStringContainsString('Setting up database.', $tester->getDisplay());
+        $this->assertStringContainsString('Administration setup.', $tester->getDisplay());
+        $this->assertStringContainsString('Existing schema kept', $tester->getDisplay());
+        $this->assertStringNotContainsString('Would you like to create a new admin user', $tester->getDisplay());
+    }
+
     public function testRunInstallCommandNoInteraction()
     {
         $this->setupDatabase();

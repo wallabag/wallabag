@@ -32,6 +32,7 @@ class InstallCommand extends Command
 
     private InputInterface $defaultInput;
     private SymfonyStyle $io;
+    private bool $schemaIsNew = true;
     private array $functionExists = [
         'curl_exec',
         'curl_multi_init',
@@ -239,6 +240,8 @@ class InstallCommand extends Command
 
                 $this->dropWallabagSchemaOnly();
                 $this->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true]);
+            } else {
+                $this->schemaIsNew = false;
             }
         } else {
             $this->io->text('Creating schema...');
@@ -260,6 +263,12 @@ class InstallCommand extends Command
     private function setupAdmin()
     {
         $this->io->section('Step 3 of 4: Administration setup.');
+
+        if (!$this->schemaIsNew) {
+            $this->io->text('<info>Existing schema kept — skipping admin user creation.</info>');
+
+            return $this;
+        }
 
         if (!$this->io->confirm('Would you like to create a new admin user (recommended)?', true)) {
             return $this;
