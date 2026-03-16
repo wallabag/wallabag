@@ -52,7 +52,7 @@
     "@babel/preset-env": "^7.29.0",
     "@symfony/webpack-encore": "^5.3.1",
     "autoprefixer": "^10.4.27",
-    "babel-loader": "^10.1.0",
+    "babel-loader": "^10.1.1",
     "core-js": "^3.48.0",
     "css-loader": "^7.1.4",
     "eslint": "^8.57.1",
