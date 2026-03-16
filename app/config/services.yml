@@ -14,6 +14,7 @@ services:
         bind:
             $projectDir: '%kernel.project_dir%'
             $debug: '%kernel.debug%'
+            $environment: '%kernel.environment%'
             $defaultLocale: '%kernel.default_locale%'
             $wallabagUrl: '%domain_name%'
             $tablePrefix: "%database_table_prefix%"
