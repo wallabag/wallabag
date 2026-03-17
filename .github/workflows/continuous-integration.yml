@@ -505,16 +505,31 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: "Detect changed bundle-relevant files"
+        id: changed-files
+        uses: tj-actions/changed-files@v47.0.5
+        with:
+          files: |
+            webpack.config.js
+            postcss.config.js
+            package.json
+            yarn.lock
+            .nvmrc
+            assets/**
+
       - name: "Install Node"
+        if: steps.changed-files.outputs.any_changed == 'true'
         uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
           cache: 'yarn'
 
       - name: "Install dependencies with Yarn"
+        if: steps.changed-files.outputs.any_changed == 'true'
         run: yarn install
 
       - name: "Build assets and upload bundle analysis"
+        if: steps.changed-files.outputs.any_changed == 'true'
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: yarn build:prod
