@@ -106,7 +106,7 @@
                     <input type="hidden" name="token" value="{{ csrf_token('star-entry') }}"/>
 
                     <button type="submit" class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" data-shortcuts-target="markAsFavorite">
-                        <i class="material-icons spall">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
+                        <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
                         <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
                     </button>
                 </form>
