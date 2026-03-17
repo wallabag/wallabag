@@ -82,6 +82,9 @@ test-integration: ## Launch integration testsuite (append test paths to narrow s
 test-functional: ## Launch functional testsuite (append test paths to narrow scope)
 	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit --testsuite functional -v $(PHPUNIT_PATH_ARGS)
 
+check-cs: ## Check PHP coding standards without making changes
+	@$(PHP_NO_XDEBUG) bin/php-cs-fixer fix --verbose --dry-run
+
 fix-cs: ## Run PHP-CS-Fixer
 	@$(PHP_NO_XDEBUG) bin/php-cs-fixer fix
 
@@ -91,11 +94,28 @@ phpstan: ## Run PHPStan
 phpstan-baseline: ## Generate PHPStan baseline
 	@$(PHP_NO_XDEBUG) bin/phpstan analyse --generate-baseline
 
+twigcs: ## Run TwigCS linter on Twig templates
+	@$(PHP_NO_XDEBUG) bin/twigcs --severity=error --display=blocking app/ src/
+
+composer-validate: ## Validate composer.json
+	@$(COMPOSER) validate
+
+composer-normalize: ## Check that composer.json is normalized (dry run)
+	@$(COMPOSER) normalize --dry-run --no-check-lock
+
+composer-dependency-analyser: ## Run composer-dependency-analyser
+	@$(PHP_NO_XDEBUG) bin/composer-dependency-analyser
+
 lint-js: ## Run ESLint
 	@$(YARN) lint:js
 
 lint-scss: ## Run Stylelint
 	@$(YARN) lint:scss
+
+lint-translations: ## Validate YAML translation files
+	@$(PHP) bin/console lint:yaml translations -v
+
+lint: composer-validate composer-normalize composer-dependency-analyser check-cs phpstan twigcs lint-js lint-scss lint-translations ## Run all coding standards and linting checks
 
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
 ifndef VERSION
@@ -106,6 +126,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup fix-cs phpstan phpstan-baseline lint-js lint-scss
+.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup check-cs fix-cs phpstan phpstan-baseline twigcs composer-validate composer-normalize composer-dependency-analyser lint-js lint-scss lint-translations lint
 
 .DEFAULT_GOAL := install
