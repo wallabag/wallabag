@@ -134,7 +134,7 @@
                                     </a>
                                 </div>
 
-                                <div class="input-field col s5">
+                                <div class="input-field range-field col s5" data-controller="materialize--range">
                                     {{ form_errors(form.config.lineHeight) }}
                                     {{ form_widget(form.config.lineHeight, {attr: {'data-config-target': 'lineHeight', 'data-action': 'config#updatePreview'}}) }}
                                     {{ form_label(form.config.lineHeight, null, {'label_attr': {'class': 'settings-range-label'}}) }}
@@ -147,7 +147,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s5">
+                                <div class="input-field range-field col s5" data-controller="materialize--range">
                                     {{ form_errors(form.config.fontsize) }}
                                     {{ form_widget(form.config.fontsize, {attr: {'data-config-target': 'fontSize', 'data-action': 'config#updatePreview'}}) }}
                                     {{ form_label(form.config.fontsize, null, {'label_attr': {'class': 'settings-range-label'}}) }}
@@ -158,7 +158,7 @@
                                     </a>
                                 </div>
 
-                                <div class="input-field col s5">
+                                <div class="input-field range-field col s5" data-controller="materialize--range">
                                     {{ form_errors(form.config.maxWidth) }}
                                     {{ form_widget(form.config.maxWidth, {attr: {'data-config-target': 'maxWidth', 'data-action': 'config#updatePreview'}}) }}
                                     {{ form_label(form.config.maxWidth, null, {'label_attr': {'class': 'settings-range-label'}}) }}
