@@ -147,6 +147,7 @@
         "symfony/options-resolver": "^5.4.45",
         "symfony/proxy-manager-bridge": "^5.4.45",
         "symfony/routing": "^5.4.48",
+        "symfony/runtime": "^5.4",
         "symfony/security-bundle": "^5.4.45",
         "symfony/security-core": "^5.4.48",
         "symfony/security-http": "^5.4.47",
@@ -234,7 +235,8 @@
         "allow-plugins": {
             "ergebnis/composer-normalize": true,
             "php-http/discovery": true,
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "symfony/runtime": true
         },
         "bin-dir": "bin",
         "sort-packages": true
