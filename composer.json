@@ -185,6 +185,7 @@
         "shipmonk/composer-dependency-analyser": "^1.8.2",
         "symfony/css-selector": "^5.4.45",
         "symfony/debug-bundle": "^5.4.45",
+        "symfony/dotenv": "^5.4",
         "symfony/maker-bundle": "^1.50",
         "symfony/phpunit-bridge": "^7.2.0",
         "symfony/process": "^5.4.47",
