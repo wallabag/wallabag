@@ -111,6 +111,7 @@ class AppKernel extends Kernel
         });
 
         $loader->load(function (ContainerBuilder $container): void {
+            $this->warnIfParametersYmlUsed();
             $this->processDatabaseParameters($container);
             $this->defineRedisUrlEnvVar($container);
             $this->defineRabbitMqUrlEnvVar($container);
@@ -120,6 +121,21 @@ class AppKernel extends Kernel
     protected function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new ImportCompilerPass());
+    }
+
+    private function warnIfParametersYmlUsed(): void
+    {
+        if ('test' === $this->getEnvironment()) {
+            return;
+        }
+
+        if (false === getenv('DATABASE_URL')) {
+            @trigger_error(
+                'Configuring wallabag via app/config/parameters.yml is deprecated and will be removed in wallabag 3.0. '
+                . 'Please set the DATABASE_URL environment variable (and other configuration) directly in your server\'s environment instead.',
+                \E_USER_DEPRECATED
+            );
+        }
     }
 
     private function processDatabaseParameters(ContainerBuilder $container)
