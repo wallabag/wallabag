@@ -60,5 +60,6 @@ specialexport.json
 web/custom.css
 
 .env.local
+.env.test.local
 
 yarn-error.log
