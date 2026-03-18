@@ -47,7 +47,7 @@ class RenderingProxy
                 // host is in the list
                 || \in_array($host, $userHosts, true)
                 // Or host is a subhost of something in the list
-                || array_find($userHosts, fn ($h) => 1 === preg_match("/\.$h$/", $host));
+                || count(array_filter($userHosts, fn ($h) => 1 === preg_match("/\.$h$/", $host))) != 0;
 
             if ($proxy) {
                 return [
