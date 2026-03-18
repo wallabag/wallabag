@@ -17,6 +17,11 @@ jobs:
   phpunit:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }}"
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: >-
+        ${{ matrix.database == 'mysql' && 'mysql://root:root@127.0.0.1:3306/wallabag?charset=utf8mb4'
+         || matrix.database == 'pgsql' && 'postgresql://wallabag:wallabagrocks@127.0.0.1:5432/wallabag?charset=utf8'
+         || format('sqlite:///{0}/data/db/wallabag_test.sqlite', github.workspace) }}
     services:
       rabbitmq:
         image: rabbitmq:3-alpine
@@ -84,9 +89,6 @@ jobs:
 
       - name: "Build assets with Yarn"
         run: yarn build:dev
-
-      - name: "Prepare database configuration"
-        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
       - name: "Prepare coverage output directory"
         run: mkdir -p .coverage
@@ -180,6 +182,11 @@ jobs:
   phpunit_no_prefix:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without prefix"
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: >-
+        ${{ matrix.database == 'mysql' && 'mysql://root:root@127.0.0.1:3306/wallabag?charset=utf8mb4'
+         || matrix.database == 'pgsql' && 'postgresql://wallabag:wallabagrocks@127.0.0.1:5432/wallabag?charset=utf8'
+         || format('sqlite:///{0}/data/db/wallabag_test.sqlite', github.workspace) }}
     services:
       rabbitmq:
         image: rabbitmq:3-alpine
@@ -250,9 +257,6 @@ jobs:
 
       - name: "Build assets with Yarn"
         run: yarn build:dev
-
-      - name: "Prepare database configuration"
-        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
       - name: "Prepare coverage output directory"
         run: mkdir -p .coverage
@@ -346,6 +350,11 @@ jobs:
   phpunit-without-rmq-redis:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without Rabbit & Redis"
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: >-
+        ${{ matrix.database == 'mysql' && 'mysql://root:root@127.0.0.1:3306/wallabag?charset=utf8mb4'
+         || matrix.database == 'pgsql' && 'postgresql://wallabag:wallabagrocks@127.0.0.1:5432/wallabag?charset=utf8'
+         || format('sqlite:///{0}/data/db/wallabag_test.sqlite', github.workspace) }}
 
     strategy:
       fail-fast: false
@@ -402,9 +411,6 @@ jobs:
 
       - name: "Build assets with Yarn"
         run: yarn build:dev
-
-      - name: "Prepare database configuration"
-        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
       - name: "Prepare coverage output directory"
         run: mkdir -p .coverage
