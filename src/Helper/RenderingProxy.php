@@ -38,16 +38,16 @@ class RenderingProxy
             preg_match('~^[^/]+://([^/]+)~', $url, $matches);
             $host = $matches[1];
 
-            $userHosts = $userConfig ? $userConfig
-                ->getRenderingProxyHosts()
-                ->map(fn (RenderingProxyHost $e) => $e->getHost())
-                ->toArray() : [];
+            $userHosts = $userConfig
+                ? $userConfig->getRenderingProxyHosts()->map(fn (RenderingProxyHost $e) => $e->getHost())->toArray()
+                : [];
 
-            $proxy = $this->renderingProxyAll
+            $proxy =
+                $this->renderingProxyAll
                 // host is in the list
                 || \in_array($host, $userHosts, true)
                 // Or host is a subhost of something in the list
-                || count(array_filter($userHosts, fn ($h) => 1 === preg_match("/\.$h$/", $host))) != 0;
+                || 0 !== \count(array_filter($userHosts, fn ($h) => 1 === preg_match("/\.$h$/", $host)));
 
             if ($proxy) {
                 return [
@@ -74,7 +74,10 @@ class RenderingProxy
         if ($this->isEnabled()) {
             $base = preg_replace('/%u.*$/', '', $this->renderingProxyUrl);
 
-            return 1 === $this->renderingProxyAll || (str_starts_with($url, $base) && 1 === preg_match("~^{$base}http[s]?://~", $url));
+            return
+                1 === $this->renderingProxyAll
+                || str_starts_with($url, $base) && 1 === preg_match("~^{$base}http[s]?://~", $url)
+            ;
         }
 
         return false;
