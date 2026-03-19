@@ -1,4 +1,4 @@
-module github.com/wallabag/doc
+module github.com/wallabag/wallabag/doc
 
 go 1.22.5
 
