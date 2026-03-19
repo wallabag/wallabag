@@ -5,7 +5,6 @@ imports:
 
 parameters:
     fosuser_registration: true
-    wallabag_dbname_suffix: '_test'
 
 framework:
     test: ~
@@ -24,7 +23,6 @@ web_profiler:
 
 doctrine:
     dbal:
-        dbname_suffix: '%wallabag_dbname_suffix%' # for MySQL and PostgreSQL
         use_savepoints: true
 
     orm:

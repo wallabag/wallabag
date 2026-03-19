@@ -18,6 +18,8 @@ use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
 class InstallCommandTest extends WallabagKernelTestCase
 {
+    private ?string $initialDatabaseUrl = null;
+
     public static function setUpBeforeClass(): void
     {
         // disable doctrine-test-bundle
@@ -37,22 +39,32 @@ class InstallCommandTest extends WallabagKernelTestCase
         /** @var Connection $connection */
         $connection = static::getContainer()->get(ManagerRegistry::class)->getConnection();
 
-        $originalDatabaseUrl = static::getContainer()->getParameter('env(DATABASE_URL)');
-        $dbnameSuffix = static::getContainer()->getParameter('wallabag_dbname_suffix');
+        // Capture the initial DATABASE_URL before modifying it.
+        // Read from $_ENV because Symfony's EnvVarProcessor checks $_ENV before getenv(),
+        // and Dotenv::bootEnv() (usePutenv=false by default) only sets $_ENV / $_SERVER.
+        $this->initialDatabaseUrl = $_ENV['DATABASE_URL'] ?? null;
+
+        $originalDatabaseUrl = $this->initialDatabaseUrl
+            ?? static::getContainer()->getParameter('env(DATABASE_URL)');
+
         $tmpDatabaseName = 'wallabag_' . bin2hex(random_bytes(5));
 
         if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
-            $tmpDatabaseUrl = str_replace('wallabag' . $dbnameSuffix . '.sqlite', $tmpDatabaseName . $dbnameSuffix . '.sqlite', $originalDatabaseUrl);
+            $dbFilename = basename($connection->getParams()['path']);
+            $tmpFilename = $tmpDatabaseName . '.sqlite';
+            $tmpDatabaseUrl = str_replace($dbFilename, $tmpFilename, $originalDatabaseUrl);
         } else {
             $tmpDatabaseUrl = (string) (new Uri($originalDatabaseUrl))->withPath($tmpDatabaseName);
         }
 
+        // Update all three env channels so Symfony's EnvVarProcessor picks up the change.
         putenv("DATABASE_URL=$tmpDatabaseUrl");
+        $_ENV['DATABASE_URL'] = $tmpDatabaseUrl;
+        $_SERVER['DATABASE_URL'] = $tmpDatabaseUrl;
 
         if ($connection->getDatabasePlatform() instanceof PostgreSQLPlatform) {
             // PostgreSQL requires that the database exists before connecting to it
-            $tmpTestDatabaseName = $tmpDatabaseName . $dbnameSuffix;
-            $connection->executeQuery('CREATE DATABASE ' . $tmpTestDatabaseName);
+            $connection->executeQuery('CREATE DATABASE ' . $tmpDatabaseName);
         }
 
         // The environment has been changed, reboot the kernel to update the connection.
@@ -67,8 +79,15 @@ class InstallCommandTest extends WallabagKernelTestCase
         $connection = static::getContainer()->get(ManagerRegistry::class)->getConnection();
 
         if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
-            // Remove the real environment variable.
-            putenv('DATABASE_URL');
+            // Restore all env channels to their initial state.
+            if (null !== $this->initialDatabaseUrl) {
+                putenv("DATABASE_URL={$this->initialDatabaseUrl}");
+                $_ENV['DATABASE_URL'] = $this->initialDatabaseUrl;
+                $_SERVER['DATABASE_URL'] = $this->initialDatabaseUrl;
+            } else {
+                putenv('DATABASE_URL');
+                unset($_ENV['DATABASE_URL'], $_SERVER['DATABASE_URL']);
+            }
 
             $databasePath = parse_url($databaseUrl, \PHP_URL_PATH);
 
@@ -79,8 +98,16 @@ class InstallCommandTest extends WallabagKernelTestCase
             $testDatabaseName = $connection->getDatabase();
             $connection->close();
 
-            // Remove the real environment variable.
-            putenv('DATABASE_URL');
+            // Restore all env channels so the rebooted kernel connects to the original database,
+            // which is required to be able to DROP the temporary database.
+            if (null !== $this->initialDatabaseUrl) {
+                putenv("DATABASE_URL={$this->initialDatabaseUrl}");
+                $_ENV['DATABASE_URL'] = $this->initialDatabaseUrl;
+                $_SERVER['DATABASE_URL'] = $this->initialDatabaseUrl;
+            } else {
+                putenv('DATABASE_URL');
+                unset($_ENV['DATABASE_URL'], $_SERVER['DATABASE_URL']);
+            }
 
             // Reboot the kernel to avoid the rollback-only transaction state.
             $this->rebootKernel();

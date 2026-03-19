@@ -34,6 +34,36 @@ If you want to test using an other database than SQLite, uncomment the `postgres
 
 You can now access your wallabag instance using that url: `http://127.0.0.1:8000`
 
+### Database configuration
+
+The project ships a `.env` file (committed) with `DATABASE_URL` defaulting to SQLite. For local development with a different database, create a `.env.local` file at the root of the repository (it is gitignored) and set `DATABASE_URL` there:
+
+```dotenv
+# MariaDB / MySQL
+DATABASE_URL=mysql://root:root@127.0.0.1:3306/wallabag?charset=utf8mb4
+# MariaDB / MySQL (Docker Compose)
+DATABASE_URL=mysql://root:wallaroot@mariadb:3306/wallabag?charset=utf8mb4
+# PostgreSQL
+DATABASE_URL=postgresql://wallabag:wallapass@127.0.0.1:5432/wallabag?charset=utf8
+# PostgreSQL (Docker Compose)
+DATABASE_URL=postgresql://wallabag:wallapass@postgres:5432/wallabag?charset=utf8
+```
+
+For tests, the committed `.env.test` defaults to SQLite. To run the test suite against MySQL or PostgreSQL, create a `.env.test.local` file (gitignored) at the root of the repository:
+
+```dotenv
+# MariaDB / MySQL
+DATABASE_URL=mysql://root:root@127.0.0.1:3306/wallabag_test?charset=utf8mb4
+# MariaDB / MySQL (Docker Compose)
+DATABASE_URL=mysql://root:wallaroot@mariadb:3306/wallabag_test?charset=utf8mb4
+# PostgreSQL
+DATABASE_URL=postgresql://wallabag:wallapass@127.0.0.1:5432/wallabag_test?charset=utf8
+# PostgreSQL (Docker Compose)
+DATABASE_URL=postgresql://wallabag:wallapass@postgres:5432/wallabag_test?charset=utf8
+```
+
+Make sure to use a different database name from the one in `.env.local` to avoid conflicts between your development and test environments.
+
 ## You found a bug
 Please [open a new issue](https://github.com/wallabag/wallabag/issues/new).
 
