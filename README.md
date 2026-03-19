@@ -1,5 +1,8 @@
 # wallabag
 
+> [!IMPORTANT]
+> The name of this project is **wallabag** — all lowercase, always. Not "Wallabag", not "WallaBag", not any other variation. Just plain, humble, all-lowercase **wallabag** 😉
+
 [![CI](https://github.com/wallabag/wallabag/actions/workflows/continuous-integration.yml/badge.svg?branch=master)](https://github.com/wallabag/wallabag/actions/workflows/continuous-integration.yml?query=branch%3Amaster)
 [![Matrix](https://matrix.to/img/matrix-badge.svg)](https://matrix.to/#/#wallabag:matrix.org)
 [![Donation Status](https://img.shields.io/liberapay/goal/wallabag.svg?logo=liberapay)](https://liberapay.com/wallabag/donate)
