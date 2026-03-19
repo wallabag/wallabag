@@ -2,32 +2,31 @@
 
 namespace Wallabag\Controller\Api;
 
-use Nelmio\ApiDocBundle\Annotation\Operation;
-use OpenApi\Annotations as OA;
+use Nelmio\ApiDocBundle\Attribute\Model;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
 use Wallabag\Repository\EntryRepository;
 use Wallabag\Repository\TagRepository;
 
 class TagRestController extends WallabagRestController
 {
-    /**
-     * Retrieve all tags.
-     *
-     * @Operation(
-     *     tags={"Tags"},
-     *     summary="Retrieve all tags.",
-     *     @OA\Response(
-     *         response="200",
-     *         description="Returned when successful"
-     *     )
-     * )
-     *
-     * @return JsonResponse
-     */
+    #[OA\Get(
+        summary: 'Retrieve all tags.',
+        tags: ['Tags'],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Returned when successful.',
+                content: new OA\JsonContent(
+                    type: 'array',
+                    items: new OA\Items(ref: new Model(type: Tag::class))
+                )
+            ),
+        ]
+    )]
     #[Route(path: '/api/tags.{_format}', name: 'api_get_tags', methods: ['GET'], defaults: ['_format' => 'json'])]
     public function getTagsAction(TagRepository $tagRepository)
     {
@@ -40,30 +39,22 @@ class TagRestController extends WallabagRestController
         return (new JsonResponse())->setJson($json);
     }
 
-    /**
-     * Permanently remove one tag from **every** entry by passing the Tag label.
-     *
-     * @Operation(
-     *     tags={"Tags"},
-     *     summary="Permanently remove one tag from every entry by passing the Tag label.",
-     *     @OA\Parameter(
-     *         name="tag",
-     *         in="query",
-     *         description="Tag as a string",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string",
-     *             pattern="\w+",
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="200",
-     *         description="Returned when successful"
-     *     )
-     * )
-     *
-     * @return JsonResponse
-     */
+    #[OA\Delete(
+        summary: 'Permanently remove one tag from every entry by passing the Tag label.',
+        tags: ['Tags'],
+        parameters: [
+            new OA\Parameter(
+                name: 'tag',
+                in: 'query',
+                description: 'Tag as a string.',
+                required: true,
+                schema: new OA\Schema(type: 'string', pattern: '\w+')
+            ),
+        ],
+        responses: [
+            new OA\Response(response: 200, description: 'Returned when successful.'),
+        ]
+    )]
     #[Route(path: '/api/tag/label.{_format}', name: 'api_delete_tag_label', methods: ['DELETE'], defaults: ['_format' => 'json'])]
     public function deleteTagLabelAction(Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
@@ -87,30 +78,22 @@ class TagRestController extends WallabagRestController
         return (new JsonResponse())->setJson($json);
     }
 
-    /**
-     * Permanently remove some tags from **every** entry.
-     *
-     * @Operation(
-     *     tags={"Tags"},
-     *     summary="Permanently remove some tags from every entry.",
-     *     @OA\Parameter(
-     *         name="tags",
-     *         in="query",
-     *         description="Tags as strings (comma splitted)",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string",
-     *             example="tag1,tag2",
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="200",
-     *         description="Returned when successful"
-     *     )
-     * )
-     *
-     * @return JsonResponse
-     */
+    #[OA\Delete(
+        summary: 'Permanently remove some tags from every entry.',
+        tags: ['Tags'],
+        parameters: [
+            new OA\Parameter(
+                name: 'tags',
+                in: 'query',
+                description: 'Tags as comma-separated strings.',
+                required: true,
+                schema: new OA\Schema(type: 'string', example: 'tag1,tag2')
+            ),
+        ],
+        responses: [
+            new OA\Response(response: 200, description: 'Returned when successful.'),
+        ]
+    )]
     #[Route(path: '/api/tags/label.{_format}', name: 'api_delete_tags_label', methods: ['DELETE'], defaults: ['_format' => 'json'])]
     public function deleteTagsLabelAction(Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
@@ -133,30 +116,22 @@ class TagRestController extends WallabagRestController
         return (new JsonResponse())->setJson($json);
     }
 
-    /**
-     * Permanently remove one tag from **every** entry by passing the Tag ID.
-     *
-     * @Operation(
-     *     tags={"Tags"},
-     *     summary="Permanently remove one tag from every entry by passing the Tag ID.",
-     *     @OA\Parameter(
-     *         name="tag",
-     *         in="path",
-     *         description="The tag",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="integer",
-     *             pattern="\w+",
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="200",
-     *         description="Returned when successful"
-     *     )
-     * )
-     *
-     * @return JsonResponse
-     */
+    #[OA\Delete(
+        summary: 'Permanently remove one tag from every entry by passing the Tag ID.',
+        tags: ['Tags'],
+        parameters: [
+            new OA\Parameter(
+                name: 'tag',
+                in: 'path',
+                description: 'The tag ID.',
+                required: true,
+                schema: new OA\Schema(type: 'integer')
+            ),
+        ],
+        responses: [
+            new OA\Response(response: 200, description: 'Returned when successful.'),
+        ]
+    )]
     #[Route(path: '/api/tags/{tag}.{_format}', name: 'api_delete_tag', methods: ['DELETE'], defaults: ['_format' => 'json'])]
     public function deleteTagAction(Tag $tag, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
