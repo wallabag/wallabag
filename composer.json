@@ -153,6 +153,7 @@
         "symfony/security-http": "^5.4.47",
         "symfony/templating": "^5.4.45",
         "symfony/translation-contracts": "^2.5.4",
+        "symfony/cache": "^5.4",
         "symfony/twig-bundle": "^5.4.45",
         "symfony/validator": "^5.4.48",
         "symfony/webpack-encore-bundle": "^1.17.2",
@@ -164,7 +165,8 @@
         "wallabag/rulerz": "dev-master",
         "wallabag/rulerz-bundle": "dev-master",
         "willdurand/hateoas": "^3.12",
-        "willdurand/hateoas-bundle": "^2.7"
+        "willdurand/hateoas-bundle": "^2.7",
+        "zircote/swagger-php": "^4.11.1 || ^5.0"
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.2.2",

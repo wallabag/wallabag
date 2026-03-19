@@ -4,60 +4,41 @@ namespace Wallabag\Controller\Api;
 
 use Hateoas\Configuration\Route as HateoasRoute;
 use Hateoas\Representation\Factory\PagerfantaFactory;
-use Nelmio\ApiDocBundle\Annotation\Operation;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Wallabag\Entity\Entry;
+use Wallabag\OpenApi\Attribute as WOA;
 use Wallabag\Repository\EntryRepository;
 
 class SearchRestController extends WallabagRestController
 {
-    /**
-     * Search all entries by term.
-     *
-     * @Operation(
-     *     tags={"Search"},
-     *     summary="Search all entries by term.",
-     *     @OA\Parameter(
-     *         name="term",
-     *         in="query",
-     *         description="Any query term",
-     *         required=false,
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         name="page",
-     *         in="query",
-     *         description="what page you want.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="integer",
-     *             default=1
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="perPage",
-     *         in="query",
-     *         description="results per page.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="integer",
-     *             default=30
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="200",
-     *         description="Returned when successful"
-     *     )
-     * )
-     *
-     * @return JsonResponse
-     */
     #[Route(path: '/api/search.{_format}', name: 'api_get_search', methods: ['GET'], defaults: ['_format' => 'json'])]
+    #[OA\Get(
+        summary: 'Search all entries by term.',
+        tags: ['Search'],
+        parameters: [
+            new OA\Parameter(
+                name: 'term',
+                in: 'query',
+                description: 'Any query term.',
+                required: false,
+                schema: new OA\Schema(type: 'string')
+            ),
+            new WOA\PagerFanta\PageParameter(),
+            new WOA\PagerFanta\PerPageParameter(),
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Returned when successful.',
+                content: new WOA\PagerFanta\JsonContent(Entry::class)
+            ),
+        ]
+    )]
     #[IsGranted('LIST_ENTRIES')]
     public function getSearchAction(Request $request, EntryRepository $entryRepository)
     {
