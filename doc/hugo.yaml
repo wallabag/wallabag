@@ -32,7 +32,7 @@ params:
 
   editURL:
     enable: true
-    base: "https://github.com/wallabag/doc/edit/master/content"
+    base: "https://github.com/wallabag/wallabag/edit/master/doc/content"
 
   highlight:
     copy:

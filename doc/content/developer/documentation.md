@@ -6,10 +6,10 @@ weight: 3
 Contribute to this documentation
 ================================
 
-Sources of our documentation are here
-https://github.com/wallabag/doc/
+The documentation lives in the `doc/` directory of the main repository:
+https://github.com/wallabag/wallabag/tree/master/doc
 
-We use [GitBook](https://www.gitbook.com/book/wallabag/documentation/details) to generate it.
+It is built with [Hugo](https://gohugo.io/) using the [Hextra](https://imfing.github.io/hextra/) theme.
 
 Pages are written in [Markdown](https://en.wikipedia.org/wiki/Markdown) format. You can
 use online tools like http://dillinger.io or
