@@ -5,6 +5,8 @@ imports:
 
 parameters:
     spiriit_form_filter.get_filter.doctrine_orm.class: Wallabag\Event\Subscriber\CustomDoctrineORMSubscriber
+    env(WALLABAG_SITE_CONFIG_FOLDERS): ''
+    wallabag.site_config_folders: '%env(csv:WALLABAG_SITE_CONFIG_FOLDERS)%'
 
 services:
     _defaults:
@@ -225,7 +227,7 @@ services:
 
     Graby\SiteConfig\ConfigBuilder:
         arguments:
-            $config: {}
+            $config: "@=parameter('wallabag.site_config_folders') and parameter('wallabag.site_config_folders')[0] ? {'site_config': parameter('wallabag.site_config_folders')} : {}"
 
     Wallabag\SiteConfig\GrabySiteConfigBuilder:
         tags:
