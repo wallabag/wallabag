@@ -360,7 +360,7 @@
         </aside>
         <article
             {% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}
-            data-controller="highlight annotations"
+            data-controller="mathjax highlight annotations"
             data-annotations-entry-id-value="{{ entry.id }}"
             data-annotations-create-url-value="{{ path('annotations_post_annotation', {'entry': entry.id}) }}"
             data-annotations-update-url-value="{{ path('annotations_put_annotation', {'annotation': 'idAnnotation'}) }}"
