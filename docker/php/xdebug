@@ -1,2 +1,3 @@
 XDEBUG_MODE=debug
 XDEBUG_TRIGGER=yes
+XDEBUG_CONFIG=client_host=host.docker.internal
