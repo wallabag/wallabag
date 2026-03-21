@@ -467,7 +467,7 @@ class ConfigControllerTest extends WallabagTestCase
 
         $this->assertStringContainsString('flashes.config.notice.tagging_rules_updated', $crawler->filter('body')->extract(['_text'])[0]);
 
-        $editLink = $crawler->filter('.mode_edit_tagging_rule')->last()->link();
+        $editLink = $crawler->filter('#set5 a[href^="/tagging-rule/edit/"]')->last()->link();
 
         $crawler = $client->click($editLink);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
@@ -629,7 +629,7 @@ class ConfigControllerTest extends WallabagTestCase
 
         $this->assertStringContainsString('flashes.config.notice.ignore_origin_rules_updated', $crawler->filter('body')->extract(['_text'])[0]);
 
-        $editLink = $crawler->filter('div[id=set6] a.mode_edit')->last()->link();
+        $editLink = $crawler->filter('#set6 a[href^="/ignore-origin-user-rule/edit/"]')->last()->link();
 
         $crawler = $client->click($editLink);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
@@ -1122,7 +1122,7 @@ class ConfigControllerTest extends WallabagTestCase
 
         $crawler = $client->request('GET', '/unread/list');
 
-        $this->assertStringContainsString('row data', $client->getResponse()->getContent());
+        $this->assertSame(0, $this->getLoggedInUser()->getConfig()->getListMode());
 
         $form = $crawler->filter('.nb-results')->selectButton('view_list')->form();
 
@@ -1130,7 +1130,8 @@ class ConfigControllerTest extends WallabagTestCase
 
         $client->followRedirect();
 
-        $this->assertStringContainsString('collection', $client->getResponse()->getContent());
+        $this->assertSame(1, $this->getLoggedInUser()->getConfig()->getListMode());
+        $this->assertSame('view_module', $client->getCrawler()->filter('.nb-results i.material-icons')->text());
     }
 
     public function testChangeLocaleWithoutReferer()

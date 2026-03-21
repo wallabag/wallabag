@@ -9,7 +9,7 @@
                         <input type="hidden" name="token" value="{{ csrf_token('remove-tag') }}"/>
 
                         <button type="submit" class="btn-link chip-action" onclick="return confirm('{{ 'entry.confirm.delete_tag'|trans|escape('js') }}')">
-                            <i class="material-icons vertical-align-middle">delete</i>
+                            <i class="material-icons">delete</i>
                         </button>
                     </form>
                 {% endif %}
