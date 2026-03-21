@@ -24,21 +24,21 @@
 {% block nav_panel_extra_actions %}
     {% if active_route %}
         <li>
-            <a class="waves-effect js-random-action" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': active_route}) }}">
+            <a class="waves-effect" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': active_route}) }}">
                 <i class="material-icons">casino</i>
             </a>
         </li>
     {% endif %}
     {% if has_filters %}
         <li class="button-filters">
-            <a class="nav-panel-menu sidenav-trigger js-filters-action" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-target="filters">
+            <a class="sidenav-trigger" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-target="filters">
                 <i class="material-icons">filter_list</i>
             </a>
         </li>
     {% endif %}
     {% if has_exports %}
         <li class="button-export">
-            <a class="nav-panel-menu sidenav-trigger js-export-action" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-target="export">
+            <a class="sidenav-trigger" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-target="export">
                 <i class="material-icons">file_download</i>
             </a>
         </li>
@@ -104,7 +104,7 @@
                 </div>
             </div>
 
-            <ol class="entries {% if list_mode == 1 %}collection{% else %}row entries-row data{% endif %}">
+            <ol class="entries {% if list_mode == 1 %}collection{% else %}row entries-row{% endif %}">
 
                 {% for entry in entries %}
                     <li id="entry-{{ entry.id|e }}" class="{% if list_mode != 0 %}col collection-item{% endif %} s12" data-entry-id="{{ entry.id|e }}" data-test="entry" data-entries-navigation-target="card">
