@@ -13,14 +13,14 @@
         <ul class="tag-chip-list">
             {% if is_granted('LIST_ENTRIES') %}
                 <li class="chip tag-chip">
-                    <a href="{{ path('untagged') }}">{{ 'tag.list.untagged'|trans }} ({{ nbEntriesUntagged }})</a>
+                    <a href="{{ path('untagged') }}" class="tag-chip-link">{{ 'tag.list.untagged'|trans }} ({{ nbEntriesUntagged }})</a>
                 </li>
             {% endif %}
             {% for tagWithNbEntries in allTagsWithNbEntries %}
                 {% set tag = tagWithNbEntries.tag %}
                 {% set nbEntries = tagWithNbEntries.nbEntries %}
                 <li title="{{ tag.label }} ({{ nbEntries }})" id="tag-{{ tag.id }}" class="chip tag-chip" data-controller="tag">
-                    <a href="{{ path('tag_entries', {'slug': tag.slug}) }}" class="card-tag-link" data-tag-target="link">
+                    <a href="{{ path('tag_entries', {'slug': tag.slug}) }}" class="tag-chip-link" data-tag-target="link">
                         {{ tag.label }}&nbsp;({{ nbEntries }})
                     </a>
                     {% if renameForms is defined and renameForms[tag.id] is defined and is_granted('EDIT', tag) %}

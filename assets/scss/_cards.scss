@@ -199,14 +199,6 @@ a.original:not(.waves-effect) {
   cursor: pointer;
 }
 
-.card-tag-link {
-  width: calc(100% - 24px);
-  line-height: 1.3;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
 .card-tag-form {
   display: flex;
   align-items: center;

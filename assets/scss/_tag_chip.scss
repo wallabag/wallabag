@@ -20,3 +20,11 @@
   cursor: default;
   line-height: 20px;
 }
+
+.tag-chip-link {
+  width: calc(100% - 24px);
+  line-height: 1.3;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
