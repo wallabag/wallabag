@@ -182,21 +182,11 @@ a.original:not(.waves-effect) {
 
 .card-entry-tags a,
 .card-entry-labels a,
-.card-tag-labels a,
-.card-tag-labels button,
 .card-entry-labels-hidden a,
 #list .chip a {
   text-decoration: none;
   font-weight: normal;
   color: #fff;
-}
-
-.card-tag-labels button {
-  background: transparent;
-  border: none;
-  font-weight: normal;
-  color: #fff;
-  cursor: pointer;
 }
 
 .card-stacked {

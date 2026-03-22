@@ -52,6 +52,12 @@
   display: flex;
 }
 
+button.tag-chip-action {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
 .tag-chip-delete {
   margin-left: 10px;
 }
