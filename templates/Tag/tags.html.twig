@@ -27,9 +27,9 @@
                     <form class="tag-chip-form hidden" data-tag-target="form" action="{{ path('tag_rename', {'slug': tag.slug, redirect: current_path}) }}" method="POST">
                         {{ form_widget(renameForms[tag.id].label, {'attr': {'value': tag.label, 'data-tag-target': 'input'}}) }}
                         {{ form_rest(renameForms[tag.id]) }}
-                        <button type="submit"><i class="material-icons">done</i></button>
+                        <button type="submit" class="tag-chip-action"><i class="material-icons">done</i></button>
                     </form>
-                    <button type="button" data-tag-target="edit" data-action="tag#showForm">
+                    <button type="button" class="tag-chip-action" data-tag-target="edit" data-action="tag#showForm">
                         <i class="material-icons">mode_edit</i>
                     </button>
                     {% endif %}
@@ -43,7 +43,7 @@
                         </form>
                     {% endif %}
                     {% if app.user.config.feedToken %}
-                        <a rel="alternate" type="application/atom+xml" href="{{ path('tag_feed', {'username': app.user.username, 'token': app.user.config.feedToken, 'slug': tag.slug}) }}" class="card-tag-icon"><i class="material-icons">rss_feed</i></a>
+                        <a rel="alternate" type="application/atom+xml" href="{{ path('tag_feed', {'username': app.user.username, 'token': app.user.config.feedToken, 'slug': tag.slug}) }}" class="tag-chip-action"><i class="material-icons">rss_feed</i></a>
                     {% endif %}
                 </li>
             {% endfor %}
