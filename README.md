@@ -27,7 +27,7 @@ You can install it on your own server, or you can create an account on [wallabag
 
 The documentation is available at https://doc.wallabag.org.
 
-You can contribute to it through its dedicated repository, available here: https://github.com/wallabag/doc.
+The source files live in the [`doc/`](doc/) directory of this repository.
 
 ## Installation
 
