@@ -21,6 +21,13 @@
   line-height: 20px;
 }
 
+.tag-chip-link,
+.tag-chip-action {
+  text-decoration: none;
+  font-weight: normal;
+  color: #fff;
+}
+
 .tag-chip-link {
   width: calc(100% - 24px);
   line-height: 1.3;
