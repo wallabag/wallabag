@@ -28,3 +28,10 @@
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
+.tag-chip-form {
+  display: flex;
+  align-items: center;
+  min-width: 100px;
+  flex-grow: 1;
+}
