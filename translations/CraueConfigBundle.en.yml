@@ -19,10 +19,14 @@ share_unmark: Enable sharing to Unmark.it
 share_linkding: Enable sharing to Linkding
 show_printlink: Display a link to print content
 wallabag_support_url: Support URL for wallabag
+rendering_proxy_url: External rendering proxy URL
+rendering_proxy_timeout: Timeout for external rendering proxy requests
+rendering_proxy_all: Pass all sites to rendering proxy
 entry: article
 export: export
 import: import
 misc: misc
+rendering_proxy: Rendering Proxy
 modify_settings: apply
 matomo_host: Host of your website in Matomo (without http:// or https://)
 matomo_site_id: ID of your website in Matomo
