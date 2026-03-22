@@ -33,8 +33,9 @@ class TagControllerTest extends WallabagTestCase
         $crawler = $client->request('GET', '/tag/list');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $crawler->filter('#tag-' . $tag->getId()));
-        $tagText = trim($crawler->filter('#tag-' . $tag->getId() . ' .card-tag-link')->text());
+        $this->assertCount(1, $crawler->filter('ul.tag-chip-list'));
+        $this->assertCount(1, $crawler->filter('li#tag-' . $tag->getId() . '.chip.tag-chip'));
+        $tagText = trim($crawler->filter('li#tag-' . $tag->getId() . ' .tag-chip-link')->text());
 
         $this->assertStringContainsString($this->tagName, $tagText);
         $this->assertStringContainsString('(1)', $tagText);
