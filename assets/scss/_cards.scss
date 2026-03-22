@@ -163,8 +163,7 @@ a.original:not(.waves-effect) {
   -webkit-line-clamp: 2;
 }
 
-.card-entry-labels li,
-.card-tag-labels li {
+.card-entry-labels li {
   margin: 10px 10px 10px auto;
   padding: 5px 12px 5px 16px !important;
   background-color: variables.$blue-accent-color;
@@ -179,10 +178,6 @@ a.original:not(.waves-effect) {
   white-space: nowrap;
   border-radius: 0 3px 3px 0;
   overflow: hidden;
-}
-
-.card-tag-labels li {
-  display: flex;
 }
 
 .card-entry-tags a,
@@ -230,11 +225,6 @@ a.original:not(.waves-effect) {
 
 .card-tag-delete {
   margin-left: 10px;
-}
-
-.card-tag-labels li {
-  margin: 10px;
-  align-items: center;
 }
 
 .card-stacked {
