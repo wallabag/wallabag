@@ -1,0 +1,61 @@
+@use "variables";
+
+/* ==========================================================================
+ * Tag chip
+ * ========================================================================== */
+
+.tag-chip-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.tag-chip-list .tag-chip {
+  display: flex;
+  margin: 10px;
+  padding: 5px 12px 5px 16px !important;
+  gap: 10px;
+  align-items: center;
+  background-color: variables.$blue-accent-color;
+  border-radius: 3px;
+  color: #fff;
+  cursor: default;
+  line-height: 20px;
+}
+
+.tag-chip-link,
+.tag-chip-action {
+  text-decoration: none;
+  font-weight: normal;
+  color: #fff;
+}
+
+.tag-chip-link {
+  width: calc(100% - 24px);
+  line-height: 1.3;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.tag-chip-form {
+  display: flex;
+  align-items: center;
+  min-width: 100px;
+  flex-grow: 1;
+}
+
+.tag-chip-form input {
+  margin-bottom: 0;
+  height: 1.8rem;
+}
+
+.tag-chip-action {
+  display: flex;
+}
+
+button.tag-chip-action {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
