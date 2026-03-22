@@ -10,7 +10,7 @@
     </div>
 
     <div class="row">
-        <ul class="card-tag-labels">
+        <ul class="tag-chip-list">
             {% if is_granted('LIST_ENTRIES') %}
                 <li class="chip">
                     <a href="{{ path('untagged') }}">{{ 'tag.list.untagged'|trans }} ({{ nbEntriesUntagged }})</a>

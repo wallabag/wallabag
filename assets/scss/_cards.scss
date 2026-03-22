@@ -232,11 +232,6 @@ a.original:not(.waves-effect) {
   margin-left: 10px;
 }
 
-.card-tag-labels {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-}
-
 .card-tag-labels li {
   margin: 10px;
   align-items: center;
