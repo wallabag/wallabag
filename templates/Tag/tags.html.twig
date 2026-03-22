@@ -37,7 +37,7 @@
                         <form action="{{ path('tag_delete', {'slug': tag.slug, redirect: current_path}) }}" method="post" class="inline-block">
                             <input type="hidden" name="token" value="{{ csrf_token('tag-delete') }}"/>
 
-                            <button type="submit" class="btn-link card-tag-icon card-tag-delete" onclick="return confirm('{{ 'tag.confirm.delete'|trans({'%name%': tag.label})|escape('js') }}')">
+                            <button type="submit" class="btn-link card-tag-icon tag-chip-delete" onclick="return confirm('{{ 'tag.confirm.delete'|trans({'%name%': tag.label})|escape('js') }}')">
                                 <i class="material-icons">delete</i>
                             </button>
                         </form>
