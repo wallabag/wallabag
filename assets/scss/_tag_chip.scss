@@ -13,6 +13,7 @@
   display: flex;
   margin: 10px;
   padding: 5px 12px 5px 16px !important;
+  gap: 10px;
   align-items: center;
   background-color: variables.$blue-accent-color;
   border-radius: 3px;
@@ -57,8 +58,4 @@ button.tag-chip-action {
   border: none;
   padding: 0;
   cursor: pointer;
-}
-
-.tag-chip-delete {
-  margin-left: 10px;
 }
