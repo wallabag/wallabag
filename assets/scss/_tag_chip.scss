@@ -44,9 +44,25 @@
   flex-grow: 1;
 }
 
+/* Materialize text input overrides for the tag chip rename form */
+.tag-chip-form {
+  input:not([type], .browser-default),
+  input[type="text"]:not(.browser-default) {
+    height: 1.8rem;
+    margin-bottom: 0;
+    font-size: 13px;
+    border-bottom: none;
+
+    &:focus:not([readonly]) {
+      border-bottom: none;
+      box-shadow: none;
+    }
+  }
+}
+
+/* Custom styles for the tag chip rename form input */
 .tag-chip-form input {
-  margin-bottom: 0;
-  height: 1.8rem;
+  color: #fff;
 }
 
 .tag-chip-action {
