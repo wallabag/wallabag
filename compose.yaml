@@ -33,10 +33,10 @@ services:
             # - ./docker/php/xdebug
             # Uncomment to enable Blackfire
             # - ./docker/php/blackfire
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
         ports:
             - 8000:8000
-            # Uncomment to permit Xdebug remote session
-            # - 9000:9000
         depends_on:
             # - mariadb
             # - postgres
