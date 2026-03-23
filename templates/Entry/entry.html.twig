@@ -91,7 +91,7 @@
                 <form action="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" method="post">
                     <input type="hidden" name="token" value="{{ csrf_token('archive-entry') }}"/>
 
-                    <button type="submit" class="waves-effect collapsible-header markasread" title="{{ mark_as_read_label|trans }}" data-shortcuts-target="markAsRead">
+                    <button type="submit" class="waves-effect collapsible-header" title="{{ mark_as_read_label|trans }}" data-shortcuts-target="markAsRead">
                         <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
                         <span>{{ mark_as_read_label|trans }}</span>
                     </button>
@@ -232,7 +232,7 @@
                     {% if craue_setting('share_mail') %}
                         <li>
                             <a href="mailto:?subject={{ entry.title|striptags|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@wallabagapp" title="{{ 'entry.view.left_menu.share_email_label'|trans }}" class="tool icon">
-                                <i class="material-icons vertical-align-middle">mail</i>
+                                <i class="material-icons">mail</i>
                                 <span>{{ 'entry.view.left_menu.share_email_label'|trans }}</span>
                             </a>
                         </li>
@@ -295,7 +295,7 @@
 
 {% block content %}
     <div id="article" class="article" data-controller="scroll-storage" data-scroll-storage-entry-id-value="{{ entry.id }}" data-action="scroll@window->scroll-storage#saveScroll">
-        <header class="mbm">
+        <header>
             <h1>
                 <span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span>
                 {% if is_granted('EDIT', entry) %}
@@ -352,7 +352,7 @@
             </div>
 
             {% if is_granted('TAG', entry) %}
-                <div class="input-field nav-panel-add-tag hidden" data-controller="add-tag" data-action="leftbar:toggleAddTagForm@window->add-tag#toggle">
+                <div class="input-field hidden" data-controller="add-tag" data-action="leftbar:toggleAddTagForm@window->add-tag#toggle">
                     {{ render(controller('Wallabag\\Controller\\TagController::addTagFormAction', {'id': entry.id})) }}
                 </div>
             {% endif %}
