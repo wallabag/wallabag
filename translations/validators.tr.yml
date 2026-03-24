@@ -5,3 +5,5 @@ validator:
     item_per_page_too_high: Bu uygulamayı tam olarak kapatacak
     feed_limit_too_high: Bu uygulamayı tam olarak kapatacak
     quote_length_too_high: Alıntı çok uzun. En fazla {{ limit }} karakter olmalıdır.
+    item_per_page_too_low: Bu değer 1'den büyük veya 1'e eşit olmalıdır.
+    feed_limit_too_low: Bu değer 1'den büyük veya 1'e eşit olmalıdır.
