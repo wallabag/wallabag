@@ -45,6 +45,7 @@ After changing configuration in production, clear the cache with
 | WALLABAG_BASE_URL | Full URL of your wallabag instance without a trailing slash | `http://127.0.0.1:8000` |
 | WALLABAG_REGISTRATION_ENABLED | Enable public registration | `0` |
 | WALLABAG_CONFIRMATION_ENABLED | Send a confirmation email for each registration | `1` |
+| WALLABAG_NO_COMPROMISED_PASSWORDS | Enable compromised-password checks for user creation, password changes, and production install. When enabled, wallabag queries the Have I Been Pwned password API using hashed password prefixes. | `0` when unset, `1` in `.env` |
 | WALLABAG_FROM_EMAIL | Address used in the `From:` field for application emails | `wallabag@example.com` |
 | WALLABAG_SERVER_NAME | User-friendly name of your instance for 2FA issuer strings | `Your wallabag instance` |
 | WALLABAG_TWOFACTOR_SENDER | Sender address for emailed 2FA codes | `no-reply@wallabag.org` |
@@ -54,6 +55,11 @@ After changing configuration in production, clear the cache with
 | WALLABAG_TABLE_PREFIX | Prefix added to wallabag database tables | `wallabag_` |
 | WALLABAG_SITE_CONFIG_FOLDERS | Optional comma-separated list of extra graby site-config folders | empty |
 | SENTRY_DSN | Optional Sentry DSN used to report application errors | empty |
+
+To reject passwords that appear in known public breaches, set
+`WALLABAG_NO_COMPROMISED_PASSWORDS=1` in your environment. wallabag treats the
+feature as opt-in when the variable is absent, while the committed `.env` keeps
+it enabled for local development.
 
 ## Service variables
 
