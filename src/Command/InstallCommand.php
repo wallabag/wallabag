@@ -21,6 +21,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Wallabag\Entity\IgnoreOriginInstanceRule;
 use Wallabag\Entity\InternalSetting;
 use Wallabag\Entity\User;
@@ -43,6 +47,7 @@ class InstallCommand extends Command
         private readonly EntityManagerInterface $entityManager,
         private readonly EventDispatcherInterface $dispatcher,
         private readonly UserManagerInterface $userManager,
+        private readonly ValidatorInterface $validator,
         private readonly TableMetadataStorageConfiguration $tableMetadataStorageConfiguration,
         private readonly string $databaseDriver,
         private readonly array $defaultSettings,
@@ -302,11 +307,33 @@ class InstallCommand extends Command
         $user = $this->userManager->createUser();
         \assert($user instanceof User);
 
-        $user->setUsername($this->io->ask('Username', 'wallabag'));
+        if ('prod' === $this->environment) {
+            $user->setUsername($this->io->ask('Username'));
 
-        $question = new Question('Password', 'wallabag');
-        $question->setHidden(true);
-        $user->setPlainPassword($this->io->askQuestion($question));
+            do {
+                $question = new Question('Password');
+                $question->setHidden(true);
+                $password = $this->io->askQuestion($question);
+
+                $violations = $this->validator->validate($password, [
+                    new NotBlank(),
+                    new Length(['min' => 8, 'minMessage' => 'validator.password_too_short']),
+                    new NotCompromisedPassword(['skipOnError' => true]),
+                ]);
+
+                if (\count($violations) > 0) {
+                    $this->io->error((string) $violations[0]->getMessage());
+                }
+            } while (\count($violations) > 0);
+
+            $user->setPlainPassword($password);
+        } else {
+            $user->setUsername($this->io->ask('Username', 'wallabag'));
+
+            $question = new Question('Password', 'wallabag');
+            $question->setHidden(true);
+            $user->setPlainPassword($this->io->askQuestion($question));
+        }
 
         $user->setEmail($this->io->ask('Email', 'wallabag@wallabag.io'));
 
