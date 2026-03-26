@@ -269,6 +269,7 @@ entry:
         is_public_help: Public link
         language_label: Language
         http_status_label: HTTP status
+        tags_label: Tags
         reading_time:
             label: Reading time in minutes
             from: from
