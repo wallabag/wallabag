@@ -48,7 +48,7 @@ class UserRestControllerTest extends WallabagApiTestCase
         $this->client->getContainer()->get(Config::class)->set('api_user_registration', '1');
         $this->client->request('PUT', '/api/user.json', [
             'username' => 'google',
-            'password' => 'googlegoogle',
+            'password' => bin2hex(random_bytes(16)),
             'email' => 'wallabag@google.com',
         ]);
 
@@ -83,7 +83,7 @@ class UserRestControllerTest extends WallabagApiTestCase
         $client->getContainer()->get(Config::class)->set('api_user_registration', '1');
         $client->request('PUT', '/api/user.json', [
             'username' => 'google',
-            'password' => 'googlegoogle',
+            'password' => bin2hex(random_bytes(16)),
             'email' => 'wallabag@google.com',
             'client_name' => 'My client name !!',
         ]);
