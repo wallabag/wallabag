@@ -46,6 +46,7 @@ After changing configuration in production, clear the cache with
 | WALLABAG_REGISTRATION_ENABLED | Enable public registration | `0` |
 | WALLABAG_CAPTCHA_ENABLED | Require an image CAPTCHA for HTML user creation | `0` |
 | WALLABAG_CONFIRMATION_ENABLED | Send a confirmation email for each registration | `1` |
+| WALLABAG_COMPROMISED_PASSWORD_CHECK_ENABLED | Enable compromised-password checks on user forms | `0` |
 | WALLABAG_FROM_EMAIL | Address used in the `From:` field for application emails | `wallabag@example.com` |
 | WALLABAG_SERVER_NAME | User-friendly name of your instance for 2FA issuer strings | `Your wallabag instance` |
 | WALLABAG_TWOFACTOR_SENDER | Sender address for emailed 2FA codes | `no-reply@wallabag.org` |
@@ -57,6 +58,20 @@ After changing configuration in production, clear the cache with
 | WALLABAG_SITE_CONFIG_FOLDERS | Optional comma-separated list of extra graby site-config folders | empty |
 | WALLABAG_ARTICLE_REPORTING_URL | Destination used to report display problems with an article | `mailto:siteconfig@wallabag.org?subject=Wrong%20display%20in%20wallabag` |
 | SENTRY_DSN | Optional Sentry DSN used to report application errors | empty |
+
+### Compromised-password protection
+
+Compromised-password checks are disabled by default. Set
+`WALLABAG_COMPROMISED_PASSWORD_CHECK_ENABLED=1` to enable checks against
+[Have I Been Pwned](https://haveibeenpwned.com/). Only a prefix of the password
+hash is sent. Temporary service failures do not block validation.
+
+The check covers public registration, administrator and API user creation,
+password changes, and password resets through forms. The installation command
+and the `fos:user:create` and `fos:user:change-password` console commands are
+not covered.
+
+Clear the production cache after changing this setting if needed.
 
 ### CAPTCHA protection for user creation
 

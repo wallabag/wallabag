@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
 
 class ChangePasswordType extends AbstractType
 {
@@ -32,6 +33,7 @@ class ChangePasswordType extends AbstractType
                         'minMessage' => 'validator.password_too_short',
                     ]),
                     new NotBlank(),
+                    new NotCompromisedPassword(['skipOnError' => true]),
                 ],
                 'label' => 'config.form_password.new_password_label',
             ])
