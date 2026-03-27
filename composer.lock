@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f79a8eabffeaa832d9649fa69b77db7",
+    "content-hash": "48a3ccfc809c7c56774a00da09f81fca",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -14630,23 +14630,24 @@
         },
         {
             "name": "willdurand/hateoas-bundle",
-            "version": "2.7.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/BazingaHateoasBundle.git",
-                "reference": "a797892b0a5e79f92e34c8fefe0e27e31114ca65"
+                "reference": "1ae8ff2388853fb9b35c8de5a1bbdb7f5554dfb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/a797892b0a5e79f92e34c8fefe0e27e31114ca65",
-                "reference": "a797892b0a5e79f92e34c8fefe0e27e31114ca65",
+                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/1ae8ff2388853fb9b35c8de5a1bbdb7f5554dfb8",
+                "reference": "1ae8ff2388853fb9b35c8de5a1bbdb7f5554dfb8",
                 "shasum": ""
             },
             "require": {
                 "jms/serializer-bundle": "^3.10 || ^4.2 || ^5.4",
                 "php": "^8.1",
-                "symfony/expression-language": "~3.0 || ~4.0 || ~5.0 || ~6.0 || ~7.0",
-                "symfony/framework-bundle": "~3.0 || ~4.0 || ~5.0 || ~6.0 || ~7.0",
+                "symfony/dependency-injection": "^5.4 || ^6.0 || ^7.0 || ~8.0",
+                "symfony/expression-language": "~5.0 || ~6.0 || ~7.0 || ~8.0",
+                "symfony/framework-bundle": "~5.0 || ~6.0 || ~7.0 || ~8.0",
                 "willdurand/hateoas": "^3.12@beta"
             },
             "conflict": {
@@ -14654,9 +14655,9 @@
             },
             "require-dev": {
                 "doctrine/annotations": "^1.13.2 || ^2.0",
-                "doctrine/coding-standard": "^12.0",
+                "doctrine/coding-standard": "^13.0.1",
                 "phpunit/phpunit": "^10.5.38",
-                "symfony/stopwatch": "~3.0 || ~4.0 || ~5.0 || ~6.0 || ~7.0",
+                "symfony/stopwatch": "~5.0 || ~6.0 || ~7.0 || ~8.0",
                 "twig/twig": "~1.12|~2.0|~3.0"
             },
             "type": "symfony-bundle",
@@ -14687,9 +14688,9 @@
             ],
             "support": {
                 "issues": "https://github.com/willdurand/BazingaHateoasBundle/issues",
-                "source": "https://github.com/willdurand/BazingaHateoasBundle/tree/2.7.0"
+                "source": "https://github.com/willdurand/BazingaHateoasBundle/tree/3.0.0"
             },
-            "time": "2024-11-07T21:08:08+00:00"
+            "time": "2025-12-21T12:15:53+00:00"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
