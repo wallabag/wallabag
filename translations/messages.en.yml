@@ -64,6 +64,7 @@ config:
         rules: Tagging rules
         new_user: Add a user
         ignore_origin: 'Ignore origin rules'
+        rendering_proxy: "Rendering proxy"
         reset: 'Reset area'
         article_display: 'Article display'
     form:
@@ -154,6 +155,7 @@ config:
         edit_rule_label: edit
         rule_label: Rule
         tags_label: Tags
+        host_label: 'Host (subdomain.example.org, .example.org, etc.)'
         card:
             new_tagging_rule: Create a tagging rule
             import_tagging_rules: Import tagging rules
@@ -213,6 +215,15 @@ config:
                 label: 'Operator'
                 equal_to: 'Equal to…'
                 matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
+    form_rendering_proxy:
+        faq:
+            title: 'FAQ'
+            rendering_proxy_definition_title: What does “Rendering Proxy” mean?
+            rendering_proxy_definition_description: More and more sites rely on a rendering on the client (aka Web browser) side. Wallabag doesn't have a browser to fetch contents and such sites can't be saved. This can be circumvented by using an external tool that will make the rendering on a browser, then pass the resulting contents to Wallabag.
+            how_to_use_title: How do I use it?
+            how_to_use_description: If you see this configuration page, then it means your Wallabag administrator enabled the functionnality. You just need to add hostnames you want to proxy to this list. All the pages from these hosts will be transparently passed through the rendering proxy.
+            what_about_site_credentials_title: What about site credentials?
+            what_about_site_credentials_description: Unfortunately this feature is not compatible with the site credentials feature. You cannot access pages that are behind a paywall through the rendering proxy.
     otp:
         page_title: Two-factor authentication
         app:
@@ -696,6 +707,8 @@ flashes:
             tagging_rules_not_imported: Error while importing tagging rules
             ignore_origin_rules_deleted: 'Ignore origin rule deleted'
             ignore_origin_rules_updated: 'Ignore origin rule updated'
+            rendering_proxy_hosts_updated: "Externally rendered hosts list updated"
+            rendering_proxy_host_deleted: "Externally rendered host deleted"
     entry:
         notice:
             entry_already_saved: Entry already saved on %date%
