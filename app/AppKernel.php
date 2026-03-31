@@ -198,6 +198,10 @@ class AppKernel extends Kernel
         if ($container->hasParameter('rabbitmq_prefetch_count')) {
             $container->setParameter('env(WALLABAG_RABBITMQ_PREFETCH_COUNT)', (string) $container->getParameter('rabbitmq_prefetch_count'));
         }
+
+        if ($container->hasParameter('sentry_dsn')) {
+            $container->setParameter('env(SENTRY_DSN)', (string) $container->getParameter('sentry_dsn'));
+        }
     }
 
     private function defineLegacyDatabaseUrlFallback(ContainerBuilder $container): void
