@@ -17,7 +17,7 @@ Installation: How did you install wallabag? Using git clone, the docker image, a
 PHP version:  The version of PHP you are using
 OS:           The host running wallabag
 Database:     The storage system your instance is using (SQLite, MySQL/MariaDB or PostgreSQL) with the version
-Parameters:   Paste the content of your app/config/parameters.yml (hide sensitive stuff if you want)
+Configuration: Paste the relevant environment variables or describe how you provide them (hide secrets if you want)
 -->
 ### Environment
 
@@ -26,13 +26,21 @@ Parameters:   Paste the content of your app/config/parameters.yml (hide sensitiv
 * **PHP version**:
 * **OS**:
 * **Database**:
-* **Parameters**:
+* **Configuration**:
 
 <details>
-  <summary>My <code>app/config/parameters.yml</code> is:</summary>
+  <summary>Relevant environment variables</summary>
 
-  ```
-  PASTE HERE
+  ```dotenv
+  APP_ENV=prod
+  DATABASE_URL=...
+  MAILER_DSN=...
+  REDIS_URL=...
+  RABBITMQ_URL=...
+  WALLABAG_BASE_URL=...
+  WALLABAG_TABLE_PREFIX=...
+  WALLABAG_REGISTRATION_ENABLED=...
+  WALLABAG_CONFIRMATION_ENABLED=...
   ```
 </details>
 

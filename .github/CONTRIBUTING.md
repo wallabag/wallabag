@@ -6,7 +6,7 @@
 
 - Clone the repository
 - Ensure your Docker daemon is running
-- Copy `docker/php/env.example` to `docker/php/env` and customize
+- Copy `docker/php/env.example` to `docker/php/env` for Docker-specific overrides
 - Launch `make dev-docker-up`
 - Launch `make dev-setup`
 
@@ -21,7 +21,7 @@ You'll then have:
 
 You can now access your wallabag instance using that url: `http://127.0.0.1:8000`
 
-If you want to test using an other database than SQLite, uncomment the `postgres` or `mariadb` code from the `compose.yaml` file at the root of the repo. Also uncomment related line in the `php` section so the database will be linked to your PHP instance.
+If you want to test using an other database than SQLite, uncomment the `postgres` or `mariadb` code from the `compose.yaml` file at the root of the repo, uncomment the matching `depends_on` line in the `php` section, set `DATABASE_URL` in `.env.local`, and set the test database URL separately in `.env.test.local`.
 
 ### Using your own PHP server
 
@@ -63,6 +63,8 @@ DATABASE_URL=postgresql://wallabag:wallapass@postgres:5432/wallabag_test?charset
 ```
 
 Make sure to use a different database name from the one in `.env.local` to avoid conflicts between your development and test environments.
+
+This applies to Docker too: keep `DATABASE_URL` in `.env.local` and `.env.test.local`, not in `docker/php/env`, so test runs can still switch to their own database.
 
 ## You found a bug
 Please [open a new issue](https://github.com/wallabag/wallabag/issues/new).

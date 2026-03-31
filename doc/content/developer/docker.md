@@ -28,29 +28,35 @@ Switch DBMS
 By default, wallabag starts with a SQLite database. However, wallabag
 also supports PostgreSQL and MySQL. Docker containers are available for both.
 
-In `compose.yaml` (or `docker-compose.yml` for wallabag < 2.7), for the chosen DBMS uncomment:
+For the chosen DBMS, update `compose.yaml` and the repo-level env overrides:
 
--   the container definition (`postgres` or `mariadb` root level block)
--   the container link in the `php` container
--   the container env file in the `php` container
+-   uncomment the container definition (`postgres` or `mariadb`)
+-   uncomment the matching `depends_on` line in the `php` service
+-   adjust `docker/mariadb/env` or `docker/postgres/env` if you need
+    different credentials or database names for the database container
+-   set `DATABASE_URL` in `.env.local` for development
+-   set `DATABASE_URL` in `.env.test.local` if you want tests to use the
+    same engine with a separate test database
 
-In order to keep running Symfony commands on your host (such as
-`wallabag:install`), you also should:
-
--   source the proper env files on your command line, so variables like
-    `SYMFONY__ENV__DATABASE_HOST` will exist.
--   create a `127.0.0.1 rdbms` on your system `hosts` file
+If you keep running Symfony commands on your host instead of inside the `php`
+container, use host-reachable values in `.env.local` and `.env.test.local`
+instead of the Docker Compose hostnames. When the Docker stack is running, the
+`Makefile` already runs Symfony commands in the `php` container by default.
 
 Run wallabag
 ------------
 
 1.  Fork and clone the project
-2.  Edit `app/config/parameters.yml` to replace `database_*` properties
-    with commented ones (with values prefixed by `env.`)
-3.  `composer install` the project dependencies
-4.  `php bin/console wallabag:install` to create the schema
-5.  `docker compose up` to run the containers (or `docker-compose up` for wallabag < 2.7)
-6.  Finally, browse to <http://localhost:8080/> to find your freshly
+2.  Copy `docker/php/env.example` to `docker/php/env`
+3.  Adjust any Docker-specific overrides you need
+4.  If you are not using SQLite, uncomment the matching database service in
+    `compose.yaml`, uncomment the matching `depends_on` line in the `php`
+    service, and set `DATABASE_URL` in `.env.local`
+5.  Set `DATABASE_URL` in `.env.test.local` as well if you want tests to use
+    the same database engine with a separate test database
+6.  `make dev-docker-up` to start the containers
+7.  `make dev-setup` to install dependencies, prepare the database, and build assets
+8.  Finally, browse to <http://localhost:8000/> to find your freshly
     installed wallabag.
 
 At various step, you'll probably run into UNIX permission problems, bad
