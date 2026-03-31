@@ -14,6 +14,7 @@ use Wallabag\Entity\IgnoreOriginUserRule;
 use Wallabag\Entity\Tag;
 use Wallabag\Entity\TaggingRule;
 use Wallabag\Entity\User;
+use Wallabag\Enum\HomepageTarget;
 use Wallabag\Tests\Functional\WallabagTestCase;
 
 class ConfigControllerTest extends WallabagTestCase
@@ -1473,5 +1474,34 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString('max-width: 60em', $client->getResponse()->getContent());
         $this->assertStringContainsString('line-height: 2em', $client->getResponse()->getContent());
         $this->assertStringContainsString('font-size: 2em', $client->getResponse()->getContent());
+    }
+
+    public function testDefaultViewSetting(): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $crawler = $client->request('GET', '/config');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('button[id=config_save]')->form();
+
+        $client->submit($form, [
+            'config[items_per_page]' => '12',
+            'config[reading_speed]' => '200',
+            'config[action_mark_as_read]' => '0',
+            'config[language]' => 'en',
+            'config[default_homepage]' => 'starred',
+        ]);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $em = $this->getEntityManager();
+        $user = $em->getRepository(User::class)->findOneBy(['username' => 'admin']);
+        $this->assertSame(HomepageTarget::Starred, $user->getConfig()->getDefaultHomepage());
+
+        // Reset
+        $user->getConfig()->setDefaultHomepage(HomepageTarget::Unread);
+        $em->flush();
     }
 }

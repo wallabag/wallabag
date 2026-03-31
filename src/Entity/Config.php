@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Wallabag\Enum\HomepageTarget;
 use Wallabag\Repository\ConfigRepository;
 
 /**
@@ -129,6 +130,9 @@ class Config
      */
     #[ORM\Column(name: 'custom_css', type: 'text', nullable: true)]
     private $customCSS;
+
+    #[ORM\Column(name: 'default_homepage', type: 'string', enumType: HomepageTarget::class, options: ['default' => 'unread'])]
+    private HomepageTarget $defaultHomepage = HomepageTarget::Unread;
 
     #[ORM\OneToOne(targetEntity: User::class, inversedBy: 'config')]
     private $user;
@@ -459,6 +463,18 @@ class Config
     public function setCustomCSS(?string $customCSS): self
     {
         $this->customCSS = $customCSS;
+
+        return $this;
+    }
+
+    public function getDefaultHomepage(): HomepageTarget
+    {
+        return $this->defaultHomepage;
+    }
+
+    public function setDefaultHomepage(HomepageTarget $defaultHomepage): self
+    {
+        $this->defaultHomepage = $defaultHomepage;
 
         return $this;
     }

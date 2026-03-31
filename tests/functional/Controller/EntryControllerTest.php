@@ -11,6 +11,7 @@ use Wallabag\Entity\Entry;
 use Wallabag\Entity\SiteCredential;
 use Wallabag\Entity\Tag;
 use Wallabag\Entity\User;
+use Wallabag\Enum\HomepageTarget;
 use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\CryptoProxy;
 use Wallabag\Tests\Functional\WallabagTestCase;
@@ -1979,5 +1980,36 @@ class EntryControllerTest extends WallabagTestCase
         $crawler = $client->request('GET', '/domain/' . $entry->getId());
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(4, $crawler->filter('ol.entries > li'));
+    }
+
+    /**
+     * @dataProvider provideDefaultViews
+     */
+    public function testHomepageRendersDefaultView(HomepageTarget $defaultHomepage, int $expectedStatus, string $expectedUri): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $em = $this->getEntityManager();
+        $user = $em->getRepository(User::class)->findOneBy(['username' => 'admin']);
+        $user->getConfig()->setDefaultHomepage($defaultHomepage);
+        $em->flush();
+
+        $client->request('GET', '/');
+
+        $this->assertSame($expectedStatus, $client->getResponse()->getStatusCode());
+        $this->assertStringContainsString($expectedUri, $client->getRequest()->getUri());
+
+        $user->getConfig()->setDefaultHomepage(HomepageTarget::Unread);
+        $em->flush();
+    }
+
+    public static function provideDefaultViews(): iterable
+    {
+        yield 'unread view stays at /' => [HomepageTarget::Unread, 200, '/'];
+        yield 'all view stays at /' => [HomepageTarget::All, 200, '/'];
+        yield 'archive view stays at /' => [HomepageTarget::Archive, 200, '/'];
+        yield 'starred view stays at /' => [HomepageTarget::Starred, 200, '/'];
+        yield 'tags view redirects to /tag/list' => [HomepageTarget::Tags, 302, '/'];
     }
 }
