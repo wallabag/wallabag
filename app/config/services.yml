@@ -19,7 +19,7 @@ services:
             $environment: '%kernel.environment%'
             $defaultLocale: '%env(DEFAULT_LOCALE)%'
             $wallabagUrl: '%env(WALLABAG_BASE_URL)%'
-            $tablePrefix: "%database_table_prefix%"
+            $tablePrefix: '%env(WALLABAG_TABLE_PREFIX)%'
             $encryptionKeyPath: "%wallabag.site_credentials.encryption_key_path%"
             $fetchingErrorMessageTitle: "%wallabag.fetching_error_message_title%"
             $fetchingErrorMessage: '%wallabag.fetching_error_message%'
@@ -203,7 +203,7 @@ services:
 
     Wallabag\Event\Subscriber\SchemaAdapterSubscriber:
         arguments:
-            $databaseTablePrefix: "%database_table_prefix%"
+            $databaseTablePrefix: '%env(WALLABAG_TABLE_PREFIX)%'
         tags:
             - { name: doctrine.event_subscriber }
 
