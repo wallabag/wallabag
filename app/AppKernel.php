@@ -162,6 +162,10 @@ class AppKernel extends Kernel
         if ($container->hasParameter('secret')) {
             $container->setParameter('env(APP_SECRET)', (string) $container->getParameter('secret'));
         }
+
+        if ($container->hasParameter('locale')) {
+            $container->setParameter('env(DEFAULT_LOCALE)', (string) $container->getParameter('locale'));
+        }
     }
 
     private function normalizeLegacyDatabaseParameters(ContainerBuilder $container): void

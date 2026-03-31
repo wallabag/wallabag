@@ -17,7 +17,7 @@ services:
             $projectDir: '%kernel.project_dir%'
             $debug: '%kernel.debug%'
             $environment: '%kernel.environment%'
-            $defaultLocale: '%kernel.default_locale%'
+            $defaultLocale: '%env(DEFAULT_LOCALE)%'
             $wallabagUrl: '%domain_name%'
             $tablePrefix: "%database_table_prefix%"
             $encryptionKeyPath: "%wallabag.site_credentials.encryption_key_path%"
@@ -282,7 +282,7 @@ services:
         arguments:
             $itemsOnPage: "%wallabag.items_on_page%"
             $feedLimit: "%wallabag.feed_limit%"
-            $language: "%wallabag.language%"
+            $language: '%env(DEFAULT_LOCALE)%'
             $readingSpeed: "%wallabag.reading_speed%"
             $actionMarkAsRead: "%wallabag.action_mark_as_read%"
             $listMode: "%wallabag.list_mode%"

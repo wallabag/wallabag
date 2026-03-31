@@ -11,7 +11,7 @@ framework:
     #esi:             ~
     translator:
         enabled: true
-        fallback: "%locale%"
+        fallback: "%env(DEFAULT_LOCALE)%"
         default_path: '%kernel.project_dir%/translations'
     secret: "%env(APP_SECRET)%"
     router:
@@ -21,7 +21,7 @@ framework:
     csrf_protection: ~
     validation:
         enable_annotations: true
-    default_locale: "%locale%"
+    default_locale: "%env(DEFAULT_LOCALE)%"
     trusted_hosts: ~
     session:
         # handler_id set to null will use default session handler from php.ini
@@ -86,7 +86,7 @@ doctrine:
                         alias: Wallabag
 
 stof_doctrine_extensions:
-    default_locale: "%locale%"
+    default_locale: "%env(DEFAULT_LOCALE)%"
     translation_fallback: true
     orm:
         default:
