@@ -277,25 +277,39 @@ class AppKernel extends Kernel
 
     private function defineLegacyRedisUrlFallback(ContainerBuilder $container): void
     {
-        $scheme = $container->getParameter('redis_scheme');
-        $host = $container->getParameter('redis_host');
-        $port = $container->getParameter('redis_port');
-        $path = $container->getParameter('redis_path');
-        $password = $container->getParameter('redis_password');
+        $scheme = (string) $container->getParameter('redis_scheme');
+        $host = (string) $container->getParameter('redis_host');
+        $port = (string) $container->getParameter('redis_port');
+        $path = (string) $container->getParameter('redis_path');
+        $password = (string) $container->getParameter('redis_password');
+
+        if ('unix' === $scheme) {
+            $url = 'unix://' . $path;
+
+            if ('' !== $password) {
+                $url .= '?password=' . rawurlencode($password);
+            }
+
+            $container->setParameter('env(REDIS_URL)', $url);
+
+            return;
+        }
 
         $url = $scheme . '://';
 
-        if ($password) {
-            $url .= $password . '@';
+        if ('' !== $password) {
+            $url .= ':' . rawurlencode($password) . '@';
         }
 
         $url .= $host;
 
-        if ($port) {
+        if ('' !== $port) {
             $url .= ':' . $port;
         }
 
-        $url .= '/' . ltrim($path, '/');
+        if ('' !== $path) {
+            $url .= '/' . ltrim($path, '/');
+        }
 
         $container->setParameter('env(REDIS_URL)', $url);
     }
