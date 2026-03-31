@@ -151,9 +151,17 @@ class AppKernel extends Kernel
 
     private function defineLegacyEnvFallbacks(ContainerBuilder $container): void
     {
+        $this->defineLegacySimpleEnvFallbacks($container);
         $this->normalizeLegacyDatabaseParameters($container);
         $this->defineLegacyRedisUrlFallback($container);
         $this->defineLegacyRabbitMqUrlFallback($container);
+    }
+
+    private function defineLegacySimpleEnvFallbacks(ContainerBuilder $container): void
+    {
+        if ($container->hasParameter('secret')) {
+            $container->setParameter('env(APP_SECRET)', (string) $container->getParameter('secret'));
+        }
     }
 
     private function normalizeLegacyDatabaseParameters(ContainerBuilder $container): void
