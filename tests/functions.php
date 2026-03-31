@@ -1,5 +1,6 @@
 <?php
 
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 /*
@@ -46,6 +47,9 @@ function isPartialRun(): bool
     return false;
 }
 
+/**
+ * In CI, bootstrap commands keep logs quiet on success but still print buffered output on failure.
+ */
 function runBootstrapCommand(array $command, bool $mustSucceed = true): void
 {
     echo '$ ' . implode(' ', array_map(static function ($argument): string {
@@ -55,16 +59,39 @@ function runBootstrapCommand(array $command, bool $mustSucceed = true): void
     }, $command)) . \PHP_EOL;
 
     $process = new Process($command);
+    $isCi = filter_var((string) getenv('CI'), \FILTER_VALIDATE_BOOL);
 
-    if ($mustSucceed) {
-        $process->mustRun(static function ($type, $buffer): void {
+    if (!$isCi) {
+        if ($mustSucceed) {
+            $process->mustRun(static function ($type, $buffer): void {
+                echo $buffer;
+            });
+
+            return;
+        }
+
+        $process->run(static function ($type, $buffer): void {
             echo $buffer;
         });
 
         return;
     }
 
-    $process->run(static function ($type, $buffer): void {
-        echo $buffer;
-    });
+    $process->run();
+
+    if ($process->isSuccessful()) {
+        return;
+    }
+
+    if ('' !== $process->getOutput()) {
+        echo $process->getOutput();
+    }
+
+    if ('' !== $process->getErrorOutput()) {
+        echo $process->getErrorOutput();
+    }
+
+    if ($mustSucceed) {
+        throw new ProcessFailedException($process);
+    }
 }
