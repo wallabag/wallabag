@@ -36,7 +36,7 @@ framework:
         base_url: '%env(WALLABAG_BASE_URL)%'
         json_manifest_path: '%kernel.project_dir%/web/build/manifest.json'
     mailer:
-        dsn: "%mailer_dsn%"
+        dsn: "%env(MAILER_DSN)%"
     http_client:
         scoped_clients:
             download_images.client:
