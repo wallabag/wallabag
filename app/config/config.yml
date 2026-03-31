@@ -196,7 +196,7 @@ fos_user:
         confirmation:
             enabled: "%env(bool:WALLABAG_CONFIRMATION_ENABLED)%"
     from_email:
-        address: "%from_email%"
+        address: "%env(WALLABAG_FROM_EMAIL)%"
         sender_name: wallabag
     service:
         mailer: fos_user.mailer.twig_symfony
