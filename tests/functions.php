@@ -48,6 +48,12 @@ function isPartialRun(): bool
 
 function runBootstrapCommand(array $command, bool $mustSucceed = true): void
 {
+    echo '$ ' . implode(' ', array_map(static function ($argument): string {
+        $argument = (string) $argument;
+
+        return preg_match('#^[A-Za-z0-9_@%+=:,./-]+$#', $argument) ? $argument : escapeshellarg($argument);
+    }, $command)) . \PHP_EOL;
+
     $process = new Process($command);
 
     if ($mustSucceed) {
