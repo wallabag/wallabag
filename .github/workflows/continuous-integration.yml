@@ -538,7 +538,27 @@ jobs:
         run: mkdir -p .coverage
 
       - name: "Run PHPUnit unit tests"
+        env:
+          SYMFONY_DEPRECATIONS_HELPER: "${{ env.WALLABAG_SYMFONY_DEPRECATIONS_HELPER_BASE }}&logFile=${{ runner.temp }}/wallabag-phpunit-unit.deprecations.log"
         run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml --log-junit=.coverage/unit.junit.xml"
+
+      - name: "Display PHPUnit unit Symfony deprecations"
+        if: ${{ !cancelled() }}
+        run: |
+          deprecations_log="${{ runner.temp }}/wallabag-phpunit-unit.deprecations.log"
+
+          if [ ! -e "$deprecations_log" ]; then
+            echo "No Symfony deprecations log was generated for the unit suite."
+            exit 0
+          fi
+
+          if [ ! -s "$deprecations_log" ]; then
+            echo "Symfony deprecations log for the unit suite is empty."
+            exit 0
+          fi
+
+          echo "Symfony deprecations for the unit suite:"
+          cat "$deprecations_log"
 
       - name: "Upload unit coverage to Codecov"
         if: ${{ !cancelled() }}
@@ -567,7 +587,27 @@ jobs:
 
       - name: "Run PHPUnit integration tests"
         if: ${{ !cancelled() }}
+        env:
+          SYMFONY_DEPRECATIONS_HELPER: "${{ env.WALLABAG_SYMFONY_DEPRECATIONS_HELPER_BASE }}&logFile=${{ runner.temp }}/wallabag-phpunit-integration.deprecations.log"
         run: "php bin/phpunit --testsuite integration -v --coverage-clover=.coverage/integration.xml --log-junit=.coverage/integration.junit.xml"
+
+      - name: "Display PHPUnit integration Symfony deprecations"
+        if: ${{ !cancelled() }}
+        run: |
+          deprecations_log="${{ runner.temp }}/wallabag-phpunit-integration.deprecations.log"
+
+          if [ ! -e "$deprecations_log" ]; then
+            echo "No Symfony deprecations log was generated for the integration suite."
+            exit 0
+          fi
+
+          if [ ! -s "$deprecations_log" ]; then
+            echo "Symfony deprecations log for the integration suite is empty."
+            exit 0
+          fi
+
+          echo "Symfony deprecations for the integration suite:"
+          cat "$deprecations_log"
 
       - name: "Upload integration coverage to Codecov"
         if: ${{ !cancelled() }}
@@ -596,7 +636,27 @@ jobs:
 
       - name: "Run PHPUnit functional tests"
         if: ${{ !cancelled() }}
+        env:
+          SYMFONY_DEPRECATIONS_HELPER: "${{ env.WALLABAG_SYMFONY_DEPRECATIONS_HELPER_BASE }}&logFile=${{ runner.temp }}/wallabag-phpunit-functional.deprecations.log"
         run: "php bin/phpunit --testsuite functional -v --coverage-clover=.coverage/functional.xml --log-junit=.coverage/functional.junit.xml"
+
+      - name: "Display PHPUnit functional Symfony deprecations"
+        if: ${{ !cancelled() }}
+        run: |
+          deprecations_log="${{ runner.temp }}/wallabag-phpunit-functional.deprecations.log"
+
+          if [ ! -e "$deprecations_log" ]; then
+            echo "No Symfony deprecations log was generated for the functional suite."
+            exit 0
+          fi
+
+          if [ ! -s "$deprecations_log" ]; then
+            echo "Symfony deprecations log for the functional suite is empty."
+            exit 0
+          fi
+
+          echo "Symfony deprecations for the functional suite:"
+          cat "$deprecations_log"
 
       - name: "Upload functional coverage to Codecov"
         if: ${{ !cancelled() }}
