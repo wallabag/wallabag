@@ -210,6 +210,10 @@ class AppKernel extends Kernel
         if ($container->hasParameter('fos_oauth_server_access_token_lifetime')) {
             $container->setParameter('env(WALLABAG_OAUTH_ACCESS_TOKEN_LIFETIME)', (string) $container->getParameter('fos_oauth_server_access_token_lifetime'));
         }
+
+        if ($container->hasParameter('fos_oauth_server_refresh_token_lifetime')) {
+            $container->setParameter('env(WALLABAG_OAUTH_REFRESH_TOKEN_LIFETIME)', (string) $container->getParameter('fos_oauth_server_refresh_token_lifetime'));
+        }
     }
 
     private function defineLegacyDatabaseUrlFallback(ContainerBuilder $container): void
