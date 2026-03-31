@@ -178,6 +178,10 @@ class AppKernel extends Kernel
         if ($container->hasParameter('fosuser_registration')) {
             $container->setParameter('env(WALLABAG_REGISTRATION_ENABLED)', (bool) $container->getParameter('fosuser_registration') ? '1' : '0');
         }
+
+        if ($container->hasParameter('fosuser_confirmation')) {
+            $container->setParameter('env(WALLABAG_CONFIRMATION_ENABLED)', (bool) $container->getParameter('fosuser_confirmation') ? '1' : '0');
+        }
     }
 
     private function normalizeLegacyDatabaseParameters(ContainerBuilder $container): void

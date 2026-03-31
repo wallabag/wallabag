@@ -194,7 +194,7 @@ fos_user:
     user_class: Wallabag\Entity\User
     registration:
         confirmation:
-            enabled: "%fosuser_confirmation%"
+            enabled: "%env(bool:WALLABAG_CONFIRMATION_ENABLED)%"
     from_email:
         address: "%from_email%"
         sender_name: wallabag
