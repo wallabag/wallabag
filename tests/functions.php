@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\Process\Process;
+
 /*
  * This files contains functions that are used in the tests, especially the bootstrap.php file.
  */
@@ -42,4 +44,21 @@ function isPartialRun(): bool
     }
 
     return false;
+}
+
+function runBootstrapCommand(array $command, bool $mustSucceed = true): void
+{
+    $process = new Process($command);
+
+    if ($mustSucceed) {
+        $process->mustRun(static function ($type, $buffer): void {
+            echo $buffer;
+        });
+
+        return;
+    }
+
+    $process->run(static function ($type, $buffer): void {
+        echo $buffer;
+    });
 }
