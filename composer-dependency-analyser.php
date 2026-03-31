@@ -45,7 +45,6 @@ $config
         'symfony/error-handler',
         'symfony/google-mailer',
         'symfony/intl',
-        'symfony/phpunit-bridge',
         'symfony/proxy-manager-bridge',
         'symfony/runtime',
         'symfony/templating',
