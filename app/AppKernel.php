@@ -316,14 +316,26 @@ class AppKernel extends Kernel
 
     private function defineLegacyRabbitMqUrlFallback(ContainerBuilder $container): void
     {
-        $host = $container->getParameter('rabbitmq_host');
-        $port = $container->getParameter('rabbitmq_port');
-        $user = $container->getParameter('rabbitmq_user');
-        $password = $container->getParameter('rabbitmq_password');
+        $host = (string) $container->getParameter('rabbitmq_host');
+        $port = (string) $container->getParameter('rabbitmq_port');
+        $user = (string) $container->getParameter('rabbitmq_user');
+        $password = (string) $container->getParameter('rabbitmq_password');
 
-        $url = 'amqp://' . $user . ':' . $password . '@' . $host;
+        $url = 'amqp://';
 
-        if ($port) {
+        if ('' !== $user || '' !== $password) {
+            $url .= rawurlencode($user);
+
+            if ('' !== $password) {
+                $url .= ':' . rawurlencode($password);
+            }
+
+            $url .= '@';
+        }
+
+        $url .= $host;
+
+        if ('' !== $port) {
             $url .= ':' . $port;
         }
 
