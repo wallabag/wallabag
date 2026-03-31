@@ -166,6 +166,10 @@ class AppKernel extends Kernel
         if ($container->hasParameter('locale')) {
             $container->setParameter('env(DEFAULT_LOCALE)', (string) $container->getParameter('locale'));
         }
+
+        if ($container->hasParameter('domain_name')) {
+            $container->setParameter('env(WALLABAG_BASE_URL)', (string) $container->getParameter('domain_name'));
+        }
     }
 
     private function normalizeLegacyDatabaseParameters(ContainerBuilder $container): void

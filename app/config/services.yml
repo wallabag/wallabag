@@ -18,7 +18,7 @@ services:
             $debug: '%kernel.debug%'
             $environment: '%kernel.environment%'
             $defaultLocale: '%env(DEFAULT_LOCALE)%'
-            $wallabagUrl: '%domain_name%'
+            $wallabagUrl: '%env(WALLABAG_BASE_URL)%'
             $tablePrefix: "%database_table_prefix%"
             $encryptionKeyPath: "%wallabag.site_credentials.encryption_key_path%"
             $fetchingErrorMessageTitle: "%wallabag.fetching_error_message_title%"
