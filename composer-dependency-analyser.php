@@ -20,7 +20,6 @@ $config
         'ergebnis/composer-normalize',
         'friendsofphp/php-cs-fixer',
         'friendsoftwig/twigcs',
-        'incenteev/composer-parameter-handler',
         'j0k3r/graby-site-config',
         'j0k3r/php-readability',
         'laminas/laminas-code',
