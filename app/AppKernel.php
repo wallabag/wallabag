@@ -152,7 +152,7 @@ class AppKernel extends Kernel
     private function defineLegacyEnvFallbacks(ContainerBuilder $container): void
     {
         $this->defineLegacySimpleEnvFallbacks($container);
-        $this->normalizeLegacyDatabaseParameters($container);
+        $this->defineLegacyDatabaseUrlFallback($container);
         $this->defineLegacyRedisUrlFallback($container);
         $this->defineLegacyRabbitMqUrlFallback($container);
     }
@@ -200,25 +200,79 @@ class AppKernel extends Kernel
         }
     }
 
-    private function normalizeLegacyDatabaseParameters(ContainerBuilder $container): void
+    private function defineLegacyDatabaseUrlFallback(ContainerBuilder $container): void
+    {
+        $databaseParameters = $this->normalizeLegacyDatabaseParameters($container);
+
+        if ('sqlite' === $databaseParameters['scheme']) {
+            $databasePath = '' !== $databaseParameters['path'] ? $databaseParameters['path'] : $databaseParameters['name'];
+            $container->setParameter(
+                'env(DATABASE_URL)',
+                str_starts_with($databasePath, '/')
+                    ? 'sqlite://' . $databasePath
+                    : 'sqlite:///' . ltrim($databasePath, '/')
+            );
+
+            return;
+        }
+
+        $url = $databaseParameters['scheme'] . '://';
+
+        if ('' !== $databaseParameters['user'] || '' !== $databaseParameters['password']) {
+            $url .= rawurlencode($databaseParameters['user']);
+
+            if ('' !== $databaseParameters['password']) {
+                $url .= ':' . rawurlencode($databaseParameters['password']);
+            }
+
+            $url .= '@';
+        }
+
+        $url .= $databaseParameters['host'];
+
+        if ('' !== $databaseParameters['port']) {
+            $url .= ':' . $databaseParameters['port'];
+        }
+
+        $url .= '/' . $databaseParameters['name'];
+
+        $query = [];
+
+        if ('' !== $databaseParameters['socket']) {
+            $query['unix_socket'] = $databaseParameters['socket'];
+        }
+
+        if ('' !== $databaseParameters['charset']) {
+            $query['charset'] = $databaseParameters['charset'];
+        }
+
+        if ([] !== $query) {
+            $url .= '?' . http_build_query($query, '', '&', \PHP_QUERY_RFC3986);
+        }
+
+        $container->setParameter('env(DATABASE_URL)', $url);
+    }
+
+    private function normalizeLegacyDatabaseParameters(ContainerBuilder $container): array
     {
         $scheme = match ($container->getParameter('database_driver')) {
             'pdo_mysql' => 'mysql',
-            'pdo_pgsql' => 'pgsql',
+            'pdo_pgsql' => 'postgresql',
             'pdo_sqlite' => 'sqlite',
             default => throw new RuntimeException('Unsupported database driver: ' . $container->getParameter('database_driver')),
         };
 
-        $container->setParameter('database_scheme', $scheme);
-
-        if ('sqlite' === $scheme) {
-            $container->setParameter('database_name', $container->getParameter('database_path'));
-        }
-
-        $container->setParameter('database_user', (string) $container->getParameter('database_user'));
-        $container->setParameter('database_password', (string) $container->getParameter('database_password'));
-        $container->setParameter('database_port', (string) $container->getParameter('database_port'));
-        $container->setParameter('database_socket', (string) $container->getParameter('database_socket'));
+        return [
+            'scheme' => $scheme,
+            'host' => (string) $container->getParameter('database_host'),
+            'port' => (string) $container->getParameter('database_port'),
+            'name' => (string) $container->getParameter('database_name'),
+            'user' => (string) $container->getParameter('database_user'),
+            'password' => (string) $container->getParameter('database_password'),
+            'path' => (string) $container->getParameter('database_path'),
+            'socket' => (string) $container->getParameter('database_socket'),
+            'charset' => (string) $container->getParameter('database_charset'),
+        ];
     }
 
     private function defineLegacyRedisUrlFallback(ContainerBuilder $container): void
