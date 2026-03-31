@@ -33,7 +33,7 @@ class RedirectTest extends TestCase
 
         $this->routerMock->expects($this->any())
             ->method('generate')
-            ->with('homepage')
+            ->with('unread')
             ->willReturn('/');
 
         $this->user = new User();
