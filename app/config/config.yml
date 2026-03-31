@@ -229,7 +229,7 @@ scheb_two_factor:
 
     email:
         enabled: true
-        sender_email: "%twofactor_sender%"
+        sender_email: "%env(WALLABAG_TWOFACTOR_SENDER)%"
         digits: 6
         template: "Authentication/form.html.twig"
         mailer: Wallabag\Mailer\AuthCodeMailer

@@ -190,6 +190,10 @@ class AppKernel extends Kernel
         if ($container->hasParameter('server_name')) {
             $container->setParameter('env(WALLABAG_SERVER_NAME)', (string) $container->getParameter('server_name'));
         }
+
+        if ($container->hasParameter('twofactor_sender')) {
+            $container->setParameter('env(WALLABAG_TWOFACTOR_SENDER)', (string) $container->getParameter('twofactor_sender'));
+        }
     }
 
     private function normalizeLegacyDatabaseParameters(ContainerBuilder $container): void
