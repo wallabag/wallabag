@@ -202,6 +202,10 @@ class AppKernel extends Kernel
         if ($container->hasParameter('sentry_dsn')) {
             $container->setParameter('env(SENTRY_DSN)', (string) $container->getParameter('sentry_dsn'));
         }
+
+        if ($container->hasParameter('wallabag_user_agent')) {
+            $container->setParameter('env(WALLABAG_USER_AGENT)', (string) $container->getParameter('wallabag_user_agent'));
+        }
     }
 
     private function defineLegacyDatabaseUrlFallback(ContainerBuilder $container): void
