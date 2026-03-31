@@ -35,15 +35,13 @@ rabbitmqctl stop
 
 ### Configure RabbitMQ in wallabag
 
-Edit your `app/config/parameters.yml` file to edit RabbitMQ
-configuration. The default one should be ok:
+Set `RABBITMQ_URL` and `WALLABAG_RABBITMQ_PREFETCH_COUNT` in your environment
+configuration (`.env.local`, `docker/php/env`, or your production environment).
+The default values are:
 
-```
-rabbitmq_host: localhost
-rabbitmq_port: 5672
-rabbitmq_user: guest
-rabbitmq_password: guest
-rabbitmq_prefetch_count: 10 # read http://www.rabbitmq.com/consumer-prefetch.html
+```dotenv
+RABBITMQ_URL=amqp://guest:guest@127.0.0.1:5672
+WALLABAG_RABBITMQ_PREFETCH_COUNT=10
 ```
 
 ### Enable RabbitMQ in wallabag
@@ -109,12 +107,11 @@ redis-server
 
 ### Configure Redis in wallabag
 
-Edit your `app/config/parameters.yml` file to edit Redis configuration.
-The default one should be ok:
+Set `REDIS_URL` in your environment configuration (`.env.local`,
+`docker/php/env`, or your production environment). The default value is:
 
-```
-redis_host: localhost
-redis_port: 6379
+```dotenv
+REDIS_URL=redis://127.0.0.1:6379
 ```
 
 ### Enable Redis in wallabag

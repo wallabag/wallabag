@@ -11,13 +11,6 @@ your account here. **Take care, we delete all your data**.
 
 ## Two factor authentication (2FA)
 
-{{< callout type="warning" >}}
-**For administrators**: enabling 2FA from the configuration interface is only
-possible if it has been authorized before in `app/config/parameters.yml`
-by setting the `twofactor_auth` parameter to `true` (do not forget to run
-`php bin/console cache:clear --env=prod` after modification).
-{{< /callout >}}
-
 Two-factor authentication (_also known as 2FA, MFA or multi-factor
 authentication_) is a security measure that strengthens identification of users
 by a combination of different components.
