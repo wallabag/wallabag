@@ -16,6 +16,13 @@ You will find here different ways to upgrade your wallabag:
 But **first**, ensure you have `composer` installed on your server (or at least the `composer.phar` binary in the root directory of wallabag). If not, [please install it](https://getcomposer.org/download/).
 {{< /callout >}}
 
+{{< callout type="info" >}}
+The historical upgrade notes below keep the configuration names that were used
+at the time of each release. Current wallabag releases are configured with
+environment variables instead. See [Parameters]({{< relref "../parameters.md" >}})
+for the current variable list and the legacy-to-env mapping.
+{{< /callout >}}
+
 ## Upgrading from 2.5.x to 2.6.x
 
 Same steps as for [upgrading from 2.2.x to 2.3.x](#upgrading-from-22x-to-23x).

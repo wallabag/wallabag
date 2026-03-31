@@ -3,127 +3,90 @@ title: Parameters
 weight: 7
 ---
 
-## Default parameters.yml file
+## Environment-first configuration
 
-Here is the latest version of the default app/config/parameters.yml file.
-Be sure that yours matches this one. If you don't know which value you
-need to set, please leave the default one.
+wallabag is configured with environment variables.
+
+- For local development, put overrides in `.env.local`.
+- For tests, put overrides in `.env.test.local`.
+- For Docker-based local development, copy `docker/php/env.example` to
+  `docker/php/env` for Docker-specific overrides.
+- For production, export the variables through your web server, PHP-FPM pool,
+  systemd unit, or container runtime.
+
+Keep `DATABASE_URL` in `.env.local` and `.env.test.local` so development and
+test can choose different databases, even when you run wallabag in Docker.
 
 {{< callout type="info" >}}
-To apply changes to `parameters.yml`, you have to clear your cache by deleting everything in `var/cache` with this command: `bin/console cache:clear --env=prod`.
+Fresh installs should not create `app/config/parameters.yml`. Upgraded installs
+may keep it temporarily: wallabag still reads that file for backward
+compatibility, but booting with it emits a deprecation notice and support will
+be removed in wallabag 3.0.
 {{< /callout >}}
 
-```yaml
-parameters:
-    database_driver: pdo_mysql
-    database_driver_class: ~
-    database_host: 127.0.0.1
-    database_port: ~
-    database_name: wallabag
-    database_user: root
-    database_password: ~
-    database_path: ~
-    database_table_prefix: wallabag_
-    database_socket: ~
-    database_charset: utf8mb4
-    domain_name: https://your-wallabag-instance.wallabag.org
-    mailer_dsn: smtp://127.0.0.1
-    wallabag_user_agent: "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2"
-    locale: en
-    secret: ovmpmAWXRCabNlMgzlzFXDYmCFfzGv
-    twofactor_auth: true
-    twofactor_sender: no-reply@wallabag.org
-    fosuser_registration: true
-    fosuser_confirmation: true
-    fos_oauth_server_access_token_lifetime: 3600
-    fos_oauth_server_refresh_token_lifetime: 1209600
-    from_email: no-reply@wallabag.org
-    rss_limit: 50
-    rabbitmq_host: localhost
-    rabbitmq_port: 5672
-    rabbitmq_user: guest
-    rabbitmq_password: guest
-    redis_scheme: tcp
-    redis_host: localhost
-    redis_port: 6379
-    redis_path: ~
-    redis_password: ~
-    sentry_dsn: ~
-    server_name: "Your wallabag instance"
-```
+{{< callout type="info" >}}
+After changing configuration in production, clear the cache with
+`bin/console cache:clear --env=prod`.
+{{< /callout >}}
 
-## Meaning of each parameter
-
-### Database parameters
-
-| Name  | Description | Default |
-| ------|---------|------------ |
-| database_driver | Should be pdo_sqlite or pdo_mysql or pdo_pgsql  | pdo_sqlite |
-| database_driver_class | Should be used only for PostgreSQL 10 with `Wallabag\CoreBundle\Doctrine\DBAL\Driver\CustomPostgreSQLDriver` | ~ |
-| database_host  | host of your database (usually localhost or 127.0.0.1) | 127.0.0.1 |
-| database_port  | port of your database (you can leave ``~`` to use the default one) | ~ |
-| database_name | name of your database | symfony |
-| database_user | user that can write to this database | root |
-| database_password | password of that user| ~ |
-| database_path | only for SQLite, define where to put the database file. Put it to null for any other database | `%kernel.root_dir%/ ../data/db/wallabag.sqlite` |
-| database_table_prefix | all wallabag's tables will be prefixed with that string. You can include a ``_`` for clarity BUT NEVER USE A ``-`` | wallabag_ |
-| database_socket | If your database is using a socket instead of tcp, put the path of the socket (other connection parameters will then be ignored) | null |
-| database_charset | For PostgreSQL & SQLite you should use utf8, for MySQL use utf8mb4 to handle emoji and other special characters | utf8mb4 |
-
-## Mailer parameters
-
-You can check about how to properly [configure email in the dedicated section]({{< relref "mailer.md" >}}).
+## Symfony runtime variables
 
 | Name | Description | Default |
-| -----|-------------|-------- |
-| mailer_dsn | One liner with all the mailer parameters `smtp://user:pass@host:465`. Any characters considered special need to be urlencoded in `user`, `pass` and `host`. | smtp://127.0.0.1 |
+| -----|-------------|---------|
+| APP_ENV | Symfony environment | `dev` |
+| APP_DEBUG | Symfony debug flag | `1` in dev, `0` in prod |
+| APP_SECRET | Secret used for security-related operations | `ch4n63m31fy0uc4n` in `.env`, set your own value in production |
 
-### Parameters removed in 2.6.1
-
-| Name | Description | Default |
-| -----|-------------|-------- |
-| mailer_transport | The exact transport method to use to deliver emails. Valid values are: `smtp`, `gmail`, `sendmail`, `null` (which will disable the mailer) | smtp |
-| mailer_user | The username when using `smtp` as the transport. | ~ |
-| mailer_password | The password when using `smtp` as the transport. | ~ |
-| mailer_host | The host to connect to when using `smtp` as the transport.| 127.0.0.1 |
-| mailer_port (**new in 2.4.0**) | The port when using `smtp` as the transport. This defaults to 465 if encryption is `ssl` and 25 otherwise.| false |
-| mailer_encryption (**new in 2.4.0**) | The encryption mode to use when using smtp as the transport. Valid values are `tls`, `ssl`, or `null` (indicating no encryption).| ~ |
-| mailer_auth_mode (**new in 2.4.0**) | The authentication mode to use when using smtp as the transport. Valid values are `plain`, `login`, `cram-md5`, or `null`.| ~ |
-
-## Other wallabag options
+## Application variables
 
 | Name | Description | Default |
-| -----|-------------|-------- |
-| locale | Default language of your wallabag instance (like en, fr, es, etc.) | en |
-| secret | This is a string that should be unique to your application and it's commonly used to add more entropy to security related operations. | ovmpmAWXRCabNlMgzlzFXDYmCFfzGv |
-| twofactor_auth | true to enable the possibility of Two factor authentication | true |
-| twofactor_sender | email of the email sender to receive the two factor code | no-reply@wallabag.org |
-| fosuser_registration | true to enable public registration | true |
-| fosuser_confirmation | true to send a confirmation by email for each registration | true |
-| fos_oauth_server_access_token_lifetime | how long the access token should life in seconds for the API | 3600 |
-| fos_oauth_server_refresh_token_lifetime | how long the refresh token should life in seconds for the API | 1209600 |
-| from_email | email address used in From: field in each email | no-reply@wallabag.org |
-| rss_limit | item limit for RSS feeds | 50 |
-| domain_name | Full URL of your wallabag instance (without the trailing slash) | https://your-wallabag-instance.wallabag.org |
-| sentry_dsn (**new in 2.4.0**) | DSN from [Sentry](https://sentry.io/welcome/) which logs errors | null |
-| server_name (**new in 2.4.1**) | User-friendly name of your instance for the 2FA issuer | "Your wallabag instance" |
-| wallabag_user_agent (**new in 2.7.0**) | Default User-Agent used in HTTP requests when fetching content | "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2" |
+| -----|-------------|---------|
+| DEFAULT_LOCALE | Default language of your wallabag instance | `en` |
+| WALLABAG_BASE_URL | Full URL of your wallabag instance without a trailing slash | `http://127.0.0.1:8000` |
+| WALLABAG_REGISTRATION_ENABLED | Enable public registration | `0` |
+| WALLABAG_CONFIRMATION_ENABLED | Send a confirmation email for each registration | `1` |
+| WALLABAG_FROM_EMAIL | Address used in the `From:` field for application emails | `wallabag@example.com` |
+| WALLABAG_SERVER_NAME | User-friendly name of your instance for 2FA issuer strings | `Your wallabag instance` |
+| WALLABAG_TWOFACTOR_SENDER | Sender address for emailed 2FA codes | `no-reply@wallabag.org` |
+| WALLABAG_USER_AGENT | Default User-Agent used when wallabag fetches content | `Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2` |
+| WALLABAG_OAUTH_ACCESS_TOKEN_LIFETIME | OAuth access-token lifetime in seconds | `3600` |
+| WALLABAG_OAUTH_REFRESH_TOKEN_LIFETIME | OAuth refresh-token lifetime in seconds | `1209600` |
+| WALLABAG_TABLE_PREFIX | Prefix added to wallabag database tables | `wallabag_` |
+| WALLABAG_SITE_CONFIG_FOLDERS | Optional comma-separated list of extra graby site-config folders | empty |
+| SENTRY_DSN | Optional Sentry DSN used to report application errors | empty |
 
-## RabbitMQ options
-
-| Name | Description | Default |
-| -----|-------------|-------- |
-| rabbitmq_host | Host of your RabbitMQ | localhost |
-| rabbitmq_port | Port of your RabbitMQ instance | 5672 |
-| rabbitmq_user | User that can read queues | guest |
-| rabbitmq_password | Password of that user | guest |
-
-## Redis options
+## Service variables
 
 | Name | Description | Default |
-| -----|-------------|-------- |
-| redis_scheme | Specifies the protocol used to communicate with an instance of Redis. Valid values are: tcp, unix, http | tcp |
-| redis_host | IP or hostname of the target server (ignored for unix scheme) | localhost |
-| redis_port | TCP/IP port of the target server (ignored for unix scheme) | 6379 |
-| redis_path | Path of the UNIX domain socket file used when connecting to Redis using UNIX domain sockets | null
-| redis_password | Password defined in the Redis server configuration (parameter `requirepass` in `redis.conf`) | null
+| -----|-------------|---------|
+| DATABASE_URL | Doctrine connection string for SQLite, MySQL/MariaDB, or PostgreSQL | `sqlite:///%kernel.project_dir%/data/db/wallabag.sqlite` |
+| MAILER_DSN | Symfony Mailer DSN | `smtp://127.0.0.1` |
+| REDIS_URL | Redis connection string used by the async import worker | `redis://127.0.0.1:6379` |
+| RABBITMQ_URL | RabbitMQ connection string used by the async import worker | `amqp://guest:guest@127.0.0.1:5672` |
+| WALLABAG_RABBITMQ_PREFETCH_COUNT | RabbitMQ consumer prefetch value | `10` |
+
+## Legacy mapping for upgraded installs
+
+If an upgraded installation still has `app/config/parameters.yml`, wallabag maps
+the legacy keys below to the new environment-variable interface at boot time.
+
+| Legacy key | Environment variable |
+| ---------- | -------------------- |
+| `secret` | `APP_SECRET` |
+| `locale` | `DEFAULT_LOCALE` |
+| `domain_name` | `WALLABAG_BASE_URL` |
+| `mailer_dsn` | `MAILER_DSN` |
+| `fosuser_registration` | `WALLABAG_REGISTRATION_ENABLED` |
+| `fosuser_confirmation` | `WALLABAG_CONFIRMATION_ENABLED` |
+| `from_email` | `WALLABAG_FROM_EMAIL` |
+| `server_name` | `WALLABAG_SERVER_NAME` |
+| `twofactor_sender` | `WALLABAG_TWOFACTOR_SENDER` |
+| `rabbitmq_prefetch_count` | `WALLABAG_RABBITMQ_PREFETCH_COUNT` |
+| `database_*` | `DATABASE_URL` |
+| `redis_*` | `REDIS_URL` |
+| `rabbitmq_*` | `RABBITMQ_URL` |
+| `sentry_dsn` | `SENTRY_DSN` |
+| `wallabag_user_agent` | `WALLABAG_USER_AGENT` |
+| `fos_oauth_server_access_token_lifetime` | `WALLABAG_OAUTH_ACCESS_TOKEN_LIFETIME` |
+| `fos_oauth_server_refresh_token_lifetime` | `WALLABAG_OAUTH_REFRESH_TOKEN_LIFETIME` |
+| `database_table_prefix` | `WALLABAG_TABLE_PREFIX` |
