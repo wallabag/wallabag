@@ -186,6 +186,10 @@ class AppKernel extends Kernel
         if ($container->hasParameter('from_email')) {
             $container->setParameter('env(WALLABAG_FROM_EMAIL)', (string) $container->getParameter('from_email'));
         }
+
+        if ($container->hasParameter('server_name')) {
+            $container->setParameter('env(WALLABAG_SERVER_NAME)', (string) $container->getParameter('server_name'));
+        }
     }
 
     private function normalizeLegacyDatabaseParameters(ContainerBuilder $container): void

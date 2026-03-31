@@ -224,7 +224,7 @@ scheb_two_factor:
 
     google:
         enabled: true
-        issuer: "%server_name%"
+        issuer: "%env(WALLABAG_SERVER_NAME)%"
         template: "Authentication/form.html.twig"
 
     email:
