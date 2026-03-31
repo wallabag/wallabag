@@ -5,12 +5,14 @@ namespace Wallabag\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Wallabag\Entity\Config;
+use Wallabag\Enum\HomepageTarget;
 
 class ConfigType extends AbstractType
 {
@@ -79,6 +81,13 @@ class ConfigType extends AbstractType
                     'config.form_settings.action_mark_as_read.redirect_homepage' => Config::REDIRECT_TO_HOMEPAGE,
                     'config.form_settings.action_mark_as_read.redirect_current_page' => Config::REDIRECT_TO_CURRENT_PAGE,
                 ],
+            ])
+            ->add('default_homepage', EnumType::class, [
+                'class' => HomepageTarget::class,
+                'label' => 'config.form_settings.default_homepage.label',
+                'property_path' => 'defaultHomepage',
+                'choice_label' => static fn (HomepageTarget $target) => $target->label(),
+                'placeholder' => false,
             ])
             ->add('language', ChoiceType::class, [
                 'choices' => array_flip($this->languages),

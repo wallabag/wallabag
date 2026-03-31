@@ -576,7 +576,6 @@ menu:
         search: 검색
     left:
         archive: 보관함
-        back_to_unread: 읽지 않은 문서로 돌아가기
         all_articles: 모든 문서
         ignore_origin_instance_rules: 전역 원본 무시 규칙
         about: 애플리케이션 정보
