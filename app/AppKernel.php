@@ -111,10 +111,8 @@ class AppKernel extends Kernel
         });
 
         $loader->load(function (ContainerBuilder $container): void {
-            $this->warnIfParametersYmlUsed();
-            $this->processDatabaseParameters($container);
-            $this->defineRedisUrlEnvVar($container);
-            $this->defineRabbitMqUrlEnvVar($container);
+            $this->triggerLegacyParametersDeprecationIfNeeded();
+            $this->defineLegacyEnvFallbacks($container);
         });
     }
 
@@ -123,7 +121,7 @@ class AppKernel extends Kernel
         $container->addCompilerPass(new ImportCompilerPass());
     }
 
-    private function warnIfParametersYmlUsed(): void
+    private function triggerLegacyParametersDeprecationIfNeeded(): void
     {
         if ('test' === $this->getEnvironment()) {
             return;
@@ -138,7 +136,14 @@ class AppKernel extends Kernel
         }
     }
 
-    private function processDatabaseParameters(ContainerBuilder $container)
+    private function defineLegacyEnvFallbacks(ContainerBuilder $container): void
+    {
+        $this->normalizeLegacyDatabaseParameters($container);
+        $this->defineLegacyRedisUrlFallback($container);
+        $this->defineLegacyRabbitMqUrlFallback($container);
+    }
+
+    private function normalizeLegacyDatabaseParameters(ContainerBuilder $container): void
     {
         $scheme = match ($container->getParameter('database_driver')) {
             'pdo_mysql' => 'mysql',
@@ -159,7 +164,7 @@ class AppKernel extends Kernel
         $container->setParameter('database_socket', (string) $container->getParameter('database_socket'));
     }
 
-    private function defineRedisUrlEnvVar(ContainerBuilder $container)
+    private function defineLegacyRedisUrlFallback(ContainerBuilder $container): void
     {
         $scheme = $container->getParameter('redis_scheme');
         $host = $container->getParameter('redis_host');
@@ -184,7 +189,7 @@ class AppKernel extends Kernel
         $container->setParameter('env(REDIS_URL)', $url);
     }
 
-    private function defineRabbitMqUrlEnvVar(ContainerBuilder $container)
+    private function defineLegacyRabbitMqUrlFallback(ContainerBuilder $container): void
     {
         $host = $container->getParameter('rabbitmq_host');
         $port = $container->getParameter('rabbitmq_port');
