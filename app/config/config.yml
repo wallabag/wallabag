@@ -210,7 +210,7 @@ fos_oauth_server:
         user_provider: fos_user.user_provider.username_email
         options:
             refresh_token_lifetime: "%fos_oauth_server_refresh_token_lifetime%"
-            access_token_lifetime: "%fos_oauth_server_access_token_lifetime%"
+            access_token_lifetime: "%env(int:WALLABAG_OAUTH_ACCESS_TOKEN_LIFETIME)%"
 
 scheb_two_factor:
     trusted_device:

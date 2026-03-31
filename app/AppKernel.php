@@ -206,6 +206,10 @@ class AppKernel extends Kernel
         if ($container->hasParameter('wallabag_user_agent')) {
             $container->setParameter('env(WALLABAG_USER_AGENT)', (string) $container->getParameter('wallabag_user_agent'));
         }
+
+        if ($container->hasParameter('fos_oauth_server_access_token_lifetime')) {
+            $container->setParameter('env(WALLABAG_OAUTH_ACCESS_TOKEN_LIFETIME)', (string) $container->getParameter('fos_oauth_server_access_token_lifetime'));
+        }
     }
 
     private function defineLegacyDatabaseUrlFallback(ContainerBuilder $container): void
