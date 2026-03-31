@@ -63,7 +63,7 @@ twig:
         - "Form/materialize_form_div_layout.html.twig"
     globals:
         wallabag_url: '%env(WALLABAG_BASE_URL)%'
-        registration_enabled: '%fosuser_registration%'
+        registration_enabled: '%env(bool:WALLABAG_REGISTRATION_ENABLED)%'
 
 # Doctrine Configuration
 doctrine:

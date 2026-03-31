@@ -174,6 +174,10 @@ class AppKernel extends Kernel
         if ($container->hasParameter('mailer_dsn')) {
             $container->setParameter('env(MAILER_DSN)', (string) $container->getParameter('mailer_dsn'));
         }
+
+        if ($container->hasParameter('fosuser_registration')) {
+            $container->setParameter('env(WALLABAG_REGISTRATION_ENABLED)', (bool) $container->getParameter('fosuser_registration') ? '1' : '0');
+        }
     }
 
     private function normalizeLegacyDatabaseParameters(ContainerBuilder $container): void

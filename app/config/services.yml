@@ -32,7 +32,7 @@ services:
             $resourceDir: "%wallabag.resource_dir%"
             $lifeTime: '%wallabag.cache_lifetime%'
             $logoPath: 'web/img/appicon/apple-touch-icon-152.png'
-            $registrationEnabled: '%fosuser_registration%'
+            $registrationEnabled: '%env(bool:WALLABAG_REGISTRATION_ENABLED)%'
             $restrictedAccess: '@=service(''craue_config'').get(''restricted_access'')'
             $senderEmail: "%scheb_two_factor.email.sender_email%"
             $senderName: "%scheb_two_factor.email.sender_name%"
