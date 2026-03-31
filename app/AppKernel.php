@@ -194,6 +194,10 @@ class AppKernel extends Kernel
         if ($container->hasParameter('twofactor_sender')) {
             $container->setParameter('env(WALLABAG_TWOFACTOR_SENDER)', (string) $container->getParameter('twofactor_sender'));
         }
+
+        if ($container->hasParameter('rabbitmq_prefetch_count')) {
+            $container->setParameter('env(WALLABAG_RABBITMQ_PREFETCH_COUNT)', (string) $container->getParameter('rabbitmq_prefetch_count'));
+        }
     }
 
     private function normalizeLegacyDatabaseParameters(ContainerBuilder $container): void
