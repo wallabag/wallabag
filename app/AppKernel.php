@@ -98,11 +98,7 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load($this->getProjectDir() . '/app/config/config_' . $this->getEnvironment() . '.yml');
-
-        if ('dev' === $this->getEnvironment()) {
-            $loader->load($this->getProjectDir() . '/app/config/services_dev.yml');
-        }
+        $legacyParametersLoaded = $this->loadLegacyParametersIfPresent($loader);
 
         $loader->load(function (ContainerBuilder $container): void {
             // $container->setParameter('container.autowiring.strict_mode', true);
@@ -110,10 +106,20 @@ class AppKernel extends Kernel
             $container->addObjectResource($this);
         });
 
-        $loader->load(function (ContainerBuilder $container): void {
+        $loader->load(function (ContainerBuilder $container) use ($legacyParametersLoaded): void {
+            if (!$legacyParametersLoaded) {
+                return;
+            }
+
             $this->triggerLegacyParametersDeprecationIfNeeded();
             $this->defineLegacyEnvFallbacks($container);
         });
+
+        $loader->load($this->getProjectDir() . '/app/config/config_' . $this->getEnvironment() . '.yml');
+
+        if ('dev' === $this->getEnvironment()) {
+            $loader->load($this->getProjectDir() . '/app/config/services_dev.yml');
+        }
     }
 
     protected function build(ContainerBuilder $container)
@@ -123,13 +129,24 @@ class AppKernel extends Kernel
 
     private function triggerLegacyParametersDeprecationIfNeeded(): void
     {
-        if (is_file($this->getProjectDir() . '/app/config/parameters.yml')) {
-            trigger_deprecation(
-                'wallabag/wallabag',
-                '2.x',
-                'Loading configuration from "app/config/parameters.yml" is deprecated and will be removed in wallabag 3.0. Configure wallabag with environment variables instead.'
-            );
+        trigger_deprecation(
+            'wallabag/wallabag',
+            '2.x',
+            'Loading configuration from "app/config/parameters.yml" is deprecated and will be removed in wallabag 3.0. Configure wallabag with environment variables instead.'
+        );
+    }
+
+    private function loadLegacyParametersIfPresent(LoaderInterface $loader): bool
+    {
+        $legacyParametersPath = $this->getProjectDir() . '/app/config/parameters.yml';
+
+        if (!is_file($legacyParametersPath)) {
+            return false;
         }
+
+        $loader->load($legacyParametersPath);
+
+        return true;
     }
 
     private function defineLegacyEnvFallbacks(ContainerBuilder $container): void
