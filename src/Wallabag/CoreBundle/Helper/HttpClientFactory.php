@@ -2,10 +2,12 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
+use Graby\HttpClient\Plugin\ServerSideRequestForgeryProtection\ServerSideRequestForgeryProtectionPlugin;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Event\SubscriberInterface;
 use Http\Adapter\Guzzle5\Client as GuzzleAdapter;
+use Http\Client\Common\PluginClient;
 use Http\Client\HttpClient;
 use Http\HttplugBundle\ClientFactory\ClientFactory;
 use Psr\Log\LoggerInterface;
@@ -54,7 +56,10 @@ class HttpClientFactory implements ClientFactory
         $this->logger->log('debug', 'Restricted access config enabled?', ['enabled' => (int) $this->restrictedAccess]);
 
         if (0 === (int) $this->restrictedAccess) {
-            return new GuzzleAdapter(new GuzzleClient($config));
+            return new PluginClient(
+                new GuzzleAdapter(new GuzzleClient($config)),
+                [new ServerSideRequestForgeryProtectionPlugin()]
+            );
         }
 
         // we clear the cookie to avoid websites who use cookies for analytics
@@ -69,6 +74,9 @@ class HttpClientFactory implements ClientFactory
             $guzzle->getEmitter()->attach($subscriber);
         }
 
-        return new GuzzleAdapter($guzzle);
+        return new PluginClient(
+            new GuzzleAdapter($guzzle),
+            [new ServerSideRequestForgeryProtectionPlugin()]
+        );
     }
 }

@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Helper;
 
 use enshrined\svgSanitize\Sanitizer;
+use Graby\HttpClient\Plugin\ServerSideRequestForgeryProtection\ServerSideRequestForgeryProtectionPlugin;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\Psr7\UriResolver;
 use Http\Client\Common\HttpMethodsClient;
@@ -31,7 +32,7 @@ class DownloadImages
 
     public function __construct(ClientInterface $client, $baseFolder, $wallabagUrl, LoggerInterface $logger, RequestFactoryInterface $requestFactory = null, StreamFactoryInterface $streamFactory = null)
     {
-        $this->client = new HttpMethodsClient(new PluginClient($client, [new ErrorPlugin(), new RedirectPlugin()]), $requestFactory ?: Psr17FactoryDiscovery::findRequestFactory(), $streamFactory ?: Psr17FactoryDiscovery::findStreamFactory());
+        $this->client = new HttpMethodsClient(new PluginClient($client, [new ServerSideRequestForgeryProtectionPlugin(), new ErrorPlugin(), new RedirectPlugin()]), $requestFactory ?: Psr17FactoryDiscovery::findRequestFactory(), $streamFactory ?: Psr17FactoryDiscovery::findStreamFactory());
         $this->baseFolder = $baseFolder;
         $this->wallabagUrl = rtrim($wallabagUrl, '/');
         $this->logger = $logger;
