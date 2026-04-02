@@ -11,9 +11,11 @@ use Wallabag\CoreBundle\Helper\DownloadImages;
 
 class DownloadImagesTest extends TestCase
 {
-    private const PUBLIC_HTTP_BASE = 'http://1.1.1.1';
+    private const PUBLIC_HTTP_IP = '1.1.1.1';
+    private const PUBLIC_HTTP_BASE = 'http://' . self::PUBLIC_HTTP_IP;
     private const PUBLIC_HTTPS_BASE = 'https://8.8.8.8';
-    private const ENTRY_ASSET_PREFIX = 'http://wallabag.io/assets/images/9/b/9b0ead26/';
+    private const ENTRY_ASSET_PATH = '/assets/images/9/b/9b0ead26/';
+    private const ENTRY_ASSET_PREFIX = 'http://wallabag.io' . self::ENTRY_ASSET_PATH;
 
     public function dataForSuccessImage()
     {
@@ -127,7 +129,7 @@ class DownloadImagesTest extends TestCase
         $logger = new Logger('test', [$logHandler]);
 
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
-        $res = $download->processSingleImage(123, '/T9qgcHc.jpg', '1.1.1.1/gallery/WxtWY');
+        $res = $download->processSingleImage(123, '/T9qgcHc.jpg', self::PUBLIC_HTTP_IP . '/gallery/WxtWY');
 
         $this->assertFalse($res, 'Absolute image can not be determined, so it will not be replaced');
     }
@@ -223,7 +225,21 @@ class DownloadImagesTest extends TestCase
         $this->assertFalse($res);
     }
 
-    public function testProcessSingleImageBlocksLocalAddress()
+    public function provideBlockedLocalImageUrls(): array
+    {
+        return [
+            'loopback' => ['http://127.0.0.1/image.png'],
+            'private class a' => ['http://10.0.0.1/image.png'],
+            'link-local metadata' => ['http://169.254.169.254/image.png'],
+            'private class b' => ['http://172.16.0.1/image.png'],
+            'private class c' => ['http://192.168.1.1/image.png'],
+        ];
+    }
+
+    /**
+     * @dataProvider provideBlockedLocalImageUrls
+     */
+    public function testProcessSingleImageBlocksLocalAddress($imageUrl)
     {
         $httpMockClient = new HttpMockClient();
 
@@ -231,7 +247,7 @@ class DownloadImagesTest extends TestCase
         $logger = new Logger('test', [$logHandler]);
 
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
-        $res = $download->processSingleImage(123, 'http://127.0.0.1/image.png', self::PUBLIC_HTTP_BASE . '/article');
+        $res = $download->processSingleImage(123, $imageUrl, self::PUBLIC_HTTP_BASE . '/article');
 
         $this->assertFalse($res);
         $this->assertCount(0, $httpMockClient->getRequests());
@@ -310,6 +326,6 @@ class DownloadImagesTest extends TestCase
 
     private function assetPathFor(string $absolutePath, string $extension): string
     {
-        return '/assets/images/9/b/9b0ead26/' . hash('crc32', $absolutePath) . '.' . $extension;
+        return self::ENTRY_ASSET_PATH . hash('crc32', $absolutePath) . '.' . $extension;
     }
 }
