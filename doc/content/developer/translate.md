@@ -50,6 +50,6 @@ For the second column, enter the name of your language in its native form.
 Unlike the web application, English is the primary language for documentation.
 
 Documentation files are located at:
-<https://github.com/wallabag/doc>
+<https://github.com/wallabag/wallabag/tree/2.6/doc>
 
 When creating your translation, maintain the same folder structure as the `en` directory.
