@@ -1,4 +1,5 @@
 [build]
+  ignore = "if [ \"$CACHED_COMMIT_REF\" == \"$COMMIT_REF\" ] ; then false ; else git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF . ; fi"
   publish = "public/"
 
 [build.environment]
