@@ -3,9 +3,14 @@ import { Controller } from '@hotwired/stimulus';
 export default class extends Controller {
   connect() {
     this.mql = window.matchMedia('(prefers-color-scheme: dark)');
-    this.mql.addEventListener('change', this.#choose.bind(this));
+    this.handleThemeChange = this.#choose.bind(this);
+    this.mql.addEventListener('change', this.handleThemeChange);
 
     this.#choose();
+  }
+
+  disconnect() {
+    this.mql.removeEventListener('change', this.handleThemeChange);
   }
 
   useLight() {
