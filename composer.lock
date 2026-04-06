@@ -8017,16 +8017,16 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "4.21.0",
+            "version": "4.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "2bf405fc4d38f00073a7d023cf321e59f614d54c"
+                "reference": "5055cc792f630a427fdf9dcccd88faa94b50fd30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/2bf405fc4d38f00073a7d023cf321e59f614d54c",
-                "reference": "2bf405fc4d38f00073a7d023cf321e59f614d54c",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/5055cc792f630a427fdf9dcccd88faa94b50fd30",
+                "reference": "5055cc792f630a427fdf9dcccd88faa94b50fd30",
                 "shasum": ""
             },
             "require": {
@@ -8048,12 +8048,14 @@
                 "guzzlehttp/psr7": "^1.8.4|^2.1.1",
                 "monolog/monolog": "^1.6|^2.0|^3.0",
                 "nyholm/psr7": "^1.8",
+                "open-telemetry/api": "^1.0",
+                "open-telemetry/exporter-otlp": "^1.0",
+                "open-telemetry/sdk": "^1.0",
                 "phpbench/phpbench": "^1.0",
                 "phpstan/phpstan": "^1.3",
                 "phpunit/phpunit": "^8.5.52|^9.6.34",
                 "spiral/roadrunner-http": "^3.6",
-                "spiral/roadrunner-worker": "^3.6",
-                "vimeo/psalm": "^4.17"
+                "spiral/roadrunner-worker": "^3.6"
             },
             "suggest": {
                 "monolog/monolog": "Allow sending log messages to Sentry by using the included Monolog handler."
@@ -8092,7 +8094,7 @@
             ],
             "support": {
                 "issues": "https://github.com/getsentry/sentry-php/issues",
-                "source": "https://github.com/getsentry/sentry-php/tree/4.21.0"
+                "source": "https://github.com/getsentry/sentry-php/tree/4.24.0"
             },
             "funding": [
                 {
@@ -8104,27 +8106,27 @@
                     "type": "custom"
                 }
             ],
-            "time": "2026-02-24T15:32:51+00:00"
+            "time": "2026-04-01T14:34:34+00:00"
         },
         {
             "name": "sentry/sentry-symfony",
-            "version": "5.9.0",
+            "version": "5.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-symfony.git",
-                "reference": "75a73de23b9af414b3c8b15c26187a4ae6c65732"
+                "reference": "6f49255f4cdcfc43a3a283bd3a1f65d483e9192f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/75a73de23b9af414b3c8b15c26187a4ae6c65732",
-                "reference": "75a73de23b9af414b3c8b15c26187a4ae6c65732",
+                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/6f49255f4cdcfc43a3a283bd3a1f65d483e9192f",
+                "reference": "6f49255f4cdcfc43a3a283bd3a1f65d483e9192f",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/psr7": "^2.1.1",
                 "jean85/pretty-package-versions": "^1.5||^2.0",
                 "php": "^7.2||^8.0",
-                "sentry/sentry": "^4.20.0",
+                "sentry/sentry": "^4.23.0",
                 "symfony/cache-contracts": "^1.1||^2.4||^3.0",
                 "symfony/config": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
                 "symfony/console": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
@@ -8194,7 +8196,7 @@
             ],
             "support": {
                 "issues": "https://github.com/getsentry/sentry-symfony/issues",
-                "source": "https://github.com/getsentry/sentry-symfony/tree/5.9.0"
+                "source": "https://github.com/getsentry/sentry-symfony/tree/5.10.0"
             },
             "funding": [
                 {
@@ -8206,7 +8208,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2026-02-23T12:32:36+00:00"
+            "time": "2026-04-01T14:50:32+00:00"
         },
         {
             "name": "simplepie/simplepie",
