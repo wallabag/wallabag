@@ -6,6 +6,7 @@ imports:
 parameters:
     spiriit_form_filter.get_filter.doctrine_orm.class: Wallabag\Event\Subscriber\CustomDoctrineORMSubscriber
     env(WALLABAG_SITE_CONFIG_FOLDERS): ''
+    env(WALLABAG_NO_COMPROMISED_PASSWORDS): '0'
     wallabag.site_config_folders: '%env(csv:WALLABAG_SITE_CONFIG_FOLDERS)%'
 
 services:
@@ -41,6 +42,7 @@ services:
             $fonts: '%wallabag.fonts%'
             $defaultIgnoreOriginInstanceRules: '%wallabag.default_ignore_origin_instance_rules%'
             $defaultUserAgent: '%env(WALLABAG_USER_AGENT)%'
+            $checkCompromisedPasswords: '%env(bool:WALLABAG_NO_COMPROMISED_PASSWORDS)%'
             $addonsUrl: "%addons_url%"
 
     Wallabag\:

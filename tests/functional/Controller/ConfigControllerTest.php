@@ -229,10 +229,11 @@ class ConfigControllerTest extends WallabagTestCase
 
         $form = $crawler->filter('button[id=change_passwd_save]')->form();
 
+        $newPassword = bin2hex(random_bytes(16));
         $data = [
             'change_passwd[old_password]' => 'mypassword',
-            'change_passwd[new_password][first]' => 'mypassword',
-            'change_passwd[new_password][second]' => 'mypassword',
+            'change_passwd[new_password][first]' => $newPassword,
+            'change_passwd[new_password][second]' => $newPassword,
         ];
 
         $client->submit($form, $data);

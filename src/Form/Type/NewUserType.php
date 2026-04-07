@@ -12,12 +12,30 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
 use Wallabag\Entity\User;
 
 class NewUserType extends AbstractType
 {
+    public function __construct(
+        private readonly bool $checkCompromisedPasswords,
+    ) {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $passwordConstraints = [
+            new Length([
+                'min' => 8,
+                'minMessage' => 'validator.password_too_short',
+            ]),
+            new NotBlank(),
+        ];
+
+        if ($this->checkCompromisedPasswords) {
+            $passwordConstraints[] = new NotCompromisedPassword(['skipOnError' => true]);
+        }
+
         $builder
             ->add('username', TextType::class, [
                 'required' => true,
@@ -28,13 +46,7 @@ class NewUserType extends AbstractType
                 'invalid_message' => 'validator.password_must_match',
                 'first_options' => ['label' => 'user.form.password_label'],
                 'second_options' => ['label' => 'user.form.repeat_new_password_label'],
-                'constraints' => [
-                    new Length([
-                        'min' => 8,
-                        'minMessage' => 'validator.password_too_short',
-                    ]),
-                    new NotBlank(),
-                ],
+                'constraints' => $passwordConstraints,
                 'label' => 'user.form.plain_password_label',
             ])
             ->add('email', EmailType::class, [

@@ -31,11 +31,12 @@ class UserControllerTest extends WallabagTestCase
         $crawler = $client->click($crawler->selectLink('user.list.create_new_one')->link());
 
         // Fill in the form and submit it
+        $password = bin2hex(random_bytes(16));
         $form = $crawler->selectButton('user.form.save')->form([
             'new_user[username]' => $username,
             'new_user[email]' => $email,
-            'new_user[plainPassword][first]' => 'testtest',
-            'new_user[plainPassword][second]' => 'testtest',
+            'new_user[plainPassword][first]' => $password,
+            'new_user[plainPassword][second]' => $password,
         ]);
 
         $client->submit($form);
