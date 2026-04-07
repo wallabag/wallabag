@@ -39,7 +39,6 @@ chown -R www-data:www-data /var/www/wallabag/var
 It has to be the same for the following folders
 
 -   /var/www/wallabag/bin/
--   /var/www/wallabag/app/config/
 -   /var/www/wallabag/vendor/
 -   /var/www/wallabag/data/
 -   /var/www/wallabag/web/
@@ -48,7 +47,6 @@ by entering
 
 ```bash
 chown -R www-data:www-data /var/www/wallabag/bin
-chown -R www-data:www-data /var/www/wallabag/app/config
 chown -R www-data:www-data /var/www/wallabag/vendor
 chown -R www-data:www-data /var/www/wallabag/data/
 chown -R www-data:www-data /var/www/wallabag/web/
@@ -58,7 +56,6 @@ otherwise, sooner or later you will see these error messages:
 
 ```
 Unable to write to the "bin" directory.
-file_put_contents(app/config/parameters.yml): failed to open stream: Permission denied
 file_put_contents(/.../wallabag/vendor/autoload.php): failed to open stream: Permission denied
 ```
 

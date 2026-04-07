@@ -98,11 +98,7 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load($this->getProjectDir() . '/app/config/config_' . $this->getEnvironment() . '.yml');
-
-        if ('dev' === $this->getEnvironment()) {
-            $loader->load($this->getProjectDir() . '/app/config/services_dev.yml');
-        }
+        $legacyParametersLoaded = $this->loadLegacyParametersIfPresent($loader);
 
         $loader->load(function (ContainerBuilder $container): void {
             // $container->setParameter('container.autowiring.strict_mode', true);
@@ -110,12 +106,20 @@ class AppKernel extends Kernel
             $container->addObjectResource($this);
         });
 
-        $loader->load(function (ContainerBuilder $container): void {
-            $this->warnIfParametersYmlUsed();
-            $this->processDatabaseParameters($container);
-            $this->defineRedisUrlEnvVar($container);
-            $this->defineRabbitMqUrlEnvVar($container);
+        $loader->load(function (ContainerBuilder $container) use ($legacyParametersLoaded): void {
+            if (!$legacyParametersLoaded) {
+                return;
+            }
+
+            $this->triggerLegacyParametersDeprecationIfNeeded();
+            $this->defineLegacyEnvFallbacks($container);
         });
+
+        $loader->load($this->getProjectDir() . '/app/config/config_' . $this->getEnvironment() . '.yml');
+
+        if ('dev' === $this->getEnvironment()) {
+            $loader->load($this->getProjectDir() . '/app/config/services_dev.yml');
+        }
     }
 
     protected function build(ContainerBuilder $container)
@@ -123,77 +127,235 @@ class AppKernel extends Kernel
         $container->addCompilerPass(new ImportCompilerPass());
     }
 
-    private function warnIfParametersYmlUsed(): void
+    private function triggerLegacyParametersDeprecationIfNeeded(): void
     {
-        if ('test' === $this->getEnvironment()) {
-            return;
+        trigger_deprecation(
+            'wallabag/wallabag',
+            '2.x',
+            'Loading configuration from "app/config/parameters.yml" is deprecated and will be removed in wallabag 3.0. Configure wallabag with environment variables instead.'
+        );
+    }
+
+    private function loadLegacyParametersIfPresent(LoaderInterface $loader): bool
+    {
+        $legacyParametersPath = $this->getProjectDir() . '/app/config/parameters.yml';
+
+        if (!is_file($legacyParametersPath)) {
+            return false;
         }
 
-        if (false === getenv('DATABASE_URL')) {
-            @trigger_error(
-                'Configuring wallabag via app/config/parameters.yml is deprecated and will be removed in wallabag 3.0. '
-                . 'Please set the DATABASE_URL environment variable (and other configuration) directly in your server\'s environment instead.',
-                \E_USER_DEPRECATED
-            );
+        $loader->load($legacyParametersPath);
+
+        return true;
+    }
+
+    private function defineLegacyEnvFallbacks(ContainerBuilder $container): void
+    {
+        $this->defineLegacySimpleEnvFallbacks($container);
+        $this->defineLegacyDatabaseUrlFallback($container);
+        $this->defineLegacyRedisUrlFallback($container);
+        $this->defineLegacyRabbitMqUrlFallback($container);
+    }
+
+    private function defineLegacySimpleEnvFallbacks(ContainerBuilder $container): void
+    {
+        if ($container->hasParameter('secret')) {
+            $container->setParameter('env(APP_SECRET)', (string) $container->getParameter('secret'));
+        }
+
+        if ($container->hasParameter('locale')) {
+            $container->setParameter('env(DEFAULT_LOCALE)', (string) $container->getParameter('locale'));
+        }
+
+        if ($container->hasParameter('domain_name')) {
+            $container->setParameter('env(WALLABAG_BASE_URL)', (string) $container->getParameter('domain_name'));
+        }
+
+        if ($container->hasParameter('mailer_dsn')) {
+            $container->setParameter('env(MAILER_DSN)', (string) $container->getParameter('mailer_dsn'));
+        }
+
+        if ($container->hasParameter('fosuser_registration')) {
+            $container->setParameter('env(WALLABAG_REGISTRATION_ENABLED)', (bool) $container->getParameter('fosuser_registration') ? '1' : '0');
+        }
+
+        if ($container->hasParameter('fosuser_confirmation')) {
+            $container->setParameter('env(WALLABAG_CONFIRMATION_ENABLED)', (bool) $container->getParameter('fosuser_confirmation') ? '1' : '0');
+        }
+
+        if ($container->hasParameter('from_email')) {
+            $container->setParameter('env(WALLABAG_FROM_EMAIL)', (string) $container->getParameter('from_email'));
+        }
+
+        if ($container->hasParameter('server_name')) {
+            $container->setParameter('env(WALLABAG_SERVER_NAME)', (string) $container->getParameter('server_name'));
+        }
+
+        if ($container->hasParameter('twofactor_sender')) {
+            $container->setParameter('env(WALLABAG_TWOFACTOR_SENDER)', (string) $container->getParameter('twofactor_sender'));
+        }
+
+        if ($container->hasParameter('rabbitmq_prefetch_count')) {
+            $container->setParameter('env(WALLABAG_RABBITMQ_PREFETCH_COUNT)', (string) $container->getParameter('rabbitmq_prefetch_count'));
+        }
+
+        if ($container->hasParameter('sentry_dsn')) {
+            $container->setParameter('env(SENTRY_DSN)', (string) $container->getParameter('sentry_dsn'));
+        }
+
+        if ($container->hasParameter('wallabag_user_agent')) {
+            $container->setParameter('env(WALLABAG_USER_AGENT)', (string) $container->getParameter('wallabag_user_agent'));
+        }
+
+        if ($container->hasParameter('fos_oauth_server_access_token_lifetime')) {
+            $container->setParameter('env(WALLABAG_OAUTH_ACCESS_TOKEN_LIFETIME)', (string) $container->getParameter('fos_oauth_server_access_token_lifetime'));
+        }
+
+        if ($container->hasParameter('fos_oauth_server_refresh_token_lifetime')) {
+            $container->setParameter('env(WALLABAG_OAUTH_REFRESH_TOKEN_LIFETIME)', (string) $container->getParameter('fos_oauth_server_refresh_token_lifetime'));
+        }
+
+        if ($container->hasParameter('database_table_prefix')) {
+            $container->setParameter('env(WALLABAG_TABLE_PREFIX)', (string) $container->getParameter('database_table_prefix'));
         }
     }
 
-    private function processDatabaseParameters(ContainerBuilder $container)
+    private function defineLegacyDatabaseUrlFallback(ContainerBuilder $container): void
+    {
+        $databaseParameters = $this->normalizeLegacyDatabaseParameters($container);
+
+        if ('sqlite' === $databaseParameters['scheme']) {
+            $databasePath = '' !== $databaseParameters['path'] ? $databaseParameters['path'] : $databaseParameters['name'];
+            $container->setParameter(
+                'env(DATABASE_URL)',
+                str_starts_with($databasePath, '/')
+                    ? 'sqlite://' . $databasePath
+                    : 'sqlite:///' . ltrim($databasePath, '/')
+            );
+
+            return;
+        }
+
+        $url = $databaseParameters['scheme'] . '://';
+
+        if ('' !== $databaseParameters['user'] || '' !== $databaseParameters['password']) {
+            $url .= rawurlencode($databaseParameters['user']);
+
+            if ('' !== $databaseParameters['password']) {
+                $url .= ':' . rawurlencode($databaseParameters['password']);
+            }
+
+            $url .= '@';
+        }
+
+        $url .= $databaseParameters['host'];
+
+        if ('' !== $databaseParameters['port']) {
+            $url .= ':' . $databaseParameters['port'];
+        }
+
+        $url .= '/' . $databaseParameters['name'];
+
+        $query = [];
+
+        if ('' !== $databaseParameters['socket']) {
+            $query['unix_socket'] = $databaseParameters['socket'];
+        }
+
+        if ('' !== $databaseParameters['charset']) {
+            $query['charset'] = $databaseParameters['charset'];
+        }
+
+        if ([] !== $query) {
+            $url .= '?' . http_build_query($query, '', '&', \PHP_QUERY_RFC3986);
+        }
+
+        $container->setParameter('env(DATABASE_URL)', $url);
+    }
+
+    private function normalizeLegacyDatabaseParameters(ContainerBuilder $container): array
     {
         $scheme = match ($container->getParameter('database_driver')) {
             'pdo_mysql' => 'mysql',
-            'pdo_pgsql' => 'pgsql',
+            'pdo_pgsql' => 'postgresql',
             'pdo_sqlite' => 'sqlite',
             default => throw new RuntimeException('Unsupported database driver: ' . $container->getParameter('database_driver')),
         };
 
-        $container->setParameter('database_scheme', $scheme);
-
-        if ('sqlite' === $scheme) {
-            $container->setParameter('database_name', $container->getParameter('database_path'));
-        }
-
-        $container->setParameter('database_user', (string) $container->getParameter('database_user'));
-        $container->setParameter('database_password', (string) $container->getParameter('database_password'));
-        $container->setParameter('database_port', (string) $container->getParameter('database_port'));
-        $container->setParameter('database_socket', (string) $container->getParameter('database_socket'));
+        return [
+            'scheme' => $scheme,
+            'host' => (string) $container->getParameter('database_host'),
+            'port' => (string) $container->getParameter('database_port'),
+            'name' => (string) $container->getParameter('database_name'),
+            'user' => (string) $container->getParameter('database_user'),
+            'password' => (string) $container->getParameter('database_password'),
+            'path' => (string) $container->getParameter('database_path'),
+            'socket' => (string) $container->getParameter('database_socket'),
+            'charset' => (string) $container->getParameter('database_charset'),
+        ];
     }
 
-    private function defineRedisUrlEnvVar(ContainerBuilder $container)
+    private function defineLegacyRedisUrlFallback(ContainerBuilder $container): void
     {
-        $scheme = $container->getParameter('redis_scheme');
-        $host = $container->getParameter('redis_host');
-        $port = $container->getParameter('redis_port');
-        $path = $container->getParameter('redis_path');
-        $password = $container->getParameter('redis_password');
+        $scheme = (string) $container->getParameter('redis_scheme');
+        $host = (string) $container->getParameter('redis_host');
+        $port = (string) $container->getParameter('redis_port');
+        $path = (string) $container->getParameter('redis_path');
+        $password = (string) $container->getParameter('redis_password');
+
+        if ('unix' === $scheme) {
+            $url = 'unix://' . $path;
+
+            if ('' !== $password) {
+                $url .= '?password=' . rawurlencode($password);
+            }
+
+            $container->setParameter('env(REDIS_URL)', $url);
+
+            return;
+        }
 
         $url = $scheme . '://';
 
-        if ($password) {
-            $url .= $password . '@';
+        if ('' !== $password) {
+            $url .= ':' . rawurlencode($password) . '@';
         }
 
         $url .= $host;
 
-        if ($port) {
+        if ('' !== $port) {
             $url .= ':' . $port;
         }
 
-        $url .= '/' . ltrim($path, '/');
+        if ('' !== $path) {
+            $url .= '/' . ltrim($path, '/');
+        }
 
         $container->setParameter('env(REDIS_URL)', $url);
     }
 
-    private function defineRabbitMqUrlEnvVar(ContainerBuilder $container)
+    private function defineLegacyRabbitMqUrlFallback(ContainerBuilder $container): void
     {
-        $host = $container->getParameter('rabbitmq_host');
-        $port = $container->getParameter('rabbitmq_port');
-        $user = $container->getParameter('rabbitmq_user');
-        $password = $container->getParameter('rabbitmq_password');
+        $host = (string) $container->getParameter('rabbitmq_host');
+        $port = (string) $container->getParameter('rabbitmq_port');
+        $user = (string) $container->getParameter('rabbitmq_user');
+        $password = (string) $container->getParameter('rabbitmq_password');
 
-        $url = 'amqp://' . $user . ':' . $password . '@' . $host;
+        $url = 'amqp://';
 
-        if ($port) {
+        if ('' !== $user || '' !== $password) {
+            $url .= rawurlencode($user);
+
+            if ('' !== $password) {
+                $url .= ':' . rawurlencode($password);
+            }
+
+            $url .= '@';
+        }
+
+        $url .= $host;
+
+        if ('' !== $port) {
             $url .= ':' . $port;
         }
 

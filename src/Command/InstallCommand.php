@@ -44,7 +44,6 @@ class InstallCommand extends Command
         private readonly EventDispatcherInterface $dispatcher,
         private readonly UserManagerInterface $userManager,
         private readonly TableMetadataStorageConfiguration $tableMetadataStorageConfiguration,
-        private readonly string $databaseDriver,
         private readonly array $defaultSettings,
         private readonly array $defaultIgnoreOriginInstanceRules,
         private readonly string $environment,
@@ -113,6 +112,7 @@ class InstallCommand extends Command
         $this->io->section('Step 1 of 4: Checking system requirements.');
 
         $rows = [];
+        $databaseDriver = $this->getDatabaseDriver();
 
         // testing if database driver exists
         $fulfilled = true;
@@ -120,13 +120,13 @@ class InstallCommand extends Command
         $status = '<info>OK!</info>';
         $help = '';
 
-        if (!\extension_loaded($this->databaseDriver)) {
+        if (!\extension_loaded($databaseDriver)) {
             $fulfilled = false;
             $status = '<error>ERROR!</error>';
-            $help = 'Database driver "' . $this->databaseDriver . '" is not installed.';
+            $help = 'Database driver "' . $databaseDriver . '" is not installed.';
         }
 
-        $rows[] = [\sprintf($label, $this->databaseDriver), $status, $help];
+        $rows[] = [\sprintf($label, $databaseDriver), $status, $help];
 
         // testing if connection to the database can be established
         $label = '<comment>Database connection</comment>';
@@ -204,6 +204,18 @@ class InstallCommand extends Command
         $this->io->success('Success! Your system can run wallabag properly.');
 
         return $this;
+    }
+
+    private function getDatabaseDriver(): string
+    {
+        $driver = $this->entityManager->getConnection()->getParams()['driver'] ?? null;
+
+        return match ($driver) {
+            'pdo_mysql', 'mysqli' => 'pdo_mysql',
+            'pdo_pgsql', 'pgsql' => 'pdo_pgsql',
+            'pdo_sqlite', 'sqlite3' => 'pdo_sqlite',
+            default => throw new \RuntimeException('Unsupported database driver: ' . (string) $driver),
+        };
     }
 
     private function setupDatabase()

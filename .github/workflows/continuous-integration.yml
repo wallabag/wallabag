@@ -249,6 +249,7 @@ jobs:
         ${{ matrix.database == 'mysql' && 'mysql://root:root@127.0.0.1:3306/wallabag?charset=utf8mb4'
          || matrix.database == 'pgsql' && 'postgresql://wallabag:wallabagrocks@127.0.0.1:5432/wallabag?charset=utf8'
          || format('sqlite:///{0}/data/db/wallabag_test.sqlite', github.workspace) }}
+      WALLABAG_TABLE_PREFIX: ""
     services:
       rabbitmq:
         image: rabbitmq:3-alpine
@@ -289,11 +290,6 @@ jobs:
         with:
           node-version-file: ".nvmrc"
           cache: 'yarn'
-
-      - name: "Remove database prefix"
-        run: |
-          pip install --user yq
-          yq -Y --in-place '.parameters.database_table_prefix = ""' app/config/parameters.yml.dist
 
       - name: "Setup MySQL"
         if: "${{ matrix.database == 'mysql' }}"

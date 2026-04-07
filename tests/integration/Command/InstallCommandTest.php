@@ -45,7 +45,8 @@ class InstallCommandTest extends WallabagKernelTestCase
         $this->initialDatabaseUrl = $_ENV['DATABASE_URL'] ?? null;
 
         $originalDatabaseUrl = $this->initialDatabaseUrl
-            ?? static::getContainer()->getParameter('env(DATABASE_URL)');
+            ?? $_SERVER['DATABASE_URL']
+            ?? getenv('DATABASE_URL');
 
         $tmpDatabaseName = 'wallabag_' . bin2hex(random_bytes(5));
 

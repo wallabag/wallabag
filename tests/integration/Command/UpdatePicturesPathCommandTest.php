@@ -26,6 +26,7 @@ class UpdatePicturesPathCommandTest extends WallabagKernelTestCase
         $application = $this->createApplication();
         $em = $this->getEntityManager();
         $user = $this->getUser('admin');
+        $wallabagUrl = $_ENV['WALLABAG_BASE_URL'];
 
         $url = 'https://wallabag.org/news/20230620-new-release-wallabag-260/';
 
@@ -46,7 +47,7 @@ class UpdatePicturesPathCommandTest extends WallabagKernelTestCase
 
         $entry = $em->getRepository(Entry::class)->findOneByUrl($url);
         $this->assertInstanceOf(Entry::class, $entry);
-        $this->assertSame($entry->getPreviewPicture(), static::getContainer()->getParameter('domain_name') . '/mypicture.jpg');
+        $this->assertSame($entry->getPreviewPicture(), $wallabagUrl . '/mypicture.jpg');
 
         $query = $em->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.url = :url');
         $query->setParameter('url', $url);

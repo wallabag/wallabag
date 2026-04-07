@@ -83,7 +83,6 @@
         "friendsofsymfony/user-bundle": "^3.4.0",
         "guzzlehttp/psr7": "^2.7.0",
         "html2text/html2text": "^4.3.2",
-        "incenteev/composer-parameter-handler": "^2.2",
         "j0k3r/graby": "^2.4.6",
         "j0k3r/graby-site-config": "^1.0.197",
         "j0k3r/php-readability": "^1.2.13",
@@ -125,6 +124,7 @@
         "symfony/config": "^5.4.46",
         "symfony/console": "^5.4.47",
         "symfony/dependency-injection": "^5.4.48",
+        "symfony/deprecation-contracts": "^2.5 || ^3.0",
         "symfony/doctrine-bridge": "^5.4.48",
         "symfony/dom-crawler": "^5.4.48",
         "symfony/error-handler": "^5.4.46",
@@ -243,9 +243,6 @@
         "sort-packages": true
     },
     "extra": {
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        },
         "public-dir": "web",
         "symfony": {
             "allow-contrib": true,
@@ -260,7 +257,6 @@
             "@post-cmd"
         ],
         "post-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "bin/console cache:clear --no-warmup",
             "bin/console assets:install web --symlink --relative"
         ]

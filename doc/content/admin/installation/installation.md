@@ -18,12 +18,15 @@ Now, read the next step to create your virtual host, then
 access your wallabag.
 
 {{< callout type="info" >}}
-To define parameters with environment variables, you have to set these variables with `SYMFONY__` prefix, for example, `SYMFONY__DATABASE_DRIVER`.
-You can have a look at [Symfony documentation](http://symfony.com/doc/current/cookbook/configuration/external_parameters.html).
+wallabag is configured with environment variables. For local development, put
+overrides in `.env.local`. For production, export the variables through your
+web server, PHP-FPM, or container runtime. See
+[Parameters]({{< relref "../parameters.md" >}}) for the full list.
 {{< /callout >}}
 
 {{< callout type="info" >}}
-If you want to use SQLite to store your data, please put `"%kernel.root_dir%/../data/db/wallabag.sqlite"` for the `database_path` parameter during installation.
+If you want to use SQLite to store your data, set
+`DATABASE_URL=sqlite:///%kernel.project_dir%/data/db/wallabag.sqlite`.
 {{< /callout >}}
 
 {{< callout type="info" >}}
@@ -33,7 +36,11 @@ If you're installing wallabag behind Squid as a reverse proxy, make sure to upda
 ## On shared hosting
 
 We provide a package with all dependencies inside. The default
-configuration uses MySQL for the database. To add the setting for your database, please edit `app/config/parameters.yml`. Beware that passwords must be surrounded by single quotes (').
+configuration uses MySQL for the database. Configure the environment variables
+documented on the [Parameters]({{< relref "../parameters.md" >}}) page before
+running the installer. If you are upgrading an older deployment that still has
+`app/config/parameters.yml`, wallabag will keep reading it with a deprecation
+warning until wallabag 3.0.
 
 We have already created a user: the login and password are `wallabag`.
 
@@ -74,7 +81,10 @@ This example starts wallabag at `http://localhost:8080` using SQLite backend and
 docker run \
   -v wallabag-data:/var/www/wallabag/data \
   -v wallabag-images:/var/www/wallabag/web/assets/images \
-  -p 8080:80 -e "SYMFONY__ENV__DOMAIN_NAME=http://localhost:8080" \
+  -p 8080:80 \
+  -e APP_SECRET=change-me \
+  -e WALLABAG_BASE_URL=http://localhost:8080 \
+  -e DATABASE_URL=sqlite:////var/www/wallabag/data/db/wallabag.sqlite \
   wallabag/wallabag
 ```
 

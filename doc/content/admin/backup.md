@@ -9,8 +9,11 @@ backup your data. This article describes what you need to backup.
 
 ## Basic settings
 
-wallabag stores some basic parameters (like SMTP server or database
-backend) in the file app/config/parameters.yml.
+wallabag stores deploy-time settings through environment variables. Back up the
+place where you define them, for example `.env.local`, `docker/php/env`, or
+your web server / PHP-FPM configuration. If you upgraded an older installation
+and still keep `app/config/parameters.yml`, back up that file too until you
+finish migrating away from it.
 
 ## Database
 

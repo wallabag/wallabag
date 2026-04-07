@@ -1,10 +1,6 @@
 imports:
     - { resource: config_dev.yml }
-    - { resource: parameters_test.yml }
     - { resource: services_test.yml }
-
-parameters:
-    fosuser_registration: true
 
 framework:
     test: ~

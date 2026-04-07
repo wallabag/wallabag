@@ -24,11 +24,9 @@ services:
             # - ../PHPePub:/var/www/html/vendor/wallabag/phpepub
             # - ../guzzle-site-authenticator:/var/www/html/vendor/bdunogier/guzzle-site-authenticator
         env_file:
-            # Copy docker/php/env.example to docker/php/env and customize
+            # Copy docker/php/env.example to docker/php/env for Docker-specific overrides
             - ./docker/php/env
-            # Uncomment the database engine you want, it will use sqlite if both are commented
-            # - ./docker/mariadb/env
-            # - ./docker/postgres/env
+            # Set DATABASE_URL in .env.local and .env.test.local when you switch from SQLite
             # Uncomment to enable Xdebug
             # - ./docker/php/xdebug
             # Uncomment to enable Blackfire

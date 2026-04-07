@@ -87,8 +87,9 @@ class SecurityControllerTest extends WallabagTestCase
     public function testEnabledRegistration()
     {
         $client = $this->getTestClient();
+        $registrationEnabled = filter_var($_ENV['WALLABAG_REGISTRATION_ENABLED'] ?? '0', \FILTER_VALIDATE_BOOL);
 
-        if (!$client->getContainer()->getParameter('fosuser_registration')) {
+        if (!$registrationEnabled) {
             $this->markTestSkipped('fosuser_registration is not enabled.');
         }
 
