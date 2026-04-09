@@ -207,7 +207,7 @@ class EntriesExport
 
             $readingTime = round($entry->getReadingTime() / $user->getConfig()->getReadingSpeed() * 200);
 
-            $tagLabels = array_map(fn ($tag) => $tag->getLabel(), $entry->getTags()->toArray());
+            $tagLabels = array_map(static fn ($tag) => $tag->getLabel(), $entry->getTags()->toArray());
 
             $titlepage = $content_start .
                 '<h1>' . $entry->getTitle() . '</h1>' .
@@ -280,7 +280,7 @@ class EntriesExport
 
             $readingTime = $entry->getReadingTime() / $user->getConfig()->getReadingSpeed() * 200;
 
-            $tagLabels = array_map(fn ($tag) => $tag->getLabel(), $entry->getTags()->toArray());
+            $tagLabels = array_map(static fn ($tag) => $tag->getLabel(), $entry->getTags()->toArray());
 
             $pdf->addPage();
             $html = '<h1>' . $entry->getTitle() . '</h1>' .
