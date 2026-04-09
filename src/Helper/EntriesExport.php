@@ -207,6 +207,8 @@ class EntriesExport
 
             $readingTime = round($entry->getReadingTime() / $user->getConfig()->getReadingSpeed() * 200);
 
+            $tagLabels = array_map(fn ($tag) => $tag->getLabel(), $entry->getTags()->toArray());
+
             $titlepage = $content_start .
                 '<h1>' . $entry->getTitle() . '</h1>' .
                 '<dl>' .
@@ -215,6 +217,7 @@ class EntriesExport
                 '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $readingTime]) . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
+                (!empty($tagLabels) ? '<dt>' . $this->translator->trans('entry.metadata.tags') . '</dt><dd>' . implode(', ', $tagLabels) . '</dd>' : '') .
                 '</dl>' .
                 $bookEnd;
             $book->addChapter("Entry {$i} of {$entryCount}", "{$filename}_cover.html", $titlepage, true, EPub::EXTERNAL_REF_ADD);
@@ -277,6 +280,8 @@ class EntriesExport
 
             $readingTime = $entry->getReadingTime() / $user->getConfig()->getReadingSpeed() * 200;
 
+            $tagLabels = array_map(fn ($tag) => $tag->getLabel(), $entry->getTags()->toArray());
+
             $pdf->addPage();
             $html = '<h1>' . $entry->getTitle() . '</h1>' .
                 '<dl>' .
@@ -284,6 +289,7 @@ class EntriesExport
                 '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $readingTime]) . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
+                (!empty($tagLabels) ? '<dt>' . $this->translator->trans('entry.metadata.tags') . '</dt><dd>' . implode(', ', $tagLabels) . '</dd>' : '') .
                 '</dl>';
             $pdf->writeHTMLCell(0, 0, null, null, $html, 0, 1);
 
