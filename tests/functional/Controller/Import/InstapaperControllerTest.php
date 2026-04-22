@@ -11,7 +11,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class InstapaperControllerTest extends WallabagTestCase
 {
-    public function testImportInstapaper()
+    public function testImportInstapaper(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -23,7 +23,7 @@ class InstapaperControllerTest extends WallabagTestCase
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportInstapaperWithRabbitEnabled()
+    public function testImportInstapaperWithRabbitEnabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -39,7 +39,7 @@ class InstapaperControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportInstapaperBadFile()
+    public function testImportInstapaperBadFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -56,7 +56,7 @@ class InstapaperControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportInstapaperWithRedisEnabled()
+    public function testImportInstapaperWithRedisEnabled(): void
     {
         $this->checkRedis();
         $this->logInAs('admin');
@@ -91,7 +91,7 @@ class InstapaperControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportInstapaperWithFile()
+    public function testImportInstapaperWithFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -145,7 +145,7 @@ class InstapaperControllerTest extends WallabagTestCase
         $this->assertCount(2, $content->getTags());
     }
 
-    public function testImportInstapaperWithFileAndMarkAllAsRead()
+    public function testImportInstapaperWithFileAndMarkAllAsRead(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -190,7 +190,7 @@ class InstapaperControllerTest extends WallabagTestCase
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
     }
 
-    public function testImportInstapaperWithEmptyFile()
+    public function testImportInstapaperWithEmptyFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

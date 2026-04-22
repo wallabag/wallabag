@@ -18,7 +18,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class ConfigControllerTest extends WallabagTestCase
 {
-    public function testLogin()
+    public function testLogin(): void
     {
         $client = $this->getTestClient();
 
@@ -28,7 +28,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString('login', $client->getResponse()->headers->get('location'));
     }
 
-    public function testIndex()
+    public function testIndex(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -43,7 +43,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertCount(1, $crawler->filter('button[id=feed_config_save]'));
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -70,7 +70,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString('flashes.config.notice.config_saved', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
-    public function testChangeReadingSpeed()
+    public function testChangeReadingSpeed(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -139,7 +139,7 @@ class ConfigControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForUpdateFailed
      */
-    public function testUpdateFailed($data, $expectedMessage)
+    public function testUpdateFailed($data, $expectedMessage): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -199,7 +199,7 @@ class ConfigControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForChangePasswordFailed
      */
-    public function testChangePasswordFailed($data, $expectedMessage)
+    public function testChangePasswordFailed($data, $expectedMessage): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -218,7 +218,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString($expectedMessage, $alert[0]);
     }
 
-    public function testChangePassword()
+    public function testChangePassword(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -267,7 +267,7 @@ class ConfigControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForUserFailed
      */
-    public function testUserFailed($data, $expectedMessage)
+    public function testUserFailed($data, $expectedMessage): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -286,7 +286,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString($expectedMessage, $alert[0]);
     }
 
-    public function testUserUpdate()
+    public function testUserUpdate(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -312,7 +312,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString('flashes.config.notice.user_updated', $alert[0]);
     }
 
-    public function testFeedUpdateResetToken()
+    public function testFeedUpdateResetToken(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -349,7 +349,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString('config.form_feed.token_reset', $body[0]);
     }
 
-    public function testRevokeTokenAjax()
+    public function testRevokeTokenAjax(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -379,7 +379,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString('config.form_feed.token_create', $body[0]);
     }
 
-    public function testFeedUpdate()
+    public function testFeedUpdate(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -424,7 +424,7 @@ class ConfigControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForFeedFailed
      */
-    public function testFeedFailed($data, $expectedMessage)
+    public function testFeedFailed($data, $expectedMessage): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -443,7 +443,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString($expectedMessage, $alert[0]);
     }
 
-    public function testTaggingRuleCreation()
+    public function testTaggingRuleCreation(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -529,7 +529,7 @@ class ConfigControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForTaggingRuleFailed
      */
-    public function testTaggingRuleCreationFail($data, $messages)
+    public function testTaggingRuleCreationFail($data, $messages): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -551,7 +551,7 @@ class ConfigControllerTest extends WallabagTestCase
         }
     }
 
-    public function testTaggingRuleTooLong()
+    public function testTaggingRuleTooLong(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -574,7 +574,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString('255 characters', $body[0]);
     }
 
-    public function testDeletingTaggingRuleFromAnOtherUser()
+    public function testDeletingTaggingRuleFromAnOtherUser(): void
     {
         $this->logInAs('bob');
         $client = $this->getTestClient();
@@ -590,7 +590,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString('404: Not Found', $body[0]);
     }
 
-    public function testEditingTaggingRuleFromAnOtherUser()
+    public function testEditingTaggingRuleFromAnOtherUser(): void
     {
         $this->logInAs('bob');
         $client = $this->getTestClient();
@@ -606,7 +606,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString('404: Not Found', $body[0]);
     }
 
-    public function testIgnoreOriginRuleCreation()
+    public function testIgnoreOriginRuleCreation(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -689,7 +689,7 @@ class ConfigControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForIgnoreOriginRuleCreationFail
      */
-    public function testIgnoreOriginRuleCreationFail($data, $messages)
+    public function testIgnoreOriginRuleCreationFail($data, $messages): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -711,7 +711,7 @@ class ConfigControllerTest extends WallabagTestCase
         }
     }
 
-    public function testDeletingIgnoreOriginRuleFromAnOtherUser()
+    public function testDeletingIgnoreOriginRuleFromAnOtherUser(): void
     {
         $this->logInAs('bob');
         $client = $this->getTestClient();
@@ -727,7 +727,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString('404: Not Found', $body[0]);
     }
 
-    public function testEditingIgnoreOriginRuleFromAnOtherUser()
+    public function testEditingIgnoreOriginRuleFromAnOtherUser(): void
     {
         $this->logInAs('bob');
         $client = $this->getTestClient();
@@ -743,7 +743,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString('404: Not Found', $body[0]);
     }
 
-    public function testDeleteUserButtonVisibility()
+    public function testDeleteUserButtonVisibility(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -795,7 +795,7 @@ class ConfigControllerTest extends WallabagTestCase
     /**
      * @group NetworkCalls
      */
-    public function testDeleteAccount()
+    public function testDeleteAccount(): void
     {
         $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
@@ -863,7 +863,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertEmpty($entries);
     }
 
-    public function testReset()
+    public function testReset(): void
     {
         $this->logInAs('empty');
         $client = $this->getTestClient();
@@ -976,7 +976,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertSame(0, $entryReset, 'Entries were reset');
     }
 
-    public function testResetArchivedEntries()
+    public function testResetArchivedEntries(): void
     {
         $this->logInAs('empty');
         $client = $this->getTestClient();
@@ -1055,7 +1055,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertEmpty($annotationsReset, 'Annotations were reset');
     }
 
-    public function testResetEntriesCascade()
+    public function testResetEntriesCascade(): void
     {
         $this->logInAs('empty');
         $client = $this->getTestClient();
@@ -1115,7 +1115,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertEmpty($annotationsReset, 'Annotations were reset');
     }
 
-    public function testSwitchViewMode()
+    public function testSwitchViewMode(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1134,7 +1134,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertSame('view_module', $client->getCrawler()->filter('.nb-results i.material-icons')->text());
     }
 
-    public function testChangeLocaleWithoutReferer()
+    public function testChangeLocaleWithoutReferer(): void
     {
         $client = $this->getTestClient();
 
@@ -1145,7 +1145,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString('400: Bad Request', $body[0]);
     }
 
-    public function testChangeLocaleWithReferer()
+    public function testChangeLocaleWithReferer(): void
     {
         $client = $this->getTestClient();
 
@@ -1159,7 +1159,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertSame('de', $client->getContainer()->get(SessionInterface::class)->get('_locale'));
     }
 
-    public function testChangeLocaleToBadLocale()
+    public function testChangeLocaleToBadLocale(): void
     {
         $client = $this->getTestClient();
 
@@ -1175,7 +1175,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertNotSame('yuyuyuyu', $client->getContainer()->get(SessionInterface::class)->get('_locale'));
     }
 
-    public function testUserEnable2faEmail()
+    public function testUserEnable2faEmail(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1201,7 +1201,7 @@ class ConfigControllerTest extends WallabagTestCase
         $em->flush();
     }
 
-    public function testUserDisable2faEmail()
+    public function testUserDisable2faEmail(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1233,7 +1233,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertFalse($user->isEmailTwoFactor());
     }
 
-    public function testUserEnable2faGoogle()
+    public function testUserEnable2faGoogle(): void
     {
         $googleAuthenticatorMock = $this->createMock(GoogleAuthenticatorInterface::class);
         $googleAuthenticatorMock
@@ -1307,7 +1307,7 @@ class ConfigControllerTest extends WallabagTestCase
         $em->flush();
     }
 
-    public function testUserDisable2faGoogle()
+    public function testUserDisable2faGoogle(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1341,7 +1341,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertFalse($user->isGoogleTwoFactor());
     }
 
-    public function testExportTaggingRule()
+    public function testExportTaggingRule(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1364,7 +1364,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertSame('sport', $content[0]['tags'][0]);
     }
 
-    public function testImportTagginfRuleBadFile()
+    public function testImportTagginfRuleBadFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1381,7 +1381,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportTagginfRuleFile()
+    public function testImportTagginfRuleFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1405,7 +1405,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertSame('title matches "football"', $taggingRules[4]->getRule());
     }
 
-    public function testSwitchDisplayThumbnails()
+    public function testSwitchDisplayThumbnails(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1439,7 +1439,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringNotContainsString('class="preview"', $client->getResponse()->getContent());
     }
 
-    public function testGeneratedCSS()
+    public function testGeneratedCSS(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

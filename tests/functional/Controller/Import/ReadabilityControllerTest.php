@@ -11,7 +11,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class ReadabilityControllerTest extends WallabagTestCase
 {
-    public function testImportReadability()
+    public function testImportReadability(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -23,7 +23,7 @@ class ReadabilityControllerTest extends WallabagTestCase
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportReadabilityWithRabbitEnabled()
+    public function testImportReadabilityWithRabbitEnabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -39,7 +39,7 @@ class ReadabilityControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportReadabilityBadFile()
+    public function testImportReadabilityBadFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -56,7 +56,7 @@ class ReadabilityControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportReadabilityWithRedisEnabled()
+    public function testImportReadabilityWithRedisEnabled(): void
     {
         $this->checkRedis();
         $this->logInAs('admin');
@@ -91,7 +91,7 @@ class ReadabilityControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportReadabilityWithFile()
+    public function testImportReadabilityWithFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -135,7 +135,7 @@ class ReadabilityControllerTest extends WallabagTestCase
         $this->assertSame('2016-09-08', $content->getCreatedAt()->format('Y-m-d'));
     }
 
-    public function testImportReadabilityWithFileAndMarkAllAsRead()
+    public function testImportReadabilityWithFileAndMarkAllAsRead(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -182,7 +182,7 @@ class ReadabilityControllerTest extends WallabagTestCase
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
     }
 
-    public function testImportReadabilityWithEmptyFile()
+    public function testImportReadabilityWithEmptyFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

@@ -15,7 +15,7 @@ use Wallabag\Repository\UserRepository;
 
 class UsernameFeedTokenConverterTest extends TestCase
 {
-    public function testSupportsWithNoRegistry()
+    public function testSupportsWithNoRegistry(): void
     {
         $params = new ParamConverter([]);
         $converter = new UsernameFeedTokenConverter();
@@ -23,7 +23,7 @@ class UsernameFeedTokenConverterTest extends TestCase
         $this->assertFalse($converter->supports($params));
     }
 
-    public function testSupportsWithNoRegistryManagers()
+    public function testSupportsWithNoRegistryManagers(): void
     {
         $registry = $this->getMockBuilder(ManagerRegistry::class)
             ->disableOriginalConstructor()
@@ -39,7 +39,7 @@ class UsernameFeedTokenConverterTest extends TestCase
         $this->assertFalse($converter->supports($params));
     }
 
-    public function testSupportsWithNoConfigurationClass()
+    public function testSupportsWithNoConfigurationClass(): void
     {
         $registry = $this->getMockBuilder(ManagerRegistry::class)
             ->disableOriginalConstructor()
@@ -55,7 +55,7 @@ class UsernameFeedTokenConverterTest extends TestCase
         $this->assertFalse($converter->supports($params));
     }
 
-    public function testSupportsWithNotTheGoodClass()
+    public function testSupportsWithNotTheGoodClass(): void
     {
         $meta = $this->getMockBuilder(ClassMetadata::class)
             ->disableOriginalConstructor()
@@ -93,7 +93,7 @@ class UsernameFeedTokenConverterTest extends TestCase
         $this->assertFalse($converter->supports($params));
     }
 
-    public function testSupportsWithGoodClass()
+    public function testSupportsWithGoodClass(): void
     {
         $meta = $this->getMockBuilder(ClassMetadata::class)
             ->disableOriginalConstructor()
@@ -131,7 +131,7 @@ class UsernameFeedTokenConverterTest extends TestCase
         $this->assertTrue($converter->supports($params));
     }
 
-    public function testApplyEmptyRequest()
+    public function testApplyEmptyRequest(): void
     {
         $params = new ParamConverter([]);
         $converter = new UsernameFeedTokenConverter();
@@ -141,7 +141,7 @@ class UsernameFeedTokenConverterTest extends TestCase
         $this->assertFalse($res);
     }
 
-    public function testApplyUserNotFound()
+    public function testApplyUserNotFound(): void
     {
         $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('User not found');
@@ -180,7 +180,7 @@ class UsernameFeedTokenConverterTest extends TestCase
         $converter->apply($request, $params);
     }
 
-    public function testApplyUserFound()
+    public function testApplyUserFound(): void
     {
         $user = new User();
 

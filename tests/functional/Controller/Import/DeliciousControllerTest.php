@@ -11,7 +11,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class DeliciousControllerTest extends WallabagTestCase
 {
-    public function testImportDelicious()
+    public function testImportDelicious(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -23,7 +23,7 @@ class DeliciousControllerTest extends WallabagTestCase
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportDeliciousWithRabbitEnabled()
+    public function testImportDeliciousWithRabbitEnabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -39,7 +39,7 @@ class DeliciousControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportDeliciousBadFile()
+    public function testImportDeliciousBadFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -56,7 +56,7 @@ class DeliciousControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportDeliciousWithRedisEnabled()
+    public function testImportDeliciousWithRedisEnabled(): void
     {
         $this->checkRedis();
         $this->logInAs('admin');
@@ -91,7 +91,7 @@ class DeliciousControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportDeliciousWithFile()
+    public function testImportDeliciousWithFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -132,7 +132,7 @@ class DeliciousControllerTest extends WallabagTestCase
         $this->assertSame('2013-01-17', $content->getCreatedAt()->format('Y-m-d'));
     }
 
-    public function testImportDeliciousWithFileAndMarkAllAsRead()
+    public function testImportDeliciousWithFileAndMarkAllAsRead(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -177,7 +177,7 @@ class DeliciousControllerTest extends WallabagTestCase
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
     }
 
-    public function testImportDeliciousWithEmptyFile()
+    public function testImportDeliciousWithEmptyFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

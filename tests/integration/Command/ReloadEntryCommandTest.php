@@ -67,7 +67,7 @@ class ReloadEntryCommandTest extends WallabagKernelTestCase
     /**
      * @group NetworkCalls
      */
-    public function testRunReloadEntryCommand()
+    public function testRunReloadEntryCommand(): void
     {
         $application = $this->createApplication();
 
@@ -91,7 +91,7 @@ class ReloadEntryCommandTest extends WallabagKernelTestCase
     /**
      * @group NetworkCalls
      */
-    public function testRunReloadEntryWithUsernameCommand()
+    public function testRunReloadEntryWithUsernameCommand(): void
     {
         $application = $this->createApplication();
 
@@ -114,7 +114,7 @@ class ReloadEntryCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('Done', $tester->getDisplay());
     }
 
-    public function testRunReloadEntryWithNotParsedOption()
+    public function testRunReloadEntryWithNotParsedOption(): void
     {
         $application = $this->createApplication();
 
@@ -135,7 +135,7 @@ class ReloadEntryCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('Done', $tester->getDisplay());
     }
 
-    public function testRunReloadEntryWithoutEntryCommand()
+    public function testRunReloadEntryWithoutEntryCommand(): void
     {
         $application = $this->createApplication();
 

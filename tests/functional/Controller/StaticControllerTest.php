@@ -6,7 +6,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class StaticControllerTest extends WallabagTestCase
 {
-    public function testAbout()
+    public function testAbout(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -16,7 +16,7 @@ class StaticControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testHowto()
+    public function testHowto(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

@@ -26,7 +26,7 @@ class ChromeImportTest extends TestCase
     protected $contentProxy;
     protected $tagsAssigner;
 
-    public function testInit()
+    public function testInit(): void
     {
         $chromeImport = $this->getChromeImport();
 
@@ -35,7 +35,7 @@ class ChromeImportTest extends TestCase
         $this->assertSame('import.chrome.description', $chromeImport->getDescription());
     }
 
-    public function testImport()
+    public function testImport(): void
     {
         $chromeImport = $this->getChromeImport(false, 1);
         $chromeImport->setFilepath(__DIR__ . '/../../fixtures/Import/chrome-bookmarks');
@@ -68,7 +68,7 @@ class ChromeImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 1, 'queued' => 0], $chromeImport->getSummary());
     }
 
-    public function testImportAndMarkAllAsRead()
+    public function testImportAndMarkAllAsRead(): void
     {
         $chromeImport = $this->getChromeImport(false, 1);
         $chromeImport->setFilepath(__DIR__ . '/../../fixtures/Import/chrome-bookmarks');
@@ -104,7 +104,7 @@ class ChromeImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 1, 'queued' => 0], $chromeImport->getSummary());
     }
 
-    public function testImportWithRabbit()
+    public function testImportWithRabbit(): void
     {
         $chromeImport = $this->getChromeImport();
         $chromeImport->setFilepath(__DIR__ . '/../../fixtures/Import/chrome-bookmarks');
@@ -144,7 +144,7 @@ class ChromeImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 1], $chromeImport->getSummary());
     }
 
-    public function testImportWithRedis()
+    public function testImportWithRedis(): void
     {
         $chromeImport = $this->getChromeImport();
         $chromeImport->setFilepath(__DIR__ . '/../../fixtures/Import/chrome-bookmarks');
@@ -184,7 +184,7 @@ class ChromeImportTest extends TestCase
         $this->assertNotEmpty($redisMock->lpop('chrome'));
     }
 
-    public function testImportBadFile()
+    public function testImportBadFile(): void
     {
         $chromeImport = $this->getChromeImport();
         $chromeImport->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1.jsonx');
@@ -198,7 +198,7 @@ class ChromeImportTest extends TestCase
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    public function testImportUserNotDefined()
+    public function testImportUserNotDefined(): void
     {
         $chromeImport = $this->getChromeImport(true);
         $chromeImport->setFilepath(__DIR__ . '/../../fixtures/Import/chrome-bookmarks');

@@ -14,7 +14,7 @@ use Wallabag\Repository\UserRepository;
 
 class AMQPEntryConsumerTest extends TestCase
 {
-    public function testMessageOk()
+    public function testMessageOk(): void
     {
         $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
@@ -137,7 +137,7 @@ JSON;
         $consumer->execute($message);
     }
 
-    public function testMessageWithBadUser()
+    public function testMessageWithBadUser(): void
     {
         $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
@@ -193,7 +193,7 @@ JSON;
         $this->assertTrue($res);
     }
 
-    public function testMessageWithEntryProcessed()
+    public function testMessageWithEntryProcessed(): void
     {
         $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()

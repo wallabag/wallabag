@@ -20,7 +20,7 @@ class ContentProxyTest extends TestCase
 {
     private $fetchingErrorMessage = 'wallabag can\'t retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.';
 
-    public function testWithBadUrl()
+    public function testWithBadUrl(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -60,7 +60,7 @@ class ContentProxyTest extends TestCase
         $this->assertTrue($entry->isNotParsed());
     }
 
-    public function testWithEmptyContent()
+    public function testWithEmptyContent(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -100,7 +100,7 @@ class ContentProxyTest extends TestCase
         $this->assertTrue($entry->isNotParsed());
     }
 
-    public function testWithEmptyContentButOG()
+    public function testWithEmptyContentButOG(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -143,7 +143,7 @@ class ContentProxyTest extends TestCase
         $this->assertTrue($entry->isNotParsed());
     }
 
-    public function testWithContent()
+    public function testWithContent(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -189,7 +189,7 @@ class ContentProxyTest extends TestCase
         $this->assertFalse($entry->isNotParsed());
     }
 
-    public function testWithContentAndNoOgImage()
+    public function testWithContentAndNoOgImage(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -235,7 +235,7 @@ class ContentProxyTest extends TestCase
         $this->assertFalse($entry->isNotParsed());
     }
 
-    public function testWithContentAndContentImage()
+    public function testWithContentAndContentImage(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -280,7 +280,7 @@ class ContentProxyTest extends TestCase
         $this->assertFalse($entry->isNotParsed());
     }
 
-    public function testWithContentImageAndOgImage()
+    public function testWithContentImageAndOgImage(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -325,7 +325,7 @@ class ContentProxyTest extends TestCase
         $this->assertFalse($entry->isNotParsed());
     }
 
-    public function testWithContentAndBadLanguage()
+    public function testWithContentAndBadLanguage(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -373,7 +373,7 @@ class ContentProxyTest extends TestCase
         $this->assertFalse($entry->isNotParsed());
     }
 
-    public function testWithContentAndBadOgImage()
+    public function testWithContentAndBadOgImage(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -427,7 +427,7 @@ class ContentProxyTest extends TestCase
         $this->assertFalse($entry->isNotParsed());
     }
 
-    public function testWithForcedContent()
+    public function testWithForcedContent(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -472,7 +472,7 @@ class ContentProxyTest extends TestCase
         $this->assertFalse($entry->isNotParsed());
     }
 
-    public function testWithForcedContentAndDateTime()
+    public function testWithForcedContentAndDateTime(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -511,7 +511,7 @@ class ContentProxyTest extends TestCase
         $this->assertFalse($entry->isNotParsed());
     }
 
-    public function testWithForcedContentAndBadDate()
+    public function testWithForcedContentAndBadDate(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -556,7 +556,7 @@ class ContentProxyTest extends TestCase
         $this->assertStringContainsString('Error while defining date', $records[0]['message']);
     }
 
-    public function testTaggerThrowException()
+    public function testTaggerThrowException(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -601,7 +601,7 @@ class ContentProxyTest extends TestCase
     /**
      * @dataProvider dataForCrazyHtml
      */
-    public function testWithCrazyHtmlContent($html, $escapedString)
+    public function testWithCrazyHtmlContent($html, $escapedString): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -640,7 +640,7 @@ class ContentProxyTest extends TestCase
         $this->assertFalse($entry->isNotParsed());
     }
 
-    public function testWithImageAsContent()
+    public function testWithImageAsContent(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -679,7 +679,7 @@ class ContentProxyTest extends TestCase
         $this->assertFalse($entry->isNotParsed());
     }
 
-    public function testWebsiteWithValidUTF8TitleDoNothing()
+    public function testWebsiteWithValidUTF8TitleDoNothing(): void
     {
         // You can use https://www.online-toolz.com/tools/text-hex-convertor.php to convert UTF-8 text <=> hex
         // See http://graphemica.com for more info about the characters
@@ -718,7 +718,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
-    public function testWebsiteWithInvalidUTF8TitleRemoveInvalidCharacter()
+    public function testWebsiteWithInvalidUTF8TitleRemoveInvalidCharacter(): void
     {
         // See http://graphemica.com for more info about the characters
         // 'a€b' (61;80;62) in hexadecimal and WINDOWS-1252 - but 80 is a invalid UTF-8 character.
@@ -757,7 +757,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
-    public function testPdfWithUTF16BETitleConvertToUTF8()
+    public function testPdfWithUTF16BETitleConvertToUTF8(): void
     {
         // See http://graphemica.com for more info about the characters
         // '😻' (U+1F63B;D83DDE3B) in hexadecimal and as UTF16BE
@@ -795,7 +795,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
-    public function testPdfWithUTF8TitleDoNothing()
+    public function testPdfWithUTF8TitleDoNothing(): void
     {
         // See http://graphemica.com for more info about the characters
         // '😻' (U+1F63B;D83DDE3B) in hexadecimal and as UTF8
@@ -833,7 +833,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
-    public function testPdfWithWINDOWS1252TitleConvertToUTF8()
+    public function testPdfWithWINDOWS1252TitleConvertToUTF8(): void
     {
         // See http://graphemica.com for more info about the characters
         // '€' (80) in hexadecimal and WINDOWS-1252
@@ -871,7 +871,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
-    public function testPdfWithInvalidCharacterInTitleRemoveInvalidCharacter()
+    public function testPdfWithInvalidCharacterInTitleRemoveInvalidCharacter(): void
     {
         /*
          * I spend too much time on trying to solve the problem of that test.
@@ -1032,7 +1032,7 @@ class ContentProxyTest extends TestCase
     /**
      * @dataProvider dataForChangedUrl
      */
-    public function testWithChangedUrl($entry_url, $origin_url, $content_url, $expected_entry_url, $expected_origin_url, $expected_domain, $processor_result)
+    public function testWithChangedUrl($entry_url, $origin_url, $content_url, $expected_entry_url, $expected_origin_url, $expected_domain, $processor_result): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())

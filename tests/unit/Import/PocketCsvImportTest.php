@@ -26,7 +26,7 @@ class PocketCsvImportTest extends TestCase
     protected $contentProxy;
     protected $tagsAssigner;
 
-    public function testInit()
+    public function testInit(): void
     {
         $pocketCsvImport = $this->getPocketCsvImport();
 
@@ -35,7 +35,7 @@ class PocketCsvImportTest extends TestCase
         $this->assertSame('import.pocket_csv.description', $pocketCsvImport->getDescription());
     }
 
-    public function testImport()
+    public function testImport(): void
     {
         $pocketCsvImport = $this->getPocketCsvImport(false, 7);
         $pocketCsvImport->setFilepath(__DIR__ . '/../../fixtures/Import/pocket.csv');
@@ -68,7 +68,7 @@ class PocketCsvImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 7, 'queued' => 0], $pocketCsvImport->getSummary());
     }
 
-    public function testImportAndMarkAllAsRead()
+    public function testImportAndMarkAllAsRead(): void
     {
         $pocketCsvImport = $this->getPocketCsvImport(false, 1);
         $pocketCsvImport->setFilepath(__DIR__ . '/../../fixtures/Import/pocket.csv');
@@ -106,7 +106,7 @@ class PocketCsvImportTest extends TestCase
         $this->assertSame(['skipped' => 6, 'imported' => 1, 'queued' => 0], $pocketCsvImport->getSummary());
     }
 
-    public function testImportWithRabbit()
+    public function testImportWithRabbit(): void
     {
         $pocketCsvImport = $this->getPocketCsvImport();
         $pocketCsvImport->setFilepath(__DIR__ . '/../../fixtures/Import/pocket.csv');
@@ -146,7 +146,7 @@ class PocketCsvImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 7], $pocketCsvImport->getSummary());
     }
 
-    public function testImportWithRedis()
+    public function testImportWithRedis(): void
     {
         $pocketCsvImport = $this->getPocketCsvImport();
         $pocketCsvImport->setFilepath(__DIR__ . '/../../fixtures/Import/pocket.csv');
@@ -186,7 +186,7 @@ class PocketCsvImportTest extends TestCase
         $this->assertNotEmpty($redisMock->lpop('pocket_csv'));
     }
 
-    public function testImportBadFile()
+    public function testImportBadFile(): void
     {
         $pocketCsvImport = $this->getPocketCsvImport();
         $pocketCsvImport->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1.jsonx');
@@ -200,7 +200,7 @@ class PocketCsvImportTest extends TestCase
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    public function testImportUserNotDefined()
+    public function testImportUserNotDefined(): void
     {
         $pocketCsvImport = $this->getPocketCsvImport(true);
         $pocketCsvImport->setFilepath(__DIR__ . '/../../fixtures/Import/pocket.csv');

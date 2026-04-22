@@ -21,7 +21,7 @@ class ListUserCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setHelp('This command list all existing users')

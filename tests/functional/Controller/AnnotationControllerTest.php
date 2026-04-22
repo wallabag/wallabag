@@ -41,7 +41,7 @@ class AnnotationControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForEachAnnotations
      */
-    public function testGetAnnotations($prefixUrl)
+    public function testGetAnnotations($prefixUrl): void
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
 
@@ -66,7 +66,7 @@ class AnnotationControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForEachAnnotations
      */
-    public function testGetAnnotationsFromAnOtherUser($prefixUrl)
+    public function testGetAnnotationsFromAnOtherUser($prefixUrl): void
     {
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
 
@@ -88,7 +88,7 @@ class AnnotationControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForEachAnnotations
      */
-    public function testSetAnnotation($prefixUrl)
+    public function testSetAnnotation($prefixUrl): void
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
 
@@ -132,7 +132,7 @@ class AnnotationControllerTest extends WallabagTestCase
         $this->assertSame('my annotation', $annotation->getText());
     }
 
-    public function testAllowEmptyQuote()
+    public function testAllowEmptyQuote(): void
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
 
@@ -161,7 +161,7 @@ class AnnotationControllerTest extends WallabagTestCase
         $this->assertSame('', $content['quote']);
     }
 
-    public function testAllowOmmittedQuote()
+    public function testAllowOmmittedQuote(): void
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
 
@@ -192,7 +192,7 @@ class AnnotationControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForEachAnnotations
      */
-    public function testSetAnnotationWithQuoteTooLong($prefixUrl)
+    public function testSetAnnotationWithQuoteTooLong($prefixUrl): void
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
 
@@ -222,7 +222,7 @@ class AnnotationControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForEachAnnotations
      */
-    public function testEditAnnotation($prefixUrl)
+    public function testEditAnnotation($prefixUrl): void
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
 
@@ -268,7 +268,7 @@ class AnnotationControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForEachAnnotations
      */
-    public function testEditAnnotationFromAnOtherUser($prefixUrl)
+    public function testEditAnnotationFromAnOtherUser($prefixUrl): void
     {
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
 
@@ -293,7 +293,7 @@ class AnnotationControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForEachAnnotations
      */
-    public function testDeleteAnnotation($prefixUrl)
+    public function testDeleteAnnotation($prefixUrl): void
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
 
@@ -337,7 +337,7 @@ class AnnotationControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForEachAnnotations
      */
-    public function testDeleteAnnotationFromAnOtherUser($prefixUrl)
+    public function testDeleteAnnotationFromAnOtherUser($prefixUrl): void
     {
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
 

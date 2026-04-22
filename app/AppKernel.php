@@ -96,7 +96,7 @@ class AppKernel extends Kernel
         return dirname(__DIR__) . '/var/logs';
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $legacyParametersLoaded = $this->loadLegacyParametersIfPresent($loader);
 
@@ -122,7 +122,7 @@ class AppKernel extends Kernel
         }
     }
 
-    protected function build(ContainerBuilder $container)
+    protected function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new ImportCompilerPass());
     }

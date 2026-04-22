@@ -9,7 +9,7 @@ use Wallabag\Import\ImportCompilerPass;
 
 class ImportCompilerPassTest extends TestCase
 {
-    public function testProcessNoDefinition()
+    public function testProcessNoDefinition(): void
     {
         $container = new ContainerBuilder();
         $res = $this->process($container);
@@ -17,7 +17,7 @@ class ImportCompilerPassTest extends TestCase
         $this->assertNull($res);
     }
 
-    public function testProcess()
+    public function testProcess(): void
     {
         $container = new ContainerBuilder();
         $container
@@ -41,7 +41,7 @@ class ImportCompilerPassTest extends TestCase
         $this->assertSame('pocket', $calls[0][1][1]);
     }
 
-    protected function process(ContainerBuilder $container)
+    protected function process(ContainerBuilder $container): void
     {
         $repeatedPass = new ImportCompilerPass();
         $repeatedPass->process($container);

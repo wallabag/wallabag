@@ -87,7 +87,7 @@ class WallabagRestController extends AbstractFOSRestController
         return (new JsonResponse())->setJson($this->serializer->serialize($info, 'json'));
     }
 
-    protected function validateAuthentication()
+    protected function validateAuthentication(): void
     {
         if (false === $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw new AccessDeniedException();

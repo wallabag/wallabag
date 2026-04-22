@@ -11,7 +11,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class OmnivoreControllerTest extends WallabagTestCase
 {
-    public function testImportOmnivore()
+    public function testImportOmnivore(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -23,7 +23,7 @@ class OmnivoreControllerTest extends WallabagTestCase
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportOmnivoreWithRabbitEnabled()
+    public function testImportOmnivoreWithRabbitEnabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -39,7 +39,7 @@ class OmnivoreControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportOmnivoreBadFile()
+    public function testImportOmnivoreBadFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -56,7 +56,7 @@ class OmnivoreControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportOmnivoreWithRedisEnabled()
+    public function testImportOmnivoreWithRedisEnabled(): void
     {
         $this->checkRedis();
         $this->logInAs('admin');
@@ -91,7 +91,7 @@ class OmnivoreControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportOmnivoreWithFile()
+    public function testImportOmnivoreWithFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -132,7 +132,7 @@ class OmnivoreControllerTest extends WallabagTestCase
         $this->assertSame('2024-10-29', $content->getCreatedAt()->format('Y-m-d'));
     }
 
-    public function testImportOmnivoreWithFileAndMarkAllAsRead()
+    public function testImportOmnivoreWithFileAndMarkAllAsRead(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -177,7 +177,7 @@ class OmnivoreControllerTest extends WallabagTestCase
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
     }
 
-    public function testImportOmnivoreWithEmptyFile()
+    public function testImportOmnivoreWithEmptyFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

@@ -11,7 +11,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class ElcuratorControllerTest extends WallabagTestCase
 {
-    public function testImportElcurator()
+    public function testImportElcurator(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -23,7 +23,7 @@ class ElcuratorControllerTest extends WallabagTestCase
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportElcuratorWithRabbitEnabled()
+    public function testImportElcuratorWithRabbitEnabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -39,7 +39,7 @@ class ElcuratorControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportElcuratorBadFile()
+    public function testImportElcuratorBadFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -56,7 +56,7 @@ class ElcuratorControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportElcuratorWithRedisEnabled()
+    public function testImportElcuratorWithRedisEnabled(): void
     {
         $this->checkRedis();
         $this->logInAs('admin');
@@ -92,7 +92,7 @@ class ElcuratorControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportElcuratorWithFile()
+    public function testImportElcuratorWithFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

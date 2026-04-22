@@ -9,7 +9,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class PocketControllerTest extends WallabagTestCase
 {
-    public function testImportPocket()
+    public function testImportPocket(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -20,7 +20,7 @@ class PocketControllerTest extends WallabagTestCase
         $this->assertSame(1, $crawler->filter('button[name=action]')->count());
     }
 
-    public function testImportPocketWithRabbitEnabled()
+    public function testImportPocketWithRabbitEnabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -35,7 +35,7 @@ class PocketControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportPocketWithRedisEnabled()
+    public function testImportPocketWithRedisEnabled(): void
     {
         $this->checkRedis();
         $this->logInAs('admin');
@@ -51,7 +51,7 @@ class PocketControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportPocketAuthBadToken()
+    public function testImportPocketAuthBadToken(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -61,7 +61,7 @@ class PocketControllerTest extends WallabagTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportPocketAuth()
+    public function testImportPocketAuth(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -83,7 +83,7 @@ class PocketControllerTest extends WallabagTestCase
         $this->assertStringContainsString('getpocket.com/auth/authorize', $client->getResponse()->headers->get('location'));
     }
 
-    public function testImportPocketCallbackWithBadToken()
+    public function testImportPocketCallbackWithBadToken(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -106,7 +106,7 @@ class PocketControllerTest extends WallabagTestCase
         $this->assertSame('flashes.import.notice.failed', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->peek('notice')[0]);
     }
 
-    public function testImportPocketCallback()
+    public function testImportPocketCallback(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

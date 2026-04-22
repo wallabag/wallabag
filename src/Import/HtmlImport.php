@@ -111,7 +111,7 @@ abstract class HtmlImport extends AbstractImport
     /**
      * Parse and insert all given entries.
      */
-    protected function parseEntries(array $entries)
+    protected function parseEntries(array $entries): void
     {
         $i = 1;
         $entryToBeFlushed = [];
@@ -156,7 +156,7 @@ abstract class HtmlImport extends AbstractImport
      * Faster parse entries for Producer.
      * We don't care to make check at this time. They'll be done by the consumer.
      */
-    protected function parseEntriesForProducer(array $entries)
+    protected function parseEntriesForProducer(array $entries): void
     {
         foreach ($entries as $importedEntry) {
             if ((array) $importedEntry !== $importedEntry) {

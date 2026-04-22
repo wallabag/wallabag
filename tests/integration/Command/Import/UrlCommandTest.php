@@ -12,7 +12,7 @@ class UrlCommandTest extends WallabagKernelTestCase
 {
     private $url = 'https://www.20minutes.fr/sport/football/4158082-20250612-euro-espoirs-su-souffrir-ensemble-decimes-bleuets-retiennent-positif-apres-nul-face-portugal';
 
-    public function testRunUrlCommandWithoutArguments()
+    public function testRunUrlCommandWithoutArguments(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments');
@@ -25,7 +25,7 @@ class UrlCommandTest extends WallabagKernelTestCase
         $tester->execute([]);
     }
 
-    public function testRunUrlCommandWithWrongUsername()
+    public function testRunUrlCommandWithWrongUsername(): void
     {
         $this->expectException(NoResultException::class);
 
@@ -40,7 +40,7 @@ class UrlCommandTest extends WallabagKernelTestCase
         ]);
     }
 
-    public function testRunUrlCommand()
+    public function testRunUrlCommand(): void
     {
         $application = $this->createApplication();
 
@@ -55,7 +55,7 @@ class UrlCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('successfully imported', $tester->getDisplay());
     }
 
-    public function testRunUrlCommandWithTags()
+    public function testRunUrlCommandWithTags(): void
     {
         $application = $this->createApplication();
 
@@ -76,7 +76,7 @@ class UrlCommandTest extends WallabagKernelTestCase
         $this->assertNotContains('basketball', $entry->getTagsLabel());
     }
 
-    public function testRunUrlCommandWithUserId()
+    public function testRunUrlCommandWithUserId(): void
     {
         $application = $this->createApplication();
         $userId = $this->getUser('admin')->getId();

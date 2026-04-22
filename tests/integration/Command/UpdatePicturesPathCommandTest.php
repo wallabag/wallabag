@@ -9,7 +9,7 @@ use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
 class UpdatePicturesPathCommandTest extends WallabagKernelTestCase
 {
-    public function testRunUpdatePicturesPathCommandWithoutOldURL()
+    public function testRunUpdatePicturesPathCommandWithoutOldURL(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments (missing: "old-url")');
@@ -21,7 +21,7 @@ class UpdatePicturesPathCommandTest extends WallabagKernelTestCase
         $tester->execute([]);
     }
 
-    public function testRunGenerateUrlHashesCommandForUser()
+    public function testRunGenerateUrlHashesCommandForUser(): void
     {
         $application = $this->createApplication();
         $em = $this->getEntityManager();

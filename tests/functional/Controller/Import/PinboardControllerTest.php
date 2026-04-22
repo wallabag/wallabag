@@ -11,7 +11,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class PinboardControllerTest extends WallabagTestCase
 {
-    public function testImportPinboard()
+    public function testImportPinboard(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -23,7 +23,7 @@ class PinboardControllerTest extends WallabagTestCase
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportPinboardWithRabbitEnabled()
+    public function testImportPinboardWithRabbitEnabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -39,7 +39,7 @@ class PinboardControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportPinboardBadFile()
+    public function testImportPinboardBadFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -56,7 +56,7 @@ class PinboardControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportPinboardWithRedisEnabled()
+    public function testImportPinboardWithRedisEnabled(): void
     {
         $this->checkRedis();
         $this->logInAs('admin');
@@ -91,7 +91,7 @@ class PinboardControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportPinboardWithFile()
+    public function testImportPinboardWithFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -137,7 +137,7 @@ class PinboardControllerTest extends WallabagTestCase
         $this->assertSame('2016-10-26', $content->getCreatedAt()->format('Y-m-d'));
     }
 
-    public function testImportPinboardWithFileAndMarkAllAsRead()
+    public function testImportPinboardWithFileAndMarkAllAsRead(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -184,7 +184,7 @@ class PinboardControllerTest extends WallabagTestCase
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
     }
 
-    public function testImportPinboardWithEmptyFile()
+    public function testImportPinboardWithEmptyFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

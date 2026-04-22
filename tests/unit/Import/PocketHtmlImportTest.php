@@ -26,7 +26,7 @@ class PocketHtmlImportTest extends TestCase
     protected $contentProxy;
     protected $tagsAssigner;
 
-    public function testInit()
+    public function testInit(): void
     {
         $pocketHtmlImport = $this->getPocketHtmlImport();
 
@@ -35,7 +35,7 @@ class PocketHtmlImportTest extends TestCase
         $this->assertSame('import.pocket_html.description', $pocketHtmlImport->getDescription());
     }
 
-    public function testImport()
+    public function testImport(): void
     {
         $pocketHtmlImport = $this->getPocketHtmlImport(false, 2);
         $pocketHtmlImport->setFilepath(__DIR__ . '/../../fixtures/Import/ril_export.html');
@@ -68,7 +68,7 @@ class PocketHtmlImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 2, 'queued' => 0], $pocketHtmlImport->getSummary());
     }
 
-    public function testImportAndMarkAllAsRead()
+    public function testImportAndMarkAllAsRead(): void
     {
         $pocketHtmlImport = $this->getPocketHtmlImport(false, 1);
         $pocketHtmlImport->setFilepath(__DIR__ . '/../../fixtures/Import/ril_export.html');
@@ -106,7 +106,7 @@ class PocketHtmlImportTest extends TestCase
         $this->assertSame(['skipped' => 1, 'imported' => 1, 'queued' => 0], $pocketHtmlImport->getSummary());
     }
 
-    public function testImportWithRabbit()
+    public function testImportWithRabbit(): void
     {
         $pocketHtmlImport = $this->getPocketHtmlImport();
         $pocketHtmlImport->setFilepath(__DIR__ . '/../../fixtures/Import/ril_export.html');
@@ -146,7 +146,7 @@ class PocketHtmlImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 2], $pocketHtmlImport->getSummary());
     }
 
-    public function testImportWithRedis()
+    public function testImportWithRedis(): void
     {
         $pocketHtmlImport = $this->getPocketHtmlImport();
         $pocketHtmlImport->setFilepath(__DIR__ . '/../../fixtures/Import/ril_export.html');
@@ -186,7 +186,7 @@ class PocketHtmlImportTest extends TestCase
         $this->assertNotEmpty($redisMock->lpop('pocket_html'));
     }
 
-    public function testImportBadFile()
+    public function testImportBadFile(): void
     {
         $pocketHtmlImport = $this->getPocketHtmlImport();
         $pocketHtmlImport->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1.jsonx');
@@ -200,7 +200,7 @@ class PocketHtmlImportTest extends TestCase
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    public function testImportUserNotDefined()
+    public function testImportUserNotDefined(): void
     {
         $pocketHtmlImport = $this->getPocketHtmlImport(true);
         $pocketHtmlImport->setFilepath(__DIR__ . '/../../fixtures/Import/ril_export.html');

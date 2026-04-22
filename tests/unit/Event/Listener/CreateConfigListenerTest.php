@@ -51,7 +51,7 @@ class CreateConfigListenerTest extends TestCase
         $this->response = new Response();
     }
 
-    public function testWithValidUser()
+    public function testWithValidUser(): void
     {
         $user = new User();
         $user->setEnabled(true);

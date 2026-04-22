@@ -32,7 +32,7 @@ class PocketImportTest extends TestCase
     protected $tagsAssigner;
     protected $uow;
 
-    public function testInit()
+    public function testInit(): void
     {
         $pocketImport = $this->getPocketImport();
 
@@ -41,7 +41,7 @@ class PocketImportTest extends TestCase
         $this->assertSame('import.pocket.description', $pocketImport->getDescription());
     }
 
-    public function testOAuthRequest()
+    public function testOAuthRequest(): void
     {
         $mockHttpClient = new MockHttpClient([new MockResponse(json_encode(['code' => 'wunderbar_code']), ['response_headers' => ['Content-Type: application/json']])]);
 
@@ -53,7 +53,7 @@ class PocketImportTest extends TestCase
         $this->assertSame('wunderbar_code', $code);
     }
 
-    public function testOAuthRequestBadResponse()
+    public function testOAuthRequestBadResponse(): void
     {
         $mockHttpClient = new MockHttpClient([new MockResponse('', ['http_code' => 403])]);
 
@@ -69,7 +69,7 @@ class PocketImportTest extends TestCase
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    public function testOAuthAuthorize()
+    public function testOAuthAuthorize(): void
     {
         $mockHttpClient = new MockHttpClient([new MockResponse(json_encode(['access_token' => 'wunderbar_token']), ['response_headers' => ['Content-Type: application/json']])]);
 
@@ -82,7 +82,7 @@ class PocketImportTest extends TestCase
         $this->assertSame('wunderbar_token', $pocketImport->getAccessToken());
     }
 
-    public function testOAuthAuthorizeBadResponse()
+    public function testOAuthAuthorizeBadResponse(): void
     {
         $mockHttpClient = new MockHttpClient([new MockResponse('', ['http_code' => 403])]);
 
@@ -101,7 +101,7 @@ class PocketImportTest extends TestCase
     /**
      * Will sample results from https://getpocket.com/developer/docs/v3/retrieve.
      */
-    public function testImport()
+    public function testImport(): void
     {
         $mockHttpClient = new MockHttpClient([
             new MockResponse(json_encode(['access_token' => 'wunderbar_token']), ['response_headers' => ['Content-Type: application/json']]),
@@ -227,7 +227,7 @@ JSON, ['response_headers' => ['Content-Type: application/json']]),
     /**
      * Will sample results from https://getpocket.com/developer/docs/v3/retrieve.
      */
-    public function testImportAndMarkAllAsRead()
+    public function testImportAndMarkAllAsRead(): void
     {
         $mockHttpClient = new MockHttpClient([
             new MockResponse(json_encode(['access_token' => 'wunderbar_token']), ['response_headers' => ['Content-Type: application/json']]),
@@ -316,7 +316,7 @@ JSON, ['response_headers' => ['Content-Type: application/json']]),
     /**
      * Will sample results from https://getpocket.com/developer/docs/v3/retrieve.
      */
-    public function testImportWithRabbit()
+    public function testImportWithRabbit(): void
     {
         $body = <<<'JSON'
 {
@@ -398,7 +398,7 @@ JSON, ['response_headers' => ['Content-Type: application/json']]),
     /**
      * Will sample results from https://getpocket.com/developer/docs/v3/retrieve.
      */
-    public function testImportWithRedis()
+    public function testImportWithRedis(): void
     {
         $body = <<<'JSON'
 {
@@ -472,7 +472,7 @@ JSON, ['response_headers' => ['Content-Type: application/json']]),
         $this->assertNotEmpty($redisMock->lpop('pocket'));
     }
 
-    public function testImportBadResponse()
+    public function testImportBadResponse(): void
     {
         $mockHttpClient = new MockHttpClient([
             new MockResponse(json_encode(['access_token' => 'wunderbar_token']), ['response_headers' => ['Content-Type: application/json']]),
@@ -492,7 +492,7 @@ JSON, ['response_headers' => ['Content-Type: application/json']]),
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    public function testImportWithExceptionFromGraby()
+    public function testImportWithExceptionFromGraby(): void
     {
         $mockHttpClient = new MockHttpClient([
             new MockResponse(json_encode(['access_token' => 'wunderbar_token']), ['response_headers' => ['Content-Type: application/json']]),

@@ -31,7 +31,7 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
     /**
      * Download images and updated the data into the entry.
      */
-    public function onEntrySaved(EntrySavedEvent $event)
+    public function onEntrySaved(EntrySavedEvent $event): void
     {
         if (!$this->enabled) {
             $this->logger->debug('DownloadImagesSubscriber: disabled.');
@@ -63,7 +63,7 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
     /**
      * Remove images related to the entry.
      */
-    public function onEntryDeleted(EntryDeletedEvent $event)
+    public function onEntryDeleted(EntryDeletedEvent $event): void
     {
         if (!$this->enabled) {
             $this->logger->debug('DownloadImagesSubscriber: disabled.');

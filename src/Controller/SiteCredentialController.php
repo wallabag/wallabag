@@ -151,7 +151,7 @@ class SiteCredentialController extends AbstractController
     /**
      * Throw a 404 if the feature is disabled.
      */
-    private function isSiteCredentialsEnabled()
+    private function isSiteCredentialsEnabled(): void
     {
         if (!$this->craueConfig->get('restricted_access')) {
             throw $this->createNotFoundException('Feature "restricted_access" is disabled, controllers too.');

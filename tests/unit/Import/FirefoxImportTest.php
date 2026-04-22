@@ -26,7 +26,7 @@ class FirefoxImportTest extends TestCase
     protected $contentProxy;
     protected $tagsAssigner;
 
-    public function testInit()
+    public function testInit(): void
     {
         $firefoxImport = $this->getFirefoxImport();
 
@@ -35,7 +35,7 @@ class FirefoxImportTest extends TestCase
         $this->assertSame('import.firefox.description', $firefoxImport->getDescription());
     }
 
-    public function testImport()
+    public function testImport(): void
     {
         $firefoxImport = $this->getFirefoxImport(false, 2);
         $firefoxImport->setFilepath(__DIR__ . '/../../fixtures/Import/firefox-bookmarks.json');
@@ -68,7 +68,7 @@ class FirefoxImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 2, 'queued' => 0], $firefoxImport->getSummary());
     }
 
-    public function testImportAndMarkAllAsRead()
+    public function testImportAndMarkAllAsRead(): void
     {
         $firefoxImport = $this->getFirefoxImport(false, 1);
         $firefoxImport->setFilepath(__DIR__ . '/../../fixtures/Import/firefox-bookmarks.json');
@@ -104,7 +104,7 @@ class FirefoxImportTest extends TestCase
         $this->assertSame(['skipped' => 1, 'imported' => 1, 'queued' => 0], $firefoxImport->getSummary());
     }
 
-    public function testImportWithRabbit()
+    public function testImportWithRabbit(): void
     {
         $firefoxImport = $this->getFirefoxImport();
         $firefoxImport->setFilepath(__DIR__ . '/../../fixtures/Import/firefox-bookmarks.json');
@@ -144,7 +144,7 @@ class FirefoxImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 1], $firefoxImport->getSummary());
     }
 
-    public function testImportWithRedis()
+    public function testImportWithRedis(): void
     {
         $firefoxImport = $this->getFirefoxImport();
         $firefoxImport->setFilepath(__DIR__ . '/../../fixtures/Import/firefox-bookmarks.json');
@@ -184,7 +184,7 @@ class FirefoxImportTest extends TestCase
         $this->assertNotEmpty($redisMock->lpop('firefox'));
     }
 
-    public function testImportBadFile()
+    public function testImportBadFile(): void
     {
         $firefoxImport = $this->getFirefoxImport();
         $firefoxImport->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1.jsonx');
@@ -198,7 +198,7 @@ class FirefoxImportTest extends TestCase
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    public function testImportUserNotDefined()
+    public function testImportUserNotDefined(): void
     {
         $firefoxImport = $this->getFirefoxImport(true);
         $firefoxImport->setFilepath(__DIR__ . '/../../fixtures/Import/firefox-bookmarks.json');
