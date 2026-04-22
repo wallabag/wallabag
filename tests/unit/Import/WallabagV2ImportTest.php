@@ -57,8 +57,7 @@ class WallabagV2ImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('updateEntry')
-            ->willReturn(new Entry($this->user));
+            ->method('updateEntry');
 
         $res = $wallabagV2Import->import();
 
@@ -86,8 +85,7 @@ class WallabagV2ImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('updateEntry')
-            ->willReturn(new Entry($this->user));
+            ->method('updateEntry');
 
         // check that every entry persisted are archived
         $this->em

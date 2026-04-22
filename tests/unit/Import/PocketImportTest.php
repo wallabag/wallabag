@@ -212,8 +212,7 @@ JSON, ['response_headers' => ['Content-Type: application/json']]),
 
         $this->contentProxy
             ->expects($this->once())
-            ->method('updateEntry')
-            ->willReturn($entry);
+            ->method('updateEntry');
 
         $pocketImport->setClient($mockHttpClient);
         $pocketImport->authorize('wunderbar_code');
@@ -301,8 +300,7 @@ JSON, ['response_headers' => ['Content-Type: application/json']]),
 
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('updateEntry')
-            ->willReturn($entry);
+            ->method('updateEntry');
 
         $pocketImport->setClient($mockHttpClient);
         $pocketImport->authorize('wunderbar_code');

@@ -61,8 +61,7 @@ class InstapaperImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(4))
-            ->method('updateEntry')
-            ->willReturn($entry);
+            ->method('updateEntry');
 
         $res = $instapaperImport->import();
 
@@ -90,8 +89,7 @@ class InstapaperImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->once())
-            ->method('updateEntry')
-            ->willReturn(new Entry($this->user));
+            ->method('updateEntry');
 
         // check that every entry persisted are archived
         $this->em

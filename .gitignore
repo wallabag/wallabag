@@ -45,6 +45,7 @@ docker/php/blackfire
 
 # Data for wallabag
 data/db/wallabag*.sqlite
+data/db/wallabag*.sqlite-journal
 
 # assets stuff
 node_modules/

@@ -59,8 +59,7 @@ class ReadabilityImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(3))
-            ->method('updateEntry')
-            ->willReturn($entry);
+            ->method('updateEntry');
 
         $res = $readabilityImport->import();
 
@@ -88,8 +87,7 @@ class ReadabilityImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(1))
-            ->method('updateEntry')
-            ->willReturn(new Entry($this->user));
+            ->method('updateEntry');
 
         // check that every entry persisted are archived
         $this->em

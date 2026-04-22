@@ -59,8 +59,7 @@ class PocketCsvImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(7))
-            ->method('updateEntry')
-            ->willReturn($entry);
+            ->method('updateEntry');
 
         $res = $pocketCsvImport->import();
 
@@ -88,8 +87,7 @@ class PocketCsvImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(1))
-            ->method('updateEntry')
-            ->willReturn(new Entry($this->user));
+            ->method('updateEntry');
 
         // check that every entry persisted are archived
         $this->em
