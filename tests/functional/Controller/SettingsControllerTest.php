@@ -10,7 +10,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
  */
 class SettingsControllerTest extends WallabagTestCase
 {
-    public function testSettingsWithAdmin()
+    public function testSettingsWithAdmin(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -20,7 +20,7 @@ class SettingsControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testSettingsWithNormalUser()
+    public function testSettingsWithNormalUser(): void
     {
         $this->logInAs('bob');
         $client = $this->getTestClient();

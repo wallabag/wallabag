@@ -28,7 +28,7 @@ class WallabagV2ImportTest extends TestCase
     protected $tagsAssigner;
     protected $uow;
 
-    public function testInit()
+    public function testInit(): void
     {
         $wallabagV2Import = $this->getWallabagV2Import();
 
@@ -37,7 +37,7 @@ class WallabagV2ImportTest extends TestCase
         $this->assertSame('import.wallabag_v2.description', $wallabagV2Import->getDescription());
     }
 
-    public function testImport()
+    public function testImport(): void
     {
         $wallabagV2Import = $this->getWallabagV2Import(false, 2);
         $wallabagV2Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2.json');
@@ -57,8 +57,7 @@ class WallabagV2ImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('updateEntry')
-            ->willReturn(new Entry($this->user));
+            ->method('updateEntry');
 
         $res = $wallabagV2Import->import();
 
@@ -66,7 +65,7 @@ class WallabagV2ImportTest extends TestCase
         $this->assertSame(['skipped' => 4, 'imported' => 2, 'queued' => 0], $wallabagV2Import->getSummary());
     }
 
-    public function testImportAndMarkAllAsRead()
+    public function testImportAndMarkAllAsRead(): void
     {
         $wallabagV2Import = $this->getWallabagV2Import(false, 2);
         $wallabagV2Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2-read.json');
@@ -86,8 +85,7 @@ class WallabagV2ImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('updateEntry')
-            ->willReturn(new Entry($this->user));
+            ->method('updateEntry');
 
         // check that every entry persisted are archived
         $this->em
@@ -102,7 +100,7 @@ class WallabagV2ImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 2, 'queued' => 0], $wallabagV2Import->getSummary());
     }
 
-    public function testImportWithRabbit()
+    public function testImportWithRabbit(): void
     {
         $wallabagV2Import = $this->getWallabagV2Import();
         $wallabagV2Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2.json');
@@ -138,7 +136,7 @@ class WallabagV2ImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 6], $wallabagV2Import->getSummary());
     }
 
-    public function testImportWithRedis()
+    public function testImportWithRedis(): void
     {
         $wallabagV2Import = $this->getWallabagV2Import();
         $wallabagV2Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2.json');
@@ -174,7 +172,7 @@ class WallabagV2ImportTest extends TestCase
         $this->assertNotEmpty($redisMock->lpop('wallabag_v2'));
     }
 
-    public function testImportBadFile()
+    public function testImportBadFile(): void
     {
         $wallabagV1Import = $this->getWallabagV2Import();
         $wallabagV1Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2.jsonx');
@@ -188,7 +186,7 @@ class WallabagV2ImportTest extends TestCase
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    public function testImportUserNotDefined()
+    public function testImportUserNotDefined(): void
     {
         $wallabagV1Import = $this->getWallabagV2Import(true);
         $wallabagV1Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2.json');
@@ -202,7 +200,7 @@ class WallabagV2ImportTest extends TestCase
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    public function testImportEmptyFile()
+    public function testImportEmptyFile(): void
     {
         $wallabagV2Import = $this->getWallabagV2Import();
         $wallabagV2Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2-empty.json');
@@ -213,7 +211,7 @@ class WallabagV2ImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 0], $wallabagV2Import->getSummary());
     }
 
-    public function testImportWithExceptionFromGraby()
+    public function testImportWithExceptionFromGraby(): void
     {
         $wallabagV2Import = $this->getWallabagV2Import(false, 2);
         $wallabagV2Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2.json');

@@ -28,7 +28,7 @@ class EntryControllerTest extends WallabagTestCase
      *
      * Ensure download_images_enabled is disabled after each script
      */
-    public function tearDownImagesEnabled()
+    public function tearDownImagesEnabled(): void
     {
         if ($this->downloadImagesEnabled) {
             $client = static::createClient();
@@ -38,7 +38,7 @@ class EntryControllerTest extends WallabagTestCase
         }
     }
 
-    public function testLogin()
+    public function testLogin(): void
     {
         $client = $this->getTestClient();
 
@@ -51,7 +51,7 @@ class EntryControllerTest extends WallabagTestCase
     /**
      * @group NetworkCalls
      */
-    public function testQuickstart()
+    public function testQuickstart(): void
     {
         $this->logInAs('empty');
         $client = $this->getTestClient();
@@ -84,7 +84,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertStringContainsString('entry.list.number_on_the_page', $body[0]);
     }
 
-    public function testGetNew()
+    public function testGetNew(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -100,7 +100,7 @@ class EntryControllerTest extends WallabagTestCase
     /**
      * @group NetworkCalls
      */
-    public function testPostNewViaBookmarklet()
+    public function testPostNewViaBookmarklet(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -125,7 +125,7 @@ class EntryControllerTest extends WallabagTestCase
         $em->flush();
     }
 
-    public function testPostNewEmpty()
+    public function testPostNewEmpty(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -144,7 +144,7 @@ class EntryControllerTest extends WallabagTestCase
     /**
      * @group NetworkCalls
      */
-    public function testPostNewOk()
+    public function testPostNewOk(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -183,7 +183,7 @@ class EntryControllerTest extends WallabagTestCase
     /**
      * @group NetworkCalls
      */
-    public function testPostNewOkWithTaggingRules()
+    public function testPostNewOkWithTaggingRules(): void
     {
         $this->logInAs('empty');
         $client = $this->getTestClient();
@@ -219,7 +219,7 @@ class EntryControllerTest extends WallabagTestCase
     /**
      * @group NetworkCalls
      */
-    public function testPostWithMultipleAuthors()
+    public function testPostWithMultipleAuthors(): void
     {
         $url = 'https://www.theguardian.com/global-development/ng-interactive/2025/dec/22/childbirth-under-attack-how-women-and-babies-became-targets-in-conflicts-around-the-world';
         $this->logInAs('admin');
@@ -254,7 +254,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertStringContainsString('Salih', $authors[3]);
     }
 
-    public function testPostNewOkUrlExist()
+    public function testPostNewOkUrlExist(): void
     {
         $this->logInAs('admin');
 
@@ -284,7 +284,7 @@ class EntryControllerTest extends WallabagTestCase
     /**
      * @group NetworkCalls
      */
-    public function testPostNewOkUrlExistWithAccent()
+    public function testPostNewOkUrlExistWithAccent(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -322,7 +322,7 @@ class EntryControllerTest extends WallabagTestCase
     /**
      * @group NetworkCalls
      */
-    public function testPostNewOkUrlExistWithRedirection()
+    public function testPostNewOkUrlExistWithRedirection(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -360,7 +360,7 @@ class EntryControllerTest extends WallabagTestCase
     /**
      * @group NetworkCalls
      */
-    public function testPostNewThatWillBeTagged()
+    public function testPostNewThatWillBeTagged(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -427,7 +427,7 @@ class EntryControllerTest extends WallabagTestCase
     /**
      * @group NetworkCalls
      */
-    public function testBadFormatURL()
+    public function testBadFormatURL(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -456,7 +456,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertFalse($content);
     }
 
-    public function testArchive()
+    public function testArchive(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -466,7 +466,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testUntagged()
+    public function testUntagged(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -476,7 +476,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testStarred()
+    public function testStarred(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -486,7 +486,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testWithAnnotations()
+    public function testWithAnnotations(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -496,7 +496,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(2, $crawler->filter('ol.entries > li'));
     }
 
-    public function testRangeException()
+    public function testRangeException(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -507,7 +507,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertSame('/all/list', $client->getResponse()->getTargetUrl());
     }
 
-    public function testView()
+    public function testView(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -529,7 +529,7 @@ class EntryControllerTest extends WallabagTestCase
     /**
      * @group NetworkCalls
      */
-    public function testReload()
+    public function testReload(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -556,7 +556,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertNotEmpty($entry->getContent());
     }
 
-    public function testReloadWithFetchingFailed()
+    public function testReloadWithFetchingFailed(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -582,7 +582,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertNotSame($client->getContainer()->getParameter('wallabag.fetching_error_message'), $newContent->getContent());
     }
 
-    public function testEdit()
+    public function testEdit(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -600,7 +600,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(1, $crawler->filter('button[id=entry_save]'));
     }
 
-    public function testEditUpdate()
+    public function testEditUpdate(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -633,7 +633,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertStringContainsString('example.io', $originUrl);
     }
 
-    public function testEditRemoveOriginUrl()
+    public function testEditRemoveOriginUrl(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -668,7 +668,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(0, $originUrl);
     }
 
-    public function testToggleArchive()
+    public function testToggleArchive(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -694,7 +694,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertTrue($res->isArchived());
     }
 
-    public function testToggleStar()
+    public function testToggleStar(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -720,7 +720,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertTrue($res->isStarred());
     }
 
-    public function testDelete()
+    public function testDelete(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -744,7 +744,7 @@ class EntryControllerTest extends WallabagTestCase
      *
      * And it'll check that user won't be redirected to the view page of the content when it had been removed
      */
-    public function testViewAndDelete()
+    public function testViewAndDelete(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -781,7 +781,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testViewOtherUserEntry()
+    public function testViewOtherUserEntry(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -796,7 +796,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
-    public function testFilterOnReadingTime()
+    public function testFilterOnReadingTime(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -820,7 +820,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(1, $crawler->filter($this->entryDataTestAttribute));
     }
 
-    public function testFilterOnReadingTimeWithNegativeValue()
+    public function testFilterOnReadingTimeWithNegativeValue(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -840,7 +840,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(0, $crawler->filter($this->entryDataTestAttribute));
     }
 
-    public function testFilterOnReadingTimeOnlyUpper()
+    public function testFilterOnReadingTimeOnlyUpper(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -868,7 +868,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(6, $crawler->filter($this->entryDataTestAttribute));
     }
 
-    public function testFilterOnReadingTimeOnlyLower()
+    public function testFilterOnReadingTimeOnlyLower(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -895,7 +895,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(1, $crawler->filter($this->entryDataTestAttribute));
     }
 
-    public function testFilterOnUnreadStatus()
+    public function testFilterOnUnreadStatus(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -923,7 +923,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(6, $crawler->filter($this->entryDataTestAttribute));
     }
 
-    public function testFilterOnCreationDate()
+    public function testFilterOnCreationDate(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -972,7 +972,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(0, $crawler->filter($this->entryDataTestAttribute));
     }
 
-    public function testFilterOnAnnotatedStatus()
+    public function testFilterOnAnnotatedStatus(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1010,7 +1010,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(3, $crawler->filter('ol.entries > li'));
     }
 
-    public function testFilterOnNotCorrectlyParsedStatus()
+    public function testFilterOnNotCorrectlyParsedStatus(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1038,7 +1038,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(2, $crawler->filter($this->entryDataTestAttribute));
     }
 
-    public function testPaginationWithFilter()
+    public function testPaginationWithFilter(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1067,7 +1067,7 @@ class EntryControllerTest extends WallabagTestCase
         $client->submit($form, $data);
     }
 
-    public function testFilterOnDomainName()
+    public function testFilterOnDomainName(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1099,7 +1099,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(0, $crawler->filter($this->entryDataTestAttribute));
     }
 
-    public function testFilterOnStatus()
+    public function testFilterOnStatus(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1121,7 +1121,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(1, $crawler->filter($this->entryDataTestAttribute));
     }
 
-    public function testFilterPreselectedStatus()
+    public function testFilterPreselectedStatus(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1145,7 +1145,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertFalse($form['entry_filter[isStarred]']->hasValue());
     }
 
-    public function testFilterOnIsPublic()
+    public function testFilterOnIsPublic(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1158,7 +1158,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(0, $crawler->filter($this->entryDataTestAttribute));
     }
 
-    public function testPreviewPictureFilter()
+    public function testPreviewPictureFilter(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1171,7 +1171,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(1, $crawler->filter($this->entryDataTestAttribute));
     }
 
-    public function testFilterOnLanguage()
+    public function testFilterOnLanguage(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1200,7 +1200,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(2, $crawler->filter($this->entryDataTestAttribute));
     }
 
-    public function testShareEntryPublicly()
+    public function testShareEntryPublicly(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1268,7 +1268,7 @@ class EntryControllerTest extends WallabagTestCase
     /**
      * @group NetworkCalls
      */
-    public function testNewEntryWithDownloadImagesEnabled()
+    public function testNewEntryWithDownloadImagesEnabled(): void
     {
         $this->downloadImagesEnabled = true;
         $this->logInAs('admin');
@@ -1311,7 +1311,7 @@ class EntryControllerTest extends WallabagTestCase
     /**
      * @depends testNewEntryWithDownloadImagesEnabled
      */
-    public function testRemoveEntryWithDownloadImagesEnabled()
+    public function testRemoveEntryWithDownloadImagesEnabled(): void
     {
         $this->downloadImagesEnabled = true;
         $this->logInAs('admin');
@@ -1348,7 +1348,7 @@ class EntryControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('download_images_enabled', 0);
     }
 
-    public function testRedirectToHomepage()
+    public function testRedirectToHomepage(): void
     {
         $this->logInAs('empty');
         $client = $this->getTestClient();
@@ -1372,7 +1372,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertSame('/', $client->getResponse()->headers->get('location'));
     }
 
-    public function testRedirectToCurrentPage()
+    public function testRedirectToCurrentPage(): void
     {
         $this->logInAs('empty');
         $client = $this->getTestClient();
@@ -1396,7 +1396,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertStringContainsString('/view/' . $entry->getId(), $client->getResponse()->headers->get('location'));
     }
 
-    public function testFilterOnHttpStatus()
+    public function testFilterOnHttpStatus(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1454,7 +1454,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(9, $crawler->filter($this->entryDataTestAttribute));
     }
 
-    public function testSearch()
+    public function testSearch(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1584,7 +1584,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(2, $crawler->filter($this->entryDataTestAttribute));
     }
 
-    public function testActionInSearchResults()
+    public function testActionInSearchResults(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1654,7 +1654,7 @@ class EntryControllerTest extends WallabagTestCase
      * @dataProvider dataForLanguage
      * @group NetworkCalls
      */
-    public function testLanguageValidation($url, $expectedLanguage)
+    public function testLanguageValidation($url, $expectedLanguage): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1686,7 +1686,7 @@ class EntryControllerTest extends WallabagTestCase
     /**
      * @group NetworkCalls
      */
-    public function testRestrictedArticle()
+    public function testRestrictedArticle(): void
     {
         $url = 'https://www.monde-diplomatique.fr/2017/05/BONNET/57476';
         $this->logInAs('admin');
@@ -1735,7 +1735,7 @@ class EntryControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('restricted_access', 0);
     }
 
-    public function testPostEntryWhenFetchFails()
+    public function testPostEntryWhenFetchFails(): void
     {
         $url = 'http://example.com/papers/email_tracking.pdf';
         $this->logInAs('admin');
@@ -1783,7 +1783,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertSame('example.com', $content->getDomainName());
     }
 
-    public function testEntryDeleteTagForm()
+    public function testEntryDeleteTagForm(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1799,7 +1799,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertStringStartsWith(\sprintf('/remove-tag/%s/%s', $entry->getId(), $tag->getId()), $link);
     }
 
-    public function testRandom()
+    public function testRandom(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1829,7 +1829,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertStringContainsString('/view/', $client->getResponse()->getTargetUrl(), 'All random');
     }
 
-    public function testMass()
+    public function testMass(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1965,7 +1965,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertNull($res);
     }
 
-    public function testGetSameDomainEntries()
+    public function testGetSameDomainEntries(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

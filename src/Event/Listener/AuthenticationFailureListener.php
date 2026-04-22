@@ -25,7 +25,7 @@ class AuthenticationFailureListener implements EventSubscriberInterface
     /**
      * On failure, add a custom error in log so server admin can configure fail2ban to block IP from people who try to login too much.
      */
-    public function onAuthenticationFailure()
+    public function onAuthenticationFailure(): void
     {
         $request = $this->requestStack->getMainRequest();
 

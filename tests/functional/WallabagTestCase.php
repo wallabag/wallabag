@@ -48,7 +48,7 @@ abstract class WallabagTestCase extends WebTestCase
      *
      * @param string $username User to log in
      */
-    public function logInAs($username)
+    public function logInAs($username): void
     {
         $container = static::getContainer();
 
@@ -69,7 +69,7 @@ abstract class WallabagTestCase extends WebTestCase
      *
      * @param string $username User to log in
      */
-    public function logInAsUsingHttp($username)
+    public function logInAsUsingHttp($username): void
     {
         $crawler = $this->client->request('GET', '/login');
         $form = $crawler->filter('button[type=submit]')->form();
@@ -115,7 +115,7 @@ abstract class WallabagTestCase extends WebTestCase
      * Check if Redis is installed.
      * If not, mark test as skip.
      */
-    protected function checkRedis()
+    protected function checkRedis(): void
     {
         try {
             $this->client->getContainer()->get(Client::class)->connect();

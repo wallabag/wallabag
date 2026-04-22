@@ -11,7 +11,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class ShaarliControllerTest extends WallabagTestCase
 {
-    public function testImportShaarli()
+    public function testImportShaarli(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -23,7 +23,7 @@ class ShaarliControllerTest extends WallabagTestCase
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportShaarliWithRabbitEnabled()
+    public function testImportShaarliWithRabbitEnabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -39,7 +39,7 @@ class ShaarliControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportShaarliBadFile()
+    public function testImportShaarliBadFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -56,7 +56,7 @@ class ShaarliControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportShaarliWithRedisEnabled()
+    public function testImportShaarliWithRedisEnabled(): void
     {
         $this->checkRedis();
         $this->logInAs('admin');
@@ -91,7 +91,7 @@ class ShaarliControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportWallabagWithShaarliFile()
+    public function testImportWallabagWithShaarliFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -129,7 +129,7 @@ class ShaarliControllerTest extends WallabagTestCase
         $this->assertCount(2, $content->getTags());
     }
 
-    public function testImportWallabagWithEmptyFile()
+    public function testImportWallabagWithEmptyFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

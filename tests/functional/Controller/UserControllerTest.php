@@ -8,7 +8,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class UserControllerTest extends WallabagTestCase
 {
-    public function testLogin()
+    public function testLogin(): void
     {
         $client = $this->getTestClient();
 
@@ -18,7 +18,7 @@ class UserControllerTest extends WallabagTestCase
         $this->assertStringContainsString('login', $client->getResponse()->headers->get('location'));
     }
 
-    public function testCompleteScenario()
+    public function testCompleteScenario(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -77,7 +77,7 @@ class UserControllerTest extends WallabagTestCase
         $this->assertDoesNotMatchRegularExpression('/Foo User/', $client->getResponse()->getContent());
     }
 
-    public function testDeleteDisabledForLoggedUser()
+    public function testDeleteDisabledForLoggedUser(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -88,7 +88,7 @@ class UserControllerTest extends WallabagTestCase
         $this->assertSame('disabled', $disabled[0]);
     }
 
-    public function testUserSearch()
+    public function testUserSearch(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

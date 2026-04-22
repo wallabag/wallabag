@@ -7,14 +7,14 @@ use Wallabag\SiteConfig\SiteConfig;
 
 class SiteConfigTest extends TestCase
 {
-    public function testInitSiteConfig()
+    public function testInitSiteConfig(): void
     {
         $config = new SiteConfig([]);
 
         $this->assertInstanceOf(SiteConfig::class, $config);
     }
 
-    public function testUnknownProperty()
+    public function testUnknownProperty(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Unknown property: "bad"');
@@ -22,7 +22,7 @@ class SiteConfigTest extends TestCase
         new SiteConfig(['bad' => true]);
     }
 
-    public function testInitSiteConfigWillFullOptions()
+    public function testInitSiteConfigWillFullOptions(): void
     {
         $config = new SiteConfig([
             'host' => 'example.com',

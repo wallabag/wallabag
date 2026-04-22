@@ -27,7 +27,7 @@ class RuleBasedTagger
      *
      * @param Entry $entry Entry to tag
      */
-    public function tag(Entry $entry)
+    public function tag(Entry $entry): void
     {
         $rules = $this->getRulesForUser($entry->getUser());
 

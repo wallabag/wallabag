@@ -44,7 +44,7 @@ class GrabySiteConfigBuilderTest extends WallabagKernelTestCase
     /**
      * @dataProvider dataProviderCredentials
      */
-    public function testBuildConfigWithDbAccess($host, $expectedUsername = null, $expectedPassword = null)
+    public function testBuildConfigWithDbAccess($host, $expectedUsername = null, $expectedPassword = null): void
     {
         $grabyConfigBuilderMock = $this->getMockBuilder(ConfigBuilder::class)
             ->disableOriginalConstructor()

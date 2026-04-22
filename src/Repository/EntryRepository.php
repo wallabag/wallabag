@@ -445,7 +445,7 @@ class EntryRepository extends ServiceEntityRepository
      *
      * @param int $userId
      */
-    public function removeTag($userId, Tag $tag)
+    public function removeTag($userId, Tag $tag): void
     {
         $entries = $this->getSortedQueryBuilderByUser($userId)
             ->innerJoin('e.tags', 't')
@@ -466,7 +466,7 @@ class EntryRepository extends ServiceEntityRepository
      * @param int        $userId
      * @param array<Tag> $tags
      */
-    public function removeTags($userId, $tags)
+    public function removeTags($userId, $tags): void
     {
         foreach ($tags as $tag) {
             $this->removeTag($userId, $tag);
@@ -598,7 +598,7 @@ class EntryRepository extends ServiceEntityRepository
      *
      * @param int $userId
      */
-    public function removeAllByUserId($userId)
+    public function removeAllByUserId($userId): void
     {
         $this->getEntityManager()
             ->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.user = :userId')
@@ -606,7 +606,7 @@ class EntryRepository extends ServiceEntityRepository
             ->execute();
     }
 
-    public function removeArchivedByUserId($userId)
+    public function removeArchivedByUserId($userId): void
     {
         $this->getEntityManager()
             ->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.user = :userId AND e.isArchived = TRUE')

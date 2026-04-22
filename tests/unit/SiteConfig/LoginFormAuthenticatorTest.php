@@ -14,7 +14,7 @@ use Wallabag\SiteConfig\SiteConfig;
 
 class LoginFormAuthenticatorTest extends TestCase
 {
-    public function testLoginPost()
+    public function testLoginPost(): void
     {
         $siteConfig = new SiteConfig([
             'host' => 'example.com',
@@ -44,7 +44,7 @@ class LoginFormAuthenticatorTest extends TestCase
         $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
     }
 
-    public function testLoginPostWithExtraFieldsButEmptyHtml()
+    public function testLoginPostWithExtraFieldsButEmptyHtml(): void
     {
         $siteConfig = new SiteConfig([
             'host' => 'example.com',
@@ -76,7 +76,7 @@ class LoginFormAuthenticatorTest extends TestCase
     }
 
     // testing preg_match
-    public function testLoginPostWithExtraFieldsWithRegex()
+    public function testLoginPostWithExtraFieldsWithRegex(): void
     {
         $siteConfig = new SiteConfig([
             'host' => 'aoc.media',
@@ -133,7 +133,7 @@ class LoginFormAuthenticatorTest extends TestCase
         $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
     }
 
-    public function testLoginWithBadSiteConfigNotLoggedInData()
+    public function testLoginWithBadSiteConfigNotLoggedInData(): void
     {
         $siteConfig = new SiteConfig([
             'host' => 'nextinpact.com',
@@ -158,7 +158,7 @@ class LoginFormAuthenticatorTest extends TestCase
         $this->assertFalse($loginRequired);
     }
 
-    public function testLoginWithGoodSiteConfigNotLoggedInData()
+    public function testLoginWithGoodSiteConfigNotLoggedInData(): void
     {
         $siteConfig = new SiteConfig([
             'host' => 'nextinpact.com',
@@ -184,7 +184,7 @@ class LoginFormAuthenticatorTest extends TestCase
         $this->assertTrue($loginRequired);
     }
 
-    public function testLoginPostWithUserAgentHeaderWithData()
+    public function testLoginPostWithUserAgentHeaderWithData(): void
     {
         $siteConfig = new SiteConfig([
             'host' => 'nextinpact.com',

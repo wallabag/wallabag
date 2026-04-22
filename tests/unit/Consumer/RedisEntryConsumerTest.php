@@ -13,7 +13,7 @@ use Wallabag\Repository\UserRepository;
 
 class RedisEntryConsumerTest extends TestCase
 {
-    public function testMessageOk()
+    public function testMessageOk(): void
     {
         $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
@@ -136,7 +136,7 @@ JSON;
         $this->assertTrue($res);
     }
 
-    public function testMessageWithBadUser()
+    public function testMessageWithBadUser(): void
     {
         $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
@@ -190,7 +190,7 @@ JSON;
         $this->assertTrue($res);
     }
 
-    public function testMessageWithEntryProcessed()
+    public function testMessageWithEntryProcessed(): void
     {
         $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()

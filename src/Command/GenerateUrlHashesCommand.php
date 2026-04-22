@@ -28,7 +28,7 @@ class GenerateUrlHashesCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setHelp('This command helps you to generates hashes of the url of each entry, to check through API if an URL is already saved')
@@ -65,7 +65,7 @@ class GenerateUrlHashesCommand extends Command
         return 0;
     }
 
-    private function generateHashedUrls(User $user)
+    private function generateHashedUrls(User $user): void
     {
         $entries = $this->entryRepository->findByEmptyHashedUrlAndUserId($user->getId());
 

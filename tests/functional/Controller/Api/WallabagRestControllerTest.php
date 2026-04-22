@@ -6,7 +6,7 @@ use Craue\ConfigBundle\Util\Config;
 
 class WallabagRestControllerTest extends WallabagApiTestCase
 {
-    public function testGetVersion()
+    public function testGetVersion(): void
     {
         // create a new client instead of using $this->client to be sure client isn't authenticated
         $client = $this->createUnauthorizedClient();
@@ -19,7 +19,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertSame($client->getContainer()->getParameter('wallabag.version'), $content);
     }
 
-    public function testGetInfo()
+    public function testGetInfo(): void
     {
         // create a new client instead of using $this->client to be sure client isn't authenticated
         $client = $this->createUnauthorizedClient();
@@ -36,7 +36,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertSame('wallabag', $content['appname']);
     }
 
-    public function testAllowedRegistration()
+    public function testAllowedRegistration(): void
     {
         // create a new client instead of using $this->client to be sure client isn't authenticated
         $client = $this->createUnauthorizedClient();

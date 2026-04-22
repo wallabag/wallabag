@@ -24,7 +24,7 @@ class ShowUserCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setHelp('This command shows the details for an user')
@@ -53,7 +53,7 @@ class ShowUserCommand extends Command
         return 0;
     }
 
-    private function showUser(User $user)
+    private function showUser(User $user): void
     {
         $this->io->listing([
             \sprintf('Username: %s', $user->getUsername()),

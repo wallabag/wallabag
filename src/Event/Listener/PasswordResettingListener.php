@@ -27,7 +27,7 @@ class PasswordResettingListener implements EventSubscriberInterface
         ];
     }
 
-    public function onPasswordResettingSuccess(FormEvent $event)
+    public function onPasswordResettingSuccess(FormEvent $event): void
     {
         $url = $this->router->generate('homepage');
 

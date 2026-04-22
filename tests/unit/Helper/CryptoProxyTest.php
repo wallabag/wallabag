@@ -10,7 +10,7 @@ use Wallabag\Helper\CryptoProxy;
 
 class CryptoProxyTest extends TestCase
 {
-    public function testCrypto()
+    public function testCrypto(): void
     {
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
@@ -27,7 +27,7 @@ class CryptoProxyTest extends TestCase
         $this->assertStringContainsString('Crypto: decrypting value', $records[1]['message']);
     }
 
-    public function testDecryptBadValue()
+    public function testDecryptBadValue(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Decrypt fail');

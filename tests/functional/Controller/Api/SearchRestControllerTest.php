@@ -4,7 +4,7 @@ namespace Wallabag\Tests\Functional\Controller\Api;
 
 class SearchRestControllerTest extends WallabagApiTestCase
 {
-    public function testGetSearchWithFullOptions()
+    public function testGetSearchWithFullOptions(): void
     {
         $this->client->request('GET', '/api/search', [
             'page' => 1,
@@ -36,7 +36,7 @@ class SearchRestControllerTest extends WallabagApiTestCase
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
-    public function testGetSearchWithNoLimit()
+    public function testGetSearchWithNoLimit(): void
     {
         $this->client->request('GET', '/api/search', [
             'term' => 'entry',

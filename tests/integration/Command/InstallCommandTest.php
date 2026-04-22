@@ -119,7 +119,7 @@ class InstallCommandTest extends WallabagKernelTestCase
         parent::tearDown();
     }
 
-    public function testRunInstallCommand()
+    public function testRunInstallCommand(): void
     {
         $this->setupDatabase();
 
@@ -141,7 +141,7 @@ class InstallCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('Config setup.', $tester->getDisplay());
     }
 
-    public function testRunInstallCommandWithReset()
+    public function testRunInstallCommandWithReset(): void
     {
         $this->setupDatabase();
 
@@ -168,7 +168,7 @@ class InstallCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('Dropping database, creating database and schema, clearing the cache', $tester->getDisplay());
     }
 
-    public function testRunInstallCommandWithNonExistingDatabase()
+    public function testRunInstallCommandWithNonExistingDatabase(): void
     {
         if (static::getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof PostgreSQLPlatform) {
             $this->markTestSkipped('PostgreSQL spotted: PostgreSQL requires that the database exists before connecting to it, skipping.');
@@ -200,7 +200,7 @@ class InstallCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('Creating database and schema, clearing the cache', $tester->getDisplay());
     }
 
-    public function testRunInstallCommandChooseResetSchema()
+    public function testRunInstallCommandChooseResetSchema(): void
     {
         $this->setupDatabase();
 
@@ -222,7 +222,7 @@ class InstallCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('Dropping schema and creating schema', $tester->getDisplay());
     }
 
-    public function testRunInstallCommandChooseNothing()
+    public function testRunInstallCommandChooseNothing(): void
     {
         $command = $this->getCommand();
 
@@ -251,7 +251,7 @@ class InstallCommandTest extends WallabagKernelTestCase
         }
     }
 
-    public function testRunInstallCommandSchemaExistsNotReset()
+    public function testRunInstallCommandSchemaExistsNotReset(): void
     {
         $this->setupDatabase();
 
@@ -271,7 +271,7 @@ class InstallCommandTest extends WallabagKernelTestCase
         $this->assertStringNotContainsString('Would you like to create a new admin user', $tester->getDisplay());
     }
 
-    public function testRunInstallCommandNoInteraction()
+    public function testRunInstallCommandNoInteraction(): void
     {
         $this->setupDatabase();
 
@@ -303,7 +303,7 @@ class InstallCommandTest extends WallabagKernelTestCase
         return $command;
     }
 
-    private function setupDatabase()
+    private function setupDatabase(): void
     {
         $application = $this->createApplication();
         $application->setAutoExit(false);

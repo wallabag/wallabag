@@ -141,7 +141,7 @@ class PocketImport extends AbstractImport
     /**
      * Set the Http client.
      */
-    public function setClient(HttpClientInterface $pocketClient)
+    public function setClient(HttpClientInterface $pocketClient): void
     {
         $this->client = $pocketClient;
     }

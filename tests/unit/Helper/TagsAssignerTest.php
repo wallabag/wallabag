@@ -11,7 +11,7 @@ use Wallabag\Repository\TagRepository;
 
 class TagsAssignerTest extends TestCase
 {
-    public function testAssignTagsWithArrayAndExtraSpaces()
+    public function testAssignTagsWithArrayAndExtraSpaces(): void
     {
         $tagRepo = $this->getTagRepositoryMock();
         $tagsAssigner = new TagsAssigner($tagRepo);
@@ -25,7 +25,7 @@ class TagsAssignerTest extends TestCase
         $this->assertSame('tag2', $entry->getTags()[1]->getLabel());
     }
 
-    public function testAssignTagsWithString()
+    public function testAssignTagsWithString(): void
     {
         $tagRepo = $this->getTagRepositoryMock();
         $tagsAssigner = new TagsAssigner($tagRepo);
@@ -39,7 +39,7 @@ class TagsAssignerTest extends TestCase
         $this->assertSame('tag2', $entry->getTags()[1]->getLabel());
     }
 
-    public function testAssignTagsWithEmptyArray()
+    public function testAssignTagsWithEmptyArray(): void
     {
         $tagRepo = $this->getTagRepositoryMock();
         $tagsAssigner = new TagsAssigner($tagRepo);
@@ -51,7 +51,7 @@ class TagsAssignerTest extends TestCase
         $this->assertCount(0, $entry->getTags());
     }
 
-    public function testAssignTagsWithEmptyString()
+    public function testAssignTagsWithEmptyString(): void
     {
         $tagRepo = $this->getTagRepositoryMock();
         $tagsAssigner = new TagsAssigner($tagRepo);
@@ -63,7 +63,7 @@ class TagsAssignerTest extends TestCase
         $this->assertCount(0, $entry->getTags());
     }
 
-    public function testAssignTagsAlreadyAssigned()
+    public function testAssignTagsAlreadyAssigned(): void
     {
         $tagRepo = $this->getTagRepositoryMock();
         $tagsAssigner = new TagsAssigner($tagRepo);
@@ -81,7 +81,7 @@ class TagsAssignerTest extends TestCase
         $this->assertSame('tag2', $entry->getTags()[1]->getLabel());
     }
 
-    public function testAssignTagsNotFlushed()
+    public function testAssignTagsNotFlushed(): void
     {
         $tagRepo = $this->getTagRepositoryMock();
         $tagRepo->expects($this->never())

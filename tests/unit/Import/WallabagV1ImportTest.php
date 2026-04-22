@@ -30,7 +30,7 @@ class WallabagV1ImportTest extends TestCase
     protected $fetchingErrorMessageTitle = 'No title found';
     protected $fetchingErrorMessage = 'wallabag can\'t retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/master/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.';
 
-    public function testInit()
+    public function testInit(): void
     {
         $wallabagV1Import = $this->getWallabagV1Import();
 
@@ -39,7 +39,7 @@ class WallabagV1ImportTest extends TestCase
         $this->assertSame('import.wallabag_v1.description', $wallabagV1Import->getDescription());
     }
 
-    public function testImport()
+    public function testImport(): void
     {
         $wallabagV1Import = $this->getWallabagV1Import(false, 1);
         $wallabagV1Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1.json');
@@ -63,8 +63,7 @@ class WallabagV1ImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(1))
-            ->method('updateEntry')
-            ->willReturn($entry);
+            ->method('updateEntry');
 
         $res = $wallabagV1Import->import();
 
@@ -72,7 +71,7 @@ class WallabagV1ImportTest extends TestCase
         $this->assertSame(['skipped' => 1, 'imported' => 1, 'queued' => 0], $wallabagV1Import->getSummary());
     }
 
-    public function testImportAndMarkAllAsRead()
+    public function testImportAndMarkAllAsRead(): void
     {
         $wallabagV1Import = $this->getWallabagV1Import(false, 3);
         $wallabagV1Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1-read.json');
@@ -92,8 +91,7 @@ class WallabagV1ImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(3))
-            ->method('updateEntry')
-            ->willReturn(new Entry($this->user));
+            ->method('updateEntry');
 
         // check that every entry persisted are archived
         $this->em
@@ -108,7 +106,7 @@ class WallabagV1ImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 3, 'queued' => 0], $wallabagV1Import->getSummary());
     }
 
-    public function testImportWithRabbit()
+    public function testImportWithRabbit(): void
     {
         $wallabagV1Import = $this->getWallabagV1Import();
         $wallabagV1Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1.json');
@@ -148,7 +146,7 @@ class WallabagV1ImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 2], $wallabagV1Import->getSummary());
     }
 
-    public function testImportWithRedis()
+    public function testImportWithRedis(): void
     {
         $wallabagV1Import = $this->getWallabagV1Import();
         $wallabagV1Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1.json');
@@ -188,7 +186,7 @@ class WallabagV1ImportTest extends TestCase
         $this->assertNotEmpty($redisMock->lpop('wallabag_v1'));
     }
 
-    public function testImportBadFile()
+    public function testImportBadFile(): void
     {
         $wallabagV1Import = $this->getWallabagV1Import();
         $wallabagV1Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1.jsonx');
@@ -202,7 +200,7 @@ class WallabagV1ImportTest extends TestCase
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    public function testImportUserNotDefined()
+    public function testImportUserNotDefined(): void
     {
         $wallabagV1Import = $this->getWallabagV1Import(true);
         $wallabagV1Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1.json');

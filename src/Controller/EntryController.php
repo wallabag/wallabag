@@ -700,7 +700,7 @@ class EntryController extends AbstractController
      *
      * @param string $prefixMessage Should be the translation key: entry_saved or entry_reloaded
      */
-    private function updateEntry(Entry $entry, $prefixMessage = 'entry_saved')
+    private function updateEntry(Entry $entry, $prefixMessage = 'entry_saved'): void
     {
         $message = 'flashes.entry.notice.' . $prefixMessage;
 

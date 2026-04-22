@@ -97,7 +97,7 @@ class Tag implements \Stringable
         return $this->slug;
     }
 
-    public function addEntry(Entry $entry)
+    public function addEntry(Entry $entry): void
     {
         if ($this->entries->contains($entry)) {
             return;
@@ -107,7 +107,7 @@ class Tag implements \Stringable
         $entry->addTag($this);
     }
 
-    public function removeEntry(Entry $entry)
+    public function removeEntry(Entry $entry): void
     {
         if (!$this->entries->contains($entry)) {
             return;

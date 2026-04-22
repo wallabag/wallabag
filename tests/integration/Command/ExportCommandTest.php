@@ -16,7 +16,7 @@ class ExportCommandTest extends WallabagKernelTestCase
         parent::tearDown();
     }
 
-    public function testExportCommandWithoutUsername()
+    public function testExportCommandWithoutUsername(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments (missing: "username")');
@@ -29,7 +29,7 @@ class ExportCommandTest extends WallabagKernelTestCase
         $tester->execute([]);
     }
 
-    public function testExportCommandWithBadUsername()
+    public function testExportCommandWithBadUsername(): void
     {
         $application = $this->createApplication();
 
@@ -43,7 +43,7 @@ class ExportCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('User "unknown" not found', $tester->getDisplay());
     }
 
-    public function testExportCommand()
+    public function testExportCommand(): void
     {
         $application = $this->createApplication();
 
@@ -59,7 +59,7 @@ class ExportCommandTest extends WallabagKernelTestCase
         $this->assertFileExists('admin-export.json');
     }
 
-    public function testExportCommandWithSpecialPath()
+    public function testExportCommandWithSpecialPath(): void
     {
         $application = $this->createApplication();
 

@@ -17,7 +17,7 @@ class GrabySiteConfigBuilderTest extends TestCase
 {
     private $builder;
 
-    public function testBuildConfigExists()
+    public function testBuildConfigExists(): void
     {
         $grabyConfigBuilderMock = $this->getMockBuilder(ConfigBuilder::class)
             ->disableOriginalConstructor()
@@ -84,7 +84,7 @@ class GrabySiteConfigBuilderTest extends TestCase
         $this->assertCount(1, $records, 'One log was recorded');
     }
 
-    public function testBuildConfigDoesntExist()
+    public function testBuildConfigDoesntExist(): void
     {
         $grabyConfigBuilderMock = $this->getMockBuilder(ConfigBuilder::class)
             ->disableOriginalConstructor()
@@ -135,7 +135,7 @@ class GrabySiteConfigBuilderTest extends TestCase
         $this->assertCount(1, $records, 'One log was recorded');
     }
 
-    public function testBuildConfigWithBadExtraFields()
+    public function testBuildConfigWithBadExtraFields(): void
     {
         $grabyConfigBuilderMock = $this->getMockBuilder(ConfigBuilder::class)
             ->disableOriginalConstructor()
@@ -202,7 +202,7 @@ class GrabySiteConfigBuilderTest extends TestCase
         $this->assertCount(1, $records, 'One log was recorded');
     }
 
-    public function testBuildConfigUserNotDefined()
+    public function testBuildConfigUserNotDefined(): void
     {
         $grabyConfigBuilderMock = $this->getMockBuilder(ConfigBuilder::class)
             ->disableOriginalConstructor()

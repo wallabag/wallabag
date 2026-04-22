@@ -10,7 +10,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class SiteCredentialControllerTest extends WallabagTestCase
 {
-    public function testAccessDeniedBecauseFeatureDisabled()
+    public function testAccessDeniedBecauseFeatureDisabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -24,7 +24,7 @@ class SiteCredentialControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('restricted_access', 1);
     }
 
-    public function testListSiteCredential()
+    public function testListSiteCredential(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -39,7 +39,7 @@ class SiteCredentialControllerTest extends WallabagTestCase
         $this->assertStringContainsString('site_credential.list.create_new_one', $body);
     }
 
-    public function testNewSiteCredential()
+    public function testNewSiteCredential(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -70,7 +70,7 @@ class SiteCredentialControllerTest extends WallabagTestCase
         $this->assertStringContainsString('flashes.site_credential.notice.added', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
-    public function testEditSiteCredential()
+    public function testEditSiteCredential(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -103,7 +103,7 @@ class SiteCredentialControllerTest extends WallabagTestCase
         $this->assertStringContainsString('flashes.site_credential.notice.updated', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
-    public function testEditFromADifferentUserSiteCredential()
+    public function testEditFromADifferentUserSiteCredential(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -117,7 +117,7 @@ class SiteCredentialControllerTest extends WallabagTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
-    public function testDeleteSiteCredential()
+    public function testDeleteSiteCredential(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

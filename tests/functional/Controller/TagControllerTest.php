@@ -16,7 +16,7 @@ class TagControllerTest extends WallabagTestCase
     public $tagName = 'opensource';
     public $caseTagName = 'OpenSource';
 
-    public function testList()
+    public function testList(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -41,7 +41,7 @@ class TagControllerTest extends WallabagTestCase
         $this->assertStringContainsString('(1)', $tagText);
     }
 
-    public function testAddTagToEntry()
+    public function testAddTagToEntry(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -88,7 +88,7 @@ class TagControllerTest extends WallabagTestCase
         $this->assertCount(2, $entry->getTags());
     }
 
-    public function testAddMultipleTagToEntry()
+    public function testAddMultipleTagToEntry(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -124,7 +124,7 @@ class TagControllerTest extends WallabagTestCase
         $this->assertNotFalse(array_search('bar2', $tags, true), 'Tag bar2 is assigned to the entry');
     }
 
-    public function testRemoveTagFromEntry()
+    public function testRemoveTagFromEntry(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -164,7 +164,7 @@ class TagControllerTest extends WallabagTestCase
         $this->assertNull($tag, $this->tagName . ' was removed because it begun an orphan tag');
     }
 
-    public function testRemoveTag()
+    public function testRemoveTag(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -214,7 +214,7 @@ class TagControllerTest extends WallabagTestCase
         $this->assertEmpty($entry2->getTagsLabel());
     }
 
-    public function testShowEntriesForTagAction()
+    public function testShowEntriesForTagAction(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -250,7 +250,7 @@ class TagControllerTest extends WallabagTestCase
         $em->flush();
     }
 
-    public function testRenameTagUsingTheFormInsideTagList()
+    public function testRenameTagUsingTheFormInsideTagList(): void
     {
         $newTagLabel = 'rename label';
 
@@ -324,7 +324,7 @@ class TagControllerTest extends WallabagTestCase
         $this->assertTrue($newTag[0]->hasEntry($freshEntry2), 'New tag is assigned to the entry2.');
     }
 
-    public function testRenameTagWithSameLabel()
+    public function testRenameTagWithSameLabel(): void
     {
         $tagLabel = 'same label';
         $this->logInAs('admin');
@@ -379,7 +379,7 @@ class TagControllerTest extends WallabagTestCase
         $this->assertTrue($newTag[0]->hasEntry($freshEntry), 'Tag is still assigned to the entry.');
     }
 
-    public function testRenameTagWithSameLabelDifferentCase()
+    public function testRenameTagWithSameLabelDifferentCase(): void
     {
         $tagLabel = 'same label';
         $newTagLabel = 'saMe labEl';
@@ -442,7 +442,7 @@ class TagControllerTest extends WallabagTestCase
         $this->assertTrue($tagFromRepo[0]->hasEntry($freshEntry), 'Tag is still assigned to the entry.');
     }
 
-    public function testRenameTagWithExistingLabel()
+    public function testRenameTagWithExistingLabel(): void
     {
         $tagLabel = 'existing label';
         $previousTagLabel = 'previous label';
@@ -508,7 +508,7 @@ class TagControllerTest extends WallabagTestCase
         $this->assertFalse($previousTagFromRepo[0]->hasEntry($freshEntry1));
     }
 
-    public function testAddUnicodeTagLabel()
+    public function testAddUnicodeTagLabel(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -555,7 +555,7 @@ class TagControllerTest extends WallabagTestCase
         $this->assertNotFalse(array_search('caché', $tags, true), 'Tag caché is assigned to the entry');
     }
 
-    public function testAssignTagsOnSearchResults()
+    public function testAssignTagsOnSearchResults(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

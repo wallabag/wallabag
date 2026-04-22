@@ -25,7 +25,7 @@ TWIG;
         $this->twig = new Environment(new ArrayLoader(['TwoFactor/email_auth_code.html.twig' => $twigTemplate]));
     }
 
-    public function testSendEmail()
+    public function testSendEmail(): void
     {
         $mailer = $this->createMock(MailerInterface::class);
         $mailer->expects($this->once())

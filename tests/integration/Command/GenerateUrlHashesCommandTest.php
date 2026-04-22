@@ -8,7 +8,7 @@ use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
 class GenerateUrlHashesCommandTest extends WallabagKernelTestCase
 {
-    public function testRunGenerateUrlHashesCommand()
+    public function testRunGenerateUrlHashesCommand(): void
     {
         $application = $this->createApplication();
 
@@ -21,7 +21,7 @@ class GenerateUrlHashesCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('Finished generated hashed urls', $tester->getDisplay());
     }
 
-    public function testRunGenerateUrlHashesCommandWithBadUsername()
+    public function testRunGenerateUrlHashesCommandWithBadUsername(): void
     {
         $application = $this->createApplication();
 
@@ -35,7 +35,7 @@ class GenerateUrlHashesCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('User "unknown" not found', $tester->getDisplay());
     }
 
-    public function testRunGenerateUrlHashesCommandForUser()
+    public function testRunGenerateUrlHashesCommandForUser(): void
     {
         $application = $this->createApplication();
 
@@ -49,7 +49,7 @@ class GenerateUrlHashesCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('Generated hashed urls for user: admin', $tester->getDisplay());
     }
 
-    public function testGenerateUrls()
+    public function testGenerateUrls(): void
     {
         $url = 'http://www.lemonde.fr/sport/visuel/2017/05/05/rondelle-prison-blanchissage-comprendre-le-hockey-sur-glace_5122587_3242.html';
         $em = $this->getEntityManager();

@@ -11,7 +11,7 @@ trait EntityTimestampsTrait
 {
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
-    public function timestamps()
+    public function timestamps(): void
     {
         if (null === $this->createdAt) {
             $this->createdAt = new \DateTime();
