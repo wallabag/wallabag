@@ -1,3 +1,4 @@
+const path = require('path');
 const Encore = require('@symfony/webpack-encore');
 const { codecovWebpackPlugin } = require('@codecov/webpack-plugin');
 
@@ -24,6 +25,13 @@ Encore
   })
   .enableSassLoader()
   .enablePostCssLoader()
+  .copyFiles({
+    from: './node_modules/mathjax/sre',
+    to: 'sre/[path][name].[ext]',
+  })
+  .addAliases({
+    module$: path.resolve(__dirname, 'assets/vendor/node_module_browser_stub.js'),
+  })
   .addPlugin(codecovWebpackPlugin({
     enableBundleAnalysis: typeof process.env.CODECOV_TOKEN !== 'undefined',
     bundleName: 'wallabag',
