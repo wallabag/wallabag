@@ -1950,19 +1950,21 @@ class EntryControllerTest extends WallabagTestCase
             'entry-checkbox' => $entries,
         ]);
 
+        $client->getContainer()->get(EntityManagerInterface::class)->clear();
+
         $res = $client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry1Id);
 
-        $this->assertNull($res);
+        $this->assertNotNull($res->getDeletedAt());
 
         $res = $client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry2Id);
 
-        $this->assertNull($res);
+        $this->assertNotNull($res->getDeletedAt());
     }
 
     public function testGetSameDomainEntries(): void

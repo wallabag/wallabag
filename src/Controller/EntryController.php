@@ -122,7 +122,7 @@ class EntryController extends AbstractController
                     }
                 } elseif ('delete' === $action) {
                     $this->eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
-                    $this->entityManager->remove($entry);
+                    $entry->softDelete();
                 }
             }
 
@@ -513,7 +513,7 @@ class EntryController extends AbstractController
         // entry deleted, dispatch event about it!
         $this->eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
-        $this->entityManager->remove($entry);
+        $entry->softDelete();
         $this->entityManager->flush();
 
         $this->addFlash(
@@ -733,6 +733,11 @@ class EntryController extends AbstractController
      */
     private function checkIfEntryAlreadyExists(Entry $entry)
     {
-        return $this->entryRepository->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
+        $existing = $this->entryRepository->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
+        if ($existing instanceof Entry && $existing->isDeleted()) {
+            return false;
+        }
+
+        return $existing;
     }
 }
