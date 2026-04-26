@@ -640,6 +640,14 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame($e['url'], $content['url']);
         $this->assertSame($e['id'], $content['id']);
 
+        // Verify soft delete persisted state
+        $entry = $em->find(Entry::class, $e['id']);
+
+        $this->assertTrue($entry->isDeleted());
+        $this->assertInstanceOf(\DateTimeInterface::class, $entry->getDeletedAt());
+        $this->assertNull($entry->getContent());
+        $this->assertNull($entry->getPreviewPicture());
+
         // We'll try to delete this entry again
         $client = $this->createAuthorizedClient();
         $client->request('DELETE', '/api/entries/' . $e['id'] . '.json');
