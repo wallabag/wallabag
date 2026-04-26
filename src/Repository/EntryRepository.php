@@ -279,7 +279,7 @@ class EntryRepository extends ServiceEntityRepository
      *
      * @return Pagerfanta
      */
-    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full', $domainName = '', $isNotParsed = null, $httpStatus = null, $hasAnnotations = null)
+    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full', $domainName = '', $isNotParsed = null, $httpStatus = null, $hasAnnotations = null, $includeDeleted = false)
     {
         if (!\in_array(strtolower($detail), ['full', 'metadata'], true)) {
             throw new \Exception('Detail "' . $detail . '" parameter is wrong, allowed: full or metadata');
@@ -288,6 +288,10 @@ class EntryRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('e')
             ->leftJoin('e.tags', 't')
             ->where('e.user = :userId')->setParameter('userId', $userId);
+
+        if (!$includeDeleted) {
+            $qb->andWhere('e.deletedAt IS NULL');
+        }
 
         if ('metadata' === $detail) {
             $fieldNames = $this->getClassMetadata()->getFieldNames();
@@ -587,6 +591,7 @@ class EntryRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('e')
             ->select('count(e)')
             ->where('e.user = :userId')->setParameter('userId', $userId)
+            ->andWhere('e.deletedAt IS NULL')
         ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
@@ -601,16 +606,18 @@ class EntryRepository extends ServiceEntityRepository
     public function removeAllByUserId($userId): void
     {
         $this->getEntityManager()
-            ->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.user = :userId')
+            ->createQuery('UPDATE Wallabag\Entity\Entry e SET e.deletedAt = :now, e.content = null, e.previewPicture = null WHERE e.user = :userId AND e.deletedAt IS NULL')
             ->setParameter('userId', $userId)
+            ->setParameter('now', new \DateTimeImmutable())
             ->execute();
     }
 
     public function removeArchivedByUserId($userId): void
     {
         $this->getEntityManager()
-            ->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.user = :userId AND e.isArchived = TRUE')
+            ->createQuery('UPDATE Wallabag\Entity\Entry e SET e.deletedAt = :now, e.content = null, e.previewPicture = null WHERE e.user = :userId AND e.isArchived = TRUE AND e.deletedAt IS NULL')
             ->setParameter('userId', $userId)
+            ->setParameter('now', new \DateTimeImmutable())
             ->execute();
     }
 
@@ -692,6 +699,7 @@ class EntryRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('e')
             ->where('e.url = :url')->setParameter('url', urldecode($url))
             ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
+            ->andWhere('e.deletedAt IS NULL')
             ->getQuery()
             ->getResult();
     }
@@ -753,7 +761,8 @@ class EntryRepository extends ServiceEntityRepository
     private function getQueryBuilderByUser($userId)
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.user = :userId')->setParameter('userId', $userId);
+            ->andWhere('e.user = :userId')->setParameter('userId', $userId)
+            ->andWhere('e.deletedAt IS NULL');
     }
 
     /**
