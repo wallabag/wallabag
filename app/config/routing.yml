@@ -11,15 +11,6 @@ doc-api-json:
     methods: GET
     defaults: { _controller: nelmio_api_doc.controller.swagger }
 
-homepage:
-    path: "/{page}"
-    methods: GET
-    defaults:
-        _controller: 'Wallabag\Controller\EntryController::showUnreadAction'
-        page : 1
-    requirements:
-        page: \d+
-
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 

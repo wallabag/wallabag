@@ -135,7 +135,6 @@ menu:
         ignore_origin_instance_rules: Globální pravidla ignorování původu
         site_credentials: Přihlašovací údaje pro stránku
         users_management: Správa uživatelů
-        back_to_unread: Zpět na nepřečtené články
         save_link: Uložit odkaz
         search: Hledat
         about: O aplikaci

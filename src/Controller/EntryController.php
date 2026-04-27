@@ -20,6 +20,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
+use Wallabag\Enum\HomepageTarget;
 use Wallabag\Event\EntryDeletedEvent;
 use Wallabag\Event\EntrySavedEvent;
 use Wallabag\Form\Type\EditEntryType;
@@ -45,6 +46,26 @@ class EntryController extends AbstractController
         private readonly Security $security,
         private readonly string $fetchingErrorMessage,
     ) {
+    }
+
+    #[Route(path: '/', name: 'homepage', methods: ['GET'])]
+    #[IsGranted('LIST_ENTRIES')]
+    public function homepageAction(Request $request): Response
+    {
+        $defaultHomepage = $this->getUser()->getConfig()->getDefaultHomepage();
+
+        if (HomepageTarget::Tags !== $defaultHomepage) {
+            $request->attributes->set('_route', $defaultHomepage->value);
+            $request->attributes->set('_route_params', ['page' => 1]);
+        }
+
+        return match ($defaultHomepage) {
+            HomepageTarget::All => $this->showAllAction($request, 1),
+            HomepageTarget::Archive => $this->showArchiveAction($request, 1),
+            HomepageTarget::Starred => $this->showStarredAction($request, 1),
+            HomepageTarget::Tags => $this->redirectToRoute('tag'),
+            default => $this->showUnreadAction($request, 1),
+        };
     }
 
     /**

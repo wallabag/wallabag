@@ -191,7 +191,6 @@ menu:
     left:
         site_credentials: Site inloggegevens
         users_management: Gebruikersbeheer
-        back_to_unread: Terug naar ongelezen artikelen
         save_link: Bewaar een link
         search: Zoeken
         about: Over
