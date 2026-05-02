@@ -1,16 +1,16 @@
-FROM golang as envsubst
+FROM golang AS envsubst
 
-ARG ENVSUBST_VERSION=v1.3.0
+ARG ENVSUBST_VERSION=v1.4.3
 
 # envsubst from gettext can not replace env vars with default values
 # this package is not available for ARM32 and we have to build it from source code
 # flag -ldflags "-s -w" produces a smaller executable
 RUN go install -ldflags "-s -w" -v github.com/a8m/envsubst/cmd/envsubst@${ENVSUBST_VERSION}
 
-FROM php:8.2-fpm-bookworm AS rootless
+FROM php:8.4-fpm-trixie AS rootless
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG NODE_VERSION=20
+ARG NODE_VERSION=24
 
 RUN apt-get update \
     && apt-get install -y \
@@ -18,8 +18,7 @@ RUN apt-get update \
       curl \
       gnupg \
       lsb-release \
-      openssl \
-      software-properties-common
+      openssl
 
 RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash -
 
@@ -59,9 +58,9 @@ RUN docker-php-ext-install -j "$(nproc)" \
         tidy \
         zip
 
-RUN pecl install redis-6.1.0 \
-    && pecl install imagick-3.7.0 \
-    && pecl install xdebug-3.4.1 \
+RUN pecl install redis-6.3.0 \
+    && pecl install imagick-3.8.1 \
+    && pecl install xdebug-3.5.1 \
     && docker-php-ext-enable \
         redis \
         imagick \
