@@ -338,6 +338,7 @@ entry:
         address: Address
         added_on: Added on
         published_on: "Published on"
+        tags: Tags
 about:
     page_title: About
     top_menu:
