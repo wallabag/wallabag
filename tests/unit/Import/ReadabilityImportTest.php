@@ -26,7 +26,7 @@ class ReadabilityImportTest extends TestCase
     protected $contentProxy;
     protected $tagsAssigner;
 
-    public function testInit()
+    public function testInit(): void
     {
         $readabilityImport = $this->getReadabilityImport();
 
@@ -35,7 +35,7 @@ class ReadabilityImportTest extends TestCase
         $this->assertSame('import.readability.description', $readabilityImport->getDescription());
     }
 
-    public function testImport()
+    public function testImport(): void
     {
         $readabilityImport = $this->getReadabilityImport(false, 3);
         $readabilityImport->setFilepath(__DIR__ . '/../../fixtures/Import/readability.json');
@@ -59,8 +59,7 @@ class ReadabilityImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(3))
-            ->method('updateEntry')
-            ->willReturn($entry);
+            ->method('updateEntry');
 
         $res = $readabilityImport->import();
 
@@ -68,7 +67,7 @@ class ReadabilityImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 3, 'queued' => 0], $readabilityImport->getSummary());
     }
 
-    public function testImportAndMarkAllAsRead()
+    public function testImportAndMarkAllAsRead(): void
     {
         $readabilityImport = $this->getReadabilityImport(false, 1);
         $readabilityImport->setFilepath(__DIR__ . '/../../fixtures/Import/readability-read.json');
@@ -88,8 +87,7 @@ class ReadabilityImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(1))
-            ->method('updateEntry')
-            ->willReturn(new Entry($this->user));
+            ->method('updateEntry');
 
         // check that every entry persisted are archived
         $this->em
@@ -104,7 +102,7 @@ class ReadabilityImportTest extends TestCase
         $this->assertSame(['skipped' => 1, 'imported' => 1, 'queued' => 0], $readabilityImport->getSummary());
     }
 
-    public function testImportWithRabbit()
+    public function testImportWithRabbit(): void
     {
         $readabilityImport = $this->getReadabilityImport();
         $readabilityImport->setFilepath(__DIR__ . '/../../fixtures/Import/readability.json');
@@ -144,7 +142,7 @@ class ReadabilityImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 3], $readabilityImport->getSummary());
     }
 
-    public function testImportWithRedis()
+    public function testImportWithRedis(): void
     {
         $readabilityImport = $this->getReadabilityImport();
         $readabilityImport->setFilepath(__DIR__ . '/../../fixtures/Import/readability.json');
@@ -184,7 +182,7 @@ class ReadabilityImportTest extends TestCase
         $this->assertNotEmpty($redisMock->lpop('readability'));
     }
 
-    public function testImportBadFile()
+    public function testImportBadFile(): void
     {
         $readabilityImport = $this->getReadabilityImport();
         $readabilityImport->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v1.jsonx');
@@ -198,7 +196,7 @@ class ReadabilityImportTest extends TestCase
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    public function testImportUserNotDefined()
+    public function testImportUserNotDefined(): void
     {
         $readabilityImport = $this->getReadabilityImport(true);
         $readabilityImport->setFilepath(__DIR__ . '/../../fixtures/Import/readability.json');

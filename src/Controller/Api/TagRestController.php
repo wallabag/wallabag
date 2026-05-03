@@ -182,7 +182,7 @@ class TagRestController extends WallabagRestController
      *
      * @param Tag|array $tags
      */
-    private function cleanOrphanTag($tags)
+    private function cleanOrphanTag($tags): void
     {
         if (!\is_array($tags)) {
             $tags = [$tags];

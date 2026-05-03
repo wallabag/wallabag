@@ -8,7 +8,7 @@ use Wallabag\Entity\User;
 
 class EntryTest extends TestCase
 {
-    public function testGetLanguage()
+    public function testGetLanguage(): void
     {
         $entry = new Entry(new User());
         $languages = [

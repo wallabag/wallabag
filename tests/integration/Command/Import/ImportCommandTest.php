@@ -10,7 +10,7 @@ use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
 class ImportCommandTest extends WallabagKernelTestCase
 {
-    public function testRunImportCommandWithoutArguments()
+    public function testRunImportCommandWithoutArguments(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments');
@@ -23,7 +23,7 @@ class ImportCommandTest extends WallabagKernelTestCase
         $tester->execute([]);
     }
 
-    public function testRunImportCommandWithoutFilepath()
+    public function testRunImportCommandWithoutFilepath(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('not found');
@@ -39,7 +39,7 @@ class ImportCommandTest extends WallabagKernelTestCase
         ]);
     }
 
-    public function testRunImportCommandWithWrongUsername()
+    public function testRunImportCommandWithWrongUsername(): void
     {
         $this->expectException(NoResultException::class);
 
@@ -54,7 +54,7 @@ class ImportCommandTest extends WallabagKernelTestCase
         ]);
     }
 
-    public function testRunImportCommand()
+    public function testRunImportCommand(): void
     {
         $application = $this->createApplication();
 
@@ -71,7 +71,7 @@ class ImportCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('already saved', $tester->getDisplay());
     }
 
-    public function testRunImportCommandWithUserId()
+    public function testRunImportCommandWithUserId(): void
     {
         $application = $this->createApplication();
         $userId = $this->getUser('admin')->getId();

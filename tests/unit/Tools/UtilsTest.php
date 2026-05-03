@@ -11,7 +11,7 @@ class UtilsTest extends TestCase
     /**
      * @dataProvider examples
      */
-    public function testCorrectWordsCountForDifferentLanguages($filename, $text, $expectedCount)
+    public function testCorrectWordsCountForDifferentLanguages($filename, $text, $expectedCount): void
     {
         static::assertSame($expectedCount, Utils::getReadingTime($text), 'Reading time for: ' . $filename);
     }

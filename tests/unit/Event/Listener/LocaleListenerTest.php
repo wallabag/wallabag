@@ -14,7 +14,7 @@ use Wallabag\Event\Listener\LocaleListener;
 
 class LocaleListenerTest extends TestCase
 {
-    public function testWithoutSession()
+    public function testWithoutSession(): void
     {
         $request = Request::create('/');
 
@@ -25,7 +25,7 @@ class LocaleListenerTest extends TestCase
         $this->assertSame('en', $request->getLocale());
     }
 
-    public function testWithPreviousSession()
+    public function testWithPreviousSession(): void
     {
         $request = Request::create('/');
         // generate a previous session
@@ -39,7 +39,7 @@ class LocaleListenerTest extends TestCase
         $this->assertSame('fr', $request->getLocale());
     }
 
-    public function testLocaleFromRequestAttribute()
+    public function testLocaleFromRequestAttribute(): void
     {
         $request = Request::create('/');
         // generate a previous session
@@ -55,7 +55,7 @@ class LocaleListenerTest extends TestCase
         $this->assertSame('es', $request->getSession()->get('_locale'));
     }
 
-    public function testSubscribedEvents()
+    public function testSubscribedEvents(): void
     {
         $request = Request::create('/');
         // generate a previous session

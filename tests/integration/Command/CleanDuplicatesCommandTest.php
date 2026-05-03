@@ -8,7 +8,7 @@ use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
 class CleanDuplicatesCommandTest extends WallabagKernelTestCase
 {
-    public function testRunCleanDuplicates()
+    public function testRunCleanDuplicates(): void
     {
         $application = $this->createApplication();
 
@@ -21,7 +21,7 @@ class CleanDuplicatesCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('Finished cleaning. 0 duplicates found in total', $tester->getDisplay());
     }
 
-    public function testRunCleanDuplicatesCommandWithBadUsername()
+    public function testRunCleanDuplicatesCommandWithBadUsername(): void
     {
         $application = $this->createApplication();
 
@@ -35,7 +35,7 @@ class CleanDuplicatesCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('User "unknown" not found', $tester->getDisplay());
     }
 
-    public function testRunCleanDuplicatesCommandForUser()
+    public function testRunCleanDuplicatesCommandForUser(): void
     {
         $application = $this->createApplication();
 
@@ -49,7 +49,7 @@ class CleanDuplicatesCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('Cleaned 0 duplicates for user admin', $tester->getDisplay());
     }
 
-    public function testDuplicate()
+    public function testDuplicate(): void
     {
         $url = 'https://www.lemonde.fr/sport/visuel/2017/05/05/rondelle-prison-blanchissage-comprendre-le-hockey-sur-glace_5122587_3242.html';
         $em = $this->getEntityManager();

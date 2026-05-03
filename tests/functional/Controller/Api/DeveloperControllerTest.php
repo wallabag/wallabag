@@ -9,7 +9,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class DeveloperControllerTest extends WallabagTestCase
 {
-    public function testCreateClient()
+    public function testCreateClient(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -36,7 +36,7 @@ class DeveloperControllerTest extends WallabagTestCase
         $this->assertStringContainsString('My app', $alert[0]);
     }
 
-    public function testCreateToken()
+    public function testCreateToken(): void
     {
         $client = $this->getTestClient();
         $apiClient = $this->createApiClientForUser('admin');
@@ -58,7 +58,7 @@ class DeveloperControllerTest extends WallabagTestCase
         $this->assertArrayHasKey('refresh_token', $data);
     }
 
-    public function testCreateTokenWithBadClientId()
+    public function testCreateTokenWithBadClientId(): void
     {
         $client = $this->getTestClient();
         $client->request('POST', '/oauth/v2/token', [
@@ -72,7 +72,7 @@ class DeveloperControllerTest extends WallabagTestCase
         $this->assertSame(400, $client->getResponse()->getStatusCode());
     }
 
-    public function testListingClient()
+    public function testListingClient(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -84,7 +84,7 @@ class DeveloperControllerTest extends WallabagTestCase
         $this->assertSame(\count($nbClients), $crawler->filter('ul[class=collapsible] li')->count());
     }
 
-    public function testDeveloperHowto()
+    public function testDeveloperHowto(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -93,7 +93,7 @@ class DeveloperControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testRemoveClient()
+    public function testRemoveClient(): void
     {
         $client = $this->getTestClient();
         $adminApiClient = $this->createApiClientForUser('admin');

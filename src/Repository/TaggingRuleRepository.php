@@ -19,7 +19,7 @@ class TaggingRuleRepository extends ServiceEntityRepository
      *
      * @param int $configId
      */
-    public function removeAllByConfigId($configId)
+    public function removeAllByConfigId($configId): void
     {
         $this->getEntityManager()
             ->createQuery('DELETE FROM Wallabag\Entity\TaggingRule tr WHERE tr.config = :configId')

@@ -226,7 +226,7 @@ class DownloadImages
      *
      * @param int $entryId ID of the entry
      */
-    public function removeImages($entryId)
+    public function removeImages($entryId): void
     {
         $relativePath = $this->getRelativePath($entryId);
         $folderPath = $this->baseFolder . '/' . $relativePath;
@@ -304,7 +304,7 @@ class DownloadImages
     /**
      * Setup base folder where all images are going to be saved.
      */
-    private function setFolder()
+    private function setFolder(): void
     {
         // if folder doesn't exist, attempt to create one and store the folder name in property $folder
         if (!file_exists($this->baseFolder)) {

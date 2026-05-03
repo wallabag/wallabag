@@ -8,7 +8,7 @@ use Wallabag\SiteConfig\SiteConfig;
 
 class ArraySiteConfigBuilderTest extends TestCase
 {
-    public function testItReturnsSiteConfigThatExists()
+    public function testItReturnsSiteConfigThatExists(): void
     {
         $builder = new ArraySiteConfigBuilder(['example.com' => []]);
         $res = $builder->buildForHost('www.example.com');
@@ -16,7 +16,7 @@ class ArraySiteConfigBuilderTest extends TestCase
         $this->assertInstanceOf(SiteConfig::class, $res);
     }
 
-    public function testItReturnsFalseOnAHostThatDoesNotExist()
+    public function testItReturnsFalseOnAHostThatDoesNotExist(): void
     {
         $builder = new ArraySiteConfigBuilder(['anotherexample.com' => []]);
         $res = $builder->buildForHost('example.com');

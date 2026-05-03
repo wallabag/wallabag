@@ -11,7 +11,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class ChromeControllerTest extends WallabagTestCase
 {
-    public function testImportChrome()
+    public function testImportChrome(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -23,7 +23,7 @@ class ChromeControllerTest extends WallabagTestCase
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportChromeWithRabbitEnabled()
+    public function testImportChromeWithRabbitEnabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -39,7 +39,7 @@ class ChromeControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportChromeBadFile()
+    public function testImportChromeBadFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -56,7 +56,7 @@ class ChromeControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportChromeWithRedisEnabled()
+    public function testImportChromeWithRedisEnabled(): void
     {
         $this->checkRedis();
         $this->logInAs('admin');
@@ -91,7 +91,7 @@ class ChromeControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportWallabagWithChromeFile()
+    public function testImportWallabagWithChromeFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -132,7 +132,7 @@ class ChromeControllerTest extends WallabagTestCase
         $this->assertSame('07', $createdAt->format('m'));
     }
 
-    public function testImportWallabagWithEmptyFile()
+    public function testImportWallabagWithEmptyFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

@@ -22,7 +22,7 @@ class RedisWorkerCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->addArgument('serviceName', InputArgument::REQUIRED, 'Service to use: wallabag_v1, wallabag_v2, pocket, readability, pinboard, delicious, omnivore, firefox, chrome or instapaper')

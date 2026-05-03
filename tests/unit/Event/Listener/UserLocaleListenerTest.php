@@ -14,7 +14,7 @@ use Wallabag\Event\Listener\UserLocaleListener;
 
 class UserLocaleListenerTest extends TestCase
 {
-    public function testWithLanguage()
+    public function testWithLanguage(): void
     {
         $session = new Session(new MockArraySessionStorage());
         $listener = new UserLocaleListener($session);
@@ -36,7 +36,7 @@ class UserLocaleListenerTest extends TestCase
         $this->assertSame('fr', $session->get('_locale'));
     }
 
-    public function testWithoutLanguage()
+    public function testWithoutLanguage(): void
     {
         $session = new Session(new MockArraySessionStorage());
         $listener = new UserLocaleListener($session);
@@ -57,7 +57,7 @@ class UserLocaleListenerTest extends TestCase
         $this->assertNull($session->get('_locale'));
     }
 
-    public function testWithLanguageFromSession()
+    public function testWithLanguageFromSession(): void
     {
         $session = new Session(new MockArraySessionStorage());
         $listener = new UserLocaleListener($session);

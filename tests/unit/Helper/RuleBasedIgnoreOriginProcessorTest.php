@@ -33,7 +33,7 @@ class RuleBasedIgnoreOriginProcessorTest extends TestCase
         $this->processor = new RuleBasedIgnoreOriginProcessor($this->rulerz, $this->logger, $this->ignoreOriginInstanceRuleRepository);
     }
 
-    public function testProcessWithNoRule()
+    public function testProcessWithNoRule(): void
     {
         $user = $this->getUser();
         $entry = new Entry($user);
@@ -53,7 +53,7 @@ class RuleBasedIgnoreOriginProcessorTest extends TestCase
         $this->assertFalse($result);
     }
 
-    public function testProcessWithNoMatchingRule()
+    public function testProcessWithNoMatchingRule(): void
     {
         $userRule = $this->getIgnoreOriginUserRule('rule as string');
         $user = $this->getUser([$userRule]);
@@ -75,7 +75,7 @@ class RuleBasedIgnoreOriginProcessorTest extends TestCase
         $this->assertFalse($result);
     }
 
-    public function testProcessWithAMatchingRule()
+    public function testProcessWithAMatchingRule(): void
     {
         $userRule = $this->getIgnoreOriginUserRule('rule as string');
         $user = $this->getUser([$userRule]);
@@ -97,7 +97,7 @@ class RuleBasedIgnoreOriginProcessorTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testProcessWithAMixOfMatchingRules()
+    public function testProcessWithAMixOfMatchingRules(): void
     {
         $userRule = $this->getIgnoreOriginUserRule('rule as string');
         $anotherUserRule = $this->getIgnoreOriginUserRule('another rule as string');
@@ -119,7 +119,7 @@ class RuleBasedIgnoreOriginProcessorTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testProcessWithInstanceRules()
+    public function testProcessWithInstanceRules(): void
     {
         $user = $this->getUser();
         $entry = new Entry($user);
@@ -141,7 +141,7 @@ class RuleBasedIgnoreOriginProcessorTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testProcessWithMixedRules()
+    public function testProcessWithMixedRules(): void
     {
         $userRule = $this->getIgnoreOriginUserRule('rule as string');
         $user = $this->getUser([$userRule]);

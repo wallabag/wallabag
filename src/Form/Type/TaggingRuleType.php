@@ -12,7 +12,7 @@ use Wallabag\Form\DataTransformer\StringToListTransformer;
 
 class TaggingRuleType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('rule', TextType::class, [
@@ -33,7 +33,7 @@ class TaggingRuleType extends AbstractType
         $builder->add($tagsField);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => TaggingRule::class,

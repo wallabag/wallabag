@@ -12,7 +12,7 @@ use Wallabag\SiteConfig\LoginFormAuthenticator;
 
 class AuthenticatorTest extends TestCase
 {
-    public function testLoginIfRequiredNotRequired()
+    public function testLoginIfRequiredNotRequired(): void
     {
         $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
@@ -37,7 +37,7 @@ class AuthenticatorTest extends TestCase
         $this->assertSame('loginIfRequired> will not require login', $records[0]['message']);
     }
 
-    public function testLoginIfRequiredWithNotLoggedInUser()
+    public function testLoginIfRequiredWithNotLoggedInUser(): void
     {
         $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
@@ -69,7 +69,7 @@ class AuthenticatorTest extends TestCase
         $this->assertSame('loginIfRequired> user is not logged in, attach authenticator', $records[0]['message']);
     }
 
-    public function testLoginIfRequestedNotRequired()
+    public function testLoginIfRequestedNotRequired(): void
     {
         $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
@@ -103,7 +103,7 @@ class AuthenticatorTest extends TestCase
         $this->assertSame('loginIfRequested> will not require login', $records[0]['message']);
     }
 
-    public function testLoginIfRequestedNotRequested()
+    public function testLoginIfRequestedNotRequested(): void
     {
         $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
@@ -148,7 +148,7 @@ class AuthenticatorTest extends TestCase
         $this->assertSame('loginIfRequested> retry with login not required', $records[0]['message']);
     }
 
-    public function testLoginIfRequestedRequested()
+    public function testLoginIfRequestedRequested(): void
     {
         $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
@@ -196,7 +196,7 @@ class AuthenticatorTest extends TestCase
         $this->assertSame('loginIfRequested> retry with login required', $records[0]['message']);
     }
 
-    public function testLoginIfRequestedRedirect()
+    public function testLoginIfRequestedRedirect(): void
     {
         $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()

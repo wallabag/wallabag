@@ -8,7 +8,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class IgnoreOriginInstanceRuleControllerTest extends WallabagTestCase
 {
-    public function testListIgnoreOriginInstanceRule()
+    public function testListIgnoreOriginInstanceRule(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -23,7 +23,7 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagTestCase
         $this->assertStringContainsString('ignore_origin_instance_rule.list.create_new_one', $body);
     }
 
-    public function testIgnoreOriginInstanceRuleCreationEditionDeletion()
+    public function testIgnoreOriginInstanceRuleCreationEditionDeletion(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -129,7 +129,7 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForIgnoreOriginInstanceRuleCreationFail
      */
-    public function testIgnoreOriginInstanceRuleCreationFail($data, $messages)
+    public function testIgnoreOriginInstanceRuleCreationFail($data, $messages): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

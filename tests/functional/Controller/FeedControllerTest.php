@@ -9,7 +9,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class FeedControllerTest extends WallabagTestCase
 {
-    public function validateDom($xml, $type, $nb = null, $tagValue = null)
+    public function validateDom($xml, $type, $nb = null, $tagValue = null): void
     {
         $doc = new \DOMDocument();
         $doc->loadXML($xml);
@@ -80,7 +80,7 @@ class FeedControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForBadUrl
      */
-    public function testBadUrl($url)
+    public function testBadUrl($url): void
     {
         $client = $this->getTestClient();
 
@@ -89,7 +89,7 @@ class FeedControllerTest extends WallabagTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
-    public function testUnread()
+    public function testUnread(): void
     {
         $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
@@ -110,7 +110,7 @@ class FeedControllerTest extends WallabagTestCase
         $this->validateDom($client->getResponse()->getContent(), 'unread', 2);
     }
 
-    public function testStarred()
+    public function testStarred(): void
     {
         $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
@@ -132,7 +132,7 @@ class FeedControllerTest extends WallabagTestCase
         $this->validateDom($client->getResponse()->getContent(), 'starred');
     }
 
-    public function testArchives()
+    public function testArchives(): void
     {
         $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
@@ -154,7 +154,7 @@ class FeedControllerTest extends WallabagTestCase
         $this->validateDom($client->getResponse()->getContent(), 'archive');
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
@@ -176,7 +176,7 @@ class FeedControllerTest extends WallabagTestCase
         $this->validateDom($client->getResponse()->getContent(), 'all');
     }
 
-    public function testPagination()
+    public function testPagination(): void
     {
         $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
@@ -204,7 +204,7 @@ class FeedControllerTest extends WallabagTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
 
-    public function testTags()
+    public function testTags(): void
     {
         $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
@@ -307,7 +307,7 @@ class FeedControllerTest extends WallabagTestCase
     /**
      * @dataProvider dataForRedirect
      */
-    public function testRedirectFromRssToAtom($url)
+    public function testRedirectFromRssToAtom($url): void
     {
         $client = $this->getTestClient();
 

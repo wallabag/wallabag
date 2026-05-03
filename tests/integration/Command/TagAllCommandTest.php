@@ -8,7 +8,7 @@ use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
 class TagAllCommandTest extends WallabagKernelTestCase
 {
-    public function testRunTagAllCommandWithoutUsername()
+    public function testRunTagAllCommandWithoutUsername(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments (missing: "username")');
@@ -21,7 +21,7 @@ class TagAllCommandTest extends WallabagKernelTestCase
         $tester->execute([]);
     }
 
-    public function testRunTagAllCommandWithBadUsername()
+    public function testRunTagAllCommandWithBadUsername(): void
     {
         $application = $this->createApplication();
 
@@ -35,7 +35,7 @@ class TagAllCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('User "unknown" not found', $tester->getDisplay());
     }
 
-    public function testRunTagAllCommand()
+    public function testRunTagAllCommand(): void
     {
         $application = $this->createApplication();
 

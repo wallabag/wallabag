@@ -10,7 +10,7 @@ class StringToListTransformerTest extends TestCase
     /**
      * @dataProvider transformProvider
      */
-    public function testTransformWithValidData($inputData, $expectedResult)
+    public function testTransformWithValidData($inputData, $expectedResult): void
     {
         $transformer = new StringToListTransformer();
 
@@ -30,7 +30,7 @@ class StringToListTransformerTest extends TestCase
     /**
      * @dataProvider reverseTransformProvider
      */
-    public function testReverseTransformWithValidData($inputData, $expectedResult)
+    public function testReverseTransformWithValidData($inputData, $expectedResult): void
     {
         $transformer = new StringToListTransformer();
 

@@ -264,7 +264,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     /**
      * @param bool $emailTwoFactor
      */
-    public function setEmailTwoFactor($emailTwoFactor)
+    public function setEmailTwoFactor($emailTwoFactor): void
     {
         $this->emailTwoFactor = $emailTwoFactor;
     }
@@ -322,7 +322,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
         $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
     }
 
-    public function setBackupCodes(?array $codes = null)
+    public function setBackupCodes(?array $codes = null): void
     {
         $this->backupCodes = $codes;
     }
