@@ -79,6 +79,7 @@ about:
 entry:
     metadata:
         published_on: Publicado o
+        tags: Etiquetas
         added_on: Engadido o
         address: Enderezo
         reading_time_minutes_short: '%readingTime% min'

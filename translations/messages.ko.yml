@@ -252,6 +252,7 @@ entry:
         shared_by_wallabag: 이 문서는 %username% 님이 <a href='%wallabag_instance%'>wallabag</a>와 공유했습니다
     metadata:
         published_on: 게시일
+        tags: 태그
         added_on: 추가
         address: 주소
         reading_time_minutes_short: '%readingTime% 분'

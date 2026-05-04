@@ -341,6 +341,7 @@ entry:
         address: Adres
         added_on: Eklenme tarihi
         published_on: Yayımlanma tarihi
+        tags: Etiketler
 about:
     page_title: Hakkımızda
     top_menu:

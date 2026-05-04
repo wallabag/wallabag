@@ -341,6 +341,7 @@ entry:
         address: Adresse
         added_on: Hinzugefügt am
         published_on: Veröffentlicht am
+        tags: Tags
 about:
     page_title: Über
     top_menu:

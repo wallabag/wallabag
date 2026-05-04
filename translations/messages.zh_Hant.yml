@@ -327,6 +327,7 @@ entry:
         reading_time: 閱讀約需時
         reading_time_minutes_short: '%readingTime% 分鐘'
         published_on: 發布於
+        tags: 標籤
         added_on: 添加於
         address: 地址
     default_title: 條目標題

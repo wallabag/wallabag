@@ -338,6 +338,7 @@ entry:
         address: Adresse
         added_on: Ajouté le
         published_on: Publié le
+        tags: Étiquettes
 about:
     page_title: À propos
     top_menu:

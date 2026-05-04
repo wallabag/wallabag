@@ -340,6 +340,7 @@ entry:
         address: Adreça
         added_on: Apondut lo
         published_on: Publicat lo
+        tags: Etiquetas
         reading_time: Durada de lectura estimada
 about:
     page_title: A prepaus

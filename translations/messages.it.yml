@@ -329,6 +329,7 @@ entry:
         address: Indirizzo
         added_on: Aggiunto il
         published_on: Pubblicato in data
+        tags: Etichette
 about:
     page_title: A proposito
     top_menu:

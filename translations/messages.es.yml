@@ -341,6 +341,7 @@ entry:
         reading_time_minutes_short: '%readingTime% min'
         reading_time: Tiempo estimado de lectura
         published_on: Publicado en
+        tags: Etiquetas
 about:
     page_title: 'Acerca de'
     top_menu:

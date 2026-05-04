@@ -331,6 +331,7 @@ entry:
         reading_time_minutes_short: '%readingTime% 分'
         reading_time: 推定読了時間
         published_on: 公開日
+        tags: タグ
     confirm:
         delete_tag: 本当にこのタグを記事から削除してよろしいですか？
         delete: 本当にこの記事を削除してよろしいですか？

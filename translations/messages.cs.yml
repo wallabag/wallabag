@@ -90,6 +90,7 @@ entry:
         add_tags: Přidat štítky
     metadata:
         published_on: Zveřejněno
+        tags: Štítky
         added_on: Přidáno
         address: Adresa
         reading_time_minutes_short: '%readingTime% min'

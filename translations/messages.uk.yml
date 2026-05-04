@@ -333,6 +333,7 @@ entry:
         address: Адреса
         added_on: Додано
         published_on: Опубліковане
+        tags: Теги
 about:
     page_title: Про wallabag
     top_menu:

@@ -563,6 +563,7 @@ entry:
         reading_time: Procijenjeno vrijeme čitanja
         address: Adresa
         published_on: Datum objavljivanja
+        tags: Oznake
     confirm:
         delete: Stvarno želiš ukloniti taj članak?
         delete_tag: Stvarno želiš ukloniti tu oznaku za taj članak?

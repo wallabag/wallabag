@@ -699,6 +699,7 @@ entry:
         number_on_the_page: '{0} Det er ingen oppføringer.|{1} Det er én oppføring.|]1,Inf[ Det er %count% oppføringer.'
     metadata:
         published_on: Publisert
+        tags: Etiketter
         added_on: Lagt til
         address: Adresse
         reading_time_minutes_short: '%readingTime% min'
