@@ -506,7 +506,7 @@ class EntryRestController extends WallabagRestController
                 // entry deleted, dispatch event about it!
                 $eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
-                $entry->softDelete();
+                $entry->setContent(null)->setPreviewPicture(null)->updateDeleted(true);
                 $this->entityManager->flush();
             }
 
@@ -561,13 +561,11 @@ class EntryRestController extends WallabagRestController
                 $this->getUser()->getId()
             );
 
-            if ($entry instanceof Entry && $entry->isDeleted()) {
-                $entry = false;
-            }
-
             $results[$key]['url'] = $url;
 
-            if (false === $entry) {
+            if ($entry instanceof Entry && $entry->isDeleted()) {
+                $contentProxy->updateEntry($entry, $url);
+            } elseif (false === $entry) {
                 $entry = new Entry($this->getUser());
 
                 $contentProxy->updateEntry($entry, $url);
@@ -739,10 +737,6 @@ class EntryRestController extends WallabagRestController
             $url,
             $this->getUser()->getId()
         );
-
-        if ($entry instanceof Entry && $entry->isDeleted()) {
-            $entry = false;
-        }
 
         if (false === $entry) {
             $entry = new Entry($this->getUser());
@@ -1142,7 +1136,7 @@ class EntryRestController extends WallabagRestController
         // entry deleted, dispatch event about it!
         $eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
-        $entry->softDelete();
+        $entry->setContent(null)->setPreviewPicture(null)->updateDeleted(true);
         $this->entityManager->flush();
 
         return $response;

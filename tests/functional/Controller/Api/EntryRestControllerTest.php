@@ -1513,6 +1513,57 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertEmpty($content);
     }
 
+    public function testPostDeletedEntryIsRestored(): void
+    {
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
+        $entry = (new Entry($this->user))->setUrl('http://0.0.0.0/deleted-entry-restore');
+        $entry->updateDeleted(true);
+        $em->persist($entry);
+        $em->flush();
+        $deletedId = $entry->getId();
+
+        $this->client = $this->createAuthorizedClient();
+
+        $this->client->request('POST', '/api/entries.json', [
+            'url' => 'http://0.0.0.0/deleted-entry-restore',
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertSame($deletedId, $content['id']);
+        $this->assertNull($content['deleted_at']);
+
+        $restored = $em->getRepository(Entry::class)->find($deletedId);
+        $this->assertNull($restored->getDeletedAt());
+    }
+
+    public function testPostEntriesListWithDeletedEntry(): void
+    {
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
+        $entry = (new Entry($this->user))->setUrl('http://0.0.0.0/deleted-list-entry-restore');
+        $entry->updateDeleted(true);
+        $em->persist($entry);
+        $em->flush();
+        $deletedId = $entry->getId();
+
+        $this->client = $this->createAuthorizedClient();
+
+        $list = ['http://0.0.0.0/deleted-list-entry-restore'];
+
+        $this->client->request('POST', '/api/entries/lists?urls=' . json_encode($list));
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertSame($deletedId, $content[0]['entry']);
+
+        $restored = $em->getRepository(Entry::class)->find($deletedId);
+        $this->assertNull($restored->getDeletedAt());
+    }
+
     public function testDeleteEntriesListAction(): void
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);

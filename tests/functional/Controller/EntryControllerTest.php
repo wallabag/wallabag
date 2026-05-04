@@ -1982,4 +1982,30 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(4, $crawler->filter('ol.entries > li'));
     }
+
+    public function testAddViaFormRestoresDeletedEntry(): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
+        $user = $this->getLoggedInUser();
+        $entry = (new Entry($user))->setUrl('http://0.0.0.0/deleted-form-restore');
+        $entry->updateDeleted(true);
+        $em->persist($entry);
+        $em->flush();
+        $deletedId = $entry->getId();
+
+        $crawler = $client->request('GET', '/new');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+        $client->submit($form, ['entry[url]' => 'http://0.0.0.0/deleted-form-restore']);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $em->clear();
+        $restored = $em->getRepository(Entry::class)->find($deletedId);
+        $this->assertNull($restored->getDeletedAt());
+    }
 }
