@@ -606,18 +606,16 @@ class EntryRepository extends ServiceEntityRepository
     public function removeAllByUserId($userId): void
     {
         $this->getEntityManager()
-            ->createQuery('UPDATE Wallabag\Entity\Entry e SET e.deletedAt = :now, e.content = null, e.previewPicture = null WHERE e.user = :userId AND e.deletedAt IS NULL')
+            ->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.user = :userId')
             ->setParameter('userId', $userId)
-            ->setParameter('now', new \DateTimeImmutable())
             ->execute();
     }
 
     public function removeArchivedByUserId($userId): void
     {
         $this->getEntityManager()
-            ->createQuery('UPDATE Wallabag\Entity\Entry e SET e.deletedAt = :now, e.content = null, e.previewPicture = null WHERE e.user = :userId AND e.isArchived = TRUE AND e.deletedAt IS NULL')
+            ->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.user = :userId AND e.isArchived = TRUE')
             ->setParameter('userId', $userId)
-            ->setParameter('now', new \DateTimeImmutable())
             ->execute();
     }
 
