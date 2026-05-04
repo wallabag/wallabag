@@ -387,6 +387,30 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
+    public function testGetEntriesIncludeDeleted(): void
+    {
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
+        $entry = (new Entry($this->user))->setUrl('http://0.0.0.0/include-deleted-test');
+        $entry->updateDeleted(true);
+        $em->persist($entry);
+        $em->flush();
+
+        // deleted entry is hidden by default
+        $this->client->request('GET', '/api/entries');
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+        $urls = array_column($content['_embedded']['items'], 'url');
+        $this->assertNotContains('http://0.0.0.0/include-deleted-test', $urls);
+
+        // deleted entry appears with include_deleted=1
+        $this->client = $this->createAuthorizedClient();
+        $this->client->request('GET', '/api/entries', ['include_deleted' => 1]);
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+        $urls = array_column($content['_embedded']['items'], 'url');
+        $this->assertContains('http://0.0.0.0/include-deleted-test', $urls);
+    }
+
     public function testGetEntriesOnPageTwo(): void
     {
         $this->client->request('GET', '/api/entries', [

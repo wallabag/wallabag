@@ -327,7 +327,7 @@ class EntryRestController extends WallabagRestController
         $domainName = (null === $request->query->get('domain_name')) ? '' : (string) $request->query->get('domain_name');
         $httpStatus = (!\array_key_exists((int) $request->query->get('http_status'), Response::$statusTexts)) ? null : (int) $request->query->get('http_status');
         $hasAnnotations = (null === $request->query->get('annotations')) ? null : (bool) $request->query->get('annotations');
-        $includeDeleted = (bool) $request->query->get('include_deleted', false);
+        $includeDeleted = (null === $request->query->get('include_deleted')) ? false : (bool) $request->query->get('include_deleted');
 
         try {
             /** @var Pagerfanta $pager */
@@ -506,7 +506,7 @@ class EntryRestController extends WallabagRestController
                 // entry deleted, dispatch event about it!
                 $eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
-                $entry->setContent(null)->setPreviewPicture(null)->updateDeleted(true);
+                $entry->updateDeleted(true);
                 $this->entityManager->flush();
             }
 
@@ -1136,7 +1136,7 @@ class EntryRestController extends WallabagRestController
         // entry deleted, dispatch event about it!
         $eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
-        $entry->setContent(null)->setPreviewPicture(null)->updateDeleted(true);
+        $entry->updateDeleted(true);
         $this->entityManager->flush();
 
         return $response;

@@ -325,9 +325,12 @@ class Entry
         return null !== $this->deletedAt;
     }
 
-    public function updateDeleted(bool $isDeleted = false): static
+    public function updateDeleted(bool $isDeleted): static
     {
         $this->deletedAt = $isDeleted ? new \DateTimeImmutable() : null;
+        if ($isDeleted) {
+            $this->setContent(null)->setPreviewPicture(null);
+        }
 
         return $this;
     }
