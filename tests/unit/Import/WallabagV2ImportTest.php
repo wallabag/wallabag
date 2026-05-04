@@ -46,9 +46,12 @@ class WallabagV2ImportTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $existingEntry = $this->createMock(Entry::class);
+        $existingEntry->method('isDeleted')->willReturn(false);
+
         $entryRepo->expects($this->exactly(6))
             ->method('findByUrlAndUserId')
-            ->will($this->onConsecutiveCalls(false, true, false));
+            ->will($this->onConsecutiveCalls(false, $existingEntry, false, $existingEntry, $existingEntry, $existingEntry));
 
         $this->em
             ->expects($this->any())
@@ -220,9 +223,12 @@ class WallabagV2ImportTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $existingEntry = $this->createMock(Entry::class);
+        $existingEntry->method('isDeleted')->willReturn(false);
+
         $entryRepo->expects($this->exactly(6))
             ->method('findByUrlAndUserId')
-            ->will($this->onConsecutiveCalls(false, true, false));
+            ->will($this->onConsecutiveCalls(false, $existingEntry, false, $existingEntry, $existingEntry, $existingEntry));
 
         $this->em
             ->expects($this->any())

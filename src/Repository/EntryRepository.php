@@ -503,11 +503,12 @@ class EntryRepository extends ServiceEntityRepository
      *
      * @return Entry|false
      */
-    public function findByUrlAndUserId($url, $userId)
+    public function findByUrlAndUserId($url, $userId, bool $includeDeleted = false)
     {
         return $this->findByHashedUrlAndUserId(
             UrlHasher::hashUrl($url),
-            $userId
+            $userId,
+            $includeDeleted
         );
     }
 
@@ -536,25 +537,33 @@ class EntryRepository extends ServiceEntityRepository
      *
      * @return Entry|false
      */
-    public function findByHashedUrlAndUserId($hashedUrl, $userId)
+    public function findByHashedUrlAndUserId($hashedUrl, $userId, bool $includeDeleted = false)
     {
         // try first using hashed_url (to use the database index)
-        $res = $this->createQueryBuilder('e')
+        $qb = $this->createQueryBuilder('e')
             ->where('e.hashedUrl = :hashed_url')->setParameter('hashed_url', $hashedUrl)
-            ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
-            ->getQuery()
-            ->getResult();
+            ->andWhere('e.user = :user_id')->setParameter('user_id', $userId);
+
+        if (!$includeDeleted) {
+            $qb->andWhere('e.deletedAt IS NULL');
+        }
+
+        $res = $qb->getQuery()->getResult();
 
         if (\count($res)) {
             return current($res);
         }
 
         // then try using hashed_given_url (to use the database index)
-        $res = $this->createQueryBuilder('e')
+        $qb = $this->createQueryBuilder('e')
             ->where('e.hashedGivenUrl = :hashed_given_url')->setParameter('hashed_given_url', $hashedUrl)
-            ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
-            ->getQuery()
-            ->getResult();
+            ->andWhere('e.user = :user_id')->setParameter('user_id', $userId);
+
+        if (!$includeDeleted) {
+            $qb->andWhere('e.deletedAt IS NULL');
+        }
+
+        $res = $qb->getQuery()->getResult();
 
         if (\count($res)) {
             return current($res);
@@ -567,6 +576,7 @@ class EntryRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('e')->select(['e.id', 'e.hashedUrl', 'e.hashedGivenUrl']);
         $res = $qb->where('e.user = :user_id')->setParameter('user_id', $userId)
+                    ->andWhere('e.deletedAt IS NULL')
                     ->andWhere(
                         $qb->expr()->orX(
                             $qb->expr()->in('e.hashedUrl', $hashedUrls),

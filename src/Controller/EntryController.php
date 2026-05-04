@@ -178,7 +178,7 @@ class EntryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $existingEntry = $this->entryRepository->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
+            $existingEntry = $this->entryRepository->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId(), includeDeleted: true);
 
             if ($existingEntry instanceof Entry && !$existingEntry->isDeleted()) {
                 $this->addFlash(
@@ -221,7 +221,7 @@ class EntryController extends AbstractController
         $entry = new Entry($this->getUser());
         $entry->setUrl($request->query->get('url'));
 
-        $existingEntry = $this->entryRepository->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
+        $existingEntry = $this->entryRepository->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId(), includeDeleted: true);
 
         if ($existingEntry instanceof Entry && $existingEntry->isDeleted()) {
             $this->updateEntry($existingEntry);

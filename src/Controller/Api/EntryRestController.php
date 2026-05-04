@@ -579,7 +579,8 @@ class EntryRestController extends WallabagRestController
         foreach ($urls as $key => $url) {
             $entry = $entryRepository->findByUrlAndUserId(
                 $url,
-                $this->getUser()->getId()
+                $this->getUser()->getId(),
+                includeDeleted: true
             );
 
             $results[$key]['url'] = $url;
@@ -756,7 +757,8 @@ class EntryRestController extends WallabagRestController
 
         $entry = $entryRepository->findByUrlAndUserId(
             $url,
-            $this->getUser()->getId()
+            $this->getUser()->getId(),
+            includeDeleted: true
         );
 
         if (false === $entry) {
