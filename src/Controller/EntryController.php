@@ -122,7 +122,7 @@ class EntryController extends AbstractController
                     }
                 } elseif ('delete' === $action) {
                     $this->eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
-                    $entry->softDelete();
+                    $entry->setContent(null)->setPreviewPicture(null)->updateDeleted(true);
                 }
             }
 
@@ -178,15 +178,19 @@ class EntryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $existingEntry = $this->checkIfEntryAlreadyExists($entry);
+            $existingEntry = $this->entryRepository->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
 
-            if (false !== $existingEntry) {
+            if ($existingEntry instanceof Entry && !$existingEntry->isDeleted()) {
                 $this->addFlash(
                     'notice',
                     $translator->trans('flashes.entry.notice.entry_already_saved', ['%date%' => $existingEntry->getCreatedAt()->format('d-m-Y')])
                 );
 
                 return $this->redirect($this->generateUrl('view', ['id' => $existingEntry->getId()]));
+            }
+
+            if ($existingEntry instanceof Entry) {
+                $entry = $existingEntry;
             }
 
             $this->updateEntry($entry);
@@ -217,9 +221,14 @@ class EntryController extends AbstractController
         $entry = new Entry($this->getUser());
         $entry->setUrl($request->query->get('url'));
 
-        if (false === $this->checkIfEntryAlreadyExists($entry)) {
-            $this->updateEntry($entry);
+        $existingEntry = $this->entryRepository->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
 
+        if ($existingEntry instanceof Entry && $existingEntry->isDeleted()) {
+            $this->updateEntry($existingEntry);
+            $this->entityManager->flush();
+            $this->eventDispatcher->dispatch(new EntrySavedEvent($existingEntry), EntrySavedEvent::NAME);
+        } elseif (!$existingEntry instanceof Entry) {
+            $this->updateEntry($entry);
             $this->entityManager->persist($entry);
             $this->entityManager->flush();
 
@@ -513,7 +522,7 @@ class EntryController extends AbstractController
         // entry deleted, dispatch event about it!
         $this->eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
-        $entry->softDelete();
+        $entry->setContent(null)->setPreviewPicture(null)->updateDeleted(true);
         $this->entityManager->flush();
 
         $this->addFlash(
@@ -726,18 +735,4 @@ class EntryController extends AbstractController
         $this->addFlash('notice', $message);
     }
 
-    /**
-     * Check for existing entry, if it exists, redirect to it with a message.
-     *
-     * @return Entry|bool
-     */
-    private function checkIfEntryAlreadyExists(Entry $entry)
-    {
-        $existing = $this->entryRepository->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
-        if ($existing instanceof Entry && $existing->isDeleted()) {
-            return false;
-        }
-
-        return $existing;
-    }
 }

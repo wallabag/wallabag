@@ -315,6 +315,23 @@ class Entry
         return $this->url;
     }
 
+    public function getDeletedAt(): ?\DateTimeInterface
+    {
+        return $this->deletedAt;
+    }
+
+    public function isDeleted(): bool
+    {
+        return null !== $this->deletedAt;
+    }
+
+    public function updateDeleted(bool $isDeleted = false): static
+    {
+        $this->deletedAt = $isDeleted ? new \DateTimeImmutable() : null;
+
+        return $this;
+    }
+
     /**
      * Set isArchived.
      *
@@ -365,25 +382,6 @@ class Entry
         $this->archivedAt = $archivedAt;
 
         return $this;
-    }
-
-    public function getDeletedAt(): ?\DateTimeInterface
-    {
-        return $this->deletedAt;
-    }
-
-    public function softDelete(?\DateTimeInterface $deletedAt = null): static
-    {
-        $this->deletedAt = $deletedAt ?? new \DateTimeImmutable();
-        $this->setContent(null);
-        $this->setPreviewPicture(null);
-
-        return $this;
-    }
-
-    public function isDeleted(): bool
-    {
-        return null !== $this->deletedAt;
     }
 
     /**
