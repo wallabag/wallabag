@@ -30,4 +30,12 @@ class Utils
     {
         return (int) floor(\count(preg_split('~([^\p{L}\p{N}\']+|(\p{Han}|\p{Hiragana}|\p{Katakana}|\p{Hangul}){1,2})~u', strip_tags($text))) / 200);
     }
+
+    /**
+     * Coerces a craue/config value to a nullable int.
+     */
+    public static function coerceNullableInt(mixed $value): ?int
+    {
+        return (null !== $value && '' !== (string) $value) ? (int) $value : null;
+    }
 }

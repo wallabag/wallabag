@@ -18,6 +18,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\Entity\Api\ApplicationInfo;
 use Wallabag\Entity\User;
+use Wallabag\Tools\Utils;
 
 class WallabagRestController extends AbstractFOSRestController
 {
@@ -82,9 +83,13 @@ class WallabagRestController extends AbstractFOSRestController
         $info = new ApplicationInfo(
             $this->version,
             $this->registrationEnabled && $craueConfig->get('api_user_registration'),
+            Utils::coerceNullableInt($craueConfig->get('deleted_entries_expiration_days')),
         );
 
-        return (new JsonResponse())->setJson($this->serializer->serialize($info, 'json'));
+        $context = new SerializationContext();
+        $context->setSerializeNull(true);
+
+        return (new JsonResponse())->setJson($this->serializer->serialize($info, 'json', $context));
     }
 
     protected function validateAuthentication(): void

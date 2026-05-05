@@ -629,6 +629,25 @@ class EntryRepository extends ServiceEntityRepository
             ->execute();
     }
 
+    public function countDeletedEntriesOlderThan(\DateTimeInterface $before): int
+    {
+        return (int) $this->createQueryBuilder('e')
+            ->select('COUNT(e.id)')
+            ->where('e.deletedAt IS NOT NULL')
+            ->andWhere('e.deletedAt < :before')
+            ->setParameter('before', $before)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function purgeDeletedEntriesOlderThan(\DateTimeInterface $before): int
+    {
+        return (int) $this->getEntityManager()
+            ->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.deletedAt IS NOT NULL AND e.deletedAt < :before')
+            ->setParameter('before', $before)
+            ->execute();
+    }
+
     /**
      * Get id and url from all entries
      * Used for the clean-duplicates command.

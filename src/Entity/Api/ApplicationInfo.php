@@ -35,10 +35,21 @@ class ApplicationInfo
      */
     public $allowed_registration;
 
-    public function __construct($version, $allowed_registration)
+    /**
+     * @var int|null
+     * @OA\Property(
+     *     description="Retention period in days for soft-deleted entries. Null means entries are never auto-purged.",
+     *     type="integer",
+     *     nullable=true,
+     * )
+     */
+    public $deleted_entries_expiration_days;
+
+    public function __construct($version, $allowed_registration, $deleted_entries_expiration_days = null)
     {
         $this->appname = 'wallabag';
         $this->version = $version;
         $this->allowed_registration = $allowed_registration;
+        $this->deleted_entries_expiration_days = $deleted_entries_expiration_days;
     }
 }

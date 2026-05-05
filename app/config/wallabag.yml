@@ -158,6 +158,10 @@ parameters:
             name: shaarli_share_origin_url
             value: 0
             section: entry
+        -
+            name: deleted_entries_expiration_days
+            value: ~
+            section: entry
 
     wallabag.default_ignore_origin_instance_rules:
         -
