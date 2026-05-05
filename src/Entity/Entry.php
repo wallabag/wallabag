@@ -329,7 +329,8 @@ class Entry
     {
         $this->deletedAt = $isDeleted ? new \DateTimeImmutable() : null;
         if ($isDeleted) {
-            $this->setContent(null)->setPreviewPicture(null);
+            $this->content = null;
+            $this->previewPicture = null;
         }
 
         return $this;
@@ -468,7 +469,7 @@ class Entry
     /**
      * Get content.
      *
-     * @return string
+     * @return string|null
      */
     public function getContent()
     {

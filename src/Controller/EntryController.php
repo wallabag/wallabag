@@ -734,5 +734,4 @@ class EntryController extends AbstractController
 
         $this->addFlash('notice', $message);
     }
-
 }
