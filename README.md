@@ -1,4 +1,4 @@
-# wallabag
+# MAIN NELES
 
 > [!IMPORTANT]
 > The name of this project is **wallabag** — all lowercase, always. Not "Wallabag", not "WallaBag", not any other variation. Just plain, humble, all-lowercase **wallabag** 😉
