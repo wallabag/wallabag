@@ -5,3 +5,5 @@ validator:
     quote_length_too_high: Citace je příliš dlouhá. Měla by mít {{ limit }} znaků nebo méně.
     feed_limit_too_high: Toto určitě ukončí aplikaci
     item_per_page_too_high: Toto určitě ukončí aplikaci
+    item_per_page_too_low: Tato hodnota by měla být větší nebo rovna 1.
+    feed_limit_too_low: Tato hodnota by měla být větší nebo rovna 1.

@@ -1,6 +1,9 @@
 imports:
     - { resource: config.yml }
 
+parameters:
+    wallabag.sentry_dsn: ''
+
 #doctrine:
 #    orm:
 #        metadata_cache_driver: apc
@@ -21,4 +24,4 @@ monolog:
             type: console
 
 sentry:
-    dsn: "%sentry_dsn%"
+    dsn: "%env(default:wallabag.sentry_dsn:SENTRY_DSN)%"

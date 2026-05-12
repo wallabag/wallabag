@@ -352,6 +352,7 @@ howto:
 entry:
     metadata:
         published_on: Δημοσιεύτηκε την
+        tags: Ετικέτες
         added_on: Προστέθηκε την
         address: Διεύθυνση
         reading_time_minutes_short: '%readingTime% λεπτά'

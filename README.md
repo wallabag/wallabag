@@ -1,5 +1,8 @@
 # wallabag
 
+> [!IMPORTANT]
+> The name of this project is **wallabag** — all lowercase, always. Not "Wallabag", not "WallaBag", not any other variation. Just plain, humble, all-lowercase **wallabag** 😉
+
 [![CI](https://github.com/wallabag/wallabag/actions/workflows/continuous-integration.yml/badge.svg?branch=master)](https://github.com/wallabag/wallabag/actions/workflows/continuous-integration.yml?query=branch%3Amaster)
 [![Matrix](https://matrix.to/img/matrix-badge.svg)](https://matrix.to/#/#wallabag:matrix.org)
 [![Donation Status](https://img.shields.io/liberapay/goal/wallabag.svg?logo=liberapay)](https://liberapay.com/wallabag/donate)
@@ -24,7 +27,7 @@ You can install it on your own server, or you can create an account on [wallabag
 
 The documentation is available at https://doc.wallabag.org.
 
-You can contribute to it through its dedicated repository, available here: https://github.com/wallabag/doc.
+The source files live in the [`doc/`](doc/) directory of this repository.
 
 ## Installation
 
@@ -36,6 +39,8 @@ Then you can install wallabag by executing the following commands:
 git clone https://github.com/wallabag/wallabag.git
 cd wallabag && make install
 ```
+
+If your system's default `make` is not GNU make, use `gmake install` instead.
 
 Now, [configure a virtual host](https://doc.wallabag.org/en/admin/installation/virtualhosts.html) to use your wallabag.
 

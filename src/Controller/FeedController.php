@@ -22,6 +22,8 @@ class FeedController extends AbstractController
 {
     public function __construct(
         private readonly EntryRepository $entryRepository,
+        private readonly int $feedLimit,
+        private readonly string $version,
     ) {
     }
 
@@ -122,7 +124,7 @@ class FeedController extends AbstractController
             $user
         );
 
-        $perPage = $user->getConfig()->getFeedLimit() ?: $this->getParameter('wallabag.feed_limit');
+        $perPage = $user->getConfig()->getFeedLimit() ?: $this->feedLimit;
         $entries->setMaxPerPage($perPage);
 
         try {
@@ -140,7 +142,7 @@ class FeedController extends AbstractController
                 'url' => $url,
                 'entries' => $entries,
                 'user' => $user->getUsername(),
-                'version' => $this->getParameter('wallabag.version'),
+                'version' => $this->version,
                 'tag' => $tag->getSlug(),
                 'updated' => $this->prepareFeedUpdatedDate($entries, $sort),
             ],
@@ -186,7 +188,7 @@ class FeedController extends AbstractController
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
         $entries = new Pagerfanta($pagerAdapter);
 
-        $perPage = $user->getConfig()->getFeedLimit() ?: $this->getParameter('wallabag.feed_limit');
+        $perPage = $user->getConfig()->getFeedLimit() ?: $this->feedLimit;
         $entries->setMaxPerPage($perPage);
 
         $url = $this->generateUrl(
@@ -211,7 +213,7 @@ class FeedController extends AbstractController
             'url' => $url,
             'entries' => $entries,
             'user' => $user->getUsername(),
-            'version' => $this->getParameter('wallabag.version'),
+            'version' => $this->version,
             'updated' => $this->prepareFeedUpdatedDate($entries),
         ], new Response('', 200, ['Content-Type' => 'application/atom+xml']));
     }

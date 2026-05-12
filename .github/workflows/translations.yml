@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v5"
+        uses: "actions/checkout@v6"
 
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
@@ -36,7 +36,7 @@ jobs:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v3"
+        uses: "ramsey/composer-install@v4"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 

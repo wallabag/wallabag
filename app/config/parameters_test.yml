@@ -1,2 +1,0 @@
-parameters:
-    database_path: "%kernel.project_dir%/data/db/wallabag%wallabag_dbname_suffix%.sqlite"

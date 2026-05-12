@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\DataFixtures;
+namespace Wallabag\Fixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -11,11 +11,20 @@ class TagFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $tags = [
-            'foo-bar-tag' => 'foo bar', // tag used for EntryControllerTest
-            'bar-tag' => 'bar',
-            'baz-tag' => 'baz', // tag used for ExportControllerTest
-            'foo-tag' => 'foo',
-            'bob-tag' => 'bob', // tag used for TagRestControllerTest
+            'tag-wallabag' => 'wallabag',
+            'tag-self-hosted' => 'self-hosted',
+            'tag-privacy' => 'privacy',
+            'tag-open-source' => 'open-source',
+            'tag-ereader' => 'ereader',
+            'tag-kobo' => 'kobo',
+            'tag-migration' => 'migration',
+            'tag-pocket' => 'pocket',
+            'tag-omnivore' => 'omnivore',
+            'tag-read-it-later' => 'read-it-later',
+            'tag-tutorial' => 'tutorial',
+            'tag-review' => 'review',
+            'tag-howto' => 'howto',
+            'tag-news' => 'news',
         ];
 
         foreach ($tags as $reference => $label) {

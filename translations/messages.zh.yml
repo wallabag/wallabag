@@ -340,6 +340,7 @@ entry:
         address: "地址"
         added_on: "添加于"
         published_on: 发布于
+        tags: 标签
 about:
     page_title: '关于'
     top_menu:

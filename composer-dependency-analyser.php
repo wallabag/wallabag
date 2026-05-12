@@ -13,7 +13,6 @@ $config
     ->addPathToScan(__DIR__ . '/migrations', false)
     ->addPathToScan(__DIR__ . '/src', false)
     ->addPathToScan(__DIR__ . '/web', false)
-    ->addPathToScan(__DIR__ . '/fixtures', true)
     ->addPathToScan(__DIR__ . '/tests', true)
     ->ignoreErrorsOnPackages([
         'doctrine/common',
@@ -21,7 +20,6 @@ $config
         'ergebnis/composer-normalize',
         'friendsofphp/php-cs-fixer',
         'friendsoftwig/twigcs',
-        'incenteev/composer-parameter-handler',
         'j0k3r/graby-site-config',
         'j0k3r/php-readability',
         'laminas/laminas-code',
@@ -43,10 +41,11 @@ $config
         'shipmonk/composer-dependency-analyser',
         'symfony/asset',
         'symfony/css-selector',
+        'symfony/error-handler',
         'symfony/google-mailer',
         'symfony/intl',
-        'symfony/phpunit-bridge',
         'symfony/proxy-manager-bridge',
+        'symfony/runtime',
         'symfony/templating',
         'symfony/var-dumper',
         'twig/string-extra',

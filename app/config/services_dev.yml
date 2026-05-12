@@ -1,0 +1,5 @@
+services:
+    Wallabag\Fixtures\:
+        resource: '../../fixtures/*'
+        tags: ['doctrine.fixture.orm']
+        autowire: true

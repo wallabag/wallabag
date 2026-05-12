@@ -604,6 +604,7 @@ entry:
         address: முகவரி
         added_on: சேர்க்கப்பட்டது
         published_on: வெளியிடப்பட்டது
+        tags: குறிச்சொற்கள்
 howto:
     page_title: எப்படி
     tab_menu:

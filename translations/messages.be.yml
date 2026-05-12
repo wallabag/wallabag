@@ -293,6 +293,7 @@ entry:
         address: Адрас
         added_on: Дададзена на
         published_on: Апублікавана на
+        tags: Тэгі
 about:
     page_title: Аб
     top_menu:

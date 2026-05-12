@@ -25,7 +25,7 @@ class GenerateCustomCSSSubscriber implements EventSubscriberInterface
     /**
      * Generate custom CSS.
      */
-    public function onConfigUpdated(ConfigUpdatedEvent $event)
+    public function onConfigUpdated(ConfigUpdatedEvent $event): void
     {
         $config = $event->getConfig();
 

@@ -32,7 +32,7 @@ class CleanDuplicatesCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setHelp('This command helps you to clean your articles list in case of duplicates')
@@ -75,7 +75,7 @@ class CleanDuplicatesCommand extends Command
         return 0;
     }
 
-    private function cleanDuplicates(User $user)
+    private function cleanDuplicates(User $user): void
     {
         $entries = $this->entryRepository->findAllEntriesIdAndUrlByUserId($user->getId());
 

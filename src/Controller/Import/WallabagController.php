@@ -15,6 +15,12 @@ use Wallabag\Import\ImportInterface;
  */
 abstract class WallabagController extends AbstractController
 {
+    public function __construct(
+        protected readonly array $allowMimetypes,
+        protected readonly string $resourceDir,
+    ) {
+    }
+
     /**
      * Handle import request.
      *
@@ -33,9 +39,9 @@ abstract class WallabagController extends AbstractController
             $markAsRead = $form->get('mark_as_read')->getData();
             $name = $this->getUser()->getId() . '.json';
 
-            if (null !== $file && \in_array($file->getClientMimeType(), $this->getParameter('wallabag.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag.resource_dir'), $name)) {
+            if (null !== $file && \in_array($file->getClientMimeType(), $this->allowMimetypes, true) && $file->move($this->resourceDir, $name)) {
                 $res = $wallabag
-                    ->setFilepath($this->getParameter('wallabag.resource_dir') . '/' . $name)
+                    ->setFilepath($this->resourceDir . '/' . $name)
                     ->setMarkAsRead($markAsRead)
                     ->import();
 
@@ -54,7 +60,7 @@ abstract class WallabagController extends AbstractController
                         ]);
                     }
 
-                    unlink($this->getParameter('wallabag.resource_dir') . '/' . $name);
+                    unlink($this->resourceDir . '/' . $name);
                 }
 
                 $this->addFlash('notice', $message);

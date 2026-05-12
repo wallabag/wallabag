@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\DataFixtures;
+namespace Wallabag\Fixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -13,32 +13,46 @@ class AnnotationFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $annotation1 = new Annotation($this->getReference('admin-user', User::class));
-        $annotation1->setEntry($this->getReference('entry1', Entry::class));
-        $annotation1->setText('This is my annotation /o/');
-        $annotation1->setQuote('content');
+        $user = $this->getReference('dev-user', User::class);
+
+        $annotation1 = new Annotation($user);
+        $annotation1->setEntry($this->getReference('entry-0', Entry::class));
+        $annotation1->setText('Very impressive!!');
+        $annotation1->setQuote('That is about 2.69 a day!');
+        $annotation1->setRanges([[
+            'start' => '/p[1]',
+            'startOffset' => '173',
+            'end' => '/p[1]',
+            'endOffset' => '198',
+        ]]);
 
         $manager->persist($annotation1);
 
-        $this->addReference('annotation1', $annotation1);
-
-        $annotation2 = new Annotation($this->getReference('admin-user', User::class));
-        $annotation2->setEntry($this->getReference('entry2', Entry::class));
-        $annotation2->setText('This is my 2nd annotation /o/');
-        $annotation2->setQuote('content');
+        $annotation2 = new Annotation($user);
+        $annotation2->setEntry($this->getReference('entry-2', Entry::class));
+        $annotation2->setText('Un bel âge ! Bravo !');
+        $annotation2->setQuote('J’ai eu 40 ans.');
+        $annotation2->setRanges([[
+            'start' => '/main[1]/article[1]/ul[1]/li[1]',
+            'startOffset' => '0',
+            'end' => '/main[1]/article[1]/ul[1]/li[1]',
+            'endOffset' => '15',
+        ]]);
 
         $manager->persist($annotation2);
 
-        $this->addReference('annotation2', $annotation2);
-
-        $annotation3 = new Annotation($this->getReference('bob-user', User::class));
-        $annotation3->setEntry($this->getReference('entry3', Entry::class));
-        $annotation3->setText('This is my first annotation !');
-        $annotation3->setQuote('content');
+        $annotation3 = new Annotation($user);
+        $annotation3->setEntry($this->getReference('entry-5', Entry::class));
+        $annotation3->setText('It\'s wallabag, not Wallabag!');
+        $annotation3->setQuote('Wallabag');
+        $annotation3->setRanges([[
+            'start' => '/h2[1]',
+            'startOffset' => '0',
+            'end' => '/h2[1]',
+            'endOffset' => '8',
+        ]]);
 
         $manager->persist($annotation3);
-
-        $this->addReference('annotation3', $annotation3);
 
         $manager->flush();
     }
@@ -47,7 +61,6 @@ class AnnotationFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             EntryFixtures::class,
-            UserFixtures::class,
         ];
     }
 }

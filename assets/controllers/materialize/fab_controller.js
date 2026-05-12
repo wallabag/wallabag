@@ -2,12 +2,11 @@ import { Controller } from '@hotwired/stimulus';
 import M from '@materializecss/materialize';
 
 export default class extends Controller {
-  static values = {
-    edge: { type: String, default: 'left' },
-  };
-
   connect() {
-    this.instance = M.FloatingActionButton.init(this.element);
+    this.instance = M.FloatingActionButton.init(this.element, {
+      direction: 'left',
+      hoverEnabled: false,
+    });
   }
 
   autoDisplay() {

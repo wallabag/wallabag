@@ -14,6 +14,7 @@ use Wallabag\Helper\UrlHasher;
 
 /**
  * @method Entry[]    findById(int[] $id)
+ * @method Entry|null findOneByUrl(string $url)
  * @method Entry|null findOneByUser(int $userId)
  */
 class EntryRepository extends ServiceEntityRepository
@@ -290,7 +291,7 @@ class EntryRepository extends ServiceEntityRepository
 
         if ('metadata' === $detail) {
             $fieldNames = $this->getClassMetadata()->getFieldNames();
-            $fields = array_filter($fieldNames, fn ($k) => 'content' !== $k);
+            $fields = array_filter($fieldNames, static fn ($k) => 'content' !== $k);
             $qb->select(\sprintf('partial e.{%s}', implode(',', $fields)));
         }
 
@@ -444,7 +445,7 @@ class EntryRepository extends ServiceEntityRepository
      *
      * @param int $userId
      */
-    public function removeTag($userId, Tag $tag)
+    public function removeTag($userId, Tag $tag): void
     {
         $entries = $this->getSortedQueryBuilderByUser($userId)
             ->innerJoin('e.tags', 't')
@@ -465,7 +466,7 @@ class EntryRepository extends ServiceEntityRepository
      * @param int        $userId
      * @param array<Tag> $tags
      */
-    public function removeTags($userId, $tags)
+    public function removeTags($userId, $tags): void
     {
         foreach ($tags as $tag) {
             $this->removeTag($userId, $tag);
@@ -597,7 +598,7 @@ class EntryRepository extends ServiceEntityRepository
      *
      * @param int $userId
      */
-    public function removeAllByUserId($userId)
+    public function removeAllByUserId($userId): void
     {
         $this->getEntityManager()
             ->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.user = :userId')
@@ -605,7 +606,7 @@ class EntryRepository extends ServiceEntityRepository
             ->execute();
     }
 
-    public function removeArchivedByUserId($userId)
+    public function removeArchivedByUserId($userId): void
     {
         $this->getEntityManager()
             ->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.user = :userId AND e.isArchived = TRUE')

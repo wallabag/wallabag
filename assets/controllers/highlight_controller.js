@@ -4,7 +4,7 @@ import hljs from 'highlight.js';
 
 export default class extends Controller {
   connect() {
-    this.element.querySelectorAll('pre code').forEach((element) => {
+    this.element.querySelectorAll('pre code:not([data-highlighted])').forEach((element) => {
       hljs.highlightElement(element);
     });
   }

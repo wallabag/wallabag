@@ -1,22 +1,31 @@
 <?php
 
-namespace Wallabag\DataFixtures;
+namespace Wallabag\Fixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Wallabag\Entity\Config;
 use Wallabag\Entity\IgnoreOriginUserRule;
-use Wallabag\Entity\User;
 
 class IgnoreOriginUserRuleFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $rule = new IgnoreOriginUserRule();
-        $rule->setRule('host = "example.fr"');
-        $rule->setConfig($this->getReference('admin-user', User::class)->getConfig());
+        $config = $this->getReference('dev-config', Config::class);
 
-        $manager->persist($rule);
+        $rules = [
+            'host = "feedproxy.google.com"',
+            'host = "l.facebook.com"',
+        ];
+
+        foreach ($rules as $ruleExpression) {
+            $rule = new IgnoreOriginUserRule();
+            $rule->setRule($ruleExpression);
+            $rule->setConfig($config);
+
+            $manager->persist($rule);
+        }
 
         $manager->flush();
     }
@@ -24,7 +33,7 @@ class IgnoreOriginUserRuleFixtures extends Fixture implements DependentFixtureIn
     public function getDependencies(): array
     {
         return [
-            UserFixtures::class,
+            ConfigFixtures::class,
         ];
     }
 }

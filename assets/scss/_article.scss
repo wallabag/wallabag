@@ -138,6 +138,7 @@
       .tags {
         display: flex;
         margin: 0;
+        flex-wrap: wrap;
         align-items: center;
         gap: 5px;
       }
@@ -147,9 +148,8 @@
       display: flex;
       margin: 0;
       padding: 0;
-      height: 25px;
+      height: auto;
       line-height: 25px;
-      align-items: center;
       background-color: transparent;
 
       a,
@@ -166,14 +166,23 @@
     .chip-label {
         padding-left: 10px;
         padding-right: 5px;
+        word-break: break-word;
+        hyphens: auto;
         background-color: #9e9e9e;
         border-radius: 6px 0 0 6px;
     }
 
+    .chip-action-form {
+        display: contents;
+    }
+
     .chip-action {
+      display: flex;
       padding: 0 5px;
       background-color: #868686;
       border-radius: 0 6px 6px 0;
+      justify-content: center;
+      align-items: center;
     }
 
     .chip-label,
@@ -258,7 +267,6 @@
   }
 
   #article .entry-info .chip {
-    height: 32px;
     line-height: 32px;
   }
 

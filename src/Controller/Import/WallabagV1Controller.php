@@ -18,7 +18,10 @@ class WallabagV1Controller extends WallabagController
         private readonly Config $craueConfig,
         private readonly RabbitMqProducer $rabbitMqProducer,
         private readonly RedisProducer $redisProducer,
+        array $allowMimetypes,
+        string $resourceDir,
     ) {
+        parent::__construct($allowMimetypes, $resourceDir);
     }
 
     #[Route(path: '/import/wallabag-v1', name: 'import_wallabag_v1', methods: ['GET', 'POST'])]

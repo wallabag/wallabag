@@ -10,6 +10,8 @@ on:
 env:
   # Force disabling the reporting of Doctrine deprecation notices for now
   DOCTRINE_DEPRECATIONS: none
+  # Keep this in sync with phpunit.xml.dist if the base Symfony deprecation policy changes.
+  WALLABAG_SYMFONY_DEPRECATIONS_HELPER_BASE: "max[self]=0&max[direct]=0&quiet[]=other"
   PGPASSWORD: wallabagrocks
   COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -17,6 +19,11 @@ jobs:
   phpunit:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }}"
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: >-
+        ${{ matrix.database == 'mysql' && 'mysql://root:root@127.0.0.1:3306/wallabag?charset=utf8mb4'
+         || matrix.database == 'pgsql' && 'postgresql://wallabag:wallabagrocks@127.0.0.1:5432/wallabag?charset=utf8'
+         || format('sqlite:///{0}/data/db/wallabag_test.sqlite', github.workspace) }}
     services:
       rabbitmq:
         image: rabbitmq:3-alpine
@@ -41,7 +48,7 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v5"
+        uses: "actions/checkout@v6"
         with:
           fetch-depth: 2
 
@@ -49,13 +56,13 @@ jobs:
         uses: "shivammathur/setup-php@v2"
         with:
           php-version: "${{ matrix.php }}"
-          coverage: none
+          coverage: pcov
           tools: pecl
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
 
       - name: "Install Node"
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
           cache: 'yarn'
@@ -75,7 +82,7 @@ jobs:
           pg_isready -d wallabag_test -h localhost -p 5432 -U wallabag
 
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v3"
+        uses: "ramsey/composer-install@v4"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
@@ -85,15 +92,164 @@ jobs:
       - name: "Build assets with Yarn"
         run: yarn build:dev
 
-      - name: "Prepare database configuration"
-        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
+      - name: "Prepare coverage output directory"
+        run: mkdir -p .coverage
 
-      - name: "Run PHPUnit"
-        run: "php bin/phpunit -v"
+      - name: "Run PHPUnit unit tests"
+        env:
+          SYMFONY_DEPRECATIONS_HELPER: "${{ env.WALLABAG_SYMFONY_DEPRECATIONS_HELPER_BASE }}&logFile=${{ runner.temp }}/wallabag-phpunit-unit.deprecations.log"
+        run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml --log-junit=.coverage/unit.junit.xml"
+
+      - name: "Display PHPUnit unit Symfony deprecations"
+        if: ${{ !cancelled() }}
+        run: |
+          deprecations_log="${{ runner.temp }}/wallabag-phpunit-unit.deprecations.log"
+
+          if [ ! -e "$deprecations_log" ]; then
+            echo "No Symfony deprecations log was generated for the unit suite."
+            exit 0
+          fi
+
+          if [ ! -s "$deprecations_log" ]; then
+            echo "Symfony deprecations log for the unit suite is empty."
+            exit 0
+          fi
+
+          echo "Symfony deprecations for the unit suite:"
+          cat "$deprecations_log"
+
+      - name: "Upload unit coverage to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/unit.xml"
+          flags: "unit"
+          name: "phpunit-unit-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Upload unit test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/unit.junit.xml"
+          flags: "unit,php-${{ matrix.php }},db-${{ matrix.database }},run-default"
+          name: "phpunit-test-results-unit-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Run PHPUnit integration tests"
+        if: ${{ !cancelled() }}
+        env:
+          SYMFONY_DEPRECATIONS_HELPER: "${{ env.WALLABAG_SYMFONY_DEPRECATIONS_HELPER_BASE }}&logFile=${{ runner.temp }}/wallabag-phpunit-integration.deprecations.log"
+        run: "php bin/phpunit --testsuite integration -v --coverage-clover=.coverage/integration.xml --log-junit=.coverage/integration.junit.xml"
+
+      - name: "Display PHPUnit integration Symfony deprecations"
+        if: ${{ !cancelled() }}
+        run: |
+          deprecations_log="${{ runner.temp }}/wallabag-phpunit-integration.deprecations.log"
+
+          if [ ! -e "$deprecations_log" ]; then
+            echo "No Symfony deprecations log was generated for the integration suite."
+            exit 0
+          fi
+
+          if [ ! -s "$deprecations_log" ]; then
+            echo "Symfony deprecations log for the integration suite is empty."
+            exit 0
+          fi
+
+          echo "Symfony deprecations for the integration suite:"
+          cat "$deprecations_log"
+
+      - name: "Upload integration coverage to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/integration.xml"
+          flags: "integration"
+          name: "phpunit-integration-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Upload integration test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/integration.junit.xml"
+          flags: "integration,php-${{ matrix.php }},db-${{ matrix.database }},run-default"
+          name: "phpunit-test-results-integration-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Run PHPUnit functional tests"
+        if: ${{ !cancelled() }}
+        env:
+          SYMFONY_DEPRECATIONS_HELPER: "${{ env.WALLABAG_SYMFONY_DEPRECATIONS_HELPER_BASE }}&logFile=${{ runner.temp }}/wallabag-phpunit-functional.deprecations.log"
+        run: "php bin/phpunit --testsuite functional -v --coverage-clover=.coverage/functional.xml --log-junit=.coverage/functional.junit.xml"
+
+      - name: "Display PHPUnit functional Symfony deprecations"
+        if: ${{ !cancelled() }}
+        run: |
+          deprecations_log="${{ runner.temp }}/wallabag-phpunit-functional.deprecations.log"
+
+          if [ ! -e "$deprecations_log" ]; then
+            echo "No Symfony deprecations log was generated for the functional suite."
+            exit 0
+          fi
+
+          if [ ! -s "$deprecations_log" ]; then
+            echo "Symfony deprecations log for the functional suite is empty."
+            exit 0
+          fi
+
+          echo "Symfony deprecations for the functional suite:"
+          cat "$deprecations_log"
+
+      - name: "Upload functional coverage to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/functional.xml"
+          flags: "functional"
+          name: "phpunit-functional-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Upload functional test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/functional.junit.xml"
+          flags: "functional,php-${{ matrix.php }},db-${{ matrix.database }},run-default"
+          name: "phpunit-test-results-functional-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
 
   phpunit_no_prefix:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without prefix"
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: >-
+        ${{ matrix.database == 'mysql' && 'mysql://root:root@127.0.0.1:3306/wallabag?charset=utf8mb4'
+         || matrix.database == 'pgsql' && 'postgresql://wallabag:wallabagrocks@127.0.0.1:5432/wallabag?charset=utf8'
+         || format('sqlite:///{0}/data/db/wallabag_test.sqlite', github.workspace) }}
+      WALLABAG_TABLE_PREFIX: ""
     services:
       rabbitmq:
         image: rabbitmq:3-alpine
@@ -105,7 +261,7 @@ jobs:
           - 6379:6379
 
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         php:
           - "8.2"
@@ -116,7 +272,7 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v5"
+        uses: "actions/checkout@v6"
         with:
           fetch-depth: 2
 
@@ -124,21 +280,16 @@ jobs:
         uses: "shivammathur/setup-php@v2"
         with:
           php-version: "${{ matrix.php }}"
-          coverage: none
+          coverage: pcov
           tools: pecl
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
 
       - name: "Install Node"
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
           cache: 'yarn'
-
-      - name: "Remove database prefix"
-        run: |
-          pip install --user yq
-          yq -Y --in-place '.parameters.database_table_prefix = ""' app/config/parameters.yml.dist
 
       - name: "Setup MySQL"
         if: "${{ matrix.database == 'mysql' }}"
@@ -155,7 +306,7 @@ jobs:
           pg_isready -d wallabag_test -h localhost -p 5432 -U wallabag
 
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v3"
+        uses: "ramsey/composer-install@v4"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
@@ -165,15 +316,163 @@ jobs:
       - name: "Build assets with Yarn"
         run: yarn build:dev
 
-      - name: "Prepare database configuration"
-        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
+      - name: "Prepare coverage output directory"
+        run: mkdir -p .coverage
 
-      - name: "Run PHPUnit"
-        run: "php bin/phpunit -v"
+      - name: "Run PHPUnit unit tests"
+        env:
+          SYMFONY_DEPRECATIONS_HELPER: "${{ env.WALLABAG_SYMFONY_DEPRECATIONS_HELPER_BASE }}&logFile=${{ runner.temp }}/wallabag-phpunit-unit.deprecations.log"
+        run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml --log-junit=.coverage/unit.junit.xml"
+
+      - name: "Display PHPUnit unit Symfony deprecations"
+        if: ${{ !cancelled() }}
+        run: |
+          deprecations_log="${{ runner.temp }}/wallabag-phpunit-unit.deprecations.log"
+
+          if [ ! -e "$deprecations_log" ]; then
+            echo "No Symfony deprecations log was generated for the unit suite."
+            exit 0
+          fi
+
+          if [ ! -s "$deprecations_log" ]; then
+            echo "Symfony deprecations log for the unit suite is empty."
+            exit 0
+          fi
+
+          echo "Symfony deprecations for the unit suite:"
+          cat "$deprecations_log"
+
+      - name: "Upload unit coverage to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/unit.xml"
+          flags: "unit"
+          name: "phpunit-no-prefix-unit-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Upload unit test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/unit.junit.xml"
+          flags: "unit,php-${{ matrix.php }},db-${{ matrix.database }},run-no-prefix"
+          name: "phpunit-no-prefix-test-results-unit-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Run PHPUnit integration tests"
+        if: ${{ !cancelled() }}
+        env:
+          SYMFONY_DEPRECATIONS_HELPER: "${{ env.WALLABAG_SYMFONY_DEPRECATIONS_HELPER_BASE }}&logFile=${{ runner.temp }}/wallabag-phpunit-integration.deprecations.log"
+        run: "php bin/phpunit --testsuite integration -v --coverage-clover=.coverage/integration.xml --log-junit=.coverage/integration.junit.xml"
+
+      - name: "Display PHPUnit integration Symfony deprecations"
+        if: ${{ !cancelled() }}
+        run: |
+          deprecations_log="${{ runner.temp }}/wallabag-phpunit-integration.deprecations.log"
+
+          if [ ! -e "$deprecations_log" ]; then
+            echo "No Symfony deprecations log was generated for the integration suite."
+            exit 0
+          fi
+
+          if [ ! -s "$deprecations_log" ]; then
+            echo "Symfony deprecations log for the integration suite is empty."
+            exit 0
+          fi
+
+          echo "Symfony deprecations for the integration suite:"
+          cat "$deprecations_log"
+
+      - name: "Upload integration coverage to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/integration.xml"
+          flags: "integration"
+          name: "phpunit-no-prefix-integration-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Upload integration test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/integration.junit.xml"
+          flags: "integration,php-${{ matrix.php }},db-${{ matrix.database }},run-no-prefix"
+          name: "phpunit-no-prefix-test-results-integration-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Run PHPUnit functional tests"
+        if: ${{ !cancelled() }}
+        env:
+          SYMFONY_DEPRECATIONS_HELPER: "${{ env.WALLABAG_SYMFONY_DEPRECATIONS_HELPER_BASE }}&logFile=${{ runner.temp }}/wallabag-phpunit-functional.deprecations.log"
+        run: "php bin/phpunit --testsuite functional -v --coverage-clover=.coverage/functional.xml --log-junit=.coverage/functional.junit.xml"
+
+      - name: "Display PHPUnit functional Symfony deprecations"
+        if: ${{ !cancelled() }}
+        run: |
+          deprecations_log="${{ runner.temp }}/wallabag-phpunit-functional.deprecations.log"
+
+          if [ ! -e "$deprecations_log" ]; then
+            echo "No Symfony deprecations log was generated for the functional suite."
+            exit 0
+          fi
+
+          if [ ! -s "$deprecations_log" ]; then
+            echo "Symfony deprecations log for the functional suite is empty."
+            exit 0
+          fi
+
+          echo "Symfony deprecations for the functional suite:"
+          cat "$deprecations_log"
+
+      - name: "Upload functional coverage to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/functional.xml"
+          flags: "functional"
+          name: "phpunit-no-prefix-functional-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Upload functional test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/functional.junit.xml"
+          flags: "functional,php-${{ matrix.php }},db-${{ matrix.database }},run-no-prefix"
+          name: "phpunit-no-prefix-test-results-functional-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
 
   phpunit-without-rmq-redis:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without Rabbit & Redis"
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: >-
+        ${{ matrix.database == 'mysql' && 'mysql://root:root@127.0.0.1:3306/wallabag?charset=utf8mb4'
+         || matrix.database == 'pgsql' && 'postgresql://wallabag:wallabagrocks@127.0.0.1:5432/wallabag?charset=utf8'
+         || format('sqlite:///{0}/data/db/wallabag_test.sqlite', github.workspace) }}
 
     strategy:
       fail-fast: false
@@ -187,7 +486,7 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v5"
+        uses: "actions/checkout@v6"
         with:
           fetch-depth: 2
 
@@ -195,13 +494,13 @@ jobs:
         uses: "shivammathur/setup-php@v2"
         with:
           php-version: "${{ matrix.php }}"
-          coverage: none
+          coverage: pcov
           tools: pecl
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
 
       - name: "Install Node"
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
           cache: 'yarn'
@@ -221,7 +520,7 @@ jobs:
           pg_isready -d wallabag_test -h localhost -p 5432 -U wallabag
 
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v3"
+        uses: "ramsey/composer-install@v4"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
@@ -231,8 +530,213 @@ jobs:
       - name: "Build assets with Yarn"
         run: yarn build:dev
 
-      - name: "Prepare database configuration"
-        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
+      - name: "Prepare coverage output directory"
+        run: mkdir -p .coverage
 
-      - name: "Run PHPUnit"
-        run: "php bin/phpunit -v"
+      - name: "Run PHPUnit unit tests"
+        env:
+          SYMFONY_DEPRECATIONS_HELPER: "${{ env.WALLABAG_SYMFONY_DEPRECATIONS_HELPER_BASE }}&logFile=${{ runner.temp }}/wallabag-phpunit-unit.deprecations.log"
+        run: "php bin/phpunit --testsuite unit -v --coverage-clover=.coverage/unit.xml --log-junit=.coverage/unit.junit.xml"
+
+      - name: "Display PHPUnit unit Symfony deprecations"
+        if: ${{ !cancelled() }}
+        run: |
+          deprecations_log="${{ runner.temp }}/wallabag-phpunit-unit.deprecations.log"
+
+          if [ ! -e "$deprecations_log" ]; then
+            echo "No Symfony deprecations log was generated for the unit suite."
+            exit 0
+          fi
+
+          if [ ! -s "$deprecations_log" ]; then
+            echo "Symfony deprecations log for the unit suite is empty."
+            exit 0
+          fi
+
+          echo "Symfony deprecations for the unit suite:"
+          cat "$deprecations_log"
+
+      - name: "Upload unit coverage to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/unit.xml"
+          flags: "unit"
+          name: "phpunit-without-rmq-redis-unit-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Upload unit test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/unit.junit.xml"
+          flags: "unit,php-${{ matrix.php }},db-${{ matrix.database }},run-no-rmq-redis"
+          name: "phpunit-without-rmq-redis-test-results-unit-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Run PHPUnit integration tests"
+        if: ${{ !cancelled() }}
+        env:
+          SYMFONY_DEPRECATIONS_HELPER: "${{ env.WALLABAG_SYMFONY_DEPRECATIONS_HELPER_BASE }}&logFile=${{ runner.temp }}/wallabag-phpunit-integration.deprecations.log"
+        run: "php bin/phpunit --testsuite integration -v --coverage-clover=.coverage/integration.xml --log-junit=.coverage/integration.junit.xml"
+
+      - name: "Display PHPUnit integration Symfony deprecations"
+        if: ${{ !cancelled() }}
+        run: |
+          deprecations_log="${{ runner.temp }}/wallabag-phpunit-integration.deprecations.log"
+
+          if [ ! -e "$deprecations_log" ]; then
+            echo "No Symfony deprecations log was generated for the integration suite."
+            exit 0
+          fi
+
+          if [ ! -s "$deprecations_log" ]; then
+            echo "Symfony deprecations log for the integration suite is empty."
+            exit 0
+          fi
+
+          echo "Symfony deprecations for the integration suite:"
+          cat "$deprecations_log"
+
+      - name: "Upload integration coverage to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/integration.xml"
+          flags: "integration"
+          name: "phpunit-without-rmq-redis-integration-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Upload integration test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/integration.junit.xml"
+          flags: "integration,php-${{ matrix.php }},db-${{ matrix.database }},run-no-rmq-redis"
+          name: "phpunit-without-rmq-redis-test-results-integration-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Run PHPUnit functional tests"
+        if: ${{ !cancelled() }}
+        env:
+          SYMFONY_DEPRECATIONS_HELPER: "${{ env.WALLABAG_SYMFONY_DEPRECATIONS_HELPER_BASE }}&logFile=${{ runner.temp }}/wallabag-phpunit-functional.deprecations.log"
+        run: "php bin/phpunit --testsuite functional -v --coverage-clover=.coverage/functional.xml --log-junit=.coverage/functional.junit.xml"
+
+      - name: "Display PHPUnit functional Symfony deprecations"
+        if: ${{ !cancelled() }}
+        run: |
+          deprecations_log="${{ runner.temp }}/wallabag-phpunit-functional.deprecations.log"
+
+          if [ ! -e "$deprecations_log" ]; then
+            echo "No Symfony deprecations log was generated for the functional suite."
+            exit 0
+          fi
+
+          if [ ! -s "$deprecations_log" ]; then
+            echo "Symfony deprecations log for the functional suite is empty."
+            exit 0
+          fi
+
+          echo "Symfony deprecations for the functional suite:"
+          cat "$deprecations_log"
+
+      - name: "Upload functional coverage to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          files: ".coverage/functional.xml"
+          flags: "functional"
+          name: "phpunit-without-rmq-redis-functional-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+      - name: "Upload functional test results to Codecov"
+        if: ${{ !cancelled() }}
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          report_type: "test_results"
+          files: ".coverage/functional.junit.xml"
+          flags: "functional,php-${{ matrix.php }},db-${{ matrix.database }},run-no-rmq-redis"
+          name: "phpunit-without-rmq-redis-test-results-functional-php${{ matrix.php }}-${{ matrix.database }}"
+          disable_search: true
+          fail_ci_if_error: false
+
+  bundle-analysis:
+    name: "Bundle analysis"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v6"
+        with:
+          fetch-depth: 2
+
+      - name: "Detect changed bundle-relevant files"
+        id: changed-files
+        uses: tj-actions/changed-files@v47.0.6
+        with:
+          files: |
+            webpack.config.js
+            postcss.config.js
+            package.json
+            yarn.lock
+            .nvmrc
+            assets/**
+
+      - name: "Install Node"
+        if: steps.changed-files.outputs.any_changed == 'true'
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".nvmrc"
+          cache: 'yarn'
+
+      - name: "Install dependencies with Yarn"
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: yarn install
+
+      - name: "Build assets and upload bundle analysis"
+        if: steps.changed-files.outputs.any_changed == 'true'
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: yarn build:prod
+
+  codecov-notify:
+    name: "Notify Codecov"
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    needs:
+      - phpunit
+      - phpunit_no_prefix
+      - phpunit-without-rmq-redis
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v6"
+        with:
+          fetch-depth: 2
+
+      - name: "Send Codecov notifications"
+        uses: "codecov/codecov-action@v6"
+        continue-on-error: true
+        with:
+          token: "${{ secrets.CODECOV_TOKEN }}"
+          run_command: "send-notifications"
+          fail_ci_if_error: false

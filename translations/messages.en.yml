@@ -340,6 +340,7 @@ entry:
         public_link: Public link
         added_on: Added on
         published_on: "Published on"
+        tags: Tags
 about:
     page_title: About
     top_menu:

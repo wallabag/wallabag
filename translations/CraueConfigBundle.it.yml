@@ -27,3 +27,9 @@ api_user_registration: Abilita la registrazione dell'utente attraverso l'API
 settings_changed: Configurazione aggiornata
 download_images_enabled: Scarica immagini localmente
 restricted_access: Abilita autenticazione nei siti con paywall
+import_with_rabbitmq: Abilitare RabbitMQ per importare i dati in modo asincrono
+import_with_redis: Abilitare Redis per importare i dati in modo asincrono
+share_linkding: Attiva la condivisione di Linkding
+share_public: Consentire gli URL pubblici per le voci
+store_article_headers: Attivare se wallabag memorizza intestazioni HTTP per ogni articolo
+shaarli_share_origin_url: Abilitare l'URL di origine di condivisione a Shaarli, se il servizio è abilitato

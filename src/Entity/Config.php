@@ -33,7 +33,8 @@ class Config
      */
     #[ORM\Column(name: 'items_per_page', type: 'integer', nullable: false)]
     #[Assert\NotBlank]
-    #[Assert\Range(min: 1, max: 100000, maxMessage: 'validator.item_per_page_too_high')]
+    #[Assert\GreaterThanOrEqual(value: 1, message: 'validator.item_per_page_too_low')]
+    #[Assert\LessThanOrEqual(value: 100000, message: 'validator.item_per_page_too_high')]
     #[Groups(['config_api'])]
     private $itemsPerPage;
 
@@ -56,7 +57,8 @@ class Config
      * @var int|null
      */
     #[ORM\Column(name: 'feed_limit', type: 'integer', nullable: true)]
-    #[Assert\Range(min: 1, max: 100000, maxMessage: 'validator.feed_limit_too_high')]
+    #[Assert\GreaterThanOrEqual(value: 1, message: 'validator.feed_limit_too_low')]
+    #[Assert\LessThanOrEqual(value: 100000, message: 'validator.feed_limit_too_high')]
     #[Groups(['config_api'])]
     private $feedLimit;
 

@@ -30,7 +30,7 @@ class TablePrefixSubscriber implements EventSubscriber
         return ['loadClassMetadata'];
     }
 
-    public function loadClassMetadata(LoadClassMetadataEventArgs $args)
+    public function loadClassMetadata(LoadClassMetadataEventArgs $args): void
     {
         $classMetadata = $args->getClassMetadata();
 

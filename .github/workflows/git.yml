@@ -1,0 +1,11 @@
+name: Git
+
+on: pull_request
+
+jobs:
+  no-fixups:
+    name: No fixups
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for 'amend!', 'fixup!', or 'squash!' commits
+        uses: matijs/no-fixups-action@v1.1.4

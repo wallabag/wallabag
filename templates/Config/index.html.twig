@@ -32,7 +32,7 @@
                                 {{ form_label(form.config.items_per_page) }}
                             </div>
                             <div class="input-field col s1">
-                                <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_items_per_page'|trans }}">
+                                <a href="#" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="left" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'config.form_settings.help_items_per_page'|trans }}">
                                     <i class="material-icons">live_help</i>
                                 </a>
                             </div>
@@ -47,7 +47,7 @@
                                 </label>
                             </div>
                             <div class="input-field col s1">
-                                <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_display_thumbnails'|trans }}">
+                                <a href="#" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="left" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'config.form_settings.help_display_thumbnails'|trans }}">
                                     <i class="material-icons">live_help</i>
                                 </a>
                             </div>
@@ -64,28 +64,28 @@
                                     </p>
                                 </div>
                                 <div class="input-field col s1">
-                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_reading_speed'|trans }}">
+                                    <a href="#" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="left" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'config.form_settings.help_reading_speed'|trans }}">
                                         <i class="material-icons">live_help</i>
                                     </a>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s11" data-controller="materialize--form-select">
-                                    {{ form_errors(form.config.action_mark_as_read) }}
-                                    {{ form_widget(form.config.action_mark_as_read) }}
-                                    {{ form_label(form.config.action_mark_as_read) }}
-                                </div>
+                                {{ form_row(form.config.action_mark_as_read, {
+                                    row_attr: {
+                                        class: 'col s11'
+                                    }
+                                }) }}
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s11" data-controller="materialize--form-select">
-                                    {{ form_errors(form.config.language) }}
-                                    {{ form_widget(form.config.language) }}
-                                    {{ form_label(form.config.language) }}
-                                </div>
+                                {{ form_row(form.config.language, {
+                                    row_attr: {
+                                        class: 'col s11'
+                                    }
+                                }) }}
                                 <div class="input-field col s1">
-                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_language'|trans }}">
+                                    <a href="#" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="left" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'config.form_settings.help_language'|trans }}">
                                         <i class="material-icons">live_help</i>
                                     </a>
                                 </div>
@@ -102,7 +102,7 @@
                                     </p>
                                 </div>
                                 <div class="input-field col s1">
-                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_pocket_consumer_key'|trans }}">
+                                    <a href="#" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="left" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'config.form_settings.help_pocket_consumer_key'|trans }}">
                                         <i class="material-icons">live_help</i>
                                     </a>
                                 </div>
@@ -119,48 +119,52 @@
                             <h5>{{ 'config.tab_menu.article_display'|trans }}</h5>
 
                             <div class="row">
-                                <div class="input-field col s5" data-controller="materialize--form-select">
-                                    {{ form_errors(form.config.font) }}
-                                    {{ form_widget(form.config.font, {attr: {'data-config-target': 'font', 'data-action': 'config#updatePreview'}}) }}
-                                    {{ form_label(form.config.font) }}
-                                </div>
+                                {{ form_row(form.config.font, {
+                                    row_attr: {
+                                        class: 'col s5'
+                                    },
+                                    attr: {
+                                        'data-config-target': 'font',
+                                        'data-action': 'config#updatePreview'
+                                    }
+                                }) }}
                                 <div class="input-field col s1">
-                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_font'|trans }}">
+                                    <a href="#" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="left" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'config.form_settings.help_font'|trans }}">
                                         <i class="material-icons">live_help</i>
                                     </a>
                                 </div>
 
-                                <div class="input-field col s5">
+                                <div class="input-field range-field col s5" data-controller="materialize--range">
                                     {{ form_errors(form.config.lineHeight) }}
                                     {{ form_widget(form.config.lineHeight, {attr: {'data-config-target': 'lineHeight', 'data-action': 'config#updatePreview'}}) }}
                                     {{ form_label(form.config.lineHeight, null, {'label_attr': {'class': 'settings-range-label'}}) }}
                                 </div>
                                 <div class="input-field col s1">
-                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_lineheight'|trans }}">
+                                    <a href="#" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="left" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'config.form_settings.help_lineheight'|trans }}">
                                         <i class="material-icons">live_help</i>
                                     </a>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s5">
+                                <div class="input-field range-field col s5" data-controller="materialize--range">
                                     {{ form_errors(form.config.fontsize) }}
                                     {{ form_widget(form.config.fontsize, {attr: {'data-config-target': 'fontSize', 'data-action': 'config#updatePreview'}}) }}
                                     {{ form_label(form.config.fontsize, null, {'label_attr': {'class': 'settings-range-label'}}) }}
                                 </div>
                                 <div class="input-field col s1">
-                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_fontsize'|trans }}">
+                                    <a href="#" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="left" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'config.form_settings.help_fontsize'|trans }}">
                                         <i class="material-icons">live_help</i>
                                     </a>
                                 </div>
 
-                                <div class="input-field col s5">
+                                <div class="input-field range-field col s5" data-controller="materialize--range">
                                     {{ form_errors(form.config.maxWidth) }}
                                     {{ form_widget(form.config.maxWidth, {attr: {'data-config-target': 'maxWidth', 'data-action': 'config#updatePreview'}}) }}
                                     {{ form_label(form.config.maxWidth, null, {'label_attr': {'class': 'settings-range-label'}}) }}
                                 </div>
                                 <div class="input-field col s1">
-                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_maxwidth'|trans }}">
+                                    <a href="#" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="left" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'config.form_settings.help_maxwidth'|trans }}">
                                         <i class="material-icons">live_help</i>
                                     </a>
                                 </div>
@@ -396,7 +400,7 @@
                                         {{ 'config.form_rules.then_tag_as_label'|trans }}
                                         « {{ tagging_rule.tags|join(', ') }} »
 
-                                        <a href="{{ path('edit_tagging_rule', {taggingRule: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit_tagging_rule">
+                                        <a href="{{ path('edit_tagging_rule', {taggingRule: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}">
                                             <i class="tool grey-text material-icons">mode_edit</i>
                                         </a>
                                         <form action="{{ path('delete_tagging_rule', {taggingRule: tagging_rule.id}) }}" method="post" class="inline-block">
@@ -490,17 +494,17 @@
                                 <h4>{{ 'config.form_rules.faq.title'|trans }}</h4>
 
                                 <h5>{{ 'config.form_rules.faq.tagging_rules_definition_title'|trans }}</h5>
-                                <p class="help">{{ 'config.form_rules.faq.tagging_rules_definition_description'|trans|raw }}</p>
+                                <p>{{ 'config.form_rules.faq.tagging_rules_definition_description'|trans|raw }}</p>
 
                                 <h5>{{ 'config.form_rules.faq.how_to_use_them_title'|trans }}</h5>
-                                <p class="help">{{ 'config.form_rules.faq.how_to_use_them_description'|trans|raw }}</p>
+                                <p>{{ 'config.form_rules.faq.how_to_use_them_description'|trans|raw }}</p>
 
                                 <h5>{{ 'config.form_rules.faq.variables_available_title'|trans }}</h5>
-                                <p class="help">
+                                <p>
                                     {{ 'config.form_rules.faq.variables_available_description'|trans }}
                                 </p>
 
-                                <table class="bordered">
+                                <table>
                                     <thead>
                                         <tr>
                                             <th>{{ 'config.form_rules.faq.variable_description.label'|trans }}</th>
@@ -580,7 +584,7 @@
                                     <li>
                                         {{ 'config.form_rules.if_label'|trans }}
                                         « {{ ignore_origin_rule.rule }} »
-                                        <a href="{{ path('edit_ignore_origin_rule', {ignoreOriginUserRule: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit">
+                                        <a href="{{ path('edit_ignore_origin_rule', {ignoreOriginUserRule: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}">
                                             <i class="tool grey-text material-icons">mode_edit</i>
                                         </a>
                                         <form action="{{ path('delete_ignore_origin_rule', {ignoreOriginUserRule: ignore_origin_rule.id}) }}" method="post" class="inline-block">
@@ -619,17 +623,17 @@
                                 <h4>{{ 'config.form_ignore_origin_rules.faq.title'|trans }}</h4>
 
                                 <h5>{{ 'config.form_ignore_origin_rules.faq.ignore_origin_rules_definition_title'|trans }}</h5>
-                                <p class="help">{{ 'config.form_ignore_origin_rules.faq.ignore_origin_rules_definition_description'|trans|raw }}</p>
+                                <p>{{ 'config.form_ignore_origin_rules.faq.ignore_origin_rules_definition_description'|trans|raw }}</p>
 
                                 <h5>{{ 'config.form_ignore_origin_rules.faq.how_to_use_them_title'|trans }}</h5>
-                                <p class="help">{{ 'config.form_ignore_origin_rules.faq.how_to_use_them_description'|trans|raw }}</p>
+                                <p>{{ 'config.form_ignore_origin_rules.faq.how_to_use_them_description'|trans|raw }}</p>
 
                                 <h5>{{ 'config.form_ignore_origin_rules.faq.variables_available_title'|trans }}</h5>
-                                <p class="help">
+                                <p>
                                     {{ 'config.form_ignore_origin_rules.faq.variables_available_description'|trans }}
                                 </p>
 
-                                <table class="bordered">
+                                <table>
                                     <thead>
                                         <tr>
                                             <th>{{ 'config.form_ignore_origin_rules.faq.variable_description.label'|trans }}</th>

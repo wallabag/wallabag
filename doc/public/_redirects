@@ -1,0 +1,16 @@
+# Redirect former language-specific doc
+/en/* /:splat
+/fr/* /:splat
+/de/* /:splat
+/it/* /:splat
+
+# Handle some exceptions from GitBook pages
+/admin/installation/readme.html /admin/installation/
+/developer/api/readme.html      /developer/api/
+/admin/query-upgrade-21-22.html /admin/query-upgrade-21-22/
+/admin/query-upgrade-22-23.html /admin/query-upgrade-22-23/
+/admin/query-upgrade-23-24.html /admin/query-upgrade-23-24/
+/admin/query-upgrade-25-26.html /admin/query-upgrade-25-26/
+
+# Redirect default Netlify subdomain to primary domain
+https://wallabag-doc.netlify.com/* https://doc.wallabag.org/:splat 301!

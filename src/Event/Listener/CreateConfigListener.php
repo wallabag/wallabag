@@ -40,7 +40,7 @@ class CreateConfigListener implements EventSubscriberInterface
         ];
     }
 
-    public function createConfig(UserEvent $event)
+    public function createConfig(UserEvent $event): void
     {
         $language = $this->language;
 

@@ -100,10 +100,10 @@ class TagRepository extends ServiceEntityRepository
         $rsm = new ResultSetMappingBuilder($this->getEntityManager());
         $rsm->addRootEntityFromClassMetadata(Tag::class, 't');
         $rsm->addEntityResult(Tag::class, 't', 'tag');
-        $rsm->addScalarResult('nbEntries', 'nbEntries', 'integer');
+        $rsm->addScalarResult('nbentries', 'nbEntries', 'integer');
 
         $sql = <<<SQL
-            SELECT DISTINCT {$rsm->generateSelectClause()}, count(e.id) as nbEntries
+            SELECT DISTINCT {$rsm->generateSelectClause()}, count(e.id) as nbentries
             FROM {$this->tablePrefix}tag t
             LEFT JOIN {$this->tablePrefix}entry_tag et ON et.tag_id = t.id
             JOIN {$this->tablePrefix}entry e ON e.id = et.entry_id

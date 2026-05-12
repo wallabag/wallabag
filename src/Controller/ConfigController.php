@@ -346,7 +346,7 @@ class ConfigController extends AbstractController
 
         $backupCodes = (new BackupCodes())->toArray();
         $backupCodesHashed = array_map(
-            fn ($backupCode) => password_hash((string) $backupCode, \PASSWORD_DEFAULT),
+            static fn ($backupCode) => password_hash((string) $backupCode, \PASSWORD_DEFAULT),
             $backupCodes
         );
 
@@ -713,7 +713,7 @@ class ConfigController extends AbstractController
      * @param array $tags
      * @param int   $userId
      */
-    private function removeAllTagsByStatusAndUserId($tags, $userId)
+    private function removeAllTagsByStatusAndUserId($tags, $userId): void
     {
         if (empty($tags)) {
             return;
@@ -736,7 +736,7 @@ class ConfigController extends AbstractController
      *
      * @param int $userId
      */
-    private function removeAllTagsByUserId($userId)
+    private function removeAllTagsByUserId($userId): void
     {
         $tags = $this->tagRepository->findAllTags($userId);
         $this->removeAllTagsByStatusAndUserId($tags, $userId);
@@ -747,13 +747,13 @@ class ConfigController extends AbstractController
      *
      * @param int $userId
      */
-    private function removeTagsForArchivedByUserId($userId)
+    private function removeTagsForArchivedByUserId($userId): void
     {
         $tags = $this->tagRepository->findForArchivedArticlesByUser($userId);
         $this->removeAllTagsByStatusAndUserId($tags, $userId);
     }
 
-    private function removeAnnotationsForArchivedByUserId($userId)
+    private function removeAnnotationsForArchivedByUserId($userId): void
     {
         $archivedEntriesAnnotations = $this->annotationRepository
             ->findAllArchivedEntriesByUser($userId);

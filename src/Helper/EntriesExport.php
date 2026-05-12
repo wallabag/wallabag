@@ -223,6 +223,7 @@ class EntriesExport
                 $chapterName = $entry->getTitle();
                 $chapter = $chapterStart . "<h1>{$entry->getTitle()}</h1>";
             }
+            $tagLabels = array_map(static fn ($tag) => $tag->getLabel(), $entry->getTags()->toArray());
 
             $chapter .= '<dl>' .
                 '<dt>' . $this->translator->trans('entry.view.published_by') . '</dt><dd>' . $authors . '</dd>' .
@@ -230,6 +231,7 @@ class EntriesExport
                 '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $readingTime]) . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
+                (!empty($tagLabels) ? '<dt>' . $this->translator->trans('entry.metadata.tags') . '</dt><dd>' . implode(', ', $tagLabels) . '</dd>' : '') .
                 '<dt>' . $this->translator->trans('entry.metadata.internal_link') . '</dt><dd><a href="' . $internalLink . '">' . $internalLink . '</a></dd>';
 
             if ($entry->isPublic()) {
@@ -302,6 +304,8 @@ class EntriesExport
 
             $readingTime = $entry->getReadingTime() / $user->getConfig()->getReadingSpeed() * 200;
 
+            $tagLabels = array_map(static fn ($tag) => $tag->getLabel(), $entry->getTags()->toArray());
+
             $pdf->addPage();
             $html = '<h1>' . $entry->getTitle() . '</h1>' .
                 '<dl>' .
@@ -309,6 +313,7 @@ class EntriesExport
                 '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $readingTime]) . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
+                (!empty($tagLabels) ? '<dt>' . $this->translator->trans('entry.metadata.tags') . '</dt><dd>' . implode(', ', $tagLabels) . '</dd>' : '') .
                 '</dl>';
             $pdf->writeHTMLCell(0, 0, null, null, $html, 0, 1);
 
@@ -351,7 +356,7 @@ class EntriesExport
         $enclosure = '"';
         $handle = fopen('php://memory', 'b+r');
 
-        fputcsv($handle, ['Title', 'URL', 'Content', 'Tags', 'MIME Type', 'Language', 'Creation date'], $delimiter, $enclosure);
+        fputcsv($handle, ['Title', 'URL', 'Content', 'Tags', 'MIME Type', 'Language', 'Creation date'], $delimiter, $enclosure, '');
 
         foreach ($this->entries as $entry) {
             fputcsv(
@@ -367,7 +372,8 @@ class EntriesExport
                     $entry->getCreatedAt()->format('d/m/Y h:i:s'),
                 ],
                 $delimiter,
-                $enclosure
+                $enclosure,
+                ''
             );
         }
 

@@ -20,6 +20,8 @@ class PocketCsvController extends AbstractController
         private readonly Config $craueConfig,
         private readonly RabbitMqProducer $rabbitMqProducer,
         private readonly RedisProducer $redisProducer,
+        private readonly array $allowMimetypes,
+        private readonly string $resourceDir,
     ) {
     }
 
@@ -43,9 +45,9 @@ class PocketCsvController extends AbstractController
             $markAsRead = $form->get('mark_as_read')->getData();
             $name = 'pocket_' . $this->getUser()->getId() . '.csv';
 
-            if (null !== $file && \in_array($file->getClientMimeType(), $this->getParameter('wallabag.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag.resource_dir'), $name)) {
+            if (null !== $file && \in_array($file->getClientMimeType(), $this->allowMimetypes, true) && $file->move($this->resourceDir, $name)) {
                 $res = $this->pocketCsvImport
-                    ->setFilepath($this->getParameter('wallabag.resource_dir') . '/' . $name)
+                    ->setFilepath($this->resourceDir . '/' . $name)
                     ->setMarkAsRead($markAsRead)
                     ->import();
 
@@ -64,7 +66,7 @@ class PocketCsvController extends AbstractController
                         ]);
                     }
 
-                    unlink($this->getParameter('wallabag.resource_dir') . '/' . $name);
+                    unlink($this->resourceDir . '/' . $name);
                 }
 
                 $this->addFlash('notice', $message);

@@ -13,7 +13,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class CustomDoctrineORMSubscriber extends DoctrineORMSubscriber implements EventSubscriberInterface
 {
-    public function filterDateRange(GetFilterConditionEvent $event)
+    public function filterDateRange(GetFilterConditionEvent $event): void
     {
         $filterQuery = $event->getFilterQuery();
 

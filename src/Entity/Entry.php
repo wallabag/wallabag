@@ -555,7 +555,7 @@ class Entry
         return $this->annotations;
     }
 
-    public function setAnnotation(Annotation $annotation)
+    public function setAnnotation(Annotation $annotation): void
     {
         $this->annotations[] = $annotation;
     }
@@ -571,7 +571,7 @@ class Entry
     /**
      * @param string $mimetype
      */
-    public function setMimetype($mimetype)
+    public function setMimetype($mimetype): void
     {
         $this->mimetype = $mimetype;
     }
@@ -587,7 +587,7 @@ class Entry
     /**
      * @param int $readingTime
      */
-    public function setReadingTime($readingTime)
+    public function setReadingTime($readingTime): void
     {
         $this->readingTime = $readingTime;
     }
@@ -603,7 +603,7 @@ class Entry
     /**
      * @param string|null $domainName
      */
-    public function setDomainName($domainName)
+    public function setDomainName($domainName): void
     {
         $this->domainName = $domainName;
     }
@@ -642,7 +642,7 @@ class Entry
         return $data;
     }
 
-    public function addTag(Tag $tag)
+    public function addTag(Tag $tag): void
     {
         if ($this->tags->contains($tag)) {
             return;
@@ -662,7 +662,7 @@ class Entry
     /**
      * Remove the given tag from the entry (if the tag is associated).
      */
-    public function removeTag(Tag $tag)
+    public function removeTag(Tag $tag): void
     {
         if (!$this->tags->contains($tag)) {
             return;
@@ -675,7 +675,7 @@ class Entry
     /**
      * Remove all assigned tags from the entry.
      */
-    public function removeAllTags()
+    public function removeAllTags(): void
     {
         foreach ($this->tags as $tag) {
             $this->tags->removeElement($tag);
@@ -764,7 +764,7 @@ class Entry
         return $this;
     }
 
-    public function generateUid()
+    public function generateUid(): void
     {
         if (null === $this->uid) {
             // @see http://blog.kevingomez.fr/til/2015/07/26/why-is-uniqid-slow/ for true parameter
@@ -772,7 +772,7 @@ class Entry
         }
     }
 
-    public function cleanUid()
+    public function cleanUid(): void
     {
         $this->uid = null;
     }

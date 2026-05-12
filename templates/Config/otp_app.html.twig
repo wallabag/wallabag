@@ -36,7 +36,7 @@
                             </div>
                             {% endfor %}
 
-                            <form class="form" action="{{ path("config_otp_app_check") }}" method="post" name="config_otp_app_check">
+                            <form action="{{ path("config_otp_app_check") }}" method="post" name="config_otp_app_check">
                                 <input type="hidden" name="token" value="{{ csrf_token('otp') }}" />
                                 <div class="card-content">
                                     <div class="row">

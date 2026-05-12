@@ -1,0 +1,65 @@
+<?php
+
+namespace Wallabag\Tests\Functional\Controller\Api;
+
+use Craue\ConfigBundle\Util\Config;
+
+class WallabagRestControllerTest extends WallabagApiTestCase
+{
+    public function testGetVersion(): void
+    {
+        // create a new client instead of using $this->client to be sure client isn't authenticated
+        $client = $this->createUnauthorizedClient();
+        $client->request('GET', '/api/version');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertSame($client->getContainer()->getParameter('wallabag.version'), $content);
+    }
+
+    public function testGetInfo(): void
+    {
+        // create a new client instead of using $this->client to be sure client isn't authenticated
+        $client = $this->createUnauthorizedClient();
+        $client->request('GET', '/api/info');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey('appname', $content);
+        $this->assertArrayHasKey('version', $content);
+        $this->assertArrayHasKey('allowed_registration', $content);
+
+        $this->assertSame('wallabag', $content['appname']);
+    }
+
+    public function testAllowedRegistration(): void
+    {
+        // create a new client instead of using $this->client to be sure client isn't authenticated
+        $client = $this->createUnauthorizedClient();
+        $registrationEnabled = filter_var($_ENV['WALLABAG_REGISTRATION_ENABLED'] ?? '0', \FILTER_VALIDATE_BOOL);
+
+        if (!$registrationEnabled) {
+            $this->markTestSkipped('fosuser_registration is not enabled.');
+        }
+
+        $client->getContainer()->get(Config::class)->set('api_user_registration', '1');
+
+        $client->request('GET', '/api/info');
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertTrue($content['allowed_registration']);
+
+        $client->getContainer()->get(Config::class)->set('api_user_registration', '0');
+
+        $client->request('GET', '/api/info');
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertFalse($content['allowed_registration']);
+    }
+}

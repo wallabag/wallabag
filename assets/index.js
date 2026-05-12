@@ -2,9 +2,6 @@ import './bootstrap';
 
 /* Materialize imports */
 import '@materializecss/materialize/dist/css/materialize.css';
-import '@materializecss/materialize/dist/js/materialize';
-
-import 'mathjax/es5/tex-svg';
 
 /* Fonts */
 import 'material-design-icons-iconfont/dist/material-design-icons.css';

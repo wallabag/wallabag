@@ -1,2 +1,131 @@
-.DEFAULT:
-	gmake $@
+# This file requires GNU make. Use gmake if your system's default make is not GNU make.
+SHELL := bash
+TMP_FOLDER := /tmp
+RELEASE_FOLDER := wllbg-release
+
+# ensure the ENV variable is well defined
+AVAILABLE_ENV := prod dev test
+override ENV := $(if $(filter $(ENV),$(AVAILABLE_ENV)),$(ENV),prod)
+
+DOCKER_COMPOSE_RUNNING = $(shell docker compose ps -q 2>/dev/null | grep -q . && echo 1 || echo 0)
+COMPOSER_LOCAL = $(shell if command -v composer >/dev/null 2>&1; then printf '%s' composer; elif [ -f composer.phar ]; then printf '%s' ./composer.phar; fi)
+COMPOSER = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run --rm php composer,$(COMPOSER_LOCAL))
+PHP = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run --rm php php,php)
+PHP_NO_XDEBUG = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run -e XDEBUG_MODE=off --rm php php,XDEBUG_MODE=off php)
+YARN = $(if $(filter 1,$(DOCKER_COMPOSE_RUNNING)),docker compose run --rm php yarn,yarn)
+PHPUNIT_TARGETS := test test-unit test-integration test-functional
+PHPUNIT_PRIMARY_TARGET := $(firstword $(MAKECMDGOALS))
+PHPUNIT_EXTRA_GOALS := $(if $(filter $(PHPUNIT_PRIMARY_TARGET),$(PHPUNIT_TARGETS)),$(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS)))
+PHPUNIT_PATH_ARGS := $(strip $(foreach goal,$(PHPUNIT_EXTRA_GOALS),$(if $(filter %.php,$(goal)),$(goal),$(if $(findstring /,$(goal)),$(goal)))))
+PHPUNIT_INVALID_GOALS := $(filter-out $(PHPUNIT_PATH_ARGS),$(PHPUNIT_EXTRA_GOALS))
+PHPUNIT_MISSING_PATH_ARGS := $(foreach goal,$(PHPUNIT_PATH_ARGS),$(if $(wildcard $(goal)),,$(goal)))
+
+ifneq ($(filter $(PHPUNIT_PRIMARY_TARGET),$(PHPUNIT_TARGETS)),)
+ifneq ($(strip $(PHPUNIT_INVALID_GOALS)),)
+$(error Invalid PHPUnit path argument(s): $(PHPUNIT_INVALID_GOALS). Use existing test file or directory paths)
+endif
+ifneq ($(strip $(PHPUNIT_MISSING_PATH_ARGS)),)
+$(error Missing PHPUnit path argument(s): $(PHPUNIT_MISSING_PATH_ARGS))
+endif
+endif
+
+.PHONY: FORCE
+FORCE:
+
+$(foreach goal,$(PHPUNIT_PATH_ARGS),$(eval $(goal): FORCE ; @:))
+
+help: ## Display this help menu
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+install: ## Install wallabag with the latest version
+	@./scripts/install.sh $(ENV)
+
+update: ## Update the wallabag installation to the latest version
+	@./scripts/update.sh $(ENV)
+
+dev-docker-up: ## Start the Docker dev stack
+	@docker compose up -d
+
+dev-docker-down: ## Stop the Docker dev stack
+	@docker compose down --remove-orphans --volumes
+
+dev-setup: ## Install wallabag for development
+	@[ -n "$(COMPOSER)" ] || { echo "composer command not found and ./composer.phar is missing." >&2; exit 1; }
+	@$(COMPOSER) install
+	@$(YARN) install
+	@$(YARN) build:dev
+	@$(PHP) bin/console wallabag:install --env=dev
+
+.NOTPARALLEL: dev
+
+dev: dev-setup run ## Install wallabag for development and run the built-in server in dev
+
+run: ## Run the built-in server in dev
+	@$(PHP) bin/console server:run --env=dev
+
+dev-watch: ## Watch frontend assets in dev
+	@$(YARN) watch
+
+build: ## Run webpack
+	@$(YARN) install
+	@$(YARN) build:$(ENV)
+
+test: ## Launch wallabag testsuite (append test paths to narrow scope)
+	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit -v $(PHPUNIT_PATH_ARGS)
+
+test-unit: ## Launch unit testsuite (append test paths to narrow scope)
+	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit --testsuite unit -v $(PHPUNIT_PATH_ARGS)
+
+test-integration: ## Launch integration testsuite (append test paths to narrow scope)
+	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit --testsuite integration -v $(PHPUNIT_PATH_ARGS)
+
+test-functional: ## Launch functional testsuite (append test paths to narrow scope)
+	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit --testsuite functional -v $(PHPUNIT_PATH_ARGS)
+
+check-cs: ## Check PHP coding standards without making changes
+	@$(PHP_NO_XDEBUG) bin/php-cs-fixer fix --verbose --dry-run
+
+fix-cs: ## Run PHP-CS-Fixer
+	@$(PHP_NO_XDEBUG) bin/php-cs-fixer fix
+
+phpstan: ## Run PHPStan
+	@$(PHP_NO_XDEBUG) bin/phpstan analyse
+
+phpstan-baseline: ## Generate PHPStan baseline
+	@$(PHP_NO_XDEBUG) bin/phpstan analyse --generate-baseline
+
+twigcs: ## Run TwigCS linter on Twig templates
+	@$(PHP_NO_XDEBUG) bin/twigcs --severity=error --display=blocking app/ src/
+
+composer-validate: ## Validate composer.json
+	@$(COMPOSER) validate
+
+composer-normalize: ## Check that composer.json is normalized (dry run)
+	@$(COMPOSER) normalize --dry-run --no-check-lock
+
+composer-dependency-analyser: ## Run composer-dependency-analyser
+	@$(PHP_NO_XDEBUG) bin/composer-dependency-analyser
+
+lint-js: ## Run ESLint
+	@$(YARN) lint:js
+
+lint-scss: ## Run Stylelint
+	@$(YARN) lint:scss
+
+lint-translations: ## Validate YAML translation files
+	@$(PHP) bin/console lint:yaml translations -v
+
+lint: composer-validate composer-normalize composer-dependency-analyser check-cs phpstan twigcs lint-js lint-scss lint-translations ## Run all coding standards and linting checks
+
+release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
+ifndef VERSION
+	$(error VERSION is not set)
+endif
+	@./scripts/release.sh $(VERSION) $(TMP_FOLDER) $(RELEASE_FOLDER) $(ENV)
+
+deploy: ## Deploy wallabag
+	@bundle exec cap staging deploy
+
+.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup check-cs fix-cs phpstan phpstan-baseline twigcs composer-validate composer-normalize composer-dependency-analyser lint-js lint-scss lint-translations lint
+
+.DEFAULT_GOAL := install

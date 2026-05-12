@@ -2,17 +2,17 @@
 {% extends "@FOSUser/layout.html.twig" %}
 
 {% block fos_user_content %}
-<form class="form" action="{{ path("2fa_login_check") }}" method="post">
+<form action="{{ path("2fa_login_check") }}" method="post">
     <div class="card-content">
         <div class="row">
 
             {% for flash_message in app.session.flashbag.get("two_factor") %}
-            <p class="error">{{ flash_message|trans }}</p>
+            <p>{{ flash_message|trans }}</p>
             {% endfor %}
 
             {# Authentication errors #}
             {% if authenticationError %}
-            <p class="error">{{ authenticationError|trans(authenticationErrorData, 'SchebTwoFactorBundle') }}</p>
+            <p>{{ authenticationError|trans(authenticationErrorData, 'SchebTwoFactorBundle') }}</p>
             {% endif %}
 
             <div class="input-field col s12">

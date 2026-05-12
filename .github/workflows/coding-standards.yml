@@ -14,10 +14,12 @@ jobs:
   coding-standards:
     name: "CS Fixer, PHPStan & TwigCS"
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: mysql://root:root@127.0.0.1:3306/wallabag?charset=utf8mb4
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v5"
+        uses: "actions/checkout@v6"
 
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
@@ -31,7 +33,7 @@ jobs:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Install Node"
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
           cache: 'yarn'
@@ -40,11 +42,10 @@ jobs:
         run: |
           sudo systemctl start mysql.service
           sudo mysql -u root -proot -h 127.0.0.1 -e "CREATE DATABASE wallabag_test"
-          cp app/config/tests/parameters_test.mysql.yml app/config/parameters_test.yml
 
       - name: "Install dependencies with Composer"
         id: composer-install
-        uses: "ramsey/composer-install@v3"
+        uses: "ramsey/composer-install@v4"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 

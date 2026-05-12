@@ -7,40 +7,43 @@ export default class extends Controller {
   static outlets = ['entries-navigation'];
 
   connect() {
+    this.boundShortcuts = [];
+    this.originalStopCallback = Mousetrap.prototype.stopCallback;
+
     /* Go to */
-    Mousetrap.bind('g u', () => {
+    this.bindShortcut('g u', () => {
       window.location.href = Routing.generate('homepage');
     });
-    Mousetrap.bind('g s', () => {
+    this.bindShortcut('g s', () => {
       window.location.href = Routing.generate('starred');
     });
-    Mousetrap.bind('g r', () => {
+    this.bindShortcut('g r', () => {
       window.location.href = Routing.generate('archive');
     });
-    Mousetrap.bind('g a', () => {
+    this.bindShortcut('g a', () => {
       window.location.href = Routing.generate('all');
     });
-    Mousetrap.bind('g t', () => {
+    this.bindShortcut('g t', () => {
       window.location.href = Routing.generate('tag');
     });
-    Mousetrap.bind('g c', () => {
+    this.bindShortcut('g c', () => {
       window.location.href = Routing.generate('config');
     });
-    Mousetrap.bind('g i', () => {
+    this.bindShortcut('g i', () => {
       window.location.href = Routing.generate('import');
     });
-    Mousetrap.bind('g d', () => {
+    this.bindShortcut('g d', () => {
       window.location.href = Routing.generate('developer');
     });
-    Mousetrap.bind('?', () => {
+    this.bindShortcut('?', () => {
       window.location.href = Routing.generate('howto');
     });
-    Mousetrap.bind('g l', () => {
+    this.bindShortcut('g l', () => {
       window.location.href = Routing.generate('fos_user_security_logout');
     });
 
     /* open original article */
-    Mousetrap.bind('o', () => {
+    this.bindShortcut('o', () => {
       if (!this.hasOpenOriginalTarget) {
         return;
       }
@@ -49,7 +52,7 @@ export default class extends Controller {
     });
 
     /* mark as favorite */
-    Mousetrap.bind('f', () => {
+    this.bindShortcut('f', () => {
       if (!this.hasMarkAsFavoriteTarget) {
         return;
       }
@@ -58,7 +61,7 @@ export default class extends Controller {
     });
 
     /* mark as read */
-    Mousetrap.bind('a', () => {
+    this.bindShortcut('a', () => {
       if (!this.hasMarkAsReadTarget) {
         return;
       }
@@ -67,7 +70,7 @@ export default class extends Controller {
     });
 
     /* delete */
-    Mousetrap.bind('del', () => {
+    this.bindShortcut('del', () => {
       if (!this.hasDeleteEntryTarget) {
         return;
       }
@@ -76,7 +79,7 @@ export default class extends Controller {
     });
 
     /* Actions */
-    Mousetrap.bind('g n', (e) => {
+    this.bindShortcut('g n', (e) => {
       if (!this.hasShowAddUrlTarget) {
         return;
       }
@@ -85,7 +88,7 @@ export default class extends Controller {
       this.showAddUrlTarget.click();
     });
 
-    Mousetrap.bind('s', (e) => {
+    this.bindShortcut('s', (e) => {
       if (!this.hasShowSearchTarget) {
         return;
       }
@@ -94,7 +97,7 @@ export default class extends Controller {
       this.showSearchTarget.click();
     });
 
-    Mousetrap.bind('esc', (e) => {
+    this.bindShortcut('esc', (e) => {
       if (!this.hasShowActionsTarget) {
         return;
       }
@@ -103,18 +106,17 @@ export default class extends Controller {
       this.showActionsTarget.click();
     });
 
-    const originalStopCallback = Mousetrap.prototype.stopCallback;
-
-    Mousetrap.prototype.stopCallback = (e, element, combo) => {
+    this.stopCallback = (e, element, combo) => {
       // allow esc key to be used in input fields of topbar
       if (combo === 'esc' && element.dataset.topbarTarget !== undefined) {
         return false;
       }
 
-      return originalStopCallback(e, element);
+      return this.originalStopCallback(e, element);
     };
+    Mousetrap.prototype.stopCallback = this.stopCallback;
 
-    Mousetrap.bind('right', () => {
+    this.bindShortcut('right', () => {
       if (!this.hasEntriesNavigationOutlet) {
         return;
       }
@@ -122,7 +124,7 @@ export default class extends Controller {
       this.entriesNavigationOutlet.selectRightCard();
     });
 
-    Mousetrap.bind('left', () => {
+    this.bindShortcut('left', () => {
       if (!this.hasEntriesNavigationOutlet) {
         return;
       }
@@ -130,12 +132,28 @@ export default class extends Controller {
       this.entriesNavigationOutlet.selectLeftCard();
     });
 
-    Mousetrap.bind('enter', () => {
+    this.bindShortcut('enter', () => {
       if (!this.hasEntriesNavigationOutlet) {
         return;
       }
 
       this.entriesNavigationOutlet.selectCurrentCard();
     });
+  }
+
+  disconnect() {
+    this.boundShortcuts.forEach((combo) => {
+      Mousetrap.unbind(combo);
+    });
+    this.boundShortcuts = [];
+
+    if (Mousetrap.prototype.stopCallback === this.stopCallback) {
+      Mousetrap.prototype.stopCallback = this.originalStopCallback;
+    }
+  }
+
+  bindShortcut(combo, callback) {
+    Mousetrap.bind(combo, callback);
+    this.boundShortcuts.push(combo);
   }
 }

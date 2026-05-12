@@ -5,6 +5,8 @@ imports:
 
 parameters:
     spiriit_form_filter.get_filter.doctrine_orm.class: Wallabag\Event\Subscriber\CustomDoctrineORMSubscriber
+    env(WALLABAG_SITE_CONFIG_FOLDERS): ''
+    wallabag.site_config_folders: '%env(csv:WALLABAG_SITE_CONFIG_FOLDERS)%'
 
 services:
     _defaults:
@@ -14,16 +16,23 @@ services:
         bind:
             $projectDir: '%kernel.project_dir%'
             $debug: '%kernel.debug%'
-            $defaultLocale: '%kernel.default_locale%'
-            $wallabagUrl: '%domain_name%'
-            $tablePrefix: "%database_table_prefix%"
+            $environment: '%kernel.environment%'
+            $defaultLocale: '%env(DEFAULT_LOCALE)%'
+            $wallabagUrl: '%env(WALLABAG_BASE_URL)%'
+            $tablePrefix: '%env(WALLABAG_TABLE_PREFIX)%'
             $encryptionKeyPath: "%wallabag.site_credentials.encryption_key_path%"
             $fetchingErrorMessageTitle: "%wallabag.fetching_error_message_title%"
             $fetchingErrorMessage: '%wallabag.fetching_error_message%'
+            $version: "%wallabag.version%"
+            $paypalUrl: "%wallabag.paypal_url%"
             $languages: '%wallabag.languages%'
+            $feedLimit: "%wallabag.feed_limit%"
+            $apiLimitMassActions: "%wallabag.api_limit_mass_actions%"
+            $allowMimetypes: "%wallabag.allow_mimetypes%"
+            $resourceDir: "%wallabag.resource_dir%"
             $lifeTime: '%wallabag.cache_lifetime%'
             $logoPath: 'web/img/appicon/apple-touch-icon-152.png'
-            $registrationEnabled: '%fosuser_registration%'
+            $registrationEnabled: '%env(bool:WALLABAG_REGISTRATION_ENABLED)%'
             $restrictedAccess: '@=service(''craue_config'').get(''restricted_access'')'
             $senderEmail: "%scheb_two_factor.email.sender_email%"
             $senderName: "%scheb_two_factor.email.sender_name%"
@@ -31,7 +40,8 @@ services:
             $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
             $fonts: '%wallabag.fonts%'
             $defaultIgnoreOriginInstanceRules: '%wallabag.default_ignore_origin_instance_rules%'
-            $defaultUserAgent: "%wallabag_user_agent%"
+            $defaultUserAgent: '%env(WALLABAG_USER_AGENT)%'
+            $addonsUrl: "%addons_url%"
 
     Wallabag\:
         resource: '../../src/*'
@@ -193,7 +203,7 @@ services:
 
     Wallabag\Event\Subscriber\SchemaAdapterSubscriber:
         arguments:
-            $databaseTablePrefix: "%database_table_prefix%"
+            $databaseTablePrefix: '%env(WALLABAG_TABLE_PREFIX)%'
         tags:
             - { name: doctrine.event_subscriber }
 
@@ -208,7 +218,7 @@ services:
                 error_message: '%wallabag.fetching_error_message%'
                 error_message_title: '%wallabag.fetching_error_message_title%'
                 http_client:
-                    ua_browser: "%wallabag_user_agent%"
+                    ua_browser: '%env(WALLABAG_USER_AGENT)%'
             $client: '@psr18.wallabag.client'
         calls:
             - [ setLogger, [ "@logger" ] ]
@@ -217,7 +227,7 @@ services:
 
     Graby\SiteConfig\ConfigBuilder:
         arguments:
-            $config: {}
+            $config: "@=parameter('wallabag.site_config_folders') and parameter('wallabag.site_config_folders')[0] ? {'site_config': parameter('wallabag.site_config_folders')} : {}"
 
     Wallabag\SiteConfig\GrabySiteConfigBuilder:
         tags:
@@ -264,7 +274,6 @@ services:
 
     Wallabag\Command\InstallCommand:
         arguments:
-            $databaseDriver: '%database_driver%'
             $defaultSettings: '%wallabag.default_internal_settings%'
             $defaultIgnoreOriginInstanceRules: '%wallabag.default_ignore_origin_instance_rules%'
 
@@ -272,7 +281,7 @@ services:
         arguments:
             $itemsOnPage: "%wallabag.items_on_page%"
             $feedLimit: "%wallabag.feed_limit%"
-            $language: "%wallabag.language%"
+            $language: '%env(DEFAULT_LOCALE)%'
             $readingSpeed: "%wallabag.reading_speed%"
             $actionMarkAsRead: "%wallabag.action_mark_as_read%"
             $listMode: "%wallabag.list_mode%"

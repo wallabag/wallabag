@@ -18,7 +18,10 @@ class ShaarliController extends HtmlController
         private readonly Config $craueConfig,
         private readonly RabbitMqProducer $rabbitMqProducer,
         private readonly RedisProducer $redisProducer,
+        array $allowMimetypes,
+        string $resourceDir,
     ) {
+        parent::__construct($allowMimetypes, $resourceDir);
     }
 
     #[Route(path: '/import/shaarli', name: 'import_shaarli', methods: ['GET', 'POST'])]

@@ -657,6 +657,7 @@ entry:
         reading_time_minutes_short: '%readingTime% min'
         reading_time: Geschatte leestijd
         published_on: Gepubliceerd op
+        tags: Labels
     confirm:
         delete_tag: Weet je zeker dat je dit label wilt verwijderen van dit artikel?
         delete: Weet je zeker dat je dit artikel wilt verwijderen?

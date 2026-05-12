@@ -2,6 +2,8 @@ validator:
     quote_length_too_high: Citat je predug. Trebao bi sadržati {{limit}} ili manje znakova.
     password_too_short: Lozinka mora sadržati barem 8 znakova.
     password_wrong_value: Dostavljena je kriva trenutačna lozinka.
-    feed_limit_too_high: Ovo će zasigurno urušiti program
-    item_per_page_too_high: Ovo će zasigurno urušiti program
+    feed_limit_too_high: Ovo će zasigurno prekinuti rad programa
+    item_per_page_too_high: Ovo će zasigurno prekinuti rad programa
     password_must_match: Polja lozinki moraju se poklapati.
+    item_per_page_too_low: Ova bi vrijednost trebala biti veća ili jednaka 1.
+    feed_limit_too_low: Ova bi vrijednost trebala biti veća ili jednaka 1.

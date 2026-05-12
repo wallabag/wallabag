@@ -239,6 +239,7 @@ entry:
         reading_time_minutes_short: '%readingTime% perc'
         address: Cím
         added_on: Hozzáadva
+        tags: Címkék
 about:
     page_title: Névjegy
     top_menu:

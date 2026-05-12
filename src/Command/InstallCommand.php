@@ -32,6 +32,8 @@ class InstallCommand extends Command
 
     private InputInterface $defaultInput;
     private SymfonyStyle $io;
+    private bool $schemaIsNew = true;
+    private bool $adminUserCreated = false;
     private array $functionExists = [
         'curl_exec',
         'curl_multi_init',
@@ -42,14 +44,14 @@ class InstallCommand extends Command
         private readonly EventDispatcherInterface $dispatcher,
         private readonly UserManagerInterface $userManager,
         private readonly TableMetadataStorageConfiguration $tableMetadataStorageConfiguration,
-        private readonly string $databaseDriver,
         private readonly array $defaultSettings,
         private readonly array $defaultIgnoreOriginInstanceRules,
+        private readonly string $environment,
     ) {
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->addOption(
@@ -76,10 +78,33 @@ class InstallCommand extends Command
             ->setupConfig()
         ;
 
+        if ($this->adminUserCreated) {
+            $this->setupDevFixtures();
+        }
+
         $this->io->success('wallabag has been successfully installed.');
         $this->io->success('You can now configure your web server, see https://doc.wallabag.org');
 
         return 0;
+    }
+
+    private function setupDevFixtures(): void
+    {
+        if ('dev' !== $this->environment) {
+            return;
+        }
+
+        $this->io->section('Step 5: Dev fixtures (optional).');
+
+        if (!$this->io->confirm('Would you like to load dev fixtures with sample entries? (recommended for development)', true)) {
+            return;
+        }
+
+        $this->io->text('Loading dev fixtures...');
+
+        $this->runCommand('doctrine:fixtures:load', ['--append' => true, '--no-interaction' => true]);
+
+        $this->io->text('<info>Dev fixtures successfully loaded.</info>');
     }
 
     private function checkRequirements()
@@ -87,6 +112,7 @@ class InstallCommand extends Command
         $this->io->section('Step 1 of 4: Checking system requirements.');
 
         $rows = [];
+        $databaseDriver = $this->getDatabaseDriver();
 
         // testing if database driver exists
         $fulfilled = true;
@@ -94,13 +120,13 @@ class InstallCommand extends Command
         $status = '<info>OK!</info>';
         $help = '';
 
-        if (!\extension_loaded($this->databaseDriver)) {
+        if (!\extension_loaded($databaseDriver)) {
             $fulfilled = false;
             $status = '<error>ERROR!</error>';
-            $help = 'Database driver "' . $this->databaseDriver . '" is not installed.';
+            $help = 'Database driver "' . $databaseDriver . '" is not installed.';
         }
 
-        $rows[] = [\sprintf($label, $this->databaseDriver), $status, $help];
+        $rows[] = [\sprintf($label, $databaseDriver), $status, $help];
 
         // testing if connection to the database can be established
         $label = '<comment>Database connection</comment>';
@@ -180,6 +206,18 @@ class InstallCommand extends Command
         return $this;
     }
 
+    private function getDatabaseDriver(): string
+    {
+        $driver = $this->entityManager->getConnection()->getParams()['driver'] ?? null;
+
+        return match ($driver) {
+            'pdo_mysql', 'mysqli' => 'pdo_mysql',
+            'pdo_pgsql', 'pgsql' => 'pdo_pgsql',
+            'pdo_sqlite', 'sqlite3' => 'pdo_sqlite',
+            default => throw new \RuntimeException('Unsupported database driver: ' . (string) $driver),
+        };
+    }
+
     private function setupDatabase()
     {
         $this->io->section('Step 2 of 4: Setting up database.');
@@ -239,6 +277,8 @@ class InstallCommand extends Command
 
                 $this->dropWallabagSchemaOnly();
                 $this->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true]);
+            } else {
+                $this->schemaIsNew = false;
             }
         } else {
             $this->io->text('Creating schema...');
@@ -260,6 +300,12 @@ class InstallCommand extends Command
     private function setupAdmin()
     {
         $this->io->section('Step 3 of 4: Administration setup.');
+
+        if (!$this->schemaIsNew) {
+            $this->io->text('<info>Existing schema kept — skipping admin user creation.</info>');
+
+            return $this;
+        }
 
         if (!$this->io->confirm('Would you like to create a new admin user (recommended)?', true)) {
             return $this;
@@ -283,6 +329,8 @@ class InstallCommand extends Command
 
         // dispatch a created event so the associated config will be created
         $this->dispatcher->dispatch(new UserEvent($user), FOSUserEvents::USER_CREATED);
+
+        $this->adminUserCreated = true;
 
         $this->io->text('<info>Administration successfully setup.</info>');
 

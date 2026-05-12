@@ -321,6 +321,7 @@ entry:
         reading_time_minutes_short: '%readingTime% мин'
         reading_time: Приблизительное время чтения
         published_on: Опубликовано
+        tags: Теги
     confirm:
         delete_tag: Вы уверены, что хотите удалить этот тег из статьи?
         delete: Вы уверены, что хотите удалить эту статью?

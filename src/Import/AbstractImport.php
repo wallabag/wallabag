@@ -40,7 +40,7 @@ abstract class AbstractImport implements ImportInterface
      * Set RabbitMQ/Redis Producer to send each entry to a queue.
      * This method should be called when user has enabled RabbitMQ.
      */
-    public function setProducer(ProducerInterface $producer)
+    public function setProducer(ProducerInterface $producer): void
     {
         $this->producer = $producer;
     }
@@ -49,7 +49,7 @@ abstract class AbstractImport implements ImportInterface
      * Set current user.
      * Could the current *connected* user or one retrieve by the consumer.
      */
-    public function setUser(User $user)
+    public function setUser(User $user): void
     {
         $this->user = $user;
     }
@@ -122,7 +122,7 @@ abstract class AbstractImport implements ImportInterface
      * @param string $url     Url to grab content for
      * @param array  $content An array with AT LEAST keys title, html, url, language & content_type to skip the fetchContent from the url
      */
-    protected function fetchContent(Entry $entry, $url, array $content = [])
+    protected function fetchContent(Entry $entry, $url, array $content = []): void
     {
         try {
             $this->contentProxy->updateEntry($entry, $url, $content, $this->disableContentUpdate);
@@ -137,7 +137,7 @@ abstract class AbstractImport implements ImportInterface
     /**
      * Parse and insert all given entries.
      */
-    protected function parseEntries(array $entries)
+    protected function parseEntries(array $entries): void
     {
         $i = 1;
         $entryToBeFlushed = [];
@@ -194,7 +194,7 @@ abstract class AbstractImport implements ImportInterface
      * Faster parse entries for Producer.
      * We don't care to make check at this time. They'll be done by the consumer.
      */
-    protected function parseEntriesForProducer(array $entries)
+    protected function parseEntriesForProducer(array $entries): void
     {
         foreach ($entries as $importedEntry) {
             // set userId for the producer (it won't know which user is connected)

@@ -11,7 +11,7 @@ use Wallabag\Entity\IgnoreOriginUserRule;
 
 class IgnoreOriginUserRuleType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('rule', TextType::class, [
@@ -24,7 +24,7 @@ class IgnoreOriginUserRuleType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => IgnoreOriginUserRule::class,

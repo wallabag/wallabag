@@ -1,49 +1,39 @@
 <?php
 
-namespace Wallabag\DataFixtures;
+namespace Wallabag\Fixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use FOS\UserBundle\Event\UserEvent;
+use FOS\UserBundle\FOSUserEvents;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wallabag\Entity\User;
 
 class UserFixtures extends Fixture
 {
+    public function __construct(
+        private readonly EventDispatcherInterface $dispatcher,
+    ) {
+    }
+
     public function load(ObjectManager $manager): void
     {
-        $userAdmin = new User();
-        $userAdmin->setName('Big boss');
-        $userAdmin->setEmail('bigboss@wallabag.org');
-        $userAdmin->setUsername('admin');
-        $userAdmin->setPlainPassword('mypassword');
-        $userAdmin->setEnabled(true);
-        $userAdmin->addRole('ROLE_SUPER_ADMIN');
+        $user = $manager->getRepository(User::class)->findOneBy([], ['id' => 'ASC']);
 
-        $manager->persist($userAdmin);
+        if (!$user) {
+            $user = new User();
+            $user->setUsername('wallabag');
+            $user->setPlainPassword('wallabag');
+            $user->setEmail('wallabag@wallabag.io');
+            $user->setEnabled(true);
+            $user->addRole('ROLE_SUPER_ADMIN');
 
-        $this->addReference('admin-user', $userAdmin);
+            $manager->persist($user);
+            $manager->flush();
 
-        $bobUser = new User();
-        $bobUser->setName('Bobby');
-        $bobUser->setEmail('bobby@wallabag.org');
-        $bobUser->setUsername('bob');
-        $bobUser->setPlainPassword('mypassword');
-        $bobUser->setEnabled(true);
+            $this->dispatcher->dispatch(new UserEvent($user), FOSUserEvents::USER_CREATED);
+        }
 
-        $manager->persist($bobUser);
-
-        $this->addReference('bob-user', $bobUser);
-
-        $emptyUser = new User();
-        $emptyUser->setName('Empty');
-        $emptyUser->setEmail('empty@wallabag.org');
-        $emptyUser->setUsername('empty');
-        $emptyUser->setPlainPassword('mypassword');
-        $emptyUser->setEnabled(true);
-
-        $manager->persist($emptyUser);
-
-        $this->addReference('empty-user', $emptyUser);
-
-        $manager->flush();
+        $this->addReference('dev-user', $user);
     }
 }

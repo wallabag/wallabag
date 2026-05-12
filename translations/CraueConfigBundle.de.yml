@@ -1,5 +1,5 @@
 settings_changed: Konfiguration aktualisiert
-download_pictures: Bilder auf den Server herunterladen
+download_pictures: Bilder auf deinen Server herunterladen
 diaspora_url: diaspora*-URL, sofern der Service aktiviert ist
 export_epub: ePUB-Export aktivieren
 export_pdf: PDF-Export aktivieren
@@ -32,4 +32,4 @@ restricted_access: Authentifizierung für Webseiten mit Paywall aktivieren
 api_user_registration: Registrierung eines Benutzers über die API ermöglichen
 store_article_headers: Speichern von HTTP-Headern für jeden Artikel aktivieren
 shaarli_share_origin_url: Original-URL mit Shaarli teilen, wenn der Service aktiviert ist
-share_linkding: Freigabe zu Linkding aktivieren
+share_linkding: Freigabe für Linkding aktivieren

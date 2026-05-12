@@ -18,7 +18,7 @@ class SchemaAdapterSubscriber implements EventSubscriber
         return ['postGenerateSchema'];
     }
 
-    public function postGenerateSchema(GenerateSchemaEventArgs $eventArgs)
+    public function postGenerateSchema(GenerateSchemaEventArgs $eventArgs): void
     {
         $platform = $eventArgs->getEntityManager()->getConnection()->getDatabasePlatform();
 

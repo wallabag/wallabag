@@ -36,7 +36,7 @@ class SQLiteCascadeDeleteSubscriber implements EventSubscriber
      * We removed everything related to the upcoming removed entry because SQLite can't handle it on it own.
      * We do it in the preRemove, because we can't retrieve tags in the postRemove (because the entry id is gone).
      */
-    public function preRemove(PreRemoveEventArgs $args)
+    public function preRemove(PreRemoveEventArgs $args): void
     {
         $entity = $args->getObject();
         if (!$this->doctrine->getConnection()->getDatabasePlatform() instanceof SqlitePlatform

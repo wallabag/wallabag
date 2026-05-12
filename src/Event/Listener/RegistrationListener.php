@@ -26,7 +26,7 @@ class RegistrationListener implements EventSubscriberInterface
         ];
     }
 
-    public function onRegistrationInitialize(GetResponseUserEvent $event)
+    public function onRegistrationInitialize(GetResponseUserEvent $event): void
     {
         if ($this->registrationEnabled) {
             return;

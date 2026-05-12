@@ -4,6 +4,7 @@ about: If wallabag can't extract content for an URL
 title: Wrong display in wallabag (HOST)
 labels: Site Config
 assignees: ''
+type: Bug
 
 ---
 

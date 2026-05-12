@@ -1,0 +1,23 @@
+{% use "form_div_layout.html.twig" %}
+
+{%- block choice_row -%}
+    {% if expanded %}
+        {{- block('form_row') -}}
+    {% else %}
+        {%- set widget_attr = {} -%}
+        {%- if help is not empty -%}
+            {%- set widget_attr = {attr: {'aria-describedby': id ~ '_help'}} -%}
+        {%- endif -%}
+        {%- set row_controller = attribute(row_attr, 'data-controller')|default('') -%}
+        {%- set row_attr = row_attr|merge({
+            class: ('input-field ' ~ row_attr.class|default(''))|trim,
+            'data-controller': (row_controller ~ ' materialize--form-select')|trim,
+        }) -%}
+        <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
+            {{- form_errors(form) -}}
+            {{- form_widget(form, widget_attr) -}}
+            {{- form_label(form) -}}
+            {{- form_help(form) -}}
+        </div>
+    {% endif %}
+{%- endblock choice_row -%}
