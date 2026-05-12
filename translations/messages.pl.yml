@@ -319,14 +319,14 @@ entry:
         page_title: Zapisz nowy wpis
         placeholder: http://website.com
         form_new:
-            url_label: Adres URL
+            url_label: Url
     search:
         placeholder: Czego szukasz?
     edit:
         page_title: Edytuj wpis
         title_label: Tytuł
-        url_label: Adres URL
-        origin_url_label: Oryginalny adres URL (gdzie znaleziono ten wpis)
+        url_label: Url
+        origin_url_label: Oryginalny url (gdzie znaleziono ten wpis)
         save_label: Zapisz
     public:
         shared_by_wallabag: Ten artykuł został udostępniony przez <a href='%wallabag_instance%'>wallabag</a>
@@ -750,4 +750,4 @@ ignore_origin_instance_rule:
         no: Nie
         actions: Akcje
         edit_action: Edytuj
-    description: Tutaj możesz zarządzać globalnymi zasadami ignorowania pochodzenia, używanymi do ignorowania niektórych wzorców oryginalnych adresów URL.
+    description: Tutaj możesz zarządzać globalnymi zasadami ignorowania pochodzenia, używanymi do ignorowania niektórych wzorców oryginalnych url.

@@ -430,7 +430,7 @@ quickstart:
     configure:
         title: アプリケーションを構成します
         description: あなたに合ったアプリケーションにするために wallabag の構成をご覧ください。
-        language: 言語とデザインを変更します
+        language: 言語と表示設定を変更します
         rss: RSS フィードを有効にします
         tagging_rules: 自動的にあなたの記事にタグ付けするルールを記述します
         feed: フィードを有効化します
@@ -512,7 +512,7 @@ import:
         description: このインポーターは、あなたの wallabag v2 の記事をすべてインポートします。すべての記事に移動し、エクスポート サイドバーで "JSON" をクリックしてください "All articles.json" ファイルができます。
         page_title: インポート > Wallabag v2
     readability:
-        description: このインポーターは、Readability の記事をすべてインポートします。ツール (https://www.readability.com/tools/) ページで "データのエクスポート" セクションの "データをエクスポート" をクリックしてします。json をダウンロードするメールを受け取ります (実は .json で終わらない)。
+        description: このインポーターは、Readability の記事をすべてインポートします。
         how_to: Readability エクスポートを選択して、下のボタンをクリックし、アップロードおよびインポートしてください。
         page_title: インポート > Readability
     worker:
@@ -536,7 +536,7 @@ import:
         description: このインポーターは Pinboard の記事すべてをインポートします。バックアップ (https://pinboard.in/settings/backup) ページの "Bookmarks" セクションで "JSON" をクリックしてください。JSONファイルがダウンロードされます（"pinboard_export"のように）。
         page_title: インポート > Pinboard
     elcurator:
-        description: このインポーターは elCurator の記事すべてをインポートします。あなたのアカウントのpreferences へ行き、コンテンツをエクスポートします。JSONファイルができます。
+        description: このインポーターは elCurator の記事すべてをインポートします。
         page_title: インポート > elCurator
         how_to: お使いのelCuratorエクスポートを選択し、以下のボタンをクリックしてアップロードおよびインポートしてください。
     omnivore:
