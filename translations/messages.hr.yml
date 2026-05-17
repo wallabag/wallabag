@@ -173,8 +173,8 @@ config:
                 not_equal_to: Nije jednako …
                 and: Jedno pravilo I jedno drugo
                 strictly_less_than: Strogo manje od …
-                notmatches: 'Provjerava nepoklapanje <i>teme</i> s <i>traženim izrazom</i> (razlikuje mala/velika slova).<br /> Primjer: <code> naslov se ne poklapa s „nogomet”</code>'
-                matches: 'Provjerava poklapanje <i>teme</i> s <i>traženim izrazom</i> (razlikuje mala/velika slova).<br /> Primjer: <code> naslov se poklapa s „nogomet”</code>'
+                notmatches: 'Provjerava nepoklapanje <i>teme</i> s <i>traženim izrazom</i> (razlikuje mala/velika slova).<br /> Primjer: <code>naslov se ne poklapa s „nogomet”</code>'
+                matches: 'Provjerava poklapanje <i>teme</i> s <i>traženim izrazom</i> (razlikuje mala/velika slova).<br /> Primjer: <code>naslov se poklapa s „nogomet”</code>'
             tagging_rules_definition_description: To su pravila koja wallabag koristi za automatsko označivanje novih zapisa.<br />Pri svakom dodavanju novog zapisa, primijenjuju se sva tvoja pravila za označivanje, kako bi se dodale konfigurirane oznake. Na taj način izbjegavaš pojedinačnu klasifikaciju zapisa.
             tagging_rules_definition_title: Što znači „Pravila za označivanje”?
             how_to_use_them_title: Kako ih koristiti?
