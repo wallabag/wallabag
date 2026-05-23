@@ -209,9 +209,10 @@ class EntriesExport
 
             $readingTime = round($entry->getReadingTime() / $user->getConfig()->getReadingSpeed() * 200);
 
+            $chapter = $chapterStart;
             if ($entryCount > 1) {
                 $chapterName = "{$i}. {$entry->getTitle()}";
-                $chapter = $chapterStart . "<h1>({$i}/{$entryCount}) {$entry->getTitle()}</h1>";
+                $chapter .= "<h1>({$i}/{$entryCount}) {$entry->getTitle()}</h1>";
                 if (null !== $entry->getPreviewPicture()) {
                     $chapter .= "<img src=\"{$entry->getPreviewPicture()}\">";
                 }
@@ -221,9 +222,8 @@ class EntriesExport
                     $book->setCoverImage($entry->getPreviewPicture());
                 }
                 $chapterName = $entry->getTitle();
-                $chapter = $chapterStart . "<h1>{$entry->getTitle()}</h1>";
+                $chapter .= "<h1>{$entry->getTitle()}</h1>";
             }
-            $tagLabels = array_map(static fn ($tag) => $tag->getLabel(), $entry->getTags()->toArray());
 
             $chapter .= '<dl>' .
                 '<dt>' . $this->translator->trans('entry.view.published_by') . '</dt><dd>' . $authors . '</dd>' .
@@ -231,12 +231,16 @@ class EntriesExport
                 '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $readingTime]) . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
-                (!empty($tagLabels) ? '<dt>' . $this->translator->trans('entry.metadata.tags') . '</dt><dd>' . implode(', ', $tagLabels) . '</dd>' : '') .
                 '<dt>' . $this->translator->trans('entry.metadata.internal_link') . '</dt><dd><a href="' . $internalLink . '">' . $internalLink . '</a></dd>';
 
             if ($entry->isPublic()) {
                 $publicLink = $this->wallabagUrl . '/share/' . $entry->getUid();
                 $chapter .= '<dt>' . $this->translator->trans('entry.metadata.public_link') . '</dt><dd><a href="' . $publicLink . '">' . $publicLink . '</a></dd>';
+            }
+
+            $tagLabels = array_map(static fn ($tag) => $tag->getLabel(), $entry->getTags()->toArray());
+            if (!empty($tagLabels)) {
+                $chapter .= '<dt>' . $this->translator->trans('entry.metadata.tags') . '</dt><dd>' . implode(', ', $tagLabels) . '</dd>';
             }
 
             $chapter .= '</dl>' .
