@@ -2840,16 +2840,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.10.1",
+            "version": "2.10.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "73ab136360b5dfd858006eae9795e8fe43c80361"
+                "reference": "d2a1a094e396da8957e797489fddaf860c340cfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/73ab136360b5dfd858006eae9795e8fe43c80361",
-                "reference": "73ab136360b5dfd858006eae9795e8fe43c80361",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/d2a1a094e396da8957e797489fddaf860c340cfc",
+                "reference": "d2a1a094e396da8957e797489fddaf860c340cfc",
                 "shasum": ""
             },
             "require": {
@@ -2937,7 +2937,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.10.1"
+                "source": "https://github.com/guzzle/psr7/tree/2.10.4"
             },
             "funding": [
                 {
@@ -2953,7 +2953,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-20T09:27:36+00:00"
+            "time": "2026-05-29T12:59:07+00:00"
         },
         {
             "name": "hoa/compiler",
