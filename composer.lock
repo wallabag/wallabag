@@ -10099,16 +10099,16 @@
         },
         {
             "name": "symfony/http-client",
-            "version": "v5.4.49",
+            "version": "v5.4.53",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "d77d8e212cde7b5c4a64142bf431522f19487c28"
+                "reference": "b9bb0c36216de55c64c4cc904fab1c3e8765a996"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/d77d8e212cde7b5c4a64142bf431522f19487c28",
-                "reference": "d77d8e212cde7b5c4a64142bf431522f19487c28",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/b9bb0c36216de55c64c4cc904fab1c3e8765a996",
+                "reference": "b9bb0c36216de55c64c4cc904fab1c3e8765a996",
                 "shasum": ""
             },
             "require": {
@@ -10170,7 +10170,7 @@
                 "http"
             ],
             "support": {
-                "source": "https://github.com/symfony/http-client/tree/v5.4.49"
+                "source": "https://github.com/symfony/http-client/tree/v5.4.53"
             },
             "funding": [
                 {
@@ -10182,11 +10182,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-28T08:37:04+00:00"
+            "time": "2026-05-22T10:25:12+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -11116,16 +11120,16 @@
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
-            "version": "v1.37.0",
+            "version": "v1.38.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-grapheme.git",
-                "reference": "4864388bfbd3001ce88e234fab652acd91fdc57e"
+                "reference": "e9247d281d694a5120554d9afaf54e070e88a603"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/4864388bfbd3001ce88e234fab652acd91fdc57e",
-                "reference": "4864388bfbd3001ce88e234fab652acd91fdc57e",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/e9247d281d694a5120554d9afaf54e070e88a603",
+                "reference": "e9247d281d694a5120554d9afaf54e070e88a603",
                 "shasum": ""
             },
             "require": {
@@ -11174,7 +11178,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.37.0"
+                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.38.1"
             },
             "funding": [
                 {
@@ -11194,7 +11198,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-26T13:13:48+00:00"
+            "time": "2026-05-26T05:58:03+00:00"
         },
         {
             "name": "symfony/polyfill-intl-icu",
@@ -11946,16 +11950,16 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v5.4.52",
+            "version": "v5.4.53",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "275b31328b2e58cab004be0cf086380e2a5c5ee7"
+                "reference": "f4ca0c533854c26e3b27e981da760807f89e1a42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/275b31328b2e58cab004be0cf086380e2a5c5ee7",
-                "reference": "275b31328b2e58cab004be0cf086380e2a5c5ee7",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/f4ca0c533854c26e3b27e981da760807f89e1a42",
+                "reference": "f4ca0c533854c26e3b27e981da760807f89e1a42",
                 "shasum": ""
             },
             "require": {
@@ -12016,7 +12020,7 @@
                 "url"
             ],
             "support": {
-                "source": "https://github.com/symfony/routing/tree/v5.4.52"
+                "source": "https://github.com/symfony/routing/tree/v5.4.53"
             },
             "funding": [
                 {
@@ -12036,20 +12040,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-16T14:40:03+00:00"
+            "time": "2026-05-22T19:02:28+00:00"
         },
         {
             "name": "symfony/runtime",
-            "version": "v5.4.52",
+            "version": "v5.4.53",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/runtime.git",
-                "reference": "b1ee7084e363f063f102ff1576b7af7a6335b6ca"
+                "reference": "aab86e248c9af2aec5eeaa62eef757c5af6e5d9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/runtime/zipball/b1ee7084e363f063f102ff1576b7af7a6335b6ca",
-                "reference": "b1ee7084e363f063f102ff1576b7af7a6335b6ca",
+                "url": "https://api.github.com/repos/symfony/runtime/zipball/aab86e248c9af2aec5eeaa62eef757c5af6e5d9f",
+                "reference": "aab86e248c9af2aec5eeaa62eef757c5af6e5d9f",
                 "shasum": ""
             },
             "require": {
@@ -12100,7 +12104,7 @@
                 "runtime"
             ],
             "support": {
-                "source": "https://github.com/symfony/runtime/tree/v5.4.52"
+                "source": "https://github.com/symfony/runtime/tree/v5.4.53"
             },
             "funding": [
                 {
@@ -12120,7 +12124,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-20T07:05:12+00:00"
+            "time": "2026-05-23T12:08:41+00:00"
         },
         {
             "name": "symfony/security-bundle",
@@ -12457,16 +12461,16 @@
         },
         {
             "name": "symfony/security-http",
-            "version": "v5.4.52",
+            "version": "v5.4.53",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-http.git",
-                "reference": "355f32f4318c962842f016eabd0966fde739f6fc"
+                "reference": "119cc48b2370db276ed5ab81ef0458943645bcf9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-http/zipball/355f32f4318c962842f016eabd0966fde739f6fc",
-                "reference": "355f32f4318c962842f016eabd0966fde739f6fc",
+                "url": "https://api.github.com/repos/symfony/security-http/zipball/119cc48b2370db276ed5ab81ef0458943645bcf9",
+                "reference": "119cc48b2370db276ed5ab81ef0458943645bcf9",
                 "shasum": ""
             },
             "require": {
@@ -12523,7 +12527,7 @@
             "description": "Symfony Security Component - HTTP Integration",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-http/tree/v5.4.52"
+                "source": "https://github.com/symfony/security-http/tree/v5.4.53"
             },
             "funding": [
                 {
@@ -12543,7 +12547,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-17T13:15:08+00:00"
+            "time": "2026-05-24T10:45:48+00:00"
         },
         {
             "name": "symfony/serializer",
