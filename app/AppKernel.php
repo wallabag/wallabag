@@ -97,5 +97,48 @@ class AppKernel extends Kernel
             // $container->setParameter('container.dumper.inline_class_loader', true);
             $container->addObjectResource($this);
         });
+
+        $loader->load(function (ContainerBuilder $container) {
+            $this->defineRedisUrlEnvVar($container);
+        });
+    }
+
+    private function defineRedisUrlEnvVar(ContainerBuilder $container)
+    {
+        $scheme = $container->getParameter('redis_scheme');
+        $host = $container->getParameter('redis_host');
+        $port = $container->getParameter('redis_port');
+        $path = $container->getParameter('redis_path');
+        $password = $container->getParameter('redis_password');
+
+        if ('unix' === $scheme) {
+            $url = 'unix://' . $path;
+
+            if ('' !== $password) {
+                $url .= '?password=' . rawurlencode($password);
+            }
+
+            $container->setParameter('env(REDIS_URL)', $url);
+
+            return;
+        }
+
+        $url = $scheme . '://';
+
+        if ('' !== $password) {
+            $url .= ':' . rawurlencode($password) . '@';
+        }
+
+        $url .= $host;
+
+        if ('' !== $port) {
+            $url .= ':' . $port;
+        }
+
+        if ('' !== $path) {
+            $url .= '/' . ltrim($path, '/');
+        }
+
+        $container->setParameter('env(REDIS_URL)', $url);
     }
 }
