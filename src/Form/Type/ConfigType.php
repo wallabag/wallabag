@@ -86,7 +86,7 @@ class ConfigType extends AbstractType
                 'class' => HomepageTarget::class,
                 'label' => 'config.form_settings.default_homepage.label',
                 'property_path' => 'defaultHomepage',
-                'choice_label' => static fn (HomepageTarget $target) => $target->label(),
+                'choice_label' => 'label',
                 'placeholder' => false,
             ])
             ->add('language', ChoiceType::class, [

@@ -106,7 +106,8 @@ class EntryControllerTest extends WallabagTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/');
+        $client->request('GET', '/');
+        $crawler = $client->followRedirect();
 
         $this->assertCount(5, $crawler->filter($this->entryDataTestAttribute));
 
@@ -114,7 +115,8 @@ class EntryControllerTest extends WallabagTestCase
         $client->request('GET', '/bookmarklet', ['url' => $this->url]);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $client->followRedirect();
-        $crawler = $client->request('GET', '/');
+        $client->request('GET', '/');
+        $crawler = $client->followRedirect();
         $this->assertCount(6, $crawler->filter($this->entryDataTestAttribute));
 
         $em = $client->getContainer()
@@ -1370,7 +1372,7 @@ class EntryControllerTest extends WallabagTestCase
         $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.set_as_read')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertSame('/', $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('/unread/list', $client->getResponse()->headers->get('location'));
     }
 
     public function testRedirectToCurrentPage(): void
@@ -1985,7 +1987,7 @@ class EntryControllerTest extends WallabagTestCase
     /**
      * @dataProvider provideDefaultViews
      */
-    public function testHomepageRendersDefaultView(HomepageTarget $defaultHomepage, int $expectedStatus, string $expectedUri): void
+    public function testHomepageRendersDefaultView(HomepageTarget $defaultHomepage, string $expectedRedirectUri): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1997,8 +1999,8 @@ class EntryControllerTest extends WallabagTestCase
 
         $client->request('GET', '/');
 
-        $this->assertSame($expectedStatus, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString($expectedUri, $client->getRequest()->getUri());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertStringContainsString($expectedRedirectUri, $client->getResponse()->headers->get('Location'));
 
         $user->getConfig()->setDefaultHomepage(HomepageTarget::Unread);
         $em->flush();
@@ -2006,10 +2008,10 @@ class EntryControllerTest extends WallabagTestCase
 
     public static function provideDefaultViews(): iterable
     {
-        yield 'unread view stays at /' => [HomepageTarget::Unread, 200, '/'];
-        yield 'all view stays at /' => [HomepageTarget::All, 200, '/'];
-        yield 'archive view stays at /' => [HomepageTarget::Archive, 200, '/'];
-        yield 'starred view stays at /' => [HomepageTarget::Starred, 200, '/'];
-        yield 'tags view redirects to /tag/list' => [HomepageTarget::Tags, 302, '/'];
+        yield 'unread view redirects to unread list' => [HomepageTarget::Unread, '/unread/list'];
+        yield 'all view redirects to all list' => [HomepageTarget::All, '/all/list'];
+        yield 'archive view redirects to archive list' => [HomepageTarget::Archive, '/archive/list'];
+        yield 'starred view redirects to starred list' => [HomepageTarget::Starred, '/starred/list'];
+        yield 'tags view redirects to tag list' => [HomepageTarget::Tags, '/tag/list'];
     }
 }

@@ -12,6 +12,12 @@ enum HomepageTarget: string
 
     public function label(): string
     {
-        return 'config.form_settings.default_homepage.' . $this->value;
+        return match ($this) {
+            self::Unread => 'config.form_settings.default_homepage.unread',
+            self::All => 'config.form_settings.default_homepage.all',
+            self::Archive => 'config.form_settings.default_homepage.archive',
+            self::Starred => 'config.form_settings.default_homepage.starred',
+            self::Tags => 'config.form_settings.default_homepage.tags',
+        };
     }
 }

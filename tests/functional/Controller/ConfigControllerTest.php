@@ -1491,7 +1491,7 @@ class ConfigControllerTest extends WallabagTestCase
             'config[reading_speed]' => '200',
             'config[action_mark_as_read]' => '0',
             'config[language]' => 'en',
-            'config[default_homepage]' => 'starred',
+            'config[default_homepage]' => HomepageTarget::Starred->value,
         ]);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());

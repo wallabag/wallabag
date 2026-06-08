@@ -50,21 +50,16 @@ class EntryController extends AbstractController
 
     #[Route(path: '/', name: 'homepage', methods: ['GET'])]
     #[IsGranted('LIST_ENTRIES')]
-    public function homepageAction(Request $request): Response
+    public function homepageAction(): Response
     {
         $defaultHomepage = $this->getUser()->getConfig()->getDefaultHomepage();
 
-        if (HomepageTarget::Tags !== $defaultHomepage) {
-            $request->attributes->set('_route', $defaultHomepage->value);
-            $request->attributes->set('_route_params', ['page' => 1]);
-        }
-
         return match ($defaultHomepage) {
-            HomepageTarget::All => $this->showAllAction($request, 1),
-            HomepageTarget::Archive => $this->showArchiveAction($request, 1),
-            HomepageTarget::Starred => $this->showStarredAction($request, 1),
+            HomepageTarget::Unread => $this->redirectToRoute('unread'),
+            HomepageTarget::All => $this->redirectToRoute('all'),
+            HomepageTarget::Archive => $this->redirectToRoute('archive'),
+            HomepageTarget::Starred => $this->redirectToRoute('starred'),
             HomepageTarget::Tags => $this->redirectToRoute('tag'),
-            default => $this->showUnreadAction($request, 1),
         };
     }
 
@@ -218,9 +213,9 @@ class EntryController extends AbstractController
             // entry saved, dispatch event about it!
             $this->eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
 
-            return $this->redirect($this->generateUrl('homepage'));
+            return $this->redirectToDefaultHomepage();
         } elseif ($form->isSubmitted() && !$form->isValid()) {
-            return $this->redirect($this->generateUrl('homepage'));
+            return $this->redirectToDefaultHomepage();
         }
 
         return $this->render('Entry/new_form.html.twig', [
@@ -248,7 +243,7 @@ class EntryController extends AbstractController
             $this->eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
         }
 
-        return $this->redirect($this->generateUrl('homepage'));
+        return $this->redirectToDefaultHomepage();
     }
 
     /**
