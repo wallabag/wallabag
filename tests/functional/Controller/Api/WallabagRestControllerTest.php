@@ -32,6 +32,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertArrayHasKey('appname', $content);
         $this->assertArrayHasKey('version', $content);
         $this->assertArrayHasKey('allowed_registration', $content);
+        $this->assertArrayHasKey('deleted_entries_expiration_days', $content);
 
         $this->assertSame('wallabag', $content['appname']);
     }

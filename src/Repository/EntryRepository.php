@@ -279,7 +279,7 @@ class EntryRepository extends ServiceEntityRepository
      *
      * @return Pagerfanta
      */
-    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full', $domainName = '', $isNotParsed = null, $httpStatus = null, $hasAnnotations = null)
+    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full', $domainName = '', $isNotParsed = null, $httpStatus = null, $hasAnnotations = null, $includeDeleted = false)
     {
         if (!\in_array(strtolower($detail), ['full', 'metadata'], true)) {
             throw new \Exception('Detail "' . $detail . '" parameter is wrong, allowed: full or metadata');
@@ -288,6 +288,10 @@ class EntryRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('e')
             ->leftJoin('e.tags', 't')
             ->where('e.user = :userId')->setParameter('userId', $userId);
+
+        if (!$includeDeleted) {
+            $qb->andWhere('e.deletedAt IS NULL');
+        }
 
         if ('metadata' === $detail) {
             $fieldNames = $this->getClassMetadata()->getFieldNames();
@@ -499,11 +503,12 @@ class EntryRepository extends ServiceEntityRepository
      *
      * @return Entry|false
      */
-    public function findByUrlAndUserId($url, $userId)
+    public function findByUrlAndUserId($url, $userId, bool $includeDeleted = false)
     {
         return $this->findByHashedUrlAndUserId(
             UrlHasher::hashUrl($url),
-            $userId
+            $userId,
+            $includeDeleted
         );
     }
 
@@ -532,25 +537,33 @@ class EntryRepository extends ServiceEntityRepository
      *
      * @return Entry|false
      */
-    public function findByHashedUrlAndUserId($hashedUrl, $userId)
+    public function findByHashedUrlAndUserId($hashedUrl, $userId, bool $includeDeleted = false)
     {
         // try first using hashed_url (to use the database index)
-        $res = $this->createQueryBuilder('e')
+        $qb = $this->createQueryBuilder('e')
             ->where('e.hashedUrl = :hashed_url')->setParameter('hashed_url', $hashedUrl)
-            ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
-            ->getQuery()
-            ->getResult();
+            ->andWhere('e.user = :user_id')->setParameter('user_id', $userId);
+
+        if (!$includeDeleted) {
+            $qb->andWhere('e.deletedAt IS NULL');
+        }
+
+        $res = $qb->getQuery()->getResult();
 
         if (\count($res)) {
             return current($res);
         }
 
         // then try using hashed_given_url (to use the database index)
-        $res = $this->createQueryBuilder('e')
+        $qb = $this->createQueryBuilder('e')
             ->where('e.hashedGivenUrl = :hashed_given_url')->setParameter('hashed_given_url', $hashedUrl)
-            ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
-            ->getQuery()
-            ->getResult();
+            ->andWhere('e.user = :user_id')->setParameter('user_id', $userId);
+
+        if (!$includeDeleted) {
+            $qb->andWhere('e.deletedAt IS NULL');
+        }
+
+        $res = $qb->getQuery()->getResult();
 
         if (\count($res)) {
             return current($res);
@@ -563,6 +576,7 @@ class EntryRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('e')->select(['e.id', 'e.hashedUrl', 'e.hashedGivenUrl']);
         $res = $qb->where('e.user = :user_id')->setParameter('user_id', $userId)
+                    ->andWhere('e.deletedAt IS NULL')
                     ->andWhere(
                         $qb->expr()->orX(
                             $qb->expr()->in('e.hashedUrl', $hashedUrls),
@@ -587,6 +601,7 @@ class EntryRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('e')
             ->select('count(e)')
             ->where('e.user = :userId')->setParameter('userId', $userId)
+            ->andWhere('e.deletedAt IS NULL')
         ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
@@ -611,6 +626,25 @@ class EntryRepository extends ServiceEntityRepository
         $this->getEntityManager()
             ->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.user = :userId AND e.isArchived = TRUE')
             ->setParameter('userId', $userId)
+            ->execute();
+    }
+
+    public function countDeletedEntriesOlderThan(\DateTimeInterface $before): int
+    {
+        return (int) $this->createQueryBuilder('e')
+            ->select('COUNT(e.id)')
+            ->where('e.deletedAt IS NOT NULL')
+            ->andWhere('e.deletedAt < :before')
+            ->setParameter('before', $before)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function purgeDeletedEntriesOlderThan(\DateTimeInterface $before): int
+    {
+        return (int) $this->getEntityManager()
+            ->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.deletedAt IS NOT NULL AND e.deletedAt < :before')
+            ->setParameter('before', $before)
             ->execute();
     }
 
@@ -692,6 +726,7 @@ class EntryRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('e')
             ->where('e.url = :url')->setParameter('url', urldecode($url))
             ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
+            ->andWhere('e.deletedAt IS NULL')
             ->getQuery()
             ->getResult();
     }
@@ -753,7 +788,8 @@ class EntryRepository extends ServiceEntityRepository
     private function getQueryBuilderByUser($userId)
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.user = :userId')->setParameter('userId', $userId);
+            ->andWhere('e.user = :userId')->setParameter('userId', $userId)
+            ->andWhere('e.deletedAt IS NULL');
     }
 
     /**
