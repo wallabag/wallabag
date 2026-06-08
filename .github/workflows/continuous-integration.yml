@@ -120,7 +120,7 @@ jobs:
 
       - name: "Upload unit coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -132,7 +132,7 @@ jobs:
 
       - name: "Upload unit test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -169,7 +169,7 @@ jobs:
 
       - name: "Upload integration coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -181,7 +181,7 @@ jobs:
 
       - name: "Upload integration test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -218,7 +218,7 @@ jobs:
 
       - name: "Upload functional coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -230,7 +230,7 @@ jobs:
 
       - name: "Upload functional test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -344,7 +344,7 @@ jobs:
 
       - name: "Upload unit coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -356,7 +356,7 @@ jobs:
 
       - name: "Upload unit test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -393,7 +393,7 @@ jobs:
 
       - name: "Upload integration coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -405,7 +405,7 @@ jobs:
 
       - name: "Upload integration test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -442,7 +442,7 @@ jobs:
 
       - name: "Upload functional coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -454,7 +454,7 @@ jobs:
 
       - name: "Upload functional test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -558,7 +558,7 @@ jobs:
 
       - name: "Upload unit coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -570,7 +570,7 @@ jobs:
 
       - name: "Upload unit test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -607,7 +607,7 @@ jobs:
 
       - name: "Upload integration coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -619,7 +619,7 @@ jobs:
 
       - name: "Upload integration test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -656,7 +656,7 @@ jobs:
 
       - name: "Upload functional coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -668,7 +668,7 @@ jobs:
 
       - name: "Upload functional test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -734,7 +734,7 @@ jobs:
           fetch-depth: 2
 
       - name: "Send Codecov notifications"
-        uses: "codecov/codecov-action@v6"
+        uses: "codecov/codecov-action@v7"
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
