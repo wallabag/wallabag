@@ -11,6 +11,7 @@ use Wallabag\Entity\Entry;
 use Wallabag\Entity\SiteCredential;
 use Wallabag\Entity\Tag;
 use Wallabag\Entity\User;
+use Wallabag\Enum\HomepageTarget;
 use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\CryptoProxy;
 use Wallabag\Tests\Functional\WallabagTestCase;
@@ -105,7 +106,8 @@ class EntryControllerTest extends WallabagTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/');
+        $client->request('GET', '/');
+        $crawler = $client->followRedirect();
 
         $this->assertCount(5, $crawler->filter($this->entryDataTestAttribute));
 
@@ -113,7 +115,8 @@ class EntryControllerTest extends WallabagTestCase
         $client->request('GET', '/bookmarklet', ['url' => $this->url]);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $client->followRedirect();
-        $crawler = $client->request('GET', '/');
+        $client->request('GET', '/');
+        $crawler = $client->followRedirect();
         $this->assertCount(6, $crawler->filter($this->entryDataTestAttribute));
 
         $em = $client->getContainer()
@@ -1369,7 +1372,7 @@ class EntryControllerTest extends WallabagTestCase
         $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.set_as_read')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertSame('/', $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('/unread/list', $client->getResponse()->headers->get('location'));
     }
 
     public function testRedirectToCurrentPage(): void
@@ -1979,5 +1982,36 @@ class EntryControllerTest extends WallabagTestCase
         $crawler = $client->request('GET', '/domain/' . $entry->getId());
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(4, $crawler->filter('ol.entries > li'));
+    }
+
+    /**
+     * @dataProvider provideDefaultViews
+     */
+    public function testHomepageRendersDefaultView(HomepageTarget $defaultHomepage, string $expectedRedirectUri): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $em = $this->getEntityManager();
+        $user = $em->getRepository(User::class)->findOneBy(['username' => 'admin']);
+        $user->getConfig()->setDefaultHomepage($defaultHomepage);
+        $em->flush();
+
+        $client->request('GET', '/');
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertStringContainsString($expectedRedirectUri, $client->getResponse()->headers->get('Location'));
+
+        $user->getConfig()->setDefaultHomepage(HomepageTarget::Unread);
+        $em->flush();
+    }
+
+    public static function provideDefaultViews(): iterable
+    {
+        yield 'unread view redirects to unread list' => [HomepageTarget::Unread, '/unread/list'];
+        yield 'all view redirects to all list' => [HomepageTarget::All, '/all/list'];
+        yield 'archive view redirects to archive list' => [HomepageTarget::Archive, '/archive/list'];
+        yield 'starred view redirects to starred list' => [HomepageTarget::Starred, '/starred/list'];
+        yield 'tags view redirects to tag list' => [HomepageTarget::Tags, '/tag/list'];
     }
 }

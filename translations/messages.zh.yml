@@ -29,7 +29,6 @@ menu:
         about: '关于'
         search: '搜索'
         save_link: '保存链接'
-        back_to_unread: '回到未读项目'
         users_management: '用户管理'
         site_credentials: '网站凭证'
         quickstart: "快速开始"
