@@ -20,4 +20,15 @@ enum HomepageTarget: string
             self::Tags => 'config.form_settings.default_homepage.tags',
         };
     }
+
+    public function route(): string
+    {
+        return match ($this) {
+            self::Unread => 'unread',
+            self::All => 'all',
+            self::Archive => 'archive',
+            self::Starred => 'starred',
+            self::Tags => 'tag',
+        };
+    }
 }

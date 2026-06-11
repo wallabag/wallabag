@@ -131,8 +131,8 @@ class Config
     #[ORM\Column(name: 'custom_css', type: 'text', nullable: true)]
     private $customCSS;
 
-    #[ORM\Column(name: 'default_homepage', type: 'string', enumType: HomepageTarget::class, options: ['default' => HomepageTarget::Unread->value])]
-    private HomepageTarget $defaultHomepage = HomepageTarget::Unread;
+    #[ORM\Column(name: 'default_homepage', type: 'string', enumType: HomepageTarget::class, nullable: true)]
+    private ?HomepageTarget $defaultHomepage = HomepageTarget::Unread;
 
     #[ORM\OneToOne(targetEntity: User::class, inversedBy: 'config')]
     private $user;
@@ -469,7 +469,7 @@ class Config
 
     public function getDefaultHomepage(): HomepageTarget
     {
-        return $this->defaultHomepage;
+        return $this->defaultHomepage ?? HomepageTarget::Unread;
     }
 
     public function setDefaultHomepage(HomepageTarget $defaultHomepage): self

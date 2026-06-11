@@ -20,7 +20,6 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
-use Wallabag\Enum\HomepageTarget;
 use Wallabag\Event\EntryDeletedEvent;
 use Wallabag\Event\EntrySavedEvent;
 use Wallabag\Form\Type\EditEntryType;
@@ -54,13 +53,7 @@ class EntryController extends AbstractController
     {
         $defaultHomepage = $this->getUser()->getConfig()->getDefaultHomepage();
 
-        return match ($defaultHomepage) {
-            HomepageTarget::Unread => $this->redirectToRoute('unread'),
-            HomepageTarget::All => $this->redirectToRoute('all'),
-            HomepageTarget::Archive => $this->redirectToRoute('archive'),
-            HomepageTarget::Starred => $this->redirectToRoute('starred'),
-            HomepageTarget::Tags => $this->redirectToRoute('tag'),
-        };
+        return $this->redirectToRoute($defaultHomepage->route());
     }
 
     /**

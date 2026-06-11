@@ -12,7 +12,7 @@ abstract class AbstractController extends BaseAbstractController
     public static function getSubscribedServices(): array
     {
         return array_merge(parent::getSubscribedServices(), [
-            'Wallabag\Helper\Redirect' => Redirect::class,
+            Redirect::class,
         ]);
     }
 

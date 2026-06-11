@@ -83,13 +83,13 @@ config:
             redirect_homepage: Retourner à la page d’accueil
             redirect_current_page: Rester sur la page actuelle
         default_homepage:
-            label: Page d’accueil par défaut
+            label: Page d'accueil par défaut
             unread: Non lus
             all: Tous les articles
             archive: Archives
             starred: Favoris
             tags: Tags
-        help_default_homepage: Choisissez la page affichée à l’ouverture de wallabag.
+        help_default_homepage: Choisissez la page affichée à l'ouverture de wallabag.
         pocket_consumer_key_label: Clé d’authentification Pocket pour importer les données
         android_configuration: Configurez votre application Android
         android_instruction: Appuyez ici pour préremplir votre application Android
