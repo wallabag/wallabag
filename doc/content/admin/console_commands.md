@@ -30,6 +30,7 @@ From Symfony:
 
 Custom to wallabag:
 
+ - `wallabag:api-client:create`: Creates an OAuth API client for an existing user.
  - `wallabag:clean-downloaded-images`: Cleans downloaded images which are no longer associated with an entry.
  - `wallabag:clean-duplicates`: Removes all entry duplicates for one user or all users.
  - `wallabag:entry:reload`: Reloads entries.
@@ -41,6 +42,46 @@ Custom to wallabag:
  - `wallabag:tag:all`: Tags all entries for a user using their tagging rules.
  - `wallabag:user:show`: Shows the details for a user.
  - `wallabag:user:list`: Lists all existing users.
+
+wallabag:api-client:create
+--------------------------
+
+This command creates an OAuth API client for an existing user. Useful for IaC
+pipelines, credential rotation, or provisioning a second client without
+recreating the user.
+
+Usage:
+
+```
+wallabag:api-client:create [--display-name DISPLAY-NAME] [--grant-types GRANT-TYPES] [--format FORMAT] <username>
+```
+
+Arguments:
+
+ - username: Owner of the client
+
+Options:
+
+ - `--display-name=DISPLAY-NAME`: Display name shown in /developer [default: "Default client"]
+ - `--grant-types=GRANT-TYPES`: Comma-separated list of allowed grant types: token, authorization_code, password, refresh_token [default: all four]
+ - `--format=FORMAT`: Output format: `text`, `env`, or `json` [default: "text"]
+
+Examples:
+
+```
+# Human-readable output
+bin/console wallabag:api-client:create alice
+
+# Machine-readable for CI / provisioning
+bin/console wallabag:api-client:create alice --display-name="ansible-bootstrap" --format=env
+
+# JSON output
+bin/console wallabag:api-client:create alice --format=json
+
+# Restrict grant types
+bin/console wallabag:api-client:create alice --grant-types=password,refresh_token
+```
+
 
 wallabag:clean-downloaded-images
 -------------------------
