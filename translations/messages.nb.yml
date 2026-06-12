@@ -260,6 +260,7 @@ flashes:
             annotations_reset: Anføringer tilbakestilt
             ignore_origin_rules_updated: Regel for å ignorere opprinnelse ble oppdatert
             ignore_origin_rules_deleted: Regel for å ignorere opprinnelse ble slettet
+            otp_code_invalid: Ugyldig tofaktorautentiseringskode
     user:
         notice:
             updated: Bruker «%username%» er oppdatert
@@ -465,6 +466,7 @@ import:
     elcurator:
         page_title: Importer > elCurator
         description: Denne modulen vil importere alle dine elCurator artikler.
+        how_to: Velg elCurator-eksportfilen din og klikk på knappen nedenfor for å laste opp og importere den.
     shaarli:
         page_title: Importer > Shaarli
         how_to: Velg sikkerhetskopifilen for bokmerke og klikk på knappen nedenfor for å importere den. Merk at prosessen kan ta lang tid siden alle artiklene må hentes.
@@ -473,6 +475,12 @@ import:
         how_to: Velg sikkerhetskopifilen for bokmerke og klikk på knappen nedenfor for å importere den. Merk at prosessen kan ta lang tid siden alle artiklene må hentes.
         page_title: Importer > Pocket HTML
         description: Denne modulen vil importere alle Pocket-bokmerkene dine (via HTML-eksport). Gå til https://getpocket.com/export, og eksporter HTML-filen derfra. En HTML-fil vil bli lastet ned (som «ril_export.html»).
+    omnivore:
+        page_title: Importer > Omnivore
+        description: Dette verktøyet vil importere alle Omnivore-artiklene dine.
+        how_to: Pakk ut Omnivore-eksporten din, og last opp hver JSON-fil med navnet «metadata_x_to_y.json» én etter én.
+    pocket_csv:
+        page_title: Importer > Pocket CSV
 tag:
     new:
         placeholder: Du kan legge til flere stikkord, delt med komma.
