@@ -261,6 +261,7 @@ flashes:
             ignore_origin_rules_updated: Regel for å ignorere opprinnelse ble oppdatert
             ignore_origin_rules_deleted: Regel for å ignorere opprinnelse ble slettet
             otp_code_invalid: Ugyldig tofaktorautentiseringskode
+            tagging_rules_reset: Taggingsregler tilbakestilt
     user:
         notice:
             updated: Bruker «%username%» er oppdatert
@@ -418,7 +419,7 @@ import:
             admin_message: Du må definere %keyurls%a pocket_consumer_key%keyurle%.
             description: Pocket-import er ikke satt opp.
         page_title: Importer > Pocket
-        description: Denne modulen vil importere alle dine Pocket oppføringer. Pocket tillater ikke at vi henter innhold fra deres tjeneste, så det lesbare innholdet i hver artikkel vil bli hentet på nytt av wallabag.
+        description: Denne importøren vil importere alle dine Pocket oppføringer. Pocket tillater ikke at vi henter innhold fra deres tjeneste, så det lesbare innholdet i hver artikkel vil bli hentet på nytt av wallabag.
         authorize_message: Du kan importere data fra Pocket-kontoen din. Du trenger bare å klikke på knappen nedenfor og autorisere applikasjonen til å koble seg til getpocket.com.
     form:
         save_label: Last opp fil
@@ -458,7 +459,7 @@ import:
     worker:
         enabled: 'mporten skjer asynkront. Når importoppgaven er startet, vil en ekstern arbeider håndtere jobbene én om gangen. Den nåværende tjenesten er:'
         download_images_warning: Du har aktivert nedlasting av bilder for artiklene dine. Kombinert med klassisk import kan dette ta svært lang tid (óg med sansynlighet for feil). Vi <strong>anbefaler på det sterkeste</strong> å aktivere asynkron import for å unngå feil.
-    page_description: Velkommen til wallabag sin import. Velg tjenesten du vil migrere data fra.
+    page_description: Velkommen til wallabag sin importør. Velg tjenesten du vil migrere data fra.
     delicious:
         page_title: Importer > del.icio.us
         how_to: Velg din Delicious-eksport og klikk på knappen nedenfor for å laste opp og importere den.
@@ -481,6 +482,8 @@ import:
         how_to: Pakk ut Omnivore-eksporten din, og last opp hver JSON-fil med navnet «metadata_x_to_y.json» én etter én.
     pocket_csv:
         page_title: Importer > Pocket CSV
+        description: Denne importøren vil importere alle Pocket-bokmerkene dine (via CSV-eksport). Bare gå til https://getpocket.com/export og eksporter filen. En ZIP-fil vil bli lastet ned (f.eks. «pocket.zip»). Pakk den ut, så får du en CSV-fil kalt «part_000000.csv».
+        how_to: Vennligst velg sikkerhetskopifilen for bokmerker og klikk på knappen nedenfor for å importere den. Merk at prosessen kan ta lang tid, ettersom alle artiklene vil bli hentet inn.
 tag:
     new:
         placeholder: Du kan legge til flere stikkord, delt med komma.
