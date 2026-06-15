@@ -1683,9 +1683,6 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertSame($expectedLanguage, $content->getLanguage());
     }
 
-    /**
-     * @group NetworkCalls
-     */
     public function testRestrictedArticle(): void
     {
         $url = 'https://www.monde-diplomatique.fr/2017/05/BONNET/57476';
@@ -1706,6 +1703,21 @@ class EntryControllerTest extends WallabagTestCase
         $em->persist($credential);
         $em->flush();
 
+        $contentProxy = $this->getMockBuilder(ContentProxy::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['updateEntry'])
+            ->getMock();
+        $contentProxy->expects($this->once())
+            ->method('updateEntry')
+            ->with($this->callback(static function (Entry $entry) use ($url): bool {
+                return $url === $entry->getUrl();
+            }))
+            ->willReturnCallback(static function (Entry $entry): void {
+                $entry->setTitle('Quand Manille manœuvre');
+                $entry->setContent('<p>Article content.</p>');
+                $entry->setDomainName('monde-diplomatique.fr');
+            });
+
         $crawler = $client->request('GET', '/new');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
@@ -1716,6 +1728,10 @@ class EntryControllerTest extends WallabagTestCase
             'entry[url]' => $url,
         ];
 
+        $cookie = $client->getCookieJar()->all();
+        $client = $this->getNewClient();
+        $client->getCookieJar()->set($cookie[0]);
+        $client->getContainer()->set(ContentProxy::class, $contentProxy);
         $client->submit($form, $data);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());

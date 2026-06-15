@@ -9,6 +9,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 use Wallabag\HttpClient\Authenticator;
 use Wallabag\SiteConfig\ArraySiteConfigBuilder;
 use Wallabag\SiteConfig\LoginFormAuthenticator;
+use Wallabag\SiteConfig\SiteConfig;
 
 class AuthenticatorTest extends TestCase
 {
@@ -67,6 +68,39 @@ class AuthenticatorTest extends TestCase
 
         $this->assertCount(1, $records);
         $this->assertSame('loginIfRequired> user is not logged in, attach authenticator', $records[0]['message']);
+    }
+
+    public function testLoginIfRequiredLogsInWithResolvedSiteConfig(): void
+    {
+        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $authenticator->expects($this->once())
+            ->method('isLoggedIn')
+            ->with($this->callback(static function (SiteConfig $siteConfig): bool {
+                return 'example.com' === $siteConfig->getHost()
+                    && 'http://example.com/login' === $siteConfig->getLoginUri();
+            }))
+            ->willReturn(false);
+
+        $authenticator->expects($this->once())
+            ->method('login')
+            ->with($this->callback(static function (SiteConfig $siteConfig): bool {
+                return 'example.com' === $siteConfig->getHost()
+                    && 'johndoe' === $siteConfig->getUsername()
+                    && 'unkn0wn' === $siteConfig->getPassword();
+            }));
+
+        $builder = new ArraySiteConfigBuilder(['example.com' => [
+            'requiresLogin' => true,
+            'loginUri' => 'http://example.com/login',
+            'username' => 'johndoe',
+            'password' => 'unkn0wn',
+        ]]);
+        $subscriber = new Authenticator($builder, $authenticator);
+
+        $this->assertTrue($subscriber->loginIfRequired('http://www.example.com/article'));
     }
 
     public function testLoginIfRequestedNotRequired(): void
