@@ -206,7 +206,7 @@ class ReadabilityControllerTest extends WallabagTestCase
         $this->assertStringContainsString('flashes.import.notice.failed', $body[0]);
     }
 
-    public function testImportReadabilityDisabled()
+    public function testImportReadabilityDisabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

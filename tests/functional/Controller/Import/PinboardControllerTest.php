@@ -208,7 +208,7 @@ class PinboardControllerTest extends WallabagTestCase
         $this->assertStringContainsString('flashes.import.notice.failed', $body[0]);
     }
 
-    public function testImportPinboardDisabled()
+    public function testImportPinboardDisabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

@@ -201,7 +201,7 @@ class OmnivoreControllerTest extends WallabagTestCase
         $this->assertStringContainsString('flashes.import.notice.failed', $body[0]);
     }
 
-    public function testImportOmnivoreDisabled()
+    public function testImportOmnivoreDisabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

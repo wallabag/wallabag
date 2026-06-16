@@ -134,7 +134,7 @@ class ElcuratorControllerTest extends WallabagTestCase
         $this->assertContains('tag2', $tags, 'It includes the "tag2" tag');
     }
 
-    public function testImportElcuratorDisabled()
+    public function testImportElcuratorDisabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

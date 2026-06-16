@@ -155,7 +155,7 @@ class PocketControllerTest extends WallabagTestCase
         $this->assertSame('flashes.import.notice.summary', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->peek('notice')[0]);
     }
 
-    public function testImportPocketDisabled()
+    public function testImportPocketDisabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
