@@ -15,3 +15,7 @@ On this page you can see several tabs:
 * [Password]({{< relref "password.md" >}})
 * [Tagging rules]({{< relref "tagging_rules.md" >}})
 * _Ignore origin rules (doc missing)_
+
+The feed token configured on the **Feeds** tab also powers the
+[OPDS catalog]({{< relref "opds.md" >}}), which lets OPDS reader apps browse and
+download your articles as EPUB files.
