@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:opds="http://opds-spec.org/2010/catalog">
+    <id>wallabag:{{ wallabag_url|removeScheme|removeWww }}:{{ user }}:opds:{{ type }}</id>
+    <title>wallabag — {{ type }}</title>
+    <subtitle type="text">OPDS acquisition feed for {{ type }} entries</subtitle>
+    <updated>{{ "now"|date('c') }}</updated>
+    <link rel="self" type="application/atom+xml;profile=opds-catalog;kind=acquisition" href="{{ app.request.uri }}"/>
+    <link rel="start" type="application/atom+xml;profile=opds-catalog;kind=navigation" href="{{ url('opds_root', {'username': user, 'token': token}) }}"/>
+    {% if entries.hasPreviousPage %}
+        <link rel="previous" type="application/atom+xml;profile=opds-catalog;kind=acquisition" href="{{ url }}/{{ entries.previousPage }}"/>
+    {% endif -%}
+    {% if entries.hasNextPage %}
+        <link rel="next" type="application/atom+xml;profile=opds-catalog;kind=acquisition" href="{{ url }}/{{ entries.nextPage }}"/>
+    {% endif -%}
+    <link rel="last" type="application/atom+xml;profile=opds-catalog;kind=acquisition" href="{{ url }}/{{ entries.nbPages }}"/>
+    <generator uri="https://wallabag.org" version="{{ version }}">wallabag</generator>
+    <author>
+        <name>{{ user }}</name>
+    </author>
+    <icon>{{ asset('favicon.ico') }}</icon>
+    {% for entry in entries %}
+    <entry>
+        {# Plain escaped text, not CDATA: XML parsers decode entities in element
+           text, so this round-trips cleanly. CDATA + |e would double-encode. #}
+        <title>{{ entry.title|e }}</title>
+        <id>wallabag:{{ wallabag_url|removeScheme|removeWww }}:{{ user }}:entry:{{ entry.id }}</id>
+        <updated>{{ entry.updatedAt|date('c') }}</updated>
+        <published>{{ entry.createdAt|date('c') }}</published>
+        <link rel="alternate" type="text/html" href="{{ entry.url|e }}"/>
+        {% for tag in entry.tags %}
+            <category term="{{ tag.slug|e('html_attr') }}" label="{{ tag.label|e('html_attr') }}" />
+        {% endfor %}
+        {% for author in entry.publishedBy %}
+        <author>
+            <name>{{ author|e }}</name>
+        </author>
+        {% endfor %}
+        {% if entry.readingTime > 0 %}
+        <content type="text">{{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': entry.readingTime}) }}</content>
+        {% endif %}
+        <link rel="http://opds-spec.org/acquisition"
+              type="application/epub+zip"
+              href="{{ url('opds_entry_export', {'username': user, 'token': token, 'id': entry.id}) }}"/>
+    </entry>
+    {% endfor %}
+</feed>

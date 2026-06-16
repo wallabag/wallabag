@@ -23,6 +23,7 @@ class EntriesExport
     private $entries = [];
     private $author = 'wallabag';
     private $language = '';
+    private ?User $user = null;
 
     /**
      * @param TranslatorInterface   $translator   Translator service
@@ -36,6 +37,23 @@ class EntriesExport
         private $logoPath,
         private readonly TokenStorageInterface $tokenStorage,
     ) {
+    }
+
+    /**
+     * Explicitly set the user the export is for.
+     *
+     * Required when exporting outside an authenticated request (e.g. the OPDS
+     * catalog, which authenticates via feed token under PUBLIC_ACCESS and so has
+     * no security token). When unset, the user is read from the token storage,
+     * preserving the behaviour for session-authenticated callers.
+     *
+     * @return EntriesExport
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
     /**
@@ -129,7 +147,7 @@ class EntriesExport
      */
     private function produceEpub(): Response
     {
-        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
+        $user = $this->user ?? ($this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null);
         \assert($user instanceof User);
 
         /*
@@ -250,7 +268,7 @@ class EntriesExport
      */
     private function producePdf(): Response
     {
-        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
+        $user = $this->user ?? ($this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null);
         \assert($user instanceof User);
 
         $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
