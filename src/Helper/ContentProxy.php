@@ -26,6 +26,7 @@ class ContentProxy
         protected RuleBasedIgnoreOriginProcessor $ignoreOriginProcessor,
         protected ValidatorInterface $validator,
         protected LoggerInterface $logger,
+        protected RenderingProxy $renderingProxy,
         protected $fetchingErrorMessage,
         protected $storeArticleHeaders = false,
     ) {
@@ -48,12 +49,17 @@ class ContentProxy
         }
 
         if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
+            [$url, $renderingProxyCallback] = $this->renderingProxy->considerUrl($entry->getUser()->getConfig(), $url);
             $fetchedContent = $this->graby->fetchContent($url);
 
             $fetchedContent['title'] = $this->sanitizeContentTitle(
                 $fetchedContent['title'],
                 $fetchedContent['headers']['content-type'] ?? ''
             );
+
+            if ($renderingProxyCallback) {
+                $fetchedContent = $renderingProxyCallback($fetchedContent);
+            }
 
             // when content is imported, we have information in $content
             // in case fetching content goes bad, we'll keep the imported information instead of overriding them
