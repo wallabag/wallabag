@@ -124,7 +124,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
         $this->assertInstanceOf(Entry::class, $content);
-        $this->assertEmpty($content->getMimetype(), 'Mimetype for http://www.framablog.org is empty');
+        $this->assertSame($content->getMimetype(), 'text/html', 'Mimetype for http://www.framablog.org is empty');
         $this->assertSame($content->getPreviewPicture(), 'http://www.framablog.org/public/_img/framablog/wallaby_baby.jpg');
         $this->assertEmpty($content->getLanguage(), 'Language for http://www.framablog.org is empty');
 
