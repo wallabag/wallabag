@@ -93,7 +93,7 @@ class CleanDuplicatesCommand extends Command
                 // entry deleted, dispatch event about it!
                 $this->eventDispatcher->dispatch(new EntryDeletedEvent($entryToDelete), EntryDeletedEvent::NAME);
 
-                $this->entityManager->remove($entryToDelete);
+                $entryToDelete->updateDeleted(true);
                 $this->entityManager->flush(); // Flushing at the end of the loop would require the instance not being online
             } else {
                 $urls[] = $entry['url'];
