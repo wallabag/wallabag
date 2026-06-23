@@ -28,7 +28,6 @@ menu:
         about: 'Sobre'
         search: 'Pesquisa'
         save_link: 'Salvar um link'
-        back_to_unread: 'Voltar para os artigos não lidos'
         users_management: 'Gestão de Utilizadores'
         theme_toggle_light: Tema claro
         theme_toggle_dark: Tema escuro

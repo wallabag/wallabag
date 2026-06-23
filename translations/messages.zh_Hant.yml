@@ -180,7 +180,6 @@ menu:
         import: 匯入
         logout: 登出
         search: 搜尋
-        back_to_unread: 回到未讀文章
         users_management: 使用者管理
         site_credentials: 網站憑證
         theme_toggle_light: 淺色主題
