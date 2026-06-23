@@ -156,7 +156,7 @@
         "symfony/twig-bundle": "^5.4.45",
         "symfony/validator": "^5.4.48",
         "symfony/webpack-encore-bundle": "^1.17.2",
-        "tecnickcom/tcpdf": "^6.8.2",
+        "tecnickcom/tcpdf": "^7.0.1",
         "twig/extra-bundle": "^3.20",
         "twig/string-extra": "^3.20",
         "twig/twig": "^3.20.0",
