@@ -42,6 +42,8 @@ class ContentProxy
      */
     public function updateEntry(Entry $entry, $url, array $content = [], $disableContentUpdate = false): void
     {
+        $entry->updateDeleted(false);
+
         $this->graby->toggleImgNoReferrer(true);
         if (!empty($content['html'])) {
             $this->graby->setContentAsPrefetched($content['html']);

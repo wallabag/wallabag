@@ -144,6 +144,7 @@ class AnnotationRepository extends ServiceEntityRepository
             ->leftJoin('a.entry', 'e')
             ->where('a.user = :userid')->setParameter(':userid', $userId)
             ->andWhere('e.isArchived = true')
+            ->andWhere('e.deletedAt IS NULL')
             ->getQuery()
             ->getResult();
     }
