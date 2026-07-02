@@ -792,8 +792,8 @@ class EntryRestController extends WallabagRestController
             $tagsAssigner->assignTagsToEntry($entry, $data['tags']);
         }
 
-        if (!empty($data['origin_url'])) {
-            $entry->setOriginUrl($data['origin_url']);
+        if (\array_key_exists('origin_url', $data)) {
+            $entry->setOriginUrl('' === $data['origin_url'] ? null : $data['origin_url']);
         }
 
         if (null !== $data['isPublic']) {
@@ -1024,8 +1024,8 @@ class EntryRestController extends WallabagRestController
             }
         }
 
-        if (!empty($data['origin_url'])) {
-            $entry->setOriginUrl($data['origin_url']);
+        if (\array_key_exists('origin_url', $data)) {
+            $entry->setOriginUrl('' === $data['origin_url'] ? null : $data['origin_url']);
         }
 
         if (empty($entry->getDomainName())) {
@@ -1424,7 +1424,7 @@ class EntryRestController extends WallabagRestController
      */
     private function retrieveValueFromRequest(Request $request)
     {
-        return [
+        $data = [
             'title' => $request->request->get('title'),
             'tags' => $request->request->get('tags', ''),
             'isArchived' => $request->request->get('archive'),
@@ -1435,7 +1435,12 @@ class EntryRestController extends WallabagRestController
             'picture' => $request->request->get('preview_picture'),
             'publishedAt' => $request->request->get('published_at'),
             'authors' => $request->request->all()['authors'] ?? '',
-            'origin_url' => $request->request->get('origin_url', ''),
         ];
+
+        if ($request->request->has('origin_url')) {
+            $data['origin_url'] = $request->request->get('origin_url');
+        }
+
+        return $data;
     }
 }
