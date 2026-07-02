@@ -1014,14 +1014,17 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testPatchEntryRemoveOriginUrl(): void
     {
-        $entry = $this->client->getContainer()
-        ->get(EntityManagerInterface::class)
-        ->getRepository(Entry::class)
-        ->findOneByUser($this->getUserId());
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
+        $entry = $em
+            ->getRepository(Entry::class)
+            ->findOneByUser($this->getUserId());
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
         }
+
+        $entry->setOriginUrl('https://myawesomesource.example.com');
+        $em->flush();
 
         $previousContent = $entry->getContent();
         $previousLanguage = $entry->getLanguage();
@@ -1037,7 +1040,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertSame($entry->getId(), $content['id']);
         $this->assertSame($entry->getUrl(), $content['url']);
-        $this->assertEmpty($content['origin_url']);
+        $this->assertNull($content['origin_url']);
         $this->assertEmpty($content['published_by'], 'Authors were not saved because of an array instead of a string');
         $this->assertSame($previousContent, $content['content'], 'Ensure content has not moved');
         $this->assertSame($previousLanguage, $content['language'], 'Ensure language has not moved');
@@ -1046,14 +1049,17 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testPatchEntryNullOriginUrl(): void
     {
-        $entry = $this->client->getContainer()
-            ->get(EntityManagerInterface::class)
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
+        $entry = $em
             ->getRepository(Entry::class)
             ->findOneByUser($this->getUserId());
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
         }
+
+        $entry->setOriginUrl('https://myawesomesource.example.com');
+        $em->flush();
 
         $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
             'origin_url' => null,
