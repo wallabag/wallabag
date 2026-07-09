@@ -375,19 +375,6 @@ class EntryRepository extends ServiceEntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    private function applyDetail(QueryBuilder $qb, string $detail): void
-    {
-        if (!\in_array(strtolower($detail), ['full', 'metadata'], true)) {
-            throw new \Exception('Detail "' . $detail . '" parameter is wrong, allowed: full or metadata');
-        }
-
-        if ('metadata' === strtolower($detail)) {
-            $fieldNames = $this->getClassMetadata()->getFieldNames();
-            $fields = array_filter($fieldNames, static fn ($k) => 'content' !== $k);
-            $qb->select(\sprintf('partial e.{%s}', implode(',', $fields)));
-        }
-    }
-
     /**
      * Fetch an entry with a tag. Only used for tests.
      *
@@ -758,6 +745,19 @@ class EntryRepository extends ServiceEntityRepository
         $randomId = $ids[mt_rand(0, \count($ids) - 1)]['id'];
 
         return $this->find($randomId);
+    }
+
+    private function applyDetail(QueryBuilder $qb, string $detail): void
+    {
+        if (!\in_array(strtolower($detail), ['full', 'metadata'], true)) {
+            throw new \Exception('Detail "' . $detail . '" parameter is wrong, allowed: full or metadata');
+        }
+
+        if ('metadata' === strtolower($detail)) {
+            $fieldNames = $this->getClassMetadata()->getFieldNames();
+            $fields = array_filter($fieldNames, static fn ($k) => 'content' !== $k);
+            $qb->select(\sprintf('partial e.{%s}', implode(',', $fields)));
+        }
     }
 
     /**
