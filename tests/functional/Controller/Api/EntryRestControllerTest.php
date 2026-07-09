@@ -32,8 +32,48 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame($entry->getUserName(), $content['user_name']);
         $this->assertSame($entry->getUserEmail(), $content['user_email']);
         $this->assertSame($entry->getUserId(), $content['user_id']);
+        $this->assertNotNull($content['content']);
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function testGetOneEntryDetailMetadata(): void
+    {
+        $entityManager = $this->client->getContainer()
+            ->get(EntityManagerInterface::class);
+        $entry = $entityManager
+            ->getRepository(Entry::class)
+            ->findOneBy(['user' => $this->getUserId(), 'isArchived' => false]);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $entryId = $entry->getId();
+        $entityManager->detach($entry);
+
+        $this->client->request('GET', '/api/entries/' . $entryId . '.json?detail=metadata');
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertNull($content['content']);
+        $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function testGetOneEntryWrongDetail(): void
+    {
+        $entry = $this->client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findOneBy(['user' => $this->getUserId(), 'isArchived' => false]);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $this->client->request('GET', '/api/entries/' . $entry->getId() . '.json?detail=bad');
+        $this->assertSame(400, $this->client->getResponse()->getStatusCode());
     }
 
     public function testGetOneEntryWithOriginUrl(): void

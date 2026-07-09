@@ -394,6 +394,17 @@ class EntryRestController extends WallabagRestController
      *             pattern="\w+",
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="detail",
+     *         in="query",
+     *         description="include content field if 'full'. 'full' by default for backward compatibility.",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string",
+     *             enum={"metadata", "full"},
+     *             default="full"
+     *         )
+     *     ),
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -403,9 +414,22 @@ class EntryRestController extends WallabagRestController
      * @return JsonResponse
      */
     #[Route(path: '/api/entries/{entry}.{_format}', name: 'api_get_entry', methods: ['GET'], defaults: ['_format' => 'json'])]
-    #[IsGranted('VIEW', subject: 'entry')]
-    public function getEntryAction(Entry $entry)
+    public function getEntryAction(Request $request, int $entry, EntryRepository $entryRepository)
     {
+        $detail = strtolower($request->query->get('detail', 'full'));
+
+        try {
+            $entry = $entryRepository->findOneByIdAndUserId($entry, $this->getUser()->getId(), $detail);
+        } catch (\Exception $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+
+        if (null === $entry) {
+            throw $this->createNotFoundException();
+        }
+
+        $this->denyAccessUnlessGranted('VIEW', $entry);
+
         return $this->sendResponse($entry);
     }
 
