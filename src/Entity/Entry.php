@@ -250,6 +250,7 @@ class Entry
     {
         $this->user = $user;
         $this->tags = new ArrayCollection();
+        $this->annotations = new ArrayCollection();
     }
 
     /**
