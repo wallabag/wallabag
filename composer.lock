@@ -1939,16 +1939,16 @@
         },
         {
             "name": "fossar/htmlawed",
-            "version": "1.3.3",
+            "version": "1.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fossar/HTMLawed.git",
-                "reference": "2975518c538667c3749f91f949348b8ea9bf4855"
+                "reference": "9a0f98d4fc6844075952417290d0add441656577"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fossar/HTMLawed/zipball/2975518c538667c3749f91f949348b8ea9bf4855",
-                "reference": "2975518c538667c3749f91f949348b8ea9bf4855",
+                "url": "https://api.github.com/repos/fossar/HTMLawed/zipball/9a0f98d4fc6844075952417290d0add441656577",
+                "reference": "9a0f98d4fc6844075952417290d0add441656577",
                 "shasum": ""
             },
             "require": {
@@ -1990,9 +1990,9 @@
             ],
             "support": {
                 "issues": "https://github.com/fossar/HTMLawed/issues",
-                "source": "https://github.com/fossar/HTMLawed/tree/1.3.3"
+                "source": "https://github.com/fossar/HTMLawed/tree/1.3.4"
             },
-            "time": "2023-07-22T16:34:45+00:00"
+            "time": "2026-07-09T07:57:28+00:00"
         },
         {
             "name": "friendsofphp/proxy-manager-lts",
@@ -2840,16 +2840,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.12.3",
+            "version": "2.12.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "7ec62dc3f44aa218487dbed81a9bf9bc647be55d"
+                "reference": "9365d578a9fd1552ad6ca9c3cb530708526feb09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/7ec62dc3f44aa218487dbed81a9bf9bc647be55d",
-                "reference": "7ec62dc3f44aa218487dbed81a9bf9bc647be55d",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/9365d578a9fd1552ad6ca9c3cb530708526feb09",
+                "reference": "9365d578a9fd1552ad6ca9c3cb530708526feb09",
                 "shasum": ""
             },
             "require": {
@@ -2939,7 +2939,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.12.3"
+                "source": "https://github.com/guzzle/psr7/tree/2.12.5"
             },
             "funding": [
                 {
@@ -2955,7 +2955,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-23T15:21:08+00:00"
+            "time": "2026-07-13T01:27:20+00:00"
         },
         {
             "name": "hoa/compiler",
@@ -4022,16 +4022,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "0295d828822f7a59c5751a8199973a4f965a99b0"
+                "reference": "644cde60b773fa6ea75d4f0f291c5c22cd15e435"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/0295d828822f7a59c5751a8199973a4f965a99b0",
-                "reference": "0295d828822f7a59c5751a8199973a4f965a99b0",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/644cde60b773fa6ea75d4f0f291c5c22cd15e435",
+                "reference": "644cde60b773fa6ea75d4f0f291c5c22cd15e435",
                 "shasum": ""
             },
             "require": {
@@ -4095,7 +4095,7 @@
             "description": "Graby helps you extract article content from web pages",
             "support": {
                 "issues": "https://github.com/j0k3r/graby/issues",
-                "source": "https://github.com/j0k3r/graby/tree/2.5.1"
+                "source": "https://github.com/j0k3r/graby/tree/2.5.2"
             },
             "funding": [
                 {
@@ -4103,7 +4103,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-27T17:47:15+00:00"
+            "time": "2026-07-07T13:35:40+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
@@ -5159,16 +5159,16 @@
         },
         {
             "name": "masterminds/html5",
-            "version": "2.10.0",
+            "version": "2.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Masterminds/html5-php.git",
-                "reference": "fcf91eb64359852f00d921887b219479b4f21251"
+                "reference": "fd5018f6815fff903946d0564977b44ce8010e29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/fcf91eb64359852f00d921887b219479b4f21251",
-                "reference": "fcf91eb64359852f00d921887b219479b4f21251",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/fd5018f6815fff903946d0564977b44ce8010e29",
+                "reference": "fd5018f6815fff903946d0564977b44ce8010e29",
                 "shasum": ""
             },
             "require": {
@@ -5176,7 +5176,7 @@
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.7.21 || ^6 || ^7 || ^8 || ^9"
+                "phpunit/phpunit": "^4.8.35 || ^5.7.21 || ^6 || ^7 || ^8 || ^9 || ^10"
             },
             "type": "library",
             "extra": {
@@ -5220,9 +5220,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Masterminds/html5-php/issues",
-                "source": "https://github.com/Masterminds/html5-php/tree/2.10.0"
+                "source": "https://github.com/Masterminds/html5-php/tree/2.10.1"
             },
-            "time": "2025-07-25T09:04:22+00:00"
+            "time": "2026-06-23T18:43:15+00:00"
         },
         {
             "name": "mgargano/simplehtmldom",
