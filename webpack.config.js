@@ -1,6 +1,10 @@
-const path = require('path');
-const Encore = require('@symfony/webpack-encore');
-const { codecovWebpackPlugin } = require('@codecov/webpack-plugin');
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import Encore from '@symfony/webpack-encore';
+import {codecovWebpackPlugin} from '@codecov/webpack-plugin';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
   Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
@@ -32,10 +36,12 @@ Encore
   .addAliases({
     module$: path.resolve(__dirname, 'assets/vendor/node_module_browser_stub.js'),
   })
-  .addPlugin(codecovWebpackPlugin({
-    enableBundleAnalysis: typeof process.env.CODECOV_TOKEN !== 'undefined',
-    bundleName: 'wallabag',
-    uploadToken: process.env.CODECOV_TOKEN,
-  }));
+  .addPlugin(
+    codecovWebpackPlugin({
+      enableBundleAnalysis: typeof process.env.CODECOV_TOKEN !== 'undefined',
+      bundleName: 'wallabag',
+      uploadToken: process.env.CODECOV_TOKEN,
+    })
+  );
 
-module.exports = Encore.getWebpackConfig();
+export default Encore.getWebpackConfig();

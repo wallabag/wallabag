@@ -1,2 +1,2 @@
 import './scss/share.scss';
-import 'mathjax/tex-svg';
+import 'mathjax/tex-svg.js';

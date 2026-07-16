@@ -1,8 +1,13 @@
-module.exports = {
+/** @type {import('stylelint').Config} */
+export default {
   extends: ['stylelint-config-standard-scss'],
   customSyntax: 'postcss-scss',
   plugins: ['stylelint-scss'],
   rules: {
+    'block-no-redundant-nested-style-rules': null, // ToDo
+    'color-function-alias-notation': null, // ToDo
+    'declaration-property-value-keyword-no-deprecated': null, // ToDo
+    'property-no-deprecated': null, // ToDo
     'at-rule-no-unknown': null,
     'no-duplicate-selectors': null,
     'font-family-no-missing-generic-family-keyword': null,

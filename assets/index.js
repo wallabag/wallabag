@@ -1,4 +1,4 @@
-import './bootstrap';
+import './bootstrap.js';
 
 /* Materialize imports */
 import '@materializecss/materialize/dist/css/materialize.css';
