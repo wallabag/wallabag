@@ -5,12 +5,13 @@ import '@materializecss/materialize/dist/css/materialize.css';
 
 /* Fonts */
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
-import 'lato-font/css/lato-font.css';
-import 'open-dyslexic/open-dyslexic-regular.css';
 import '@fontsource/atkinson-hyperlegible';
 import '@fontsource/eb-garamond';
+import '@fontsource/lato';
 import '@fontsource/montserrat';
+import '@fontsource/opendyslexic';
 import '@fontsource/oswald';
+import '@fontsource/roboto';
 
 /* Theme style */
 import './scss/index.scss';
