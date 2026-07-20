@@ -51,6 +51,7 @@ After changing configuration in production, clear the cache with
 | WALLABAG_TWOFACTOR_SENDER | Sender address for emailed 2FA codes | `no-reply@wallabag.org` |
 | WALLABAG_LOG_LEVEL | Minimum level written by the nested production log handler | `error` |
 | WALLABAG_USER_AGENT | Default User-Agent used when wallabag fetches content | `Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2` |
+| WALLABAG_FETCH_BLOCKED_HOSTS | Optional comma-separated hostname deny-list for outgoing fetches | empty |
 | WALLABAG_OAUTH_ACCESS_TOKEN_LIFETIME | OAuth access-token lifetime in seconds | `3600` |
 | WALLABAG_OAUTH_REFRESH_TOKEN_LIFETIME | OAuth refresh-token lifetime in seconds | `1209600` |
 | WALLABAG_TABLE_PREFIX | Prefix added to wallabag database tables | `wallabag_` |
@@ -100,6 +101,42 @@ After changing the value, clear the production cache:
 ```console
 bin/console cache:clear --env=prod
 ```
+
+### Outgoing fetch hostname deny-list
+
+Set `WALLABAG_FETCH_BLOCKED_HOSTS` to prevent wallabag fetch clients from
+requesting selected hostnames. Separate multiple rules with commas:
+
+```dotenv
+WALLABAG_FETCH_BLOCKED_HOSTS=example.com,.internal.example,192.0.2.1,2001:db8::1
+```
+
+A rule without a leading dot matches only that exact hostname. A rule with one
+leading dot matches both the named hostname and all descendants.
+
+| Rule | Blocked examples | Not blocked examples |
+| ---- | ---------------- | -------------------- |
+| `example.com` | `example.com` | `www.example.com` |
+| `.example.com` | `example.com`, `www.example.com`, `deep.api.example.com` | `badexample.com` |
+| `my.example.com` | `my.example.com` | `api.my.example.com` |
+| `.my.example.com` | `my.example.com`, `api.my.example.com` | `example.com`, `your.example.com` |
+
+Rules are trimmed, lowercased, stripped of a terminal DNS dot, and converted
+from internationalized names to UTS46 ASCII form. A port in a requested URL is
+ignored while matching, but configuration rules must not contain ports. IPv4
+and IPv6 literals are supported as exact rules only; leading-dot IP rules are
+invalid.
+
+wallabag checks the initial destination and every HTTP redirect before sending
+the next request. Invalid configuration prevents the fetch clients from being
+created. Schemes, paths, user information, wildcards, regular expressions,
+malformed hostnames, and more than one leading dot are not accepted. After
+changing the value in production, run `bin/console cache:clear --env=prod`.
+
+This setting is an operator-managed hostname deny-list, not complete SSRF
+protection. It does not resolve DNS names or classify public and private address
+ranges. Use network-level egress controls when requests must be isolated from
+internal services.
 
 ## Service variables
 
