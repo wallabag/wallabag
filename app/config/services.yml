@@ -53,6 +53,16 @@ services:
     Wallabag\HttpClient\WallabagClient:
         lazy: true
 
+    Wallabag\HttpClient\HostnameDenyList:
+        arguments:
+            $hostnames: '%env(csv:WALLABAG_FETCH_BLOCKED_HOSTS)%'
+
+    Wallabag\HttpClient\HostnameDenyListHttpClient:
+        decorates: http_client
+        decoration_priority: 20
+        arguments:
+            $client: '@Wallabag\HttpClient\HostnameDenyListHttpClient.inner'
+
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     Wallabag\Controller\:
