@@ -51,6 +51,16 @@ services:
         resource: '../../src/*'
         exclude: ['../../src/{Consumer,Controller,Entity,DataFixtures,Redis}', '../../src/Event/*Event.php']
 
+    Wallabag\HttpClient\WallabagClient:
+        lazy: true
+        arguments:
+            $httpClient: '@wallabag.article_fetch.private_network_client'
+
+    wallabag.article_fetch.private_network_client:
+        class: Symfony\Component\HttpClient\NoPrivateNetworkHttpClient
+        arguments:
+            $client: '@http_client'
+
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     Wallabag\Controller\:
