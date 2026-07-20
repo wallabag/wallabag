@@ -10,7 +10,24 @@
 - Launch `make dev-docker-up`
 - Launch `make dev-setup`
 
-The Docker `php` service serves wallabag on `http://127.0.0.1:8000`. Use `make dev-docker-down` when you want to tear the stack down and reset Docker volumes.
+By default, `make dev-docker-up` serves wallabag on `http://127.0.0.1:8000`.
+
+To use another host port, set `PORT` when starting the stack:
+
+```console
+PORT=8001 make dev-docker-up
+```
+
+Wallabag is then available on `http://127.0.0.1:8001`.
+
+Compose normally derives its project name from the worktree directory. If that is not enough to isolate project resources, set `COMPOSE_PROJECT_NAME` explicitly alongside a unique port:
+
+```console
+COMPOSE_PROJECT_NAME=wallabag-master PORT=8000 make dev-docker-up
+COMPOSE_PROJECT_NAME=wallabag-feature PORT=8001 make dev-docker-up
+```
+
+Use `make dev-docker-down` when you want to tear the stack down and reset Docker volumes.
 
 Run `make dev-watch` in another terminal while working on frontend assets so Encore rebuilds them automatically.
 

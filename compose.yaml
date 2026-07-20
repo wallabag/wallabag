@@ -5,6 +5,8 @@ services:
             context: docker/php
             # Use target 'rootless' if you run rootless Docker
             target: default
+        environment:
+            WALLABAG_BASE_URL: "${WALLABAG_BASE_URL:-http://127.0.0.1:${PORT:-8000}}"
         volumes:
             - .:/var/www/html
             # Volumes for data-related folders
@@ -34,7 +36,7 @@ services:
         extra_hosts:
             - "host.docker.internal:host-gateway"
         ports:
-            - 8000:8000
+            - "${PORT:-8000}:8000"
         depends_on:
             # - mariadb
             # - postgres
