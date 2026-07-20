@@ -50,6 +50,9 @@ services:
         resource: '../../src/*'
         exclude: ['../../src/{Consumer,Controller,Entity,DataFixtures,Redis}', '../../src/Event/*Event.php']
 
+    Wallabag\HttpClient\WallabagClient:
+        lazy: true
+
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     Wallabag\Controller\:
