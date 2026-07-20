@@ -7962,16 +7962,16 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "4.24.0",
+            "version": "4.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "5055cc792f630a427fdf9dcccd88faa94b50fd30"
+                "reference": "d732a4da195f231cedb2a2a78ae16dd73082afa3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/5055cc792f630a427fdf9dcccd88faa94b50fd30",
-                "reference": "5055cc792f630a427fdf9dcccd88faa94b50fd30",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/d732a4da195f231cedb2a2a78ae16dd73082afa3",
+                "reference": "d732a4da195f231cedb2a2a78ae16dd73082afa3",
                 "shasum": ""
             },
             "require": {
@@ -7988,21 +7988,22 @@
                 "raven/raven": "*"
             },
             "require-dev": {
+                "carthage-software/mago": "1.30.0",
                 "friendsofphp/php-cs-fixer": "^3.4",
                 "guzzlehttp/promises": "^2.0.3",
-                "guzzlehttp/psr7": "^1.8.4|^2.1.1",
                 "monolog/monolog": "^1.6|^2.0|^3.0",
                 "nyholm/psr7": "^1.8",
                 "open-telemetry/api": "^1.0",
                 "open-telemetry/exporter-otlp": "^1.0",
                 "open-telemetry/sdk": "^1.0",
-                "phpbench/phpbench": "^1.0",
+                "open-telemetry/sem-conv": "^1.27",
                 "phpstan/phpstan": "^1.3",
                 "phpunit/phpunit": "^8.5.52|^9.6.34",
                 "spiral/roadrunner-http": "^3.6",
                 "spiral/roadrunner-worker": "^3.6"
             },
             "suggest": {
+                "ext-excimer": "Enable Sentry profiling with the Excimer PHP extension.",
                 "monolog/monolog": "Allow sending log messages to Sentry by using the included Monolog handler."
             },
             "type": "library",
@@ -8039,7 +8040,7 @@
             ],
             "support": {
                 "issues": "https://github.com/getsentry/sentry-php/issues",
-                "source": "https://github.com/getsentry/sentry-php/tree/4.24.0"
+                "source": "https://github.com/getsentry/sentry-php/tree/4.29.0"
             },
             "funding": [
                 {
@@ -8051,20 +8052,20 @@
                     "type": "custom"
                 }
             ],
-            "time": "2026-04-01T14:34:34+00:00"
+            "time": "2026-06-29T14:47:44+00:00"
         },
         {
             "name": "sentry/sentry-symfony",
-            "version": "5.10.0",
+            "version": "5.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-symfony.git",
-                "reference": "6f49255f4cdcfc43a3a283bd3a1f65d483e9192f"
+                "reference": "7d72a006c2099ef932f41233df9d1e8effe480d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/6f49255f4cdcfc43a3a283bd3a1f65d483e9192f",
-                "reference": "6f49255f4cdcfc43a3a283bd3a1f65d483e9192f",
+                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/7d72a006c2099ef932f41233df9d1e8effe480d7",
+                "reference": "7d72a006c2099ef932f41233df9d1e8effe480d7",
                 "shasum": ""
             },
             "require": {
@@ -8091,7 +8092,7 @@
                 "phpstan/phpstan": "1.12.5",
                 "phpstan/phpstan-phpunit": "1.4.0",
                 "phpstan/phpstan-symfony": "1.4.10",
-                "phpunit/phpunit": "^8.5.40||^9.6.21",
+                "phpunit/phpunit": "^8.5.52||^9.6.34",
                 "symfony/browser-kit": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
                 "symfony/cache": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
                 "symfony/dom-crawler": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
@@ -8141,7 +8142,7 @@
             ],
             "support": {
                 "issues": "https://github.com/getsentry/sentry-symfony/issues",
-                "source": "https://github.com/getsentry/sentry-symfony/tree/5.10.0"
+                "source": "https://github.com/getsentry/sentry-symfony/tree/5.11.0"
             },
             "funding": [
                 {
@@ -8153,7 +8154,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2026-04-01T14:50:32+00:00"
+            "time": "2026-07-13T11:32:54+00:00"
         },
         {
             "name": "simplepie/simplepie",
@@ -8741,16 +8742,16 @@
         },
         {
             "name": "symfony/cache-contracts",
-            "version": "v3.7.0",
+            "version": "v3.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache-contracts.git",
-                "reference": "225e8a254166bd3442e370c6f50145465db63831"
+                "reference": "9789738bc19af1106dc54d6afba9a0b467516cf2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache-contracts/zipball/225e8a254166bd3442e370c6f50145465db63831",
-                "reference": "225e8a254166bd3442e370c6f50145465db63831",
+                "url": "https://api.github.com/repos/symfony/cache-contracts/zipball/9789738bc19af1106dc54d6afba9a0b467516cf2",
+                "reference": "9789738bc19af1106dc54d6afba9a0b467516cf2",
                 "shasum": ""
             },
             "require": {
@@ -8797,7 +8798,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/cache-contracts/tree/v3.7.0"
+                "source": "https://github.com/symfony/cache-contracts/tree/v3.7.1"
             },
             "funding": [
                 {
@@ -8817,7 +8818,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-05T15:33:14+00:00"
+            "time": "2026-06-05T06:23:12+00:00"
         },
         {
             "name": "symfony/config",
@@ -13702,16 +13703,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v6.4.41",
+            "version": "v6.4.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "e8fdf3408c85806198d5826e604ffc6830d33152"
+                "reference": "989dfb75049b77884f3f8cf9e99f103c8f91ca1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/e8fdf3408c85806198d5826e604ffc6830d33152",
-                "reference": "e8fdf3408c85806198d5826e604ffc6830d33152",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/989dfb75049b77884f3f8cf9e99f103c8f91ca1c",
+                "reference": "989dfb75049b77884f3f8cf9e99f103c8f91ca1c",
                 "shasum": ""
             },
             "require": {
@@ -13754,7 +13755,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v6.4.41"
+                "source": "https://github.com/symfony/yaml/tree/v6.4.42"
             },
             "funding": [
                 {
@@ -13774,7 +13775,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-25T06:03:23+00:00"
+            "time": "2026-06-08T07:06:12+00:00"
         },
         {
             "name": "tecnickcom/tcpdf",
