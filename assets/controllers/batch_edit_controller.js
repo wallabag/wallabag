@@ -5,7 +5,7 @@ export default class extends Controller {
 
   toggleSelection(e) {
     this.itemTargets.forEach((item) => {
-      item.checked = e.currentTarget.checked; // eslint-disable-line no-param-reassign
+      item.checked = e.currentTarget.checked;
     });
   }
 
