@@ -82,10 +82,10 @@
     "webpack-notifier": "^1.15.0"
   },
   "dependencies": {
-    "@fontsource/atkinson-hyperlegible": "^5.2.8",
-    "@fontsource/eb-garamond": "^5.2.7",
-    "@fontsource/montserrat": "^5.2.8",
-    "@fontsource/oswald": "^5.2.8",
+    "@fontsource/atkinson-hyperlegible": "^5.3.0",
+    "@fontsource/eb-garamond": "^5.3.0",
+    "@fontsource/montserrat": "^5.3.0",
+    "@fontsource/oswald": "^5.3.0",
     "@hotwired/stimulus": "^3.2.2",
     "@materializecss/materialize": "^1.2.2",
     "@symfony/stimulus-bridge": "^4.0.1",
