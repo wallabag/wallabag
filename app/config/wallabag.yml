@@ -1,4 +1,6 @@
 parameters:
+    env(WALLABAG_ARTICLE_REPORTING_URL): ''
+    wallabag.article_reporting_url: '%env(WALLABAG_ARTICLE_REPORTING_URL)%'
     wallabag.version: 2.7.0-dev
     wallabag.paypal_url: "https://liberapay.com/wallabag/donate"
     wallabag.languages:

@@ -34,6 +34,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\WebpackEncoreBundle\WebpackEncoreBundle;
 use Twig\Extra\TwigExtraBundle\TwigExtraBundle;
+use Wallabag\DependencyInjection\Compiler\ArticleReportingUrlPass;
 use Wallabag\Import\ImportCompilerPass;
 
 class AppKernel extends Kernel
@@ -125,6 +126,7 @@ class AppKernel extends Kernel
     protected function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new ImportCompilerPass());
+        $container->addCompilerPass(new ArticleReportingUrlPass());
     }
 
     private function triggerLegacyParametersDeprecationIfNeeded(): void
