@@ -35,7 +35,7 @@ Button ⑥ is for showing the account menu.
 
 ![Filter modal](../../img/user/wallabag_interface_filter.png)
 
-This modal lets you filter entries using more criterias than the main text search, including:
+This modal lets you filter entries using more criteria than the main text search, including:
 
 - whether articles are unread, starred, archived or contain annotations
 - the language of the articles
@@ -43,7 +43,7 @@ This modal lets you filter entries using more criterias than the main text searc
 - the domain name
 - the date when the article has been saved
 
-Click on the _Filter_ button to validate your criterias.
+Click on the _Filter_ button to validate your criteria.
 
 ## Account menu
 
