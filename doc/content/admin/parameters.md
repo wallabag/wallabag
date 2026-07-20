@@ -48,12 +48,33 @@ After changing configuration in production, clear the cache with
 | WALLABAG_FROM_EMAIL | Address used in the `From:` field for application emails | `wallabag@example.com` |
 | WALLABAG_SERVER_NAME | User-friendly name of your instance for 2FA issuer strings | `Your wallabag instance` |
 | WALLABAG_TWOFACTOR_SENDER | Sender address for emailed 2FA codes | `no-reply@wallabag.org` |
+| WALLABAG_LOG_LEVEL | Minimum level written by the nested production log handler | `error` |
 | WALLABAG_USER_AGENT | Default User-Agent used when wallabag fetches content | `Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2` |
 | WALLABAG_OAUTH_ACCESS_TOKEN_LIFETIME | OAuth access-token lifetime in seconds | `3600` |
 | WALLABAG_OAUTH_REFRESH_TOKEN_LIFETIME | OAuth refresh-token lifetime in seconds | `1209600` |
 | WALLABAG_TABLE_PREFIX | Prefix added to wallabag database tables | `wallabag_` |
 | WALLABAG_SITE_CONFIG_FOLDERS | Optional comma-separated list of extra graby site-config folders | empty |
 | SENTRY_DSN | Optional Sentry DSN used to report application errors | empty |
+
+### Production log verbosity
+
+`WALLABAG_LOG_LEVEL` controls the minimum level written by the nested Monolog
+handler in production. Monolog accepts `debug`, `info`, `notice`, `warning`,
+`error`, `critical`, `alert`, and `emergency`.
+
+The main `fingers_crossed` handler continues to activate only at `error`.
+Lowering `WALLABAG_LOG_LEVEL` therefore adds buffered context when a request
+ends in an error without logging successful requests. For example:
+
+```dotenv
+WALLABAG_LOG_LEVEL=debug
+```
+
+After changing the value, clear the production cache:
+
+```console
+bin/console cache:clear --env=prod
+```
 
 ## Service variables
 
