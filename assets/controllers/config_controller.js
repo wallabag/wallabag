@@ -1,7 +1,14 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-  static targets = ['previewArticle', 'previewContent', 'font', 'fontSize', 'lineHeight', 'maxWidth'];
+  static targets = [
+    'previewArticle',
+    'previewContent',
+    'font',
+    'fontSize',
+    'lineHeight',
+    'maxWidth',
+  ];
 
   connect() {
     this.updatePreview();

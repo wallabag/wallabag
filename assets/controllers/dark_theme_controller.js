@@ -29,7 +29,9 @@ export default class extends Controller {
   }
 
   #choose() {
-    const themeCookieExists = document.cookie.split(';').some((cookie) => cookie.trim().startsWith('theme='));
+    const themeCookieExists = document.cookie
+      .split(';')
+      .some((cookie) => cookie.trim().startsWith('theme='));
 
     if (themeCookieExists) {
       return;

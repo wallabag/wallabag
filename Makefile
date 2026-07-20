@@ -106,7 +106,7 @@ composer-normalize: ## Check that composer.json is normalized (dry run)
 composer-dependency-analyser: ## Run composer-dependency-analyser
 	@$(PHP_NO_XDEBUG) bin/composer-dependency-analyser
 
-lint-js: ## Run ESLint
+lint-js: ## Run Biome
 	@$(YARN) lint:js
 
 lint-scss: ## Run Stylelint

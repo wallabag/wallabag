@@ -2,7 +2,15 @@ import { Controller } from '@hotwired/stimulus';
 import Mousetrap from 'mousetrap';
 
 export default class extends Controller {
-  static targets = ['openOriginal', 'markAsFavorite', 'markAsRead', 'deleteEntry', 'showAddUrl', 'showSearch', 'showActions'];
+  static targets = [
+    'openOriginal',
+    'markAsFavorite',
+    'markAsRead',
+    'deleteEntry',
+    'showAddUrl',
+    'showSearch',
+    'showActions',
+  ];
 
   static outlets = ['entries-navigation'];
 

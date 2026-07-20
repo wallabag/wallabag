@@ -82,7 +82,7 @@ jobs:
         if: always() && steps.composer-install.outcome == 'success'
         run: "composer normalize --dry-run --no-check-lock"
 
-      - name: "Run ESLint"
+      - name: "Run Biome"
         if: always() && steps.yarn-install.outcome == 'success'
         run: "yarn lint:js"
 

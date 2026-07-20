@@ -1,0 +1,61 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+
+  "files": {
+    "includes": [
+      "assets/*.js",
+      "assets/controllers/**/*.js",
+      "assets/**/*.css"
+    ]
+  },
+
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "a11y": {
+        "useGenericFontNames": "off"
+      },
+      "suspicious": {
+        "noDocumentCookie": "off",
+        "noDuplicateProperties": "off",
+        "noExplicitAny": "off"
+      },
+      "complexity": {
+        "noImportantStyles": "off"
+      },
+      "style": {
+        "noDescendingSpecificity": "off",
+        "noNonNullAssertion": "off"
+      }
+    }
+  },
+
+  "javascript": {
+    "globals": ["Routing"],
+    "formatter": {
+      "quoteStyle": "single",
+      "semicolons": "always",
+      "trailingCommas": "es5"
+    }
+  },
+
+  "css": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  }
+}

@@ -10,7 +10,7 @@ export default class extends Controller {
   }
 
   autoDisplay() {
-    const scrolled = (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
+    const scrolled = window.innerHeight + window.scrollY >= document.body.offsetHeight;
 
     if (scrolled) {
       this.toggleScroll = true;
