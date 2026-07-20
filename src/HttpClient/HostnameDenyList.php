@@ -5,6 +5,7 @@ namespace Wallabag\HttpClient;
 final class HostnameDenyList
 {
     private array $hostnames = [];
+    private array $subtrees = [];
 
     public function __construct(array $hostnames = [])
     {
@@ -24,25 +25,47 @@ final class HostnameDenyList
                 continue;
             }
 
-            $hostname = $this->normalizeConfiguredHostname($hostname);
+            $isSubtree = str_starts_with($hostname, '.');
+            $hostname = $this->normalizeConfiguredHostname($isSubtree ? substr($hostname, 1) : $hostname);
+
+            if ($isSubtree) {
+                if (false !== filter_var($hostname, \FILTER_VALIDATE_IP)) {
+                    throw new \InvalidArgumentException('Leading-dot rules cannot contain IP literals.');
+                }
+
+                $this->subtrees[$hostname] = true;
+
+                continue;
+            }
+
             $this->hostnames[$hostname] = true;
         }
     }
 
     public function isEmpty(): bool
     {
-        return [] === $this->hostnames;
+        return [] === $this->hostnames && [] === $this->subtrees;
     }
 
     public function getBlockedHostname(string $hostname): ?string
     {
         $hostname = $this->normalizeHostname($hostname);
 
-        if (null === $hostname || !isset($this->hostnames[$hostname])) {
+        if (null === $hostname) {
             return null;
         }
 
-        return $hostname;
+        if (isset($this->hostnames[$hostname])) {
+            return $hostname;
+        }
+
+        foreach (array_keys($this->subtrees) as $subtree) {
+            if ($hostname === $subtree || str_ends_with($hostname, '.' . $subtree)) {
+                return $hostname;
+            }
+        }
+
+        return null;
     }
 
     private function normalizeConfiguredHostname(string $hostname): string

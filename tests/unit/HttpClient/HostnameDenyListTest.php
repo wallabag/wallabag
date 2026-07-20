@@ -60,6 +60,46 @@ class HostnameDenyListTest extends TestCase
         $this->assertSame('example.com', $denyList->getBlockedHostname('example.com'));
     }
 
+    public function testLeadingDotRuleMatchesApexAndOneLevelSubdomain(): void
+    {
+        $denyList = new HostnameDenyList(['.example.com']);
+
+        $this->assertSame('example.com', $denyList->getBlockedHostname('example.com'));
+        $this->assertSame('www.example.com', $denyList->getBlockedHostname('www.example.com'));
+    }
+
+    public function testLeadingDotRuleMatchesMultipleSubdomainLevels(): void
+    {
+        $denyList = new HostnameDenyList(['.example.com']);
+
+        $this->assertSame('deep.api.example.com', $denyList->getBlockedHostname('deep.api.example.com'));
+    }
+
+    public function testNestedLeadingDotRuleDoesNotMatchItsParentOrSiblings(): void
+    {
+        $denyList = new HostnameDenyList(['.my.example.com']);
+
+        $this->assertSame('my.example.com', $denyList->getBlockedHostname('my.example.com'));
+        $this->assertSame('api.my.example.com', $denyList->getBlockedHostname('api.my.example.com'));
+        $this->assertNull($denyList->getBlockedHostname('example.com'));
+        $this->assertNull($denyList->getBlockedHostname('your.example.com'));
+    }
+
+    public function testLeadingDotRuleMatchesOnlyAtDnsLabelBoundaries(): void
+    {
+        $denyList = new HostnameDenyList(['.example.com']);
+
+        $this->assertNull($denyList->getBlockedHostname('badexample.com'));
+        $this->assertNull($denyList->getBlockedHostname('example.com.evil.test'));
+    }
+
+    public function testRejectsLeadingDotIpRules(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        new HostnameDenyList(['.192.0.2.1']);
+    }
+
     /**
      * @dataProvider invalidHostnameProvider
      */
