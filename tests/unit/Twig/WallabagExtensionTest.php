@@ -14,27 +14,7 @@ class WallabagExtensionTest extends TestCase
 {
     public function testRemoveWww(): void
     {
-        $entryRepository = $this->getMockBuilder(EntryRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $annotationRepository = $this->getMockBuilder(AnnotationRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $tagRepository = $this->getMockBuilder(TagRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $tokenStorage = $this->getMockBuilder(TokenStorageInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $translator = $this->getMockBuilder(TranslatorInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $extension = new WallabagExtension($entryRepository, $annotationRepository, $tagRepository, $tokenStorage, 0, $translator, '');
+        $extension = $this->createExtension();
 
         $this->assertSame('lemonde.fr', $extension->removeWww('www.lemonde.fr'));
         $this->assertSame('lemonde.fr', $extension->removeWww('lemonde.fr'));
@@ -43,27 +23,7 @@ class WallabagExtensionTest extends TestCase
 
     public function testRemoveScheme(): void
     {
-        $entryRepository = $this->getMockBuilder(EntryRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $annotationRepository = $this->getMockBuilder(AnnotationRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $tagRepository = $this->getMockBuilder(TagRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $tokenStorage = $this->getMockBuilder(TokenStorageInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $translator = $this->getMockBuilder(TranslatorInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $extension = new WallabagExtension($entryRepository, $annotationRepository, $tagRepository, $tokenStorage, 0, $translator, '');
+        $extension = $this->createExtension();
 
         $this->assertSame('lemonde.fr', $extension->removeScheme('lemonde.fr'));
         $this->assertSame('gist.github.com', $extension->removeScheme('gist.github.com'));
@@ -73,6 +33,19 @@ class WallabagExtensionTest extends TestCase
 
     public function testRemoveSchemeAndWww(): void
     {
+        $extension = $this->createExtension();
+
+        $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('www.lemonde.fr'));
+        $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('http://www.lemonde.fr'));
+        $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('http://lemonde.fr'));
+        $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('https://www.lemonde.fr'));
+        $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('https://lemonde.fr'));
+        $this->assertSame('gist.github.com', $extension->removeSchemeAndWww('https://gist.github.com'));
+        $this->assertSame('ftp://gist.github.com', $extension->removeSchemeAndWww('ftp://gist.github.com'));
+    }
+
+    private function createExtension(): WallabagExtension
+    {
         $entryRepository = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -93,14 +66,6 @@ class WallabagExtensionTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $extension = new WallabagExtension($entryRepository, $annotationRepository, $tagRepository, $tokenStorage, 0, $translator, '');
-
-        $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('www.lemonde.fr'));
-        $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('http://www.lemonde.fr'));
-        $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('http://lemonde.fr'));
-        $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('https://www.lemonde.fr'));
-        $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('https://lemonde.fr'));
-        $this->assertSame('gist.github.com', $extension->removeSchemeAndWww('https://gist.github.com'));
-        $this->assertSame('ftp://gist.github.com', $extension->removeSchemeAndWww('ftp://gist.github.com'));
+        return new WallabagExtension($entryRepository, $annotationRepository, $tagRepository, $tokenStorage, 0, $translator, '');
     }
 }
