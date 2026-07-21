@@ -112,6 +112,43 @@ class UserRestControllerTest extends WallabagApiTestCase
         $client->getContainer()->get(Config::class)->set('api_user_registration', '0');
     }
 
+    public function testCreateNewUserRemainsCaptchaFreeWhenCaptchaIsEnabled(): void
+    {
+        putenv('WALLABAG_CAPTCHA_ENABLED=1');
+        $_ENV['WALLABAG_CAPTCHA_ENABLED'] = $_SERVER['WALLABAG_CAPTCHA_ENABLED'] = '1';
+
+        $client = $this->createUnauthorizedClient();
+        $config = $client->getContainer()->get(Config::class);
+        $config->set('api_user_registration', '1');
+
+        try {
+            $client->request('PUT', '/api/user.json', [
+                'username' => 'captcha-api',
+                'password' => 'captcha-password',
+                'email' => 'captcha-api@wallabag.org',
+            ]);
+
+            $this->assertSame(201, $client->getResponse()->getStatusCode());
+
+            $content = json_decode($client->getResponse()->getContent(), true);
+
+            $this->assertArrayHasKey('id', $content);
+            $this->assertArrayHasKey('email', $content);
+            $this->assertArrayHasKey('username', $content);
+            $this->assertArrayHasKey('created_at', $content);
+            $this->assertArrayHasKey('updated_at', $content);
+            $this->assertArrayHasKey('default_client', $content);
+            $this->assertArrayNotHasKey('captcha', $content);
+            $this->assertSame('captcha-api@wallabag.org', $content['email']);
+            $this->assertSame('captcha-api', $content['username']);
+            $this->assertSame('application/json', $client->getResponse()->headers->get('Content-Type'));
+        } finally {
+            $config->set('api_user_registration', '0');
+            putenv('WALLABAG_CAPTCHA_ENABLED=0');
+            $_ENV['WALLABAG_CAPTCHA_ENABLED'] = $_SERVER['WALLABAG_CAPTCHA_ENABLED'] = '0';
+        }
+    }
+
     public function testCreateNewUserWithExistingEmail(): void
     {
         $client = $this->createUnauthorizedClient();
