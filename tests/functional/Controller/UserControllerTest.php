@@ -77,6 +77,16 @@ class UserControllerTest extends WallabagTestCase
         $this->assertDoesNotMatchRegularExpression('/Foo User/', $client->getResponse()->getContent());
     }
 
+    public function testNewUserDoesNotRenderCaptchaWhenDisabled(): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $crawler = $client->request('GET', '/users/new');
+
+        $this->assertCount(0, $crawler->filter('input[name="new_user[captcha]"]'));
+    }
+
     public function testDeleteDisabledForLoggedUser(): void
     {
         $this->logInAs('admin');
