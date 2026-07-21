@@ -201,6 +201,9 @@ fos_user:
     firewall_name: main
     user_class: Wallabag\Entity\User
     registration:
+        form:
+            name: fos_user_registration
+            type: Wallabag\Form\Type\RegistrationFormType
         confirmation:
             enabled: "%env(bool:WALLABAG_CONFIRMATION_ENABLED)%"
     from_email:
