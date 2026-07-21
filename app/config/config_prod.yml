@@ -19,7 +19,7 @@ monolog:
         nested:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
-            level: debug
+            level: "%env(WALLABAG_LOG_LEVEL)%"
         console:
             type: console
 
