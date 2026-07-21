@@ -2,12 +2,15 @@
 
 namespace Wallabag\Twig;
 
+use GuzzleHttp\Psr7\Query;
+use GuzzleHttp\Psr7\Uri;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
+use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
 use Wallabag\Repository\AnnotationRepository;
 use Wallabag\Repository\EntryRepository;
@@ -23,6 +26,7 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
         private $lifeTime,
         private readonly TranslatorInterface $translator,
         private readonly string $projectDir,
+        private readonly string $articleReportingUrl,
     ) {
     }
 
@@ -48,7 +52,17 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
             new TwigFunction('display_stats', $this->displayStats(...)),
             new TwigFunction('asset_file_exists', $this->assetFileExists(...)),
             new TwigFunction('theme_class', $this->themeClass(...)),
+            new TwigFunction('generate_article_reporting_url', $this->generateArticleReportingUrl(...)),
         ];
+    }
+
+    public function generateArticleReportingUrl(Entry $entry): string
+    {
+        $uri = new Uri($this->articleReportingUrl);
+        $query = Query::parse($uri->getQuery(), \PHP_QUERY_RFC3986);
+        $query['body'] = $entry->getUrl();
+
+        return (string) $uri->withQuery(Query::build($query, \PHP_QUERY_RFC3986));
     }
 
     public function removeWww($url)

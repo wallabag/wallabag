@@ -54,6 +54,7 @@ After changing configuration in production, clear the cache with
 | WALLABAG_OAUTH_REFRESH_TOKEN_LIFETIME | OAuth refresh-token lifetime in seconds | `1209600` |
 | WALLABAG_TABLE_PREFIX | Prefix added to wallabag database tables | `wallabag_` |
 | WALLABAG_SITE_CONFIG_FOLDERS | Optional comma-separated list of extra graby site-config folders | empty |
+| WALLABAG_ARTICLE_REPORTING_URL | Destination used to report display problems with an article | `mailto:siteconfig@wallabag.org?subject=Wrong%20display%20in%20wallabag` |
 | SENTRY_DSN | Optional Sentry DSN used to report application errors | empty |
 
 ### Production log verbosity
@@ -85,6 +86,25 @@ bin/console cache:clear --env=prod
 | REDIS_URL | Redis connection string used by the async import worker | `redis://127.0.0.1:6379` |
 | RABBITMQ_URL | RabbitMQ connection string used by the async import worker | `amqp://guest:guest@127.0.0.1:5672` |
 | WALLABAG_RABBITMQ_PREFETCH_COUNT | RabbitMQ consumer prefetch value | `10` |
+
+## Article problem-reporting destination
+
+`WALLABAG_ARTICLE_REPORTING_URL` accepts an absolute `https:` URL or a
+`mailto:` URI with one recipient. An unset or empty value uses the default
+address shown above. Invalid values stop the Symfony container from compiling.
+
+Query names and values in the configured URL must use RFC 3986 percent
+encoding. wallabag preserves configured query parameters, including a custom
+`subject`, but always replaces `body` with the URL of the article being
+reported. Fragments are preserved.
+
+```dotenv
+WALLABAG_ARTICLE_REPORTING_URL="https://support.example.com/issues/new?template=article"
+WALLABAG_ARTICLE_REPORTING_URL="mailto:support@example.com?subject=Article%20display%20problem"
+```
+
+Because the value is validated and stored while building the container, clear
+the application cache after changing it.
 
 ## Legacy mapping for upgraded installs
 
