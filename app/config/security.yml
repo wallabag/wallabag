@@ -65,6 +65,7 @@ security:
         # force role for logout otherwise when 2fa enable, you won't be able to logout
         # https://github.com/scheb/two-factor-bundle/issues/168#issuecomment-430822478
         - { path: ^/logout, roles: [IS_AUTHENTICATED_ANONYMOUSLY, IS_AUTHENTICATED_2FA_IN_PROGRESS] }
+        - { path: ^/_captcha, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /(unread|starred|archive|annotated|all).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -52,6 +52,15 @@ framework:
                 verify_host: false
                 verify_peer: false
 
+gregwar_captcha:
+    width: 200
+    height: 50
+    background_color: [255, 255, 255]
+    as_url: true
+    reload: true
+    keep_value: false
+    invalid_message: validator.captcha_invalid
+
 # Twig Configuration
 twig:
     default_path: '%kernel.project_dir%/templates'
