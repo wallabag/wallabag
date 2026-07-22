@@ -4,11 +4,14 @@ namespace Wallabag\Tests\Unit\SiteConfig;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\BrowserKit\HttpBrowser;
+use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Wallabag\ExpressionLanguage\AuthenticatorProvider;
+use Wallabag\HttpClient\HostnameDenyList;
+use Wallabag\HttpClient\HostnameDenyListHttpClient;
 use Wallabag\SiteConfig\LoginFormAuthenticator;
 use Wallabag\SiteConfig\SiteConfig;
 
@@ -42,6 +45,64 @@ class LoginFormAuthenticatorTest extends TestCase
         $res = $auth->login($siteConfig);
 
         $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
+    }
+
+    public function testLoginDoesNotRequestBlockedHost(): void
+    {
+        $siteConfig = new SiteConfig([
+            'host' => 'example.com',
+            'loginUri' => 'https://example.com/login',
+            'usernameField' => 'username',
+            'passwordField' => 'password',
+            'username' => 'johndoe',
+            'password' => 'unkn0wn',
+        ]);
+        $innerClient = new MockHttpClient();
+        $browserClient = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['example.com']));
+        $browser = new HttpBrowser($browserClient);
+        $authenticatorProvider = new AuthenticatorProvider(new MockHttpClient());
+        $authenticator = new LoginFormAuthenticator($browser, $authenticatorProvider, 'Wallabag (Symfony HttpClient/5)');
+
+        try {
+            $authenticator->login($siteConfig);
+            $this->fail('The blocked login request should throw a transport exception.');
+        } catch (TransportException $exception) {
+            $this->assertSame('Host "example.com" is blocked by WALLABAG_FETCH_BLOCKED_HOSTS.', $exception->getMessage());
+        }
+
+        $this->assertSame(0, $innerClient->getRequestsCount());
+    }
+
+    public function testLoginDoesNotFollowRedirectToBlockedHost(): void
+    {
+        $siteConfig = new SiteConfig([
+            'host' => 'allowed.example',
+            'loginUri' => 'https://allowed.example/login',
+            'usernameField' => 'username',
+            'passwordField' => 'password',
+            'username' => 'johndoe',
+            'password' => 'unkn0wn',
+        ]);
+        $innerClient = new MockHttpClient([
+            new MockResponse('', [
+                'http_code' => 302,
+                'response_headers' => ['Location: https://blocked.example/private'],
+            ]),
+            new MockResponse('must not be requested'),
+        ]);
+        $browserClient = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+        $browser = new HttpBrowser($browserClient);
+        $authenticatorProvider = new AuthenticatorProvider(new MockHttpClient());
+        $authenticator = new LoginFormAuthenticator($browser, $authenticatorProvider, 'Wallabag (Symfony HttpClient/5)');
+
+        try {
+            $authenticator->login($siteConfig);
+            $this->fail('The blocked login redirect should throw a transport exception.');
+        } catch (TransportException $exception) {
+            $this->assertSame('Host "blocked.example" is blocked by WALLABAG_FETCH_BLOCKED_HOSTS.', $exception->getMessage());
+        }
+
+        $this->assertSame(1, $innerClient->getRequestsCount());
     }
 
     public function testLoginPostWithExtraFieldsButEmptyHtml(): void
