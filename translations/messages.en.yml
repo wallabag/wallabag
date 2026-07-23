@@ -13,6 +13,9 @@ security:
     register:
         page_title: Create an account
         go_to_account: Go to your account
+captcha:
+    label: Security check
+    help: Enter the characters shown in the image. Refreshing the image invalidates the previous answer.
 menu:
     left:
         unread: Unread

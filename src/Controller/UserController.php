@@ -32,6 +32,7 @@ class UserController extends AbstractController
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly TranslatorInterface $translator,
+        private readonly bool $captchaEnabled,
     ) {
     }
 
@@ -47,7 +48,9 @@ class UserController extends AbstractController
         // enable created user by default
         $user->setEnabled(true);
 
-        $form = $this->createForm(NewUserType::class, $user);
+        $form = $this->createForm(NewUserType::class, $user, [
+            'captcha_enabled' => $this->captchaEnabled,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

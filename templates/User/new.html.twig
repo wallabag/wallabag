@@ -47,6 +47,16 @@
                                     </div>
                                 </div>
 
+                                {% if form.captcha is defined %}
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            {{ form_errors(form.captcha) }}
+                                            {{ form_widget(form.captcha, {'attr': {'aria-label': 'captcha.label'|trans({}, 'messages')}}) }}
+                                            {{ form_help(form.captcha) }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
                                 {{ form_widget(form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
                                 {{ form_rest(form) }}
                             </form>

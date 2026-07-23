@@ -97,4 +97,13 @@ class SecurityControllerTest extends WallabagTestCase
         $client->request('GET', '/register');
         $this->assertStringContainsString('registration.submit', $client->getResponse()->getContent());
     }
+
+    public function testRegistrationDoesNotRenderCaptchaWhenDisabled(): void
+    {
+        $client = $this->getTestClient();
+
+        $crawler = $client->request('GET', '/register/');
+
+        $this->assertCount(0, $crawler->filter('input[name="fos_user_registration[captcha]"]'));
+    }
 }

@@ -81,6 +81,7 @@
         "friendsofsymfony/oauth-server-bundle": "dev-master#dc8ff343363cf794d30eb1a123610d186a43f162",
         "friendsofsymfony/rest-bundle": "^3.8",
         "friendsofsymfony/user-bundle": "^3.4.0",
+        "gregwar/captcha-bundle": "^2.2",
         "guzzlehttp/psr7": "^2.7.0",
         "html2text/html2text": "^4.3.2",
         "j0k3r/graby": "^2.4.6",

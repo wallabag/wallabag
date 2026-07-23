@@ -2,6 +2,7 @@
 
 namespace Wallabag\Form\Type;
 
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -40,17 +41,29 @@ class NewUserType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'user.form.email_label',
             ])
-            ->add('save', SubmitType::class, [
-                'label' => 'user.form.save',
-            ])
         ;
+
+        if ($options['captcha_enabled']) {
+            $builder->add('captcha', CaptchaType::class, [
+                'help' => 'captcha.help',
+                'label' => false,
+                'session_key' => 'administrator_user_creation',
+                'translation_domain' => 'messages',
+            ]);
+        }
+
+        $builder->add('save', SubmitType::class, [
+            'label' => 'user.form.save',
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'captcha_enabled' => false,
             'data_class' => User::class,
         ]);
+        $resolver->setAllowedTypes('captcha_enabled', 'bool');
     }
 
     public function getBlockPrefix(): string

@@ -32,6 +32,14 @@
                 {{ form_label(form.plainPassword.second) }}
                 {{ form_widget(form.plainPassword.second) }}
             </div>
+
+            {% if form.captcha is defined %}
+                <div class="input-field col s12">
+                    {{ form_errors(form.captcha) }}
+                    {{ form_widget(form.captcha, {'attr': {'aria-label': 'captcha.label'|trans({}, 'messages')}}) }}
+                    {{ form_help(form.captcha) }}
+                </div>
+            {% endif %}
         </div>
     </div>
     <div class="card-action center">

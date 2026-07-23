@@ -44,6 +44,7 @@ After changing configuration in production, clear the cache with
 | DEFAULT_LOCALE | Default language of your wallabag instance | `en` |
 | WALLABAG_BASE_URL | Full URL of your wallabag instance without a trailing slash | `http://127.0.0.1:8000` |
 | WALLABAG_REGISTRATION_ENABLED | Enable public registration | `0` |
+| WALLABAG_CAPTCHA_ENABLED | Require an image CAPTCHA for HTML user creation | `0` |
 | WALLABAG_CONFIRMATION_ENABLED | Send a confirmation email for each registration | `1` |
 | WALLABAG_FROM_EMAIL | Address used in the `From:` field for application emails | `wallabag@example.com` |
 | WALLABAG_SERVER_NAME | User-friendly name of your instance for 2FA issuer strings | `Your wallabag instance` |
@@ -56,6 +57,29 @@ After changing configuration in production, clear the cache with
 | WALLABAG_SITE_CONFIG_FOLDERS | Optional comma-separated list of extra graby site-config folders | empty |
 | WALLABAG_ARTICLE_REPORTING_URL | Destination used to report display problems with an article | `mailto:siteconfig@wallabag.org?subject=Wrong%20display%20in%20wallabag` |
 | SENTRY_DSN | Optional Sentry DSN used to report application errors | empty |
+
+### CAPTCHA protection for user creation
+
+Set `WALLABAG_CAPTCHA_ENABLED=1` to require a CAPTCHA on public registration
+and administrator user-creation forms. The default value, `0`, leaves both
+forms unchanged. Clear the production cache after changing the value:
+
+```console
+bin/console cache:clear --env=prod
+```
+
+Each challenge is stored in the visitor's session. Loading a new image or
+submitting the form invalidates the previous answer, including after an
+incorrect submission. The challenge has no clock-based expiry; its lifetime is
+defined by those refresh and submission events.
+
+The CAPTCHA is image-only and has no audio alternative. For users who cannot
+complete it, an administrator should create the account through the protected
+administrator form. API user registration remains CAPTCHA-free and is outside
+this feature's scope.
+
+A CAPTCHA is only one abuse-prevention layer. It does not replace rate limits,
+reverse-proxy controls, or a web application firewall.
 
 ### Production log verbosity
 

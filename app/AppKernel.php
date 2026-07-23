@@ -11,6 +11,7 @@ use FOS\JsRoutingBundle\FOSJsRoutingBundle;
 use FOS\OAuthServerBundle\FOSOAuthServerBundle;
 use FOS\RestBundle\FOSRestBundle;
 use FOS\UserBundle\FOSUserBundle;
+use Gregwar\CaptchaBundle\GregwarCaptchaBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
 use KPhoen\RulerZBundle\KPhoenRulerZBundle;
 use Nelmio\ApiDocBundle\NelmioApiDocBundle;
@@ -50,6 +51,7 @@ class AppKernel extends Kernel
             new SensioFrameworkExtraBundle(),
             new FOSRestBundle(),
             new FOSUserBundle(),
+            new GregwarCaptchaBundle(),
             new JMSSerializerBundle(),
             new NelmioApiDocBundle(),
             new NelmioCorsBundle(),

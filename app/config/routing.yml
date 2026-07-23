@@ -2,6 +2,10 @@ app:
     resource: ../../src/Controller/
     type: annotation
 
+gregwar_captcha:
+    resource: "@GregwarCaptchaBundle/Resources/config/routing/routing.yml"
+    prefix: /_captcha
+
 doc-api:
     resource: "@NelmioApiDocBundle/config/routing/swaggerui.xml"
     prefix: /api/doc
