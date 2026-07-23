@@ -65,6 +65,58 @@ class WallabagV2ImportTest extends TestCase
         $this->assertSame(['skipped' => 4, 'imported' => 2, 'queued' => 0], $wallabagV2Import->getSummary());
     }
 
+    public function testImportWithAnnotations(): void
+    {
+        $wallabagV2Import = $this->getWallabagV2Import(false, 1);
+        $wallabagV2Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2-annotations.json');
+
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->once())
+            ->method('findByUrlAndUserId')
+            ->willReturn(false);
+
+        $this->em
+            ->expects($this->any())
+            ->method('getRepository')
+            ->willReturn($entryRepo);
+
+        $this->contentProxy
+            ->expects($this->once())
+            ->method('updateEntry');
+
+        $persistedEntry = null;
+
+        // the entry and its annotation must both be persisted
+        $this->em
+            ->expects($this->exactly(2))
+            ->method('persist')
+            ->willReturnCallback(static function ($entity) use (&$persistedEntry): void {
+                if ($entity instanceof Entry) {
+                    $persistedEntry = $entity;
+                }
+            });
+
+        $res = $wallabagV2Import->import();
+
+        $this->assertTrue($res);
+        $this->assertSame(['skipped' => 0, 'imported' => 1, 'queued' => 0], $wallabagV2Import->getSummary());
+
+        $this->assertInstanceOf(Entry::class, $persistedEntry);
+
+        $annotations = $persistedEntry->getAnnotations();
+        $this->assertCount(1, $annotations);
+
+        $annotation = $annotations[0];
+        $this->assertSame('my imported annotation', $annotation->getText());
+        $this->assertSame('some quoted text', $annotation->getQuote());
+        $this->assertNotEmpty($annotation->getRanges());
+        $this->assertSame($this->user, $annotation->getUser());
+        $this->assertSame($persistedEntry, $annotation->getEntry());
+    }
+
     public function testImportAndMarkAllAsRead(): void
     {
         $wallabagV2Import = $this->getWallabagV2Import(false, 2);
