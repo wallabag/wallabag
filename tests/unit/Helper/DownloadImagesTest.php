@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Wallabag\Helper\DownloadImages;
+use Wallabag\HttpClient\HostnameDenyList;
+use Wallabag\HttpClient\HostnameDenyListHttpClient;
 
 class DownloadImagesTest extends TestCase
 {
@@ -94,6 +96,39 @@ class DownloadImagesTest extends TestCase
         $res = $download->processSingleImage(123, 'T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertFalse($res, 'Image can not be found, so it will not be replaced');
+    }
+
+    public function testProcessSingleImageSkipsBlockedInitialRequest(): void
+    {
+        $innerClient = new MockHttpClient();
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+        $download = new DownloadImages($client, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+
+        $result = $download->processSingleImage(123, 'https://blocked.example/image.jpg', 'https://allowed.example/article');
+
+        $this->assertFalse($result);
+        $this->assertSame(0, $innerClient->getRequestsCount());
+        $this->assertTrue($logHandler->hasErrorThatContains('DownloadImages: Can not retrieve image, skipping.'));
+    }
+
+    public function testProcessSingleImageSkipsBlockedRedirect(): void
+    {
+        $innerClient = new MockHttpClient([
+            new MockResponse('', ['http_code' => 302, 'redirect_url' => 'https://blocked.example/image.jpg']),
+            new MockResponse('must not be requested'),
+        ]);
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+        $download = new DownloadImages($client, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+
+        $result = $download->processSingleImage(123, 'https://allowed.example/image.jpg', 'https://allowed.example/article');
+
+        $this->assertFalse($result);
+        $this->assertSame(1, $innerClient->getRequestsCount());
+        $this->assertTrue($logHandler->hasErrorThatContains('DownloadImages: Can not retrieve image, skipping.'));
     }
 
     public function testProcessSingleImageWithBadImage(): void
