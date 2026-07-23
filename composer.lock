@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "37c0332b0d71dd3b8c0c999dea3443c8",
+    "content-hash": "e88a76fa4ee4e6917cdb752165de264a",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -6799,16 +6799,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "2.3.2",
+            "version": "2.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "a004701b11273a26cd7955a61d67a7f1e525a45a"
+                "reference": "fb19eedd2bb67ff8cf7a5502ad329e701d6398a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/a004701b11273a26cd7955a61d67a7f1e525a45a",
-                "reference": "a004701b11273a26cd7955a61d67a7f1e525a45a",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/fb19eedd2bb67ff8cf7a5502ad329e701d6398a3",
+                "reference": "fb19eedd2bb67ff8cf7a5502ad329e701d6398a3",
                 "shasum": ""
             },
             "require": {
@@ -6840,9 +6840,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.2"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.3"
             },
-            "time": "2026-01-25T14:56:51+00:00"
+            "time": "2026-07-08T07:01:06+00:00"
         },
         {
             "name": "phpzip/phpzip",
@@ -8766,16 +8766,16 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v6.4.41",
+            "version": "v6.4.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "5490a577195422c3c9cda09c64823580858af854"
+                "reference": "704edf29f1c97ff6e36e248def6ff4a51f765ce1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/5490a577195422c3c9cda09c64823580858af854",
-                "reference": "5490a577195422c3c9cda09c64823580858af854",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/704edf29f1c97ff6e36e248def6ff4a51f765ce1",
+                "reference": "704edf29f1c97ff6e36e248def6ff4a51f765ce1",
                 "shasum": ""
             },
             "require": {
@@ -8842,7 +8842,7 @@
                 "psr6"
             ],
             "support": {
-                "source": "https://github.com/symfony/cache/tree/v6.4.41"
+                "source": "https://github.com/symfony/cache/tree/v6.4.42"
             },
             "funding": [
                 {
@@ -8862,7 +8862,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-24T08:42:40+00:00"
+            "time": "2026-06-17T14:17:34+00:00"
         },
         {
             "name": "symfony/cache-contracts",
@@ -13673,16 +13673,16 @@
         },
         {
             "name": "symfony/var-exporter",
-            "version": "v7.4.9",
+            "version": "v7.4.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-exporter.git",
-                "reference": "22e03a49c95ef054a43601cd159b222bfab1c701"
+                "reference": "0118811b1d59f323bf131250b3fb919febfece28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/22e03a49c95ef054a43601cd159b222bfab1c701",
-                "reference": "22e03a49c95ef054a43601cd159b222bfab1c701",
+                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/0118811b1d59f323bf131250b3fb919febfece28",
+                "reference": "0118811b1d59f323bf131250b3fb919febfece28",
                 "shasum": ""
             },
             "require": {
@@ -13730,7 +13730,7 @@
                 "serialize"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-exporter/tree/v7.4.9"
+                "source": "https://github.com/symfony/var-exporter/tree/v7.4.14"
             },
             "funding": [
                 {
@@ -13750,7 +13750,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-18T13:18:21+00:00"
+            "time": "2026-06-27T08:41:53+00:00"
         },
         {
             "name": "symfony/webpack-encore-bundle",
@@ -14746,23 +14746,24 @@
         },
         {
             "name": "willdurand/hateoas-bundle",
-            "version": "2.7.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/BazingaHateoasBundle.git",
-                "reference": "a797892b0a5e79f92e34c8fefe0e27e31114ca65"
+                "reference": "340c4f2bee05a11e0b585d8bb292b35e2ee88e66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/a797892b0a5e79f92e34c8fefe0e27e31114ca65",
-                "reference": "a797892b0a5e79f92e34c8fefe0e27e31114ca65",
+                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/340c4f2bee05a11e0b585d8bb292b35e2ee88e66",
+                "reference": "340c4f2bee05a11e0b585d8bb292b35e2ee88e66",
                 "shasum": ""
             },
             "require": {
                 "jms/serializer-bundle": "^3.10 || ^4.2 || ^5.4",
                 "php": "^8.1",
-                "symfony/expression-language": "~3.0 || ~4.0 || ~5.0 || ~6.0 || ~7.0",
-                "symfony/framework-bundle": "~3.0 || ~4.0 || ~5.0 || ~6.0 || ~7.0",
+                "symfony/dependency-injection": "^5.4 || ^6.0 || ^7.0 || ~8.0",
+                "symfony/expression-language": "~5.0 || ~6.0 || ~7.0 || ~8.0",
+                "symfony/framework-bundle": "~5.0 || ~6.0 || ~7.0 || ~8.0",
                 "willdurand/hateoas": "^3.12@beta"
             },
             "conflict": {
@@ -14770,9 +14771,9 @@
             },
             "require-dev": {
                 "doctrine/annotations": "^1.13.2 || ^2.0",
-                "doctrine/coding-standard": "^12.0",
+                "doctrine/coding-standard": "^13.0.1",
                 "phpunit/phpunit": "^10.5.38",
-                "symfony/stopwatch": "~3.0 || ~4.0 || ~5.0 || ~6.0 || ~7.0",
+                "symfony/stopwatch": "~5.0 || ~6.0 || ~7.0 || ~8.0",
                 "twig/twig": "~1.12|~2.0|~3.0"
             },
             "type": "symfony-bundle",
@@ -14803,9 +14804,9 @@
             ],
             "support": {
                 "issues": "https://github.com/willdurand/BazingaHateoasBundle/issues",
-                "source": "https://github.com/willdurand/BazingaHateoasBundle/tree/2.7.0"
+                "source": "https://github.com/willdurand/BazingaHateoasBundle/tree/3.0.1"
             },
-            "time": "2024-11-07T21:08:08+00:00"
+            "time": "2026-07-17T20:45:53+00:00"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
