@@ -5,6 +5,8 @@ namespace Tests\Wallabag\CoreBundle\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Helper\EntriesExport;
+use Wallabag\UserBundle\Entity\User;
 
 class ExportControllerTest extends WallabagCoreTestCase
 {
@@ -100,6 +102,60 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame('application/epub+zip', $headers->get('content-type'));
         $this->assertSame('attachment; filename="Archive articles.epub"', $headers->get('content-disposition'));
         $this->assertSame('binary', $headers->get('content-transfer-encoding'));
+    }
+
+    public function testEpubExportEscapesXmlSpecialCharacters()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
+        $user = $em->getRepository(User::class)->findOneByUserName('admin');
+
+        $entry = new Entry($user);
+        $entry->setUrl('http://example.com/article?foo=bar&baz=qux');
+        $entry->setTitle('D&D <test> article');
+        $entry->setContent('<p>valid content</p>');
+        $entry->setLanguage('en');
+        $entry->setDomainName('example.com');
+        $entry->setMimetype('text/html');
+        $entry->setCreatedAt(new \DateTimeImmutable());
+        $em->persist($entry);
+        $em->flush();
+
+        $response = $client->getContainer()
+            ->get(EntriesExport::class)
+            ->setEntries($entry)
+            ->updateTitle('entry')
+            ->updateAuthor('entry')
+            ->exportAs('epub');
+
+        $this->assertSame(200, $response->getStatusCode());
+
+        $epubFilename = tempnam(sys_get_temp_dir(), 'wallabag-epub-');
+        file_put_contents($epubFilename, $response->getContent());
+
+        $zip = new \ZipArchive();
+        $this->assertTrue($zip->open($epubFilename));
+
+        $opf = $zip->getFromName('OEBPS/book.opf');
+        $this->assertIsString($opf);
+        $this->assertXmlStringEqualsXmlString($opf, $opf);
+        $this->assertStringContainsString('D&amp;D &lt;test&gt; article', $opf);
+
+        $cover = $zip->getFromName('OEBPS/' . sha1($entry->getUrl() . ':' . $entry->getTitle()) . '_cover.html');
+        $this->assertIsString($cover);
+        $this->assertXmlStringEqualsXmlString($cover, $cover);
+        $this->assertStringContainsString('href="http://example.com/article?foo=bar&amp;baz=qux"', $cover);
+
+        $epub3Toc = $zip->getFromName('OEBPS/epub3toc.xhtml');
+        $this->assertIsString($epub3Toc);
+        $this->assertXmlStringEqualsXmlString($epub3Toc, $epub3Toc);
+
+        $zip->close();
+        unlink($epubFilename);
+
+        $em->remove($entry);
+        $em->flush();
     }
 
     public function testMobiExport()

@@ -157,7 +157,7 @@ class EntriesExport
          * Book metadata
          */
 
-        $book->setTitle($this->title);
+        $book->setTitle($this->escapeXml($this->title));
         // EPub specification requires BCP47-compliant languages, thus we replace _ with -
         $book->setLanguage(str_replace('_', '-', $this->language));
         $book->setDescription('Some articles saved on my wallabag');
@@ -168,7 +168,7 @@ class EntriesExport
         $book->setPublisher('wallabag', 'wallabag');
         // Strictly not needed as the book date defaults to time().
         $book->setDate(time());
-        $book->setSourceURL($this->wallabagUrl);
+        $book->setSourceURL($this->escapeXml($this->wallabagUrl));
 
         $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, 'PHP');
         $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, 'wallabag');
@@ -213,20 +213,20 @@ class EntriesExport
             $readingTime = $entry->getUserReadingTime();
 
             $titlepage = $content_start .
-                '<h1>' . $entry->getTitle() . '</h1>' .
+                '<h1>' . $this->escapeXml($entry->getTitle()) . '</h1>' .
                 '<dl>' .
-                '<dt>' . $this->translator->trans('entry.view.published_by') . '</dt><dd>' . $authors . '</dd>' .
-                '<dt>' . $this->translator->trans('entry.metadata.published_on') . '</dt><dd>' . $publishedDate . '</dd>' .
-                '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $readingTime]) . '</dd>' .
-                '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
-                '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
+                '<dt>' . $this->escapeXml($this->translator->trans('entry.view.published_by')) . '</dt><dd>' . $this->escapeXml($authors) . '</dd>' .
+                '<dt>' . $this->escapeXml($this->translator->trans('entry.metadata.published_on')) . '</dt><dd>' . $publishedDate . '</dd>' .
+                '<dt>' . $this->escapeXml($this->translator->trans('entry.metadata.reading_time')) . '</dt><dd>' . $this->escapeXml($this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $readingTime])) . '</dd>' .
+                '<dt>' . $this->escapeXml($this->translator->trans('entry.metadata.added_on')) . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
+                '<dt>' . $this->escapeXml($this->translator->trans('entry.metadata.address')) . '</dt><dd><a href="' . $this->escapeXml($entry->getUrl()) . '">' . $this->escapeXml($entry->getUrl()) . '</a></dd>' .
                 '</dl>' .
                 $bookEnd;
             $book->addChapter("Entry {$i} of {$entryCount}", "{$filename}_cover.html", $titlepage, true, EPub::EXTERNAL_REF_ADD);
             $chapter = $content_start . $entry->getContent() . $bookEnd;
 
             $entryIds[] = $entry->getId();
-            $book->addChapter($entry->getTitle(), "{$filename}.html", $chapter, true, EPub::EXTERNAL_REF_ADD);
+            $book->addChapter($this->escapeXml($entry->getTitle()), "{$filename}.html", $chapter, true, EPub::EXTERNAL_REF_ADD);
         }
 
         $book->addChapter('Notices', 'Cover2.html', $content_start . $this->getExportInformation('PHPePub') . $bookEnd);
@@ -245,6 +245,11 @@ class EntriesExport
                 'Content-Transfer-Encoding' => 'binary',
             ]
         );
+    }
+
+    private function escapeXml($value)
+    {
+        return htmlspecialchars($value ?? '', \ENT_XML1 | \ENT_COMPAT, 'UTF-8', false);
     }
 
     /**
