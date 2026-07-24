@@ -430,7 +430,7 @@ class Entry
     /**
      * Set content.
      *
-     * @param string $content
+     * @param string|null $content
      *
      * @return Entry
      */
@@ -444,7 +444,7 @@ class Entry
     /**
      * Get content.
      *
-     * @return string
+     * @return string|null
      */
     public function getContent()
     {

@@ -394,6 +394,17 @@ class EntryRestController extends WallabagRestController
      *             pattern="\w+",
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="detail",
+     *         in="query",
+     *         description="include content field if 'full'. 'full' by default for backward compatibility.",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string",
+     *             enum={"metadata", "full"},
+     *             default="full"
+     *         )
+     *     ),
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -404,8 +415,18 @@ class EntryRestController extends WallabagRestController
      */
     #[Route(path: '/api/entries/{entry}.{_format}', name: 'api_get_entry', methods: ['GET'], defaults: ['_format' => 'json'])]
     #[IsGranted('VIEW', subject: 'entry')]
-    public function getEntryAction(Entry $entry)
+    public function getEntryAction(Request $request, Entry $entry)
     {
+        $detail = strtolower($request->query->get('detail', 'full'));
+
+        if (!\in_array($detail, ['full', 'metadata'], true)) {
+            throw new BadRequestHttpException('Detail "' . $detail . '" parameter is wrong, allowed: full or metadata');
+        }
+
+        if ('metadata' === $detail) {
+            $entry->setContent(null);
+        }
+
         return $this->sendResponse($entry);
     }
 

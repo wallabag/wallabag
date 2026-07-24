@@ -281,7 +281,8 @@ class EntryRepository extends ServiceEntityRepository
      */
     public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full', $domainName = '', $isNotParsed = null, $httpStatus = null, $hasAnnotations = null)
     {
-        if (!\in_array(strtolower($detail), ['full', 'metadata'], true)) {
+        $detail = strtolower($detail);
+        if (!\in_array($detail, ['full', 'metadata'], true)) {
             throw new \Exception('Detail "' . $detail . '" parameter is wrong, allowed: full or metadata');
         }
 
