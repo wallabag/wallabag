@@ -281,11 +281,20 @@ class EntryRepository extends ServiceEntityRepository
      */
     public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full', $domainName = '', $isNotParsed = null, $httpStatus = null, $hasAnnotations = null)
     {
+        $detail = strtolower($detail);
+        if (!\in_array($detail, ['full', 'metadata'], true)) {
+            throw new \Exception('Detail "' . $detail . '" parameter is wrong, allowed: full or metadata');
+        }
+
         $qb = $this->createQueryBuilder('e')
             ->leftJoin('e.tags', 't')
             ->where('e.user = :userId')->setParameter('userId', $userId);
 
-        $this->applyDetail($qb, $detail);
+        if ('metadata' === $detail) {
+            $fieldNames = $this->getClassMetadata()->getFieldNames();
+            $fields = array_filter($fieldNames, static fn ($k) => 'content' !== $k);
+            $qb->select(\sprintf('partial e.{%s}', implode(',', $fields)));
+        }
 
         if (null !== $isArchived) {
             $qb->andWhere('e.isArchived = :isArchived')->setParameter('isArchived', (bool) $isArchived);
@@ -361,18 +370,6 @@ class EntryRepository extends ServiceEntityRepository
         $pagerAdapter = new DoctrineORMAdapter($qb, true, false);
 
         return new Pagerfanta($pagerAdapter);
-    }
-
-    public function findOneByIdAndUserId($id, $userId, $detail = 'full'): ?Entry
-    {
-        $qb = $this->createQueryBuilder('e')
-            ->leftJoin('e.tags', 't')
-            ->where('e.id = :id')->setParameter('id', $id)
-            ->andWhere('e.user = :userId')->setParameter('userId', $userId);
-
-        $this->applyDetail($qb, $detail);
-
-        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**
@@ -745,19 +742,6 @@ class EntryRepository extends ServiceEntityRepository
         $randomId = $ids[mt_rand(0, \count($ids) - 1)]['id'];
 
         return $this->find($randomId);
-    }
-
-    private function applyDetail(QueryBuilder $qb, string $detail): void
-    {
-        if (!\in_array(strtolower($detail), ['full', 'metadata'], true)) {
-            throw new \Exception('Detail "' . $detail . '" parameter is wrong, allowed: full or metadata');
-        }
-
-        if ('metadata' === strtolower($detail)) {
-            $fieldNames = $this->getClassMetadata()->getFieldNames();
-            $fields = array_filter($fieldNames, static fn ($k) => 'content' !== $k);
-            $qb->select(\sprintf('partial e.{%s}', implode(',', $fields)));
-        }
     }
 
     /**

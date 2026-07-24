@@ -414,21 +414,18 @@ class EntryRestController extends WallabagRestController
      * @return JsonResponse
      */
     #[Route(path: '/api/entries/{entry}.{_format}', name: 'api_get_entry', methods: ['GET'], defaults: ['_format' => 'json'])]
-    public function getEntryAction(Request $request, int $entry, EntryRepository $entryRepository)
+    #[IsGranted('VIEW', subject: 'entry')]
+    public function getEntryAction(Request $request, Entry $entry)
     {
         $detail = strtolower($request->query->get('detail', 'full'));
 
-        try {
-            $entry = $entryRepository->findOneByIdAndUserId($entry, $this->getUser()->getId(), $detail);
-        } catch (\Exception $e) {
-            throw new BadRequestHttpException($e->getMessage());
+        if (!\in_array($detail, ['full', 'metadata'], true)) {
+            throw new BadRequestHttpException('Detail "' . $detail . '" parameter is wrong, allowed: full or metadata');
         }
 
-        if (null === $entry) {
-            throw $this->createNotFoundException();
+        if ('metadata' === $detail) {
+            $entry->setContent(null);
         }
-
-        $this->denyAccessUnlessGranted('VIEW', $entry);
 
         return $this->sendResponse($entry);
     }
