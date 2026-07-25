@@ -1,1 +1,10 @@
-{}
+import: ievietot
+misc: dažādi
+matomo_enabled: Iespējot Matomo
+download_images_enabled: Saglabāt attēlus vietējā krātuvē
+export_csv: Iespējot CSV izgūšanu
+export_pdf: Iespējot PDF izgūšanu
+share_twitter: Iespējot X/Twitter kopīgošanu
+share_linkding: Iespējot Linkding kopīgošanu
+share_unmark: Iespējot Unmark.it kopīgošanu
+share_shaarli: Iespējot Shaarli kopīgošanu
