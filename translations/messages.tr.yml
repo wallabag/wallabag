@@ -751,3 +751,6 @@ ignore_origin_instance_rule:
     edit_ignore_origin_instance_rule: Mevcut bir orijinal kaynağı yok say kuralını düzenle
     new_ignore_origin_instance_rule: Genel orijinal kaynağı yok say kuralı oluştur
     page_title: Genel orijinal kaynağı yok say kuralları
+captcha:
+    label: Güvenlik denetimi
+    help: Resimde gösterilen karakterleri girin. Resmi yenilediğinizde önceki cevap geçersiz olur.
