@@ -151,7 +151,7 @@ abstract class WallabagImport extends AbstractImport
      */
     protected function parseAnnotation(Entry $entry, $importedAnnotation): ?Annotation
     {
-        if (!\is_array($importedAnnotation) || empty($importedAnnotation['text'])) {
+        if (!\is_array($importedAnnotation) || !\array_key_exists('text', $importedAnnotation)) {
             return null;
         }
 
@@ -160,6 +160,14 @@ abstract class WallabagImport extends AbstractImport
         $annotation->setText($importedAnnotation['text']);
         $annotation->setQuote($importedAnnotation['quote'] ?? '');
         $annotation->setRanges(\is_array($importedAnnotation['ranges'] ?? null) ? $importedAnnotation['ranges'] : []);
+
+        if (!empty($importedAnnotation['created_at'])) {
+            $annotation->setCreatedAt(new \DateTime($importedAnnotation['created_at']));
+        }
+
+        if (!empty($importedAnnotation['updated_at'])) {
+            $annotation->setUpdatedAt(new \DateTime($importedAnnotation['updated_at']));
+        }
 
         return $annotation;
     }

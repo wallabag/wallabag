@@ -89,9 +89,10 @@ class WallabagV2ImportTest extends TestCase
 
         $persistedEntry = null;
 
-        // the entry and its annotation must both be persisted
+        // the entry and its two valid annotations must be persisted
+        // (the third one, without any text key, is skipped)
         $this->em
-            ->expects($this->exactly(2))
+            ->expects($this->exactly(3))
             ->method('persist')
             ->willReturnCallback(static function ($entity) use (&$persistedEntry): void {
                 if ($entity instanceof Entry) {
@@ -107,7 +108,7 @@ class WallabagV2ImportTest extends TestCase
         $this->assertInstanceOf(Entry::class, $persistedEntry);
 
         $annotations = $persistedEntry->getAnnotations();
-        $this->assertCount(1, $annotations);
+        $this->assertCount(2, $annotations);
 
         $annotation = $annotations[0];
         $this->assertSame('my imported annotation', $annotation->getText());
@@ -115,6 +116,29 @@ class WallabagV2ImportTest extends TestCase
         $this->assertNotEmpty($annotation->getRanges());
         $this->assertSame($this->user, $annotation->getUser());
         $this->assertSame($persistedEntry, $annotation->getEntry());
+
+        // dates from the imported file are kept
+        $this->assertSame('2024-01-02T09:00:00+00:00', $annotation->getCreatedAt()->format(\DateTime::ATOM));
+        $this->assertSame('2024-01-03T18:30:00+00:00', $annotation->getUpdatedAt()->format(\DateTime::ATOM));
+
+        // a highlight without any note is a valid annotation
+        $emptyTextAnnotation = $annotations[1];
+        $this->assertSame('', $emptyTextAnnotation->getText());
+        $this->assertSame('a highlight without a note', $emptyTextAnnotation->getQuote());
+        $this->assertNotEmpty($emptyTextAnnotation->getRanges());
+
+        // without dates in the imported file, they are left to the entity lifecycle
+        $this->assertNull($emptyTextAnnotation->getCreatedAt());
+        $this->assertNull($emptyTextAnnotation->getUpdatedAt());
+
+        // which only fills the blanks and never overwrites imported dates
+        $annotation->timestamps();
+        $emptyTextAnnotation->timestamps();
+
+        $this->assertSame('2024-01-02T09:00:00+00:00', $annotation->getCreatedAt()->format(\DateTime::ATOM));
+        $this->assertSame('2024-01-03T18:30:00+00:00', $annotation->getUpdatedAt()->format(\DateTime::ATOM));
+        $this->assertNotNull($emptyTextAnnotation->getCreatedAt());
+        $this->assertNotNull($emptyTextAnnotation->getUpdatedAt());
     }
 
     public function testImportAndMarkAllAsRead(): void
