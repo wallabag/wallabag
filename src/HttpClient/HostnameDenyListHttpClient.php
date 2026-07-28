@@ -20,6 +20,7 @@ final class HostnameDenyListHttpClient implements HttpClientInterface, LoggerAwa
     use HttpClientTrait;
 
     private array $defaultOptions = self::OPTIONS_DEFAULTS;
+    private ?LoggerInterface $logger = null;
 
     public function __construct(
         private HttpClientInterface $client,
@@ -79,6 +80,8 @@ final class HostnameDenyListHttpClient implements HttpClientInterface, LoggerAwa
 
     public function setLogger(LoggerInterface $logger): void
     {
+        $this->logger = $logger;
+
         if ($this->client instanceof LoggerAwareInterface) {
             $this->client->setLogger($logger);
         }
@@ -195,6 +198,11 @@ final class HostnameDenyListHttpClient implements HttpClientInterface, LoggerAwa
         if (!\is_string($hostname) || null === $blockedHostname = $this->denyList->getBlockedHostname($hostname)) {
             return;
         }
+
+        $this->logger?->warning('Blocked HTTP request to denied hostname.', [
+            'url' => $url,
+            'hostname' => $blockedHostname,
+        ]);
 
         throw new TransportException(\sprintf('Host "%s" is blocked by WALLABAG_FETCH_BLOCKED_HOSTS.', $blockedHostname));
     }
