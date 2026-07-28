@@ -18,6 +18,18 @@ class JavaScriptOnlyLinkTest extends TestCase
         );
     }
 
+    /**
+     * @dataProvider anchors
+     */
+    public function testTwigAnchorsDoNotUseEmptyHashDestinations(string $path, string $anchor): void
+    {
+        self::assertDoesNotMatchRegularExpression(
+            '/\\bhref\\s*=\\s*(["\\\'])#\\1/i',
+            $anchor,
+            \sprintf('Fake fragment link in %s: %s', $path, $anchor)
+        );
+    }
+
     public function anchors(): iterable
     {
         $projectDirectory = \dirname(__DIR__, 3);
