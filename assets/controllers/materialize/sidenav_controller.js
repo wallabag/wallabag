@@ -9,7 +9,14 @@ export default class extends Controller {
   };
 
   connect() {
-    this.instance = M.Sidenav.init(this.element, { edge: this.edgeValue });
+    this.triggers = [...document.querySelectorAll('.sidenav-trigger')]
+      .filter((trigger) => trigger.dataset.target === this.element.id);
+    this.instance = M.Sidenav.init(this.element, {
+      edge: this.edgeValue,
+      onOpenStart: () => this.#setExpanded(true),
+      onCloseStart: () => this.#setExpanded(false),
+    });
+    this.#setExpanded(false);
   }
 
   close() {
@@ -20,5 +27,9 @@ export default class extends Controller {
 
   disconnect() {
     this.instance.destroy();
+  }
+
+  #setExpanded(expanded) {
+    this.triggers.forEach((trigger) => trigger.setAttribute('aria-expanded', expanded.toString()));
   }
 }
