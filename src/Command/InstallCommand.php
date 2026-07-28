@@ -82,6 +82,8 @@ class InstallCommand extends Command
             $this->setupDevFixtures();
         }
 
+        $this->clearCache();
+
         $this->io->success('wallabag has been successfully installed.');
         $this->io->success('You can now configure your web server, see https://doc.wallabag.org');
 
@@ -90,7 +92,7 @@ class InstallCommand extends Command
 
     private function setupDevFixtures(): void
     {
-        if ('dev' !== $this->environment) {
+        if (!\in_array($this->environment, ['dev', 'test'], true)) {
             return;
         }
 
@@ -105,6 +107,13 @@ class InstallCommand extends Command
         $this->runCommand('doctrine:fixtures:load', ['--append' => true, '--no-interaction' => true]);
 
         $this->io->text('<info>Dev fixtures successfully loaded.</info>');
+    }
+
+    private function clearCache(): void
+    {
+        $this->io->text('Clearing the cache...');
+        $this->runCommand('cache:clear');
+        $this->io->newLine();
     }
 
     private function checkRequirements()
@@ -227,7 +236,7 @@ class InstallCommand extends Command
 
         // user want to reset everything? Don't care about what is already here
         if (true === $this->defaultInput->getOption('reset')) {
-            $this->io->text('Dropping database, creating database and schema, clearing the cache');
+            $this->io->text('Dropping database, creating database and schema');
 
             $this->runCommand('doctrine:schema:drop', ['--force' => true, '--full-database' => true]);
 
@@ -238,7 +247,6 @@ class InstallCommand extends Command
 
             $this
                 ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
-                ->runCommand('cache:clear')
             ;
 
             $this->io->newLine();
@@ -247,12 +255,11 @@ class InstallCommand extends Command
         }
 
         if (!$this->isDatabasePresent()) {
-            $this->io->text('Creating database and schema, clearing the cache');
+            $this->io->text('Creating database and schema');
 
             $this
                 ->runCommand('doctrine:database:create')
                 ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
-                ->runCommand('cache:clear')
             ;
 
             $this->io->newLine();
@@ -287,9 +294,6 @@ class InstallCommand extends Command
                 ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
             ;
         }
-
-        $this->io->text('Clearing the cache...');
-        $this->runCommand('cache:clear');
 
         $this->io->newLine();
         $this->io->text('<info>Database successfully setup.</info>');

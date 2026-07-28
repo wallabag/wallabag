@@ -132,6 +132,7 @@ class InstallCommandTest extends WallabagKernelTestCase
             'username_' . uniqid('', true), // username
             'password_' . uniqid('', true), // password
             'email_' . uniqid('', true) . '@wallabag.it', // email
+            'n', // don't load dev fixtures
         ]);
         $tester->execute([]);
 
@@ -139,6 +140,33 @@ class InstallCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('Setting up database.', $tester->getDisplay());
         $this->assertStringContainsString('Administration setup.', $tester->getDisplay());
         $this->assertStringContainsString('Config setup.', $tester->getDisplay());
+    }
+
+    public function testRunInstallCommandLoadsDevFixturesBeforeClearingCache(): void
+    {
+        $this->setupDatabase();
+
+        $command = $this->getCommand();
+
+        $tester = new CommandTester($command);
+        $tester->setInputs([
+            'y', // dropping database
+            'y', // create super admin
+            'username_' . uniqid('', true), // username
+            'password_' . uniqid('', true), // password
+            'email_' . uniqid('', true) . '@wallabag.it', // email
+            'y', // load dev fixtures
+        ]);
+        $tester->execute([]);
+
+        $display = $tester->getDisplay();
+        $fixturesLoadedPosition = strpos($display, 'Dev fixtures successfully loaded.');
+        $cacheClearPosition = strpos($display, 'Clearing the cache...');
+
+        $this->assertNotFalse($fixturesLoadedPosition);
+        $this->assertNotFalse($cacheClearPosition);
+        $this->assertLessThan($cacheClearPosition, $fixturesLoadedPosition);
+        $this->assertStringContainsString('wallabag has been successfully installed.', $display);
     }
 
     public function testRunInstallCommandWithReset(): void
@@ -153,6 +181,7 @@ class InstallCommandTest extends WallabagKernelTestCase
             'username_' . uniqid('', true), // username
             'password_' . uniqid('', true), // password
             'email_' . uniqid('', true) . '@wallabag.it', // email
+            'n', // don't load dev fixtures
         ]);
         $tester->execute([
             '--reset' => true,
@@ -160,12 +189,12 @@ class InstallCommandTest extends WallabagKernelTestCase
 
         $this->assertStringContainsString('Checking system requirements.', $tester->getDisplay());
         $this->assertStringContainsString('Setting up database.', $tester->getDisplay());
-        $this->assertStringContainsString('Dropping database, creating database and schema, clearing the cache', $tester->getDisplay());
+        $this->assertStringContainsString('Dropping database, creating database and schema', $tester->getDisplay());
         $this->assertStringContainsString('Administration setup.', $tester->getDisplay());
         $this->assertStringContainsString('Config setup.', $tester->getDisplay());
 
         // we force to reset everything
-        $this->assertStringContainsString('Dropping database, creating database and schema, clearing the cache', $tester->getDisplay());
+        $this->assertStringContainsString('Dropping database, creating database and schema', $tester->getDisplay());
     }
 
     public function testRunInstallCommandWithNonExistingDatabase(): void
@@ -188,6 +217,7 @@ class InstallCommandTest extends WallabagKernelTestCase
             'username_' . uniqid('', true), // username
             'password_' . uniqid('', true), // password
             'email_' . uniqid('', true) . '@wallabag.it', // email
+            'n', // don't load dev fixtures
         ]);
         $tester->execute([]);
 
@@ -197,7 +227,7 @@ class InstallCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('Config setup.', $tester->getDisplay());
 
         // the current database doesn't already exist
-        $this->assertStringContainsString('Creating database and schema, clearing the cache', $tester->getDisplay());
+        $this->assertStringContainsString('Creating database and schema', $tester->getDisplay());
     }
 
     public function testRunInstallCommandChooseResetSchema(): void
