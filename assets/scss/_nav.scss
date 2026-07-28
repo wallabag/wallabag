@@ -181,10 +181,13 @@ nav {
     padding-right: 15px;
   }
 
-  li > a {
+  li > a,
+  li > button {
     display: flex;
     padding: 14px 10px;
     align-items: center;
+    width: 100%;
+    text-align: left;
     white-space: initial;
   }
 }
