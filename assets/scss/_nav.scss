@@ -160,8 +160,11 @@ nav {
   }
 }
 
-.nav-form-button,
-.nav-panel-item .close {
+.nav-panel-item .nav-panel-close {
+  padding: 0;
+}
+
+.nav-form-button {
   margin: 0 1%;
 }
 
