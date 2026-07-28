@@ -371,8 +371,8 @@
         </article>
 
         <div class="fixed-action-btn hide-on-large-only" data-controller="materialize--fab" data-action="scroll@window->materialize--fab#autoDisplay click->materialize--fab#click">
-            <button type="button" class="btn-floating btn-large" data-toggle="actions">
-              <i class="material-icons">menu</i>
+            <button type="button" class="btn-floating btn-large" data-toggle="actions" aria-label="{{ 'entry.view.left_menu.toggle_actions'|trans }}">
+              <i class="material-icons" aria-hidden="true">menu</i>
             </button>
             <ul>
                 {% if is_granted('ARCHIVE', entry) %}

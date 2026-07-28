@@ -307,6 +307,7 @@ entry:
             theme_toggle_light: Light
             theme_toggle_dark: Dark
             theme_toggle_auto: Automatic
+            toggle_actions: Toggle actions
             problem:
                 label: Problems?
                 description: Does this article appear wrong?
