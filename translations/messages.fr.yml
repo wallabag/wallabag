@@ -40,6 +40,7 @@ menu:
         theme_toggle_auto: "Thème automatique"
     top:
         add_new_entry: Sauvegarder un nouvel article
+        open_menu: Ouvrir le menu
         search: Rechercher
         filter_entries: Filtrer les articles
         random_entry: Aller à un article aléatoire de cette liste
