@@ -7,3 +7,4 @@ validator:
     quote_length_too_high: Alıntı çok uzun. En fazla {{ limit }} karakter olmalıdır.
     item_per_page_too_low: Bu değer 1'den büyük veya 1'e eşit olmalıdır.
     feed_limit_too_low: Bu değer 1'den büyük veya 1'e eşit olmalıdır.
+    captcha_invalid: Güvenlik kodu geçersiz veya süresi doldu. Lütfen tekrar deneyin.
