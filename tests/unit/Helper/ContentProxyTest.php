@@ -100,6 +100,31 @@ class ContentProxyTest extends TestCase
         $this->assertTrue($entry->isNotParsed());
     }
 
+    public function testWithGrabyExceptionStoresFetchingErrorMessage(): void
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $graby = $this->getMockBuilder(Graby::class)
+            ->onlyMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $graby->expects($this->once())
+            ->method('fetchContent')
+            ->willThrowException(new \RuntimeException('transport failed'));
+
+        $handler = new TestHandler();
+        $logger = new Logger('test', [$handler]);
+        $proxy = new ContentProxy($graby, $tagger, $this->getRuleBasedIgnoreOriginProcessorMock(), $this->getValidator(), $logger, $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'https://example.com/article');
+
+        $this->assertSame($this->fetchingErrorMessage, $entry->getContent());
+        $this->assertTrue($entry->isNotParsed());
+        $this->assertTrue($handler->hasWarningThatContains('Error while fetching entry content.'));
+    }
+
     public function testWithEmptyContentButOG(): void
     {
         $tagger = $this->getTaggerMock();

@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\Container;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
 use Wallabag\Helper\ContentProxy;
+use Wallabag\HttpClient\HostnameDenyList;
 
 class EntryRestControllerTest extends WallabagApiTestCase
 {
@@ -833,6 +834,32 @@ class EntryRestControllerTest extends WallabagApiTestCase
             $this->assertSame('www.example.com', $content['title']);
         } finally {
             // Remove the created entry to avoid side effects on other tests
+            if (isset($content['id'])) {
+                $em = $this->client->getContainer()->get(EntityManagerInterface::class);
+                $entry = $em->getReference(Entry::class, $content['id']);
+                $em->remove($entry);
+                $em->flush();
+            }
+        }
+    }
+
+    public function testPostEntryWithBlockedHostnameStoresFetchingErrorMessage(): void
+    {
+        /** @var Container $container */
+        $container = $this->client->getContainer();
+        $container->set(HostnameDenyList::class, new HostnameDenyList(['medium.com']));
+
+        try {
+            $this->client->request('POST', '/api/entries.json', [
+                'url' => 'https://medium.com/article',
+            ]);
+
+            $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+            $content = json_decode($this->client->getResponse()->getContent(), true);
+            $this->assertSame($container->getParameter('wallabag.fetching_error_message'), $content['content']);
+            $entry = $container->get(EntityManagerInterface::class)->getReference(Entry::class, $content['id']);
+            $this->assertTrue($entry->isNotParsed());
+        } finally {
             if (isset($content['id'])) {
                 $em = $this->client->getContainer()->get(EntityManagerInterface::class);
                 $entry = $em->getReference(Entry::class, $content['id']);
