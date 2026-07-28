@@ -2,6 +2,8 @@
 
 namespace Wallabag\Tests\Unit\HttpClient;
 
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpClient\Exception\TransportException;
@@ -30,6 +32,24 @@ class HostnameDenyListHttpClientTest extends TestCase
         }
 
         $this->assertSame(0, $innerClient->getRequestsCount());
+    }
+
+    public function testBlockedInitialRequestIsLogged(): void
+    {
+        $innerClient = new MockHttpClient();
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['example.com']));
+        $handler = new TestHandler();
+        $client->setLogger(new Logger('test', [$handler]));
+
+        try {
+            $client->request('GET', 'https://example.com/private');
+            $this->fail('The blocked request should throw a transport exception.');
+        } catch (TransportException) {
+        }
+
+        $this->assertTrue($handler->hasWarningThatContains('Blocked HTTP request to denied hostname.'));
+        $this->assertSame('https://example.com/private', $handler->getRecords()[0]['context']['url']);
+        $this->assertSame('example.com', $handler->getRecords()[0]['context']['hostname']);
     }
 
     public function testUrlPortsAreIgnoredWhenMatching(): void
@@ -83,6 +103,8 @@ class HostnameDenyListHttpClientTest extends TestCase
             new MockResponse('must not be requested'),
         ]);
         $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+        $handler = new TestHandler();
+        $client->setLogger(new Logger('test', [$handler]));
 
         $response = $client->request('GET', 'https://allowed.example/start');
 
@@ -96,6 +118,9 @@ class HostnameDenyListHttpClientTest extends TestCase
         }
 
         $this->assertSame(1, $innerClient->getRequestsCount());
+        $this->assertTrue($handler->hasWarningThatContains('Blocked HTTP request to denied hostname.'));
+        $this->assertSame('https://blocked.example/secret', $handler->getRecords()[0]['context']['url']);
+        $this->assertSame('blocked.example', $handler->getRecords()[0]['context']['hostname']);
     }
 
     public function testActivePolicyDoesNotConsumeTheResponseDuringRequest(): void
