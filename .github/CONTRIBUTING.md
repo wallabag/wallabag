@@ -20,7 +20,9 @@ PORT=8001 make dev-docker-up
 
 Wallabag is then available on `http://127.0.0.1:8001`.
 
-Compose normally derives its project name from the worktree directory. If that is not enough to isolate project resources, set `COMPOSE_PROJECT_NAME` explicitly alongside a unique port:
+Compose also derives the session, remember-me, and trusted-device cookie names from the selected port. This keeps logins independent when multiple stacks share `127.0.0.1`. Existing Docker development sessions require one new login after this change because their cookie names have changed.
+
+Compose normally derives its project name from the worktree directory and uses it to isolate containers, networks, and volumes. If that is not enough to isolate project resources, set `COMPOSE_PROJECT_NAME` explicitly alongside a unique port:
 
 ```console
 COMPOSE_PROJECT_NAME=wallabag-master PORT=8000 make dev-docker-up
@@ -36,7 +38,7 @@ You'll then have:
 - a Redis database (to handle imports)
 - a SQLite database to store articles
 
-You can now access your wallabag instance using that url: `http://127.0.0.1:8000`
+You can now access your wallabag instance at `http://127.0.0.1:8000`, or at the port selected with `PORT`.
 
 If you want to test using an other database than SQLite, uncomment the `postgres` or `mariadb` code from the `compose.yaml` file at the root of the repo, uncomment the matching `depends_on` line in the `php` section, set `DATABASE_URL` in `.env.local`, and set the test database URL separately in `.env.test.local`.
 

@@ -7,6 +7,9 @@ services:
             target: default
         environment:
             WALLABAG_BASE_URL: "${WALLABAG_BASE_URL:-http://127.0.0.1:${PORT:-8000}}"
+            WALLABAG_SESSION_COOKIE_NAME: "PHPSESSID_${PORT:-8000}"
+            WALLABAG_REMEMBER_ME_COOKIE_NAME: "REMEMBERME_${PORT:-8000}"
+            WALLABAG_TRUSTED_DEVICE_COOKIE_NAME: "wllbg_trusted_computer_${PORT:-8000}"
         volumes:
             - .:/var/www/html
             # Volumes for data-related folders
