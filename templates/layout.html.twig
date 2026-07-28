@@ -101,8 +101,8 @@
                     </li>
                     {% block nav_panel_extra_actions '' %}
                     <li class="bold">
-                        <button type="button" class="waves-effect dropdown-trigger" data-controller="materialize--dropdown materialize--tooltip" data-target="dropdown-account" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.account'|trans }}" id="news_menu">
-                            <i class="material-icons" id="news_link">account_circle</i>
+                        <button type="button" class="waves-effect dropdown-trigger" data-controller="materialize--dropdown materialize--tooltip" data-target="dropdown-account" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.account'|trans }}" id="news_menu" aria-label="{{ 'menu.top.account'|trans }}">
+                            <i class="material-icons" id="news_link" aria-hidden="true">account_circle</i>
                         </button>
                     </li>
                 </ul>
