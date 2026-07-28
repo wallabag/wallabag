@@ -3,10 +3,12 @@ import M from '@materializecss/materialize';
 
 export default class extends Controller {
   connect() {
+    this.trigger = this.element.querySelector('[data-toggle="actions"]');
     this.instance = M.FloatingActionButton.init(this.element, {
       direction: 'left',
       hoverEnabled: false,
     });
+    this.#syncExpanded();
   }
 
   autoDisplay() {
@@ -19,13 +21,20 @@ export default class extends Controller {
       this.toggleScroll = false;
       this.instance.close();
     }
+
+    this.#syncExpanded();
   }
 
   click() {
     this.dispatch('click');
+    requestAnimationFrame(() => this.#syncExpanded());
   }
 
   disconnect() {
     this.instance.destroy();
+  }
+
+  #syncExpanded() {
+    this.trigger.setAttribute('aria-expanded', this.instance.isOpen.toString());
   }
 }

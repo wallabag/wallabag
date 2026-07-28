@@ -371,10 +371,10 @@
         </article>
 
         <div class="fixed-action-btn hide-on-large-only" data-controller="materialize--fab" data-action="scroll@window->materialize--fab#autoDisplay click->materialize--fab#click">
-            <button type="button" class="btn-floating btn-large" data-toggle="actions" aria-label="{{ 'entry.view.left_menu.toggle_actions'|trans }}">
+            <button type="button" class="btn-floating btn-large" data-toggle="actions" aria-label="{{ 'entry.view.left_menu.toggle_actions'|trans }}" aria-controls="reader-mobile-actions" aria-expanded="false">
               <i class="material-icons" aria-hidden="true">menu</i>
             </button>
-            <ul>
+            <ul id="reader-mobile-actions">
                 {% if is_granted('ARCHIVE', entry) %}
                     <li>
                       <form action="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
