@@ -263,10 +263,10 @@
 
         {% if is_granted('EXPORT', entry) %}
             <li class="bold">
-                <a class="waves-effect collapsible-header">
+                <button type="button" class="waves-effect collapsible-header">
                     <i class="material-icons small">file_download</i>
                     <span>{{ 'entry.view.left_menu.export'|trans }}</span>
-                </a>
+                </button>
                 <div class="collapsible-body">
                     <ul>
                         {% if craue_setting('export_epub') %}<li><a href="{{ path('export_entry', {entry: entry.id, 'format': 'epub'}) }}" title="Generate ePub file">EPUB</a></li>{% endif %}
