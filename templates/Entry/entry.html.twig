@@ -244,10 +244,10 @@
 
         {% if craue_setting('show_printlink') %}
         <li class="bold border-bottom hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.print'|trans }}" href="javascript: window.print();">
+            <button type="button" class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.print'|trans }}" onclick="window.print();">
                 <i class="material-icons small">print</i>
                 <span>{{ 'entry.view.left_menu.print'|trans }}</span>
-            </a>
+            </button>
             <div class="collapsible-body"></div>
         </li>
         {% endif %}
