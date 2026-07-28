@@ -137,11 +137,11 @@
         </li>
 
         <li class="bold">
-            <button type="button" class="waves-effect collapsible-header">
+            <button type="button" class="waves-effect collapsible-header" aria-controls="reader-theme-options" aria-expanded="false">
                 <i class="material-icons small">brightness_medium</i>
                 <span>{{ 'entry.view.left_menu.theme_toggle'|trans }}</span>
             </button>
-            <ul class="collapsible-body">
+            <ul id="reader-theme-options" class="collapsible-body">
                 <li>
                     <button type="button" data-action="click->dark-theme#useLight">
                         <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
@@ -164,11 +164,11 @@
         </li>
         {% if craue_setting('share_public') or craue_setting('share_twitter') or craue_setting('share_shaarli') or craue_setting('share_diaspora') or craue_setting('share_unmark') or craue_setting('share_linkding') or craue_setting('share_mail') %}
         <li class="bold">
-            <button type="button" class="waves-effect collapsible-header">
+            <button type="button" class="waves-effect collapsible-header" aria-controls="reader-share-options" aria-expanded="false">
                 <i class="material-icons small">share</i>
                 <span>{{ 'entry.view.left_menu.share_content'|trans }}</span>
             </button>
-            <div class="collapsible-body">
+            <div id="reader-share-options" class="collapsible-body">
                 <ul>
                     {% if craue_setting('share_public') %}
                         {% if is_granted('SHARE', entry) %}
@@ -263,11 +263,11 @@
 
         {% if is_granted('EXPORT', entry) %}
             <li class="bold">
-                <button type="button" class="waves-effect collapsible-header">
+                <button type="button" class="waves-effect collapsible-header" aria-controls="reader-export-options" aria-expanded="false">
                     <i class="material-icons small">file_download</i>
                     <span>{{ 'entry.view.left_menu.export'|trans }}</span>
                 </button>
-                <div class="collapsible-body">
+                <div id="reader-export-options" class="collapsible-body">
                     <ul>
                         {% if craue_setting('export_epub') %}<li><a href="{{ path('export_entry', {entry: entry.id, 'format': 'epub'}) }}" title="Generate ePub file">EPUB</a></li>{% endif %}
                         {% if craue_setting('export_pdf') %}<li><a href="{{ path('export_entry', {entry: entry.id, 'format': 'pdf'}) }}" title="Generate PDF file">PDF</a></li>{% endif %}
