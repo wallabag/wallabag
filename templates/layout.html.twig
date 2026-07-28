@@ -95,8 +95,8 @@
                         </a>
                     </li>
                     <li>
-                        <button type="button" class="waves-effect" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.search'|trans }}" data-action="topbar#showSearch:stop" data-shortcuts-target="showSearch">
-                            <i class="material-icons">search</i>
+                        <button type="button" class="waves-effect" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.search'|trans }}" data-action="topbar#showSearch:stop" data-shortcuts-target="showSearch" aria-label="{{ 'menu.top.search'|trans }}">
+                            <i class="material-icons" aria-hidden="true">search</i>
                         </button>
                     </li>
                     {% block nav_panel_extra_actions '' %}
