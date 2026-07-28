@@ -1,7 +1,14 @@
 imports:
     - { resource: config.yml }
 
+parameters:
+    env(WALLABAG_SESSION_COOKIE_NAME): PHPSESSID
+    env(WALLABAG_REMEMBER_ME_COOKIE_NAME): REMEMBERME
+    env(WALLABAG_TRUSTED_DEVICE_COOKIE_NAME): wllbg_trusted_computer
+
 framework:
+    session:
+        name: "%env(WALLABAG_SESSION_COOKIE_NAME)%"
     router:
         resource: "%kernel.project_dir%/app/config/routing_dev.yml"
         strict_requirements: true
@@ -11,6 +18,16 @@ framework:
     mailer:
         # see https://mailcatcher.me/
         dsn: smtp://127.0.0.1:1025
+
+security:
+    firewalls:
+        main:
+            remember_me:
+                name: "%env(WALLABAG_REMEMBER_ME_COOKIE_NAME)%"
+
+scheb_two_factor:
+    trusted_device:
+        cookie_name: "%env(WALLABAG_TRUSTED_DEVICE_COOKIE_NAME)%"
 
 web_profiler:
     toolbar: true
