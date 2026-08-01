@@ -19,16 +19,19 @@ export default class extends Controller {
   useLight() {
     this.element.classList.remove('dark-theme');
     document.cookie = 'theme=light;samesite=Lax;path=/;max-age=31536000';
+    this.#select('light');
   }
 
   useDark() {
     this.element.classList.add('dark-theme');
     document.cookie = 'theme=dark;samesite=Lax;path=/;max-age=31536000';
+    this.#select('dark');
   }
 
   useAuto() {
     document.cookie = 'theme=auto;samesite=Lax;path=/;max-age=0';
     this.#choose();
+    this.#select('auto');
   }
 
   #choose() {
