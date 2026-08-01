@@ -7,7 +7,10 @@ export default class extends Controller {
       hover: false,
       coverTrigger: false,
       constrainWidth: false,
+      onOpenStart: () => this.element.setAttribute('aria-expanded', 'true'),
+      onCloseStart: () => this.element.setAttribute('aria-expanded', 'false'),
     });
+    this.element.setAttribute('aria-expanded', 'false');
   }
 
   disconnect() {
