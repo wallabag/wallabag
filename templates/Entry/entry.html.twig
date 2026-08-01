@@ -130,7 +130,7 @@
 
         <li class="bold border-bottom">
             <button type="button" class="waves-effect collapsible-header" id="nav-btn-add-tag" data-action="click->materialize--sidenav#close click->leftbar#toggleAddTagForm">
-                <i class="material-icons small">label_outline</i>
+                <i class="material-icons small" aria-hidden="true">label_outline</i>
                 <span>{{ 'entry.view.left_menu.add_a_tag'|trans }}</span>
             </button>
             <div class="collapsible-body"></div>
@@ -138,25 +138,25 @@
 
         <li class="bold">
             <button type="button" class="waves-effect collapsible-header">
-                <i class="material-icons small">brightness_medium</i>
+                <i class="material-icons small" aria-hidden="true">brightness_medium</i>
                 <span>{{ 'entry.view.left_menu.theme_toggle'|trans }}</span>
             </button>
             <ul class="collapsible-body">
                 <li>
                     <button type="button" data-action="click->dark-theme#useLight">
-                        <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
+                        <i class="theme-toggle-icon material-icons tiny" aria-hidden="true">brightness_high</i>
                         <span>{{ 'entry.view.left_menu.theme_toggle_light'|trans }}</span>
                     </button>
                 </li>
                 <li>
                     <button type="button" data-action="click->dark-theme#useDark">
-                        <i class="theme-toggle-icon material-icons tiny">brightness_low</i>
+                        <i class="theme-toggle-icon material-icons tiny" aria-hidden="true">brightness_low</i>
                         <span>{{ 'entry.view.left_menu.theme_toggle_dark'|trans }}</span>
                     </button>
                 </li>
                 <li>
                     <button type="button" data-action="click->dark-theme#useAuto">
-                        <i class="theme-toggle-icon material-icons tiny">brightness_auto</i>
+                        <i class="theme-toggle-icon material-icons tiny" aria-hidden="true">brightness_auto</i>
                         <span>{{ 'entry.view.left_menu.theme_toggle_auto'|trans }}</span>
                     </button>
                 </li>
@@ -165,7 +165,7 @@
         {% if craue_setting('share_public') or craue_setting('share_twitter') or craue_setting('share_shaarli') or craue_setting('share_diaspora') or craue_setting('share_unmark') or craue_setting('share_linkding') or craue_setting('share_mail') %}
         <li class="bold">
             <button type="button" class="waves-effect collapsible-header">
-                <i class="material-icons small">share</i>
+                <i class="material-icons small" aria-hidden="true">share</i>
                 <span>{{ 'entry.view.left_menu.share_content'|trans }}</span>
             </button>
             <div class="collapsible-body">
@@ -245,7 +245,7 @@
         {% if craue_setting('show_printlink') %}
         <li class="bold border-bottom hide-on-med-and-down">
             <button type="button" class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.print'|trans }}" onclick="window.print();">
-                <i class="material-icons small">print</i>
+                <i class="material-icons small" aria-hidden="true">print</i>
                 <span>{{ 'entry.view.left_menu.print'|trans }}</span>
             </button>
             <div class="collapsible-body"></div>
@@ -264,7 +264,7 @@
         {% if is_granted('EXPORT', entry) %}
             <li class="bold">
                 <button type="button" class="waves-effect collapsible-header">
-                    <i class="material-icons small">file_download</i>
+                    <i class="material-icons small" aria-hidden="true">file_download</i>
                     <span>{{ 'entry.view.left_menu.export'|trans }}</span>
                 </button>
                 <div class="collapsible-body">
@@ -371,8 +371,8 @@
         </article>
 
         <div class="fixed-action-btn hide-on-large-only" data-controller="materialize--fab" data-action="scroll@window->materialize--fab#autoDisplay click->materialize--fab#click">
-            <button type="button" class="btn-floating btn-large" data-toggle="actions">
-              <i class="material-icons">menu</i>
+            <button type="button" class="btn-floating btn-large" data-toggle="actions" aria-label="{{ 'entry.view.left_menu.toggle_actions'|trans }}">
+              <i class="material-icons" aria-hidden="true">menu</i>
             </button>
             <ul>
                 {% if is_granted('ARCHIVE', entry) %}
