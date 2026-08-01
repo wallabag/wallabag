@@ -112,7 +112,7 @@ export default class extends Controller {
         return false;
       }
 
-      if (e.defaultPrevented || element.closest('a, button, input, select, textarea')) {
+      if (e.defaultPrevented || element.closest('a, button, input, select, textarea, [contenteditable="true"], .dropdown-content')) {
         return true;
       }
 
