@@ -17,6 +17,8 @@ export default class extends Controller {
       onCloseStart: () => this.#setExpanded(false),
     });
     this.#setExpanded(false);
+    this.keydownHandler = this.#handleKeydown.bind(this);
+    document.addEventListener('keydown', this.keydownHandler);
   }
 
   close() {
@@ -26,7 +28,18 @@ export default class extends Controller {
   }
 
   disconnect() {
+    document.removeEventListener('keydown', this.keydownHandler);
     this.instance.destroy();
+  }
+
+  #handleKeydown(event) {
+    if (event.key !== 'Escape' || !this.instance.isOpen || (this.instance.isFixed && window.innerWidth >= mobileMaxWidth)) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    this.instance.close();
   }
 
   #setExpanded(expanded) {
