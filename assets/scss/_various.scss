@@ -56,3 +56,13 @@ nav .input-field input {
   font: inherit;
   line-height: inherit;
 }
+
+.dropdown-content button[data-dark-theme-target][aria-pressed="true"],
+.sidenav button[data-dark-theme-target][aria-pressed="true"] {
+  color: variables.$blue-accent-color;
+  font-weight: bold;
+
+  > i {
+    color: inherit;
+  }
+}
