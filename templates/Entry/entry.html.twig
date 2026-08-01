@@ -129,7 +129,7 @@
         {% endif %}
 
         <li class="bold border-bottom">
-            <button type="button" class="waves-effect collapsible-header" id="nav-btn-add-tag" data-action="click->materialize--sidenav#close click->leftbar#toggleAddTagForm">
+            <button type="button" class="waves-effect collapsible-header" id="nav-btn-add-tag" data-action="click->materialize--sidenav#close click->leftbar#toggleAddTagForm" aria-controls="entry-add-tag" aria-expanded="false">
                 <i class="material-icons small" aria-hidden="true">label_outline</i>
                 <span>{{ 'entry.view.left_menu.add_a_tag'|trans }}</span>
             </button>
@@ -352,7 +352,7 @@
             </div>
 
             {% if is_granted('TAG', entry) %}
-                <div class="input-field hidden" data-controller="add-tag" data-action="leftbar:toggleAddTagForm@window->add-tag#toggle">
+                <div id="entry-add-tag" class="input-field hidden" data-controller="add-tag" data-action="leftbar:toggleAddTagForm@window->add-tag#toggle">
                     {{ render(controller('Wallabag\\Controller\\TagController::addTagFormAction', {'id': entry.id})) }}
                 </div>
             {% endif %}
