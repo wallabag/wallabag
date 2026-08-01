@@ -61,6 +61,11 @@ button.disabled {
   cursor: default;
 }
 
+button:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
+}
+
 .config-help {
   font: inherit;
   line-height: inherit;
