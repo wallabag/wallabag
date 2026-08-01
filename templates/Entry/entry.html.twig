@@ -371,9 +371,9 @@
         </article>
 
         <div class="fixed-action-btn hide-on-large-only" data-controller="materialize--fab" data-action="scroll@window->materialize--fab#autoDisplay click->materialize--fab#click">
-            <a class="btn-floating btn-large" data-toggle="actions">
+            <button type="button" class="btn-floating btn-large" data-toggle="actions">
               <i class="material-icons">menu</i>
-            </a>
+            </button>
             <ul>
                 {% if is_granted('ARCHIVE', entry) %}
                     <li>
