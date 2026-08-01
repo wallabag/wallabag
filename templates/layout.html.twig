@@ -134,22 +134,22 @@
                         <li class="divider"></li>
                     {% endif %}
                     <li>
-                        <a href="#" data-action="click->dark-theme#useLight:prevent">
+                        <button type="button" data-action="click->dark-theme#useLight">
                             <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
                             <span>{{ 'menu.left.theme_toggle_light'|trans }}</span>
-                        </a>
+                        </button>
                     </li>
                     <li>
-                        <a href="#" data-action="click->dark-theme#useDark:prevent">
+                        <button type="button" data-action="click->dark-theme#useDark">
                             <i class="theme-toggle-icon material-icons tiny">brightness_low</i>
                             <span>{{ 'menu.left.theme_toggle_dark'|trans }}</span>
-                        </a>
+                        </button>
                     </li>
                     <li>
-                        <a href="#" data-action="click->dark-theme#useAuto:prevent">
+                        <button type="button" data-action="click->dark-theme#useAuto">
                             <i class="theme-toggle-icon material-icons tiny">brightness_auto</i>
                             <span>{{ 'menu.left.theme_toggle_auto'|trans }}</span>
-                        </a>
+                        </button>
                     </li>
                     <li class="divider"></li>
                     <li><a href="{{ path('howto') }}"><i class="material-icons">live_help</i> {{ 'menu.left.howto'|trans }}</a></li>
