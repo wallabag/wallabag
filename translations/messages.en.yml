@@ -43,6 +43,7 @@ menu:
         theme_toggle_auto: "Automatic theme"
     top:
         add_new_entry: Add a new entry
+        close: Close
         open_menu: Open menu
         search: Search
         filter_entries: Filter entries
