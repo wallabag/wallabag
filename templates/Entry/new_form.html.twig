@@ -1,4 +1,4 @@
-<form class="input-field nav-panel-item nav-panel-add" style="display: none" name="entry" method="post" action="{{ path('new_entry') }}" data-topbar-target="addUrl" data-action="topbar#submittingUrl">
+<form id="nav-panel-add" class="input-field nav-panel-item nav-panel-add" style="display: none" name="entry" method="post" action="{{ path('new_entry') }}" data-topbar-target="addUrl" data-action="topbar#submittingUrl">
     {% if form_errors(form) %}
         <span class="black-text">{{ form_errors(form) }}</span>
     {% endif %}
