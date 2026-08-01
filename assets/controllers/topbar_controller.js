@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-  static targets = ['addUrl', 'addUrlInput', 'search', 'searchInput', 'actions'];
+  static targets = ['addUrl', 'addUrlInput', 'addUrlTrigger', 'search', 'searchInput', 'searchTrigger', 'actions'];
 
   showAddUrl() {
     this.actionsTarget.style.display = 'none';
