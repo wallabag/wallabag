@@ -56,6 +56,11 @@ button:not(:disabled, .disabled) {
   cursor: pointer;
 }
 
+button:disabled,
+button.disabled {
+  cursor: default;
+}
+
 .config-help {
   font: inherit;
   line-height: inherit;
