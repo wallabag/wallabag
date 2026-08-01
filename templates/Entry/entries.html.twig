@@ -31,16 +31,16 @@
     {% endif %}
     {% if has_filters %}
         <li class="button-filters">
-            <a class="sidenav-trigger" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-target="filters">
+            <button type="button" class="sidenav-trigger" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" data-target="filters">
                 <i class="material-icons">filter_list</i>
-            </a>
+            </button>
         </li>
     {% endif %}
     {% if has_exports %}
         <li class="button-export">
-            <a class="sidenav-trigger" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-target="export">
+            <button type="button" class="sidenav-trigger" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.export'|trans }}" data-target="export">
                 <i class="material-icons">file_download</i>
-            </a>
+            </button>
         </li>
     {% endif %}
 {% endblock %}
