@@ -3,7 +3,8 @@ import { Controller } from '@hotwired/stimulus';
 export default class extends Controller {
   static targets = ['addUrl', 'addUrlInput', 'addUrlTrigger', 'search', 'searchInput', 'searchTrigger', 'actions'];
 
-  showAddUrl() {
+  showAddUrl({ currentTarget } = {}) {
+    this.modeTrigger = currentTarget ?? this.addUrlTriggerTarget;
     this.actionsTarget.style.display = 'none';
     this.addUrlTarget.style.display = 'flex';
     this.searchTarget.style.display = 'none';
@@ -17,7 +18,8 @@ export default class extends Controller {
     this.addUrlInputTarget.blur();
   }
 
-  showSearch() {
+  showSearch({ currentTarget } = {}) {
+    this.modeTrigger = currentTarget ?? this.searchTriggerTarget;
     this.actionsTarget.style.display = 'none';
     this.addUrlTarget.style.display = 'none';
     this.searchTarget.style.display = 'flex';
@@ -30,6 +32,8 @@ export default class extends Controller {
     this.addUrlTarget.style.display = 'none';
     this.searchTarget.style.display = 'none';
     this.#setExpanded(false, false);
+    this.modeTrigger?.focus({ preventScroll: true });
+    this.modeTrigger = undefined;
   }
 
   #setExpanded(addUrl, search) {
