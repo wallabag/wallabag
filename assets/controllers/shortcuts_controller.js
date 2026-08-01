@@ -112,6 +112,10 @@ export default class extends Controller {
         return false;
       }
 
+      if (e.defaultPrevented || element.closest('a, button, input, select, textarea')) {
+        return true;
+      }
+
       return this.originalStopCallback(e, element);
     };
     Mousetrap.prototype.stopCallback = this.stopCallback;
