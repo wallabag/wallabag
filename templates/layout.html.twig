@@ -134,19 +134,19 @@
                         <li class="divider"></li>
                     {% endif %}
                     <li>
-                        <button type="button" data-action="click->dark-theme#useLight">
+                        <button type="button" data-action="click->dark-theme#useLight" data-dark-theme-target="light" aria-pressed="false">
                             <i class="theme-toggle-icon material-icons tiny" aria-hidden="true">brightness_high</i>
                             <span>{{ 'menu.left.theme_toggle_light'|trans }}</span>
                         </button>
                     </li>
                     <li>
-                        <button type="button" data-action="click->dark-theme#useDark">
+                        <button type="button" data-action="click->dark-theme#useDark" data-dark-theme-target="dark" aria-pressed="false">
                             <i class="theme-toggle-icon material-icons tiny" aria-hidden="true">brightness_low</i>
                             <span>{{ 'menu.left.theme_toggle_dark'|trans }}</span>
                         </button>
                     </li>
                     <li>
-                        <button type="button" data-action="click->dark-theme#useAuto">
+                        <button type="button" data-action="click->dark-theme#useAuto" data-dark-theme-target="auto" aria-pressed="false">
                             <i class="theme-toggle-icon material-icons tiny" aria-hidden="true">brightness_auto</i>
                             <span>{{ 'menu.left.theme_toggle_auto'|trans }}</span>
                         </button>
