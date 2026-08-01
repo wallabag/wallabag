@@ -7,6 +7,7 @@ export default class extends Controller {
     this.actionsTarget.style.display = 'none';
     this.addUrlTarget.style.display = 'flex';
     this.searchTarget.style.display = 'none';
+    this.#setExpanded(true, false);
     this.addUrlInputTarget.focus();
   }
 
@@ -20,6 +21,7 @@ export default class extends Controller {
     this.actionsTarget.style.display = 'none';
     this.addUrlTarget.style.display = 'none';
     this.searchTarget.style.display = 'flex';
+    this.#setExpanded(false, true);
     this.searchInputTarget.focus();
   }
 
@@ -27,5 +29,11 @@ export default class extends Controller {
     this.actionsTarget.style.display = 'flex';
     this.addUrlTarget.style.display = 'none';
     this.searchTarget.style.display = 'none';
+    this.#setExpanded(false, false);
+  }
+
+  #setExpanded(addUrl, search) {
+    this.addUrlTriggerTarget.setAttribute('aria-expanded', addUrl.toString());
+    this.searchTriggerTarget.setAttribute('aria-expanded', search.toString());
   }
 }
