@@ -28,7 +28,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
         'https://wallabag.org/news/20250627-apero-wallabag/',
         'https://manualdousuario.net/wallabag-alternativa-omnivore-pocket/',
         'https://nicolas.loeuillet.org/billets/2025/07/08/rip-pocket/',
-        'https://www.blog.brightcoding.dev/2025/07/15/save-web-articles-to-read-later-the-self-host-way/',
+        'https://wallabag.org/news/20250524-pocket-shutdown/',
         'https://linuxfr.org/news/pocket-est-mort-vive-wallabag',
         'https://justman.fr/on-the-web/fin-de-pocket-occasion-de-decouvrir-wallabag-alternative-libre',
         'https://goodtech.info/alternative-open-source-pocket-wallabag/',

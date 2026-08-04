@@ -16,7 +16,7 @@ class IgnoreOriginInstanceRuleFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         foreach ($this->defaultIgnoreOriginInstanceRules as $ignoreOriginInstanceRule) {
-            $newIgnoreOriginInstanceRule = new IgnoreOriginInstanceRule();
+            $newIgnoreOriginInstanceRule = $manager->getRepository(IgnoreOriginInstanceRule::class)->findOneBy(['rule' => $ignoreOriginInstanceRule['rule']]) ?? new IgnoreOriginInstanceRule();
             $newIgnoreOriginInstanceRule->setRule($ignoreOriginInstanceRule['rule']);
             $manager->persist($newIgnoreOriginInstanceRule);
         }

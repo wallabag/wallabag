@@ -16,7 +16,7 @@ class InternalSettingFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         foreach ($this->defaultInternalSettings as $setting) {
-            $newSetting = new InternalSetting();
+            $newSetting = $manager->getRepository(InternalSetting::class)->findOneBy(['name' => $setting['name']]) ?? new InternalSetting();
             $newSetting->setName($setting['name']);
             $newSetting->setValue($setting['value']);
             $newSetting->setSection($setting['section']);
