@@ -547,6 +547,18 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertTrue($content['is_public'], 'A public link has been generated for that entry');
     }
 
+    public function testPostEntryWithoutAuthors()
+    {
+        $this->client->request('POST', '/api/entries.json', [
+            'url' => 'https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
+            'title' => 'New title for my article',
+        ]);
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertNull($content['published_by']);
+    }
+
     public function testPostSameEntry()
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
