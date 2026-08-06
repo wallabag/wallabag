@@ -185,6 +185,55 @@ class ContentProxyTest extends TestCase
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
+    public function testWithContentAndEmptyProvidedContent()
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+        $ruleBasedIgnoreOriginProcessor->expects($this->once())
+            ->method('process');
+
+        $graby = $this->getMockBuilder(Graby::class)
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => str_repeat('this is my content', 325),
+                'title' => 'this is my title',
+                'url' => 'http://1.1.1.1',
+                'language' => 'fr',
+                'status' => '200',
+                'description' => 'OG desc',
+                'image' => 'http://3.3.3.3/cover.jpg',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        // empty values provided along the import should not override the fetched content
+        $proxy->updateEntry($entry, 'http://0.0.0.0', [
+            'title' => '',
+            'language' => '',
+            'image' => '',
+        ]);
+
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
+        $this->assertStringContainsString('content', $entry->getContent());
+        $this->assertSame('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
+        $this->assertSame('text/html', $entry->getMimetype());
+        $this->assertSame('fr', $entry->getLanguage());
+        $this->assertSame('200', $entry->getHttpStatus());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
+    }
+
     public function testWithContentAndNoOgImage()
     {
         $tagger = $this->getTaggerMock();
