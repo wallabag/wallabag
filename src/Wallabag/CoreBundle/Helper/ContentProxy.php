@@ -75,7 +75,7 @@ class ContentProxy
             // when content is imported, we have information in $content
             // in case fetching content goes bad, we'll keep the imported information instead of overriding them
             if ($fetchedContent['html'] !== $this->fetchingErrorMessage) {
-                $content = array_merge($fetchedContent, $content);
+                $content = array_merge(array_filter($fetchedContent), array_filter($content));
             }
         }
 
