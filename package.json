@@ -54,7 +54,7 @@
     "@symfony/webpack-encore": "^6.0.0",
     "autoprefixer": "^10.5.4",
     "babel-loader": "^10.1.1",
-    "core-js": "^3.49.0",
+    "core-js": "^3.50.0",
     "css-loader": "^7.1.4",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
