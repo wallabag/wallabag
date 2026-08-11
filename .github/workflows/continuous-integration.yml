@@ -48,12 +48,12 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v7"
+        uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
         with:
           fetch-depth: 2
 
       - name: "Install PHP"
-        uses: "shivammathur/setup-php@v2"
+        uses: "shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240" # 2.37.2
         with:
           php-version: "${{ matrix.php }}"
           coverage: pcov
@@ -62,7 +62,7 @@ jobs:
           ini-values: "date.timezone=Europe/Paris"
 
       - name: "Install Node"
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: ".nvmrc"
           cache: 'yarn'
@@ -82,7 +82,7 @@ jobs:
           pg_isready -d wallabag_test -h localhost -p 5432 -U wallabag
 
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v4"
+        uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
@@ -120,7 +120,7 @@ jobs:
 
       - name: "Upload unit coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -132,7 +132,7 @@ jobs:
 
       - name: "Upload unit test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -169,7 +169,7 @@ jobs:
 
       - name: "Upload integration coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -181,7 +181,7 @@ jobs:
 
       - name: "Upload integration test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -218,7 +218,7 @@ jobs:
 
       - name: "Upload functional coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -230,7 +230,7 @@ jobs:
 
       - name: "Upload functional test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -272,12 +272,12 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v7"
+        uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
         with:
           fetch-depth: 2
 
       - name: "Install PHP"
-        uses: "shivammathur/setup-php@v2"
+        uses: "shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240" # 2.37.2
         with:
           php-version: "${{ matrix.php }}"
           coverage: pcov
@@ -286,7 +286,7 @@ jobs:
           ini-values: "date.timezone=Europe/Paris"
 
       - name: "Install Node"
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: ".nvmrc"
           cache: 'yarn'
@@ -306,7 +306,7 @@ jobs:
           pg_isready -d wallabag_test -h localhost -p 5432 -U wallabag
 
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v4"
+        uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
@@ -344,7 +344,7 @@ jobs:
 
       - name: "Upload unit coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -356,7 +356,7 @@ jobs:
 
       - name: "Upload unit test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -393,7 +393,7 @@ jobs:
 
       - name: "Upload integration coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -405,7 +405,7 @@ jobs:
 
       - name: "Upload integration test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -442,7 +442,7 @@ jobs:
 
       - name: "Upload functional coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -454,7 +454,7 @@ jobs:
 
       - name: "Upload functional test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -486,12 +486,12 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v7"
+        uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
         with:
           fetch-depth: 2
 
       - name: "Install PHP"
-        uses: "shivammathur/setup-php@v2"
+        uses: "shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240" # 2.37.2
         with:
           php-version: "${{ matrix.php }}"
           coverage: pcov
@@ -500,7 +500,7 @@ jobs:
           ini-values: "date.timezone=Europe/Paris"
 
       - name: "Install Node"
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: ".nvmrc"
           cache: 'yarn'
@@ -520,7 +520,7 @@ jobs:
           pg_isready -d wallabag_test -h localhost -p 5432 -U wallabag
 
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v4"
+        uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
@@ -558,7 +558,7 @@ jobs:
 
       - name: "Upload unit coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -570,7 +570,7 @@ jobs:
 
       - name: "Upload unit test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -607,7 +607,7 @@ jobs:
 
       - name: "Upload integration coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -619,7 +619,7 @@ jobs:
 
       - name: "Upload integration test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -656,7 +656,7 @@ jobs:
 
       - name: "Upload functional coverage to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -668,7 +668,7 @@ jobs:
 
       - name: "Upload functional test results to Codecov"
         if: ${{ !cancelled() }}
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -685,13 +685,13 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v7"
+        uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
         with:
           fetch-depth: 2
 
       - name: "Detect changed bundle-relevant files"
         id: changed-files
-        uses: tj-actions/changed-files@v47.0.6
+        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
           files: |
             webpack.config.js
@@ -703,7 +703,7 @@ jobs:
 
       - name: "Install Node"
         if: steps.changed-files.outputs.any_changed == 'true'
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: ".nvmrc"
           cache: 'yarn'
@@ -729,12 +729,12 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v7"
+        uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
         with:
           fetch-depth: 2
 
       - name: "Send Codecov notifications"
-        uses: "codecov/codecov-action@v7"
+        uses: "codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f" # v7.0.0
         continue-on-error: true
         with:
           token: "${{ secrets.CODECOV_TOKEN }}"

@@ -16,10 +16,10 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v7"
+        uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
 
       - name: "Install PHP"
-        uses: "shivammathur/setup-php@v2"
+        uses: "shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240" # 2.37.2
         with:
           coverage: "none"
           php-version: "${{ matrix.php }}"
@@ -30,7 +30,7 @@ jobs:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Install Node"
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: ".nvmrc"
           cache: "yarn"
@@ -39,7 +39,7 @@ jobs:
         run: make release VERSION=${{ github.event.release.tag_name }}
 
       - name: Upload the package to the release
-        uses: shogo82148/actions-upload-release-asset@v1
+        uses: shogo82148/actions-upload-release-asset@d0cb37bb764791e72e64e643cd7056f74f1e77d7 # v1.10.3
         with:
           upload_url: ${{ github.event.release.upload_url }}
           asset_path: /tmp/wllbg-release/wallabag-${{ github.event.release.tag_name }}.tar.gz

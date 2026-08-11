@@ -19,10 +19,10 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v7"
+        uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
 
       - name: "Install PHP"
-        uses: "shivammathur/setup-php@v2"
+        uses: "shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240" # 2.37.2
         with:
           coverage: "none"
           php-version: "8.2"
@@ -33,7 +33,7 @@ jobs:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Install Node"
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: ".nvmrc"
           cache: 'yarn'
@@ -45,7 +45,7 @@ jobs:
 
       - name: "Install dependencies with Composer"
         id: composer-install
-        uses: "ramsey/composer-install@v4"
+        uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
