@@ -5,6 +5,10 @@ on:
     types:
       - created
 
+permissions:
+  # The packaged tarball is uploaded to the release with this token.
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
