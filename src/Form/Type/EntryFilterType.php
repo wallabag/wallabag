@@ -205,6 +205,24 @@ class EntryFilterType extends AbstractType
                 'choices' => array_flip($this->repository->findDistinctLanguageByUser($user->getId())),
                 'label' => 'entry.filters.language_label',
             ])
+            ->add('sortOrder', ChoiceFilterType::class, [
+                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) { },
+                'choices' => [
+                    'entry.sort.ascending' => 'asc',
+                    'entry.sort.descending' => 'desc',
+                ],
+                'label' => 'entry.sort.order_label',
+            ])
+            ->add('sortType', ChoiceFilterType::class, [
+                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) { },
+                'choices' => [
+                    'entry.sort.by.creation_date' => 'createdAt',
+                    'entry.sort.by.title' => 'title',
+                    'entry.sort.by.url' => 'url',
+                    'entry.sort.by.reading_time' => 'readingTime',
+                ],
+                'label' => 'entry.sort.status_label',
+            ])
         ;
     }
 
