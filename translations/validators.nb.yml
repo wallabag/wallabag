@@ -7,3 +7,4 @@ validator:
     quote_length_too_high: Sitatet er for langt. De kan være {{ limit }} tegn eller mindre.
     item_per_page_too_low: Denne verdien må være større enn eller lik 1.
     feed_limit_too_low: Denne verdien må være større enn eller lik 1.
+    captcha_invalid: Sikkerhetskoden er ugyldig eller har utløpt. Vennligst prøv igjen.
