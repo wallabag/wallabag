@@ -747,3 +747,4 @@ export:
     footer_template: <div style="text-align:center;"><p>Laget av wallabag med %method%</p><p>Åpne <a href="https://github.com/wallabag/wallabag/issues">en ny sak</a> dersom du har problemer med visning av denne e-boken på din enhet .</p></div>
 captcha:
     label: Sikkerhetssjekk
+    help: Skriv inn tegnene som vises i bildet. Hvis du oppdaterer bildet, blir det forrige svaret ugyldig.
