@@ -745,3 +745,5 @@ ignore_origin_instance_rule:
         delete: Supprimer
         save: Sauvegarder
         rule_label: Règle
+captcha:
+    help: Entrez les caractères indiqués dans l'image. Rafraichir l'image invalide la réponse précédente.
