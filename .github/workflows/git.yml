@@ -2,10 +2,13 @@ name: Git
 
 on: pull_request
 
+permissions:
+  contents: read
+
 jobs:
   no-fixups:
     name: No fixups
     runs-on: ubuntu-latest
     steps:
       - name: Check for 'amend!', 'fixup!', or 'squash!' commits
-        uses: matijs/no-fixups-action@v1.1.4
+        uses: matijs/no-fixups-action@8dfcf79304e29c3aa37e327cfc1d3685dca3c6c0 # v1.1.4
