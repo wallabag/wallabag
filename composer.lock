@@ -19520,16 +19520,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v7.4.14",
+            "version": "v7.4.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "11eeee9d109963145e66f5b1919e5cf5411da58b"
+                "reference": "49757f773056f1180f16667e0a5a533d262cbe9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/11eeee9d109963145e66f5b1919e5cf5411da58b",
-                "reference": "11eeee9d109963145e66f5b1919e5cf5411da58b",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/49757f773056f1180f16667e0a5a533d262cbe9a",
+                "reference": "49757f773056f1180f16667e0a5a533d262cbe9a",
                 "shasum": ""
             },
             "require": {
@@ -19581,7 +19581,7 @@
                 "testing"
             ],
             "support": {
-                "source": "https://github.com/symfony/phpunit-bridge/tree/v7.4.14"
+                "source": "https://github.com/symfony/phpunit-bridge/tree/v7.4.16"
             },
             "funding": [
                 {
@@ -19601,7 +19601,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-08T20:24:16+00:00"
+            "time": "2026-08-07T14:56:57+00:00"
         },
         {
             "name": "symfony/process",
