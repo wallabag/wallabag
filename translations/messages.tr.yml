@@ -158,10 +158,10 @@ config:
                 not_equal_to: Eşit değildir…
                 or: Bir kural veya birbaşkası
                 and: Bir kural ve diğeri
-                matches: '<i>konu</i>nun <i>arama</i> kriterine (büyük küçük harf duyarsız) eşleştiğini test eder.<br />Örnek: <code>title matches "futbol"</code>'
-                notmatches: '<i>konu</i>nun <i>arama</i> kriterine (büyük küçük harf duyarsız) eşleşmediğini test eder.<br />Örnek: <code>title nonmatches "futbol"</code>'
+                matches: '<i>Konunun</i> <i>arama</i> kriterine (büyük küçük harf duyarsız) eşleştiğini test eder.<br />Örnek: <code>title matches "futbol"</code>'
+                notmatches: '<i>Konunun</i> <i>arama</i> kriterine (büyük küçük harf duyarsız) eşleşmediğini test eder.<br />Örnek: <code>title nonmatches "futbol"</code>'
             tagging_rules_definition_description: Bunlar wallabag'in yeni makaleleri otomatik olarak etiketleyebilmesi için tanımlanmış kurallardır.<br />Her yeni makale eklendiğinde, ayarladığınız tüm etiket kuralları kullanılarak makaleniz etiketlenecektir. Bu sayede her bir makaleyi tek tek etiketlemekle uğraşmanız gerekmeyecek.
-            how_to_use_them_description: 'Örneğin, 3 dakikadan kısa okuma süresi olan yeni makaleleri « <i>kısa okumalar</i>» etiketi ile etiketlemek istiyorsunuz diyelim.<br />Bu durumda, <i>Kural</i> alanına « readingTime &lt; = 3 » değeri, ve de <i>Etiketler</i> alanına da <i>kısa okumalar</i> değerini girmelisiniz.<br /> Eğer birden fazla etiket tanımlamak istiyorsanız arasına virgül koyabilirsiniz: « <i>kısa okumalar, mutlaka oku</i> »<br />Daha kompleks kurallar önden tanımlanmış operatörlerle girilebilir: Eğer « <i> readingTime &gt; = AND domainName = "www.php.net"</i> » ise, o zaman « <i>uzun okumalar, php</i> » gibi girebilirsiniz'
+            how_to_use_them_description: 'Örneğin, 3 dakikadan kısa okuma süresi olan yeni makaleleri « <i>kısa okumalar</i> » etiketi ile etiketlemek istiyorsunuz diyelim.<br />Bu durumda, <i>Kural</i> alanına « readingTime &lt;= 3 » değeri, ve de <i>Etiketler</i> alanına da « <i>kısa okumalar</i> » değerini girmelisiniz.<br />Eğer birden fazla etiket tanımlamak istiyorsanız arasına virgül koyabilirsiniz: « <i>kısa okumalar, mutlaka oku</i> »<br />Daha kompleks kurallar önden tanımlanmış operatörlerle girilebilir: Eğer « <i>readingTime &gt;= AND domainName = "www.php.net"</i> » ise, o zaman « <i>uzun okumalar, php</i> » gibi girebilirsiniz'
         if_label: eğer
         then_tag_as_label: ise, şu şekilde etiketle
         delete_rule_label: sil
@@ -751,3 +751,6 @@ ignore_origin_instance_rule:
     edit_ignore_origin_instance_rule: Mevcut bir orijinal kaynağı yok say kuralını düzenle
     new_ignore_origin_instance_rule: Genel orijinal kaynağı yok say kuralı oluştur
     page_title: Genel orijinal kaynağı yok say kuralları
+captcha:
+    label: Güvenlik denetimi
+    help: Resimde gösterilen karakterleri girin. Resmi yenilediğinizde önceki cevap geçersiz olur.

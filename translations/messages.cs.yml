@@ -745,3 +745,6 @@ ignore_origin_instance_rule:
     edit_ignore_origin_instance_rule: Upravit existující pravidlo ignorování původu
     new_ignore_origin_instance_rule: Vytvořit globální pravidlo ignorování původu
     page_title: Globální pravidla ignorování původu
+captcha:
+    label: Bezpečnostní kontrola
+    help: Zadejte znaky zobrazené na obrázku. Znovunačtení obrázku zneplatní předchozí odpověď.

@@ -751,3 +751,6 @@ ignore_origin_instance_rule:
     new_ignore_origin_instance_rule: Erstelle globale Regeln fürs Ignorieren des Ursprungs
     page_title: Globale Regeln fürs Ignorieren des Ursprungs
     description: Hier kannst du die globalen Regeln zum Ignorieren des Ursprungs festlegen, um einige Muster einer Ursprungs-URL zu ignorieren.
+captcha:
+    label: Sicherheitsprüfung
+    help: Geben Sie die im Bild angezeigten Schriftzeichen ein. Durch das Aktualisieren des Bildes wird die vorherige Antwort ungültig.

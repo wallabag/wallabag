@@ -7,3 +7,4 @@ validator:
     quote_length_too_high: Das Zitat ist zu lang. Es sollte nicht mehr als {{ limit }} Zeichen enthalten.
     feed_limit_too_low: Dieser Wert sollte größer oder gleich 1 sein.
     item_per_page_too_low: Dieser Wert sollte größer oder gleich 1 sein.
+    captcha_invalid: Der Sicherheitscode ist ungültig oder abgelaufen. Bitte erneut versuchen.

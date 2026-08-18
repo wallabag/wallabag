@@ -7,3 +7,4 @@ validator:
     feed_limit_too_low: Cette valeur doit être supérieure ou égale à 1.
     feed_limit_too_high: Ça ne va pas plaire à l’application
     quote_length_too_high: La citation est trop longue. Elle doit avoir au maximum {{ limit }} caractères.
+    captcha_invalid: Le code de sécurité est invalide ou a expiré. Veuillez réessayer.

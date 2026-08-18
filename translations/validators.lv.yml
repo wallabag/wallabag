@@ -1,0 +1,6 @@
+validator:
+    password_must_match: Parolēm ir jāsakrīt.
+    password_too_short: Jūsu parolei ir jābūt vismaz 8 rakstzīmēm garai.
+    password_wrong_value: Norādīta nepareiza pašreizējā parole.
+    item_per_page_too_low: Šai vērtībai jābūt lielākai par vai vienādai ar 1.
+    feed_limit_too_low: Šai vērtībai jābūt lielākai par vai vienādai ar 1.

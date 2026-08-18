@@ -1,0 +1,9 @@
+auth_code:
+    mailer:
+        subject: wallabag autentifikācijas kods
+        body:
+            hello: Sveiki %user%,
+            support: 'Lūdzu, nevilcinieties sazināties ar mums, ja jums rodas kādas problēmas:'
+            signature: wallabag komanda
+            second_para: 'Lūk, kods:'
+    on: ieslēgts

@@ -751,3 +751,6 @@ ignore_origin_instance_rule:
         actions: Akcje
         edit_action: Edytuj
     description: Tutaj możesz zarządzać globalnymi zasadami ignorowania pochodzenia, używanymi do ignorowania niektórych wzorców oryginalnych url.
+captcha:
+    label: Kontrola bezpieczeństwa
+    help: Wpisz znaki pokazane na obrazku. Odświeżenie obrazka unieważnia poprzednią odpowiedź.

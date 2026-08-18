@@ -7,3 +7,4 @@ validator:
     password_must_match: Os contrasinais deben concordar.
     item_per_page_too_low: Este valor ten que ser igual ou maior que 1.
     feed_limit_too_low: Este valor ten que ser igual ou maior que 1.
+    captcha_invalid: O código de seguridade non é válido ou caducou. Volve a intentalo.
