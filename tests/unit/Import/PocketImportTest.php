@@ -18,6 +18,8 @@ use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
 use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\TagsAssigner;
+use Wallabag\HttpClient\HostnameDenyList;
+use Wallabag\HttpClient\HostnameDenyListHttpClient;
 use Wallabag\Import\PocketImport;
 use Wallabag\Redis\Producer;
 use Wallabag\Repository\EntryRepository;
@@ -67,6 +69,20 @@ class PocketImportTest extends TestCase
         $records = $this->logHandler->getRecords();
         $this->assertStringContainsString('PocketImport: Failed to request token', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
+    }
+
+    public function testOAuthRequestReturnsFalseWhenPocketIsBlocked(): void
+    {
+        $innerClient = new MockHttpClient();
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['getpocket.com']));
+        $pocketImport = $this->getPocketImport();
+        $pocketImport->setClient($client);
+
+        $code = $pocketImport->getRequestToken('http://0.0.0.0/redirect');
+
+        $this->assertFalse($code);
+        $this->assertSame(0, $innerClient->getRequestsCount());
+        $this->assertTrue($this->logHandler->hasErrorThatContains('PocketImport: Failed to request token'));
     }
 
     public function testOAuthAuthorize(): void
