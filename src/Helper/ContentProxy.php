@@ -43,7 +43,7 @@ class ContentProxy
     public function updateEntry(Entry $entry, $url, array $content = [], $disableContentUpdate = false): void
     {
         // no mater previous state, if an entry got updated, we restore it
-        $entry->updateDeleted(false);
+        $entry->restore();
 
         $this->graby->toggleImgNoReferrer(true);
         if (!empty($content['html'])) {
