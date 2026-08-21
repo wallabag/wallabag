@@ -91,4 +91,57 @@ class CleanDuplicatesCommandTest extends WallabagKernelTestCase
         $query->setParameter('url', $url);
         $query->execute();
     }
+
+    public function testDuplicateSkipsAlreadyDeletedEntry(): void
+    {
+        $url = 'https://www.lemonde.fr/sport/visuel/2017/05/05/rondelle-prison-blanchissage-comprendre-le-hockey-sur-glace_5122587_3242.html';
+        $em = $this->getEntityManager();
+        $user = $this->getUser('admin');
+
+        // Deletion and restoration can combine in a lot of different ways so any order is possible.
+        // This case covers most of the edge cases: deleted / live / deleted.
+
+        $entryDeletedBefore = new Entry($user);
+        $entryDeletedBefore->setUrl($url);
+        $entryDeletedBefore->updateDeleted(true);
+        $deletedAtBefore = $entryDeletedBefore->getDeletedAt()->format('U');
+
+        $entryLive = new Entry($user);
+        $entryLive->setUrl($url);
+
+        $entryDeletedAfter = new Entry($user);
+        $entryDeletedAfter->setUrl($url);
+        $entryDeletedAfter->updateDeleted(true);
+        $deletedAtAfter = $entryDeletedAfter->getDeletedAt()->format('U');
+
+        $em->persist($entryDeletedBefore);
+        $em->persist($entryLive);
+        $em->persist($entryDeletedAfter);
+
+        $em->flush();
+
+        $application = $this->createApplication();
+
+        $command = $application->find('wallabag:clean-duplicates');
+
+        $tester = new CommandTester($command);
+        $tester->execute([
+            'username' => 'admin',
+        ]);
+
+        $this->assertStringContainsString('Cleaned 0 duplicates for user admin', $tester->getDisplay());
+
+        $em->refresh($entryDeletedBefore);
+        $this->assertSame($deletedAtBefore, $entryDeletedBefore->getDeletedAt()->format('U'));
+
+        $em->refresh($entryDeletedAfter);
+        $this->assertSame($deletedAtAfter, $entryDeletedAfter->getDeletedAt()->format('U'));
+
+        $em->refresh($entryLive);
+        $this->assertFalse($entryLive->isDeleted());
+
+        $query = $em->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.url = :url');
+        $query->setParameter('url', $url);
+        $query->execute();
+    }
 }
