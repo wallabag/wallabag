@@ -79,6 +79,19 @@
                             </div>
 
                             <div class="row">
+                                {{ form_row(form.config.default_homepage, {
+                                    row_attr: {
+                                        class: 'col s11'
+                                    }
+                                }) }}
+                                <div class="input-field col s1">
+                                    <a href="#" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="left" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'config.form_settings.help_default_homepage'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
                                 {{ form_row(form.config.language, {
                                     row_attr: {
                                         class: 'col s11'

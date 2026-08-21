@@ -29,7 +29,6 @@ menu:
         about: 'о wallabag'
         search: 'Поиск'
         save_link: 'Сохранить ссылку'
-        back_to_unread: 'Назад к непрочитанным записям'
         users_management: 'Управление пользователями'
         site_credentials: Реквизиты сайта
         ignore_origin_instance_rules: Глобальные правила игнорирования источника

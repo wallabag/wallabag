@@ -47,6 +47,15 @@ class EntryController extends AbstractController
     ) {
     }
 
+    #[Route(path: '/', name: 'homepage', methods: ['GET'])]
+    #[IsGranted('LIST_ENTRIES')]
+    public function homepageAction(): Response
+    {
+        $defaultHomepage = $this->getUser()->getConfig()->getDefaultHomepage();
+
+        return $this->redirectToRoute($defaultHomepage->route());
+    }
+
     /**
      * @return Response
      */
@@ -197,9 +206,9 @@ class EntryController extends AbstractController
             // entry saved, dispatch event about it!
             $this->eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
 
-            return $this->redirect($this->generateUrl('homepage'));
+            return $this->redirectToDefaultHomepage();
         } elseif ($form->isSubmitted() && !$form->isValid()) {
-            return $this->redirect($this->generateUrl('homepage'));
+            return $this->redirectToDefaultHomepage();
         }
 
         return $this->render('Entry/new_form.html.twig', [
@@ -227,7 +236,7 @@ class EntryController extends AbstractController
             $this->eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
         }
 
-        return $this->redirect($this->generateUrl('homepage'));
+        return $this->redirectToDefaultHomepage();
     }
 
     /**

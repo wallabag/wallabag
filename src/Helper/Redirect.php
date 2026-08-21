@@ -43,17 +43,22 @@ class Redirect
 
         if (!$ignoreActionMarkAsRead
               && Config::REDIRECT_TO_HOMEPAGE === $user->getConfig()->getActionMarkAsRead()) {
-            return $this->router->generate('homepage');
+            return $this->generateHomepageUrl($user);
         }
 
         if (null === $url) {
-            return $this->router->generate('homepage');
+            return $this->generateHomepageUrl($user);
         }
 
         if (!Uri::isAbsolutePathReference(new Uri($url))) {
-            return $this->router->generate('homepage');
+            return $this->generateHomepageUrl($user);
         }
 
         return $url;
+    }
+
+    private function generateHomepageUrl(User $user): string
+    {
+        return $this->router->generate($user->getConfig()->getDefaultHomepage()->route());
     }
 }
