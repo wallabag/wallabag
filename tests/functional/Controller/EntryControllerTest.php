@@ -1276,6 +1276,38 @@ class EntryControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('share_public', 0);
     }
 
+    public function testDeletedEntryUidIsNulledAndShareUrlIsGone(): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $client->getContainer()->get(Config::class)->set('share_public', 1);
+
+        $content = new Entry($this->getLoggedInUser());
+        $content->setUrl($this->url);
+        $this->getEntityManager()->persist($content);
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->request('GET', '/view/' . $content->getId());
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.public_link')->form());
+        $shareUrl = $client->getResponse()->getTargetUrl();
+
+        $client->request('GET', $shareUrl);
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->request('GET', '/view/' . $content->getId());
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.delete')->form());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $entry = $this->getEntityManager()->getRepository(Entry::class)->find($content->getId());
+        $this->assertNull($entry->getUid());
+
+        $client->request('GET', $shareUrl);
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+
+        $client->getContainer()->get(Config::class)->set('share_public', 0);
+    }
+
     /**
      * @group NetworkCalls
      */
@@ -2018,7 +2050,7 @@ class EntryControllerTest extends WallabagTestCase
         $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $this->getLoggedInUser();
         $entry = (new Entry($user))->setUrl('http://0.0.0.0/deleted-form-restore');
-        $entry->updateDeleted(true);
+        $entry->delete();
         $em->persist($entry);
         $em->flush();
         $deletedId = $entry->getId();
