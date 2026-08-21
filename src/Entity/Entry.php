@@ -331,6 +331,7 @@ class Entry
         if ($isDeleted) {
             $this->content = null;
             $this->previewPicture = null;
+            $this->uid = null;
         }
 
         return $this;
