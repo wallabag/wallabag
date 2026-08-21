@@ -325,14 +325,19 @@ class Entry
         return null !== $this->deletedAt;
     }
 
-    public function updateDeleted(bool $isDeleted): static
+    public function delete(): static
     {
-        $this->deletedAt = $isDeleted ? new \DateTimeImmutable() : null;
-        if ($isDeleted) {
-            $this->content = null;
-            $this->previewPicture = null;
-            $this->uid = null;
-        }
+        $this->deletedAt = new \DateTimeImmutable();
+        $this->content = null;
+        $this->previewPicture = null;
+        $this->uid = null;
+
+        return $this;
+    }
+
+    public function restore(): static
+    {
+        $this->deletedAt = null;
 
         return $this;
     }

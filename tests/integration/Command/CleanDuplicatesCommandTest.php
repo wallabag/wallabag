@@ -103,7 +103,7 @@ class CleanDuplicatesCommandTest extends WallabagKernelTestCase
 
         $entryDeletedBefore = new Entry($user);
         $entryDeletedBefore->setUrl($url);
-        $entryDeletedBefore->updateDeleted(true);
+        $entryDeletedBefore->delete();
         $deletedAtBefore = $entryDeletedBefore->getDeletedAt()->format('U');
 
         $entryLive = new Entry($user);
@@ -111,7 +111,7 @@ class CleanDuplicatesCommandTest extends WallabagKernelTestCase
 
         $entryDeletedAfter = new Entry($user);
         $entryDeletedAfter->setUrl($url);
-        $entryDeletedAfter->updateDeleted(true);
+        $entryDeletedAfter->delete();
         $deletedAtAfter = $entryDeletedAfter->getDeletedAt()->format('U');
 
         $em->persist($entryDeletedBefore);

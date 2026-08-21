@@ -122,7 +122,7 @@ class EntryController extends AbstractController
                     }
                 } elseif ('delete' === $action) {
                     $this->eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
-                    $entry->updateDeleted(true);
+                    $entry->delete();
                 }
             }
 
@@ -522,7 +522,7 @@ class EntryController extends AbstractController
         // entry deleted, dispatch event about it!
         $this->eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
-        $entry->updateDeleted(true);
+        $entry->delete();
         $this->entityManager->flush();
 
         $this->addFlash(

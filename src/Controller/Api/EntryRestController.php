@@ -506,7 +506,7 @@ class EntryRestController extends WallabagRestController
                 // entry deleted, dispatch event about it!
                 $eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
-                $entry->updateDeleted(true);
+                $entry->delete();
                 $this->entityManager->flush();
             }
 
@@ -1138,7 +1138,7 @@ class EntryRestController extends WallabagRestController
         // entry deleted, dispatch event about it!
         $eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
-        $entry->updateDeleted(true);
+        $entry->delete();
         $this->entityManager->flush();
 
         return $response;

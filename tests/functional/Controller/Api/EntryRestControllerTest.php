@@ -391,7 +391,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
         $entry = (new Entry($this->user))->setUrl('http://0.0.0.0/include-deleted-test');
-        $entry->updateDeleted(true);
+        $entry->delete();
         $em->persist($entry);
         $em->flush();
 
@@ -1541,7 +1541,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
         $entry = (new Entry($this->user))->setUrl('http://0.0.0.0/deleted-entry-restore');
-        $entry->updateDeleted(true);
+        $entry->delete();
         $em->persist($entry);
         $em->flush();
         $deletedId = $entry->getId();
@@ -1567,7 +1567,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
         $entry = (new Entry($this->user))->setUrl('http://0.0.0.0/deleted-list-entry-restore');
-        $entry->updateDeleted(true);
+        $entry->delete();
         $em->persist($entry);
         $em->flush();
         $deletedId = $entry->getId();
