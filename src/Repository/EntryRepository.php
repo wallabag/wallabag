@@ -637,7 +637,8 @@ class EntryRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('e')
             ->select('e.id, e.url')
-            ->where('e.user = :userid')->setParameter(':userid', $userId);
+            ->where('e.user = :userid')->setParameter(':userid', $userId)
+            ->andWhere('e.deletedAt IS NULL');
 
         return $qb->getQuery()->getArrayResult();
     }
