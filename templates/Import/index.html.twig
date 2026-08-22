@@ -16,17 +16,17 @@
 
             {{ 'import.page_description'|trans }}
             <div class="row">
-                {% for import in imports %}
+                {% for import in imports | filter(i => i.isEnabled()) %}
                 <div class="col s6 m3">
                     <div class="card">
-                      <div class="card-content">
-                        <span class="card-title">{{ import.name }}</span>
-                      </div>
-                      <div class="card-action">
-                        <a href="{{ path(import.url) }}">{{ 'import.action.import_contents'|trans }}</a>
-                      </div>
+                        <div class="card-content">
+                            <span class="card-title">{{ import.name }}</span>
+                        </div>
+                        <div class="card-action">
+                            <a href="{{ path(import.url) }}">{{ 'import.action.import_contents'|trans }}</a>
+                        </div>
                     </div>
-                  </div>
+                </div>
                 {% endfor %}
             </div>
         </div>
