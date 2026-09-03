@@ -49,26 +49,37 @@ class ContentProxy
         }
 
         if (false === $disableContentUpdate) {
-            $fetchedContent = array_filter($this->graby->fetchContent($url), static function ($value, $key) {
-                if ('html' === $key) {
-                    return true;
-                }
+            try {
+                $fetchedContent = array_filter($this->graby->fetchContent($url), static function ($value, $key) {
+                    if ('html' === $key) {
+                        return true;
+                    }
 
-                return $value;
-            }, \ARRAY_FILTER_USE_BOTH);
-
-            $title = $content['title'] ?? $fetchedContent['title'] ?? null;
-            if ($title) {
-                $fetchedContent['title'] = $this->sanitizeContentTitle(
-                    $title,
-                    $fetchedContent['headers']['content-type'] ?? ''
-                );
+                    return $value;
+                }, \ARRAY_FILTER_USE_BOTH);
+            } catch (\Exception $e) {
+                $this->logger->warning('Error while fetching entry content.', [
+                    'url' => $url,
+                    'exception' => $e,
+                ]);
+                unset($content['html']);
+                $fetchedContent = null;
             }
 
-            // when content is imported, we have information in $content
-            // in case fetching content goes bad, we'll keep the imported information instead of overriding them
-            if ($fetchedContent['html'] !== $this->fetchingErrorMessage) {
-                $content = array_merge($fetchedContent, $content);
+            if (null !== $fetchedContent) {
+                $title = $content['title'] ?? $fetchedContent['title'] ?? null;
+                if ($title) {
+                    $fetchedContent['title'] = $this->sanitizeContentTitle(
+                        $title,
+                        $fetchedContent['headers']['content-type'] ?? ''
+                    );
+                }
+
+                // when content is imported, we have information in $content
+                // in case fetching content goes bad, we'll keep the imported information instead of overriding them
+                if ($fetchedContent['html'] !== $this->fetchingErrorMessage) {
+                    $content = array_merge($fetchedContent, $content);
+                }
             }
         }
 

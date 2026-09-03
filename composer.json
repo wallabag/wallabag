@@ -152,6 +152,7 @@
         "symfony/security-bundle": "^5.4.45",
         "symfony/security-core": "^5.4.48",
         "symfony/security-http": "^5.4.47",
+        "symfony/service-contracts": "^2.5.4",
         "symfony/templating": "^5.4.45",
         "symfony/translation-contracts": "^2.5.4",
         "symfony/twig-bundle": "^5.4.45",
