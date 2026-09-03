@@ -76,9 +76,12 @@ class PocketCsvImportTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $existingEntry = $this->createMock(Entry::class);
+        $existingEntry->method('isDeleted')->willReturn(false);
+
         $entryRepo->expects($this->exactly(7))
             ->method('findByUrlAndUserId')
-            ->will($this->onConsecutiveCalls(false, true));
+            ->will($this->onConsecutiveCalls(false, $existingEntry, $existingEntry, $existingEntry, $existingEntry, $existingEntry, $existingEntry));
 
         $this->em
             ->expects($this->any())

@@ -327,6 +327,7 @@ class EntryRestController extends WallabagRestController
         $domainName = (null === $request->query->get('domain_name')) ? '' : (string) $request->query->get('domain_name');
         $httpStatus = (!\array_key_exists((int) $request->query->get('http_status'), Response::$statusTexts)) ? null : (int) $request->query->get('http_status');
         $hasAnnotations = (null === $request->query->get('annotations')) ? null : (bool) $request->query->get('annotations');
+        $includeDeleted = $request->query->getBoolean('include_deleted');
 
         try {
             /** @var Pagerfanta $pager */
@@ -343,7 +344,8 @@ class EntryRestController extends WallabagRestController
                 $domainName,
                 $isNotParsed,
                 $httpStatus,
-                $hasAnnotations
+                $hasAnnotations,
+                $includeDeleted
             );
         } catch (\Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
@@ -417,6 +419,10 @@ class EntryRestController extends WallabagRestController
     #[IsGranted('VIEW', subject: 'entry')]
     public function getEntryAction(Request $request, Entry $entry)
     {
+        if ($entry->isDeleted()) {
+            throw $this->createNotFoundException();
+        }
+
         $detail = strtolower($request->query->get('detail', 'full'));
 
         if (!\in_array($detail, ['full', 'metadata'], true)) {
@@ -517,11 +523,11 @@ class EntryRestController extends WallabagRestController
 
             $results[$key]['url'] = $url;
 
-            if (false !== $entry && $this->authorizationChecker->isGranted('DELETE', $entry)) {
+            if (false !== $entry && !$entry->isDeleted() && $this->authorizationChecker->isGranted('DELETE', $entry)) {
                 // entry deleted, dispatch event about it!
                 $eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
-                $this->entityManager->remove($entry);
+                $entry->delete();
                 $this->entityManager->flush();
             }
 
@@ -573,12 +579,15 @@ class EntryRestController extends WallabagRestController
         foreach ($urls as $key => $url) {
             $entry = $entryRepository->findByUrlAndUserId(
                 $url,
-                $this->getUser()->getId()
+                $this->getUser()->getId(),
+                includeDeleted: true
             );
 
             $results[$key]['url'] = $url;
 
-            if (false === $entry) {
+            if ($entry instanceof Entry && $entry->isDeleted()) {
+                $contentProxy->updateEntry($entry, $url);
+            } elseif (false === $entry) {
                 $entry = new Entry($this->getUser());
 
                 $contentProxy->updateEntry($entry, $url);
@@ -748,7 +757,8 @@ class EntryRestController extends WallabagRestController
 
         $entry = $entryRepository->findByUrlAndUserId(
             $url,
-            $this->getUser()->getId()
+            $this->getUser()->getId(),
+            includeDeleted: true
         );
 
         if (false === $entry) {
@@ -1128,6 +1138,10 @@ class EntryRestController extends WallabagRestController
     #[IsGranted('DELETE', subject: 'entry')]
     public function deleteEntriesAction(Entry $entry, Request $request, EventDispatcherInterface $eventDispatcher)
     {
+        if ($entry->isDeleted()) {
+            throw $this->createNotFoundException();
+        }
+
         $expect = $request->query->get('expect', 'entry');
         if (!\in_array($expect, ['id', 'entry'], true)) {
             throw new BadRequestHttpException(\sprintf("expect: 'id' or 'entry' expected, %s given", $expect));
@@ -1145,7 +1159,7 @@ class EntryRestController extends WallabagRestController
         // entry deleted, dispatch event about it!
         $eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
-        $this->entityManager->remove($entry);
+        $entry->delete();
         $this->entityManager->flush();
 
         return $response;
