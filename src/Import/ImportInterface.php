@@ -63,4 +63,15 @@ interface ImportInterface extends LoggerAwareInterface
      * @param bool $markAsRead
      */
     public function setMarkAsRead($markAsRead): static;
+
+    /**
+     * Get whether the import is enabled.
+     * If not, the importer won't be available in the UI.
+     */
+    public function isEnabled(): bool;
+
+    /**
+     * Set whether the import is enabled.
+     */
+    public function setEnabled(bool $enabled): static;
 }
