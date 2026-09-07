@@ -29,7 +29,6 @@ menu:
         about: 'Acerca de'
         search: 'Buscar'
         save_link: 'Guardar un artículo'
-        back_to_unread: 'Volver a los artículos sin leer'
         users_management: 'Configuración de usuarios'
         site_credentials: Credenciales del sitio
         quickstart: Inicio rápido

@@ -19,7 +19,6 @@ menu:
         logout: 'Log ud'
         about: 'Om'
         search: 'Søg'
-        back_to_unread: 'Tilbage til de ulæste artikler'
     top:
         add_new_entry: 'Tilføj ny artikel'
         search: 'Søg'

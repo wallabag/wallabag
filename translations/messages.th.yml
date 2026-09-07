@@ -29,7 +29,6 @@ menu:
         about: 'เกี่ยวกับ'
         search: 'ค้นหา'
         save_link: 'บันทึกลิงค์'
-        back_to_unread: 'กลับไปยังรายการที่ไม่ได้อ่าน'
         users_management: 'การจัดการผู้ใช้'
         site_credentials: 'การรับรองไซต์'
         quickstart: "เริ่มแบบด่วน"

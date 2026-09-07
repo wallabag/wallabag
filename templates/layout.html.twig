@@ -12,7 +12,7 @@
    {% set active_route = 'archive' %}
 {% elseif current_route == 'starred' or current_route_from_query_params == 'starred' %}
    {% set active_route = 'starred' %}
-{% elseif current_route == 'unread' or current_route == 'homepage' or current_route_from_query_params == 'unread' %}
+{% elseif current_route == 'unread' or current_route_from_query_params == 'unread' %}
    {% set active_route = 'unread' %}
 {% elseif current_route == 'untagged' %}
    {% set active_route = 'untagged' %}
@@ -47,7 +47,7 @@
             {% block logo %}
                 <li class="logo border-bottom">
                     {% if is_granted('LIST_ENTRIES') %}
-                        <a title="{{ 'menu.left.back_to_unread'|trans }}" href="{{ path('unread') }}">
+                        <a title="{{ 'menu.left.back_to_homepage'|trans }}" href="{{ path('homepage') }}">
                             <img src="{{ asset('img/logo-square.svg') }}" alt="wallabag logo" />
                         </a>
                     {% else %}
