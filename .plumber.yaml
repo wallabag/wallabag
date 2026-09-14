@@ -1,0 +1,18 @@
+# Plumber overlay: inherits every control from the CLI's built-in
+# baseline, only the differences for this repo are written here.
+# Run 'plumber config resolve' to see the full effective config.
+extends: plumber:default
+version: '2.0'
+
+github:
+  controls:
+    githubActionMustComeFromAuthorizedSources:
+      # Keep the curated default list and trust the PHP toolchain,
+      # release and hygiene actions this repo already uses on top of it.
+      includePlumberDefaults: true
+      trustedGithubActions:
+        - matijs/no-fixups-action
+        - ramsey/composer-install
+        - shivammathur/setup-php
+        - shogo82148/actions-upload-release-asset
+        - tj-actions/changed-files
