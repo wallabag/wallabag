@@ -65,6 +65,82 @@ class WallabagV2ImportTest extends TestCase
         $this->assertSame(['skipped' => 4, 'imported' => 2, 'queued' => 0], $wallabagV2Import->getSummary());
     }
 
+    public function testImportWithAnnotations(): void
+    {
+        $wallabagV2Import = $this->getWallabagV2Import(false, 1);
+        $wallabagV2Import->setFilepath(__DIR__ . '/../../fixtures/Import/wallabag-v2-annotations.json');
+
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->once())
+            ->method('findByUrlAndUserId')
+            ->willReturn(false);
+
+        $this->em
+            ->expects($this->any())
+            ->method('getRepository')
+            ->willReturn($entryRepo);
+
+        $this->contentProxy
+            ->expects($this->once())
+            ->method('updateEntry');
+
+        $persistedEntry = null;
+
+        // the entry and its two valid annotations must be persisted
+        // (the third one, without any text key, is skipped)
+        $this->em
+            ->expects($this->exactly(3))
+            ->method('persist')
+            ->willReturnCallback(static function ($entity) use (&$persistedEntry): void {
+                if ($entity instanceof Entry) {
+                    $persistedEntry = $entity;
+                }
+            });
+
+        $res = $wallabagV2Import->import();
+
+        $this->assertTrue($res);
+        $this->assertSame(['skipped' => 0, 'imported' => 1, 'queued' => 0], $wallabagV2Import->getSummary());
+
+        $this->assertInstanceOf(Entry::class, $persistedEntry);
+
+        $annotations = $persistedEntry->getAnnotations();
+        $this->assertCount(2, $annotations);
+
+        $annotation = $annotations[0];
+        $this->assertSame('my imported annotation', $annotation->getText());
+        $this->assertSame('some quoted text', $annotation->getQuote());
+        $this->assertNotEmpty($annotation->getRanges());
+        $this->assertSame($this->user, $annotation->getUser());
+        $this->assertSame($persistedEntry, $annotation->getEntry());
+
+        // dates from the imported file are kept
+        $this->assertSame('2024-01-02T09:00:00+00:00', $annotation->getCreatedAt()->format(\DateTime::ATOM));
+        $this->assertSame('2024-01-03T18:30:00+00:00', $annotation->getUpdatedAt()->format(\DateTime::ATOM));
+
+        // a highlight without any note is a valid annotation
+        $emptyTextAnnotation = $annotations[1];
+        $this->assertSame('', $emptyTextAnnotation->getText());
+        $this->assertSame('a highlight without a note', $emptyTextAnnotation->getQuote());
+        $this->assertNotEmpty($emptyTextAnnotation->getRanges());
+
+        // without dates in the imported file, they are left to the entity lifecycle
+        $this->assertNull($emptyTextAnnotation->getCreatedAt());
+        $this->assertNull($emptyTextAnnotation->getUpdatedAt());
+
+        // which only fills the blanks and never overwrites imported dates
+        $annotation->timestamps();
+        $emptyTextAnnotation->timestamps();
+
+        $this->assertSame('2024-01-02T09:00:00+00:00', $annotation->getCreatedAt()->format(\DateTime::ATOM));
+        $this->assertSame('2024-01-03T18:30:00+00:00', $annotation->getUpdatedAt()->format(\DateTime::ATOM));
+        $this->assertNotNull($emptyTextAnnotation->getCreatedAt());
+        $this->assertNotNull($emptyTextAnnotation->getUpdatedAt());
+    }
+
     public function testImportAndMarkAllAsRead(): void
     {
         $wallabagV2Import = $this->getWallabagV2Import(false, 2);
