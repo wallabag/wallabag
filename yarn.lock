@@ -1442,6 +1442,13 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
+"@types/node-notifier@^8.0.1":
+  version "8.0.5"
+  resolved "https://registry.yarnpkg.com/@types/node-notifier/-/node-notifier-8.0.5.tgz#c5786810d16bbff10550e2d10efe5a17eaf1095e"
+  integrity sha512-LX7+8MtTsv6szumAp6WOy87nqMEdGhhry/Qfprjm1Ma6REjVzeF7SCyvPtp5RaF6IkXCS9V4ra8g5fwvf2ZAYg==
+  dependencies:
+    "@types/node" "*"
+
 "@types/node@*":
   version "26.1.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-26.1.2.tgz#da79708f1f9c6294f4cdec8f455a3032b028808a"
@@ -5511,11 +5518,12 @@ webpack-merge@^6.0.1:
     flat "^5.0.2"
     wildcard "^2.0.1"
 
-webpack-notifier@^1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/webpack-notifier/-/webpack-notifier-1.15.0.tgz#72644a1a4ec96b3528704d28f79da5e70048e8ee"
-  integrity sha512-N2V8UMgRB5komdXQRavBsRpw0hPhJq2/SWNOGuhrXpIgRhcMexzkGQysUyGStHLV5hkUlgpRiF7IUXoBqyMmzQ==
+webpack-notifier@^1.17.0:
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/webpack-notifier/-/webpack-notifier-1.17.0.tgz#c413a8b9858979414026ca5fee39e992d15a7b9e"
+  integrity sha512-N8ZhVsi7Jd4sRfVmzT4I6zV7eKtkdQ2F3EypoRI7KRYf5d6hABEMdmTUlu50QlcGHT6PaeYSkQ0b5NVPK0NxKA==
   dependencies:
+    "@types/node-notifier" "^8.0.1"
     node-notifier "^9.0.0"
     strip-ansi "^6.0.0"
 
