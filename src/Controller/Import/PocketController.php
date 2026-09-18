@@ -29,6 +29,10 @@ class PocketController extends AbstractController
     #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(PocketImport $pocketImport)
     {
+        if (!$pocketImport->isEnabled()) {
+            throw $this->createNotFoundException('Import is disabled');
+        }
+
         $pocket = $this->getPocketImportService($pocketImport);
 
         $form = $this->createFormBuilder($pocket)
@@ -49,6 +53,10 @@ class PocketController extends AbstractController
     #[IsGranted('IMPORT_ENTRIES')]
     public function authAction(Request $request, PocketImport $pocketImport)
     {
+        if (!$pocketImport->isEnabled()) {
+            throw $this->createNotFoundException('Import is disabled');
+        }
+
         $requestToken = $this->getPocketImportService($pocketImport)
             ->getRequestToken($this->generateUrl('import', [], UrlGeneratorInterface::ABSOLUTE_URL));
 
@@ -78,6 +86,10 @@ class PocketController extends AbstractController
     #[IsGranted('IMPORT_ENTRIES')]
     public function callbackAction(PocketImport $pocketImport, TranslatorInterface $translator)
     {
+        if (!$pocketImport->isEnabled()) {
+            throw $this->createNotFoundException('Import is disabled');
+        }
+
         $message = 'flashes.import.notice.failed';
         $pocket = $this->getPocketImportService($pocketImport);
 
