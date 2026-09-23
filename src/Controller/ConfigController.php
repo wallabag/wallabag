@@ -678,7 +678,7 @@ class ConfigController extends AbstractController
             $request->getSession()->set('_locale', $language);
         }
 
-        return $this->redirect($request->headers->get('referer', $this->generateUrl('homepage')));
+        return $this->redirect($request->headers->get('referer', $this->redirectToDefaultHomepage()->getTargetUrl()));
     }
 
     /**

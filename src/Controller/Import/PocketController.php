@@ -107,7 +107,7 @@ class PocketController extends AbstractController
 
         $this->addFlash('notice', $message);
 
-        return $this->redirect($this->generateUrl('homepage'));
+        return $this->redirectToDefaultHomepage();
     }
 
     /**
