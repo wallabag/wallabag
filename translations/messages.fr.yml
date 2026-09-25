@@ -40,6 +40,8 @@ menu:
         theme_toggle_auto: "Thème automatique"
     top:
         add_new_entry: Sauvegarder un nouvel article
+        close: Fermer
+        open_menu: Ouvrir le menu
         search: Rechercher
         filter_entries: Filtrer les articles
         random_entry: Aller à un article aléatoire de cette liste
@@ -302,6 +304,7 @@ entry:
             theme_toggle_light: "Clair"
             theme_toggle_dark: "Sombre"
             theme_toggle_auto: "Automatique"
+            toggle_actions: Afficher ou masquer les actions
             problem:
                 label: Un problème ?
                 description: Est-ce que cet article s’affiche mal ?

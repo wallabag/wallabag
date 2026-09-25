@@ -82,7 +82,7 @@
         <div class="nav-panels" data-controller="topbar">
             <div class="nav-panel-item" data-topbar-target="actions">
                 <div class="nav-panel-top">
-                    <button type="button" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></button>
+                    <button type="button" data-target="slide-out" class="sidenav-trigger" aria-label="{{ 'menu.top.open_menu'|trans }}" aria-controls="slide-out" aria-expanded="false"><i class="material-icons" aria-hidden="true">menu</i></button>
                     <h1 class="left action">
                         {% block title %}
                         {% endblock %}
@@ -90,19 +90,19 @@
                 </div>
                 <ul class="input-field nav-panel-button">
                     <li class="bold toggle-add-url-container">
-                        <a class="waves-effect toggle-add-url" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" data-action="topbar#showAddUrl:prevent:stop" data-shortcuts-target="showAddUrl">
+                        <a class="waves-effect toggle-add-url" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" data-action="topbar#showAddUrl:prevent:stop" data-shortcuts-target="showAddUrl" data-topbar-target="addUrlTrigger" aria-controls="nav-panel-add" aria-expanded="false">
                             <i class="material-icons">add</i>
                         </a>
                     </li>
                     <li>
-                        <button type="button" class="waves-effect" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.search'|trans }}" data-action="topbar#showSearch:stop" data-shortcuts-target="showSearch">
-                            <i class="material-icons">search</i>
+                        <button type="button" class="waves-effect" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.search'|trans }}" data-action="topbar#showSearch:stop" data-shortcuts-target="showSearch" data-topbar-target="searchTrigger" aria-label="{{ 'menu.top.search'|trans }}" aria-controls="nav-panel-search" aria-expanded="false">
+                            <i class="material-icons" aria-hidden="true">search</i>
                         </button>
                     </li>
                     {% block nav_panel_extra_actions '' %}
                     <li class="bold">
-                        <button type="button" class="waves-effect dropdown-trigger" data-controller="materialize--dropdown materialize--tooltip" data-target="dropdown-account" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.account'|trans }}" id="news_menu">
-                            <i class="material-icons" id="news_link">account_circle</i>
+                        <button type="button" class="waves-effect dropdown-trigger" data-controller="materialize--dropdown materialize--tooltip" data-target="dropdown-account" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.account'|trans }}" id="news_menu" aria-label="{{ 'menu.top.account'|trans }}" aria-controls="dropdown-account" aria-expanded="false">
+                            <i class="material-icons" id="news_link" aria-hidden="true">account_circle</i>
                         </button>
                     </li>
                 </ul>
@@ -134,20 +134,20 @@
                         <li class="divider"></li>
                     {% endif %}
                     <li>
-                        <button type="button" data-action="click->dark-theme#useLight">
-                            <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
+                        <button type="button" data-action="click->dark-theme#useLight" data-dark-theme-target="light" aria-pressed="false">
+                            <i class="theme-toggle-icon material-icons tiny" aria-hidden="true">brightness_high</i>
                             <span>{{ 'menu.left.theme_toggle_light'|trans }}</span>
                         </button>
                     </li>
                     <li>
-                        <button type="button" data-action="click->dark-theme#useDark">
-                            <i class="theme-toggle-icon material-icons tiny">brightness_low</i>
+                        <button type="button" data-action="click->dark-theme#useDark" data-dark-theme-target="dark" aria-pressed="false">
+                            <i class="theme-toggle-icon material-icons tiny" aria-hidden="true">brightness_low</i>
                             <span>{{ 'menu.left.theme_toggle_dark'|trans }}</span>
                         </button>
                     </li>
                     <li>
-                        <button type="button" data-action="click->dark-theme#useAuto">
-                            <i class="theme-toggle-icon material-icons tiny">brightness_auto</i>
+                        <button type="button" data-action="click->dark-theme#useAuto" data-dark-theme-target="auto" aria-pressed="false">
+                            <i class="theme-toggle-icon material-icons tiny" aria-hidden="true">brightness_auto</i>
                             <span>{{ 'menu.left.theme_toggle_auto'|trans }}</span>
                         </button>
                     </li>
