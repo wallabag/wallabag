@@ -2,6 +2,7 @@
 
 namespace Wallabag\Import;
 
+use Wallabag\Entity\Annotation;
 use Wallabag\Entity\Entry;
 
 abstract class WallabagImport extends AbstractImport
@@ -130,7 +131,45 @@ abstract class WallabagImport extends AbstractImport
         $this->em->persist($entry);
         ++$this->importedEntries;
 
+        if (\array_key_exists('annotations', $importedEntry) && \is_array($importedEntry['annotations'])) {
+            foreach ($importedEntry['annotations'] as $importedAnnotation) {
+                $annotation = $this->parseAnnotation($entry, $importedAnnotation);
+
+                if (null !== $annotation) {
+                    $this->em->persist($annotation);
+                }
+            }
+        }
+
         return $entry;
+    }
+
+    /**
+     * Create an annotation from an imported entry and attach it to the given entry.
+     *
+     * @param array $importedAnnotation Annotation data from the imported file
+     */
+    protected function parseAnnotation(Entry $entry, $importedAnnotation): ?Annotation
+    {
+        if (!\is_array($importedAnnotation) || !\array_key_exists('text', $importedAnnotation)) {
+            return null;
+        }
+
+        $annotation = new Annotation($this->user);
+        $annotation->setEntry($entry);
+        $annotation->setText($importedAnnotation['text']);
+        $annotation->setQuote($importedAnnotation['quote'] ?? '');
+        $annotation->setRanges(\is_array($importedAnnotation['ranges'] ?? null) ? $importedAnnotation['ranges'] : []);
+
+        if (!empty($importedAnnotation['created_at'])) {
+            $annotation->setCreatedAt(new \DateTime($importedAnnotation['created_at']));
+        }
+
+        if (!empty($importedAnnotation['updated_at'])) {
+            $annotation->setUpdatedAt(new \DateTime($importedAnnotation['updated_at']));
+        }
+
+        return $annotation;
     }
 
     /**
