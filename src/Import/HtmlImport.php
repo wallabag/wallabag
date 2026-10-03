@@ -75,9 +75,9 @@ abstract class HtmlImport extends AbstractImport
 
         $existingEntry = $this->em
             ->getRepository(Entry::class)
-            ->findByUrlAndUserId($url, $this->user->getId());
+            ->findByUrlAndUserId($url, $this->user->getId(), includeDeleted: true);
 
-        if (false !== $existingEntry) {
+        if ($existingEntry instanceof Entry && !$existingEntry->isDeleted()) {
             ++$this->skippedEntries;
 
             return null;
@@ -85,7 +85,7 @@ abstract class HtmlImport extends AbstractImport
 
         $data = $this->prepareEntry($importedEntry);
 
-        $entry = new Entry($this->user);
+        $entry = ($existingEntry instanceof Entry) ? $existingEntry : new Entry($this->user);
         $entry->setUrl($data['url']);
         $entry->updateArchived($data['is_archived']);
         $createdAt = new \DateTime();
