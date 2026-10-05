@@ -4,6 +4,7 @@
 > The name of this project is **wallabag** — all lowercase, always. Not "Wallabag", not "WallaBag", not any other variation. Just plain, humble, all-lowercase **wallabag** 😉
 
 [![CI](https://github.com/wallabag/wallabag/actions/workflows/continuous-integration.yml/badge.svg?branch=master)](https://github.com/wallabag/wallabag/actions/workflows/continuous-integration.yml?query=branch%3Amaster)
+[![Plumber Score](https://score.getplumber.io/github.com/wallabag/wallabag.svg)](https://score.getplumber.io/github.com/wallabag/wallabag)
 [![Matrix](https://matrix.to/img/matrix-badge.svg)](https://matrix.to/#/#wallabag:matrix.org)
 [![Donation Status](https://img.shields.io/liberapay/goal/wallabag.svg?logo=liberapay)](https://liberapay.com/wallabag/donate)
 [![Translation status](https://hosted.weblate.org/widgets/wallabag/-/svg-badge.svg)](https://hosted.weblate.org/engage/wallabag/?utm_source=widget)
