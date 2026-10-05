@@ -42,7 +42,7 @@ jobs:
         run: make release VERSION=${{ github.event.release.tag_name }}
 
       - name: Upload the package to the release
-        uses: shogo82148/actions-upload-release-asset@aaba0f56bdbc1071f4af234d5cb16055e8a400de # v1.10.4
+        uses: shogo82148/actions-upload-release-asset@9ee13965a8a51926f330b424693f25fcff8f2ef6 # v1.10.6
         with:
           upload_url: ${{ github.event.release.upload_url }}
           asset_path: /tmp/wllbg-release/wallabag-${{ github.event.release.tag_name }}.tar.gz
