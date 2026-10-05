@@ -100,7 +100,6 @@ config:
             how_to_use_them_description: 'Vamos dizer que você deseja adicionar a tag « <i>leitura rápida</i> » quando o tempo de leitura for menor que 3 minutos.<br />Neste caso, você deve « readingTime &lt;= 3 » no campo <i>Regra</i> e « <i>leitura rápida</i> » no campo <i>Tags</i>.<br />Diversas tags podem ser adicionadas simultâneamente separando-as com vírgula: « <i>leitura rápida, precisa ser lido</i> »<br />Regras complexas podem ser escritas usando os seguintes operadores pré-definidos: if « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » então adicione a tag « <i>leitura longa, php</i> »'
             variables_available_title: 'Quais variáveis e operadores eu posso usar para escrever regras?'
             variables_available_description: 'As seguintes variáveis e operadores podem ser usados para criar regras de tags:'
-            meaning: ''
             variable_description:
                 label: 'Variável'
                 title: 'Título da entrada'
@@ -145,7 +144,6 @@ entry:
         reading_time_minutes: 'tempo estimado de leitura: %readingTime% min'
         reading_time_less_one_minute: 'tempo estimado de leitura: &lt; 1 min'
         number_of_tags: '{1}e uma outra tag|]1,Inf[e %count% outras tags'
-        reading_time_minutes_short: ''
         reading_time_less_one_minute_short: '&lt; 1 min'
         original_article: 'original'
         toogle_as_read: 'Marcar como lido'
@@ -230,7 +228,6 @@ about:
         support: '<a href="https://github.com/wallabag/wallabag/issues">no GitHub</a>'
     helping:
         description: 'wallabag é livre e software livre. Você pode nos ajudar:'
-        by_paypal: ''
     contributors:
         description: 'Obrigado por contribuir com a aplicação web wallabag'
     third_party:
@@ -243,7 +240,6 @@ howto:
     top_menu:
         browser_addons: 'Extensões de navegadores'
         mobile_apps: "App's móveis"
-        bookmarklet: ''
     form:
         description: 'Obrigado por este formulário'
     browser_addons:
@@ -251,9 +247,6 @@ howto:
         chrome: 'Extensão do Chrome'
         opera: 'Extensão do Opera'
     mobile_apps:
-        android:
-            via_f_droid: ''
-            via_google_play: ''
         ios: 'na App Store'
         windows: 'na Microsoft Store'
     bookmarklet:
@@ -290,8 +283,6 @@ quickstart:
         pocket: 'Migrar do Pocket'
         wallabag_v1: 'Migrar do wallabag v1'
         wallabag_v2: 'Migrar do wallabag v2'
-        readability: ''
-        instapaper: ''
     developer:
         title: 'Desenvolvedores'
         description: 'Nós também agradecemos os desenvolvedores: Docker, API, traduções, etc.'

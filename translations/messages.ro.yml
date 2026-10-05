@@ -62,7 +62,6 @@ config:
     form_password:
         old_password_label: 'Parola veche'
         new_password_label: 'Parola nouă'
-        repeat_new_password_label: ''
 entry:
     list:
         reading_time: 'timp estimat de citire'
@@ -148,7 +147,6 @@ howto:
     top_menu:
         browser_addons: 'Add-On-uri de Browser'
         mobile_apps: 'Aplicații mobile'
-        bookmarklet: ''
     form:
         description: 'Mulțumită acestui formular'
     browser_addons:
@@ -169,7 +167,6 @@ user:
     form:
         username_label: 'Nume de utilizator'
         password_label: 'Parolă'
-        repeat_new_password_label: ''
         plain_password_label: '????'
         email_label: 'E-mail'
 flashes:

@@ -280,10 +280,6 @@ howto:
         bookmarklet: 'วิธี Bookmarklet'
     form:
         description: 'ขอบคุณสิ่งนี้จาก'
-    browser_addons:
-        firefox: ''
-        chrome: ''
-        opera: ''
     mobile_apps:
         android:
             via_f_droid: 'ผ่านทาง F-Droid'
@@ -294,7 +290,6 @@ howto:
         description: 'Drag & drop สื่งนี้บน bookmarks bar ของคุณ:'
     shortcuts:
         page_description: ที่นึ้จะใช้ Shortcut ใน wallabag
-        shortcut: ''
         action: แอ็คชั่น
         all_pages_title: ใช้ Shortcut ในหน้าทั้งหมด
         go_unread: ไปยังที่ยังไม่ได้อ่าน
