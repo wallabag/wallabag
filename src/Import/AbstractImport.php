@@ -21,6 +21,7 @@ abstract class AbstractImport implements ImportInterface
     protected $skippedEntries = 0;
     protected $importedEntries = 0;
     protected $queuedEntries = 0;
+    protected $enabled = true;
 
     public function __construct(
         protected EntityManagerInterface $em,
@@ -72,6 +73,25 @@ abstract class AbstractImport implements ImportInterface
     public function getMarkAsRead()
     {
         return $this->markAsRead;
+    }
+
+    /**
+     * Get whether the import is enabled.
+     * If not, the importer won't be available in the UI.
+     */
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * Set whether the import is enabled.
+     */
+    public function setEnabled(bool $enabled): static
+    {
+        $this->enabled = $enabled;
+
+        return $this;
     }
 
     /**
