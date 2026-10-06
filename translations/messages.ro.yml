@@ -19,7 +19,6 @@ menu:
         logout: 'cum să'
         about: 'Despre'
         search: 'Căutare'
-        back_to_unread: 'Înapoi la articolele necitite'
     top:
         add_new_entry: 'Introdu un nou articol'
         search: 'Căutare'
