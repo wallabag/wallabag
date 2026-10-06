@@ -628,6 +628,16 @@ class EntryController extends AbstractController
         $currentEntryId = $request->attributes->getInt('id');
 
         $formOptions = [];
+        $direction = 'desc';
+        $sortBy = null;
+
+        if (null !== $request->get('entry_filter') && null !== $request->get('entry_filter')['sortType'] && '' !== $request->get('entry_filter')['sortType']) {
+            $direction = (null !== $request->get('entry_filter')['sortOrder'] && \in_array($request->get('entry_filter')['sortOrder'], ['asc', 'desc'], true)) ? $request->get('entry_filter')['sortOrder'] : 'desc';
+
+            if (\in_array($request->get('entry_filter')['sortType'], ['id','title','createdAt', 'url', 'readingTime'], true)) {
+                $sortBy = $request->get('entry_filter')['sortType'];
+            }
+        }
 
         switch ($type) {
             case 'search':
@@ -655,7 +665,7 @@ class EntryController extends AbstractController
                 $qb = $this->entryRepository->getBuilderForSameDomainByUser($this->getUser()->getId(), $currentEntryId);
                 break;
             case 'all':
-                $qb = $this->entryRepository->getBuilderForAllByUser($this->getUser()->getId());
+                $qb = $this->entryRepository->getBuilderForAllByUser($this->getUser()->getId(), $sortBy, $direction);
                 break;
             default:
                 throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type));
