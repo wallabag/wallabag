@@ -7,3 +7,4 @@ validator:
     password_must_match: Polja lozinki moraju se poklapati.
     item_per_page_too_low: Ova bi vrijednost trebala biti veća ili jednaka 1.
     feed_limit_too_low: Ova bi vrijednost trebala biti veća ili jednaka 1.
+    captcha_invalid: Sigurnosni kod ne vrijedi ili je istekao. Pokušaj ponovo.
