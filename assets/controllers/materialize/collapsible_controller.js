@@ -8,6 +8,13 @@ export default class extends Controller {
 
   connect() {
     this.instance = M.Collapsible.init(this.element, { accordion: this.accordionValue });
+    this.buttonHeaders = [...this.element.querySelectorAll('button.collapsible-header')];
+    // eslint-disable-next-line dot-notation
+    const keydownHandler = this.instance['_handleCollapsibleKeydownBound'];
+
+    this.buttonHeaders.forEach((header) => {
+      header.removeEventListener('keydown', keydownHandler);
+    });
   }
 
   disconnect() {
