@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3048787b4a8dfb841a303fe9bc7ea1ed",
+    "content-hash": "b485a39461867ef27b5c5ad8bee664ed",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -276,54 +276,53 @@
         },
         {
             "name": "craue/config-bundle",
-            "version": "2.7.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/craue/CraueConfigBundle.git",
-                "reference": "5bf3673fc116cab92b9943c88dc514e9ca8ad4ad"
+                "reference": "69d884f5d95cbe00eb8fc51d354b4ca01e209573"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueConfigBundle/zipball/5bf3673fc116cab92b9943c88dc514e9ca8ad4ad",
-                "reference": "5bf3673fc116cab92b9943c88dc514e9ca8ad4ad",
+                "url": "https://api.github.com/repos/craue/CraueConfigBundle/zipball/69d884f5d95cbe00eb8fc51d354b4ca01e209573",
+                "reference": "69d884f5d95cbe00eb8fc51d354b4ca01e209573",
                 "shasum": ""
             },
             "require": {
-                "doctrine/doctrine-bundle": "^1.6.12|^2",
-                "php": "^7.3|^8",
-                "psr/simple-cache": "^1|^2|^3",
-                "symfony/cache": "~4.4|~5.4|^6.3",
-                "symfony/config": "~4.4|~5.4|^6.3",
-                "symfony/dependency-injection": "~4.4|~5.4|^6.3",
-                "symfony/form": "~4.4|~5.4|^6.3",
-                "symfony/framework-bundle": "~4.4|~5.4|^6.3",
-                "symfony/http-foundation": "~4.4|~5.4|^6.3",
-                "symfony/http-kernel": "~4.4|~5.4|^6.3",
-                "symfony/options-resolver": "~4.4|~5.4|^6.3",
-                "symfony/validator": "~4.4|~5.4|^6.3"
+                "doctrine/doctrine-bundle": "^2 || ^3",
+                "php": "^8.2",
+                "psr/cache": "^1 || ^2 || ^3",
+                "symfony/cache": "^5.4 || ^6.4 || ^7.4 || ^8.1",
+                "symfony/config": "^5.4 || ^6.4 || ^7.4 || ^8.1",
+                "symfony/dependency-injection": "^5.4 || ^6.4 || ^7.4 || ^8.1",
+                "symfony/form": "^5.4 || ^6.4 || ^7.4 || ^8.1",
+                "symfony/framework-bundle": "^5.4 || ^6.4 || ^7.4 || ^8.1",
+                "symfony/http-foundation": "^5.4 || ^6.4 || ^7.4 || ^8.1",
+                "symfony/http-kernel": "^5.4 || ^6.4 || ^7.4 || ^8.1",
+                "symfony/options-resolver": "^5.4 || ^6.4 || ^7.4 || ^8.1",
+                "symfony/validator": "^5.4 || ^6.4 || ^7.4 || ^8.1"
             },
             "require-dev": {
-                "craue/translations-tests": "^1.0",
-                "doctrine/orm": "^2.5.14",
+                "composer/semver": "^3",
+                "craue/translations-tests": "^1",
+                "doctrine/orm": "^2.12 || ^3",
                 "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan": "^1.4",
-                "phpstan/phpstan-deprecation-rules": "^1.0",
-                "phpstan/phpstan-strict-rules": "^1.1",
-                "phpstan/phpstan-symfony": "^1.1",
+                "phpstan/phpstan": "^2.2",
+                "phpstan/phpstan-deprecation-rules": "^2",
+                "phpstan/phpstan-strict-rules": "^2",
+                "phpstan/phpstan-symfony": "^2",
                 "phpunit/phpunit": "^9.6",
-                "symfony/asset": "~4.4|~5.4|^6.3",
-                "symfony/browser-kit": "~4.4|~5.4|^6.3",
-                "symfony/phpunit-bridge": "^6.3",
-                "symfony/twig-bundle": "~4.4|~5.4|^6.3",
-                "symfony/web-profiler-bundle": "~4.4|~5.4|^6.3"
+                "symfony/asset": "^5.4 || ^6.4 || ^7.4 || ^8.1",
+                "symfony/browser-kit": "^5.4 || ^6.4 || ^7.4 || ^8.1",
+                "symfony/phpunit-bridge": "^8.1",
+                "symfony/property-info": "^5.4 || ^6.4 || ^7.4 || ^8.1",
+                "symfony/twig-bundle": "^5.4 || ^6.4 || ^7.4 || ^8.1",
+                "symfony/web-profiler-bundle": "^5.4 || ^6.4 || ^7.4 || ^8.1"
             },
             "type": "symfony-bundle",
             "extra": {
-                "symfony": {
-                    "require": "~4.4|~5.4|^6.3"
-                },
                 "branch-alias": {
-                    "dev-master": "2.7.x-dev"
+                    "dev-master": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -356,9 +355,9 @@
             ],
             "support": {
                 "issues": "https://github.com/craue/CraueConfigBundle/issues",
-                "source": "https://github.com/craue/CraueConfigBundle/tree/2.7.0"
+                "source": "https://github.com/craue/CraueConfigBundle/tree/3.0.0"
             },
-            "time": "2023-08-06T22:32:54+00:00"
+            "time": "2026-09-15T09:43:34+00:00"
         },
         {
             "name": "defuse/php-encryption",
@@ -1772,16 +1771,16 @@
         },
         {
             "name": "doctrine/sql-formatter",
-            "version": "1.5.3",
+            "version": "1.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/sql-formatter.git",
-                "reference": "a8af23a8e9d622505baa2997465782cbe8bb7fc7"
+                "reference": "9563949f5cd3bd12a17d12fb980528bc141c5806"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/sql-formatter/zipball/a8af23a8e9d622505baa2997465782cbe8bb7fc7",
-                "reference": "a8af23a8e9d622505baa2997465782cbe8bb7fc7",
+                "url": "https://api.github.com/repos/doctrine/sql-formatter/zipball/9563949f5cd3bd12a17d12fb980528bc141c5806",
+                "reference": "9563949f5cd3bd12a17d12fb980528bc141c5806",
                 "shasum": ""
             },
             "require": {
@@ -1821,9 +1820,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/sql-formatter/issues",
-                "source": "https://github.com/doctrine/sql-formatter/tree/1.5.3"
+                "source": "https://github.com/doctrine/sql-formatter/tree/1.5.4"
             },
-            "time": "2025-10-26T09:35:14+00:00"
+            "time": "2026-02-08T16:21:46+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -7524,57 +7523,6 @@
             "time": "2021-05-03T11:20:27+00:00"
         },
         {
-            "name": "psr/simple-cache",
-            "version": "3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/simple-cache.git",
-                "reference": "764e0b3939f5ca87cb904f570ef9be2d78a07865"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/764e0b3939f5ca87cb904f570ef9be2d78a07865",
-                "reference": "764e0b3939f5ca87cb904f570ef9be2d78a07865",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.0.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\SimpleCache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interfaces for simple caching",
-            "keywords": [
-                "cache",
-                "caching",
-                "psr",
-                "psr-16",
-                "simple-cache"
-            ],
-            "support": {
-                "source": "https://github.com/php-fig/simple-cache/tree/3.0.0"
-            },
-            "time": "2021-10-29T13:26:27+00:00"
-        },
-        {
             "name": "ralouphie/getallheaders",
             "version": "3.0.3",
             "source": {
@@ -11342,16 +11290,16 @@
         },
         {
             "name": "symfony/polyfill-intl-icu",
-            "version": "v1.31.0",
+            "version": "v1.38.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-icu.git",
-                "reference": "d80a05e9904d2c2b9b95929f3e4b5d3a8f418d78"
+                "reference": "445c90e341fccda10311019cf82ff73bb7343945"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/d80a05e9904d2c2b9b95929f3e4b5d3a8f418d78",
-                "reference": "d80a05e9904d2c2b9b95929f3e4b5d3a8f418d78",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/445c90e341fccda10311019cf82ff73bb7343945",
+                "reference": "445c90e341fccda10311019cf82ff73bb7343945",
                 "shasum": ""
             },
             "require": {
@@ -11406,7 +11354,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-icu/tree/v1.31.0"
+                "source": "https://github.com/symfony/polyfill-intl-icu/tree/v1.38.0"
             },
             "funding": [
                 {
@@ -11418,11 +11366,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-09T11:45:10+00:00"
+            "time": "2026-05-25T11:52:53+00:00"
         },
         {
             "name": "symfony/polyfill-intl-idn",
@@ -11844,16 +11796,16 @@
         },
         {
             "name": "symfony/property-info",
-            "version": "v6.4.34",
+            "version": "v6.4.46",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-info.git",
-                "reference": "916455e4c9dcddbebfd101f29d7983841c3564e0"
+                "reference": "4789c9a2650f9285da6db0363ef40e5a21b42ce9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-info/zipball/916455e4c9dcddbebfd101f29d7983841c3564e0",
-                "reference": "916455e4c9dcddbebfd101f29d7983841c3564e0",
+                "url": "https://api.github.com/repos/symfony/property-info/zipball/4789c9a2650f9285da6db0363ef40e5a21b42ce9",
+                "reference": "4789c9a2650f9285da6db0363ef40e5a21b42ce9",
                 "shasum": ""
             },
             "require": {
@@ -11910,7 +11862,7 @@
                 "validator"
             ],
             "support": {
-                "source": "https://github.com/symfony/property-info/tree/v6.4.34"
+                "source": "https://github.com/symfony/property-info/tree/v6.4.46"
             },
             "funding": [
                 {
@@ -11930,7 +11882,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-02-13T09:42:46+00:00"
+            "time": "2026-09-03T19:31:46+00:00"
         },
         {
             "name": "symfony/proxy-manager-bridge",
