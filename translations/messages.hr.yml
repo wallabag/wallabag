@@ -751,3 +751,6 @@ ignore_origin_instance_rule:
         delete: Izbriši
         save: Spremi
         rule_label: Pravilo
+captcha:
+    label: Sigurnosna provjera
+    help: Upiši znakove koje su prikazane na slici. Osvježavanjem slike prethodni odgovor postaje nevažeći.
