@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:opds="http://opds-spec.org/2010/catalog">
+    <id>wallabag:{{ wallabag_url|removeScheme|removeWww }}:{{ user }}:opds</id>
+    <title>wallabag — {{ user }}</title>
+    <updated>{{ "now"|date('c') }}</updated>
+    <link rel="self" type="application/atom+xml;profile=opds-catalog;kind=navigation" href="{{ app.request.uri }}"/>
+    <link rel="start" type="application/atom+xml;profile=opds-catalog;kind=navigation" href="{{ app.request.uri }}"/>
+    <generator uri="https://wallabag.org" version="{{ version }}">wallabag</generator>
+    <author>
+        <name>{{ user }}</name>
+    </author>
+    <icon>{{ asset('favicon.ico') }}</icon>
+
+    <entry>
+        <title>Digest — {{ digestDefault }} most recent unread</title>
+        <id>wallabag:{{ wallabag_url|removeScheme|removeWww }}:{{ user }}:opds:digest</id>
+        <updated>{{ "now"|date('c') }}</updated>
+        <content type="text">The {{ digestDefault }} most recently saved unread articles, bundled into a single EPUB.</content>
+        <link rel="http://opds-spec.org/acquisition"
+              type="application/epub+zip"
+              href="{{ digestHref }}"/>
+    </entry>
+
+    {% for shelf in shelves %}
+    <entry>
+        <title>{{ shelf.type|capitalize }}</title>
+        <id>wallabag:{{ wallabag_url|removeScheme|removeWww }}:{{ user }}:opds:{{ shelf.type }}</id>
+        <updated>{{ "now"|date('c') }}</updated>
+        <content type="text">{{ shelf.type|capitalize }} articles</content>
+        <link rel="subsection"
+              type="application/atom+xml;profile=opds-catalog;kind=acquisition"
+              href="{{ shelf.href }}"/>
+    </entry>
+    {% endfor %}
+</feed>

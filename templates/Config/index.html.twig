@@ -235,6 +235,7 @@
                                     <li><a href="{{ path('starred_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.starred'|trans }}</a></li>
                                     <li><a href="{{ path('archive_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.archive'|trans }}</a></li>
                                     <li><a href="{{ path('all_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.all'|trans }}</a></li>
+                                    <li><a href="{{ path('opds_root', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.opds'|trans }}</a></li>
                                 </ul>
                             </div>
                         </div>
