@@ -17,7 +17,8 @@ The OPDS catalog uses the same personal feed token as the [RSS feeds]({{< relref
 If you have not created one yet, open the **Feeds** tab and click
 `Create your token` (you can change it later with `Reset your token`).
 
-Your catalog URL is then:
+Once the token exists, the **Feeds** tab links to your catalog as
+`OPDS catalog (e-readers)`. The URL has this shape:
 
 ```
 https://your-wallabag-instance/opds/{username}/{token}

@@ -179,6 +179,18 @@ class OpdsControllerTest extends WallabagTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
+    public function testConfigPageLinksToCatalog(): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $this->setFeedToken($client, 'admin', 'SUPERTOKEN');
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertCount(1, $crawler->filter('a[href="/opds/admin/SUPERTOKEN"]'));
+    }
+
     private function setFeedToken($client, string $username, string $token, int $limit = 2): void
     {
         $em = $client->getContainer()->get(EntityManagerInterface::class);
