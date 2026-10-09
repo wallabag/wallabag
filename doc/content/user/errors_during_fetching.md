@@ -32,7 +32,7 @@ If you already tried to re-fetch the content or to solve potential networking is
 
 Wallabag uses two systems working together to try to fetch the content of an article:
 
-- site configuration files written for each specific domain (often called _site config_, stored in `vendor/j0k3r/graby-site-config`);
+- site configuration files written for each specific domain (often called _site config_, fetched from [j0k3r/graby-site-config](https://github.com/j0k3r/graby-site-config);
 - [php-readability](https://github.com/j0k3r/php-readability), which automatically analyzes the content of a web page to determine what is more likely to be the desired content.
 
 None of these two elements are flawless and we sometimes have to help wallabag a bit! In order to help you efficiently, we will need you to gather some information beforehand, as described below. When required, you could also create (or update) the site configuration file of the website hosting the desired content.
