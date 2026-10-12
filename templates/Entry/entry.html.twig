@@ -14,8 +14,8 @@
         <div class="nav-panel-item cyan darken-1">
             <ul>
                 <li>
-                    <button type="button" data-target="slide-out" class="sidenav-trigger">
-                        <i class="material-icons">menu</i>
+                    <button type="button" data-target="slide-out" class="sidenav-trigger" aria-label="{{ 'menu.top.open_menu'|trans }}" aria-controls="slide-out" aria-expanded="false">
+                        <i class="material-icons" aria-hidden="true">menu</i>
                     </button>
                 </li>
                 <li>
@@ -129,34 +129,34 @@
         {% endif %}
 
         <li class="bold border-bottom">
-            <button type="button" class="waves-effect collapsible-header" id="nav-btn-add-tag" data-action="click->materialize--sidenav#close click->leftbar#toggleAddTagForm">
-                <i class="material-icons small">label_outline</i>
+            <button type="button" class="waves-effect collapsible-header" id="nav-btn-add-tag" data-action="click->materialize--sidenav#close click->leftbar#toggleAddTagForm" aria-controls="entry-add-tag" aria-expanded="false">
+                <i class="material-icons small" aria-hidden="true">label_outline</i>
                 <span>{{ 'entry.view.left_menu.add_a_tag'|trans }}</span>
             </button>
             <div class="collapsible-body"></div>
         </li>
 
         <li class="bold">
-            <button type="button" class="waves-effect collapsible-header">
-                <i class="material-icons small">brightness_medium</i>
+            <button type="button" class="waves-effect collapsible-header" aria-controls="reader-theme-options" aria-expanded="false">
+                <i class="material-icons small" aria-hidden="true">brightness_medium</i>
                 <span>{{ 'entry.view.left_menu.theme_toggle'|trans }}</span>
             </button>
-            <ul class="collapsible-body">
+            <ul id="reader-theme-options" class="collapsible-body">
                 <li>
-                    <button type="button" data-action="click->dark-theme#useLight">
-                        <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
+                    <button type="button" data-action="click->dark-theme#useLight" data-dark-theme-target="light" aria-pressed="false">
+                        <i class="theme-toggle-icon material-icons tiny" aria-hidden="true">brightness_high</i>
                         <span>{{ 'entry.view.left_menu.theme_toggle_light'|trans }}</span>
                     </button>
                 </li>
                 <li>
-                    <button type="button" data-action="click->dark-theme#useDark">
-                        <i class="theme-toggle-icon material-icons tiny">brightness_low</i>
+                    <button type="button" data-action="click->dark-theme#useDark" data-dark-theme-target="dark" aria-pressed="false">
+                        <i class="theme-toggle-icon material-icons tiny" aria-hidden="true">brightness_low</i>
                         <span>{{ 'entry.view.left_menu.theme_toggle_dark'|trans }}</span>
                     </button>
                 </li>
                 <li>
-                    <button type="button" data-action="click->dark-theme#useAuto">
-                        <i class="theme-toggle-icon material-icons tiny">brightness_auto</i>
+                    <button type="button" data-action="click->dark-theme#useAuto" data-dark-theme-target="auto" aria-pressed="false">
+                        <i class="theme-toggle-icon material-icons tiny" aria-hidden="true">brightness_auto</i>
                         <span>{{ 'entry.view.left_menu.theme_toggle_auto'|trans }}</span>
                     </button>
                 </li>
@@ -164,11 +164,11 @@
         </li>
         {% if craue_setting('share_public') or craue_setting('share_twitter') or craue_setting('share_shaarli') or craue_setting('share_diaspora') or craue_setting('share_unmark') or craue_setting('share_linkding') or craue_setting('share_mail') %}
         <li class="bold">
-            <button type="button" class="waves-effect collapsible-header">
-                <i class="material-icons small">share</i>
+            <button type="button" class="waves-effect collapsible-header" aria-controls="reader-share-options" aria-expanded="false">
+                <i class="material-icons small" aria-hidden="true">share</i>
                 <span>{{ 'entry.view.left_menu.share_content'|trans }}</span>
             </button>
-            <div class="collapsible-body">
+            <div id="reader-share-options" class="collapsible-body">
                 <ul>
                     {% if craue_setting('share_public') %}
                         {% if is_granted('SHARE', entry) %}
@@ -245,7 +245,7 @@
         {% if craue_setting('show_printlink') %}
         <li class="bold border-bottom hide-on-med-and-down">
             <button type="button" class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.print'|trans }}" onclick="window.print();">
-                <i class="material-icons small">print</i>
+                <i class="material-icons small" aria-hidden="true">print</i>
                 <span>{{ 'entry.view.left_menu.print'|trans }}</span>
             </button>
             <div class="collapsible-body"></div>
@@ -263,11 +263,11 @@
 
         {% if is_granted('EXPORT', entry) %}
             <li class="bold">
-                <button type="button" class="waves-effect collapsible-header">
-                    <i class="material-icons small">file_download</i>
+                <button type="button" class="waves-effect collapsible-header" aria-controls="reader-export-options" aria-expanded="false">
+                    <i class="material-icons small" aria-hidden="true">file_download</i>
                     <span>{{ 'entry.view.left_menu.export'|trans }}</span>
                 </button>
-                <div class="collapsible-body">
+                <div id="reader-export-options" class="collapsible-body">
                     <ul>
                         {% if craue_setting('export_epub') %}<li><a href="{{ path('export_entry', {entry: entry.id, 'format': 'epub'}) }}" title="Generate ePub file">EPUB</a></li>{% endif %}
                         {% if craue_setting('export_pdf') %}<li><a href="{{ path('export_entry', {entry: entry.id, 'format': 'pdf'}) }}" title="Generate PDF file">PDF</a></li>{% endif %}
@@ -352,7 +352,7 @@
             </div>
 
             {% if is_granted('TAG', entry) %}
-                <div class="input-field hidden" data-controller="add-tag" data-action="leftbar:toggleAddTagForm@window->add-tag#toggle">
+                <div id="entry-add-tag" class="input-field hidden" data-controller="add-tag" data-action="leftbar:toggleAddTagForm@window->add-tag#toggle">
                     {{ render(controller('Wallabag\\Controller\\TagController::addTagFormAction', {'id': entry.id})) }}
                 </div>
             {% endif %}
@@ -371,10 +371,10 @@
         </article>
 
         <div class="fixed-action-btn hide-on-large-only" data-controller="materialize--fab" data-action="scroll@window->materialize--fab#autoDisplay click->materialize--fab#click">
-            <button type="button" class="btn-floating btn-large" data-toggle="actions">
-              <i class="material-icons">menu</i>
+            <button type="button" class="btn-floating btn-large" data-toggle="actions" aria-label="{{ 'entry.view.left_menu.toggle_actions'|trans }}" aria-controls="reader-mobile-actions" aria-expanded="false">
+              <i class="material-icons" aria-hidden="true">menu</i>
             </button>
-            <ul>
+            <ul id="reader-mobile-actions">
                 {% if is_granted('ARCHIVE', entry) %}
                     <li>
                       <form action="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
