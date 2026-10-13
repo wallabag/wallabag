@@ -1,0 +1,17 @@
+{
+  "name": "playwright-javascript-binding",
+  "version": "1.0.0",
+  "description": "Playwright JavaScript Code Export (testmu binding mode)",
+  "main": "test.js",
+  "type": "module",
+  "scripts": {
+    "start": "node test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@testmuai/playwright-bindings": "0.1.47",
+    "playwright": "1.57.0",
+    "@playwright/test": "1.57.0"
+  }
+}

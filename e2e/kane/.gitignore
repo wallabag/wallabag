@@ -1,0 +1,5 @@
+# Local KaneCLI run evidence (screenshots, traces)
+.testmuai/
+# Dependencies for the exported Playwright tests
+node_modules/
+.env
