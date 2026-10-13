@@ -95,18 +95,32 @@ title: [XPath]
 # Article's main content
 body: [XPath]
 
+# Article's publication date
+date: [XPath]
+
 # Parts to strip in the content
 strip: [XPath]
 
-# A test URL, e.g. the article you used to write the file
+# Test URLs, e.g. articles you used to write the file
 test_url: https://www.newswebite.com/xxx/my-article.html
+test_url: https://www.newswebite.com/xxx/another-article.html
 ```
 
 The `[XPath]` are the specific paths leading to the desired content in the HTML page. Wallabag will be able to follow these paths in order to directly fetch the content, instead of trying to analyze what is what in the page.
 
+The `date` XPath identifies the article's publication date, which wallabag uses when it is provided. You can also repeat `test_url` for several article pages, which is useful when a website has more than one article layout.
+
+Site configurations accept a few optional cleanup directives:
+
+- `prune: no` disables the default cleanup that removes elements which do not resemble article content. Use it when that cleanup removes content you want to keep;
+- `tidy: no` disables preprocessing with HTML Tidy. Try it when an XPath stops matching because Tidy changed the document structure;
+- `strip_attr: [XPath]` removes attributes selected by an XPath before content extraction. For example, `strip_attr: //img/@srcset` can prevent an unwanted `srcset` from overriding an image's `src` URL.
+
+Compare the fetched result before and after adding `prune` or `tidy`; these settings depend on the website's HTML and do not need to be present when the default result is correct.
+
 You can find the _XPath_ with [this tool](https://siteconfig.fivefilters.org/): load the content by entering the URL of the article, then select the part(s) of interest in the page. The _XPath_ will be displayed at the bottom of the page. You can also look directly at the source code of the website (`Ctrl`+`U` and/or `F12` on most recent browsers) and determine the _XPath_ with the rules described in the following part.
 
-Other elements can be specified in the site configuration files (date, authors, stripped elements...), you can check the full extent of the features in [the documentation](https://help.fivefilters.org/full-text-rss/site-patterns.html#pattern-format).
+Other elements can be specified in the site configuration files (authors, multi-page links, HTTP headers...), you can check the full extent of the features in [the documentation](https://help.fivefilters.org/full-text-rss/site-patterns.html#pattern-format).
 
 There is two ways to test and troubleshoot your new site configuration file:
 
