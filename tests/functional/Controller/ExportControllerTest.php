@@ -233,7 +233,13 @@ class ExportControllerTest extends WallabagTestCase
         $this->assertSame((int) $contentInDB->isStarred(), $content[0]['is_starred']);
         $this->assertSame($contentInDB->getTitle(), $content[0]['title']);
         $this->assertSame($contentInDB->getUrl(), $content[0]['url']);
-        $this->assertSame([['text' => 'This is my annotation /o/', 'quote' => 'content']], $content[0]['annotations']);
+        $this->assertCount(1, $content[0]['annotations']);
+        $this->assertSame('This is my annotation /o/', $content[0]['annotations'][0]['text']);
+        $this->assertSame('content', $content[0]['annotations'][0]['quote']);
+        // dates are exported so they can be restored on import
+        $annotationInDB = $contentInDB->getAnnotations()[0];
+        $this->assertSame($annotationInDB->getCreatedAt()->format(\DateTime::ATOM), $content[0]['annotations'][0]['created_at']);
+        $this->assertSame($annotationInDB->getUpdatedAt()->format(\DateTime::ATOM), $content[0]['annotations'][0]['updated_at']);
         $this->assertSame($contentInDB->getMimetype(), $content[0]['mimetype']);
         $this->assertSame($contentInDB->getLanguage(), $content[0]['language']);
         $this->assertSame($contentInDB->getReadingtime(), $content[0]['reading_time']);
