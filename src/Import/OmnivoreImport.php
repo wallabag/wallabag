@@ -81,9 +81,9 @@ class OmnivoreImport extends AbstractImport
     {
         $existingEntry = $this->em
             ->getRepository(Entry::class)
-            ->findByUrlAndUserId($importedEntry['url'], $this->user->getId());
+            ->findByUrlAndUserId($importedEntry['url'], $this->user->getId(), includeDeleted: true);
 
-        if (false !== $existingEntry) {
+        if ($existingEntry instanceof Entry && !$existingEntry->isDeleted()) {
             ++$this->skippedEntries;
 
             return null;
@@ -101,7 +101,7 @@ class OmnivoreImport extends AbstractImport
             'preview_picture' => $importedEntry['thumbnail'],
         ];
 
-        $entry = new Entry($this->user);
+        $entry = ($existingEntry instanceof Entry) ? $existingEntry : new Entry($this->user);
         $entry->setUrl($data['url']);
         $entry->setTitle($data['title']);
 

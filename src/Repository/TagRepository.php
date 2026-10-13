@@ -107,7 +107,7 @@ class TagRepository extends ServiceEntityRepository
             FROM {$this->tablePrefix}tag t
             LEFT JOIN {$this->tablePrefix}entry_tag et ON et.tag_id = t.id
             JOIN {$this->tablePrefix}entry e ON e.id = et.entry_id
-            WHERE e.user_id = :userId
+            WHERE e.user_id = :userId AND e.deleted_at IS NULL
             GROUP BY t.id
             ORDER BY t.label
         SQL;
@@ -179,6 +179,7 @@ class TagRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('t')
             ->leftJoin('t.entries', 'e')
             ->where('e.user = :userId')->setParameter('userId', $userId)
+            ->andWhere('e.deletedAt IS NULL')
             ->groupBy('t.id')
             ->orderBy('t.slug');
     }
