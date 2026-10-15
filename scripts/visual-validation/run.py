@@ -24,7 +24,10 @@ parser.add_argument('--runtime-slot-released', action='store_true', required=Tru
 parser.add_argument('--mariadb-image', required=True)
 parser.add_argument('--browser-image', required=True)
 parser.add_argument('--public-x-receipt', type=Path, help='Optional previously retrieved public article JSON; exact integrity is verified.')
+parser.add_argument('--evidence-subdir', default='visual-evidence', help='Separate captures from earlier Library-backed screenshots.')
 args = parser.parse_args()
+if not re.fullmatch(r'[a-z0-9-]{1,64}', args.evidence_subdir):
+    parser.error('Use a simple relative evidence directory name.')
 if args.public_x_receipt:
     args.public_x_receipt = args.public_x_receipt.resolve(strict=True)
     if hashlib.sha256(args.public_x_receipt.read_bytes()).hexdigest() != 'b4fe5c4a1619c55187a2f692a09b0c7853077b241ab850e66e2045859281213d':
@@ -35,7 +38,7 @@ for image in [args.mariadb_image, args.browser_image]:
 if not args.browser_image.startswith('mcr.microsoft.com/playwright:v1.63.0-noble@'):
     parser.error('Use the matching official Playwright v1.63.0-noble image digest.')
 PHP_IMAGE = 'wallabag-local-' + KEY + ':test'
-EVIDENCE = ART / 'visual-evidence'
+EVIDENCE = ART / args.evidence_subdir
 STAGE = ART / 'visual-app'
 PACKAGE = ART / 'playwright/node_modules/playwright-core'
 if not STAGE.is_dir() or not (PACKAGE / 'package.json').is_file():
