@@ -115,6 +115,14 @@ applications) on a Public or Private Cloud.
 
 [Install wallabag on alwaysdata](https://www.alwaysdata.com/en/marketplace/wallabag/)
 
+## Installation on Pethost
+
+Pethost has a one-click template that runs the wallabag Docker image with
+a persistent volume and HTTPS. It asks for a password and creates the
+`wallabag` user with it, with sign-ups turned off.
+
+[Install wallabag on Pethost](https://pethost.dev/templates/wallabag/)
+
 ## Installation on Synology
 
 The SynoCommunity provides a package to install wallabag on your Synology NAS.
