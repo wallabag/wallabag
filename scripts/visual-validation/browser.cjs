@@ -48,15 +48,30 @@ let page;
   await page.locator('label[for="config_x_article_reader_enabled"]').click();
   assert.equal(await page.locator('input[name="config[x_article_reader_enabled]"]').isChecked(), true);
   await Promise.all([page.waitForNavigation(), page.locator('#config_save').click()]);
-  async function capture(id, title, expected, screenshot) {
+  await page.goto('http://127.0.0.1:8080/grabbers');
+  assert.ok((await page.locator('body').innerText()).includes('Medium public stories'));
+  await page.locator('label[for="grabber-enabled-medium"]').click();
+  await Promise.all([page.waitForNavigation(), page.getByRole('button', { name: 'Save medium settings' }).click()]);
+  assert.equal(await page.locator('#grabber-enabled-medium').isChecked(), false);
+  await page.locator('label[for="grabber-enabled-medium"]').click();
+  await Promise.all([page.waitForNavigation(), page.getByRole('button', { name: 'Save medium settings' }).click()]);
+  assert.equal(await page.locator('#grabber-enabled-medium').isChecked(), true);
+  await page.screenshot({ path: '/evidence/special-grabbers-desktop.png', fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({ path: '/evidence/special-grabbers-mobile.png', fullPage: true });
+  assert.ok(await page.locator('body').evaluate(el => el.scrollWidth <= window.innerWidth + 1), 'grabbers mobile horizontal overflow');
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  async function captureUrl(url, title, expected, screenshot) {
     await page.goto('http://127.0.0.1:8080/new');
     if (!(await page.locator('input[name="entry[url]"]').isVisible())) await page.locator('#nav-btn-add').click();
-    await page.locator('input[name="entry[url]"]').fill(`https://x.com/synthetic/status/${id}`);
+    await page.locator('input[name="entry[url]"]').fill(url);
     await Promise.all([page.waitForNavigation(), page.locator('input[name="entry[url]"]').locator('xpath=ancestor::form').locator('button[type="submit"], input[type="submit"]').first().click()]);
     await Promise.all([page.waitForNavigation(), page.getByRole('link', { name: title, exact: true }).first().click()]);
     assert.ok((await page.locator('body').innerText()).includes(expected), expected);
     await page.screenshot({ path: `/evidence/${screenshot}.png`, fullPage: true });
   }
+  const capture = (id, title, expected, screenshot) => captureUrl(`https://x.com/synthetic/status/${id}`, title, expected, screenshot);
+  await captureUrl('https://medium.com/@author/story-abcdef012345', 'Synthetic Medium story', 'Synthetic Medium ending.', 'medium-public-desktop');
   await capture('12345', 'Synthetic visual article', 'Synthetic closing paragraph.', 'x-article-desktop');
   await capture('12346', 'Synthetic author — X post (partial capture)', 'Partial X capture.', 'x-partial-desktop');
   await capture('12347', 'X — X post (unavailable)', 'X capture unavailable.', 'x-failure-desktop');
@@ -78,7 +93,7 @@ let page;
   await Promise.all([page.waitForNavigation(), historical.getByRole('button', { name: 'Unsubscribe' }).click()]);
   assert.equal(await page.getByRole('heading', { name: 'Historical synthetic feed', exact: true }).count(), 0);
   assert.deepEqual(errors, [], 'browser JavaScript exceptions');
-  fs.writeFileSync('/evidence/browser-result.json', JSON.stringify({ status: 'pass', synthetic_account_and_feeds: true, public_article_receipt: process.env.WALLABAG_PUBLIC_X_RECEIPT === '1', viewport: ['1440x1000', '390x844'], checks: ['login', 'rss-create', 'rss-disable', 'rss-import', 'rss-unsubscribe', 'x-opt-in', 'x-body', 'x-partial', 'x-failure', 'no-horizontal-overflow', 'no-page-errors'] }, null, 2));
+  fs.writeFileSync('/evidence/browser-result.json', JSON.stringify({ status: 'pass', synthetic_account_and_feeds: true, public_article_receipt: process.env.WALLABAG_PUBLIC_X_RECEIPT === '1', viewport: ['1440x1000', '390x844'], checks: ['login', 'rss-create', 'rss-disable', 'rss-import', 'rss-unsubscribe', 'x-opt-in', 'x-body', 'x-partial', 'x-failure', 'medium-public-only', 'grabber-disable-enable', 'no-horizontal-overflow', 'no-page-errors'] }, null, 2));
   await browser.close();
 })().catch(async error => {
   console.error(error);

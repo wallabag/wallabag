@@ -1,0 +1,24 @@
+# Template only. Copy outside the checkout and supply host-local paths/values.
+# Existing DB/Redis/network definitions belong in the operator's local Compose.
+services:
+  wallabag:
+    image: ${WALLABAG_IMAGE:?Set an immutable locally built image tag}
+    restart: unless-stopped
+    ports:
+      - "${WALLABAG_BIND_ADDRESS:-127.0.0.1}:${WALLABAG_HTTP_PORT:?Set a local port}:80"
+    volumes: &application_mounts
+      - ${WALLABAG_PARAMETERS_PATH:?Supply existing parameters}:/run/wallabag/parameters.yml:ro
+      - ${WALLABAG_SITE_KEY_PATH:?Supply existing site credential key}:/run/wallabag/site-credentials-key:ro
+      - ${WALLABAG_PHP_INI_PATH:?Supply existing runtime ini}:/run/wallabag/php.ini:ro
+      - ${WALLABAG_IMAGES_PATH:?Supply existing media directory}:/var/www/wallabag/web/assets/images
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
+  rss-worker:
+    image: ${WALLABAG_IMAGE:?Set an immutable locally built image tag}
+    command: ["rss-worker"]
+    restart: unless-stopped
+    volumes: *application_mounts
+    healthcheck:
+      disable: true
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"

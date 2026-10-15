@@ -9,6 +9,7 @@ use Wallabag\Entity\RssFeed;
 use Wallabag\Entity\RssSeenItem;
 use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\PublicHttpClient;
+use Wallabag\Helper\SpecialGrabbers;
 use Wallabag\Helper\TagsAssigner;
 use Wallabag\Helper\XPostExtractor;
 use Wallabag\Repository\EntryRepository;
@@ -66,10 +67,10 @@ class FeedImporter
                     $entry = $this->entries->findByUrlAndUserId($url, $feed->user->getId());
                     if (!$entry) {
                         $entry = new Entry($feed->user);
-                        if (XPostExtractor::canonicalUrl($url)) {
+                        if (XPostExtractor::canonicalUrl($url) || (SpecialGrabbers::mediumUrl($url) && $feed->user->getConfig() && $feed->user->getConfig()->isMediumGrabberEnabled())) {
                             $this->content->updateEntry($entry, $url);
                             if (502 === $entry->getHttpStatus()) {
-                                throw new \RuntimeException('X public capture unavailable.');
+                                throw new \RuntimeException('Special public capture unavailable.');
                             }
                         } else {
                             $article = $this->http->get($url);

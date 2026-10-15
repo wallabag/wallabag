@@ -112,6 +112,7 @@
                     {% endif %}
                     <li><a href="{{ path('developer') }}"><i class="material-icons">smartphone</i> {{ 'menu.left.developer'|trans }}</a></li>
                     <li><a href="{{ path('rss_subscriptions') }}"><i class="material-icons">rss_feed</i> RSS subscriptions</a></li>
+                    <li><a href="{{ path('special_grabbers') }}"><i class="material-icons">tune</i> Special grabbers</a></li>
                     {% if is_granted('IMPORT_ENTRIES') %}
                         <li><a href="{{ path('import') }}"><i class="material-icons">import_export</i> {{ 'menu.left.import'|trans }}</a></li>
                     {% endif %}

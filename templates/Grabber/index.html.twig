@@ -1,0 +1,26 @@
+{% extends "layout.html.twig" %}
+{% block title %}Special grabbers{% endblock %}
+{% block css %}{{ parent() }}<style>.special-grabbers { overflow-wrap: anywhere; } .special-grabbers h1 { font-size: 2rem; } .special-grabbers h2 { font-size: 1.5rem; } .special-grabbers label { height: auto !important; }</style>{% endblock %}
+{% block content %}
+<div class="row special-grabbers"><div class="col s12"><div class="card-panel">
+    <h1>Special grabbers</h1>
+    <p>These fixed rules apply to your account when saving or reloading a URL through the UI, API or RSS importer. The lowest priority number wins. Disabled and unrelated rules use standard Wallabag extraction. Public responses may be incomplete; entry status 206 means partial/unverified, and 502 means unavailable. Existing saved text is retained if a reload fails.</p>
+    {% if error %}<p role="alert">{{ error }}</p>{% endif %}
+    {% for grabber in grabbers %}
+    <section aria-labelledby="grabber-{{ grabber.id }}">
+        <h2 id="grabber-{{ grabber.id }}">{{ grabber.name }}</h2>
+        <p><strong>URL match:</strong> {{ grabber.match }}</p>
+        <p><strong>Priority:</strong> {{ grabber.priority }} · <strong>Handler/service:</strong> {{ grabber.service }}</p>
+        <p role="status">{{ grabber.status }}</p>
+        <p>{{ grabber.privacy }}</p>
+        <form method="post" action="{{ path('special_grabbers') }}">
+            <input type="hidden" name="token" value="{{ csrf_token('grabbers') }}"><input type="hidden" name="id" value="{{ grabber.id }}">
+            <p><input type="checkbox" id="grabber-enabled-{{ grabber.id }}" name="enabled" value="1" {% if grabber.enabled %}checked{% endif %}><label for="grabber-enabled-{{ grabber.id }}">Enable this rule</label></p>
+            {% if grabber.id == 'x' %}<p><input type="checkbox" id="grabber-x-reader" name="article_reader_enabled" value="1" {% if grabber.article_reader_enabled %}checked{% endif %}><label for="grabber-x-reader">Read public Articles using FxTwitter (shares the public post ID and server IP)</label></p>{% endif %}
+            <button class="btn">Save {{ grabber.id }} settings</button>
+        </form>
+    </section><hr>
+    {% endfor %}
+    <p>X falls back from the optional Article reader to the public embed. Failed public requests keep an explicitly unavailable bookmark. Medium always saves a public-only snapshot with unverified completeness; it never uses the legacy Freedium mirror. No custom code, URL regex or service endpoint can be entered here.</p>
+</div></div></div>
+{% endblock %}

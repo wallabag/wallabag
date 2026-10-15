@@ -18,6 +18,7 @@ use Wallabag\Tools\Utils;
 class ContentProxy
 {
     private ?XPostExtractor $xPostExtractor;
+    private ?MediumExtractor $mediumExtractor;
     protected $mimeTypes;
     protected $eventDispatcher;
 
@@ -30,8 +31,10 @@ class ContentProxy
         protected $fetchingErrorMessage,
         protected $storeArticleHeaders = false,
         ?XPostExtractor $xPostExtractor = null,
+        ?MediumExtractor $mediumExtractor = null,
     ) {
         $this->xPostExtractor = $xPostExtractor;
+        $this->mediumExtractor = $mediumExtractor;
         $this->mimeTypes = new MimeTypes();
     }
 
@@ -45,9 +48,9 @@ class ContentProxy
      */
     public function updateEntry(Entry $entry, $url, array $content = [], $disableContentUpdate = false): void
     {
-        if (!$disableContentUpdate && !$this->validateContent($content) && $this->xPostExtractor && XPostExtractor::canonicalUrl($url)) {
-            $user = $entry->getUser();
-            $config = $user ? $user->getConfig() : null;
+        $user = $entry->getUser();
+        $config = $user ? $user->getConfig() : null;
+        if (!$disableContentUpdate && !$this->validateContent($content) && $this->xPostExtractor && XPostExtractor::canonicalUrl($url) && (!$config || $config->isXGrabberEnabled())) {
             $content = $this->xPostExtractor->extract($url, $config && $config->isXArticleReaderEnabled());
             if (502 === $content['status'] && $entry->getContent()) {
                 $entry->setHttpStatus(502);
@@ -55,7 +58,14 @@ class ContentProxy
                 return;
             }
         }
+        if (!$disableContentUpdate && !$this->validateContent($content) && $this->mediumExtractor && SpecialGrabbers::mediumUrl($url) && $config && $config->isMediumGrabberEnabled()) {
+            $content = $this->mediumExtractor->extract($url);
+            if (502 === $content['status'] && $entry->getContent()) {
+                $entry->setHttpStatus(502);
 
+                return;
+            }
+        }
         $this->graby->toggleImgNoReferrer(true);
         if (!empty($content['html'])) {
             $this->graby->setContentAsPrefetched($content['html']);

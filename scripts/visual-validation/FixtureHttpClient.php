@@ -22,6 +22,8 @@ class WallabagVisualFixtureHttpClient extends \Wallabag\CoreBundle\Helper\Public
             if ('b4fe5c4a1619c55187a2f692a09b0c7853077b241ab850e66e2045859281213d' !== hash('sha256', $body)) {
                 throw new \RuntimeException('Public receipt integrity mismatch.');
             }
+        } elseif ('https://medium.com/@author/story-abcdef012345' === $url) {
+            $body = '<html><head><title>Synthetic Medium story</title></head><body><article><h1>Synthetic Medium story</h1><p>' . str_repeat('Only publicly returned synthetic Medium text is used. ', 30) . '</p><p>Synthetic Medium ending.</p></article></body></html>';
         } elseif ('https://feeds.example.org/rss' === $url) {
             $body = '<rss version="2.0"><channel><title>Synthetic feed</title><item><title>Synthetic feed entry</title><link>https://feeds.example.org/article</link><guid>synthetic-1</guid></item></channel></rss>';
         } elseif ('https://feeds.example.org/article' === $url) {
