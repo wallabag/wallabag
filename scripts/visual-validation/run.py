@@ -22,7 +22,8 @@ LABEL = 'io.wallabag.validation.root=' + str(ROOT)
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--runtime-slot-released', action='store_true', required=True)
 parser.add_argument('--mariadb-image', required=True)
-parser.add_argument('--browser-image', required=True)
+parser.add_argument('--browser-image')
+parser.add_argument('--database-only', action='store_true', help='Run synthetic MariaDB tests without browser dependencies.')
 parser.add_argument('--public-x-receipt', type=Path, help='Optional previously retrieved public article JSON; exact integrity is verified.')
 parser.add_argument('--evidence-subdir', default='visual-evidence', help='Separate captures from earlier Library-backed screenshots.')
 args = parser.parse_args()
@@ -32,18 +33,21 @@ if args.public_x_receipt:
     args.public_x_receipt = args.public_x_receipt.resolve(strict=True)
     if hashlib.sha256(args.public_x_receipt.read_bytes()).hexdigest() != 'b4fe5c4a1619c55187a2f692a09b0c7853077b241ab850e66e2045859281213d':
         parser.error('Public article receipt integrity mismatch.')
-for image in [args.mariadb_image, args.browser_image]:
+if not args.database_only and not args.browser_image:
+    parser.error('Supply --browser-image or choose --database-only.')
+images = [args.mariadb_image] + ([] if args.database_only else [args.browser_image])
+for image in images:
     if not re.fullmatch(r'[a-zA-Z0-9./:_-]+@sha256:[a-f0-9]{64}', image):
         parser.error('Use an image reference pinned by sha256 digest.')
-if not args.browser_image.startswith('mcr.microsoft.com/playwright:v1.63.0-noble@'):
+if not args.database_only and not args.browser_image.startswith('mcr.microsoft.com/playwright:v1.63.0-noble@'):
     parser.error('Use the matching official Playwright v1.63.0-noble image digest.')
 PHP_IMAGE = 'wallabag-local-' + KEY + ':test'
 EVIDENCE = ART / args.evidence_subdir
 STAGE = ART / 'visual-app'
 PACKAGE = ART / 'playwright/node_modules/playwright-core'
-if not STAGE.is_dir() or not (PACKAGE / 'package.json').is_file():
+if not STAGE.is_dir() or (not args.database_only and not (PACKAGE / 'package.json').is_file()):
     parser.error('Prepare the isolated app and own playwright-core package first.')
-if json.loads((PACKAGE / 'package.json').read_text())['version'] != '1.63.0':
+if not args.database_only and json.loads((PACKAGE / 'package.json').read_text())['version'] != '1.63.0':
     parser.error('This harness expects playwright-core 1.63.0 and its matching browser image.')
 
 
@@ -60,15 +64,15 @@ for kind, name in names.items():
     resource = 'volume' if kind in ['data', 'socket'] else 'container'
     if subprocess.run(['docker', resource, 'inspect', name], capture_output=True).returncode == 0:
         raise SystemExit('Resource exists; refusing to adopt or replace: ' + name)
-for image in [PHP_IMAGE, args.mariadb_image, args.browser_image]:
+for image in [PHP_IMAGE, *images]:
     run('docker', 'image', 'inspect', image, stdout=subprocess.DEVNULL)
 php = json.loads(output('docker', 'image', 'inspect', PHP_IMAGE))[0]
 if php['Config'].get('Labels', {}).get('io.wallabag.validation.root') != str(ROOT):
     raise SystemExit('PHP image ownership mismatch.')
 EVIDENCE.mkdir(exist_ok=True)
 created = []
-report = {'status': 'running', 'images': {}, 'networks_created': [], 'published_ports': [], 'synthetic': True}
-for image in [PHP_IMAGE, args.mariadb_image, args.browser_image]:
+report = {'status': 'running', 'images': {}, 'networks_created': [], 'published_ports': [], 'synthetic': True, 'database_only': args.database_only}
+for image in [PHP_IMAGE, *images]:
     report['images'][image] = json.loads(output('docker', 'image', 'inspect', image))[0]['Id']
 
 
@@ -124,31 +128,32 @@ try:
     ]:
         with (EVIDENCE / 'mariadb-checks.log').open('a') as log:
             run('docker', 'exec', names['app'], *command, stdout=log, stderr=subprocess.STDOUT, timeout=180)
-    # BrowserKit needs mock sessions; actual HTTP requests need native sessions.
-    # No HTTP request has been served yet, so clear only this staged test cache.
-    config = STAGE / 'app/config/config_test.yml'
-    config.write_text(config.read_text().replace('session.storage.mock_file', 'session.storage.native'))
-    cache = STAGE / 'var/cache/test'
-    if cache.exists():
-        shutil.rmtree(cache)
-    if args.public_x_receipt:
-        article = json.loads(args.public_x_receipt.read_text())['status']['article']
-        (EVIDENCE / 'public-article-blocks.json').write_text(json.dumps(article['content']['blocks']))
-    create('browser', args.browser_image,
-           ['--network', 'container:' + names['app'], '--init', '--shm-size', '256m',
-            '--env', 'WALLABAG_ISOLATED_VISUAL=1', '--env', 'NODE_PATH=/packages',
-            '--env', 'WALLABAG_PUBLIC_X_RECEIPT=' + ('1' if args.public_x_receipt else '0'),
-            '--mount', 'type=bind,src=' + str(PACKAGE) + ',dst=/packages/playwright-core,readonly',
-            '--mount', 'type=bind,src=' + str(ROOT / 'scripts/visual-validation') + ',dst=/suite,readonly',
-            '--mount', 'type=bind,src=' + str(EVIDENCE) + ',dst=/evidence'],
-           ['node', '/suite/browser.cjs'])
-    with (EVIDENCE / 'browser.log').open('w') as log:
-        run('docker', 'start', '-a', names['browser'], stdout=log, stderr=subprocess.STDOUT, timeout=180)
-    exit_code = output('docker', 'inspect', '--format', '{{.State.ExitCode}}', names['browser'])
-    if exit_code != '0':
-        raise RuntimeError('Chromium suite failed; inspect browser.log.')
-    if not (EVIDENCE / 'browser-result.json').is_file():
-        raise RuntimeError('Browser completion receipt missing.')
+    if not args.database_only:
+        # BrowserKit needs mock sessions; actual HTTP requests need native sessions.
+        # No HTTP request has been served yet, so clear only this staged test cache.
+        config = STAGE / 'app/config/config_test.yml'
+        config.write_text(config.read_text().replace('session.storage.mock_file', 'session.storage.native'))
+        cache = STAGE / 'var/cache/test'
+        if cache.exists():
+            shutil.rmtree(cache)
+        if args.public_x_receipt:
+            article = json.loads(args.public_x_receipt.read_text())['status']['article']
+            (EVIDENCE / 'public-article-blocks.json').write_text(json.dumps(article['content']['blocks']))
+        create('browser', args.browser_image,
+               ['--network', 'container:' + names['app'], '--init', '--shm-size', '256m',
+                '--env', 'WALLABAG_ISOLATED_VISUAL=1', '--env', 'NODE_PATH=/packages',
+                '--env', 'WALLABAG_PUBLIC_X_RECEIPT=' + ('1' if args.public_x_receipt else '0'),
+                '--mount', 'type=bind,src=' + str(PACKAGE) + ',dst=/packages/playwright-core,readonly',
+                '--mount', 'type=bind,src=' + str(ROOT / 'scripts/visual-validation') + ',dst=/suite,readonly',
+                '--mount', 'type=bind,src=' + str(EVIDENCE) + ',dst=/evidence'],
+               ['node', '/suite/browser.cjs'])
+        with (EVIDENCE / 'browser.log').open('w') as log:
+            run('docker', 'start', '-a', names['browser'], stdout=log, stderr=subprocess.STDOUT, timeout=180)
+        exit_code = output('docker', 'inspect', '--format', '{{.State.ExitCode}}', names['browser'])
+        if exit_code != '0':
+            raise RuntimeError('Chromium suite failed; inspect browser.log.')
+        if not (EVIDENCE / 'browser-result.json').is_file():
+            raise RuntimeError('Browser completion receipt missing.')
     report['status'] = 'pass'
 finally:
     if report['status'] == 'running':

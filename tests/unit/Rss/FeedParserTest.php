@@ -25,6 +25,29 @@ class FeedParserTest extends TestCase
         self::assertSame(['News'], $items[0]['tags']);
     }
 
+    /** @dataProvider invalidXml */
+    public function testInvalidXmlRestoresLibxmlState(string $xml): void
+    {
+        $previous = libxml_use_internal_errors(false);
+        try {
+            try {
+                (new FeedParser())->parse($xml, 'https://example.org/feed', 10);
+                self::fail('Invalid XML must be rejected.');
+            } catch (\RuntimeException $e) {
+                self::assertFalse(libxml_use_internal_errors());
+                self::assertSame([], libxml_get_errors());
+            }
+            self::assertCount(0, (new FeedParser())->parse('<rss><channel/></rss>', 'https://example.org/feed', 10));
+        } finally {
+            libxml_use_internal_errors($previous);
+        }
+    }
+
+    public function invalidXml(): array
+    {
+        return [[''], ['   '], ['<rss>']];
+    }
+
     public function testRejectsExternalEntities(): void
     {
         $this->expectException(\RuntimeException::class);

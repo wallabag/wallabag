@@ -8,15 +8,21 @@ class FeedParser
 {
     public function parse(string $xml, string $base, int $limit): array
     {
+        if ('' === trim($xml)) {
+            throw new \RuntimeException('Empty RSS/Atom feed.');
+        }
         if (\strlen($xml) > 2 * 1024 * 1024 || false !== stripos($xml, '<!DOCTYPE') || false !== stripos($xml, '<!ENTITY')) {
             throw new \RuntimeException('Feed exceeds size limit or contains a forbidden DTD/entity.');
         }
         $doc = new \DOMDocument();
         $previous = libxml_use_internal_errors(true);
-        $ok = $doc->loadXML($xml, \LIBXML_NONET);
-        libxml_clear_errors();
-        libxml_use_internal_errors($previous);
-        if (!$ok || !\in_array($doc->documentElement->localName, ['rss', 'feed', 'RDF'], true)) {
+        try {
+            $ok = $doc->loadXML($xml, \LIBXML_NONET);
+        } finally {
+            libxml_clear_errors();
+            libxml_use_internal_errors($previous);
+        }
+        if (!$ok || !$doc->documentElement || !\in_array($doc->documentElement->localName, ['rss', 'feed', 'RDF'], true)) {
             throw new \RuntimeException('Invalid RSS/Atom feed.');
         }
         $xp = new \DOMXPath($doc);

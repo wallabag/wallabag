@@ -4,4 +4,5 @@ test "$#" -eq 1 || { echo 'Usage: scripts/build-production-image local-image-nam
 cd "$(dirname "$0")/.."
 test -z "$(git status --porcelain --untracked-files=normal)" || { echo 'Build requires a clean checkout.' >&2; exit 1; }
 revision=$(git rev-parse HEAD)
-exec docker build --network=none --build-arg "VCS_REF=$revision" --label "org.opencontainers.image.revision=$revision" -f docker/production/Dockerfile -t "$1" .
+# Archive only committed source: ignored uploads, credentials and caches never enter context.
+git archive --format=tar "$revision" | docker build --network=none --build-arg "VCS_REF=$revision" --label "org.opencontainers.image.revision=$revision" -f docker/production/Dockerfile -t "$1" -

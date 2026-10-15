@@ -43,9 +43,13 @@ if isinstance(labels, list):
     labels = dict(item.split('=', 1) for item in labels)
 labels['com.centurylinklabs.watchtower.enable'] = 'false'
 app['labels'] = labels
-worker = copy.deepcopy(app)
-for key in ['ports', 'hostname', 'environment', 'env_file', 'depends_on', 'links']:
-    worker.pop(key, None)
+# Workers share connectivity, never ingress routing or application network identity.
+if app.get('network_mode'):
+    parser.error('Review custom network_mode manually before adding a worker.')
+worker = {key: copy.deepcopy(app[key]) for key in ['image', 'volumes', 'restart'] if key in app}
+if 'networks' in app:
+    worker['networks'] = list(app['networks'])
+worker['labels'] = {'com.centurylinklabs.watchtower.enable': 'false', 'traefik.enable': 'false'}
 worker['command'] = ['rss-worker']
 worker['cpus'] = 1
 worker['mem_limit'] = '256m'

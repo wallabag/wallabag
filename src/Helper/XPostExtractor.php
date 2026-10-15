@@ -59,7 +59,7 @@ class XPostExtractor
         }
         $html .= '<p><a rel="noreferrer noopener" href="' . htmlspecialchars($canonical, \ENT_QUOTES, 'UTF-8') . '">Original post on X</a></p>';
 
-        return ['title' => $author . ' — X post (' . (206 === $status ? 'partial capture' : 'unavailable') . ')', 'html' => $html, 'url' => $canonical, 'status' => $status, 'authors' => [$author]];
+        return ['title' => $author . ' — X post (' . (206 === $status ? 'partial capture' : 'unavailable') . ')', 'html' => $html, 'url' => $canonical, 'status' => $status, 'authors' => [$author], 'reader_failed' => $readerFailed];
     }
 
     public function sanitizeEmbed(string $html): string

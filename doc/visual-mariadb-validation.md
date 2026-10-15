@@ -17,10 +17,9 @@ responses for Chromium; the isolated router now serves static files explicitly.
 This changes the test harness only.
 
 Screenshots and receipts are retained locally under `.validation/visual-evidence`.
-The requested Library upload could not start: the current upload helper reported
-`Library prepare_uploads is not available`. No Library IDs were issued. Do not
-present local screenshot paths as delivered attachments. The article preview is
-a genuine 1440×500 browser clip; the full body was checked separately.
+The screenshots have been delivered as native Library image attachments. The
+article preview is a genuine 1440×500 browser clip; the full body was checked
+separately. Library identity receipts remain in local validation evidence.
 
 All owned containers and both synthetic socket/data volumes were removed; the
 owned PHP image and newly pulled MariaDB/Chromium base images were removed too.
@@ -68,6 +67,12 @@ After the shared Mac's runtime owner explicitly releases the agreed slot:
    previously retrieved through the authorized public reader; this replay adds
    no live X requests and does not claim independent verification against X.
    It is not checked into Git. Without that option, article screens are synthetic.
+
+For server-only database regressions, `--database-only` omits the browser image
+and Playwright package requirements. Supply a verified cached MariaDB digest and
+prepare the same synthetic staging tree. This runs migrations, fixtures, mapping
+validation and PHP tests over the private Unix socket, then removes its two own
+containers and two volumes. It does not claim real Chromium coverage for that run.
 
 The runner creates two labeled volumes (synthetic DB data and its Unix socket),
 three labeled containers, and no Docker network. MariaDB disables TCP networking;

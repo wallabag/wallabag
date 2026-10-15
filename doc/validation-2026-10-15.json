@@ -125,5 +125,41 @@
     "native_library_attachments": true,
     "local_files_retained": true
   },
-  "validation_scope": "Application source through 947ea110b41c989bde93d9c702c693ed8b780ee3; later operator-script changes are validated separately"
+  "validation_scope": "Application source through 947ea110b41c989bde93d9c702c693ed8b780ee3; later operator-script changes are validated separately",
+  "review_remediation": {
+    "reviewed_base": "b175fe5c952744579312a7c872e8efe9a0a2b369",
+    "findings_addressed": [
+      "author-output-escaping",
+      "preserve-article-on-reader-failure",
+      "normalized-seen-payload-deduplication",
+      "empty-feed-and-throwable-batch-recovery",
+      "worker-ingress-and-network-identity-isolation",
+      "tracked-only-build-context-and-upload-exclusion"
+    ],
+    "php_tests": {
+      "executed": 123,
+      "passed": 122,
+      "skipped": 1,
+      "assertions": 504
+    },
+    "synthetic_mariadb": {
+      "version": "13.0.2-MariaDB-ubu2604",
+      "tests": 91,
+      "passed": 91,
+      "assertions": 286,
+      "production_data_used": false,
+      "networks_created": [],
+      "published_ports": [],
+      "cleanup_errors": [],
+      "resources_remaining": []
+    },
+    "python_tests": {
+      "compose_candidate": 1,
+      "tracked_build_context": 1,
+      "passed": 2
+    },
+    "chromium_rerun": false,
+    "author_sink_verified": "authenticated BrowserKit response DOM for normal and malicious names through both providers",
+    "production_changes": false
+  }
 }

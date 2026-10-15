@@ -24,7 +24,9 @@ Never recreate dependencies as collateral work.
 3. Have the server fetch this repository, check out the reviewed **full source
    commit**, verify a clean tree and run
    `sh scripts/build-production-image local-image:COMMIT`. No production values
-   are build arguments. Inspect `org.opencontainers.image.revision` and
+   are build arguments. The helper sends a Git archive of the exact committed
+   revision, excluding ignored uploads, caches and runtime files; `.dockerignore`
+   also excludes uploads/data for direct builds. Inspect `org.opencontainers.image.revision` and
    `/var/www/wallabag/.source-revision` before rollout.
 4. Prepare a server-local Compose candidate using the built image and existing
    media/dependencies. Both application and worker need `/run/wallabag/parameters.yml`,
@@ -36,7 +38,10 @@ Never recreate dependencies as collateral work.
    that candidate from existing Compose, an immutable image/revision and the
    server-local runtime-config directory. It refuses overwrite/custom entrypoints,
    keeps dependency definitions and published ports unchanged, and never copies
-   app environment credentials into the new worker. The worker is bounded to one
+   app environment credentials into the new worker. It builds the worker from an
+   explicit allowlist, gives it only network names (no app aliases/static IPs),
+   and disables ingress discovery rather than copying application labels. Custom
+   `network_mode` requires manual review. The worker is bounded to one
    CPU/256 MiB. Review and validate the candidate before replacing any live file.
 5. Stop **only the legacy RSS bridge**, wait for its process to settle, and create
    a consistent SQLite backup with SQLite's backup API. Export that offline copy

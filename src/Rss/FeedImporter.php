@@ -98,11 +98,11 @@ class FeedImporter
                     $this->em->flush();
                     // Do not dispatch the legacy image downloader: it has a separate unpinned HTTP path.
                     // Source images remain in sanitized HTML; no server-side media fetch occurs here.
-                } catch (\Exception $e) {
+                } catch (\Throwable $e) {
                     $errors[] = 'Item ' . substr(hash('sha256', $url), 0, 12) . ': ' . $e->getMessage();
                 }
             }
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $errors[] = $e->getMessage();
         }
         $feed->lastFetchAt = $now;

@@ -122,14 +122,17 @@ class FeedManager
                 if (!$feed) {
                     $feed = $this->save($user, $row);
                 }
+                $queued = [];
                 foreach (($seen[$row['url']] ?? []) as $item) {
                     if (!\is_array($item) || !\is_string($item['url'] ?? null)) {
                         throw new \InvalidArgumentException('Invalid seen item.');
                     }
                     $itemUrl = PublicHttpClient::normalize($url, $item['url']);
-                    $criteria = ['feed' => $feed, 'urlHash' => hash('sha256', $itemUrl)];
-                    if (!$this->em->getRepository(RssSeenItem::class)->findOneBy($criteria)) {
+                    $hash = hash('sha256', $itemUrl);
+                    $criteria = ['feed' => $feed, 'urlHash' => $hash];
+                    if (!isset($queued[$hash]) && !$this->em->getRepository(RssSeenItem::class)->findOneBy($criteria)) {
                         $this->em->persist(new RssSeenItem($feed, $itemUrl));
+                        $queued[$hash] = true;
                     }
                 }
                 $this->em->flush();

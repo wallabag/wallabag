@@ -65,6 +65,7 @@ class FxArticleReaderTest extends TestCase
         $http->expects(self::exactly(2))->method('get')->willReturnOnConsecutiveCalls(['body' => '{"code":404}'], ['body' => '{"author_name":"Author","html":"<p>A public excerpt</p>"}']);
         $result = (new XPostExtractor($http))->extract('https://x.com/person/status/12345', true);
         self::assertSame(206, $result['status']);
+        self::assertTrue($result['reader_failed']);
         self::assertStringContainsString('did not return a verified body', $result['html']);
     }
 }

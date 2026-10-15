@@ -7,3 +7,4 @@ var/logs
 app/config/parameters.yml
 data
 web/assets/images
+web/uploads
