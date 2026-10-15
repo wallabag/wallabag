@@ -10,10 +10,10 @@
     "published_ports": []
   },
   "php_tests": {
-    "executed": 90,
-    "passed": 89,
+    "executed": 112,
+    "passed": 111,
     "skipped": 1,
-    "assertions": 380,
+    "assertions": 440,
     "skip_reason": "Upstream PDF invalid-character encoding test skips PHP >=8.1"
   },
   "python_tests": {
@@ -48,18 +48,18 @@
     "Full schema synchronization not certified; legacy SQLite drift remains separately recorded",
     "Provider body is verified against its receipt, not independently against inaccessible X rendered page",
     "External media/embedded posts are linked, not archived",
-    "Library screenshot attachment delivery blocked; no Library IDs issued"
+    "Medium captures public HTML only; completeness remains explicitly unverified and restricted content is not bypassed"
   ],
   "github_actions_setting": "Unchanged per user instruction; no further approval attempts",
   "production_changes": false,
   "mariadb_validation": {
     "version": "10.11.19-MariaDB-ubu2204",
-    "migrations": 57,
-    "queries": 165,
+    "migrations": 58,
+    "queries": 166,
     "mapping": "pass",
-    "tests": 58,
-    "assertions": 162,
-    "passed": 58,
+    "tests": 80,
+    "assertions": 222,
+    "passed": 80,
     "full_schema_sync_checked": false,
     "production_data_used": false
   },
@@ -81,6 +81,8 @@
       "x-body",
       "x-partial",
       "x-failure",
+      "medium-public-only",
+      "grabber-disable-enable",
       "no-horizontal-overflow",
       "no-page-errors"
     ],
@@ -119,9 +121,9 @@
     }
   ],
   "screenshot_delivery": {
-    "status": "blocked",
-    "reason": "Library prepare_uploads is not available in this executor",
-    "library_file_ids": [],
+    "status": "delivered",
+    "native_library_attachments": true,
     "local_files_retained": true
-  }
+  },
+  "validation_scope": "Application source through 947ea110b41c989bde93d9c702c693ed8b780ee3; later operator-script changes are validated separately"
 }

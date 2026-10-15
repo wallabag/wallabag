@@ -16,14 +16,14 @@ if test -s /run/wallabag/php.ini; then
 fi
 
 if test "${1:-}" = wallabag; then
-    su -s /bin/sh -c 'exec "$@"' nobody wallabag-cli php bin/console cache:warmup --env=prod --no-debug
+    su -s /bin/sh -c 'exec "$@"' -- nobody wallabag-cli php bin/console cache:warmup --env=prod --no-debug
     exec s6-svscan /etc/s6/
 fi
 if test "${1:-}" = console; then
     shift
-    exec su -s /bin/sh -c 'exec "$@"' nobody wallabag-cli php bin/console "$@"
+    exec su -s /bin/sh -c 'exec "$@"' -- nobody wallabag-cli php bin/console "$@"
 fi
 if test "${1:-}" = rss-worker; then
-    exec su -s /bin/sh -c 'while :; do php bin/console wallabag:rss:fetch --env=prod --no-debug || echo "RSS import reported errors; inspect subscription status." >&2; sleep 60; done' nobody
+    exec su -s /bin/sh -c 'while :; do php bin/console wallabag:rss:fetch --env=prod --no-debug || echo "RSS import reported errors; inspect subscription status." >&2; sleep 60; done' -- nobody
 fi
 exec "$@"
