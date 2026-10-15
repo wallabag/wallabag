@@ -5,3 +5,5 @@ node_modules
 var/cache
 var/logs
 app/config/parameters.yml
+data
+web/assets/images
