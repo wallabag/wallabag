@@ -17,7 +17,12 @@ class WallabagVisualFixtureHttpClient extends \Wallabag\CoreBundle\Helper\Public
         if ('1' !== getenv('WALLABAG_ISOLATED_VISUAL')) {
             throw new \RuntimeException('Synthetic HTTP fixture requires isolated validation mode.');
         }
-        if ('https://feeds.example.org/rss' === $url) {
+        if ('https://api.fxtwitter.com/2/status/2069824386283319343' === $url && '1' === getenv('WALLABAG_PUBLIC_X_RECEIPT')) {
+            $body = file_get_contents('/receipts/public-x.json');
+            if ('b4fe5c4a1619c55187a2f692a09b0c7853077b241ab850e66e2045859281213d' !== hash('sha256', $body)) {
+                throw new \RuntimeException('Public receipt integrity mismatch.');
+            }
+        } elseif ('https://feeds.example.org/rss' === $url) {
             $body = '<rss version="2.0"><channel><title>Synthetic feed</title><item><title>Synthetic feed entry</title><link>https://feeds.example.org/article</link><guid>synthetic-1</guid></item></channel></rss>';
         } elseif ('https://feeds.example.org/article' === $url) {
             $body = '<html><head><title>Synthetic feed entry</title></head><body><article><h1>Synthetic feed entry</h1><p>' . str_repeat('A synthetic feed paragraph for isolated validation. ', 20) . '</p></article></body></html>';

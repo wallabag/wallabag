@@ -30,11 +30,19 @@ After the shared Mac's runtime owner explicitly releases the agreed slot:
    ```sh
    python3 scripts/visual-validation/run.py --runtime-slot-released \
      --mariadb-image 'mariadb:10.11@sha256:REPLACE_WITH_VERIFIED_DIGEST' \
-     --browser-image 'mcr.microsoft.com/playwright:v1.63.0-noble@sha256:REPLACE_WITH_VERIFIED_DIGEST'
+     --browser-image 'mcr.microsoft.com/playwright:v1.63.0-noble@sha256:REPLACE_WITH_VERIFIED_DIGEST' \
+     --public-x-receipt .validation/x-research/fx-v2.json
    ```
 
    The flag records an operator assertion; it cannot authorize a slot or establish
    that another task has released it. The runner never pulls images itself.
+
+   The optional public receipt captures the user-supplied post's article,
+   **Loops You Can Trust**, through the normal new-entry UI and real sanitizer.
+   Its exact SHA-256 is verified before mounting it read-only. The receipt was
+   previously retrieved through the authorized public reader; this replay adds
+   no live X requests and does not claim independent verification against X.
+   It is not checked into Git. Without that option, article screens are synthetic.
 
 The runner creates two labeled volumes (synthetic DB data and its Unix socket),
 three labeled containers, and no Docker network. MariaDB disables TCP networking;

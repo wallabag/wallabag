@@ -47,6 +47,11 @@ const fs = require('node:fs');
   await capture('12345', 'Synthetic visual article', 'Synthetic closing paragraph.', 'x-article-desktop');
   await capture('12346', 'Synthetic author — X post (partial capture)', 'Partial X capture.', 'x-partial-desktop');
   await capture('12347', 'X — X post (unavailable)', 'X capture unavailable.', 'x-failure-desktop');
+  if (process.env.WALLABAG_PUBLIC_X_RECEIPT === '1') {
+    await capture('2069824386283319343', 'Loops You Can Trust', 'Article text captured from public X data', 'x-public-article-desktop');
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.screenshot({ path: '/evidence/x-public-article-mobile.png', fullPage: true });
+  }
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('http://127.0.0.1:8080/rss/subscriptions');
   await page.screenshot({ path: '/evidence/rss-mobile.png', fullPage: true });
@@ -55,6 +60,6 @@ const fs = require('node:fs');
   await Promise.all([page.waitForNavigation(), historical.getByRole('button', { name: 'Unsubscribe' }).click()]);
   assert.equal(await page.getByRole('heading', { name: 'Historical synthetic feed', exact: true }).count(), 0);
   assert.deepEqual(errors, [], 'browser JavaScript exceptions');
-  fs.writeFileSync('/evidence/browser-result.json', JSON.stringify({ status: 'pass', synthetic: true, viewport: ['1440x1000', '390x844'], checks: ['login', 'rss-create', 'rss-disable', 'rss-import', 'rss-unsubscribe', 'x-opt-in', 'x-body', 'x-partial', 'x-failure', 'no-horizontal-overflow', 'no-page-errors'] }, null, 2));
+  fs.writeFileSync('/evidence/browser-result.json', JSON.stringify({ status: 'pass', synthetic_account_and_feeds: true, public_article_receipt: process.env.WALLABAG_PUBLIC_X_RECEIPT === '1', viewport: ['1440x1000', '390x844'], checks: ['login', 'rss-create', 'rss-disable', 'rss-import', 'rss-unsubscribe', 'x-opt-in', 'x-body', 'x-partial', 'x-failure', 'no-horizontal-overflow', 'no-page-errors'] }, null, 2));
   await browser.close();
 })().catch(error => { console.error(error); process.exitCode = 1; });

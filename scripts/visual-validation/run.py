@@ -22,7 +22,12 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--runtime-slot-released', action='store_true', required=True)
 parser.add_argument('--mariadb-image', required=True)
 parser.add_argument('--browser-image', required=True)
+parser.add_argument('--public-x-receipt', type=Path, help='Optional previously retrieved public article JSON; exact integrity is verified.')
 args = parser.parse_args()
+if args.public_x_receipt:
+    args.public_x_receipt = args.public_x_receipt.resolve(strict=True)
+    if hashlib.sha256(args.public_x_receipt.read_bytes()).hexdigest() != 'b4fe5c4a1619c55187a2f692a09b0c7853077b241ab850e66e2045859281213d':
+        parser.error('Public article receipt integrity mismatch.')
 for image in [args.mariadb_image, args.browser_image]:
     if not re.fullmatch(r'[a-zA-Z0-9./:_-]+@sha256:[a-f0-9]{64}', image):
         parser.error('Use an image reference pinned by sha256 digest.')
@@ -102,6 +107,8 @@ try:
                    '--mount', 'type=bind,src=' + str(STAGE) + ',dst=/work',
                    '--mount', 'type=bind,src=' + str(ROOT) + ',dst=/source,readonly',
                    '--mount', 'type=bind,src=' + str(EVIDENCE) + ',dst=/evidence', '--workdir', '/work']
+    if args.public_x_receipt:
+        app_options += ['--env', 'WALLABAG_PUBLIC_X_RECEIPT=1', '--mount', 'type=bind,src=' + str(args.public_x_receipt) + ',dst=/receipts/public-x.json,readonly']
     create('app', PHP_IMAGE, app_options, ['-ec', 'exec php -S 127.0.0.1:8080 -t web scripts/visual-validation/router.php'])
     run('docker', 'start', names['app'], stdout=subprocess.DEVNULL)
     for command in [
@@ -115,6 +122,7 @@ try:
     create('browser', args.browser_image,
            ['--network', 'container:' + names['app'], '--init', '--shm-size', '256m',
             '--env', 'WALLABAG_ISOLATED_VISUAL=1', '--env', 'NODE_PATH=/packages',
+            '--env', 'WALLABAG_PUBLIC_X_RECEIPT=' + ('1' if args.public_x_receipt else '0'),
             '--mount', 'type=bind,src=' + str(PACKAGE) + ',dst=/packages/playwright-core,readonly',
             '--mount', 'type=bind,src=' + str(ROOT / 'scripts/visual-validation') + ',dst=/suite,readonly',
             '--mount', 'type=bind,src=' + str(EVIDENCE) + ',dst=/evidence'],
