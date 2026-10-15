@@ -19,7 +19,7 @@ class XPostExtractor
             return null;
         }
 
-        return 'https://x.com/i/web/status/' . $m[1];
+        return 'https://x.com/i/status/' . $m[1];
     }
 
     public function extract(string $url): array

@@ -54,10 +54,14 @@ Unsubscribing deletes subscription/seen history but retains saved articles. Migr
 
 Tested the supplied URL `https://x.com/poteto/status/2069824386283319343` against `https://publish.twitter.com/oembed` without credentials. It returned HTTP 200, author **lauren (@poteto)**, and only `https://t.co/6Ta0f4J3u2` as post text. The public short link returns a 301 to `https://x.com/i/article/2066965659259686912`. That article returned HTTP 404 with login markup and no article body. This does **not** establish access to the linked article or full long-form post. Direct browser retrieval failed in the research tool. No short-link destination was represented as captured content.
 
+The public lookup was also tested with the exact canonical `/i/status/{id}` form used by this implementation (HTTP 200). `/i/web/status/{id}` fails on the embed endpoint and is normalized before lookup.
+
 The legacy official oEmbed documentation now redirects to the X overview; the public endpoint remains empirically reachable, but its completeness/stability is not guaranteed. Official Post Lookup documentation specifies an approved developer account, project/app and keys/tokens: https://docs.x.com/x-api/posts/lookup/introduction . Current official platform documentation describes pay-per-use access: https://docs.x.com/overview . This branch does not create credentials, subscribe to paid access, or silently make authenticated/paid X requests. Full long-form content remains an access decision for Jon; this implementation only promises clearly labeled public snapshots.
 
 ## Validation
 
+The offline Python exporter regression passes (1 test) against synthetic SQLite data and verifies its source file hash remains unchanged.
+
 PHP unit and functional tests cover XML safety, RSS/Atom resolution and limits, blocked address ranges, mixed DNS answers, X canonicalization/sanitization and partial/unavailable responses, UI CSRF/authentication, owned API CRUD and idempotent legacy imports. Added tests are intended for the existing isolated SQLite test setup; execution evidence must be recorded before treating them as passing.
 
-The Mac currently has no PHP CLI or Composer. Nomos startup and then AI metadata own the heavy runtime slot. PHP containers remain held pending explicit release/coordination. No GitHub Actions validation is relied on. `git diff --check` passes, and a Node PHP parser configured for PHP 7.4 successfully parsed all 20 changed/new PHP files. This is source syntax validation, not PHP execution or functional test evidence.
+The Mac currently has no PHP CLI or Composer. Nomos startup and then AI metadata own the heavy runtime slot. PHP containers remain held pending explicit release/coordination. No GitHub Actions validation is relied on. `git diff --check` passes, and a Node PHP parser configured for PHP 7.4 successfully parsed all 23 changed/new PHP files. This is source syntax validation, not PHP execution or functional test evidence.
