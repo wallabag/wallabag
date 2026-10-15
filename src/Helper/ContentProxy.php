@@ -17,6 +17,7 @@ use Wallabag\Tools\Utils;
  */
 class ContentProxy
 {
+    private ?XPostExtractor $xPostExtractor;
     protected $mimeTypes;
     protected $eventDispatcher;
 
@@ -28,7 +29,9 @@ class ContentProxy
         protected LoggerInterface $logger,
         protected $fetchingErrorMessage,
         protected $storeArticleHeaders = false,
+        ?XPostExtractor $xPostExtractor = null,
     ) {
+        $this->xPostExtractor = $xPostExtractor;
         $this->mimeTypes = new MimeTypes();
     }
 
@@ -42,6 +45,15 @@ class ContentProxy
      */
     public function updateEntry(Entry $entry, $url, array $content = [], $disableContentUpdate = false): void
     {
+        if (!$disableContentUpdate && !$this->validateContent($content) && $this->xPostExtractor && XPostExtractor::canonicalUrl($url)) {
+            $content = $this->xPostExtractor->extract($url);
+            if (502 === $content['status'] && $entry->getContent()) {
+                $entry->setHttpStatus(502);
+
+                return;
+            }
+        }
+
         $this->graby->toggleImgNoReferrer(true);
         if (!empty($content['html'])) {
             $this->graby->setContentAsPrefetched($content['html']);

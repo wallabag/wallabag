@@ -11,6 +11,7 @@ use Pagerfanta\Pagerfanta;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
 use Wallabag\Helper\UrlHasher;
+use Wallabag\Helper\XPostExtractor;
 
 /**
  * @method Entry[]    findById(int[] $id)
@@ -501,10 +502,21 @@ class EntryRepository extends ServiceEntityRepository
      */
     public function findByUrlAndUserId($url, $userId)
     {
-        return $this->findByHashedUrlAndUserId(
-            UrlHasher::hashUrl($url),
-            $userId
-        );
+        $canonical = XPostExtractor::canonicalUrl($url);
+        $entry = $this->findByHashedUrlAndUserId(UrlHasher::hashUrl($canonical ?: $url), $userId);
+        if ($entry || !$canonical) {
+            return $entry;
+        }
+        // Also find pre-fork bookmarks, whose hashes used the original username/host/query.
+        $id = basename($canonical);
+        $candidates = $this->createQueryBuilder('e')->where('e.user = :user')->andWhere('e.url LIKE :status OR e.givenUrl LIKE :status')
+            ->setParameter('user', $userId)->setParameter('status', '%/status/' . $id . '%')->getQuery()->getResult();
+        foreach ($candidates as $candidate) {
+            if ($canonical === XPostExtractor::canonicalUrl($candidate->getUrl() ?: '') || $canonical === XPostExtractor::canonicalUrl($candidate->getGivenUrl() ?: '')) {
+                return $candidate;
+            }
+        }
+        return false;
     }
 
     /**

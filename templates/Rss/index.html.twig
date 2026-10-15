@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+{% block title %}RSS subscriptions{% endblock %}
+{% block content %}
+<div class="row"><div class="col s12"><div class="card-panel">
+    <h1>RSS subscriptions</h1>
+    <p>Save new articles automatically to your account. Enabled feeds are checked every 30 minutes by the scheduled importer. Only successful saves are marked as seen. No paywall mirrors are used.</p>
+    {% for feed in feeds %}
+    <section aria-labelledby="feed-heading-{{ feed.id }}">
+        <h2 id="feed-heading-{{ feed.id }}">{{ feed.name }}</h2>
+        <p><a href="{{ feed.url }}" rel="noreferrer noopener">{{ feed.url }}</a></p>
+        <p>Last checked: {{ feed.lastFetchAt ? feed.lastFetchAt|date('Y-m-d H:i T') : 'Never' }} · Imported: {{ feed.importedCount }}</p>
+        {% if feed.lastError %}<p role="status"><strong>Import needs attention:</strong> {{ feed.lastError }}</p>{% endif %}
+        <form method="post" action="{{ path('rss_subscriptions') }}">
+            <input type="hidden" name="token" value="{{ csrf_token('rss') }}"><input type="hidden" name="id" value="{{ feed.id }}">
+            <label for="name-{{ feed.id }}">Name</label><input id="name-{{ feed.id }}" name="name" maxlength="255" value="{{ feed.name }}" required>
+            <label for="tags-{{ feed.id }}">Tags (comma separated)</label><input id="tags-{{ feed.id }}" name="tags" value="{{ feed.tags|join(', ') }}">
+            <label for="limit-{{ feed.id }}">Recent items per check</label><input id="limit-{{ feed.id }}" type="number" min="1" max="100" name="max_items" value="{{ feed.maxItems }}" required>
+            <p><label><input type="checkbox" name="enabled" value="1" {% if feed.enabled %}checked{% endif %}><span>Enabled</span></label></p>
+            <button class="btn" name="action" value="save">Save settings</button>
+            <button class="btn" name="action" value="delete">Unsubscribe</button>
+        </form>
+    </section><hr>
+    {% else %}<p>No subscriptions yet. Add a public RSS or Atom feed below.</p>{% endfor %}
+    <h2>Add feed</h2>
+    <form method="post" action="{{ path('rss_subscriptions') }}">
+        <input type="hidden" name="token" value="{{ csrf_token('rss') }}">
+        <label for="new-url">Feed URL</label><input id="new-url" name="url" type="url" required maxlength="2048">
+        <label for="new-name">Name</label><input id="new-name" name="name" required maxlength="255">
+        <label for="new-tags">Tags (comma separated)</label><input id="new-tags" name="tags">
+        <label for="new-limit">Recent items per check</label><input id="new-limit" name="max_items" type="number" min="1" max="100" value="10" required>
+        <input type="hidden" name="enabled" value="1"><button class="btn">Subscribe</button>
+    </form>
+    <h2>Import rss-wallabag export</h2>
+    <p>Paste the JSON produced by <code>scripts/export-rss-wallabag.py</code>. This merges subscriptions and seen URLs into your account; repeating an import is safe. Existing subscription settings are retained.</p>
+    <form method="post" action="{{ path('rss_subscriptions') }}">
+        <input type="hidden" name="token" value="{{ csrf_token('rss') }}"><input type="hidden" name="action" value="import">
+        <label for="import-json">RSS export JSON</label><textarea id="import-json" name="import_json" class="materialize-textarea" required></textarea><button class="btn">Import subscriptions</button>
+    </form>
+</div></div></div>
+{% endblock %}

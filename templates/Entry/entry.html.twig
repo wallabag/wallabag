@@ -367,6 +367,9 @@
             data-annotations-destroy-url-value="{{ path('annotations_delete_annotation', {'annotation': 'idAnnotation'}) }}"
             data-annotations-search-url-value="{{ path('annotations_get_annotations', {'entry': entry.id}) }}"
         >
+            {% if entry.httpStatus == 502 and entry.domainName in ['x.com', 'www.x.com', 'twitter.com', 'www.twitter.com', 'mobile.twitter.com'] %}
+                <p role="status"><strong>The latest X capture failed.</strong> Any previous snapshot below has been retained. Open the original or retry later.</p>
+            {% endif %}
             {{ entry.content|raw }}
         </article>
 
