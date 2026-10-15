@@ -9,10 +9,16 @@ $root = dirname(__DIR__, 2);
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $file = realpath($root . '/web' . rawurldecode($path));
 if ($file && 0 === strpos($file, $root . '/web/') && is_file($file) && 'php' !== strtolower(pathinfo($file, PATHINFO_EXTENSION))) {
-    return false;
+    // Serve explicitly: the release image's CLI server static shortcut produces
+    // responses Chromium rejects, although PHP's permissive HTTP client accepts them.
+    $types = ['css' => 'text/css', 'js' => 'application/javascript', 'svg' => 'image/svg+xml', 'png' => 'image/png', 'ico' => 'image/x-icon', 'woff' => 'font/woff', 'woff2' => 'font/woff2', 'ttf' => 'font/ttf', 'otf' => 'font/otf', 'json' => 'application/json'];
+    $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+    header('Content-Type: ' . ($types[$extension] ?? 'application/octet-stream'));
+    readfile($file);
+    exit;
 }
-require_once $root . '/app/AppKernel.php';
 require_once $root . '/vendor/autoload.php';
+require_once $root . '/app/AppKernel.php';
 header('X-Wallabag-Validation: synthetic-network-none');
 $kernel = new AppKernel('test', false);
 $request = Symfony\Component\HttpFoundation\Request::createFromGlobals();

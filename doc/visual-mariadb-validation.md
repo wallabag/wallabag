@@ -1,8 +1,32 @@
 # Isolated MariaDB and real-browser validation
 
-Status: **prepared, not executed**. The existing SQLite/BrowserKit results in
-`local-validation.md` remain the only completed application test results. No
-screenshots or MariaDB compatibility pass are claimed by this document.
+Status: **executed successfully on 2026-10-15** after Startup and Integration's
+explicit settled returns. MariaDB **10.11.19** completed all **57 migrations / 165
+queries**, fixtures and ORM mapping validation. The feature regression suite
+passed **58 tests / 162 assertions**. Real Chromium passed the flows below at
+1440×1000 and 390×844; all **69 nonempty source blocks** of the public article
+were also present in the rendered reading view. Earlier SQLite/BrowserKit results
+remain documented separately in `local-validation.md`.
+
+Visual inspection found and fixed Materialize checkbox markup in the RSS and
+reader-consent forms, plus oversized RSS headings causing mobile overflow. The
+final captures were inspected: both controls work through their visible labels,
+RSS has no horizontal overflow, and article attribution and linked-media notices
+are visible. The release image's CLI-server static shortcut produced invalid
+responses for Chromium; the isolated router now serves static files explicitly.
+This changes the test harness only.
+
+Screenshots and receipts are retained locally under `.validation/visual-evidence`.
+The requested Library upload could not start: the current upload helper reported
+`Library prepare_uploads is not available`. No Library IDs were issued. Do not
+present local screenshot paths as delivered attachments. The article preview is
+a genuine 1440×500 browser clip; the full body was checked separately.
+
+All owned containers and both synthetic socket/data volumes were removed; the
+owned PHP image and newly pulled MariaDB/Chromium base images were removed too.
+No network or published port was created, and foreign resources were preserved.
+No production migration, deployment or merge was performed. This is MariaDB
+compatibility evidence, not a production-version or full-schema certification.
 
 `scripts/prepare-visual-validation.py` copies tracked application sources into
 `.validation/visual-app`, excluding data, vendor, caches and local parameters.
@@ -19,9 +43,10 @@ After the shared Mac's runtime owner explicitly releases the agreed slot:
 2. Cache official MariaDB 10.11 and Microsoft Playwright `v1.63.0-noble` images.
    Record their immutable repo digests and whether each image existed beforehand.
    This is a compatibility target, not a claim that production runs that DB version.
-   Cache `playwright-core@1.63.0` in the task's own
-   `.validation/playwright/node_modules/playwright-core` directory, with a local
-   lockfile and scripts/audit disabled. Do not borrow Nomos dependencies or caches.
+   Run `python3 scripts/visual-validation/cache-playwright.py` to cache the pinned
+   public client in the task's own `.validation/playwright` directory. It verifies
+   npm SHA-512 integrity and records a receipt, without executing package scripts.
+   Do not borrow Nomos dependencies or caches.
 3. Prepare the staging tree with `python3 scripts/prepare-visual-validation.py`.
    If it already exists, inspect and remove only that generated staging directory
    before recreating it. It contains synthetic configuration only.
@@ -66,6 +91,10 @@ full synthetic article text, partial capture and unavailable-content presentatio
 It records desktop/mobile screenshots, checks mobile horizontal overflow and fails
 on browser JavaScript exceptions. This is browser-flow coverage and visual evidence,
 not pixel-baseline regression testing or independent verification of X's live body.
+CLI tests use mock sessions; the generated staged configuration switches to native
+sessions and clears its own test cache before actual browser requests. Bundle
+assets are copied into the synthetic web directory with the standard Symfony
+asset installer. The source checkout's configuration and data are not used for writes.
 
 Receipts and logs are under `.validation/visual-evidence`; inspect the screenshots
 before reporting visual success. `runtime-result.json` contains image IDs, DB

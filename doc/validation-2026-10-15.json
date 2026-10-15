@@ -44,12 +44,84 @@
     "foreign_resources_modified": false
   },
   "limits": [
-    "BrowserKit functional UI, no visual/browser-server test",
-    "SQLite only; MariaDB production migration not executed",
-    "Legacy SQLite schema drift retained separately",
+    "No production MariaDB migration/deployment performed; 10.11.19 is an isolated compatibility target",
+    "Full schema synchronization not certified; legacy SQLite drift remains separately recorded",
     "Provider body is verified against its receipt, not independently against inaccessible X rendered page",
-    "External media/embedded posts are linked, not archived"
+    "External media/embedded posts are linked, not archived",
+    "Library screenshot attachment delivery blocked; no Library IDs issued"
   ],
-  "github_actions_setting": "Disable retry rejected by automatic approval review; setting unchanged",
-  "production_changes": false
+  "github_actions_setting": "Unchanged per user instruction; no further approval attempts",
+  "production_changes": false,
+  "mariadb_validation": {
+    "version": "10.11.19-MariaDB-ubu2204",
+    "migrations": 57,
+    "queries": 165,
+    "mapping": "pass",
+    "tests": 58,
+    "assertions": 162,
+    "passed": 58,
+    "full_schema_sync_checked": false,
+    "production_data_used": false
+  },
+  "real_browser_validation": {
+    "status": "pass",
+    "synthetic_account_and_feeds": true,
+    "public_article_receipt": true,
+    "viewport": [
+      "1440x1000",
+      "390x844"
+    ],
+    "checks": [
+      "login",
+      "rss-create",
+      "rss-disable",
+      "rss-import",
+      "rss-unsubscribe",
+      "x-opt-in",
+      "x-body",
+      "x-partial",
+      "x-failure",
+      "no-horizontal-overflow",
+      "no-page-errors"
+    ],
+    "public_article_nonempty_blocks_visible": 69,
+    "screenshots_visually_inspected": true,
+    "fixed_defects": [
+      "Materialize RSS enabled checkbox markup",
+      "Materialize X-reader consent checkbox markup",
+      "RSS mobile heading overflow"
+    ]
+  },
+  "visual_cleanup": {
+    "containers_remaining": [],
+    "volumes_remaining": [],
+    "created_volumes_removed": 2,
+    "networks_created": [],
+    "published_ports": [],
+    "new_base_images_removed": [
+      "mariadb:10.11",
+      "mcr.microsoft.com/playwright:v1.63.0-noble"
+    ],
+    "foreign_resources_modified": false
+  },
+  "screenshots": [
+    {
+      "filename": "rss-desktop.png",
+      "sha256": "ee47b1920917de834a50c034c6d5ecec5545a1960ac1534b3ab8f60f996bb6c1"
+    },
+    {
+      "filename": "rss-mobile.png",
+      "sha256": "6ac35daa1324cd7847d42ff78e7856593e0543d7409439a42e740a91ce87e0db"
+    },
+    {
+      "filename": "x-public-article-preview.png",
+      "sha256": "296d878994d7ea49732e69f8b6fb910bf768cab81e32336c8fb48a2116d35171"
+    }
+  ],
+  "screenshot_delivery": {
+    "status": "blocked",
+    "reason": "Library prepare_uploads is not available in this executor",
+    "library_file_ids": [],
+    "local_files_retained": true
+  }
 }

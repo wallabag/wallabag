@@ -18,6 +18,9 @@ The test DB path is fixed to `/work/.validation/wallabag_test.sqlite`; the runne
 
 ## Results (2026-10-15)
 
+The results below describe the initial SQLite interval. Subsequent real MariaDB
+and Chromium validation passed; see [browser and MariaDB results](visual-mariadb-validation.md).
+
 - Release runtime: PHP **8.1.32**, PHPUnit **9.6.29**, ARM64 Docker.
 - Focused feature plus existing ContentProxy regressions: **90 tests, 380 assertions; 89 passed and 1 existing skipped**. The skip is the upstream PDF invalid-character encoding test, which explicitly skips on PHP >=8.1.
 - Application migrations, fixtures, new RSS-table mappings and new preference-column comparison passed. RSS command entrypoint booted successfully against the empty fixture subscription set.

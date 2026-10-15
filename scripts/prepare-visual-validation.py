@@ -44,18 +44,18 @@ parameters = parameters.replace('CHANGE_ME_TO_SOMETHING_SECRET_AND_RANDOM', 'iso
     env(TEST_DATABASE_PATH): ''
 ''')
 test = (config / 'config_test.yml').read_text()
-test = test.replace('session.storage.mock_file', 'session.storage.native')
 test = test.replace('enabled: false', 'enabled: true')
 (config / 'config_test.yml').write_text(test)
 with (config / 'services_test.yml').open('a') as stream:
     stream.write('''
     Wallabag\\CoreBundle\\Helper\\PublicHttpClient:
         class: WallabagVisualFixtureHttpClient
+        public: true
         file: '%kernel.project_dir%/scripts/visual-validation/FixtureHttpClient.php'
 ''')
 (DEST / 'scripts/visual-validation/phpunit-bootstrap.php').write_text('''<?php
-require_once '/work/app/AppKernel.php';
 require_once '/work/vendor/autoload.php';
+require_once '/work/app/AppKernel.php';
 ''')
 (ROOT / '.validation/visual-preparation.json').write_text(json.dumps({
     'status': 'prepared-not-executed',

@@ -10,6 +10,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import time
 
@@ -115,10 +116,21 @@ try:
         ['php', 'scripts/visual-validation/console.php', 'doctrine:migrations:migrate', '--no-interaction'],
         ['php', 'scripts/visual-validation/console.php', 'doctrine:fixtures:load', '--no-interaction'],
         ['php', 'scripts/visual-validation/console.php', 'doctrine:schema:validate', '--skip-sync'],
+        ['php', 'scripts/visual-validation/console.php', 'assets:install', 'web'],
         ['php', '/source/.validation/phpunit/vendor/bin/phpunit', '--bootstrap', 'scripts/visual-validation/phpunit-bootstrap.php', '--filter', '(Rss|FeedParserTest|FeedImporterTest|PublicHttpClientTest|XPostExtractorTest|FxArticleReaderTest|XContentProxyTest|XEntry|XArticleRestControllerTest)', '--log-junit', '/evidence/mariadb-phpunit.xml'],
     ]:
         with (EVIDENCE / 'mariadb-checks.log').open('a') as log:
             run('docker', 'exec', names['app'], *command, stdout=log, stderr=subprocess.STDOUT, timeout=180)
+    # BrowserKit needs mock sessions; actual HTTP requests need native sessions.
+    # No HTTP request has been served yet, so clear only this staged test cache.
+    config = STAGE / 'app/config/config_test.yml'
+    config.write_text(config.read_text().replace('session.storage.mock_file', 'session.storage.native'))
+    cache = STAGE / 'var/cache/test'
+    if cache.exists():
+        shutil.rmtree(cache)
+    if args.public_x_receipt:
+        article = json.loads(args.public_x_receipt.read_text())['status']['article']
+        (EVIDENCE / 'public-article-blocks.json').write_text(json.dumps(article['content']['blocks']))
     create('browser', args.browser_image,
            ['--network', 'container:' + names['app'], '--init', '--shm-size', '256m',
             '--env', 'WALLABAG_ISOLATED_VISUAL=1', '--env', 'NODE_PATH=/packages',

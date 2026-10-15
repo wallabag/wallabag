@@ -1,7 +1,16 @@
 {% extends 'layout.html.twig' %}
 {% block title %}RSS subscriptions{% endblock %}
+{% block css %}
+{{ parent() }}
+<style>
+    .rss-subscriptions { overflow-wrap: anywhere; }
+    .rss-subscriptions h1 { font-size: 2rem; }
+    .rss-subscriptions h2 { font-size: 1.5rem; }
+    .rss-subscriptions button { margin-bottom: .5rem; }
+</style>
+{% endblock %}
 {% block content %}
-<div class="row"><div class="col s12"><div class="card-panel">
+<div class="row rss-subscriptions"><div class="col s12"><div class="card-panel">
     <h1>RSS subscriptions</h1>
     <p>Save new articles automatically to your account. Enabled feeds are checked every 30 minutes by the scheduled importer. Only successful saves are marked as seen. No paywall mirrors are used.</p>
     {% for feed in feeds %}
@@ -15,7 +24,7 @@
             <label for="name-{{ feed.id }}">Name</label><input id="name-{{ feed.id }}" name="name" maxlength="255" value="{{ feed.name }}" required>
             <label for="tags-{{ feed.id }}">Tags (comma separated)</label><input id="tags-{{ feed.id }}" name="tags" value="{{ feed.tags|join(', ') }}">
             <label for="limit-{{ feed.id }}">Recent items per check</label><input id="limit-{{ feed.id }}" type="number" min="1" max="100" name="max_items" value="{{ feed.maxItems }}" required>
-            <p><label><input type="checkbox" name="enabled" value="1" {% if feed.enabled %}checked{% endif %}><span>Enabled</span></label></p>
+            <p><input id="enabled-{{ feed.id }}" type="checkbox" name="enabled" value="1" {% if feed.enabled %}checked{% endif %}><label for="enabled-{{ feed.id }}">Enabled</label></p>
             <button class="btn" name="action" value="save">Save settings</button>
             <button class="btn" name="action" value="delete">Unsubscribe</button>
         </form>
