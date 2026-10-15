@@ -20,6 +20,7 @@ import yaml
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('backup', type=Path)
 parser.add_argument('--application-image', required=True)
+parser.add_argument('--database-memory', choices=['512m', '1g', '2g'], default='1g')
 args = parser.parse_args()
 os.umask(0o077)
 root = args.backup.resolve(strict=True)
@@ -52,7 +53,7 @@ try:
     for volume in volumes:
         run(['docker', 'volume', 'create', '--label', owner + '=' + str(root), volume], stdout=subprocess.DEVNULL)
         created.append(('volume', volume))
-    run(['docker', 'create', '--name', name, '--label', owner + '=' + str(root), '--network', 'none', '--cpus', '1', '--memory', '512m', '--pids-limit', '128', '--env', 'MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1', '--mount', 'type=volume,src=' + volumes[0] + ',dst=/var/lib/mysql', '--mount', 'type=volume,src=' + volumes[1] + ',dst=/run/mysqld', image, '--skip-networking', '--innodb-buffer-pool-size=64M', '--max-allowed-packet=256M'], stdout=subprocess.DEVNULL)
+    run(['docker', 'create', '--name', name, '--label', owner + '=' + str(root), '--network', 'none', '--cpus', '1', '--memory', args.database_memory, '--pids-limit', '128', '--env', 'MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1', '--mount', 'type=volume,src=' + volumes[0] + ',dst=/var/lib/mysql', '--mount', 'type=volume,src=' + volumes[1] + ',dst=/run/mysqld', image, '--skip-networking', '--innodb-buffer-pool-size=64M', '--max-allowed-packet=256M'], stdout=subprocess.DEVNULL)
     created.append(('container', name))
     run(['docker', 'start', name], stdout=subprocess.DEVNULL)
     for attempt in range(60):
@@ -104,6 +105,11 @@ finally:
     errors = []
     for kind, target in reversed(created):
         obj = json.loads(subprocess.check_output(['docker', kind, 'inspect', target]))[0]
+        if kind == 'container':
+            with (root / (target + '.log')).open('wb') as log:
+                subprocess.run(['docker', 'logs', '--tail', '100', target], stdout=log, stderr=subprocess.STDOUT)
+            if target == name:
+                report['restore_db_state'] = {key: obj['State'][key] for key in ['Status', 'ExitCode', 'OOMKilled']}
         labels = obj.get('Labels', {}) if kind == 'volume' else obj['Config'].get('Labels', {})
         if labels.get(owner) != str(root):
             errors.append('Ownership mismatch: ' + target)
