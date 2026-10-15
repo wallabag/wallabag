@@ -32,6 +32,12 @@ Never recreate dependencies as collateral work.
    The entrypoint copies them into private runtime files owned by the existing
    unprivileged application user. Validate candidate Compose without printing its
    secret-bearing expanded configuration.
+   `scripts/prepare-source-compose.py` (operator-host PyYAML required) can generate
+   that candidate from existing Compose, an immutable image/revision and the
+   server-local runtime-config directory. It refuses overwrite/custom entrypoints,
+   keeps dependency definitions and published ports unchanged, and never copies
+   app environment credentials into the new worker. The worker is bounded to one
+   CPU/256 MiB. Review and validate the candidate before replacing any live file.
 5. Stop **only the legacy RSS bridge**, wait for its process to settle, and create
    a consistent SQLite backup with SQLite's backup API. Export that offline copy
    with `scripts/export-rss-wallabag.py` server-locally. Do not start the integrated
