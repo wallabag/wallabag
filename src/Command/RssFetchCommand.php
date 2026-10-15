@@ -14,13 +14,26 @@ class RssFetchCommand extends Command
     private EntityManagerInterface $em;
     private FeedImporter $importer;
     private string $projectDir;
-    public function __construct(EntityManagerInterface $em, FeedImporter $importer, string $projectDir) { $this->em = $em; $this->importer = $importer; $this->projectDir = $projectDir; parent::__construct(); }
-    protected function configure() { $this->setName('wallabag:rss:fetch')->setDescription('Import due RSS subscriptions (run every minute; feeds poll every 30 minutes).'); }
+
+    public function __construct(EntityManagerInterface $em, FeedImporter $importer, string $projectDir)
+    {
+        $this->em = $em;
+        $this->importer = $importer;
+        $this->projectDir = $projectDir;
+        parent::__construct();
+    }
+
+    protected function configure()
+    {
+        $this->setName('wallabag:rss:fetch')->setDescription('Import due RSS subscriptions (run every minute; feeds poll every 30 minutes).');
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $lock = fopen($this->projectDir . '/var/rss-fetch.lock', 'c');
-        if (!$lock || !flock($lock, LOCK_EX | LOCK_NB)) {
+        if (!$lock || !flock($lock, \LOCK_EX | \LOCK_NB)) {
             $output->writeln('Another RSS importer is active, or the lock is unavailable.');
+
             return 1;
         }
         try {
@@ -32,7 +45,11 @@ class RssFetchCommand extends Command
                     $failed = $failed || (bool) $feed->lastError;
                 }
             }
+
             return $failed ? 1 : 0;
-        } finally { flock($lock, LOCK_UN); fclose($lock); }
+        } finally {
+            flock($lock, \LOCK_UN);
+            fclose($lock);
+        }
     }
 }

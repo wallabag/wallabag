@@ -64,3 +64,7 @@ web/custom.css
 .env.test.local
 
 yarn-error.log
+# Isolated local validation caches, synthetic databases and research responses
+/.validation/
+
+/docker/rss-tests/cache/

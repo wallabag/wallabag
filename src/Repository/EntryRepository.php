@@ -516,6 +516,7 @@ class EntryRepository extends ServiceEntityRepository
                 return $candidate;
             }
         }
+
         return false;
     }
 

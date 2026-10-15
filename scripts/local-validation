@@ -1,0 +1,267 @@
+#!/usr/bin/env python3
+"""Bounded network-none local validation. Usage: scripts/local-validation setup|test|cleanup"""
+
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import shutil
+import sys
+import urllib.request
+
+ROOT = Path(__file__).resolve().parents[1]
+ART = ROOT / ".validation"
+KEY = hashlib.sha256(str(ROOT).encode()).hexdigest()[:12]
+NAME = "wallabag-local-" + KEY
+IMAGE = NAME + ":test"
+BASE = "wallabag/wallabag:2.6.14"
+LABEL = "io.wallabag.validation.root"
+STATE = ART / "runtime.json"
+
+
+def run(args, **kwargs):
+    return subprocess.run(args, cwd=ROOT, check=True, **kwargs)
+
+
+def output(args):
+    return subprocess.check_output(args, cwd=ROOT, text=True).strip()
+
+
+def inspect(kind, target):
+    r = subprocess.run(
+        ["docker", kind, "inspect", target], capture_output=True, text=True
+    )
+    return json.loads(r.stdout)[0] if r.returncode == 0 else None
+
+
+def owned_container():
+    item = inspect("container", NAME)
+    if item and item["Config"].get("Labels", {}).get(LABEL) != str(ROOT):
+        raise SystemExit("Container name belongs to another owner; refusing.")
+    return item
+
+
+def container(command):
+    if owned_container():
+        raise SystemExit(
+            "An owned validation container already exists; inspect/clean it before starting another."
+        )
+    return run(
+        [
+            "docker",
+            "run",
+            "--rm",
+            "--name",
+            NAME,
+            "--label",
+            LABEL + "=" + str(ROOT),
+            "--network",
+            "none",
+            "--cpus",
+            "1",
+            "--memory",
+            "256m",
+            "--pids-limit",
+            "128",
+            "--mount",
+            "type=bind,src=" + str(ROOT) + ",dst=/work",
+            "--env",
+            "COMPOSER_CACHE_DIR=/work/.validation/composer-cache",
+            "--env",
+            "COMPOSER_DISABLE_NETWORK=1",
+            "--env",
+            "COMPOSER_ALLOW_SUPERUSER=1",
+            "--env",
+            "TEST_DATABASE_PATH=/work/.validation/wallabag_test.sqlite",
+            "--env",
+            "SYMFONY_DEPRECATIONS_HELPER=weak",
+            IMAGE,
+            "-ec",
+            command,
+        ]
+    )
+
+
+def setup():
+    ART.mkdir(exist_ok=True)
+    if STATE.exists():
+        raise SystemExit("Validation state exists; reuse test or run cleanup first.")
+    if owned_container() or inspect("image", IMAGE):
+        raise SystemExit(
+            "Validation resources already exist without state; refusing to adopt them."
+        )
+    base_exists = inspect("image", BASE) is not None
+    STATE.write_text(
+        json.dumps(
+            {
+                "root": str(ROOT),
+                "name": NAME,
+                "image": IMAGE,
+                "base_preexisting": base_exists,
+            },
+            indent=2,
+        )
+    )
+    run(["docker", "pull", BASE])
+    architecture = {"arm64": "aarch64", "amd64": "x86_64"}.get(
+        inspect("image", BASE)["Architecture"]
+    )
+    if not architecture:
+        raise SystemExit("Unsupported test image architecture.")
+    package = ROOT / "docker/rss-tests/cache/php81-xmlwriter.apk"
+    package.parent.mkdir(parents=True, exist_ok=True)
+    with urllib.request.urlopen(
+        "https://dl-cdn.alpinelinux.org/alpine/v3.19/community/"
+        + architecture
+        + "/php81-xmlwriter-8.1.34-r0.apk",
+        timeout=30,
+    ) as response:
+        package.write_bytes(response.read())
+    run(
+        [
+            "docker",
+            "build",
+            "--network=none",
+            "--memory=256m",
+            "--cpu-period=100000",
+            "--cpu-quota=100000",
+            "--label",
+            LABEL + "=" + str(ROOT),
+            "-f",
+            "docker/rss-tests/Dockerfile",
+            "-t",
+            IMAGE,
+            ".",
+        ]
+    )
+    run([sys.executable, "scripts/cache-validation-dependencies.py"])
+    shutil.copytree(
+        ROOT / "docker/rss-tests/phpunit", ART / "phpunit", dirs_exist_ok=True
+    )
+    shutil.copytree(
+        ROOT / "docker/rss-tests/phpunit-repository",
+        ART / "phpunit-repository",
+        dirs_exist_ok=True,
+    )
+    parameters = ROOT / "app/config/parameters.yml"
+    if parameters.exists():
+        raise SystemExit(
+            "parameters.yml already exists; refusing to replace it. Use a clean isolated checkout."
+        )
+    source = (ROOT / "app/config/parameters.yml.dist").read_text()
+    source = (
+        source.replace("database_driver: pdo_mysql", "database_driver: pdo_sqlite")
+        .replace(
+            "database_path: null",
+            'database_path: "%kernel.project_dir%/.validation/app.sqlite"',
+        )
+        .replace("database_charset: utf8mb4", "database_charset: utf8")
+        .replace(
+            "secret: CHANGE_ME_TO_SOMETHING_SECRET_AND_RANDOM",
+            "secret: isolated-local-fixtures-only-no-production-use",
+        )
+    )
+    parameters.write_text(source)
+    state = json.loads(STATE.read_text())
+    state["created_parameters"] = True
+    STATE.write_text(json.dumps(state, indent=2))
+    deps()
+
+
+def deps():
+    if not STATE.exists():
+        raise SystemExit("Run setup first.")
+    container(
+        "composer install --no-interaction --prefer-dist --no-scripts --no-plugins --no-progress; composer install --working-dir=.validation/phpunit --no-interaction --prefer-dist --no-scripts --no-plugins --no-progress; php -v | head -2"
+    )
+
+
+def test():
+    if not STATE.exists() or json.loads(STATE.read_text())["root"] != str(ROOT):
+        raise SystemExit("Run setup in this isolated checkout first.")
+    # Test DB is fixed under .validation. No host environment or production DSN is forwarded.
+    command = """test "$TEST_DATABASE_PATH" = /work/.validation/wallabag_test.sqlite
+php -r '$p=getenv("TEST_DATABASE_PATH"); if (is_file($p)) { unlink($p); }'
+php bin/console doctrine:migrations:migrate --no-interaction --env=test
+php bin/console doctrine:fixtures:load --no-interaction --env=test
+php bin/console doctrine:schema:validate --env=test --skip-sync
+php scripts/check-local-rss-schema.php
+php .validation/phpunit/vendor/bin/phpunit --filter '(Rss|FeedParserTest|FeedImporterTest|PublicHttpClientTest|XPostExtractorTest|FxArticleReaderTest|XContentProxyTest|XEntry|XArticleRestControllerTest|ContentProxyTest)' --log-junit .validation/phpunit.xml
+php bin/console wallabag:rss:fetch --env=test
+"""
+    container(command)
+
+
+def cleanup():
+    if not STATE.exists():
+        raise SystemExit("No owned state; nothing removed.")
+    state = json.loads(STATE.read_text())
+    if state["root"] != str(ROOT) or state["name"] != NAME or state["image"] != IMAGE:
+        raise SystemExit("Validation identity mismatch; refusing cleanup.")
+    item = owned_container()
+    if item:
+        run(["docker", "rm", "-f", item["Id"]])
+    image_ids = output(
+        [
+            "docker",
+            "image",
+            "ls",
+            "--filter",
+            "label=" + LABEL + "=" + str(ROOT),
+            "--format",
+            "{{.ID}}",
+        ]
+    ).split()
+    for image_id in dict.fromkeys(image_ids):
+        image = inspect("image", image_id)
+        if image.get("Config", {}).get("Labels", {}).get(LABEL) != str(ROOT):
+            raise SystemExit("Image owner mismatch; refusing cleanup.")
+        run(["docker", "image", "rm", image_id])
+    if not state.get("base_preexisting", True):
+        users = output(["docker", "ps", "-aq", "--filter", "ancestor=" + BASE])
+        if not users:
+            run(["docker", "image", "rm", BASE])
+    # No network or Docker volume is created by this workflow. Never prune or touch foreign resources.
+    for name in [
+        "wallabag_test.sqlite",
+        "app.sqlite",
+        "wallabag_test.sqlite-wal",
+        "wallabag_test.sqlite-shm",
+    ]:
+        path = ART / name
+        if path.exists():
+            path.unlink()
+    if state.get("created_parameters"):
+        path = ROOT / "app/config/parameters.yml"
+        if (
+            path.exists()
+            and "isolated-local-fixtures-only-no-production-use" in path.read_text()
+        ):
+            path.unlink()
+    report = {
+        "container_absent": owned_container() is None,
+        "image_absent": inspect("image", IMAGE) is None,
+        "owned_images_remaining": output(
+            [
+                "docker",
+                "image",
+                "ls",
+                "--filter",
+                "label=" + LABEL + "=" + str(ROOT),
+                "--format",
+                "{{.ID}}",
+            ]
+        ).split(),
+        "networks_created": [],
+        "volumes_created": [],
+        "foreign_resources_modified": False,
+    }
+    (ART / "cleanup.json").write_text(json.dumps(report, indent=2))
+    STATE.unlink()
+    print(json.dumps(report))
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2 or sys.argv[1] not in ["setup", "deps", "test", "cleanup"]:
+        raise SystemExit(__doc__)
+    {"setup": setup, "deps": deps, "test": test, "cleanup": cleanup}[sys.argv[1]]()

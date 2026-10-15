@@ -40,6 +40,7 @@
 
                         <div class="row">
                             <div class="input-field col s11 settings-checkbox-col">
+                                {{ form_row(form.config.x_article_reader_enabled) }}
                                 {{ form_errors(form.config.display_thumbnails) }}
                                 <label for="{{ form.config.display_thumbnails.vars.id }}" class="settings-checkbox-label">
                                     {{ form_widget(form.config.display_thumbnails) }}

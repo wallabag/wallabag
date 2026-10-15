@@ -1,0 +1,7 @@
+.git
+.validation
+vendor
+node_modules
+var/cache
+var/logs
+app/config/parameters.yml

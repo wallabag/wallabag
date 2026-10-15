@@ -15,11 +15,14 @@ class RssOAuthTest extends WallabagTestCase
         $client = $this->getTestClient();
         $em = $this->getEntityManager();
         $user = $em->getRepository(User::class)->findOneByUsername('admin');
-        $apiClient = new Client($user); $apiClient->setName('RSS test fixture'); $apiClient->setAllowedGrantTypes(['password']);
+        $apiClient = new Client($user);
+        $apiClient->setName('RSS test fixture');
+        $apiClient->setAllowedGrantTypes(['password']);
         $em->persist($apiClient);
         $other = $em->getRepository(User::class)->findOneByUsername('bob');
         $foreignFeed = new RssFeed($other, 'https://1.1.1.1/foreign');
-        $em->persist($foreignFeed); $em->flush();
+        $em->persist($foreignFeed);
+        $em->flush();
         $foreignId = $foreignFeed->id;
         $client->request('POST', '/oauth/v2/token', ['grant_type' => 'password', 'client_id' => $apiClient->getPublicId(), 'client_secret' => $apiClient->getSecret(), 'username' => 'admin', 'password' => 'mypassword']);
         self::assertSame(200, $client->getResponse()->getStatusCode());
@@ -36,7 +39,8 @@ class RssOAuthTest extends WallabagTestCase
         $client->request('GET', '/api/rss/feeds.json', [], [], $headers);
         self::assertSame(200, $client->getResponse()->getStatusCode());
         $ids = array_column(json_decode($client->getResponse()->getContent(), true), 'id');
-        self::assertContains($id, $ids); self::assertNotContains($foreignId, $ids);
+        self::assertContains($id, $ids);
+        self::assertNotContains($foreignId, $ids);
         $client->request('GET', '/api/rss/feeds.json', [], [], ['HTTP_AUTHORIZATION' => 'Bearer invalid']);
         self::assertContains($client->getResponse()->getStatusCode(), [401, 403]);
     }

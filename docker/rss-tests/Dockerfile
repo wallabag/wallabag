@@ -1,4 +1,7 @@
-# A CLI-only test tool. No web server, exposed ports, application credentials or production mounts.
-FROM alpine:3.21
-RUN apk add --no-cache composer git php83 php83-ctype php83-curl php83-dom php83-fileinfo php83-gd php83-iconv php83-intl php83-mbstring php83-openssl php83-pdo_sqlite php83-phar php83-session php83-simplexml php83-tidy php83-tokenizer php83-xml php83-xmlreader php83-xmlwriter php83-zip
+# Release-matched CLI runtime. No entrypoint initialization, network, server or production mounts.
+FROM wallabag/wallabag:2.6.14@sha256:4a527e027e0d59e87c14225ef11e005af3d4890374202ad319ce5e63dfc66709
+COPY docker/rss-tests/cache/php81-xmlwriter.apk /tmp/php81-xmlwriter.apk
+RUN apk add --no-network /tmp/php81-xmlwriter.apk && rm /tmp/php81-xmlwriter.apk
 WORKDIR /work
+COPY . /work
+ENTRYPOINT ["/bin/sh"]

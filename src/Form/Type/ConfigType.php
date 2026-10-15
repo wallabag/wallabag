@@ -68,6 +68,11 @@ class ConfigType extends AbstractType
                 'property_path' => 'displayThumbnails',
                 'required' => false,
             ])
+            ->add('x_article_reader_enabled', CheckboxType::class, [
+                'label' => 'Read public X Articles using FxTwitter (shares the public post ID and server IP with that service)',
+                'property_path' => 'xArticleReaderEnabled',
+                'required' => false,
+            ])
             ->add('reading_speed', IntegerType::class, [
                 'label' => 'config.form_settings.reading_speed.label',
                 'property_path' => 'readingSpeed',

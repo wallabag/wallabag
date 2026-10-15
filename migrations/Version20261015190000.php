@@ -9,6 +9,7 @@ final class Version20261015190000 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
+        $schema->getTable($this->getTable('config', true))->addColumn('x_article_reader_enabled', 'boolean', ['default' => false]);
         $feed = $schema->createTable($this->getTable('rss_feed', true));
         $feed->addColumn('id', 'integer', ['autoincrement' => true]);
         $feed->addColumn('user_id', 'integer');
@@ -37,6 +38,7 @@ final class Version20261015190000 extends WallabagMigration
 
     public function down(Schema $schema): void
     {
+        $schema->getTable($this->getTable('config', true))->dropColumn('x_article_reader_enabled');
         $schema->dropTable($this->getTable('rss_seen_item', true));
         $schema->dropTable($this->getTable('rss_feed', true));
     }

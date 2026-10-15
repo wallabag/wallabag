@@ -96,6 +96,10 @@ class Config
     #[Groups(['config_api'])]
     private $displayThumbnails;
 
+    #[ORM\Column(name: 'x_article_reader_enabled', type: 'boolean', options: ['default' => false])]
+    #[Groups(['config_api'])]
+    private bool $xArticleReaderEnabled = false;
+
     /**
      * @var string|null
      */
@@ -155,6 +159,18 @@ class Config
         $this->user = $user;
         $this->taggingRules = new ArrayCollection();
         $this->ignoreOriginRules = new ArrayCollection();
+    }
+
+    public function isXArticleReaderEnabled(): bool
+    {
+        return $this->xArticleReaderEnabled;
+    }
+
+    public function setXArticleReaderEnabled(bool $enabled): self
+    {
+        $this->xArticleReaderEnabled = $enabled;
+
+        return $this;
     }
 
     /**

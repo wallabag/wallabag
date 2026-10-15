@@ -13,7 +13,9 @@ class XPostExtractorTest extends TestCase
         foreach (['https://x.com/poteto/status/2069824386283319343?s=20', 'https://twitter.com/poteto/status/2069824386283319343/photo/1', 'https://x.com/i/web/status/2069824386283319343'] as $url) {
             self::assertSame('https://x.com/i/status/2069824386283319343', XPostExtractor::canonicalUrl($url));
         }
-        foreach (['https://x.com.evil.test/poteto/status/1', 'https://x.com@127.0.0.1/a/status/1', 'file://x.com/a/status/1', 'https://x.com:8443/a/status/1'] as $url) { self::assertNull(XPostExtractor::canonicalUrl($url)); }
+        foreach (['https://x.com.evil.test/poteto/status/1', 'https://x.com@127.0.0.1/a/status/1', 'file://x.com/a/status/1', 'https://x.com:8443/a/status/1'] as $url) {
+            self::assertNull(XPostExtractor::canonicalUrl($url));
+        }
     }
 
     public function testPublicEmbedIsPartialAndSanitized(): void

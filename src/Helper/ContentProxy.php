@@ -46,7 +46,9 @@ class ContentProxy
     public function updateEntry(Entry $entry, $url, array $content = [], $disableContentUpdate = false): void
     {
         if (!$disableContentUpdate && !$this->validateContent($content) && $this->xPostExtractor && XPostExtractor::canonicalUrl($url)) {
-            $content = $this->xPostExtractor->extract($url);
+            $user = $entry->getUser();
+            $config = $user ? $user->getConfig() : null;
+            $content = $this->xPostExtractor->extract($url, $config && $config->isXArticleReaderEnabled());
             if (502 === $content['status'] && $entry->getContent()) {
                 $entry->setHttpStatus(502);
 

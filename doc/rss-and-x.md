@@ -15,7 +15,7 @@
 3. Add authenticated JSON endpoints using Wallabag's existing OAuth firewall. Every lookup scopes to the current user; another user's ID returns 404.
 4. Poll due subscriptions with `wallabag:rss:fetch`. An atomic database claim prevents simultaneous cron workers processing the same feed. A project-local CLI file lock serializes workers on the single deployment host; multi-host workers must share that lock directory or provide a distributed scheduler lock to preserve cross-feed deduplication. Disabled user accounts are not polled. Feed and article requests are bounded, use public-address validation, pin DNS, and validate each redirect. Feed XML forbids DTD/entities.
 5. Extract articles from safely prefetched HTML with secondary/multipage fetching disabled. Sanitize through the existing ContentProxy/Graby HTML cleanup. Do not invoke the legacy server-side image downloader from RSS ingestion. External images may remain in sanitized content and render in the browser; offline media mirroring is not implemented by this importer.
-6. Integrate X public embeds into ContentProxy so the ordinary new-entry form, API entry creation and reload paths all use it. Safe attributed text/links only; no widget scripts, inline handlers, iframes or automatic media downloads. Every public embed is explicitly partial (stored `http_status: 206`); unavailability is explicit (`502`). Failed reloads retain existing content and display a status notice.
+6. Integrate X public embeds and an optional structured article reader into ContentProxy so the ordinary new-entry form, API entry creation and reload paths all use it. Safe attributed text/links only; no widget scripts, inline handlers, iframes or automatic media downloads. Every fallback public embed is explicitly partial (stored `http_status: 206`); unavailability is explicit (`502`). Failed reloads retain existing content and display a status notice.
 
 RSS retains the old 30-minute schedule, enabled/disabled subscriptions, configurable recent-item window (default 10), relative URL resolution/fragment removal, publication dates, item categories and successful-item deduplication. Subscription tags are also applied. A pre-existing user entry counts as seen without overwriting it. Entries and seen markers flush together. Failures are visible on the UI/API and retry on the next cycle. A worker spends at most about 210 seconds on one feed (120-second loop budget plus a bounded in-flight request); the 30-minute claim exceeds that budget. The command limits each invocation to 10 feeds.
 
@@ -50,18 +50,10 @@ Deployment requires Jon's approval. Back up the application database using the e
 
 Unsubscribing deletes subscription/seen history but retains saved articles. Migration rollback removes only the new RSS tables; export RSS settings before rollback if needed. The old SQLite backup remains a rollback artifact.
 
-## X access boundary
+## Public X Article reader and validation
 
-Tested the supplied URL `https://x.com/poteto/status/2069824386283319343` against `https://publish.twitter.com/oembed` without credentials. It returned HTTP 200, author **lauren (@poteto)**, and only `https://t.co/6Ta0f4J3u2` as post text. The public short link returns a 301 to `https://x.com/i/article/2066965659259686912`. That article returned HTTP 404 with login markup and no article body. This does **not** establish access to the linked article or full long-form post. Direct browser retrieval failed in the research tool. No short-link destination was represented as captured content.
+The public embed-only limit for the supplied post is now addressed by an optional FxTwitter reader. The actual article body was retrieved without credentials/payment and replayed through the application sanitizer: every nonempty text block survived. Enable the per-user Settings checkbox or PATCH `/api/config.json` with `{"x_article_reader_enabled":true}`. It defaults off, discloses public post ID/server IP sharing, and never sends private Wallabag data or credentials.
 
-The public lookup was also tested with the exact canonical `/i/status/{id}` form used by this implementation (HTTP 200). `/i/web/status/{id}` fails on the embed endpoint and is normalized before lookup.
+See [reader evaluation, sources and completeness evidence](x-article-readers.md) and [reproducible Docker setup/test/cleanup and verification limits](local-validation.md).
 
-The legacy official oEmbed documentation now redirects to the X overview; the public endpoint remains empirically reachable, but its completeness/stability is not guaranteed. Official Post Lookup documentation specifies an approved developer account, project/app and keys/tokens: https://docs.x.com/x-api/posts/lookup/introduction . Current official platform documentation describes pay-per-use access: https://docs.x.com/overview . This branch does not create credentials, subscribe to paid access, or silently make authenticated/paid X requests. Full long-form content remains an access decision for Jon; this implementation only promises clearly labeled public snapshots.
-
-## Validation
-
-The offline Python exporter regression passes (1 test) against synthetic SQLite data and verifies its source file hash remains unchanged.
-
-PHP unit and functional tests cover XML safety, RSS/Atom resolution and limits, blocked address ranges, mixed DNS answers, X canonicalization/sanitization and partial/unavailable responses, UI CSRF/authentication, owned API CRUD and idempotent legacy imports. Added tests are intended for the existing isolated SQLite test setup; execution evidence must be recorded before treating them as passing.
-
-The Mac currently has no PHP CLI or Composer. Nomos startup and then AI metadata own the heavy runtime slot. PHP containers remain held pending explicit release/coordination. No GitHub Actions validation is relied on. `git diff --check` passes, and a Node PHP parser configured for PHP 7.4 successfully parsed all 23 changed/new PHP files. This is source syntax validation, not PHP execution or functional test evidence.
+Local Docker validation currently covers 90 tests / 380 assertions (89 passed, one upstream PHP encoding skip), plus the passing offline exporter regression. Legacy SQLite schema drift is recorded separately; the new RSS tables and preference column match mapping. No production migration or deployment was performed.

@@ -1,0 +1,1 @@
+{"require": {"phpunit/phpunit": "9.6.29"}, "repositories": [{"type": "composer", "url": "file:///work/.validation/phpunit-repository"}, {"packagist.org": false}], "config": {"allow-plugins": false}}

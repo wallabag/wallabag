@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-15",
+  "runtime": {
+    "application": "Wallabag 2.6.14",
+    "php": "8.1.32",
+    "phpunit": "9.6.29",
+    "docker_network": "none",
+    "cpus": 1,
+    "memory_mib": 256,
+    "published_ports": []
+  },
+  "php_tests": {
+    "executed": 90,
+    "passed": 89,
+    "skipped": 1,
+    "assertions": 380,
+    "skip_reason": "Upstream PDF invalid-character encoding test skips PHP >=8.1"
+  },
+  "python_tests": {
+    "passed": 1
+  },
+  "php_syntax_files": 32,
+  "php_style": "repository formatter dry-run passed",
+  "article": {
+    "post_id": "2069824386283319343",
+    "article_id": "2066965659259686912",
+    "title": "Loops You Can Trust",
+    "source_blocks": 79,
+    "nonempty_blocks_verified": 69,
+    "http_status": 200,
+    "all_nonempty_blocks_preserved": true,
+    "provider_response_sha256": "b4fe5c4a1619c55187a2f692a09b0c7853077b241ab850e66e2045859281213d",
+    "sanitized_html_sha256": "2b6da1d38b876a44d44209820b0831cf7585119c2e487b34e63d1b6844fbb591",
+    "closing_paragraph_sha256": "d5c291ad6fdfb954f1652d4707635bf4fe8f1d5cf3c9eb677aa5b101e5d001c1",
+    "network_access_during_replay": false,
+    "database_writes": false
+  },
+  "cleanup": {
+    "container_absent": true,
+    "image_absent": true,
+    "owned_images_remaining": [],
+    "networks_created": [],
+    "volumes_created": [],
+    "foreign_resources_modified": false
+  },
+  "limits": [
+    "BrowserKit functional UI, no visual/browser-server test",
+    "SQLite only; MariaDB production migration not executed",
+    "Legacy SQLite schema drift retained separately",
+    "Provider body is verified against its receipt, not independently against inaccessible X rendered page",
+    "External media/embedded posts are linked, not archived"
+  ],
+  "github_actions_setting": "Disable retry rejected by automatic approval review; setting unchanged",
+  "production_changes": false
+}

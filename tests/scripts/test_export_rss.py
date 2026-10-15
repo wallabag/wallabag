@@ -1,4 +1,5 @@
 """Offline exporter regression; uses synthetic data in a temporary directory."""
+
 import hashlib
 import json
 from pathlib import Path
@@ -22,13 +23,23 @@ class ExportRssTest(unittest.TestCase):
                     INSERT INTO seen_items VALUES (1, 1, 'https://example.com/one#fragment');
                 """)
             before = hashlib.sha256(database.read_bytes()).hexdigest()
-            script = Path(__file__).resolve().parents[2] / "scripts/export-rss-wallabag.py"
-            result = subprocess.run([sys.executable, str(script), str(database)], check=True, capture_output=True, text=True)
+            script = (
+                Path(__file__).resolve().parents[2] / "scripts/export-rss-wallabag.py"
+            )
+            result = subprocess.run(
+                [sys.executable, str(script), str(database)],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
             data = json.loads(result.stdout)
             self.assertEqual(data["feeds"][0]["tags"], ["Tech"])
             self.assertEqual(data["feeds"][0]["max_items"], 3)
             self.assertFalse(data["feeds"][0]["enabled"])
-            self.assertEqual(data["seen_items"]["https://example.com/feed"], [{"url": "https://example.com/one#fragment"}])
+            self.assertEqual(
+                data["seen_items"]["https://example.com/feed"],
+                [{"url": "https://example.com/one#fragment"}],
+            )
             self.assertEqual(before, hashlib.sha256(database.read_bytes()).hexdigest())
 
 
