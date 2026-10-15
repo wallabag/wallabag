@@ -117,7 +117,7 @@ try:
         ['php', 'scripts/visual-validation/console.php', 'doctrine:fixtures:load', '--no-interaction'],
         ['php', 'scripts/visual-validation/console.php', 'doctrine:schema:validate', '--skip-sync'],
         ['php', 'scripts/visual-validation/console.php', 'assets:install', 'web'],
-        ['php', '/source/.validation/phpunit/vendor/bin/phpunit', '--bootstrap', 'scripts/visual-validation/phpunit-bootstrap.php', '--filter', '(Rss|Grabber|MediumExtractor|FeedParserTest|FeedImporterTest|PublicHttpClientTest|XPostExtractorTest|FxArticleReaderTest|XContentProxyTest|XEntry|XArticleRestControllerTest)', '--log-junit', '/evidence/mariadb-phpunit.xml'],
+        ['php', '/source/.validation/phpunit/vendor/bin/phpunit', '--bootstrap', 'scripts/visual-validation/phpunit-bootstrap.php', '--filter', '(Rss|Grabber|MediumExtractor|MediumContentProxyTest|FeedParserTest|FeedImporterTest|PublicHttpClientTest|XPostExtractorTest|FxArticleReaderTest|XContentProxyTest|XEntry|XArticleRestControllerTest)', '--log-junit', '/evidence/mariadb-phpunit.xml'],
     ]:
         with (EVIDENCE / 'mariadb-checks.log').open('a') as log:
             run('docker', 'exec', names['app'], *command, stdout=log, stderr=subprocess.STDOUT, timeout=180)
