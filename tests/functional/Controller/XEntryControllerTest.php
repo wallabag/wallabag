@@ -55,6 +55,10 @@ class XEntryControllerTest extends WallabagTestCase
         // Metadata stays plain text, without HTML entities leaking into API/export values.
         self::assertSame([$author], $entry->getPublishedBy());
         self::assertSame($articleReader ? 200 : 206, $entry->getHttpStatus());
+        $entryId = $entry->getId();
+        $this->getEntityManager()->clear();
+        $entry = $this->getEntityManager()->find(Entry::class, $entryId);
+        self::assertSame($articleReader ? 'article' : 'post', $entry->getXCaptureType());
         $crawler = $client->request('GET', '/view/' . $entry->getId());
         self::assertSame(200, $client->getResponse()->getStatusCode());
         self::assertStringContainsString($author, $crawler->filter('ul.stats')->text());

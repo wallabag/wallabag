@@ -137,7 +137,7 @@ class FxArticleReader
         $authorHtml = \is_string($handle) && preg_match('/^[A-Za-z0-9_]{1,15}$/', $handle) ? $this->link('https://x.com/' . $handle, $author . ' (@' . $handle . ')') : self::escape($author);
         $html .= '<p>By ' . $authorHtml . '. ' . $this->link($canonical, 'Original post and article on X') . '</p>';
 
-        return ['title' => $title, 'html' => $html, 'url' => $canonical, 'status' => $complete ? 200 : 206, 'authors' => [$author], 'date' => \is_string($article['created_at'] ?? null) ? $article['created_at'] : (\is_string($post['created_at'] ?? null) ? $post['created_at'] : null)];
+        return ['title' => $title, 'html' => $html, 'url' => $canonical, 'status' => $complete ? 200 : 206, 'authors' => [$author], 'x_capture_type' => 'article', 'date' => \is_string($article['created_at'] ?? null) ? $article['created_at'] : (\is_string($post['created_at'] ?? null) ? $post['created_at'] : null)];
     }
 
     private function inline(array $block, array $entities): string

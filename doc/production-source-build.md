@@ -51,7 +51,8 @@ Never recreate dependencies as collateral work.
 6. Pause only the old application for the migration window. Run the new image's
    `console doctrine:migrations:migrate --env=prod --no-interaction --no-debug`
    using the server-local configuration and existing DB network. Verify migration
-   ledger and new tables/columns. Never run `wallabag:install` on existing data.
+   ledger and new tables/columns, including nullable internal `entry.x_capture_type`
+   provenance. Existing entries start with no inferred capture type. Never run `wallabag:install` on existing data.
 7. For the verified legacy bridge owner, run
    `console wallabag:rss:import USER_ID /dev/stdin --env=prod --no-debug` with the
    export on stdin. It validates URLs and merges transactionally and idempotently.

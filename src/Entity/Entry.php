@@ -132,6 +132,11 @@ class Entry
     #[Groups(['entries_for_user', 'export_all'])]
     private $content;
 
+    /** Capture provenance survives failed reloads independently of the last HTTP status. */
+    #[ORM\Column(name: 'x_capture_type', type: 'string', length: 16, nullable: true)]
+    #[Exclude]
+    private ?string $xCaptureType = null;
+
     /**
      * @var \DateTimeInterface
      */
@@ -449,6 +454,18 @@ class Entry
     public function getContent()
     {
         return $this->content;
+    }
+
+    public function getXCaptureType(): ?string
+    {
+        return $this->xCaptureType;
+    }
+
+    public function setXCaptureType(?string $type): self
+    {
+        $this->xCaptureType = $type;
+
+        return $this;
     }
 
     /**

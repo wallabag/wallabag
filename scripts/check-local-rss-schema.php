@@ -22,6 +22,10 @@ $comparator = new Doctrine\DBAL\Schema\Comparator();
 if ($comparator->diffColumn($actual->getTable($table)->getColumn('x_article_reader_enabled'), $desired->getTable($table)->getColumn('x_article_reader_enabled'))) {
     throw new RuntimeException('X reader preference column differs from ORM mapping.');
 }
+$entryTable = $em->getClassMetadata(Wallabag\CoreBundle\Entity\Entry::class)->getTableName();
+if ($comparator->diffColumn($actual->getTable($entryTable)->getColumn('x_capture_type'), $desired->getTable($entryTable)->getColumn('x_capture_type'))) {
+    throw new RuntimeException('X capture provenance column differs from ORM mapping.');
+}
 $legacyMetadata = [];
 foreach ($metadata as $class) {
     if (in_array($class->getName(), [Wallabag\CoreBundle\Entity\RssFeed::class, Wallabag\CoreBundle\Entity\RssSeenItem::class], true)) {

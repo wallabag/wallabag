@@ -161,5 +161,58 @@
     "chromium_rerun": false,
     "author_sink_verified": "authenticated BrowserKit response DOM for normal and malicious names through both providers",
     "production_changes": false
+  },
+  "residual_review_remediation": {
+    "reviewed_base": "de8833e61d6c5784be43b805ca042f4f269cb94f",
+    "fixes": [
+      "plain title/author/URL escaping at EPUB/PDF/MOBI HTML boundaries without changing stored/API values",
+      "nullable internal capture provenance distinguishes saved Articles from posts and unavailable placeholders"
+    ],
+    "php_tests": {
+      "executed": 129,
+      "passed": 128,
+      "skipped": 1,
+      "assertions": 650
+    },
+    "synthetic_mariadb": {
+      "version": "13.0.2-MariaDB-ubu2604",
+      "tests": 97,
+      "passed": 97,
+      "assertions": 432,
+      "production_data_used": false,
+      "networks_created": [],
+      "published_ports": [],
+      "cleanup_errors": [],
+      "resources_remaining": []
+    },
+    "export_checks": {
+      "providers": [
+        "public oEmbed",
+        "FxTwitter Article"
+      ],
+      "metadata_cases": [
+        "malicious image/script HTML",
+        "Unicode punctuation and literal angle brackets"
+      ],
+      "actual_formats": [
+        "epub",
+        "pdf",
+        "mobi"
+      ],
+      "injected_resource_requests": 0,
+      "resource_trap_positive_control": true,
+      "epub_resource_elements": 0,
+      "epub_metadata_text_preserved": true,
+      "stored_and_json_metadata_unchanged": true
+    },
+    "recovery_checks": [
+      "unavailable-to-partial",
+      "ordinary-post-reload",
+      "repeated-failed-full-Article-preservation",
+      "capture provenance after database rehydration"
+    ],
+    "test_runtime_note": "TCPDF after accumulated Symfony state exceeded PHP 128 MiB in the first MariaDB attempt; process-isolated export tests passed without raising container or PHP memory limits",
+    "chromium_rerun": false,
+    "production_changes": false
   }
 }

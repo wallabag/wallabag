@@ -99,7 +99,8 @@ try:
         raise RuntimeError('Isolated migration failed; inspect private restore-migration.log.')
     report.update(migration_pass=True, existing_entries_unchanged=before_entries == sql(entries, dbname), authentication_fingerprints_unchanged=before_users == sql(users, dbname))
     report['new_rss_tables'] = int(sql("SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME IN ('" + prefix + "rss_feed','" + prefix + "rss_seen_item')", dbname).strip())
-    if not report['existing_entries_unchanged'] or not report['authentication_fingerprints_unchanged'] or report['new_rss_tables'] != 2:
+    report['x_capture_type_column'] = int(sql("SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='" + prefix + "entry' AND COLUMN_NAME='x_capture_type'", dbname).strip())
+    if report['x_capture_type_column'] != 1 or not report['existing_entries_unchanged'] or not report['authentication_fingerprints_unchanged'] or report['new_rss_tables'] != 2:
         raise RuntimeError('Isolated migration preservation check failed.')
 finally:
     errors = []
