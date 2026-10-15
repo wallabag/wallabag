@@ -57,7 +57,7 @@ try:
     created.append(('container', name))
     run(['docker', 'start', name], stdout=subprocess.DEVNULL)
     for attempt in range(60):
-        if subprocess.run(['docker', 'exec', name, 'mariadb-admin', '-uroot', 'ping'], capture_output=True, timeout=5).returncode == 0:
+        if subprocess.run(['docker', 'exec', name, 'sh', '-c', 'case "$(cat /proc/1/comm)" in mariadbd|mysqld) mariadb-admin -uroot ping >/dev/null;; *) exit 1;; esac'], capture_output=True, timeout=5).returncode == 0:
             break
         time.sleep(1)
     else:

@@ -99,7 +99,7 @@ try:
            ['--skip-networking', '--socket=/run/mysqld/mysqld.sock', '--innodb-buffer-pool-size=64M'])
     run('docker', 'start', names['db'], stdout=subprocess.DEVNULL)
     for attempt in range(60):
-        ready = subprocess.run(['docker', 'exec', names['db'], 'mariadb-admin', '--socket=/run/mysqld/mysqld.sock', '-uroot', 'ping'], capture_output=True, timeout=5)
+        ready = subprocess.run(['docker', 'exec', names['db'], 'sh', '-c', 'case "$(cat /proc/1/comm)" in mariadbd|mysqld) mariadb-admin --socket=/run/mysqld/mysqld.sock -uroot ping >/dev/null;; *) exit 1;; esac'], capture_output=True, timeout=5)
         if ready.returncode == 0:
             break
         time.sleep(1)
