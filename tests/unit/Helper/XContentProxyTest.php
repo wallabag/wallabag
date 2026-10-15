@@ -107,6 +107,32 @@ class XContentProxyTest extends TestCase
         self::assertSame(['New author'], $entry->getPublishedBy());
     }
 
+    /** @dataProvider suppliedCaptureContent */
+    public function testProvenanceChangesOnlyWhenContentOrExplicitSourceChanges(string $html, ?string $explicitType, ?string $expectedType): void
+    {
+        $entry = $this->optedInEntry();
+        $entry->setContent('<p>Saved Article body.</p>');
+        $entry->setXCaptureType('article');
+        $content = ['title' => 'Saved Article', 'html' => $html, 'url' => 'https://x.com/person/status/12345'];
+        if (null !== $explicitType) {
+            $content['x_capture_type'] = $explicitType;
+        }
+        $http = $this->createMock(PublicHttpClient::class);
+        $http->expects(self::never())->method('get');
+        $this->withHttp($http)->updateEntry($entry, $content['url'], $content);
+        self::assertSame($expectedType, $entry->getXCaptureType());
+        self::assertStringContainsString(strip_tags($html), strip_tags($entry->getContent()));
+    }
+
+    public function suppliedCaptureContent(): array
+    {
+        return [
+            'unchanged supplied body' => ['<p>Saved Article body.</p>', null, 'article'],
+            'replacement from unknown source' => ['<p>Replacement body.</p>', null, null],
+            'explicit different capture source' => ['<p>Saved Article body.</p>', 'post', 'post'],
+        ];
+    }
+
     private function optedInEntry(): Entry
     {
         $user = new User();

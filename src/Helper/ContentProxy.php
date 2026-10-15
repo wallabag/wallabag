@@ -66,6 +66,10 @@ class ContentProxy
                 return;
             }
         }
+        // Duplicate saves reuse stored HTML; retain its provenance before cleanup normalizes it.
+        if (!\array_key_exists('x_capture_type', $content) && isset($content['html']) && $content['html'] === $entry->getContent()) {
+            $content['x_capture_type'] = $entry->getXCaptureType();
+        }
         $this->graby->toggleImgNoReferrer(true);
         if (!empty($content['html'])) {
             $this->graby->setContentAsPrefetched($content['html']);

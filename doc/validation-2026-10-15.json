@@ -214,5 +214,50 @@
     "test_runtime_note": "TCPDF after accumulated Symfony state exceeded PHP 128 MiB in the first MariaDB attempt; process-isolated export tests passed without raising container or PHP memory limits",
     "chromium_rerun": false,
     "production_changes": false
+  },
+  "duplicate_api_lifecycle_remediation": {
+    "reviewed_base": "b64664385aef77ea80208ad7c0b10d1718f007b7",
+    "regression_reproduced_on_base": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "reason": "capture provenance was null after duplicate API POST and database reload"
+    },
+    "fixes": [
+      "carry existing provenance when supplied HTML is unchanged before cleanup",
+      "preserve authors when duplicate API requests omit the authors field"
+    ],
+    "lifecycle": [
+      "Article API capture",
+      "duplicate API POST without content or authors",
+      "database reload",
+      "failed Article reader with successful short embed",
+      "body/title/authors/provenance retained"
+    ],
+    "replacement_cases": [
+      "changed body resets unknown provenance",
+      "explicit capture source replaces provenance",
+      "unchanged body retains provenance"
+    ],
+    "php_tests": {
+      "executed": 133,
+      "passed": 132,
+      "skipped": 1,
+      "assertions": 679
+    },
+    "synthetic_mariadb": {
+      "version": "13.0.2-MariaDB-ubu2604",
+      "tests": 101,
+      "passed": 101,
+      "assertions": 461,
+      "production_data_used": false,
+      "networks_created": [],
+      "published_ports": [],
+      "cleanup_errors": [],
+      "resources_remaining": []
+    },
+    "schema_change": false,
+    "chromium_rerun": false,
+    "production_changes": false
   }
 }
