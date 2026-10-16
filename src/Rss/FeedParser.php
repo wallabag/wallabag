@@ -11,16 +11,24 @@ class FeedParser
         if ('' === trim($xml)) {
             throw new \RuntimeException('Empty RSS/Atom feed.');
         }
-        if (\strlen($xml) > 2 * 1024 * 1024 || false !== stripos($xml, '<!DOCTYPE') || false !== stripos($xml, '<!ENTITY')) {
+        if (\strlen($xml) > 2 * 1024 * 1024) {
             throw new \RuntimeException('Feed exceeds size limit or contains a forbidden DTD/entity.');
         }
         $doc = new \DOMDocument();
+        // Never load a DTD or substitute entities. Inspect the parsed document,
+        // not literal declaration examples inside CDATA, comments or text.
+        $doc->resolveExternals = false;
+        $doc->substituteEntities = false;
+        $doc->validateOnParse = false;
         $previous = libxml_use_internal_errors(true);
         try {
             $ok = $doc->loadXML($xml, \LIBXML_NONET);
         } finally {
             libxml_clear_errors();
             libxml_use_internal_errors($previous);
+        }
+        if (null !== $doc->doctype) {
+            throw new \RuntimeException('Feed exceeds size limit or contains a forbidden DTD/entity.');
         }
         if (!$ok || !$doc->documentElement || !\in_array($doc->documentElement->localName, ['rss', 'feed', 'RDF'], true)) {
             throw new \RuntimeException('Invalid RSS/Atom feed.');

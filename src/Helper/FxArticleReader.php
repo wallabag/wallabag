@@ -53,11 +53,14 @@ class FxArticleReader
         if (!\is_string($author)) {
             $author = 'Unknown author';
         }
-        $html = '<p>Article text captured from public X data via <a href="https://docs.fxembed.com/api/introduction/" rel="noreferrer noopener">FxTwitter</a>. External images and embeds are linked; they are not archived. Verify the original for later edits.</p>';
+        $html = '<p>Article text captured from public X data via <a href="https://docs.fxembed.com/api/introduction/" rel="noreferrer noopener">FxTwitter</a>. Images load from X’s public media CDN in your browser; image bytes are not archived. Embedded posts are linked. Verify the original for later edits.</p>';
         $complete = true;
         $cover = $article['cover_media']['media_info']['original_img_url'] ?? null;
-        if (\is_string($cover) && 'pbs.twimg.com' === parse_url($cover, \PHP_URL_HOST) && $this->safeLink($cover)) {
-            $html .= '<p>' . $this->link($cover, 'Cover image') . '</p>';
+        if ($this->safeImage($cover)) {
+            $html .= $this->image($cover, 'Cover image');
+        } elseif (null !== $cover) {
+            $html .= '<p>[Cover image unavailable in this snapshot]</p>';
+            $complete = false;
         }
         $textLength = 0;
         $openList = null;
@@ -86,8 +89,8 @@ class FxArticleReader
                         foreach (($entityData['mediaItems'] ?? []) as $ref) {
                             $item = $media[(string) ($ref['mediaId'] ?? '')] ?? [];
                             $url = $item['media_info']['original_img_url'] ?? '';
-                            if (\is_string($url) && 'pbs.twimg.com' === parse_url($url, \PHP_URL_HOST) && $this->safeLink($url)) {
-                                $html .= '<p>' . $this->link($url, $caption) . '</p>';
+                            if ($this->safeImage($url)) {
+                                $html .= $this->image($url, $caption);
                                 $rendered = true;
                             } else {
                                 $complete = false;
@@ -190,6 +193,18 @@ class FxArticleReader
         }
 
         return $html;
+    }
+
+    private function safeImage($url): bool
+    {
+        // Fixed public raster-media path only: no credentials, ports,
+        // query strings, SVG, arbitrary hosts or server-side media requests.
+        return \is_string($url) && \strlen($url) <= 2048 && 1 === preg_match('~^https://pbs\.twimg\.com/media/[A-Za-z0-9_-]+\.(?:jpg|jpeg|png|gif|webp)$~D', $url);
+    }
+
+    private function image(string $url, string $caption): string
+    {
+        return '<p><a href="' . self::escape($url) . '" rel="noreferrer noopener"><img src="' . self::escape($url) . '" alt="' . self::escape($caption) . '" loading="lazy" referrerpolicy="no-referrer"></a></p>';
     }
 
     private function safeLink($url): bool

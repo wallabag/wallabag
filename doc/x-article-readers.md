@@ -44,3 +44,20 @@ php scripts/verify-x-article.php .validation/x-research/2069824386283319343.json
 ```
 
 Research responses and full article text stay in ignored `.validation/`; only the evaluation and non-content evidence are checked in.
+
+## Inline Article images
+
+The image correction renders cover and body raster images only from exact HTTPS
+`pbs.twimg.com/media/` URLs with fixed filename characters and raster extensions.
+It escapes captions and attributes, sets `referrerpolicy="no-referrer"`, and
+retains source links. Images load in the reader’s browser from X’s media CDN;
+image bytes are **not archived locally**. The general server-side image downloader
+is skipped for structured X Articles, including when that downloader is enabled
+for ordinary entries. Unsupported media remains visibly partial; arbitrary media
+URLs, SVG, credentials, ports, query strings and alternate hosts are rejected.
+
+PDF, EPUB and MOBI exports convert Article image elements to their caption text
+and preserve surrounding source links; EPUB does not fetch an Article preview
+cover. Binary exporters receive a restricted markup allowlist without media,
+CSS or resource attributes. JSON exports and stored content retain browser image
+references unchanged. This avoids invoking legacy exporter media fetchers.

@@ -40,6 +40,11 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
         }
 
         $entry = $event->getEntry();
+        // Public X Article images are browser-loaded CDN references. Keep the
+        // general image downloader out of this bounded extraction path.
+        if ('article' === $entry->getXCaptureType()) {
+            return;
+        }
 
         $html = $this->downloadImages($entry);
         if (false !== $html) {

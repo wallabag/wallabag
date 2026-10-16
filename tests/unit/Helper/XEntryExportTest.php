@@ -50,6 +50,14 @@ class XEntryExportTest extends TestCase
             $graby->expects(self::never())->method('fetchContent');
             $proxy = new ContentProxy($graby, $this->createMock(RuleBasedTagger::class), $this->createMock(RuleBasedIgnoreOriginProcessor::class), Validation::createValidator(), new NullLogger(), 'Error', false, new XPostExtractor($http));
             $proxy->updateEntry($entry, 'https://x.com/person/status/12345');
+            if ($article && $malicious) {
+                // Exercise real binary export fetchers, including the EPUB cover.
+                $entry->setContent('<h2>Public body.</h2><p><a href="' . $resourceUrl . '"><img src="' . $resourceUrl . '" alt="Article image" /></a></p>'
+                    . '<div style="background:url(' . $resourceUrl . ')" background="' . $resourceUrl . '">Body ending.</div>'
+                    . '<iframe src="' . $resourceUrl . '"></iframe>');
+                $entry->setPreviewPicture($resourceUrl);
+            }
+            $originalContent = $entry->getContent();
             $entry->setLanguage('en');
             $entry->setCreatedAt(new \DateTime('2026-10-15T12:00:00Z'));
             $title = $entry->getTitle();
@@ -82,6 +90,10 @@ class XEntryExportTest extends TestCase
                     }
                     $xpath = new \DOMXPath($doc);
                     self::assertSame(0, $xpath->query('//*[local-name()="img" or local-name()="image" or local-name()="svg" or local-name()="script" or local-name()="iframe" or local-name()="object" or (local-name()="source" and namespace-uri()="http://www.w3.org/1999/xhtml")]')->length, $name);
+                    if ($article && $malicious && str_ends_with($name, '.html') && !str_ends_with($name, '_cover.html') && 'Cover2.html' !== $name) {
+                        self::assertStringContainsString('Body ending.', $doc->textContent);
+                        self::assertSame($resourceUrl, $xpath->evaluate('string(//*[local-name()="a" and text()="Article image"]/@href)'));
+                    }
                     if (str_ends_with($name, '.opf')) {
                         self::assertSame($title, $xpath->evaluate('string(//*[local-name()="title"][1])'));
                         self::assertSame($author, $xpath->evaluate('string(//*[local-name()="creator"][1])'));
@@ -103,6 +115,8 @@ class XEntryExportTest extends TestCase
             $json = json_decode($export->exportJsonData(), true);
             self::assertSame($title, $json[0]['title']);
             self::assertSame([$author], $json[0]['published_by']);
+            self::assertSame($originalContent, $json[0]['content']);
+            self::assertSame($originalContent, $entry->getContent());
             self::assertSame($title, $entry->getTitle());
             self::assertSame([$author], $entry->getPublishedBy());
         } finally {

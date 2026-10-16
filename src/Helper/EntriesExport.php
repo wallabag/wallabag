@@ -184,7 +184,7 @@ class EntriesExport
              * Front page
              * Set if there's only one entry in the given set
              */
-            if (1 === $entryCount && null !== $entry->getPreviewPicture()) {
+            if (1 === $entryCount && null !== $entry->getPreviewPicture() && 'article' !== $entry->getXCaptureType()) {
                 $book->setCoverImage($entry->getPreviewPicture());
             }
 
@@ -221,7 +221,7 @@ class EntriesExport
                 '</dl>' .
                 $bookEnd;
             $book->addChapter("Entry {$i} of {$entryCount}", "{$filename}_cover.html", $titlepage, true, EPub::EXTERNAL_REF_ADD);
-            $chapter = $content_start . $entry->getContent() . $bookEnd;
+            $chapter = $content_start . $this->entryContentForExport($entry) . $bookEnd;
 
             $entryIds[] = $entry->getId();
             $book->addChapter($this->escapeMetadata($entry->getTitle()), "{$filename}.html", $chapter, true, EPub::EXTERNAL_REF_ADD);
@@ -276,7 +276,7 @@ class EntriesExport
          */
         foreach ($this->entries as $entry) {
             $content->appendChapterTitle($this->escapeMetadata($entry->getTitle()));
-            $content->appendParagraph($entry->getContent());
+            $content->appendParagraph($this->entryContentForExport($entry));
             $content->appendPageBreak();
         }
         $mobi->setContentProvider($content);
@@ -348,7 +348,7 @@ class EntriesExport
 
             $pdf->AddPage();
             $html = '<h1>' . $this->escapeMetadata($entry->getTitle()) . '</h1>';
-            $html .= $entry->getContent();
+            $html .= $this->entryContentForExport($entry);
 
             $pdf->writeHTMLCell(0, 0, null, null, $html, 0, 1);
         }
@@ -539,6 +539,62 @@ class EntriesExport
     }
 
     /** Plain metadata becomes markup only at an HTML/XML export boundary. */
+    /** X Article binary exports keep links, never invoke legacy remote-media fetchers. */
+    private function entryContentForExport(Entry $entry): string
+    {
+        if ('article' !== $entry->getXCaptureType()) {
+            return $entry->getContent();
+        }
+        $doc = new \DOMDocument();
+        $doc->resolveExternals = false;
+        $doc->substituteEntities = false;
+        $previous = libxml_use_internal_errors(true);
+        try {
+            $doc->loadHTML('<?xml encoding="UTF-8"><body>' . $entry->getContent() . '</body>', \LIBXML_NONET);
+        } finally {
+            libxml_clear_errors();
+            libxml_use_internal_errors($previous);
+        }
+        $render = function (\DOMNode $node) use (&$render): string {
+            if ($node instanceof \DOMText) {
+                return $this->escapeMetadata($node->textContent);
+            }
+            if (!$node instanceof \DOMElement) {
+                return '';
+            }
+            $tag = strtolower($node->tagName);
+            if ('img' === $tag) {
+                // Generated Article images are wrapped in their source link.
+                return $this->escapeMetadata($node->getAttribute('alt') ?: 'Article image');
+            }
+            if (\in_array($tag, ['script', 'style', 'iframe', 'object', 'svg', 'video', 'audio', 'embed', 'link', 'base', 'source', 'input'], true)) {
+                return '';
+            }
+            $inside = '';
+            foreach ($node->childNodes as $child) {
+                $inside .= $render($child);
+            }
+            if ('a' === $tag) {
+                $href = $node->getAttribute('href');
+                $p = parse_url($href);
+                if (\strlen($href) <= 2048 && !preg_match('/[\x00-\x20\x7f]/', $href) && $p
+                    && \in_array($p['scheme'] ?? '', ['http', 'https'], true) && !empty($p['host'])
+                    && !isset($p['user']) && !isset($p['pass'])) {
+                    return '<a href="' . $this->escapeMetadata($href) . '">' . $inside . '</a>';
+                }
+
+                return $inside;
+            }
+            if ('br' === $tag) {
+                return '<br />';
+            }
+
+            return \in_array($tag, ['p', 'h2', 'h3', 'h4', 'blockquote', 'pre', 'code', 'strong', 'em', 's', 'ol', 'ul', 'li'], true) ? '<' . $tag . '>' . $inside . '</' . $tag . '>' : $inside;
+        };
+
+        return $render($doc->documentElement);
+    }
+
     private function escapeMetadata($value): string
     {
         return htmlspecialchars((string) $value, \ENT_QUOTES | \ENT_SUBSTITUTE, 'UTF-8');

@@ -48,6 +48,55 @@ class FeedParserTest extends TestCase
         return [[''], ['   '], ['<rss>']];
     }
 
+    public function testDeclarationExamplesInAtomCdataCommentsAndEscapedTextAreAccepted(): void
+    {
+        $xml = '<feed xmlns="http://www.w3.org/2005/Atom"><!-- <!DOCTYPE example> -->'
+            . '<entry><title>Literal &lt;!ENTITY example&gt;</title><link href="https://example.org/article"/>'
+            . '<content type="html"><![CDATA[<pre><!DOCTYPE html> <!ENTITY x SYSTEM "file:///etc/passwd"></pre>]]></content></entry></feed>';
+        $items = (new FeedParser())->parse($xml, 'https://example.org/feed', 10);
+        self::assertCount(1, $items);
+        self::assertSame('https://example.org/article', $items[0]['url']);
+        self::assertSame('Literal <!ENTITY example>', $items[0]['title']);
+    }
+
+    /**
+     * @dataProvider forbiddenDeclarations
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
+    public function testActualDeclarationsAreRejectedWithoutLoadingExternalResources(string $xml): void
+    {
+        $loads = [];
+        libxml_set_external_entity_loader(static function ($public, $system) use (&$loads) {
+            $loads[] = $system;
+
+            return null;
+        });
+        try {
+            try {
+                (new FeedParser())->parse($xml, 'https://example.org/feed', 10);
+                self::fail('Document DTD/entities must be rejected.');
+            } catch (\RuntimeException $e) {
+                self::assertSame('Feed exceeds size limit or contains a forbidden DTD/entity.', $e->getMessage());
+            }
+            self::assertSame([], $loads);
+        } finally {
+            libxml_set_external_entity_loader(null);
+        }
+    }
+
+    public function forbiddenDeclarations(): array
+    {
+        return [
+            ['<!DOCTYPE rss><rss><channel/></rss>'],
+            ['<!DOCTYPE rss SYSTEM "http://127.0.0.1/feed.dtd"><rss><channel/></rss>'],
+            ['<!DOCTYPE rss SYSTEM "file:///etc/passwd"><rss><channel/></rss>'],
+            ['<!DOCTYPE rss [<!ENTITY x "expanded">]><rss><channel><item><title>&x;</title><link>https://example.org/a</link></item></channel></rss>'],
+            ['<!DOCTYPE rss [<!ENTITY x SYSTEM "file:///etc/passwd">]><rss><channel><item><title>&x;</title><link>https://example.org/a</link></item></channel></rss>'],
+            ['<!DOCTYPE rss [<!ENTITY % external SYSTEM "http://127.0.0.1/entity.dtd">%external;]><rss><channel/></rss>'],
+        ];
+    }
+
     public function testRejectsExternalEntities(): void
     {
         $this->expectException(\RuntimeException::class);
