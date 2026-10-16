@@ -32,6 +32,8 @@ class XArticleRestControllerTest extends RssApiTestCase
         self::assertSame(200, (int) $entry['http_status']);
         self::assertStringContainsString('The ending paragraph.', $entry['content']);
         self::assertStringNotContainsString('<script>', $entry['content']);
+        self::assertStringNotContainsString('Partial article snapshot.', $entry['content']);
+        self::assertStringNotContainsString('Article text captured from public X data via', $entry['content']);
         $doc = new \DOMDocument();
         $doc->loadHTML($entry['content']);
         self::assertSame(2, $doc->getElementsByTagName('img')->length);
@@ -46,6 +48,56 @@ class XArticleRestControllerTest extends RssApiTestCase
         self::assertSame(200, $this->client->getResponse()->getStatusCode());
         $this->client->request('POST', '/api/entries.json', ['url' => 'https://x.com/person/status/54321']);
         self::assertSame(206, (int) json_decode($this->client->getResponse()->getContent(), true)['http_status']);
+    }
+
+    public function testPartialSaveAndRefreshOmitNoticesWithoutLosingIntegrityOrRewritingOtherEntries(): void
+    {
+        $this->client->disableReboot();
+        $partial = FxArticleReaderTest::post();
+        $partial['article']['content']['blocks'][] = ['type' => 'atomic', 'text' => ' ', 'entityRanges' => []];
+        $http = $this->createMock(PublicHttpClient::class);
+        $http->expects(self::exactly(4))->method('get')->willReturnOnConsecutiveCalls(
+            ['body' => json_encode(['code' => 200, 'status' => $partial])],
+            ['body' => json_encode(['code' => 200, 'status' => $partial])],
+            ['body' => '{"code":404}'],
+            ['body' => '{"author_name":"Embed author","html":"<p>A shorter excerpt</p>"}']
+        );
+        $this->client->getContainer()->set(PublicHttpClient::class, $http);
+        $this->client->request('PATCH', '/api/config.json', [], [], ['CONTENT_TYPE' => 'application/json'], '{"x_article_reader_enabled":true}');
+        self::assertSame(200, $this->client->getResponse()->getStatusCode());
+        $em = $this->getEntityManager();
+        $owner = $em->getRepository(User::class)->find($this->user->getId());
+        $existing = new Entry($owner);
+        $existing->setUrl('https://example.org/previously-saved');
+        $existing->setTitle('Earlier saved entry');
+        $existing->setContent('<p>Partial article snapshot. Some embedded content or formatting is unavailable.</p><p>Existing source prose.</p>');
+        $em->persist($existing);
+        $em->flush();
+        $existingId = $existing->getId();
+        $existingContent = $existing->getContent();
+        $this->client->request('POST', '/api/entries.json', ['url' => 'https://x.com/person/status/12345']);
+        self::assertSame(200, $this->client->getResponse()->getStatusCode());
+        $created = json_decode($this->client->getResponse()->getContent(), true);
+        self::assertSame(206, (int) $created['http_status']);
+        self::assertStringNotContainsString('Partial article snapshot.', $created['content']);
+        self::assertStringNotContainsString('Article text captured from public X data via', $created['content']);
+        self::assertStringContainsString('The ending paragraph.', $created['content']);
+        self::assertStringContainsString('Embedded content unavailable', $created['content']);
+        $this->client->request('PATCH', '/api/entries/' . $created['id'] . '/reload.json');
+        self::assertSame(200, $this->client->getResponse()->getStatusCode());
+        $refreshed = json_decode($this->client->getResponse()->getContent(), true);
+        self::assertSame(206, (int) $refreshed['http_status']);
+        self::assertSame($created['content'], $refreshed['content']);
+        $em->clear();
+        self::assertSame('article', $em->find(Entry::class, $created['id'])->getXCaptureType());
+        $this->client->request('PATCH', '/api/entries/' . $created['id'] . '/reload.json');
+        self::assertSame(200, $this->client->getResponse()->getStatusCode());
+        $failed = json_decode($this->client->getResponse()->getContent(), true);
+        self::assertSame(502, (int) $failed['http_status']);
+        self::assertSame($created['content'], $failed['content']);
+        $em->clear();
+        self::assertSame('article', $em->find(Entry::class, $created['id'])->getXCaptureType());
+        self::assertSame($existingContent, $em->find(Entry::class, $existingId)->getContent());
     }
 
     public function testDuplicateApiPostPreservesArticleProvenanceForFailedReload(): void

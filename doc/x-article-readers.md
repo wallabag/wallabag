@@ -61,3 +61,12 @@ and preserve surrounding source links; EPUB does not fetch an Article preview
 cover. Binary exporters receive a restricted markup allowlist without media,
 CSS or resource attributes. JSON exports and stored content retain browser image
 references unchanged. This avoids invoking legacy exporter media fetchers.
+
+## Saved-body notices
+
+Future structured Article saves and successful refreshes omit the generated
+provider disclosure and general partial-snapshot preamble. Capture provenance and
+HTTP status remain unchanged: unsupported content is still `206`, and failed
+refreshes retain an existing Article with failure status `502`. Per-item unavailable
+media placeholders and source attribution remain. This changes generation only;
+it does not strip matching source prose or rewrite existing saved entries.

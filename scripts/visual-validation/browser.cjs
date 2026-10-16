@@ -76,7 +76,7 @@ let page;
   await capture('12346', 'Synthetic author — X post (partial capture)', 'Partial X capture.', 'x-partial-desktop');
   await capture('12347', 'X — X post (unavailable)', 'X capture unavailable.', 'x-failure-desktop');
   if (process.env.WALLABAG_PUBLIC_X_RECEIPT === '1') {
-    await capture('2069824386283319343', 'Loops You Can Trust', 'Article text captured from public X data', 'x-public-article-desktop');
+    await capture('2069824386283319343', 'Loops You Can Trust', 'Original post and article on X', 'x-public-article-desktop');
     await page.screenshot({ path: '/evidence/x-public-article-preview.png', clip: { x: 0, y: 0, width: 1440, height: 500 } });
     const normalize = text => text.replace(/\s+/gu, ' ').trim();
     const rendered = normalize(await page.locator('body').innerText());

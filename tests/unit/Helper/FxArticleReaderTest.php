@@ -30,7 +30,9 @@ class FxArticleReaderTest extends TestCase
         self::assertStringNotContainsString('<script>', $result['html']);
         self::assertStringContainsString('The ending paragraph.', $result['html']);
         self::assertStringContainsString('Original post and article on X', $result['html']);
-        self::assertStringContainsString('not archived', $result['html']);
+        self::assertStringNotContainsString('Article text captured from public X data via', $result['html']);
+        self::assertStringNotContainsString('Partial article snapshot.', $result['html']);
+        self::assertSame('article', $result['x_capture_type']);
     }
 
     public static function imagePost(string $url = 'https://pbs.twimg.com/media/Synthetic_1.png'): array
@@ -61,7 +63,7 @@ class FxArticleReaderTest extends TestCase
             self::assertSame(4, $image->attributes->length);
         }
         self::assertSame('"><script>bad</script>', $doc->getElementsByTagName('img')->item(1)->getAttribute('alt'));
-        self::assertStringContainsString('image bytes are not archived', $result['html']);
+        self::assertStringNotContainsString('image bytes are not archived', $result['html']);
     }
 
     public function testRejectedCoverAloneMakesTheSnapshotPartial(): void
@@ -112,7 +114,35 @@ class FxArticleReaderTest extends TestCase
         $post['article']['content']['blocks'][] = ['type' => 'atomic', 'text' => ' ', 'entityRanges' => []];
         $result = (new FxArticleReader(new PublicHttpClient()))->render($post, 'https://x.com/i/status/12345');
         self::assertSame(206, $result['status']);
-        self::assertStringContainsString('Partial article snapshot', $result['html']);
+        self::assertStringNotContainsString('Partial article snapshot.', $result['html']);
+        self::assertStringNotContainsString('Article text captured from public X data via', $result['html']);
+        self::assertStringContainsString('Embedded content unavailable', $result['html']);
+        self::assertSame('article', $result['x_capture_type']);
+    }
+
+    public function testGenuineSourceParagraphsMatchingOldNoticesArePreserved(): void
+    {
+        $notices = [
+            'Partial article snapshot. Some embedded content or formatting is unavailable.',
+            'Article text captured from public X data via FxTwitter. Images load from X’s public media CDN in your browser; image bytes are not archived. Embedded posts are linked. Verify the original for later edits.',
+        ];
+        $post = self::post();
+        foreach ($notices as $text) {
+            $post['article']['content']['blocks'][] = ['type' => 'unstyled', 'text' => $text];
+        }
+        $result = (new FxArticleReader(new PublicHttpClient()))->render($post, 'https://x.com/i/status/12345');
+        self::assertSame(200, $result['status']);
+        $doc = new \DOMDocument();
+        $doc->loadHTML('<?xml encoding="UTF-8">' . $result['html']);
+        $paragraphs = [];
+        foreach ($doc->getElementsByTagName('p') as $paragraph) {
+            $paragraphs[] = $paragraph->textContent;
+        }
+        foreach ($notices as $text) {
+            self::assertSame(1, \count(array_keys($paragraphs, $text, true)));
+        }
+        self::assertStringContainsString('The ending paragraph.', $result['html']);
+        self::assertStringContainsString('Original post and article on X', $result['html']);
     }
 
     public function testPreviewOnlyIsNotTreatedAsArticleBody(): void

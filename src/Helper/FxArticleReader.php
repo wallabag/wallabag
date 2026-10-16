@@ -53,7 +53,7 @@ class FxArticleReader
         if (!\is_string($author)) {
             $author = 'Unknown author';
         }
-        $html = '<p>Article text captured from public X data via <a href="https://docs.fxembed.com/api/introduction/" rel="noreferrer noopener">FxTwitter</a>. Images load from X’s public media CDN in your browser; image bytes are not archived. Embedded posts are linked. Verify the original for later edits.</p>';
+        $html = '';
         $complete = true;
         $cover = $article['cover_media']['media_info']['original_img_url'] ?? null;
         if ($this->safeImage($cover)) {
@@ -132,9 +132,6 @@ class FxArticleReader
         }
         if (0 === $textLength) {
             throw new \RuntimeException('Article has no body text.');
-        }
-        if (!$complete) {
-            $html = '<p><strong>Partial article snapshot.</strong> Some embedded content or formatting is unavailable.</p>' . $html;
         }
         $handle = $post['author']['screen_name'] ?? '';
         $authorHtml = \is_string($handle) && preg_match('/^[A-Za-z0-9_]{1,15}$/', $handle) ? $this->link('https://x.com/' . $handle, $author . ' (@' . $handle . ')') : self::escape($author);
