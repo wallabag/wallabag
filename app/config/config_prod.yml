@@ -24,4 +24,7 @@ monolog:
             type: console
 
 sentry:
-    dsn: "%env(default:wallabag.sentry_dsn:SENTRY_DSN)%"
+    # Sentry's config node is scalar; the default processor advertises an
+    # array-capable result type even when the configured fallback is a string.
+    # Cast explicitly so Symfony's config validation accepts the empty default.
+    dsn: "%env(string:default:wallabag.sentry_dsn:SENTRY_DSN)%"

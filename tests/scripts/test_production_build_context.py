@@ -84,6 +84,8 @@ class ProductionContextTest(unittest.TestCase):
         self.assertIn('test "$(php -r \'echo PHP_VERSION;\')" = "$PHP_VERSION"', dockerfile)
         self.assertIn('        sockets \\\n', dockerfile)
         self.assertNotIn('wallabag/wallabag:2.6.14', dockerfile)
+        production_config = (ROOT / 'app/config/config_prod.yml').read_text()
+        self.assertIn('env(string:default:wallabag.sentry_dsn:SENTRY_DSN)', production_config)
         exclusions = (ROOT / '.dockerignore').read_text().splitlines()
         self.assertIn('web/uploads', exclusions)
         self.assertIn('data', exclusions)
