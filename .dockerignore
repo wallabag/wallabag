@@ -1,4 +1,7 @@
 .git
+.composer-auth.json
+.env
+.env.*
 .validation
 vendor
 node_modules

@@ -1,9 +1,11 @@
 # Source-built deployment
 
-This image overlays the verified Wallabag 2.6.14 runtime with tracked application
-source. Its release-matched Composer lock is checked and autoload regenerated
-offline. Startup never runs Composer, installs accounts, grants DB permissions or
-applies migrations. Existing configuration and encryption keys are runtime mounts.
+This image builds the rebased Wallabag source on the pinned official
+`php:8.2.35-apache-trixie` image. It installs the locked Composer dependencies,
+keeps host configuration and keys out of the build, and labels the selected PHP
+version. The build checks the image label against the PHP binary. Startup never
+runs Composer, installs accounts, grants DB permissions or applies migrations.
+Existing configuration and encryption keys are runtime mounts.
 
 Keep the actual Compose file, domain, port, host paths, DB configuration and all
 secrets **outside the repository**. `docker/production/compose.example.yml` is only
@@ -23,10 +25,12 @@ Never recreate dependencies as collateral work.
    under an immutable rollback tag; do not remove production volumes.
 3. Have the server fetch this repository, check out the reviewed **full source
    commit**, verify a clean tree and run
-   `sh scripts/build-production-image local-image:COMMIT`. No production values
-   are build arguments. The helper sends a Git archive of the exact committed
-   revision, excluding ignored uploads, caches and runtime files; `.dockerignore`
-   also excludes uploads/data for direct builds. Inspect `org.opencontainers.image.revision` and
+   `sh scripts/build-production-image local-image:COMMIT`. The build fetches only
+   Composer packages pinned by `composer.lock`; no application secrets are build
+   arguments. The helper sends a Git archive of the exact committed revision,
+   excluding local Composer credentials, dotenv files, uploads, caches and runtime
+   files. Inspect the PHP version label, PHP binary version,
+   `org.opencontainers.image.revision`, and
    `/var/www/wallabag/.source-revision` before rollout.
 4. Prepare a server-local Compose candidate using the built image and existing
    media/dependencies. Both application and worker need `/run/wallabag/parameters.yml`,
@@ -48,11 +52,15 @@ Never recreate dependencies as collateral work.
    with `scripts/export-rss-wallabag.py` server-locally. Do not start the integrated
    worker yet. The final export must preserve every feed and seen record; the
    original mirror URLs must not replace original seen identities.
-6. Pause only the old application for the migration window. Run the new image's
-   `console doctrine:migrations:migrate --env=prod --no-interaction --no-debug`
-   using the server-local configuration and existing DB network. Verify migration
-   ledger and new tables/columns, including nullable internal `entry.x_capture_type`
-   provenance. Existing entries start with no inferred capture type. Never run `wallabag:install` on existing data.
+6. Pause only the old application for the migration window. Read the live
+   migration ledger and schema first. Apply only verified missing migrations for
+   the rebased application, in order, using the new image's `console
+   doctrine:migrations:execute --up VERSION --env=prod --no-interaction --no-debug`
+   and the server-local configuration. Do not bulk-run historical pending
+   migrations without reviewing each one. Verify the ledger and new
+   tables/columns, including nullable internal `entry.x_capture_type` provenance.
+   Existing entries start with no inferred capture type. Never run
+   `wallabag:install` on existing data.
 7. For the verified legacy bridge owner, run
    `console wallabag:rss:import USER_ID /dev/stdin --env=prod --no-debug` with the
    export on stdin. It validates URLs and merges transactionally and idempotently.
@@ -74,9 +82,9 @@ Never recreate dependencies as collateral work.
 ## Rollback
 
 Keep the previous image, original Compose and server-local backups. Stop only the
-integrated worker before rollback. The added schema is additive; the original
-2.6.14 app can run against the expanded schema, so prefer restoring the exact old
-image/config without deleting tables or restoring an older dump over new entries.
+integrated worker before rollback. The added schema is additive; the previous
+application image can run against the expanded schema, so prefer restoring the
+exact old image/config without deleting tables or restoring an older dump over new entries.
 Restore the DB backup only if recovery requires it and after accounting for writes
 since the snapshot. Keep legacy RSS stopped until deciding which scheduler owns
 the imported interval; resuming its old SQLite snapshot may reprocess newer items.

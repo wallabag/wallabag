@@ -4,5 +4,23 @@ test "$#" -eq 1 || { echo 'Usage: scripts/build-production-image local-image-nam
 cd "$(dirname "$0")/.."
 test -z "$(git status --porcelain --untracked-files=normal)" || { echo 'Build requires a clean checkout.' >&2; exit 1; }
 revision=$(git rev-parse HEAD)
-# Archive only committed source: ignored uploads, credentials and caches never enter context.
-git archive --format=tar "$revision" | docker build --network=none --build-arg "VCS_REF=$revision" --label "org.opencontainers.image.revision=$revision" -f docker/production/Dockerfile -t "$1" -
+# Exclude local credentials and dotenv settings even if tracked. The locked public
+# Composer distributions are fetched during the image build; no app secrets are
+# build arguments, and ignored runtime data never enters the archive.
+PHP_VERSION=8.2.35
+archive=$(mktemp "${TMPDIR:-/tmp}/wallabag-build-context.XXXXXX")
+trap 'rm -f "$archive"' 0
+trap 'exit 1' HUP INT TERM
+git archive --format=tar "$revision" -- . ':(exclude).composer-auth.json' ':(exclude).env' ':(exclude).env.*' > "$archive"
+docker build --build-arg "PHP_VERSION=$PHP_VERSION" --build-arg "VCS_REF=$revision" -f docker/production/Dockerfile -t "$1" - < "$archive"
+
+metadata=$(docker image inspect --format '{{index .Config.Labels "com.jonniesweb.wallabag.php.version"}}|{{index .Config.Labels "org.opencontainers.image.revision"}}' "$1")
+label=${metadata%%|*}
+image_revision=${metadata#*|}
+test "$label" = "$PHP_VERSION" || { echo "Image PHP version label mismatch: expected $PHP_VERSION, got $label" >&2; exit 1; }
+test "$image_revision" = "$revision" || { echo "Image source revision label mismatch: expected $revision, got $image_revision" >&2; exit 1; }
+runtime=$(docker run --rm --network none --entrypoint php "$1" -r 'echo PHP_VERSION;')
+test "$runtime" = "$PHP_VERSION" || { echo "Image PHP runtime mismatch: expected $PHP_VERSION, got $runtime" >&2; exit 1; }
+source_revision=$(docker run --rm --network none --entrypoint cat "$1" /var/www/wallabag/.source-revision)
+test "$source_revision" = "$revision" || { echo "Image source file mismatch: expected $revision, got $source_revision" >&2; exit 1; }
+printf 'image=%s php_label=%s php_runtime=%s revision_label=%s source_revision=%s\n' "$1" "$label" "$runtime" "$image_revision" "$source_revision"
