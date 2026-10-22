@@ -11,7 +11,7 @@ class TagRestControllerTest extends WallabagApiTestCase
 {
     private $otherUserTagLabel = 'bob';
 
-    public function testGetUserTags()
+    public function testGetUserTags(): void
     {
         $this->client->request('GET', '/api/tags.json');
 
@@ -24,14 +24,14 @@ class TagRestControllerTest extends WallabagApiTestCase
         $this->assertArrayHasKey('label', $content[0]);
         $this->assertArrayHasKey('nbEntries', $content[0]);
 
-        $tagLabels = array_map(function ($i) {
+        $tagLabels = array_map(static function ($i) {
             return $i['label'];
         }, $content);
 
         $this->assertNotContains($this->otherUserTagLabel, $tagLabels, 'There is a possible tag leak');
     }
 
-    public function testDeleteUserTag()
+    public function testDeleteUserTag(): void
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
         $entry = $this->client->getContainer()
@@ -72,7 +72,7 @@ class TagRestControllerTest extends WallabagApiTestCase
         $this->assertNull($tag, $tagLabel . ' was removed because it begun an orphan tag');
     }
 
-    public function testDeleteOtherUserTag()
+    public function testDeleteOtherUserTag(): void
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
         $tag = $em->getRepository(Tag::class)->findOneByLabel($this->otherUserTagLabel);
@@ -93,7 +93,7 @@ class TagRestControllerTest extends WallabagApiTestCase
     /**
      * @dataProvider dataForDeletingTagByLabel
      */
-    public function testDeleteTagByLabel($useQueryString)
+    public function testDeleteTagByLabel($useQueryString): void
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
         $entry = $this->client->getContainer()
@@ -134,14 +134,14 @@ class TagRestControllerTest extends WallabagApiTestCase
         $this->assertCount(0, $entries);
     }
 
-    public function testDeleteTagByLabelNotFound()
+    public function testDeleteTagByLabelNotFound(): void
     {
         $this->client->request('DELETE', '/api/tag/label.json', ['tag' => 'does not exist']);
 
         $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 
-    public function testDeleteTagByLabelOtherUser()
+    public function testDeleteTagByLabelOtherUser(): void
     {
         $this->client->request('DELETE', '/api/tag/label.json', ['tag' => $this->otherUserTagLabel]);
 
@@ -151,7 +151,7 @@ class TagRestControllerTest extends WallabagApiTestCase
     /**
      * @dataProvider dataForDeletingTagByLabel
      */
-    public function testDeleteTagsByLabel($useQueryString)
+    public function testDeleteTagsByLabel($useQueryString): void
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
         $entry = $this->client->getContainer()
@@ -210,14 +210,14 @@ class TagRestControllerTest extends WallabagApiTestCase
         $this->assertCount(0, $entries);
     }
 
-    public function testDeleteTagsByLabelNotFound()
+    public function testDeleteTagsByLabelNotFound(): void
     {
         $this->client->request('DELETE', '/api/tags/label.json', ['tags' => 'does not exist']);
 
         $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 
-    public function testDeleteTagsByLabelOtherUser()
+    public function testDeleteTagsByLabelOtherUser(): void
     {
         $this->client->request('DELETE', '/api/tags/label.json', ['tags' => $this->otherUserTagLabel]);
 

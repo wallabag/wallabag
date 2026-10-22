@@ -12,13 +12,16 @@ use Wallabag\UserBundle\Entity\User;
 
 /**
  * @ORM\Table("oauth2_clients")
+ *
  * @ORM\Entity(repositoryClass="Wallabag\ApiBundle\Repository\ClientRepository")
  */
 class Client extends BaseClient
 {
     /**
      * @ORM\Id
+     *
      * @ORM\Column(type="integer")
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
@@ -58,6 +61,7 @@ class Client extends BaseClient
      * )
      *
      * @SerializedName("client_secret")
+     *
      * @Groups({"user_api_with_client"})
      */
     protected $secret;
@@ -115,6 +119,7 @@ class Client extends BaseClient
      * )
      *
      * @SerializedName("client_id")
+     *
      * @Groups({"user_api_with_client"})
      */
     public function getClientId()

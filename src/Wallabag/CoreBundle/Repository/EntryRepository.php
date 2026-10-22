@@ -63,7 +63,7 @@ class EntryRepository extends ServiceEntityRepository
         return $this
             ->getSortedQueryBuilderByUser($userId)
             ->andWhere('e.isArchived = false')
-            ;
+        ;
     }
 
     /**
@@ -78,7 +78,7 @@ class EntryRepository extends ServiceEntityRepository
         return $this
             ->getQueryBuilderByUser($userId)
             ->andWhere('e.isArchived = false')
-            ;
+        ;
     }
 
     /**
@@ -223,7 +223,7 @@ class EntryRepository extends ServiceEntityRepository
         return $this
             ->getSortedQueryBuilderByUser($userId)
             ->innerJoin('e.annotations', 'a')
-            ;
+        ;
     }
 
     /**
@@ -286,10 +286,10 @@ class EntryRepository extends ServiceEntityRepository
 
         if ('metadata' === $detail) {
             $fieldNames = $this->getClassMetadata()->getFieldNames();
-            $fields = array_filter($fieldNames, function ($k) {
+            $fields = array_filter($fieldNames, static function ($k) {
                 return 'content' !== $k;
             });
-            $qb->select(sprintf('partial e.{%s}', implode(',', $fields)));
+            $qb->select(\sprintf('partial e.{%s}', implode(',', $fields)));
         }
 
         if (null !== $isArchived) {
@@ -434,7 +434,7 @@ class EntryRepository extends ServiceEntityRepository
      *
      * @param int $userId
      */
-    public function removeTag($userId, Tag $tag)
+    public function removeTag($userId, Tag $tag): void
     {
         $entries = $this->getSortedQueryBuilderByUser($userId)
             ->innerJoin('e.tags', 't')
@@ -455,7 +455,7 @@ class EntryRepository extends ServiceEntityRepository
      * @param int        $userId
      * @param array<Tag> $tags
      */
-    public function removeTags($userId, $tags)
+    public function removeTags($userId, $tags): void
     {
         foreach ($tags as $tag) {
             $this->removeTag($userId, $tag);
@@ -587,7 +587,7 @@ class EntryRepository extends ServiceEntityRepository
      *
      * @param int $userId
      */
-    public function removeAllByUserId($userId)
+    public function removeAllByUserId($userId): void
     {
         $this->getEntityManager()
             ->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.user = :userId')
@@ -595,7 +595,7 @@ class EntryRepository extends ServiceEntityRepository
             ->execute();
     }
 
-    public function removeArchivedByUserId($userId)
+    public function removeArchivedByUserId($userId): void
     {
         $this->getEntityManager()
             ->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.user = :userId AND e.isArchived = TRUE')
@@ -751,6 +751,6 @@ class EntryRepository extends ServiceEntityRepository
      */
     private function sortQueryBuilder(QueryBuilder $qb, $sortBy = 'createdAt', $direction = 'desc')
     {
-        return $qb->orderBy(sprintf('e.%s', $sortBy), $direction);
+        return $qb->orderBy(\sprintf('e.%s', $sortBy), $direction);
     }
 }

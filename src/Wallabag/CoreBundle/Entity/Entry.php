@@ -21,11 +21,14 @@ use Wallabag\UserBundle\Entity\User;
  * Entry.
  *
  * @XmlRoot("entry")
+ *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\EntryRepository")
+ *
  * @ORM\Table(
  *     name="`entry`",
  *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},
  *     indexes={
+ *
  *         @ORM\Index(name="created_at", columns={"created_at"}),
  *         @ORM\Index(name="uid", columns={"uid"}),
  *         @ORM\Index(name="hashed_url_user_id", columns={"user_id", "hashed_url"}, options={"lengths"={null, 40}}),
@@ -36,7 +39,9 @@ use Wallabag\UserBundle\Entity\User;
  *         @ORM\Index(name="user_starred", columns={"user_id", "is_starred", "starred_at"})
  *     }
  * )
+ *
  * @ORM\HasLifecycleCallbacks()
+ *
  * @Hateoas\Relation("self", href = "expr('/api/entries/' ~ object.getId())")
  */
 class Entry
@@ -48,7 +53,9 @@ class Entry
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
+     *
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      *
      * @Groups({"entries_for_user", "export_all"})
@@ -79,6 +86,7 @@ class Entry
      * @var string
      *
      * @Assert\NotBlank()
+     *
      * @ORM\Column(name="url", type="text", nullable=true)
      *
      * @Groups({"entries_for_user", "export_all"})
@@ -139,7 +147,7 @@ class Entry
      *
      * @Groups({"entries_for_user", "export_all"})
      */
-    private $archivedAt = null;
+    private $archivedAt;
 
     /**
      * @var bool
@@ -204,10 +212,11 @@ class Entry
      *
      * @Groups({"entries_for_user", "export_all"})
      */
-    private $starredAt = null;
+    private $starredAt;
 
     /**
      * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
+     *
      * @ORM\JoinTable
      *
      * @Groups({"entries_for_user", "export_all"})
@@ -288,9 +297,11 @@ class Entry
 
     /**
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="entries", cascade={"persist"})
+     *
      * @ORM\JoinTable(
      *  name="entry_tag",
      *  joinColumns={
+     *
      *      @ORM\JoinColumn(name="entry_id", referencedColumnName="id", onDelete="cascade")
      *  },
      *  inverseJoinColumns={
@@ -432,7 +443,9 @@ class Entry
 
     /**
      * @VirtualProperty
+     *
      * @SerializedName("is_archived")
+     *
      * @Groups({"entries_for_user", "export_all"})
      */
     public function is_Archived()
@@ -473,7 +486,9 @@ class Entry
 
     /**
      * @VirtualProperty
+     *
      * @SerializedName("is_starred")
+     *
      * @Groups({"entries_for_user", "export_all"})
      */
     public function is_Starred()
@@ -522,6 +537,7 @@ class Entry
 
     /**
      * @VirtualProperty
+     *
      * @SerializedName("user_name")
      */
     public function getUserName()
@@ -531,6 +547,7 @@ class Entry
 
     /**
      * @VirtualProperty
+     *
      * @SerializedName("user_email")
      */
     public function getUserEmail()
@@ -540,6 +557,7 @@ class Entry
 
     /**
      * @VirtualProperty
+     *
      * @SerializedName("user_id")
      */
     public function getUserId()
@@ -622,7 +640,7 @@ class Entry
         return $this->annotations;
     }
 
-    public function setAnnotation(Annotation $annotation)
+    public function setAnnotation(Annotation $annotation): void
     {
         $this->annotations[] = $annotation;
     }
@@ -638,7 +656,7 @@ class Entry
     /**
      * @param string $mimetype
      */
-    public function setMimetype($mimetype)
+    public function setMimetype($mimetype): void
     {
         $this->mimetype = $mimetype;
     }
@@ -654,7 +672,7 @@ class Entry
     /**
      * @param int $readingTime
      */
-    public function setReadingTime($readingTime)
+    public function setReadingTime($readingTime): void
     {
         $this->readingTime = $readingTime;
     }
@@ -678,7 +696,7 @@ class Entry
     /**
      * @param string $domainName
      */
-    public function setDomainName($domainName)
+    public function setDomainName($domainName): void
     {
         $this->domainName = $domainName;
     }
@@ -706,7 +724,9 @@ class Entry
 
     /**
      * @VirtualProperty
+     *
      * @SerializedName("tags")
+     *
      * @Groups({"entries_for_user", "export_all"})
      */
     public function getSerializedTags()
@@ -719,7 +739,7 @@ class Entry
         return $data;
     }
 
-    public function addTag(Tag $tag)
+    public function addTag(Tag $tag): void
     {
         if ($this->tags->contains($tag)) {
             return;
@@ -739,7 +759,7 @@ class Entry
     /**
      * Remove the given tag from the entry (if the tag is associated).
      */
-    public function removeTag(Tag $tag)
+    public function removeTag(Tag $tag): void
     {
         if (!$this->tags->contains($tag)) {
             return;
@@ -752,7 +772,7 @@ class Entry
     /**
      * Remove all assigned tags from the entry.
      */
-    public function removeAllTags()
+    public function removeAllTags(): void
     {
         foreach ($this->tags as $tag) {
             $this->tags->removeElement($tag);
@@ -841,7 +861,7 @@ class Entry
         return $this;
     }
 
-    public function generateUid()
+    public function generateUid(): void
     {
         if (null === $this->uid) {
             // @see http://blog.kevingomez.fr/til/2015/07/26/why-is-uniqid-slow/ for true parameter
@@ -849,7 +869,7 @@ class Entry
         }
     }
 
-    public function cleanUid()
+    public function cleanUid(): void
     {
         $this->uid = null;
     }
@@ -859,7 +879,9 @@ class Entry
      * Also used in the API.
      *
      * @VirtualProperty
+     *
      * @SerializedName("is_public")
+     *
      * @Groups({"entries_for_user"})
      *
      * @return bool
@@ -1005,8 +1027,6 @@ class Entry
     }
 
     /**
-     * @param mixed $hashedUrl
-     *
      * @return Entry
      */
     public function setHashedUrl($hashedUrl)

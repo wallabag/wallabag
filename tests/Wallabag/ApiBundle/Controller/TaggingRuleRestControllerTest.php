@@ -6,7 +6,7 @@ use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
 
 class TaggingRuleRestControllerTest extends WallabagApiTestCase
 {
-    public function testExportEntry()
+    public function testExportEntry(): void
     {
         $this->client->request('GET', '/api/taggingrule/export');
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());

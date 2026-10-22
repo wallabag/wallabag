@@ -21,33 +21,40 @@ class SearchRestController extends WallabagRestController
      * @Operation(
      *     tags={"Search"},
      *     summary="Search all entries by term.",
+     *
      *     @OA\Parameter(
      *         name="term",
      *         in="query",
      *         description="Any query term",
      *         required=false,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Parameter(
      *         name="page",
      *         in="query",
      *         description="what page you want.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             default=1
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="perPage",
      *         in="query",
      *         description="results per page.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             default=30
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"

@@ -59,28 +59,28 @@ class RedirectTest extends TestCase
         $this->redirect = new Redirect($this->routerMock, $tokenStorage);
     }
 
-    public function testRedirectToNull()
+    public function testRedirectToNull(): void
     {
         $redirectUrl = $this->redirect->to(null);
 
         $this->assertSame('/', $redirectUrl);
     }
 
-    public function testRedirectToValidUrl()
+    public function testRedirectToValidUrl(): void
     {
         $redirectUrl = $this->redirect->to('/unread/list');
 
         $this->assertSame('/unread/list', $redirectUrl);
     }
 
-    public function testRedirectToAbsoluteUrl()
+    public function testRedirectToAbsoluteUrl(): void
     {
         $redirectUrl = $this->redirect->to('https://www.google.com/');
 
         $this->assertSame('/', $redirectUrl);
     }
 
-    public function testWithNotLoggedUser()
+    public function testWithNotLoggedUser(): void
     {
         $redirect = new Redirect($this->routerMock, new TokenStorage());
         $redirectUrl = $redirect->to('/unread/list');
@@ -88,7 +88,7 @@ class RedirectTest extends TestCase
         $this->assertSame('/unread/list', $redirectUrl);
     }
 
-    public function testUserForRedirectToHomepage()
+    public function testUserForRedirectToHomepage(): void
     {
         $this->user->getConfig()->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
 
@@ -97,7 +97,7 @@ class RedirectTest extends TestCase
         $this->assertSame('/', $redirectUrl);
     }
 
-    public function testUserForRedirectWithIgnoreActionMarkAsRead()
+    public function testUserForRedirectWithIgnoreActionMarkAsRead(): void
     {
         $this->user->getConfig()->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
 
@@ -106,7 +106,7 @@ class RedirectTest extends TestCase
         $this->assertSame('/unread/list', $redirectUrl);
     }
 
-    public function testUserForRedirectNullWithIgnoreActionMarkAsRead()
+    public function testUserForRedirectNullWithIgnoreActionMarkAsRead(): void
     {
         $this->user->getConfig()->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
 

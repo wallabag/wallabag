@@ -71,17 +71,17 @@ class AppKernel extends Kernel
         return dirname(__DIR__) . '/var/logs';
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load($this->getProjectDir() . '/app/config/config_' . $this->getEnvironment() . '.yml');
 
-        $loader->load(function ($container) {
+        $loader->load(static function ($container) {
             if ($container->getParameter('use_webpack_dev_server')) {
                 $container->loadFromExtension('framework', [
-                   'assets' => [
-                       'base_url' => 'http://localhost:8080/',
-                   ],
-               ]);
+                    'assets' => [
+                        'base_url' => 'http://localhost:8080/',
+                    ],
+                ]);
             } else {
                 $container->loadFromExtension('framework', [
                     'assets' => [
@@ -102,7 +102,7 @@ class AppKernel extends Kernel
         });
     }
 
-    private function defineRedisUrlEnvVar(ContainerBuilder $container)
+    private function defineRedisUrlEnvVar(ContainerBuilder $container): void
     {
         $scheme = $container->getParameter('redis_scheme');
         $host = $container->getParameter('redis_host');

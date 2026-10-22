@@ -351,7 +351,7 @@ class ConfigController extends AbstractController
 
         $backupCodes = (new BackupCodes())->toArray();
         $backupCodesHashed = array_map(
-            function ($backupCode) {
+            static function ($backupCode) {
                 return password_hash($backupCode, \PASSWORD_DEFAULT);
             },
             $backupCodes
@@ -684,7 +684,7 @@ class ConfigController extends AbstractController
             throw new BadRequestHttpException('Bad CSRF token.');
         }
 
-        $errors = $validator->validate($language, (new LocaleConstraint()));
+        $errors = $validator->validate($language, new LocaleConstraint());
 
         if (0 === \count($errors)) {
             $request->getSession()->set('_locale', $language);
@@ -725,7 +725,7 @@ class ConfigController extends AbstractController
      * @param array $tags
      * @param int   $userId
      */
-    private function removeAllTagsByStatusAndUserId($tags, $userId)
+    private function removeAllTagsByStatusAndUserId($tags, $userId): void
     {
         if (empty($tags)) {
             return;
@@ -748,7 +748,7 @@ class ConfigController extends AbstractController
      *
      * @param int $userId
      */
-    private function removeAllTagsByUserId($userId)
+    private function removeAllTagsByUserId($userId): void
     {
         $tags = $this->tagRepository->findAllTags($userId);
         $this->removeAllTagsByStatusAndUserId($tags, $userId);
@@ -759,13 +759,13 @@ class ConfigController extends AbstractController
      *
      * @param int $userId
      */
-    private function removeTagsForArchivedByUserId($userId)
+    private function removeTagsForArchivedByUserId($userId): void
     {
         $tags = $this->tagRepository->findForArchivedArticlesByUser($userId);
         $this->removeAllTagsByStatusAndUserId($tags, $userId);
     }
 
-    private function removeAnnotationsForArchivedByUserId($userId)
+    private function removeAnnotationsForArchivedByUserId($userId): void
     {
         $archivedEntriesAnnotations = $this->annotationRepository
             ->findAllArchivedEntriesByUser($userId);
@@ -780,7 +780,7 @@ class ConfigController extends AbstractController
     /**
      * Validate that a rule can be edited/deleted by the current user.
      */
-    private function validateRuleAction(RuleInterface $rule)
+    private function validateRuleAction(RuleInterface $rule): void
     {
         if ($this->getUser()->getId() !== $rule->getConfig()->getUser()->getId()) {
             throw $this->createAccessDeniedException('You can not access this rule.');

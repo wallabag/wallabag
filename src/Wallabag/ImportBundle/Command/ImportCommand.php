@@ -62,7 +62,7 @@ class ImportCommand extends Command
         OmnivoreImport $omnivoreImport,
         ShaarliImport $shaarliImport,
         PocketHtmlImport $pocketHtmlImport,
-        PocketCsvImport $pocketCsvImport
+        PocketCsvImport $pocketCsvImport,
     ) {
         $this->entityManager = $entityManager;
         $this->tokenStorage = $tokenStorage;
@@ -84,7 +84,7 @@ class ImportCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('wallabag:import')
@@ -103,7 +103,7 @@ class ImportCommand extends Command
         $output->writeln('Start : ' . (new \DateTime())->format('d-m-Y G:i:s') . ' ---');
 
         if (!file_exists($input->getArgument('filepath'))) {
-            throw new Exception(sprintf('File "%s" not found', $input->getArgument('filepath')));
+            throw new Exception(\sprintf('File "%s" not found', $input->getArgument('filepath')));
         }
 
         // Turning off doctrine default logs queries for saving memory
@@ -116,7 +116,7 @@ class ImportCommand extends Command
         }
 
         if (!\is_object($entityUser)) {
-            throw new Exception(sprintf('User "%s" not found', $input->getArgument('username')));
+            throw new Exception(\sprintf('User "%s" not found', $input->getArgument('username')));
         }
 
         // Authenticate user for paywalled websites
@@ -153,7 +153,7 @@ class ImportCommand extends Command
                 break;
             case 'omnivore':
                 $import = $this->omnivoreImport;
-            break;
+                break;
             case 'elcurator':
                 $import = $this->elcuratorImport;
                 break;

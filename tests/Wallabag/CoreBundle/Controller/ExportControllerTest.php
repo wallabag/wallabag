@@ -15,7 +15,7 @@ class ExportControllerTest extends WallabagCoreTestCase
     private $sameDomainEntry;
     private $sameDomainEntry2;
 
-    public function testLogin()
+    public function testLogin(): void
     {
         $client = $this->getTestClient();
 
@@ -25,7 +25,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('login', $client->getResponse()->headers->get('location'));
     }
 
-    public function testUnknownCategoryExport()
+    public function testUnknownCategoryExport(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -35,7 +35,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
-    public function testUnknownFormatExport()
+    public function testUnknownFormatExport(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -45,7 +45,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
-    public function testUnsupportedFormatExport()
+    public function testUnsupportedFormatExport(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -62,7 +62,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
-    public function testNonExistingEntryId()
+    public function testNonExistingEntryId(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -72,7 +72,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
-    public function testForbiddenEntryId()
+    public function testForbiddenEntryId(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -87,7 +87,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
-    public function testEpubExport()
+    public function testEpubExport(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -104,7 +104,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame('binary', $headers->get('content-transfer-encoding'));
     }
 
-    public function testEpubExportEscapesXmlSpecialCharacters()
+    public function testEpubExportEscapesXmlSpecialCharacters(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -158,7 +158,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $em->flush();
     }
 
-    public function testMobiExport()
+    public function testMobiExport(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -180,7 +180,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame('binary', $headers->get('content-transfer-encoding'));
     }
 
-    public function testPdfExport()
+    public function testPdfExport(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -208,7 +208,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame('binary', $headers->get('content-transfer-encoding'));
     }
 
-    public function testTxtExport()
+    public function testTxtExport(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -225,7 +225,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
     }
 
-    public function testCsvExport()
+    public function testCsvExport(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -272,7 +272,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         }
     }
 
-    public function testJsonExport()
+    public function testJsonExport(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -321,7 +321,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertContains('foo', $content[0]['tags']);
     }
 
-    public function testJsonExportFromSearch()
+    public function testJsonExportFromSearch(): void
     {
         $this->setUpForJsonExportFromSearch();
 
@@ -345,7 +345,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->tearDownForJsonExportFromSearch();
     }
 
-    public function testXmlExport()
+    public function testXmlExport(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -384,7 +384,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty('updated_at', (string) $content->entry[0]->updated_at);
     }
 
-    public function testJsonExportFromSameDomain()
+    public function testJsonExportFromSameDomain(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -404,7 +404,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertCount(4, $content);
     }
 
-    private function setUpForJsonExportFromSearch()
+    private function setUpForJsonExportFromSearch(): void
     {
         $client = $this->getTestClient();
         $em = $this->getEntityManager();
@@ -429,7 +429,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $em->flush();
     }
 
-    private function tearDownForJsonExportFromSearch()
+    private function tearDownForJsonExportFromSearch(): void
     {
         $em = $this->getEntityManager();
 

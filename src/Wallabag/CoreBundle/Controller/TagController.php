@@ -142,6 +142,7 @@ class TagController extends AbstractController
      * @param int $page
      *
      * @Route("/tag/list/{slug}/{page}", name="tag_entries", defaults={"page" = "1"})
+     *
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
      * @return Response
@@ -181,6 +182,7 @@ class TagController extends AbstractController
      * Create a new tag with the new name and drop the old one.
      *
      * @Route("/tag/rename/{slug}", name="tag_rename")
+     *
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
      * @return Response
@@ -273,6 +275,7 @@ class TagController extends AbstractController
      * Delete a given tag for the current user.
      *
      * @Route("/tag/delete/{slug}", name="tag_delete", methods={"POST"})
+     *
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
      * @return Response
@@ -300,7 +303,7 @@ class TagController extends AbstractController
     /**
      * Check if the logged user can manage the given entry.
      */
-    private function checkUserAction(Entry $entry)
+    private function checkUserAction(Entry $entry): void
     {
         if (null === $this->getUser() || $this->getUser()->getId() !== $entry->getUser()->getId()) {
             throw $this->createAccessDeniedException('You can not access this entry.');

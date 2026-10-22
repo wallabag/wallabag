@@ -8,7 +8,7 @@ use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 
 class ListUserCommandTest extends WallabagCoreTestCase
 {
-    public function testRunListUserCommand()
+    public function testRunListUserCommand(): void
     {
         $application = new Application($this->getTestClient()->getKernel());
 
@@ -20,7 +20,7 @@ class ListUserCommandTest extends WallabagCoreTestCase
         $this->assertStringContainsString('3/3 user(s) displayed.', $tester->getDisplay());
     }
 
-    public function testRunListUserCommandWithLimit()
+    public function testRunListUserCommandWithLimit(): void
     {
         $application = new Application($this->getTestClient()->getKernel());
 
@@ -34,7 +34,7 @@ class ListUserCommandTest extends WallabagCoreTestCase
         $this->assertStringContainsString('2/3 user(s) displayed.', $tester->getDisplay());
     }
 
-    public function testRunListUserCommandWithSearch()
+    public function testRunListUserCommandWithSearch(): void
     {
         $application = new Application($this->getTestClient()->getKernel());
 
@@ -48,7 +48,7 @@ class ListUserCommandTest extends WallabagCoreTestCase
         $this->assertStringContainsString('1/3 (filtered) user(s) displayed.', $tester->getDisplay());
     }
 
-    public function testRunListUserCommandWithSearchAndLimit()
+    public function testRunListUserCommandWithSearchAndLimit(): void
     {
         $application = new Application($this->getTestClient()->getKernel());
 

@@ -47,7 +47,7 @@ class ContentProxy
      * @param array  $content              Array with content provided for import with AT LEAST keys title, html, url to skip the fetchContent from the url
      * @param bool   $disableContentUpdate Whether to skip trying to fetch content using Graby
      */
-    public function updateEntry(Entry $entry, $url, array $content = [], $disableContentUpdate = false)
+    public function updateEntry(Entry $entry, $url, array $content = [], $disableContentUpdate = false): void
     {
         $this->graby->toggleImgNoReferrer(true);
         if (!empty($content['html'])) {
@@ -100,7 +100,7 @@ class ContentProxy
      *
      * @param string $value Language to validate and save
      */
-    public function updateLanguage(Entry $entry, $value)
+    public function updateLanguage(Entry $entry, $value): void
     {
         // some lang are defined as fr-FR, es-ES.
         // replacing - by _ might increase language support
@@ -108,7 +108,7 @@ class ContentProxy
 
         $errors = $this->validator->validate(
             $value,
-            (new LocaleConstraint())
+            new LocaleConstraint()
         );
 
         if (0 === \count($errors)) {
@@ -125,11 +125,11 @@ class ContentProxy
      *
      * @param string $value URL to validate and save
      */
-    public function updatePreviewPicture(Entry $entry, $value)
+    public function updatePreviewPicture(Entry $entry, $value): void
     {
         $errors = $this->validator->validate(
             $value,
-            (new UrlConstraint())
+            new UrlConstraint()
         );
 
         if (0 === \count($errors)) {
@@ -146,7 +146,7 @@ class ContentProxy
      *
      * @param string $value Date to validate and save
      */
-    public function updatePublishedAt(Entry $entry, $value)
+    public function updatePublishedAt(Entry $entry, $value): void
     {
         $date = $value;
 
@@ -171,7 +171,7 @@ class ContentProxy
     /**
      * Helper to extract and save host from entry url.
      */
-    public function setEntryDomainName(Entry $entry)
+    public function setEntryDomainName(Entry $entry): void
     {
         $domainName = parse_url($entry->getUrl(), \PHP_URL_HOST);
         if (false !== $domainName) {
@@ -184,7 +184,7 @@ class ContentProxy
      * - url basename, if applicable
      * - hostname.
      */
-    public function setDefaultEntryTitle(Entry $entry)
+    public function setDefaultEntryTitle(Entry $entry): void
     {
         $url = parse_url($entry->getUrl());
         $path = pathinfo($url['path'], \PATHINFO_BASENAME);
@@ -216,8 +216,6 @@ class ContentProxy
     /**
      * If the title from the fetched content comes from a PDF, then its very possible that the character encoding is not
      * UTF-8. This methods tries to identify the character encoding and translate the title to UTF-8.
-     *
-     * @param $title
      *
      * @return string (maybe contains invalid UTF-8 character)
      */
@@ -258,7 +256,7 @@ class ContentProxy
      * @param Entry $entry   Entry to stock
      * @param array $content Array with at least title, url & html
      */
-    private function stockEntry(Entry $entry, array $content)
+    private function stockEntry(Entry $entry, array $content): void
     {
         $this->updateOriginUrl($entry, $content['url']);
 

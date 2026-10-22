@@ -23,7 +23,7 @@ class UserLocaleListener
         $this->session = $session;
     }
 
-    public function onInteractiveLogin(InteractiveLoginEvent $event)
+    public function onInteractiveLogin(InteractiveLoginEvent $event): void
     {
         $user = $event->getAuthenticationToken()->getUser();
         \assert($user instanceof User);

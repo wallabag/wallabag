@@ -23,7 +23,7 @@ class UsernameFeedTokenConverter implements ParamConverterInterface
     /**
      * @param ManagerRegistry $registry Manager registry
      */
-    public function __construct(ManagerRegistry $registry = null)
+    public function __construct(?ManagerRegistry $registry = null)
     {
         $this->registry = $registry;
     }
@@ -88,7 +88,7 @@ class UsernameFeedTokenConverter implements ParamConverterInterface
         $user = $userRepository->findOneByUsernameAndFeedtoken($username, $feedToken);
 
         if (null === $user || !($user instanceof User)) {
-            throw new NotFoundHttpException(sprintf('%s not found.', $configuration->getClass()));
+            throw new NotFoundHttpException(\sprintf('%s not found.', $configuration->getClass()));
         }
 
         // Map found user to the route's parameter

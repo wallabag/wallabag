@@ -21,7 +21,7 @@ class ListUserCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('wallabag:user:list')
@@ -58,7 +58,7 @@ class ListUserCommand extends Command
         $io->table(['username', 'email', 'is enabled?', 'is admin?'], $rows);
 
         $io->success(
-            sprintf(
+            \sprintf(
                 '%s/%s%s user(s) displayed.',
                 \count($users),
                 $nbUsers,

@@ -6,33 +6,21 @@ class ChromeImport extends BrowserImport
 {
     protected $filepath;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Chrome';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUrl()
     {
         return 'import_chrome';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return 'import.chrome.description';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateEntry(array $importedEntry)
     {
         if (empty($importedEntry['url'])) {
@@ -42,9 +30,6 @@ class ChromeImport extends BrowserImport
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function prepareEntry(array $entry = [])
     {
         $data = [

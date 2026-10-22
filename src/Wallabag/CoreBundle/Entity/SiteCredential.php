@@ -11,7 +11,9 @@ use Wallabag\UserBundle\Entity\User;
  * SiteCredential.
  *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\SiteCredentialRepository")
+ *
  * @ORM\Table(name="`site_credential`")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class SiteCredential
@@ -22,7 +24,9 @@ class SiteCredential
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
+     *
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -31,7 +35,9 @@ class SiteCredential
      * @var string
      *
      * @Assert\NotBlank()
+     *
      * @Assert\Length(max=255)
+     *
      * @ORM\Column(name="host", type="string", length=255)
      */
     private $host;
@@ -40,6 +46,7 @@ class SiteCredential
      * @var string
      *
      * @Assert\NotBlank()
+     *
      * @ORM\Column(name="username", type="text")
      */
     private $username;
@@ -48,6 +55,7 @@ class SiteCredential
      * @var string
      *
      * @Assert\NotBlank()
+     *
      * @ORM\Column(name="password", type="text")
      */
     private $password;

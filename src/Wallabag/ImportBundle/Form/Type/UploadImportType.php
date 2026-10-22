@@ -10,7 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class UploadImportType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('file', FileType::class, [

@@ -9,8 +9,11 @@ use FOS\UserBundle\Model\UserInterface;
 
 /**
  * @ORM\Table("oauth2_auth_codes")
+ *
  * @ORM\Entity
+ *
  * @ORM\AttributeOverrides({
+ *
  *     @ORM\AttributeOverride(name="token",
  *         column=@ORM\Column(
  *             name   = "token",
@@ -31,13 +34,16 @@ class AuthCode extends BaseAuthCode
 {
     /**
      * @ORM\Id
+     *
      * @ORM\Column(type="integer")
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="Client")
+     *
      * @ORM\JoinColumn(nullable=false)
      *
      * @var ClientInterface
@@ -46,6 +52,7 @@ class AuthCode extends BaseAuthCode
 
     /**
      * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      *
      * @var UserInterface

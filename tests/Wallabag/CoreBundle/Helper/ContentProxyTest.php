@@ -20,7 +20,7 @@ class ContentProxyTest extends TestCase
 {
     private $fetchingErrorMessage = 'wallabag can\'t retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.';
 
-    public function testWithBadUrl()
+    public function testWithBadUrl(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -59,7 +59,7 @@ class ContentProxyTest extends TestCase
         $this->assertNull($entry->getDomainName());
     }
 
-    public function testWithEmptyContent()
+    public function testWithEmptyContent(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -98,7 +98,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('0.0.0.0', $entry->getDomainName());
     }
 
-    public function testWithEmptyContentButOG()
+    public function testWithEmptyContentButOG(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -140,7 +140,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('domain.io', $entry->getDomainName());
     }
 
-    public function testWithContent()
+    public function testWithContent(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -185,7 +185,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
-    public function testWithContentAndEmptyProvidedContent()
+    public function testWithContentAndEmptyProvidedContent(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -234,7 +234,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
-    public function testWithContentAndNoOgImage()
+    public function testWithContentAndNoOgImage(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -279,7 +279,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
-    public function testWithContentAndContentImage()
+    public function testWithContentAndContentImage(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -323,7 +323,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
-    public function testWithContentImageAndOgImage()
+    public function testWithContentImageAndOgImage(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -367,7 +367,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
-    public function testWithContentAndBadLanguage()
+    public function testWithContentAndBadLanguage(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -414,7 +414,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
-    public function testWithContentAndBadOgImage()
+    public function testWithContentAndBadOgImage(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -467,7 +467,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
-    public function testWithForcedContent()
+    public function testWithForcedContent(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -477,7 +477,7 @@ class ContentProxyTest extends TestCase
         $ruleBasedIgnoreOriginProcessor->expects($this->once())
             ->method('process');
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
+        $proxy = new ContentProxy(new Graby(), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -511,7 +511,7 @@ class ContentProxyTest extends TestCase
         $this->assertContains('no-cache', $entry->getHeaders());
     }
 
-    public function testWithForcedContentAndDateTime()
+    public function testWithForcedContentAndDateTime(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -522,7 +522,7 @@ class ContentProxyTest extends TestCase
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $logger, $this->fetchingErrorMessage);
+        $proxy = new ContentProxy(new Graby(), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $logger, $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -549,7 +549,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('08/09/2016', $entry->getPublishedAt()->format('d/m/Y'));
     }
 
-    public function testWithForcedContentAndBadDate()
+    public function testWithForcedContentAndBadDate(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -561,7 +561,7 @@ class ContentProxyTest extends TestCase
         $handler = new TestHandler();
         $logger->pushHandler($handler);
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $logger, $this->fetchingErrorMessage);
+        $proxy = new ContentProxy(new Graby(), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $logger, $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -593,7 +593,7 @@ class ContentProxyTest extends TestCase
         $this->assertStringContainsString('Error while defining date', $records[0]['message']);
     }
 
-    public function testTaggerThrowException()
+    public function testTaggerThrowException(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -602,7 +602,7 @@ class ContentProxyTest extends TestCase
 
         $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy(new Graby(), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -638,7 +638,7 @@ class ContentProxyTest extends TestCase
     /**
      * @dataProvider dataForCrazyHtml
      */
-    public function testWithCrazyHtmlContent($html, $escapedString)
+    public function testWithCrazyHtmlContent($html, $escapedString): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -646,7 +646,7 @@ class ContentProxyTest extends TestCase
 
         $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy(new Graby(), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -657,7 +657,7 @@ class ContentProxyTest extends TestCase
                 'url' => 'http://1.1.1.1',
                 'language' => 'fr',
                 'status' => '200',
-                //'og_title' => 'my OG title',
+                // 'og_title' => 'my OG title',
                 'description' => 'OG desc',
                 'image' => 'http://3.3.3.3/cover.jpg',
                 'headers' => [
@@ -738,7 +738,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
-    public function testWithImageAsContent()
+    public function testWithImageAsContent(): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -776,12 +776,12 @@ class ContentProxyTest extends TestCase
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
-    public function testWebsiteWithValidUTF8TitleDoNothing()
+    public function testWebsiteWithValidUTF8TitleDoNothing(): void
     {
         // You can use https://www.online-toolz.com/tools/text-hex-convertor.php to convert UTF-8 text <=> hex
         // See http://graphemica.com for more info about the characters
         // '😻ℤz' (U+1F63B or F09F98BB; U+2124 or E284A4; U+007A or 7A) in hexadecimal and UTF-8
-        $actualTitle = $this->hexToStr('F09F98BB' . 'E284A4' . '7A');
+        $actualTitle = $this->hexToStr('F09F98BBE284A47A');
 
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -811,16 +811,16 @@ class ContentProxyTest extends TestCase
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
         // '😻ℤz' (U+1F63B or F09F98BB; U+2124 or E284A4; U+007A or 7A) in hexadecimal and UTF-8
-        $expectedTitle = 'F09F98BB' . 'E284A4' . '7A';
+        $expectedTitle = 'F09F98BBE284A47A';
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
-    public function testWebsiteWithInvalidUTF8TitleRemoveInvalidCharacter()
+    public function testWebsiteWithInvalidUTF8TitleRemoveInvalidCharacter(): void
     {
         // See http://graphemica.com for more info about the characters
         // 'a€b' (61;80;62) in hexadecimal and WINDOWS-1252 - but 80 is a invalid UTF-8 character.
         // The correct UTF-8 € character (U+20AC) is E282AC
-        $actualTitle = $this->hexToStr('61' . '80' . '62');
+        $actualTitle = $this->hexToStr('618062');
 
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -850,11 +850,11 @@ class ContentProxyTest extends TestCase
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
         // 'ab' (61;62) because all invalid UTF-8 character (like 80) are removed
-        $expectedTitle = '61' . '62';
+        $expectedTitle = '6162';
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
-    public function testPdfWithUTF16BETitleConvertToUTF8()
+    public function testPdfWithUTF16BETitleConvertToUTF8(): void
     {
         // See http://graphemica.com for more info about the characters
         // '😻' (U+1F63B;D83DDE3B) in hexadecimal and as UTF16BE
@@ -892,7 +892,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
-    public function testPdfWithUTF8TitleDoNothing()
+    public function testPdfWithUTF8TitleDoNothing(): void
     {
         // See http://graphemica.com for more info about the characters
         // '😻' (U+1F63B;D83DDE3B) in hexadecimal and as UTF8
@@ -930,7 +930,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
-    public function testPdfWithWINDOWS1252TitleConvertToUTF8()
+    public function testPdfWithWINDOWS1252TitleConvertToUTF8(): void
     {
         // See http://graphemica.com for more info about the characters
         // '€' (80) in hexadecimal and WINDOWS-1252
@@ -968,7 +968,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
-    public function testPdfWithInvalidCharacterInTitleRemoveInvalidCharacter()
+    public function testPdfWithInvalidCharacterInTitleRemoveInvalidCharacter(): void
     {
         /*
          * I spend too much time on trying to solve the problem of that test.
@@ -983,7 +983,7 @@ class ContentProxyTest extends TestCase
         // See http://graphemica.com for more info about the characters
         // '😻ℤ�z' (U+1F63B or F09F98BB; U+2124 or E284A4; invalid character 81; U+007A or 7A) in hexadecimal and UTF-8
         // 0x81 is not a valid character for UTF16, UTF8 and WINDOWS-1252
-        $actualTitle = $this->hexToStr('F09F98BB' . 'E284A4' . '81' . '7A');
+        $actualTitle = $this->hexToStr('F09F98BBE284A4817A');
 
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -1014,7 +1014,7 @@ class ContentProxyTest extends TestCase
 
         // '😻ℤz' (U+1F63B or F09F98BB; U+2124 or E284A4; U+007A or 7A) in hexadecimal and UTF-8
         // the 0x81 (represented by �) is invalid for UTF16, UTF8 and WINDOWS-1252 and is removed
-        $expectedTitle = 'F09F98BB' . 'E284A4' . '7A';
+        $expectedTitle = 'F09F98BBE284A47A';
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
@@ -1129,7 +1129,7 @@ class ContentProxyTest extends TestCase
     /**
      * @dataProvider dataForChangedUrl
      */
-    public function testWithChangedUrl($entry_url, $origin_url, $content_url, $expected_entry_url, $expected_origin_url, $expected_domain, $processor_result)
+    public function testWithChangedUrl($entry_url, $origin_url, $content_url, $expected_entry_url, $expected_origin_url, $expected_domain, $processor_result): void
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
@@ -1140,7 +1140,7 @@ class ContentProxyTest extends TestCase
             ->method('process')
             ->willReturn($processor_result);
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
+        $proxy = new ContentProxy(new Graby(), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
         $entry = new Entry(new User());
         $entry->setOriginUrl($origin_url);
         $proxy->updateEntry(
@@ -1166,8 +1166,6 @@ class ContentProxyTest extends TestCase
     /**
      * https://stackoverflow.com/a/18506801.
      *
-     * @param $string
-     *
      * @return string
      */
     private function strToHex($string)
@@ -1186,8 +1184,6 @@ class ContentProxyTest extends TestCase
      * Convert hex to string.
      *
      * @see https://stackoverflow.com/a/18506801
-     *
-     * @param $hex
      *
      * @return string
      */

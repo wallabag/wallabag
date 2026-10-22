@@ -33,7 +33,7 @@ class EntryFilterType extends AbstractType
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
@@ -49,7 +49,7 @@ class EntryFilterType extends AbstractType
                     'condition_operator' => FilterOperands::OPERATOR_LOWER_THAN_EQUAL,
                     'attr' => ['min' => 0],
                 ],
-                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) use ($user) {
+                'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) use ($user) {
                     $lower = $values['value']['left_number'][0];
                     $upper = $values['value']['right_number'][0];
 
@@ -94,7 +94,7 @@ class EntryFilterType extends AbstractType
                 'label' => 'entry.filters.created_at.label',
             ])
             ->add('domainName', TextFilterType::class, [
-                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) {
                     $value = $values['value'];
                     if (\strlen($value) <= 2 || empty($value)) {
                         return false;
@@ -109,13 +109,13 @@ class EntryFilterType extends AbstractType
                 ],
             ])
             ->add('httpStatus', NumberFilterType::class, [
-                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) {
                     $value = (int) $values['value'];
                     if (false === \array_key_exists($value, Response::$statusTexts)) {
                         return false;
                     }
 
-                    $paramName = sprintf('%s', str_replace('.', '_', $field));
+                    $paramName = \sprintf('%s', str_replace('.', '_', $field));
                     $expression = $filterQuery->getExpr()->eq($field, ':' . $paramName);
                     $parameters = [$paramName => $value];
 
@@ -139,7 +139,7 @@ class EntryFilterType extends AbstractType
             ->add('isUnread', CheckboxFilterType::class, [
                 'label' => 'entry.filters.unread_label',
                 'data' => $options['filter_unread'],
-                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
                         return false;
                     }
@@ -152,7 +152,7 @@ class EntryFilterType extends AbstractType
             ->add('isAnnotated', CheckboxFilterType::class, [
                 'label' => 'entry.filters.annotated_label',
                 'data' => $options['filter_annotated'],
-                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
                         return false;
                     }
@@ -162,7 +162,7 @@ class EntryFilterType extends AbstractType
                 },
             ])
             ->add('previewPicture', CheckboxFilterType::class, [
-                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
                         return false;
                     }
@@ -174,7 +174,7 @@ class EntryFilterType extends AbstractType
                 'label' => 'entry.filters.preview_picture_label',
             ])
             ->add('isPublic', CheckboxFilterType::class, [
-                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
                         return false;
                     }
@@ -199,7 +199,7 @@ class EntryFilterType extends AbstractType
         return 'entry_filter';
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'csrf_protection' => false,

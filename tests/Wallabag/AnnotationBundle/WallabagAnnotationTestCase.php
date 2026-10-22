@@ -16,7 +16,7 @@ abstract class WallabagAnnotationTestCase extends WebTestCase
     /**
      * @var KernelBrowser
      */
-    protected $client = null;
+    protected $client;
 
     /**
      * @var UserInterface
@@ -29,7 +29,7 @@ abstract class WallabagAnnotationTestCase extends WebTestCase
         $this->client = $this->createAuthorizedClient();
     }
 
-    public function logInAs($username)
+    public function logInAs($username): void
     {
         $crawler = $this->client->request('GET', '/login');
         $form = $crawler->filter('button[type=submit]')->form();

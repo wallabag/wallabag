@@ -26,7 +26,7 @@ class ShaarliImportTest extends TestCase
     protected $contentProxy;
     protected $tagsAssigner;
 
-    public function testInit()
+    public function testInit(): void
     {
         $shaarliImport = $this->getShaarliImport();
 
@@ -35,7 +35,7 @@ class ShaarliImportTest extends TestCase
         $this->assertSame('import.shaarli.description', $shaarliImport->getDescription());
     }
 
-    public function testImport()
+    public function testImport(): void
     {
         $shaarliImport = $this->getShaarliImport(false, 2);
         $shaarliImport->setFilepath(__DIR__ . '/../fixtures/shaarli-bookmarks.html');
@@ -68,7 +68,7 @@ class ShaarliImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 2, 'queued' => 0], $shaarliImport->getSummary());
     }
 
-    public function testImportAndMarkAllAsRead()
+    public function testImportAndMarkAllAsRead(): void
     {
         $shaarliImport = $this->getShaarliImport(false, 1);
         $shaarliImport->setFilepath(__DIR__ . '/../fixtures/shaarli-bookmarks.html');
@@ -95,7 +95,7 @@ class ShaarliImportTest extends TestCase
         $this->em
             ->expects($this->any())
             ->method('persist')
-            ->with($this->callback(function ($persistedEntry) {
+            ->with($this->callback(static function ($persistedEntry) {
                 return (bool) $persistedEntry->isArchived();
             }));
 
@@ -108,7 +108,7 @@ class ShaarliImportTest extends TestCase
         $this->assertSame(['skipped' => 1, 'imported' => 1, 'queued' => 0], $shaarliImport->getSummary());
     }
 
-    public function testImportWithRabbit()
+    public function testImportWithRabbit(): void
     {
         $shaarliImport = $this->getShaarliImport();
         $shaarliImport->setFilepath(__DIR__ . '/../fixtures/shaarli-bookmarks.html');
@@ -148,7 +148,7 @@ class ShaarliImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 2], $shaarliImport->getSummary());
     }
 
-    public function testImportWithRedis()
+    public function testImportWithRedis(): void
     {
         $shaarliImport = $this->getShaarliImport();
         $shaarliImport->setFilepath(__DIR__ . '/../fixtures/shaarli-bookmarks.html');
@@ -188,7 +188,7 @@ class ShaarliImportTest extends TestCase
         $this->assertNotEmpty($redisMock->lpop('shaarli'));
     }
 
-    public function testImportBadFile()
+    public function testImportBadFile(): void
     {
         $shaarliImport = $this->getShaarliImport();
         $shaarliImport->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.jsonx');
@@ -202,7 +202,7 @@ class ShaarliImportTest extends TestCase
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    public function testImportUserNotDefined()
+    public function testImportUserNotDefined(): void
     {
         $shaarliImport = $this->getShaarliImport(true);
         $shaarliImport->setFilepath(__DIR__ . '/../fixtures/shaarli-bookmarks.html');

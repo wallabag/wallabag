@@ -12,7 +12,7 @@ use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 
 class RedisWorkerCommandTest extends WallabagCoreTestCase
 {
-    public function testRunRedisWorkerCommandWithoutArguments()
+    public function testRunRedisWorkerCommandWithoutArguments(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments (missing: "serviceName")');
@@ -25,7 +25,7 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
         $tester->execute([]);
     }
 
-    public function testRunRedisWorkerCommandWithBadService()
+    public function testRunRedisWorkerCommandWithBadService(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No queue or consumer found for service name');
@@ -40,7 +40,7 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
         ]);
     }
 
-    public function testRunRedisWorkerCommand()
+    public function testRunRedisWorkerCommand(): void
     {
         $application = new Application($this->getTestClient()->getKernel());
 

@@ -17,8 +17,11 @@ use Wallabag\UserBundle\Entity\User;
  * Annotation.
  *
  * @ORM\Table(name="annotation")
+ *
  * @ORM\Entity(repositoryClass="Wallabag\AnnotationBundle\Repository\AnnotationRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
+ *
  * @ExclusionPolicy("none")
  */
 class Annotation
@@ -29,7 +32,9 @@ class Annotation
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
+     *
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -64,6 +69,7 @@ class Annotation
      *     max = 10000,
      *     maxMessage = "validator.quote_length_too_high"
      * )
+     *
      * @ORM\Column(name="quote", type="text")
      *
      * @Groups({"entries_for_user", "export_all"})
@@ -90,6 +96,7 @@ class Annotation
      * @Exclude
      *
      * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\Entry", inversedBy="annotations")
+     *
      * @ORM\JoinColumn(name="entry_id", referencedColumnName="id", onDelete="cascade")
      */
     private $entry;
@@ -230,6 +237,7 @@ class Annotation
 
     /**
      * @VirtualProperty
+     *
      * @SerializedName("user")
      */
     public function getUserName()
@@ -264,6 +272,7 @@ class Annotation
 
     /**
      * @VirtualProperty
+     *
      * @SerializedName("annotator_schema_version")
      */
     public function getVersion()

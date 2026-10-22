@@ -16,7 +16,7 @@ class ImportChain
      *
      * @param string $alias
      */
-    public function addImport(ImportInterface $import, $alias)
+    public function addImport(ImportInterface $import, $alias): void
     {
         $this->imports[$alias] = $import;
     }

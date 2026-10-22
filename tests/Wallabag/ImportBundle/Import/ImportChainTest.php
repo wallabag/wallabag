@@ -8,7 +8,7 @@ use Wallabag\ImportBundle\Import\ImportInterface;
 
 class ImportChainTest extends TestCase
 {
-    public function testGetAll()
+    public function testGetAll(): void
     {
         $import = $this->getMockBuilder(ImportInterface::class)
             ->disableOriginalConstructor()

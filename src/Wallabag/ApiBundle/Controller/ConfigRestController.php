@@ -17,6 +17,7 @@ class ConfigRestController extends WallabagRestController
      * @Operation(
      *     tags={"Config"},
      *     summary="Retrieve configuration for current user.",
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"

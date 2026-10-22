@@ -32,25 +32,16 @@ class PocketImport extends AbstractImport
         return $this->accessToken;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Pocket';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUrl()
     {
         return 'import_pocket';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return 'import.pocket.description';
@@ -71,7 +62,7 @@ class PocketImport extends AbstractImport
                 'redirect_uri' => $redirectUri,
             ]));
         } catch (RequestException $e) {
-            $this->logger->error(sprintf('PocketImport: Failed to request token: %s', $e->getMessage()), ['exception' => $e]);
+            $this->logger->error(\sprintf('PocketImport: Failed to request token: %s', $e->getMessage()), ['exception' => $e]);
 
             return false;
         }
@@ -95,7 +86,7 @@ class PocketImport extends AbstractImport
                 'code' => $code,
             ]));
         } catch (RequestException $e) {
-            $this->logger->error(sprintf('PocketImport: Failed to authorize client: %s', $e->getMessage()), ['exception' => $e]);
+            $this->logger->error(\sprintf('PocketImport: Failed to authorize client: %s', $e->getMessage()), ['exception' => $e]);
 
             return false;
         }
@@ -105,9 +96,6 @@ class PocketImport extends AbstractImport
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function import($offset = 0)
     {
         static $run = 0;
@@ -123,7 +111,7 @@ class PocketImport extends AbstractImport
                 'offset' => $offset,
             ]));
         } catch (RequestException $e) {
-            $this->logger->error(sprintf('PocketImport: Failed to import: %s', $e->getMessage()), ['exception' => $e]);
+            $this->logger->error(\sprintf('PocketImport: Failed to import: %s', $e->getMessage()), ['exception' => $e]);
 
             return false;
         }
@@ -153,14 +141,11 @@ class PocketImport extends AbstractImport
     /**
      * Set the Http client.
      */
-    public function setClient(ClientInterface $client, RequestFactoryInterface $requestFactory = null, StreamFactoryInterface $streamFactory = null)
+    public function setClient(ClientInterface $client, ?RequestFactoryInterface $requestFactory = null, ?StreamFactoryInterface $streamFactory = null): void
     {
         $this->client = new HttpMethodsClient(new PluginClient($client, [new ErrorPlugin()]), $requestFactory ?: Psr17FactoryDiscovery::findRequestFactory(), $streamFactory ?: Psr17FactoryDiscovery::findStreamFactory());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateEntry(array $importedEntry)
     {
         if (empty($importedEntry['resolved_url']) && empty($importedEntry['given_url'])) {
@@ -171,8 +156,6 @@ class PocketImport extends AbstractImport
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @see https://getpocket.com/developer/docs/v3/retrieve
      */
     public function parseEntry(array $importedEntry)
@@ -233,9 +216,6 @@ class PocketImport extends AbstractImport
         return $entry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setEntryAsRead(array $importedEntry)
     {
         $importedEntry['status'] = '1';

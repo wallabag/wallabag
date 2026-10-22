@@ -6,7 +6,7 @@ use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
 
 class ConfigRestControllerTest extends WallabagApiTestCase
 {
-    public function testGetConfig()
+    public function testGetConfig(): void
     {
         $this->client->request('GET', '/api/config.json');
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -29,7 +29,7 @@ class ConfigRestControllerTest extends WallabagApiTestCase
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
-    public function testGetConfigWithoutAuthentication()
+    public function testGetConfigWithoutAuthentication(): void
     {
         $client = static::createClient();
         $client->request('GET', '/api/config.json');

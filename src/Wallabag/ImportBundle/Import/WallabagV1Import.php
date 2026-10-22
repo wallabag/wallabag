@@ -21,33 +21,21 @@ class WallabagV1Import extends WallabagImport
         parent::__construct($em, $contentProxy, $tagsAssigner, $eventDispatcher, $logger);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'wallabag v1';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUrl()
     {
         return 'import_wallabag_v1';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return 'import.wallabag_v1.description';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function prepareEntry($entry = [])
     {
         $data = [
@@ -74,9 +62,6 @@ class WallabagV1Import extends WallabagImport
         return $data;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setEntryAsRead(array $importedEntry)
     {
         $importedEntry['is_read'] = 1;

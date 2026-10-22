@@ -49,7 +49,7 @@ class CreateConfigListener implements EventSubscriberInterface
         ];
     }
 
-    public function createConfig(UserEvent $event)
+    public function createConfig(UserEvent $event): void
     {
         $config = new Config($event->getUser());
         $config->setItemsPerPage($this->itemsOnPage);

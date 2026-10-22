@@ -13,14 +13,18 @@ use JMS\Serializer\Annotation\XmlRoot;
  * Tag.
  *
  * @XmlRoot("tag")
+ *
  * @ORM\Table(
  *     name="`tag`",
  *     options={"collate"="utf8mb4_bin", "charset"="utf8mb4"},
  *     indexes={
+ *
  *         @ORM\Index(name="tag_label", columns={"label"}, options={"lengths"={255}}),
  *     }
  * )
+ *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\TagRepository")
+ *
  * @ExclusionPolicy("all")
  */
 class Tag
@@ -29,8 +33,11 @@ class Tag
      * @var int
      *
      * @Expose
+     *
      * @ORM\Column(name="id", type="integer")
+     *
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -39,13 +46,16 @@ class Tag
      * @var string
      *
      * @Expose
+     *
      * @ORM\Column(name="label", type="text")
      */
     private $label;
 
     /**
      * @Expose
+     *
      * @Gedmo\Slug(fields={"label"}, prefix="t:")
+     *
      * @ORM\Column(length=128, unique=true)
      */
     private $slug;
@@ -104,7 +114,7 @@ class Tag
         return $this->slug;
     }
 
-    public function addEntry(Entry $entry)
+    public function addEntry(Entry $entry): void
     {
         if ($this->entries->contains($entry)) {
             return;
@@ -114,7 +124,7 @@ class Tag
         $entry->addTag($this);
     }
 
-    public function removeEntry(Entry $entry)
+    public function removeEntry(Entry $entry): void
     {
         if (!$this->entries->contains($entry)) {
             return;

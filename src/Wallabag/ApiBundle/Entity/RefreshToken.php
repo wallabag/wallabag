@@ -9,8 +9,11 @@ use FOS\UserBundle\Model\UserInterface;
 
 /**
  * @ORM\Table("oauth2_refresh_tokens")
+ *
  * @ORM\Entity
+ *
  * @ORM\AttributeOverrides({
+ *
  *     @ORM\AttributeOverride(name="token",
  *         column=@ORM\Column(
  *             name   = "token",
@@ -31,13 +34,16 @@ class RefreshToken extends BaseRefreshToken
 {
     /**
      * @ORM\Id
+     *
      * @ORM\Column(type="integer")
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="Client", inversedBy="refreshTokens")
+     *
      * @ORM\JoinColumn(nullable=false)
      *
      * @var ClientInterface
@@ -46,6 +52,7 @@ class RefreshToken extends BaseRefreshToken
 
     /**
      * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      *
      * @var UserInterface

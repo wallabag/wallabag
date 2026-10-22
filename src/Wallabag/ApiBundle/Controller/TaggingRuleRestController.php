@@ -17,6 +17,7 @@ class TaggingRuleRestController extends WallabagRestController
      * @Operation(
      *     tags={"TaggingRule"},
      *     summary="Export all tagging rules as a json file.",
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"

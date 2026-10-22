@@ -12,7 +12,7 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
     public $url = 'https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html';
 
     /**
-     * @var entry
+     * @var Entry
      */
     public $adminEntry;
 
@@ -47,7 +47,7 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
     /**
      * @group NetworkCalls
      */
-    public function testRunReloadEntryCommand()
+    public function testRunReloadEntryCommand(): void
     {
         $application = new Application($this->getTestClient()->getKernel());
 
@@ -72,7 +72,7 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
     /**
      * @group NetworkCalls
      */
-    public function testRunReloadEntryWithUsernameCommand()
+    public function testRunReloadEntryWithUsernameCommand(): void
     {
         $application = new Application($this->getTestClient()->getKernel());
 
@@ -95,7 +95,7 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
         $this->assertStringContainsString('Done', $tester->getDisplay());
     }
 
-    public function testRunReloadEntryWithoutEntryCommand()
+    public function testRunReloadEntryWithoutEntryCommand(): void
     {
         $application = new Application($this->getTestClient()->getKernel());
 

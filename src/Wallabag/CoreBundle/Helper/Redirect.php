@@ -44,8 +44,8 @@ class Redirect
             return $url;
         }
 
-        if (!$ignoreActionMarkAsRead &&
-              Config::REDIRECT_TO_HOMEPAGE === $user->getConfig()->getActionMarkAsRead()) {
+        if (!$ignoreActionMarkAsRead
+              && Config::REDIRECT_TO_HOMEPAGE === $user->getConfig()->getActionMarkAsRead()) {
             return $this->router->generate('homepage');
         }
 

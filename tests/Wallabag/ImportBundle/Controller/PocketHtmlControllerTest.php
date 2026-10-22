@@ -11,7 +11,7 @@ use Wallabag\CoreBundle\Entity\Entry;
 
 class PocketHtmlControllerTest extends WallabagCoreTestCase
 {
-    public function testImportPocketHtml()
+    public function testImportPocketHtml(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -23,7 +23,7 @@ class PocketHtmlControllerTest extends WallabagCoreTestCase
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportPocketHtmlWithRabbitEnabled()
+    public function testImportPocketHtmlWithRabbitEnabled(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -39,7 +39,7 @@ class PocketHtmlControllerTest extends WallabagCoreTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportPocketHtmlBadFile()
+    public function testImportPocketHtmlBadFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -56,7 +56,7 @@ class PocketHtmlControllerTest extends WallabagCoreTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportPocketHtmlWithRedisEnabled()
+    public function testImportPocketHtmlWithRedisEnabled(): void
     {
         $this->checkRedis();
         $this->logInAs('admin');
@@ -91,7 +91,7 @@ class PocketHtmlControllerTest extends WallabagCoreTestCase
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportWallabagWithPocketHtmlFile()
+    public function testImportWallabagWithPocketHtmlFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -142,7 +142,7 @@ class PocketHtmlControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getLanguage(), 'Language for 20minutes.fr is ok');
     }
 
-    public function testImportWallabagWithEmptyFile()
+    public function testImportWallabagWithEmptyFile(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

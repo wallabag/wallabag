@@ -28,7 +28,7 @@ class InstapaperImportTest extends TestCase
     protected $tagsAssigner;
     protected $uow;
 
-    public function testInit()
+    public function testInit(): void
     {
         $instapaperImport = $this->getInstapaperImport();
 
@@ -37,7 +37,7 @@ class InstapaperImportTest extends TestCase
         $this->assertSame('import.instapaper.description', $instapaperImport->getDescription());
     }
 
-    public function testImport()
+    public function testImport(): void
     {
         $instapaperImport = $this->getInstapaperImport(false, 4);
         $instapaperImport->setFilepath(__DIR__ . '/../fixtures/instapaper-export.csv');
@@ -70,7 +70,7 @@ class InstapaperImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 4, 'queued' => 0], $instapaperImport->getSummary());
     }
 
-    public function testImportAndMarkAllAsRead()
+    public function testImportAndMarkAllAsRead(): void
     {
         $instapaperImport = $this->getInstapaperImport(false, 1);
         $instapaperImport->setFilepath(__DIR__ . '/../fixtures/instapaper-export.csv');
@@ -97,7 +97,7 @@ class InstapaperImportTest extends TestCase
         $this->em
             ->expects($this->once())
             ->method('persist')
-            ->with($this->callback(function ($persistedEntry) {
+            ->with($this->callback(static function ($persistedEntry) {
                 return (bool) $persistedEntry->isArchived();
             }));
 
@@ -108,7 +108,7 @@ class InstapaperImportTest extends TestCase
         $this->assertSame(['skipped' => 3, 'imported' => 1, 'queued' => 0], $instapaperImport->getSummary());
     }
 
-    public function testImportWithRabbit()
+    public function testImportWithRabbit(): void
     {
         $instapaperImport = $this->getInstapaperImport();
         $instapaperImport->setFilepath(__DIR__ . '/../fixtures/instapaper-export.csv');
@@ -148,7 +148,7 @@ class InstapaperImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 4], $instapaperImport->getSummary());
     }
 
-    public function testImportWithRedis()
+    public function testImportWithRedis(): void
     {
         $instapaperImport = $this->getInstapaperImport();
         $instapaperImport->setFilepath(__DIR__ . '/../fixtures/instapaper-export.csv');
@@ -188,7 +188,7 @@ class InstapaperImportTest extends TestCase
         $this->assertNotEmpty($redisMock->lpop('instapaper'));
     }
 
-    public function testImportBadFile()
+    public function testImportBadFile(): void
     {
         $instapaperImport = $this->getInstapaperImport();
         $instapaperImport->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.jsonx');
@@ -202,7 +202,7 @@ class InstapaperImportTest extends TestCase
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    public function testImportUserNotDefined()
+    public function testImportUserNotDefined(): void
     {
         $instapaperImport = $this->getInstapaperImport(true);
         $instapaperImport->setFilepath(__DIR__ . '/../fixtures/instapaper-export.csv');

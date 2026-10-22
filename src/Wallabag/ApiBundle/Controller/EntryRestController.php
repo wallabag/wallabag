@@ -38,45 +38,56 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Check if an entry exist by url.",
+     *
      *     @OA\Parameter(
      *         name="return_id",
      *         in="query",
      *         description="Set 1 if you want to retrieve ID in case entry(ies) exists, 0 by default",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="url",
      *         in="query",
      *         description="DEPRECATED, use hashed_url instead. An url",
      *         required=true,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Parameter(
      *         name="urls",
      *         in="query",
      *         description="DEPRECATED, use hashed_urls instead. An array of urls (?urls[]=http...&urls[]=http...)",
      *         required=false,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Parameter(
      *         name="hashed_url",
      *         in="query",
      *         description="Hashed url using SHA1 to check if it exists. A hashed url",
      *         required=false,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Parameter(
      *         name="hashed_urls",
      *         in="query",
      *         description="An array of hashed urls using SHA1 to check if they exist. An array of hashed urls (?hashed_urls[]=xxx...&hashed_urls[]=xxx...)",
      *         required=false,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -131,7 +142,7 @@ class EntryRestController extends WallabagRestController
         }
 
         if (false === $returnId) {
-            $results = array_map(function ($v) {
+            $results = array_map(static function ($v) {
                 return null !== $v;
             }, $results);
         }
@@ -153,132 +164,157 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Retrieve all entries. It could be filtered by many options.",
+     *
      *     @OA\Parameter(
      *         name="archive",
      *         in="query",
      *         description="filter by archived status. all entries by default.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="starred",
      *         in="query",
      *         description="filter by starred status. all entries by default",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="sort",
      *         in="query",
      *         description="sort entries by date.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string",
      *             enum={"created", "updated", "archived"},
      *             default="created"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="order",
      *         in="query",
      *         description="order of sort.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string",
      *             enum={"asc", "desc"},
      *             default="desc"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="page",
      *         in="query",
      *         description="what page you want.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             default=1
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="perPage",
      *         in="query",
      *         description="results per page.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             default=30
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="tags",
      *         in="query",
      *         description="a comma-seperated list of tags url encoded. Will returns entries that matches ALL tags.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string",
      *             example="api,rest"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="since",
      *         in="query",
      *         description="The timestamp since when you want entries updated.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             default=0
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="public",
      *         in="query",
      *         description="filter by entries with a public link. all entries by default",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="detail",
      *         in="query",
      *         description="include content field if 'full'. 'full' by default for backward compatibility.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string",
      *             enum={"metadata", "full"},
      *             default="full"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="domain_name",
      *         in="query",
      *         description="filter entries with the given domain name",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string",
      *             example="example.com",
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="annotations",
      *         in="query",
      *         description="filter by entries with annotations. Use 1 for entries with annotations, 0 for entries without annotations. All entries by default",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"}
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -359,16 +395,19 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Retrieve a single entry.",
+     *
      *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             pattern="\w+",
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -393,26 +432,31 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Retrieve a single entry as a predefined format.",
+     *
      *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             pattern="\w+",
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="_format",
      *         in="path",
      *         description="",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="string",
      *             enum={"xml", "json", "txt", "csv", "pdf", "epub", "mobi"},
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -441,13 +485,16 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Handles an entries list and delete URL.",
+     *
      *     @OA\Parameter(
      *         name="urls",
      *         in="query",
      *         description="Urls (as an array) to delete. A JSON array of urls [{'url': 'http://...'}, {'url': 'http://...'}]",
      *         required=true,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -499,13 +546,16 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Handles an entries list and create URL.",
+     *
      *     @OA\Parameter(
      *         name="urls",
      *         in="query",
      *         description="Urls (as an array) to create. A JSON array of urls ['http://...', 'http://...']",
      *         required=true,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -571,84 +621,101 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Create an entry.",
+     *
      *     @OA\Parameter(
      *         name="url",
      *         in="query",
      *         description="Url for the entry.",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="string",
      *             example="http://www.test.com/article.html"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="title",
      *         in="query",
      *         description="Optional, we'll get the title from the page.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string",
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="tags",
      *         in="query",
      *         description="a comma-separated list of tags.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string",
      *             example="tag1,tag2,tag3"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="archive",
      *         in="query",
      *         description="entry already archived",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="starred",
      *         in="query",
      *         description="entry already starred",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="content",
      *         in="query",
      *         description="Content of the entry",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="language",
      *         in="query",
      *         description="Language of the entry",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="preview_picture",
      *         in="query",
      *         description="Preview picture of the entry",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="published_at",
      *         in="query",
@@ -660,37 +727,44 @@ class EntryRestController extends WallabagRestController
      *             format="YYYY-MM-DDTHH:II:SS+TZ or a timestamp (integer)",
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="authors",
      *         in="query",
      *         description="Authors of the entry",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string",
      *             example="Name Firstname,author2,author3"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="public",
      *         in="query",
      *         description="will generate a public link for the entry",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="origin_url",
      *         in="query",
      *         description="Origin url for the entry (from where you found it).",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string",
      *             example="http://www.test.com/article.html"
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -788,117 +862,142 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Change several properties of an entry.",
+     *
      *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             pattern="\w+",
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="title",
      *         in="query",
      *         description="",
      *         required=false,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Parameter(
      *         name="tags",
      *         in="query",
      *         description="a comma-separated list of tags.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string",
      *             example="tag1,tag2,tag3",
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="archive",
      *         in="query",
      *         description="archived the entry.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="starred",
      *         in="query",
      *         description="starred the entry.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="content",
      *         in="query",
      *         description="Content of the entry",
      *         required=false,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Parameter(
      *         name="language",
      *         in="query",
      *         description="Language of the entry",
      *         required=false,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Parameter(
      *         name="preview_picture",
      *         in="query",
      *         description="Preview picture of the entry",
      *         required=false,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Parameter(
      *         name="published_at",
      *         in="query",
      *         description="Published date of the entry",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="datetime|integer",
      *             format="YYYY-MM-DDTHH:II:SS+TZ or a timestamp",
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="authors",
      *         in="query",
      *         description="Authors of the entry",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string",
      *             example="Name Firstname,author2,author3",
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="public",
      *         in="query",
      *         description="will generate a public link for the entry",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="origin_url",
      *         in="query",
      *         description="Origin url for the entry (from where you found it).",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string",
      *             example="http://www.test.com/article.html",
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -1006,16 +1105,19 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Reload an entry.",
+     *
      *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             pattern="\w+",
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -1062,17 +1164,20 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Delete permanently an entry.",
+     *
      *     @OA\Parameter(
      *         name="expect",
      *         in="query",
      *         description="Only returns the id instead of the deleted entry's full entity if 'id' is specified.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string",
      *             enum={"id", "entry"},
      *             default="entry"
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -1087,7 +1192,7 @@ class EntryRestController extends WallabagRestController
     {
         $expect = $request->query->get('expect', 'entry');
         if (!\in_array($expect, ['id', 'entry'], true)) {
-            throw new BadRequestHttpException(sprintf("expect: 'id' or 'entry' expected, %s given", $expect));
+            throw new BadRequestHttpException(\sprintf("expect: 'id' or 'entry' expected, %s given", $expect));
         }
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
@@ -1116,16 +1221,19 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Retrieve all tags for an entry.",
+     *
      *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             pattern="\w+",
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -1150,26 +1258,31 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Add one or more tags to an entry.",
+     *
      *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             pattern="\w+",
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="tags",
      *         in="query",
      *         description="a comma-separated list of tags.",
      *         required=false,
+     *
      *         @OA\Schema(
      *             type="string",
      *             example="tag1,tag2,tag3",
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -1202,26 +1315,31 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Permanently remove one tag for an entry.",
+     *
      *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             pattern="\w+",
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="tag",
      *         in="path",
      *         description="The tag ID",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             pattern="\w+",
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -1251,13 +1369,16 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Handles an entries list delete tags from them.",
+     *
      *     @OA\Parameter(
      *         name="list",
      *         in="query",
      *         description="Urls (as an array) to handle. A JSON array of urls [{'url': 'http://...','tags': 'tag1, tag2'}, {'url': 'http://...','tags': 'tag1, tag2'}]",
      *         required=true,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -1318,13 +1439,16 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Handles an entries list and add tags to them.",
+     *
      *     @OA\Parameter(
      *         name="list",
      *         in="query",
      *         description="Urls (as an array) to handle. A JSON array of urls [{'url': 'http://...','tags': 'tag1, tag2'}, {'url': 'http://...','tags': 'tag1, tag2'}]",
      *         required=true,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"

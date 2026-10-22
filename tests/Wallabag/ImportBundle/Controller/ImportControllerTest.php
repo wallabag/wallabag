@@ -6,7 +6,7 @@ use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 
 class ImportControllerTest extends WallabagCoreTestCase
 {
-    public function testLogin()
+    public function testLogin(): void
     {
         $client = $this->getTestClient();
 
@@ -16,7 +16,7 @@ class ImportControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('login', $client->getResponse()->headers->get('location'));
     }
 
-    public function testImportList()
+    public function testImportList(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();

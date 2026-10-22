@@ -7,7 +7,7 @@ use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
 
 class UserRestControllerTest extends WallabagApiTestCase
 {
-    public function testGetUser()
+    public function testGetUser(): void
     {
         $this->client->request('GET', '/api/user.json');
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -28,7 +28,7 @@ class UserRestControllerTest extends WallabagApiTestCase
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
-    public function testGetUserWithoutAuthentication()
+    public function testGetUserWithoutAuthentication(): void
     {
         $client = static::createClient();
         $client->request('GET', '/api/user.json');
@@ -44,7 +44,7 @@ class UserRestControllerTest extends WallabagApiTestCase
         $this->assertSame('application/json', $client->getResponse()->headers->get('Content-Type'));
     }
 
-    public function testCreateNewUser()
+    public function testCreateNewUser(): void
     {
         $this->client->getContainer()->get(Config::class)->set('api_user_registration', 1);
         $this->client->request('PUT', '/api/user.json', [
@@ -77,7 +77,7 @@ class UserRestControllerTest extends WallabagApiTestCase
         $this->client->getContainer()->get(Config::class)->set('api_user_registration', 0);
     }
 
-    public function testCreateNewUserWithoutAuthentication()
+    public function testCreateNewUserWithoutAuthentication(): void
     {
         // create a new client instead of using $this->client to be sure client isn't authenticated
         $client = static::createClient();
@@ -113,7 +113,7 @@ class UserRestControllerTest extends WallabagApiTestCase
         $client->getContainer()->get(Config::class)->set('api_user_registration', 0);
     }
 
-    public function testCreateNewUserWithExistingEmail()
+    public function testCreateNewUserWithExistingEmail(): void
     {
         $client = static::createClient();
         $client->getContainer()->get(Config::class)->set('api_user_registration', 1);
@@ -142,7 +142,7 @@ class UserRestControllerTest extends WallabagApiTestCase
         $client->getContainer()->get(Config::class)->set('api_user_registration', 0);
     }
 
-    public function testCreateNewUserWithTooShortPassword()
+    public function testCreateNewUserWithTooShortPassword(): void
     {
         $client = static::createClient();
         $client->getContainer()->get(Config::class)->set('api_user_registration', 1);
@@ -166,7 +166,7 @@ class UserRestControllerTest extends WallabagApiTestCase
         $client->getContainer()->get(Config::class)->set('api_user_registration', 0);
     }
 
-    public function testCreateNewUserWhenRegistrationIsDisabled()
+    public function testCreateNewUserWhenRegistrationIsDisabled(): void
     {
         $client = static::createClient();
         $client->request('PUT', '/api/user.json', [

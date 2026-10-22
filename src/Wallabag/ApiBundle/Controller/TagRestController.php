@@ -20,6 +20,7 @@ class TagRestController extends WallabagRestController
      * @Operation(
      *     tags={"Tags"},
      *     summary="Retrieve all tags.",
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -47,16 +48,19 @@ class TagRestController extends WallabagRestController
      * @Operation(
      *     tags={"Tags"},
      *     summary="Permanently remove one tag from every entry by passing the Tag label.",
+     *
      *     @OA\Parameter(
      *         name="tag",
      *         in="query",
      *         description="Tag as a string",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="string",
      *             pattern="\w+",
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -95,16 +99,19 @@ class TagRestController extends WallabagRestController
      * @Operation(
      *     tags={"Tags"},
      *     summary="Permanently remove some tags from every entry.",
+     *
      *     @OA\Parameter(
      *         name="tags",
      *         in="query",
      *         description="Tags as strings (comma splitted)",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="string",
      *             example="tag1,tag2",
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -142,16 +149,19 @@ class TagRestController extends WallabagRestController
      * @Operation(
      *     tags={"Tags"},
      *     summary="Permanently remove one tag from every entry by passing the Tag ID.",
+     *
      *     @OA\Parameter(
      *         name="tag",
      *         in="path",
      *         description="The tag",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             pattern="\w+",
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -186,7 +196,7 @@ class TagRestController extends WallabagRestController
      *
      * @param Tag|array $tags
      */
-    private function cleanOrphanTag($tags)
+    private function cleanOrphanTag($tags): void
     {
         if (!\is_array($tags)) {
             $tags = [$tags];

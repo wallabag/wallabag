@@ -11,7 +11,7 @@ use Wallabag\UserBundle\Entity\User;
 
 class ShowUserCommandTest extends WallabagCoreTestCase
 {
-    public function testRunShowUserCommandWithoutUsername()
+    public function testRunShowUserCommandWithoutUsername(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments');
@@ -24,7 +24,7 @@ class ShowUserCommandTest extends WallabagCoreTestCase
         $tester->execute([]);
     }
 
-    public function testRunShowUserCommandWithBadUsername()
+    public function testRunShowUserCommandWithBadUsername(): void
     {
         $application = new Application($this->getTestClient()->getKernel());
 
@@ -38,7 +38,7 @@ class ShowUserCommandTest extends WallabagCoreTestCase
         $this->assertStringContainsString('User "unknown" not found', $tester->getDisplay());
     }
 
-    public function testRunShowUserCommandForUser()
+    public function testRunShowUserCommandForUser(): void
     {
         $application = new Application($this->getTestClient()->getKernel());
 
@@ -56,7 +56,7 @@ class ShowUserCommandTest extends WallabagCoreTestCase
         $this->assertStringContainsString('2FA (OTP) activated', $tester->getDisplay());
     }
 
-    public function testShowUser()
+    public function testShowUser(): void
     {
         $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);

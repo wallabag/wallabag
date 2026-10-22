@@ -23,8 +23,11 @@ use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
  * User.
  *
  * @XmlRoot("user")
+ *
  * @ORM\Entity(repositoryClass="Wallabag\UserBundle\Repository\UserRepository")
+ *
  * @ORM\Table(name="`user`")
+ *
  * @ORM\HasLifecycleCallbacks()
  *
  * @UniqueEntity("email")
@@ -39,7 +42,9 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
+     *
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      *
      * @OA\Property(
@@ -156,6 +161,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      * )
      *
      * @Groups({"user_api_with_client"})
+     *
      * @Accessor(getter="getFirstClient")
      */
     protected $default_client;
@@ -252,11 +258,9 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     /**
      * Set config.
      *
-     * @param Config $config
-     *
      * @return User
      */
-    public function setConfig(Config $config = null)
+    public function setConfig(?Config $config = null)
     {
         $this->config = $config;
 
@@ -284,7 +288,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     /**
      * @param bool $emailTwoFactor
      */
-    public function setEmailTwoFactor($emailTwoFactor)
+    public function setEmailTwoFactor($emailTwoFactor): void
     {
         $this->emailTwoFactor = $emailTwoFactor;
     }
@@ -297,71 +301,47 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
         return $this->isGoogleAuthenticatorEnabled();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isEmailAuthEnabled(): bool
     {
         return $this->emailTwoFactor;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEmailAuthCode(): string
     {
         return $this->authCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEmailAuthCode(string $authCode): void
     {
         $this->authCode = $authCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEmailAuthRecipient(): string
     {
         return $this->email;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isGoogleAuthenticatorEnabled(): bool
     {
         return $this->googleAuthenticatorSecret ? true : false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getGoogleAuthenticatorUsername(): string
     {
         return $this->username;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getGoogleAuthenticatorSecret(): string
     {
         return $this->googleAuthenticatorSecret;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setGoogleAuthenticatorSecret(?string $googleAuthenticatorSecret): void
     {
         $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
     }
 
-    public function setBackupCodes(array $codes = null)
+    public function setBackupCodes(?array $codes = null): void
     {
         $this->backupCodes = $codes;
     }
@@ -371,17 +351,11 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
         return $this->backupCodes;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isBackupCode(string $code): bool
     {
         return false === $this->findBackupCode($code) ? false : true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function invalidateBackupCode(string $code): void
     {
         $key = $this->findBackupCode($code);

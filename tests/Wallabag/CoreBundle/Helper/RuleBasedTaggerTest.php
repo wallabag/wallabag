@@ -38,7 +38,7 @@ class RuleBasedTaggerTest extends TestCase
         $this->tagger = new RuleBasedTagger($this->rulerz, $this->tagRepository, $this->entryRepository, $this->logger);
     }
 
-    public function testTagWithNoRule()
+    public function testTagWithNoRule(): void
     {
         $entry = new Entry($this->getUser());
 
@@ -49,7 +49,7 @@ class RuleBasedTaggerTest extends TestCase
         $this->assertCount(0, $records);
     }
 
-    public function testTagWithNoMatchingRule()
+    public function testTagWithNoMatchingRule(): void
     {
         $taggingRule = $this->getTaggingRule('rule as string', ['foo', 'bar']);
         $user = $this->getUser([$taggingRule]);
@@ -68,7 +68,7 @@ class RuleBasedTaggerTest extends TestCase
         $this->assertCount(0, $records);
     }
 
-    public function testTagWithAMatchingRule()
+    public function testTagWithAMatchingRule(): void
     {
         $taggingRule = $this->getTaggingRule('rule as string', ['foo', 'bar']);
         $user = $this->getUser([$taggingRule]);
@@ -92,7 +92,7 @@ class RuleBasedTaggerTest extends TestCase
         $this->assertCount(1, $records);
     }
 
-    public function testTagWithAMixOfMatchingRules()
+    public function testTagWithAMixOfMatchingRules(): void
     {
         $taggingRule = $this->getTaggingRule('bla bla', ['hey']);
         $otherTaggingRule = $this->getTaggingRule('rule as string', ['foo']);
@@ -114,7 +114,7 @@ class RuleBasedTaggerTest extends TestCase
         $this->assertCount(1, $records);
     }
 
-    public function testWhenTheTagExists()
+    public function testWhenTheTagExists(): void
     {
         $taggingRule = $this->getTaggingRule('rule as string', ['foo']);
         $user = $this->getUser([$taggingRule]);
@@ -144,7 +144,7 @@ class RuleBasedTaggerTest extends TestCase
         $this->assertCount(1, $records);
     }
 
-    public function testWithMixedCaseTag()
+    public function testWithMixedCaseTag(): void
     {
         $taggingRule = $this->getTaggingRule('rule as string', ['Foo']);
         $user = $this->getUser([$taggingRule]);
@@ -175,7 +175,7 @@ class RuleBasedTaggerTest extends TestCase
         $this->assertCount(1, $records);
     }
 
-    public function testSameTagWithDifferentfMatchingRules()
+    public function testSameTagWithDifferentfMatchingRules(): void
     {
         $taggingRule = $this->getTaggingRule('bla bla', ['hey']);
         $otherTaggingRule = $this->getTaggingRule('rule as string', ['hey']);
@@ -197,7 +197,7 @@ class RuleBasedTaggerTest extends TestCase
         $this->assertCount(2, $records);
     }
 
-    public function testTagAllEntriesForAUser()
+    public function testTagAllEntriesForAUser(): void
     {
         $taggingRule = $this->getTaggingRule('bla bla', ['hey']);
 

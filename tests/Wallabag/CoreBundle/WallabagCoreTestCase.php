@@ -18,7 +18,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
     /**
      * @var KernelBrowser|null
      */
-    private $client = null;
+    private $client;
 
     protected function setUp(): void
     {
@@ -41,7 +41,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
         return $this->client;
     }
 
-    public function resetDatabase(KernelBrowser $client)
+    public function resetDatabase(KernelBrowser $client): void
     {
         $application = new Application($client->getKernel());
         $application->setAutoExit(false);
@@ -85,7 +85,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
      *
      * @param string $username User to log in
      */
-    public function logInAs($username)
+    public function logInAs($username): void
     {
         $container = $this->client->getContainer();
         $session = $container->get(SessionInterface::class);
@@ -115,7 +115,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
      *
      * @param string $username User to log in
      */
-    public function logInAsUsingHttp($username)
+    public function logInAsUsingHttp($username): void
     {
         $crawler = $this->client->request('GET', '/login');
         $form = $crawler->filter('button[type=submit]')->form();
@@ -159,7 +159,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
      * Check if Redis is installed.
      * If not, mark test as skip.
      */
-    protected function checkRedis()
+    protected function checkRedis(): void
     {
         try {
             $this->client->getContainer()->get(\Predis\Client::class)->connect();

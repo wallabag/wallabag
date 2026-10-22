@@ -11,9 +11,6 @@ use Wallabag\UserBundle\Entity\User;
 
 class IgnoreOriginUserRuleFixtures extends Fixture implements DependentFixtureInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(ObjectManager $manager): void
     {
         $rule = new IgnoreOriginUserRule();
@@ -25,9 +22,6 @@ class IgnoreOriginUserRuleFixtures extends Fixture implements DependentFixtureIn
         $manager->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDependencies()
     {
         return [

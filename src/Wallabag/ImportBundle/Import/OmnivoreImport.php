@@ -8,25 +8,16 @@ class OmnivoreImport extends AbstractImport
 {
     private $filepath;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Omnivore';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUrl()
     {
         return 'import_omnivore';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return 'import.omnivore.description';
@@ -44,9 +35,6 @@ class OmnivoreImport extends AbstractImport
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function import()
     {
         if (!$this->user) {
@@ -80,9 +68,6 @@ class OmnivoreImport extends AbstractImport
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateEntry(array $importedEntry)
     {
         if (empty($importedEntry['url'])) {
@@ -92,9 +77,6 @@ class OmnivoreImport extends AbstractImport
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function parseEntry(array $importedEntry)
     {
         $existingEntry = $this->em
@@ -148,9 +130,6 @@ class OmnivoreImport extends AbstractImport
         return $entry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setEntryAsRead(array $importedEntry)
     {
         return $importedEntry;

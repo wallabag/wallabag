@@ -12,7 +12,7 @@ use Wallabag\CoreBundle\Twig\WallabagExtension;
 
 class WallabagExtensionTest extends TestCase
 {
-    public function testRemoveWww()
+    public function testRemoveWww(): void
     {
         $entryRepository = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -41,7 +41,7 @@ class WallabagExtensionTest extends TestCase
         $this->assertSame('gist.github.com', $extension->removeWww('gist.github.com'));
     }
 
-    public function testRemoveScheme()
+    public function testRemoveScheme(): void
     {
         $entryRepository = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -70,7 +70,7 @@ class WallabagExtensionTest extends TestCase
         $this->assertSame('gist.github.com', $extension->removeScheme('https://gist.github.com'));
     }
 
-    public function testRemoveSchemeAndWww()
+    public function testRemoveSchemeAndWww(): void
     {
         $entryRepository = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()

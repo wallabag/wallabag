@@ -28,7 +28,7 @@ class DownloadImagesTest extends TestCase
     /**
      * @dataProvider dataForSuccessImage
      */
-    public function testProcessHtml($html, $url)
+    public function testProcessHtml($html, $url): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
@@ -44,7 +44,7 @@ class DownloadImagesTest extends TestCase
         $this->assertStringContainsString('http://wallabag.io/assets/images/9/b/9b0ead26/', $res);
     }
 
-    public function testProcessHtmlWithBadImage()
+    public function testProcessHtmlWithBadImage(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['content-type' => 'application/json'], ''));
@@ -72,7 +72,7 @@ class DownloadImagesTest extends TestCase
     /**
      * @dataProvider singleImage
      */
-    public function testProcessSingleImage($header, $extension)
+    public function testProcessSingleImage($header, $extension): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['content-type' => $header], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
@@ -86,7 +86,7 @@ class DownloadImagesTest extends TestCase
         $this->assertStringContainsString('/assets/images/9/b/9b0ead26/ebe60399.' . $extension, $res);
     }
 
-    public function testProcessSingleImageWithBadUrl()
+    public function testProcessSingleImageWithBadUrl(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(404, []));
@@ -100,7 +100,7 @@ class DownloadImagesTest extends TestCase
         $this->assertFalse($res, 'Image can not be found, so it will not be replaced');
     }
 
-    public function testProcessSingleImageWithBadImage()
+    public function testProcessSingleImageWithBadImage(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], ''));
@@ -114,7 +114,7 @@ class DownloadImagesTest extends TestCase
         $this->assertFalse($res, 'Image can not be loaded, so it will not be replaced');
     }
 
-    public function testProcessSingleImageFailAbsolute()
+    public function testProcessSingleImageFailAbsolute(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
@@ -128,7 +128,7 @@ class DownloadImagesTest extends TestCase
         $this->assertFalse($res, 'Absolute image can not be determined, so it will not be replaced');
     }
 
-    public function testProcessRealImage()
+    public function testProcessRealImage(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['content-type' => null], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
@@ -148,7 +148,7 @@ class DownloadImagesTest extends TestCase
         $this->assertStringContainsString('DownloadImages: Checking extension (alternative)', $logHandler->getRecords()[3]['message']);
     }
 
-    public function testProcessImageWithSrcset()
+    public function testProcessImageWithSrcset(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['content-type' => null], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
@@ -164,7 +164,7 @@ class DownloadImagesTest extends TestCase
         $this->assertStringNotContainsString('http://piketty.blog.lemonde.fr/', $res, 'Image srcset attribute were not replaced');
     }
 
-    public function testProcessImageWithTrickySrcset()
+    public function testProcessImageWithTrickySrcset(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['content-type' => null], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
@@ -184,7 +184,7 @@ class DownloadImagesTest extends TestCase
         $this->assertStringNotContainsString('f_auto,q_auto', $res, 'Image srcset attribute were not replaced');
     }
 
-    public function testProcessImageWithNumericHtmlEntitySeparator()
+    public function testProcessImageWithNumericHtmlEntitySeparator(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/jpeg'], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
@@ -201,7 +201,7 @@ class DownloadImagesTest extends TestCase
         $this->assertStringNotContainsString('https://example.com', $res, 'Image srcset attribute were not replaced');
     }
 
-    public function testProcessImageWithNullPath()
+    public function testProcessImageWithNullPath(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['content-type' => null], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
@@ -219,7 +219,7 @@ class DownloadImagesTest extends TestCase
         $this->assertFalse($res);
     }
 
-    public function testEnsureOnlyFirstOccurrenceIsReplaced()
+    public function testEnsureOnlyFirstOccurrenceIsReplaced(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
@@ -238,7 +238,7 @@ class DownloadImagesTest extends TestCase
         $this->assertSame('<img src="http://wallabag.io/assets/images/9/b/9b0ead26/6bef06fe.png" srcset="http://wallabag.io/assets/images/9/b/9b0ead26/43cc0123.png 1290w" height="573" width="860" alt="" referrerpolicy="no-referrer">', $res);
     }
 
-    public function testProcessSingleImageWithSvg()
+    public function testProcessSingleImageWithSvg(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/svg+xml'], file_get_contents(__DIR__ . '/../fixtures/modal-content.svg')));
@@ -269,7 +269,7 @@ class DownloadImagesTest extends TestCase
         $this->assertStringNotContainsString('https://tracker.example', $svg);
     }
 
-    public function testProcessSingleImageWithBadSvg()
+    public function testProcessSingleImageWithBadSvg(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/svg+xml'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
@@ -283,7 +283,7 @@ class DownloadImagesTest extends TestCase
         $this->assertFalse($res);
     }
 
-    public function testFollowRedirection()
+    public function testFollowRedirection(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(301, ['content-type' => 'image/png', 'location' => '/final-path.png']));

@@ -42,9 +42,11 @@ class WallabagRestController extends AbstractFOSRestController
      * @Operation(
      *     tags={"Information"},
      *     summary="Retrieve version number.",
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful",
+     *
      *         @OA\JsonContent(
      *             description="Version number of the application.",
      *             type="string",
@@ -71,9 +73,11 @@ class WallabagRestController extends AbstractFOSRestController
      * @Operation(
      *     tags={"Information"},
      *     summary="Retrieve information about the running wallabag application.",
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful",
+     *
      *         @Model(type=ApplicationInfo::class),
      *     )
      * )
@@ -92,7 +96,7 @@ class WallabagRestController extends AbstractFOSRestController
         return (new JsonResponse())->setJson($this->serializer->serialize($info, 'json'));
     }
 
-    protected function validateAuthentication()
+    protected function validateAuthentication(): void
     {
         if (false === $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw new AccessDeniedException();
@@ -105,7 +109,7 @@ class WallabagRestController extends AbstractFOSRestController
      *
      * @param int $requestUserId User id from the requested source
      */
-    protected function validateUserAccess($requestUserId)
+    protected function validateUserAccess($requestUserId): void
     {
         $user = $this->tokenStorage->getToken()->getUser();
         \assert($user instanceof User);
@@ -117,8 +121,6 @@ class WallabagRestController extends AbstractFOSRestController
 
     /**
      * Shortcut to send data serialized in json.
-     *
-     * @param mixed $data
      *
      * @return JsonResponse
      */

@@ -7,9 +7,6 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 class AMQPEntryConsumer extends AbstractConsumer implements ConsumerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function execute(AMQPMessage $msg)
     {
         return $this->handleMessage($msg->body);

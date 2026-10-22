@@ -78,14 +78,14 @@ class EntryController extends AbstractController
 
             if (isset($values['tags'])) {
                 $labels = array_filter(explode(',', $values['tags']),
-                    function ($v) {
+                    static function ($v) {
                         $v = trim($v);
 
                         return '' !== $v;
                     });
                 foreach ($labels as $label) {
                     $remove = false;
-                    if (0 === strpos($label, '-')) {
+                    if (str_starts_with($label, '-')) {
                         $label = substr($label, 1);
                         $remove = true;
                     }
@@ -600,6 +600,7 @@ class EntryController extends AbstractController
      * Ability to view a content publicly.
      *
      * @Route("/share/{uid}", name="share_entry", methods={"GET"}, requirements={"uid" = ".+"})
+     *
      * @Cache(maxage="25200", smaxage="25200", public=true)
      *
      * @return Response
@@ -675,7 +676,7 @@ class EntryController extends AbstractController
                 $qb = $this->entryRepository->getBuilderForAllByUser($this->getUser()->getId());
                 break;
             default:
-                throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
+                throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type));
         }
 
         $form = $this->createForm(EntryFilterType::class, [], $formOptions);
@@ -717,7 +718,7 @@ class EntryController extends AbstractController
      *
      * @param string $prefixMessage Should be the translation key: entry_saved or entry_reloaded
      */
-    private function updateEntry(Entry $entry, $prefixMessage = 'entry_saved')
+    private function updateEntry(Entry $entry, $prefixMessage = 'entry_saved'): void
     {
         $message = 'flashes.entry.notice.' . $prefixMessage;
 
@@ -746,7 +747,7 @@ class EntryController extends AbstractController
     /**
      * Check if the logged user can manage the given entry.
      */
-    private function checkUserAction(Entry $entry)
+    private function checkUserAction(Entry $entry): void
     {
         if (null === $this->getUser() || $this->getUser()->getId() !== $entry->getUser()->getId()) {
             throw $this->createAccessDeniedException('You can not access this entry.');

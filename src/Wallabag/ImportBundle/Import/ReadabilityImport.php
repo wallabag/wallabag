@@ -8,25 +8,16 @@ class ReadabilityImport extends AbstractImport
 {
     private $filepath;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Readability';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUrl()
     {
         return 'import_readability';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return 'import.readability.description';
@@ -44,9 +35,6 @@ class ReadabilityImport extends AbstractImport
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function import()
     {
         if (!$this->user) {
@@ -80,9 +68,6 @@ class ReadabilityImport extends AbstractImport
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateEntry(array $importedEntry)
     {
         if (empty($importedEntry['article__url'])) {
@@ -92,9 +77,6 @@ class ReadabilityImport extends AbstractImport
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function parseEntry(array $importedEntry)
     {
         $existingEntry = $this->em
@@ -133,9 +115,6 @@ class ReadabilityImport extends AbstractImport
         return $entry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setEntryAsRead(array $importedEntry)
     {
         $importedEntry['archive'] = 1;

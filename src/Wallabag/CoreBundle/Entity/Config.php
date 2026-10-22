@@ -12,9 +12,11 @@ use Wallabag\UserBundle\Entity\User;
  * Config.
  *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\ConfigRepository")
+ *
  * @ORM\Table(
  *     name="`config`",
  *     indexes={
+ *
  *         @ORM\Index(name="config_feed_token", columns={"feed_token"}, options={"lengths"={255}}),
  *     }
  * )
@@ -28,7 +30,9 @@ class Config
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
+     *
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      *
      * @Groups({"config_api"})
@@ -39,11 +43,13 @@ class Config
      * @var int
      *
      * @Assert\NotBlank()
+     *
      * @Assert\Range(
      *      min = 1,
      *      max = 100000,
      *      maxMessage = "validator.item_per_page_too_high"
      * )
+     *
      * @ORM\Column(name="items_per_page", type="integer", nullable=false)
      *
      * @Groups({"config_api"})
@@ -54,6 +60,7 @@ class Config
      * @var string
      *
      * @Assert\NotBlank()
+     *
      * @ORM\Column(name="language", type="string", nullable=false)
      *
      * @Groups({"config_api"})
@@ -73,6 +80,7 @@ class Config
      * @var int
      *
      * @ORM\Column(name="feed_limit", type="integer", nullable=true)
+     *
      * @Assert\Range(
      *      min = 1,
      *      max = 100000,
@@ -133,12 +141,14 @@ class Config
 
     /**
      * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\TaggingRule", mappedBy="config", cascade={"remove"})
+     *
      * @ORM\OrderBy({"id" = "ASC"})
      */
     private $taggingRules;
 
     /**
      * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\IgnoreOriginUserRule", mappedBy="config", cascade={"remove"})
+     *
      * @ORM\OrderBy({"id" = "ASC"})
      */
     private $ignoreOriginRules;
@@ -214,11 +224,9 @@ class Config
     /**
      * Set user.
      *
-     * @param User $user
-     *
      * @return Config
      */
-    public function setUser(User $user = null)
+    public function setUser(?User $user = null)
     {
         $this->user = $user;
 
@@ -371,9 +379,6 @@ class Config
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getDisplayThumbnails(): ?bool
     {
         return $this->displayThumbnails;

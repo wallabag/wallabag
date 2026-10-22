@@ -8,6 +8,7 @@ class ApplicationInfo
 {
     /**
      * @var string
+     *
      * @OA\Property(
      *      description="Name of the application.",
      *      type="string",
@@ -18,6 +19,7 @@ class ApplicationInfo
 
     /**
      * @var string
+     *
      * @OA\Property(
      *      description="Version number of the application.",
      *      type="string",
@@ -28,6 +30,7 @@ class ApplicationInfo
 
     /**
      * @var bool
+     *
      * @OA\Property(
      *      description="Indicates whether registration is allowed. See PUT /api/user.",
      *      type="boolean"

@@ -9,24 +9,12 @@ abstract class BrowserImport extends AbstractImport
 {
     protected $filepath;
 
-    /**
-     * {@inheritdoc}
-     */
     abstract public function getName();
 
-    /**
-     * {@inheritdoc}
-     */
     abstract public function getUrl();
 
-    /**
-     * {@inheritdoc}
-     */
     abstract public function getDescription();
 
-    /**
-     * {@inheritdoc}
-     */
     public function import()
     {
         if (!$this->user) {
@@ -72,9 +60,6 @@ abstract class BrowserImport extends AbstractImport
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function parseEntry(array $importedEntry)
     {
         if ((!\array_key_exists('guid', $importedEntry) || (!\array_key_exists('id', $importedEntry))) && \is_array(reset($importedEntry))) {
@@ -149,7 +134,7 @@ abstract class BrowserImport extends AbstractImport
     /**
      * Parse and insert all given entries.
      */
-    protected function parseEntries(array $entries)
+    protected function parseEntries(array $entries): void
     {
         $i = 1;
         $entryToBeFlushed = [];
@@ -198,7 +183,7 @@ abstract class BrowserImport extends AbstractImport
      * Faster parse entries for Producer.
      * We don't care to make check at this time. They'll be done by the consumer.
      */
-    protected function parseEntriesForProducer(array $entries)
+    protected function parseEntriesForProducer(array $entries): void
     {
         foreach ($entries as $importedEntry) {
             if ((array) $importedEntry !== $importedEntry) {
@@ -218,9 +203,6 @@ abstract class BrowserImport extends AbstractImport
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setEntryAsRead(array $importedEntry)
     {
         $importedEntry['is_archived'] = 1;

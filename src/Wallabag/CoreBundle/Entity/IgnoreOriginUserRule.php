@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Ignore Origin rule.
  *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\IgnoreOriginUserRuleRepository")
+ *
  * @ORM\Table(name="`ignore_origin_user_rule`")
  */
 class IgnoreOriginUserRule implements IgnoreOriginRuleInterface, RuleInterface
@@ -18,7 +19,9 @@ class IgnoreOriginUserRule implements IgnoreOriginRuleInterface, RuleInterface
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
+     *
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -27,11 +30,14 @@ class IgnoreOriginUserRule implements IgnoreOriginRuleInterface, RuleInterface
      * @var string
      *
      * @Assert\NotBlank()
+     *
      * @Assert\Length(max=255)
+     *
      * @RulerZAssert\ValidRule(
      *  allowed_variables={"host","_all"},
      *  allowed_operators={"=","~"}
      * )
+     *
      * @ORM\Column(name="rule", type="string", nullable=false)
      */
     private $rule;

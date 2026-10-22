@@ -83,7 +83,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         parent::tearDown();
     }
 
-    public function testRunInstallCommand()
+    public function testRunInstallCommand(): void
     {
         $application = new Application($this->getTestClient()->getKernel());
 
@@ -111,7 +111,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertStringContainsString('Config setup.', $tester->getDisplay());
     }
 
-    public function testRunInstallCommandWithReset()
+    public function testRunInstallCommandWithReset(): void
     {
         if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
             $this->markTestSkipped('Rollback are not properly handled for MySQL, skipping.');
@@ -144,7 +144,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertStringContainsString('Dropping database, creating database and schema, clearing the cache', $tester->getDisplay());
     }
 
-    public function testRunInstallCommandWithDatabaseRemoved()
+    public function testRunInstallCommandWithDatabaseRemoved(): void
     {
         if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
             $this->markTestSkipped('Rollback are not properly handled for MySQL, skipping.');
@@ -188,7 +188,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertStringContainsString('Creating database and schema, clearing the cache', $tester->getDisplay());
     }
 
-    public function testRunInstallCommandChooseResetSchema()
+    public function testRunInstallCommandChooseResetSchema(): void
     {
         if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
             $this->markTestSkipped('Rollback are not properly handled for MySQL, skipping.');
@@ -216,7 +216,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertStringContainsString('Dropping schema and creating schema', $tester->getDisplay());
     }
 
-    public function testRunInstallCommandChooseNothing()
+    public function testRunInstallCommandChooseNothing(): void
     {
         /*
          *  [PHPUnit\Framework\Error\Warning (2)]
@@ -258,7 +258,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertStringContainsString('Creating schema', $tester->getDisplay());
     }
 
-    public function testRunInstallCommandNoInteraction()
+    public function testRunInstallCommandNoInteraction(): void
     {
         if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
             $this->markTestSkipped('Rollback are not properly handled for MySQL, skipping.');

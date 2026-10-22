@@ -127,7 +127,7 @@ class AnnotationRepository extends ServiceEntityRepository
      *
      * @param int $userId
      */
-    public function removeAllByUserId($userId)
+    public function removeAllByUserId($userId): void
     {
         $this->getEntityManager()
             ->createQuery('DELETE FROM Wallabag\AnnotationBundle\Entity\Annotation a WHERE a.user = :userId')
@@ -137,10 +137,6 @@ class AnnotationRepository extends ServiceEntityRepository
 
     /**
      * Find all annotations related to archived entries.
-     *
-     * @param $userId
-     *
-     * @return mixed
      */
     public function findAllArchivedEntriesByUser($userId)
     {

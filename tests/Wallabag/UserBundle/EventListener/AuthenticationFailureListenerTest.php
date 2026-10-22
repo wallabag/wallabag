@@ -41,7 +41,7 @@ class AuthenticationFailureListenerTest extends TestCase
         $this->dispatcher->addSubscriber($this->listener);
     }
 
-    public function testOnAuthenticationFailure()
+    public function testOnAuthenticationFailure(): void
     {
         $token = $this->getMockBuilder(TokenInterface::class)
             ->disableOriginalConstructor()

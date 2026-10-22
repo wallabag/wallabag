@@ -22,7 +22,7 @@ class RedisWorkerCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('wallabag:import:redis-worker')
@@ -40,7 +40,7 @@ class RedisWorkerCommand extends Command
         $serviceName = $input->getArgument('serviceName');
 
         if (!$this->container->has('wallabag_import.queue.redis.' . $serviceName) || !$this->container->has('wallabag_import.consumer.redis.' . $serviceName)) {
-            throw new Exception(sprintf('No queue or consumer found for service name: "%s"', $input->getArgument('serviceName')));
+            throw new Exception(\sprintf('No queue or consumer found for service name: "%s"', $input->getArgument('serviceName')));
         }
 
         $worker = new QueueWorker(

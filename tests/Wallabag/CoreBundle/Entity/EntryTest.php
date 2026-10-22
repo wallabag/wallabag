@@ -7,7 +7,7 @@ use Wallabag\CoreBundle\Entity\Entry;
 
 class EntryTest extends WallabagCoreTestCase
 {
-    public function testGetLanguage()
+    public function testGetLanguage(): void
     {
         $this->logInAs('admin');
         $entry = new Entry($this->getLoggedInUser());

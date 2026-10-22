@@ -13,10 +13,7 @@ use Wallabag\UserBundle\Entity\User;
 
 class AnnotationFixtures extends Fixture implements DependentFixtureInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $annotation1 = new Annotation($this->getReference('admin-user', User::class));
         $annotation1->setEntry($this->getReference('entry1', Entry::class));
@@ -48,9 +45,6 @@ class AnnotationFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDependencies()
     {
         return [

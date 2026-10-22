@@ -24,16 +24,16 @@ class CleanDownloadedImagesCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('wallabag:clean-downloaded-images')
             ->setDescription('Cleans downloaded images which are no more associated to an entry')
             ->addOption(
-               'dry-run',
-               null,
-               InputOption::VALUE_NONE,
-               'Do not remove images, just dump counters'
+                'dry-run',
+                null,
+                InputOption::VALUE_NONE,
+                'Do not remove images, just dump counters'
             );
     }
 
@@ -64,7 +64,7 @@ class CleanDownloadedImagesCommand extends Command
             $existingPaths[] = $file->getFilename();
         }
 
-        $io->text(sprintf('  -> <info>%d</info> images found', \count($existingPaths)));
+        $io->text(\sprintf('  -> <info>%d</info> images found', \count($existingPaths)));
 
         $io->text('Retrieve valid folders attached to a user');
 
@@ -83,7 +83,7 @@ class CleanDownloadedImagesCommand extends Command
             $validPaths[] = explode('/', $path)[2];
         }
 
-        $io->text(sprintf('  -> <info>%d</info> folders found', \count($validPaths)));
+        $io->text(\sprintf('  -> <info>%d</info> folders found', \count($validPaths)));
 
         $deletedCount = 0;
 
@@ -102,11 +102,11 @@ class CleanDownloadedImagesCommand extends Command
 
                 $deletedCount += \count($files);
 
-                $io->text(sprintf('Deleted images in <info>%s</info>: <info>%d</info>', $existingPath, \count($files)));
+                $io->text(\sprintf('Deleted images in <info>%s</info>: <info>%d</info>', $existingPath, \count($files)));
             }
         }
 
-        $io->success(sprintf('Finished cleaning. %d deleted images', $deletedCount));
+        $io->success(\sprintf('Finished cleaning. %d deleted images', $deletedCount));
 
         return 0;
     }

@@ -8,7 +8,7 @@ use Wallabag\ImportBundle\Import\ImportCompilerPass;
 
 class WallabagImportBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 

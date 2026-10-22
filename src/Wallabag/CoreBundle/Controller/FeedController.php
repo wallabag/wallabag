@@ -34,8 +34,6 @@ class FeedController extends AbstractController
      *
      * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      *
-     * @param $page
-     *
      * @return Response
      */
     public function showUnreadFeedAction(User $user, $page)
@@ -50,8 +48,6 @@ class FeedController extends AbstractController
      *
      * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      *
-     * @param $page
-     *
      * @return Response
      */
     public function showArchiveFeedAction(User $user, $page)
@@ -65,8 +61,6 @@ class FeedController extends AbstractController
      * @Route("/feed/{username}/{token}/starred/{page}", name="starred_feed", defaults={"page"=1, "_format"="xml"})
      *
      * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
-     *
-     * @param $page
      *
      * @return Response
      */
@@ -109,7 +103,7 @@ class FeedController extends AbstractController
         ];
 
         if (!isset($sorts[$sort])) {
-            throw new BadRequestHttpException(sprintf('Sort "%s" is not available.', $sort));
+            throw new BadRequestHttpException(\sprintf('Sort "%s" is not available.', $sort));
         }
 
         $url = $this->generateUrl(
@@ -207,7 +201,7 @@ class FeedController extends AbstractController
                 $qb = $this->entryRepository->getBuilderForAllByUser($user->getId());
                 break;
             default:
-                throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
+                throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type));
         }
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
@@ -242,7 +236,7 @@ class FeedController extends AbstractController
             'version' => $this->getParameter('wallabag_core.version'),
             'updated' => $this->prepareFeedUpdatedDate($entries),
         ],
-        new Response('', 200, ['Content-Type' => 'application/atom+xml'])
+            new Response('', 200, ['Content-Type' => 'application/atom+xml'])
         );
     }
 }

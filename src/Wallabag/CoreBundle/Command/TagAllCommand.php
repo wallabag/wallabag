@@ -28,15 +28,15 @@ class TagAllCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('wallabag:tag:all')
             ->setDescription('Tag all entries using the tagging rules.')
             ->addArgument(
-               'username',
-               InputArgument::REQUIRED,
-               'User to tag entries for.'
+                'username',
+                InputArgument::REQUIRED,
+                'User to tag entries for.'
             )
         ;
     }
@@ -48,12 +48,12 @@ class TagAllCommand extends Command
         try {
             $user = $this->getUser($input->getArgument('username'));
         } catch (NoResultException $e) {
-            $io->error(sprintf('User "%s" not found.', $input->getArgument('username')));
+            $io->error(\sprintf('User "%s" not found.', $input->getArgument('username')));
 
             return 1;
         }
 
-        $io->text(sprintf('Tagging entries for user <info>%s</info>...', $user->getUserName()));
+        $io->text(\sprintf('Tagging entries for user <info>%s</info>...', $user->getUserName()));
 
         $entries = $this->ruleBasedTagger->tagAllForUser($user);
 

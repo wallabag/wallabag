@@ -17,7 +17,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
 {
     private $builder;
 
-    public function testBuildConfigExists()
+    public function testBuildConfigExists(): void
     {
         $grabyConfigBuilderMock = $this->getMockBuilder(ConfigBuilder::class)
             ->disableOriginalConstructor()
@@ -84,7 +84,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
         $this->assertCount(1, $records, 'One log was recorded');
     }
 
-    public function testBuildConfigDoesntExist()
+    public function testBuildConfigDoesntExist(): void
     {
         $grabyConfigBuilderMock = $this->getMockBuilder(ConfigBuilder::class)
             ->disableOriginalConstructor()
@@ -135,7 +135,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
         $this->assertCount(1, $records, 'One log was recorded');
     }
 
-    public function testBuildConfigWithBadExtraFields()
+    public function testBuildConfigWithBadExtraFields(): void
     {
         $grabyConfigBuilderMock = $this->getMockBuilder(ConfigBuilder::class)
             ->disableOriginalConstructor()
@@ -202,7 +202,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
         $this->assertCount(1, $records, 'One log was recorded');
     }
 
-    public function testBuildConfigUserNotDefined()
+    public function testBuildConfigUserNotDefined(): void
     {
         $grabyConfigBuilderMock = $this->getMockBuilder(ConfigBuilder::class)
             ->disableOriginalConstructor()
@@ -265,7 +265,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
     /**
      * @dataProvider dataProviderCredentials
      */
-    public function testBuildConfigWithDbAccess($host, $expectedUsername = null, $expectedPassword = null)
+    public function testBuildConfigWithDbAccess($host, $expectedUsername = null, $expectedPassword = null): void
     {
         $grabyConfigBuilderMock = $this->getMockBuilder(ConfigBuilder::class)
             ->disableOriginalConstructor()

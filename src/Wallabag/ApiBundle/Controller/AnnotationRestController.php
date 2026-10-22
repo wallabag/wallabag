@@ -18,16 +18,19 @@ class AnnotationRestController extends WallabagRestController
      * @Operation(
      *     tags={"Annotations"},
      *     summary="Retrieve annotations for an entry.",
+     *
      *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             pattern="\w+",
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -53,47 +56,58 @@ class AnnotationRestController extends WallabagRestController
      * @Operation(
      *     tags={"Annotations"},
      *     summary="Creates a new annotation.",
+     *
      *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="integer",
      *             pattern="\w+",
      *         )
      *     ),
+     *
      *     @OA\RequestBody(
+     *
      *          @OA\JsonContent(
      *              type="object",
      *              required={"text"},
+     *
      *              @OA\Property(
      *                  property="ranges",
      *                  type="array",
      *                  description="The range array for the annotation",
+     *
      *                  @OA\Items(
      *                      type="string",
      *                      pattern="\w+",
      *                  )
      *              ),
+     *
      *              @OA\Property(
      *                  property="quote",
      *                  type="array",
      *                  description="The annotated text",
+     *
      *                  @OA\Items(
      *                      type="string",
      *                  )
      *              ),
+     *
      *              @OA\Property(
      *                  property="text",
      *                  type="array",
      *                  description="Content of annotation",
+     *
      *                  @OA\Items(
      *                      type="string",
      *                  )
      *              ),
      *          )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -120,16 +134,19 @@ class AnnotationRestController extends WallabagRestController
      * @Operation(
      *     tags={"Annotations"},
      *     summary="Updates an annotation.",
+     *
      *     @OA\Parameter(
      *         name="annotation",
      *         in="path",
      *         description="The annotation ID",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="string",
      *             pattern="\w+",
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -156,16 +173,19 @@ class AnnotationRestController extends WallabagRestController
      * @Operation(
      *     tags={"Annotations"},
      *     summary="Removes an annotation.",
+     *
      *     @OA\Parameter(
      *         name="annotation",
      *         in="path",
      *         description="The annotation ID",
      *         required=true,
+     *
      *         @OA\Schema(
      *             type="string",
      *             pattern="\w+",
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"

@@ -8,25 +8,16 @@ class PocketCsvImport extends AbstractImport
 {
     protected $filepath;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Pocket CSV';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUrl()
     {
         return 'import_pocket_csv';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return 'import.pocket_csv.description';
@@ -44,9 +35,6 @@ class PocketCsvImport extends AbstractImport
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateEntry(array $importedEntry)
     {
         if (empty($importedEntry['url'])) {
@@ -104,9 +92,6 @@ class PocketCsvImport extends AbstractImport
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function parseEntry(array $importedEntry)
     {
         $existingEntry = $this->em
@@ -144,9 +129,6 @@ class PocketCsvImport extends AbstractImport
         return $entry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setEntryAsRead(array $importedEntry)
     {
         $importedEntry['is_archived'] = 'archive';

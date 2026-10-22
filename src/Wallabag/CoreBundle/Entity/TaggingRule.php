@@ -13,8 +13,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Tagging rule.
  *
  * @XmlRoot("tagging_rule")
+ *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\TaggingRuleRepository")
+ *
  * @ORM\Table(name="`tagging_rule`")
+ *
  * @ORM\Entity
  */
 class TaggingRule implements RuleInterface
@@ -23,7 +26,9 @@ class TaggingRule implements RuleInterface
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
+     *
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -32,11 +37,14 @@ class TaggingRule implements RuleInterface
      * @var string
      *
      * @Assert\NotBlank()
+     *
      * @Assert\Length(max=255)
+     *
      * @RulerZAssert\ValidRule(
      *  allowed_variables={"title", "url", "isArchived", "isStared", "content", "language", "mimetype", "readingTime", "domainName"},
      *  allowed_operators={">", "<", ">=", "<=", "=", "is", "!=", "and", "not", "or", "matches", "notmatches"}
      * )
+     *
      * @ORM\Column(name="rule", type="string", nullable=false)
      *
      * @Groups({"export_tagging_rule"})
@@ -47,6 +55,7 @@ class TaggingRule implements RuleInterface
      * @var array
      *
      * @Assert\NotBlank()
+     *
      * @ORM\Column(name="tags", type="simple_array", nullable=false)
      *
      * @Groups({"export_tagging_rule"})

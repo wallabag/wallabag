@@ -23,24 +23,12 @@ abstract class WallabagImport extends AbstractImport
         '',
     ];
 
-    /**
-     * {@inheritdoc}
-     */
     abstract public function getName();
 
-    /**
-     * {@inheritdoc}
-     */
     abstract public function getUrl();
 
-    /**
-     * {@inheritdoc}
-     */
     abstract public function getDescription();
 
-    /**
-     * {@inheritdoc}
-     */
     public function import()
     {
         if (!$this->user) {
@@ -86,9 +74,6 @@ abstract class WallabagImport extends AbstractImport
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateEntry(array $importedEntry)
     {
         if (empty($importedEntry['url'])) {
@@ -98,9 +83,6 @@ abstract class WallabagImport extends AbstractImport
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function parseEntry(array $importedEntry)
     {
         $existingEntry = $this->em

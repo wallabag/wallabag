@@ -8,7 +8,7 @@ use Wallabag\UserBundle\Entity\User;
 
 class SecurityControllerTest extends WallabagCoreTestCase
 {
-    public function testLoginWithEmail()
+    public function testLoginWithEmail(): void
     {
         $this->logInAsUsingHttp('bigboss@wallabag.org');
         $client = $this->getTestClient();
@@ -18,7 +18,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('config.form_feed.description', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
-    public function testLoginWithout2Factor()
+    public function testLoginWithout2Factor(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -28,7 +28,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('config.form_feed.description', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
-    public function testLoginWith2FactorEmail()
+    public function testLoginWith2FactorEmail(): void
     {
         $client = $this->getTestClient();
 
@@ -55,7 +55,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $em->flush();
     }
 
-    public function testLoginWith2FactorGoogle()
+    public function testLoginWith2FactorGoogle(): void
     {
         $client = $this->getTestClient();
 
@@ -82,7 +82,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $em->flush();
     }
 
-    public function testEnabledRegistration()
+    public function testEnabledRegistration(): void
     {
         $client = $this->getTestClient();
 

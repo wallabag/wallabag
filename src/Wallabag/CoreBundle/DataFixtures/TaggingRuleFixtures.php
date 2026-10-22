@@ -10,9 +10,6 @@ use Wallabag\CoreBundle\Entity\TaggingRule;
 
 class TaggingRuleFixtures extends Fixture implements DependentFixtureInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(ObjectManager $manager): void
     {
         $tr1 = new TaggingRule();
@@ -61,9 +58,6 @@ class TaggingRuleFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDependencies()
     {
         return [

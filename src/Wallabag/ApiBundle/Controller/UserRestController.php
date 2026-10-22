@@ -27,9 +27,11 @@ class UserRestController extends WallabagRestController
      * @Operation(
      *     tags={"User"},
      *     summary="Retrieve current logged in user informations.",
+     *
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful",
+     *
      *         @Model(type=User::class, groups={"user_api"}))
      *     )
      * )
@@ -51,10 +53,13 @@ class UserRestController extends WallabagRestController
      * @Operation(
      *     tags={"User"},
      *     summary="Register an user and create a client.",
+     *
      *     @OA\RequestBody(
+     *
      *          @OA\JsonContent(
      *              type="object",
      *              required={"username", "password", "email"},
+     *
      *              @OA\Property(
      *                  property="username",
      *                  description="The user's username",
@@ -81,11 +86,14 @@ class UserRestController extends WallabagRestController
      *              ),
      *          )
      *     ),
+     *
      *     @OA\Response(
      *         response="201",
      *         description="Returned when successful",
+     *
      *         @Model(type=User::class, groups={"user_api_with_client"})),
      *     ),
+     *
      *     @OA\Response(
      *         response="403",
      *         description="Server doesn't allow registrations"

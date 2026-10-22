@@ -39,7 +39,7 @@ class TablePrefixSubscriberTest extends TestCase
     /**
      * @dataProvider dataForPrefix
      */
-    public function testPrefix($prefix, $entityName, $tableName, $tableNameExpected, $finalTableName, $finalTableNameQuoted, $platform)
+    public function testPrefix($prefix, $entityName, $tableName, $tableNameExpected, $finalTableName, $finalTableNameQuoted, $platform): void
     {
         $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
@@ -63,7 +63,7 @@ class TablePrefixSubscriberTest extends TestCase
     /**
      * @dataProvider dataForPrefix
      */
-    public function testSubscribedEvents($prefix, $entityName, $tableName, $tableNameExpected, $finalTableName, $finalTableNameQuoted, $platform)
+    public function testSubscribedEvents($prefix, $entityName, $tableName, $tableNameExpected, $finalTableName, $finalTableNameQuoted, $platform): void
     {
         $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
@@ -85,7 +85,7 @@ class TablePrefixSubscriberTest extends TestCase
         $this->assertSame($finalTableNameQuoted, $metaDataEvent->getClassMetadata()->getQuotedTableName($platform));
     }
 
-    public function testPrefixManyToMany()
+    public function testPrefixManyToMany(): void
     {
         $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()

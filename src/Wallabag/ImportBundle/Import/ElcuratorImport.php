@@ -4,33 +4,21 @@ namespace Wallabag\ImportBundle\Import;
 
 class ElcuratorImport extends WallabagImport
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'elcurator';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUrl()
     {
         return 'import_elcurator';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return 'import.elcurator.description';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function prepareEntry($entry = [])
     {
         return [
@@ -42,9 +30,6 @@ class ElcuratorImport extends WallabagImport
         ] + $entry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setEntryAsRead(array $importedEntry)
     {
         $importedEntry['is_archived'] = 1;

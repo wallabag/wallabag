@@ -11,7 +11,7 @@ use Wallabag\UserBundle\Entity\User;
 
 class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
 {
-    public function testRunGenerateUrlHashesCommand()
+    public function testRunGenerateUrlHashesCommand(): void
     {
         $application = new Application($this->getTestClient()->getKernel());
 
@@ -24,7 +24,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
         $this->assertStringContainsString('Finished generated hashed urls', $tester->getDisplay());
     }
 
-    public function testRunGenerateUrlHashesCommandWithBadUsername()
+    public function testRunGenerateUrlHashesCommandWithBadUsername(): void
     {
         $application = new Application($this->getTestClient()->getKernel());
 
@@ -38,7 +38,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
         $this->assertStringContainsString('User "unknown" not found', $tester->getDisplay());
     }
 
-    public function testRunGenerateUrlHashesCommandForUser()
+    public function testRunGenerateUrlHashesCommandForUser(): void
     {
         $application = new Application($this->getTestClient()->getKernel());
 
@@ -52,7 +52,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
         $this->assertStringContainsString('Generated hashed urls for user: admin', $tester->getDisplay());
     }
 
-    public function testGenerateUrls()
+    public function testGenerateUrls(): void
     {
         $url = 'http://www.lemonde.fr/sport/visuel/2017/05/05/rondelle-prison-blanchissage-comprendre-le-hockey-sur-glace_5122587_3242.html';
         $client = $this->getTestClient();

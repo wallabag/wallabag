@@ -32,7 +32,7 @@ class PocketImportTest extends TestCase
     protected $tagsAssigner;
     protected $uow;
 
-    public function testInit()
+    public function testInit(): void
     {
         $pocketImport = $this->getPocketImport();
 
@@ -41,7 +41,7 @@ class PocketImportTest extends TestCase
         $this->assertSame('import.pocket.description', $pocketImport->getDescription());
     }
 
-    public function testOAuthRequest()
+    public function testOAuthRequest(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['code' => 'wunderbar_code'])));
@@ -54,7 +54,7 @@ class PocketImportTest extends TestCase
         $this->assertSame('wunderbar_code', $code);
     }
 
-    public function testOAuthRequestBadResponse()
+    public function testOAuthRequestBadResponse(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(403));
@@ -71,7 +71,7 @@ class PocketImportTest extends TestCase
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    public function testOAuthAuthorize()
+    public function testOAuthAuthorize(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
@@ -85,7 +85,7 @@ class PocketImportTest extends TestCase
         $this->assertSame('wunderbar_token', $pocketImport->getAccessToken());
     }
 
-    public function testOAuthAuthorizeBadResponse()
+    public function testOAuthAuthorizeBadResponse(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(403));
@@ -105,7 +105,7 @@ class PocketImportTest extends TestCase
     /**
      * Will sample results from https://getpocket.com/developer/docs/v3/retrieve.
      */
-    public function testImport()
+    public function testImport(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
@@ -190,7 +190,7 @@ class PocketImportTest extends TestCase
                 }
             }
 JSON
-));
+        ));
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 1);
 
@@ -210,7 +210,7 @@ JSON
         $this->em
             ->expects($this->any())
             ->method('persist')
-            ->with($this->callback(function ($persistedEntry) {
+            ->with($this->callback(static function ($persistedEntry) {
                 return (bool) $persistedEntry->isArchived() && (bool) $persistedEntry->isStarred();
             }));
 
@@ -233,7 +233,7 @@ JSON
     /**
      * Will sample results from https://getpocket.com/developer/docs/v3/retrieve.
      */
-    public function testImportAndMarkAllAsRead()
+    public function testImportAndMarkAllAsRead(): void
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
@@ -280,7 +280,7 @@ JSON
                 }
             }
 JSON
-));
+        ));
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 2);
 
@@ -301,7 +301,7 @@ JSON
         $this->em
             ->expects($this->any())
             ->method('persist')
-            ->with($this->callback(function ($persistedEntry) {
+            ->with($this->callback(static function ($persistedEntry) {
                 return (bool) $persistedEntry->isArchived();
             }));
 
@@ -324,7 +324,7 @@ JSON
     /**
      * Will sample results from https://getpocket.com/developer/docs/v3/retrieve.
      */
-    public function testImportWithRabbit()
+    public function testImportWithRabbit(): void
     {
         $httpMockClient = new HttpMockClient();
 
@@ -407,7 +407,7 @@ JSON
     /**
      * Will sample results from https://getpocket.com/developer/docs/v3/retrieve.
      */
-    public function testImportWithRedis()
+    public function testImportWithRedis(): void
     {
         $httpMockClient = new HttpMockClient();
 
@@ -482,7 +482,7 @@ JSON
         $this->assertNotEmpty($redisMock->lpop('pocket'));
     }
 
-    public function testImportBadResponse()
+    public function testImportBadResponse(): void
     {
         $httpMockClient = new HttpMockClient();
 
@@ -502,7 +502,7 @@ JSON
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
-    public function testImportWithExceptionFromGraby()
+    public function testImportWithExceptionFromGraby(): void
     {
         $httpMockClient = new HttpMockClient();
 
