@@ -82,6 +82,7 @@ class ProductionContextTest(unittest.TestCase):
         self.assertIn('php:${PHP_VERSION}-apache-trixie@sha256:', dockerfile)
         self.assertIn('com.jonniesweb.wallabag.php.version="${PHP_VERSION}"', dockerfile)
         self.assertIn('test "$(php -r \'echo PHP_VERSION;\')" = "$PHP_VERSION"', dockerfile)
+        self.assertIn('        sockets \\\n', dockerfile)
         self.assertNotIn('wallabag/wallabag:2.6.14', dockerfile)
         exclusions = (ROOT / '.dockerignore').read_text().splitlines()
         self.assertIn('web/uploads', exclusions)

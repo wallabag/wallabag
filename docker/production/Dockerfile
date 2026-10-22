@@ -31,6 +31,7 @@ RUN apt-get update \
         intl \
         opcache \
         pdo_mysql \
+        sockets \
         tidy \
         zip \
     && a2enmod headers rewrite \
