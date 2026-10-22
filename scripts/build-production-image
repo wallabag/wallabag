@@ -12,7 +12,9 @@ archive=$(mktemp "${TMPDIR:-/tmp}/wallabag-build-context.XXXXXX")
 trap 'rm -f "$archive"' 0
 trap 'exit 1' HUP INT TERM
 git archive --format=tar "$revision" -- . ':(exclude).composer-auth.json' ':(exclude).env' ':(exclude).env.*' > "$archive"
-docker build --build-arg "PHP_VERSION=$PHP_VERSION" --build-arg "VCS_REF=$revision" -f docker/production/Dockerfile -t "$1" - < "$archive"
+docker build --memory=2g --memory-swap=2g --cpu-period=100000 --cpu-quota=200000 \
+    --build-arg "PHP_VERSION=$PHP_VERSION" --build-arg "VCS_REF=$revision" \
+    -f docker/production/Dockerfile -t "$1" - < "$archive"
 
 metadata=$(docker image inspect --format '{{index .Config.Labels "com.jonniesweb.wallabag.php.version"}}|{{index .Config.Labels "org.opencontainers.image.revision"}}' "$1")
 label=${metadata%%|*}

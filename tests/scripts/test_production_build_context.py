@@ -64,6 +64,8 @@ class ProductionContextTest(unittest.TestCase):
             self.assertFalse(any(path in {'.env', '.env.local', '.composer-auth.json'} for path in build['members']))
             self.assertIn('--build-arg', build['arguments'])
             self.assertIn('PHP_VERSION=8.2.35', build['arguments'])
+            self.assertIn('--memory=2g', build['arguments'])
+            self.assertIn('--cpu-quota=200000', build['arguments'])
             self.assertNotIn('--network=none', build['arguments'])
             self.assertIn('--format', inspect['arguments'])
             self.assertEqual('8.2.35', result.split('php_label=')[1].split()[0])
