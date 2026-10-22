@@ -4,49 +4,35 @@ namespace Wallabag\CoreBundle\Helper;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Cookie\CookieJar;
-use GuzzleHttp\Event\SubscriberInterface;
-use Http\Adapter\Guzzle5\Client as GuzzleAdapter;
+use GuzzleHttp\HandlerStack;
+use Http\Adapter\Guzzle7\Client as GuzzleAdapter;
 use Http\Client\HttpClient;
 use Http\HttplugBundle\ClientFactory\ClientFactory;
 use Psr\Log\LoggerInterface;
+use Wallabag\CoreBundle\GuzzleSiteAuthenticator\SiteAuthenticator;
 
 /**
  * Builds and configures the HTTP client.
  */
 class HttpClientFactory implements ClientFactory
 {
-    /** @var SubscriberInterface[] */
-    private $subscribers = [];
-
-    /** @var CookieJar */
     private $cookieJar;
-
     private $restrictedAccess;
     private $logger;
+    private $authenticator;
 
     /**
-     * HttpClientFactory constructor.
-     *
      * @param string $restrictedAccess This param is a kind of boolean. Values: 0 or 1
      */
-    public function __construct(CookieJar $cookieJar, $restrictedAccess, LoggerInterface $logger)
+    public function __construct(CookieJar $cookieJar, $restrictedAccess, LoggerInterface $logger, SiteAuthenticator $authenticator)
     {
         $this->cookieJar = $cookieJar;
         $this->restrictedAccess = $restrictedAccess;
         $this->logger = $logger;
+        $this->authenticator = $authenticator;
     }
 
     /**
-     * Adds a subscriber to the HTTP client.
-     */
-    public function addSubscriber(SubscriberInterface $subscriber)
-    {
-        $this->subscribers[] = $subscriber;
-    }
-
-    /**
-     * Input an array of configuration to be able to create a HttpClient.
-     *
      * @return HttpClient
      */
     public function createClient(array $config = [])
@@ -57,18 +43,17 @@ class HttpClientFactory implements ClientFactory
             return new GuzzleAdapter(new GuzzleClient($config));
         }
 
-        // we clear the cookie to avoid websites who use cookies for analytics
+        // Clear cookies from the previous fetch, including analytics cookies.
         $this->cookieJar->clear();
-        if (!isset($config['defaults']['cookies'])) {
-            // need to set the (shared) cookie jar
-            $config['defaults']['cookies'] = $this->cookieJar;
+        if (!isset($config['cookies'])) {
+            $config['cookies'] = $this->cookieJar;
         }
 
-        $guzzle = new GuzzleClient($config);
-        foreach ($this->subscribers as $subscriber) {
-            $guzzle->getEmitter()->attach($subscriber);
-        }
+        $handler = $config['handler'] ?? null;
+        $stack = $handler instanceof HandlerStack ? clone $handler : HandlerStack::create($handler);
+        $stack->unshift($this->authenticator, 'site_authenticator');
+        $config['handler'] = $stack;
 
-        return new GuzzleAdapter($guzzle);
+        return new GuzzleAdapter(new GuzzleClient($config));
     }
 }

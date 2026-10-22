@@ -2,14 +2,12 @@
 
 namespace Wallabag\CoreBundle\GuzzleSiteAuthenticator;
 
-use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfig;
-use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfigBuilder;
 use Graby\SiteConfig\ConfigBuilder;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
 
-class GrabySiteConfigBuilder implements SiteConfigBuilder
+class GrabySiteConfigBuilder
 {
     /**
      * @var ConfigBuilder
@@ -43,7 +41,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
     }
 
     /**
-     * {@inheritdoc}
+     * @return SiteConfig|false
      */
     public function buildForHost($host)
     {
@@ -119,7 +117,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
 
         $extraFields = [];
         foreach ($extraFieldsStrings as $extraField) {
-            if (false === strpos($extraField, '=')) {
+            if (!str_contains($extraField, '=')) {
                 continue;
             }
 

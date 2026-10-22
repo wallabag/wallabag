@@ -252,6 +252,23 @@ class DownloadImagesTest extends TestCase
         $this->assertStringContainsString('/assets/images/9/b/9b0ead26/400e29f9.svg', $res);
     }
 
+    public function testSvgActiveContentAndRemoteReferencesAreRemoved(): void
+    {
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/svg+xml'], '<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script><circle onload="alert(1)"/><image href="https://tracker.example/pixel"/></svg>'));
+        $baseFolder = sys_get_temp_dir() . '/wallabag_test';
+        $download = new DownloadImages($httpMockClient, $baseFolder, 'http://wallabag.io/', new Logger('test'));
+
+        $url = $download->processSingleImage(123, 'unsafe.svg', 'https://example.org/article');
+
+        $this->assertNotFalse($url);
+        $svg = file_get_contents(str_replace('http://wallabag.io/assets/images', $baseFolder, $url));
+        $this->assertStringContainsString('<circle', $svg);
+        $this->assertStringNotContainsString('<script', $svg);
+        $this->assertStringNotContainsString('onload', $svg);
+        $this->assertStringNotContainsString('https://tracker.example', $svg);
+    }
+
     public function testProcessSingleImageWithBadSvg()
     {
         $httpMockClient = new HttpMockClient();

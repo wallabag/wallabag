@@ -1,4 +1,4 @@
-FROM php:8.1-fpm-bookworm AS rootless
+FROM php:8.2-fpm-bookworm AS rootless
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NODE_VERSION=20
@@ -53,7 +53,7 @@ RUN docker-php-ext-install -j "$(nproc)" \
 
 RUN pecl install redis; \
     pecl install imagick; \
-    pecl install xdebug-3.1.6; \
+    pecl install xdebug; \
     docker-php-ext-enable \
         redis \
         imagick \

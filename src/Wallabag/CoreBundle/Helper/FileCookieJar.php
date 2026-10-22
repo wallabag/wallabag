@@ -21,9 +21,9 @@ class FileCookieJar extends BaseFileCookieJar
      */
     public function __construct(LoggerInterface $logger, $cookieFile)
     {
-        parent::__construct($cookieFile);
-
         $this->logger = $logger;
+
+        parent::__construct($cookieFile);
     }
 
     /**
@@ -35,7 +35,7 @@ class FileCookieJar extends BaseFileCookieJar
      *
      * @throws \RuntimeException if the file cannot be loaded
      */
-    public function load($filename)
+    public function load(string $filename): void
     {
         $json = file_get_contents($filename);
         if (false === $json) {
