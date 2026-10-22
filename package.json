@@ -48,18 +48,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",
-    "@babel/eslint-parser": "^7.29.7",
     "@babel/preset-env": "^7.29.7",
+    "@biomejs/biome": "^2.5.15",
     "@codecov/webpack-plugin": "^2",
     "@symfony/webpack-encore": "^6.0.0",
     "autoprefixer": "^10.6.1",
     "babel-loader": "^10.1.1",
     "core-js": "^3.50.0",
     "css-loader": "^7.1.5",
-    "eslint": "^8.57.1",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-webpack-plugin": "^5.0.3",
     "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^2.10.2",
     "postcss": "^8.5.30",
@@ -106,7 +102,7 @@
     "build:dev": "encore dev",
     "watch": "encore dev --watch",
     "build:prod": "encore production --progress",
-    "lint:js": "eslint assets/*.js assets/controllers/*.js",
+    "lint:js": "biome lint assets",
     "lint:scss": "stylelint assets/scss/*.scss assets/scss/**/*.scss"
   }
 }

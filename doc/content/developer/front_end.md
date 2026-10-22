@@ -37,6 +37,5 @@ Remember: Always generate production builds before committing changes!
 
 ## Code style
 
-Two tools check code style:
-- stylelint for (S)CSS
-- eslint for JavaScript (using the Airbnb base preset configuration)
+Biome checks code style for JavaScript and CSS assets, and Stylelint checks SCSS.
+Run `yarn lint:js` and `yarn lint:scss` before committing front-end changes.
