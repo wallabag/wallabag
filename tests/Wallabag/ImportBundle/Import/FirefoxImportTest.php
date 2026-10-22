@@ -53,14 +53,9 @@ class FirefoxImportTest extends TestCase
             ->method('getRepository')
             ->willReturn($entryRepo);
 
-        $entry = $this->getMockBuilder(Entry::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('updateEntry')
-            ->willReturn($entry);
+            ->method('updateEntry');
 
         $res = $firefoxImport->import();
 
@@ -88,8 +83,7 @@ class FirefoxImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(1))
-            ->method('updateEntry')
-            ->willReturn(new Entry($this->user));
+            ->method('updateEntry');
 
         // check that every entry persisted are archived
         $this->em

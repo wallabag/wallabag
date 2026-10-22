@@ -57,14 +57,9 @@ class WallabagV1ImportTest extends TestCase
             ->method('getRepository')
             ->willReturn($entryRepo);
 
-        $entry = $this->getMockBuilder(Entry::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->contentProxy
             ->expects($this->exactly(1))
-            ->method('updateEntry')
-            ->willReturn($entry);
+            ->method('updateEntry');
 
         $res = $wallabagV1Import->import();
 
@@ -92,8 +87,7 @@ class WallabagV1ImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(3))
-            ->method('updateEntry')
-            ->willReturn(new Entry($this->user));
+            ->method('updateEntry');
 
         // check that every entry persisted are archived
         $this->em

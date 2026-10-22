@@ -11,7 +11,6 @@ use PHPUnit\Framework\TestCase;
 use Predis\Client;
 use Simpleue\Queue\RedisQueue;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Helper\TagsAssigner;
 use Wallabag\CoreBundle\Repository\EntryRepository;
@@ -57,8 +56,7 @@ class WallabagV2ImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('updateEntry')
-            ->willReturn(new Entry($this->user));
+            ->method('updateEntry');
 
         $res = $wallabagV2Import->import();
 
@@ -86,8 +84,7 @@ class WallabagV2ImportTest extends TestCase
 
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('updateEntry')
-            ->willReturn(new Entry($this->user));
+            ->method('updateEntry');
 
         // check that every entry persisted are archived
         $this->em

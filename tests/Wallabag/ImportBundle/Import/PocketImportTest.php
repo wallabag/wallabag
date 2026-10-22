@@ -214,12 +214,9 @@ JSON
                 return (bool) $persistedEntry->isArchived() && (bool) $persistedEntry->isStarred();
             }));
 
-        $entry = new Entry($this->user);
-
         $this->contentProxy
             ->expects($this->once())
-            ->method('updateEntry')
-            ->willReturn($entry);
+            ->method('updateEntry');
 
         $pocketImport->setClient($httpMockClient);
         $pocketImport->authorize('wunderbar_code');
@@ -305,12 +302,9 @@ JSON
                 return (bool) $persistedEntry->isArchived();
             }));
 
-        $entry = new Entry($this->user);
-
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('updateEntry')
-            ->willReturn($entry);
+            ->method('updateEntry');
 
         $pocketImport->setClient($httpMockClient);
         $pocketImport->authorize('wunderbar_code');
