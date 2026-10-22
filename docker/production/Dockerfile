@@ -10,6 +10,7 @@ LABEL org.opencontainers.image.title="Wallabag with RSS and special grabbers" \
 
 ENV APP_ENV=prod \
     APP_DEBUG=0 \
+    WALLABAG_USER_AGENT="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2" \
     APACHE_DOCUMENT_ROOT=/var/www/wallabag/web
 
 WORKDIR /var/www/wallabag

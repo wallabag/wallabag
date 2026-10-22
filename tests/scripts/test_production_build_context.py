@@ -82,6 +82,7 @@ class ProductionContextTest(unittest.TestCase):
         self.assertIn('php:${PHP_VERSION}-apache-trixie@sha256:', dockerfile)
         self.assertIn('com.jonniesweb.wallabag.php.version="${PHP_VERSION}"', dockerfile)
         self.assertIn('test "$(php -r \'echo PHP_VERSION;\')" = "$PHP_VERSION"', dockerfile)
+        self.assertIn('WALLABAG_USER_AGENT="Mozilla/5.0 (Windows NT 6.1; WOW64)', dockerfile)
         self.assertIn('        sockets \\\n', dockerfile)
         self.assertNotIn('wallabag/wallabag:2.6.14', dockerfile)
         production_config = (ROOT / 'app/config/config_prod.yml').read_text()
