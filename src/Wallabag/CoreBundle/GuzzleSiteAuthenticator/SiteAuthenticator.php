@@ -55,16 +55,13 @@ class SiteAuthenticator
                 $this->login($client, $config);
             }
 
-            return $this->send($handler, $request, $options, $client, $config, $cookies);
+            return $this->send($handler, $request, $options, $client, $config);
         };
     }
 
-    private function send(callable $handler, RequestInterface $request, array $options, Client $client, SiteConfig $config, CookieJarInterface $cookies, int $retries = 0): PromiseInterface
+    private function send(callable $handler, RequestInterface $request, array $options, Client $client, SiteConfig $config, int $retries = 0): PromiseInterface
     {
-        $request = $cookies->withCookieHeader($request);
-
-        return $handler($request, $options)->then(function (ResponseInterface $response) use ($handler, $request, $options, $client, $config, $cookies, $retries) {
-            $cookies->extractCookies($request, $response);
+        return $handler($request, $options)->then(function (ResponseInterface $response) use ($handler, $request, $options, $client, $config, $retries) {
             $body = $response->getBody();
             $html = (string) $body;
             if ($body->isSeekable()) {
@@ -76,7 +73,7 @@ class SiteAuthenticator
             if ($retries < self::MAX_RETRIES && $this->isLoginRequired($html, $config)) {
                 $this->login($client, $config);
 
-                return $this->send($handler, $request, $options, $client, $config, $cookies, $retries + 1);
+                return $this->send($handler, $request, $options, $client, $config, $retries + 1);
             }
 
             return $response;

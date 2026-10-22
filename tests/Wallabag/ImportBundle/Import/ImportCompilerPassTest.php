@@ -12,9 +12,9 @@ class ImportCompilerPassTest extends TestCase
     public function testProcessNoDefinition()
     {
         $container = new ContainerBuilder();
-        $res = $this->process($container);
+        $this->process($container);
 
-        $this->assertNull($res);
+        $this->assertFalse($container->hasDefinition(ImportChain::class));
     }
 
     public function testProcess()

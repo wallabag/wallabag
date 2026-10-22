@@ -39,6 +39,10 @@ class HttpClientFactory implements ClientFactory
     {
         $this->logger->log('debug', 'Restricted access config enabled?', ['enabled' => (int) $this->restrictedAccess]);
 
+        // HTTPlug handles redirects and HTTP errors; every redirect target must pass its SSRF checks.
+        $config['allow_redirects'] = false;
+        $config['http_errors'] = false;
+
         if (0 === (int) $this->restrictedAccess) {
             return new GuzzleAdapter(new GuzzleClient($config));
         }
