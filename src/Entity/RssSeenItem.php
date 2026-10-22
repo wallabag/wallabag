@@ -5,7 +5,8 @@ namespace Wallabag\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'rss_seen_item', uniqueConstraints: [new ORM\UniqueConstraint(name: 'rss_feed_item', columns: ['feed_id', 'url_hash'])])]
+#[ORM\Table(name: 'rss_seen_item')]
+#[ORM\UniqueConstraint(name: 'rss_feed_item', columns: ['feed_id', 'url_hash'])]
 class RssSeenItem
 {
     #[ORM\Id]

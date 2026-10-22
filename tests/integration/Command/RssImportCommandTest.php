@@ -9,6 +9,14 @@ use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
 class RssImportCommandTest extends WallabagKernelTestCase
 {
+    public function testRssDeduplicationIndexesArePresentInDoctrineMapping(): void
+    {
+        $em = $this->getEntityManager();
+
+        self::assertArrayHasKey('rss_owner_url', $em->getClassMetadata(RssFeed::class)->table['uniqueConstraints']);
+        self::assertArrayHasKey('rss_feed_item', $em->getClassMetadata(RssSeenItem::class)->table['uniqueConstraints']);
+    }
+
     public function testOperatorImportIsIdempotentAndConsentIsExplicit(): void
     {
         $em = $this->getEntityManager();
