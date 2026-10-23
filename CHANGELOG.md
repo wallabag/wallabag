@@ -1,5 +1,30 @@
 # Changelog
 
+## [2.6.15](https://github.com/wallabag/wallabag/tree/2.6.15)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.14...2.6.15)
+
+### Improvements
+
+* Support PHP 8.4 to facilitate upgrading to patched PHP releases following recent PHP security vulnerabilities, while retaining compatibility with PHP 7.4 and the locked legacy dependencies. Deprecation notices may still be emitted.
+
+### Fixes
+
+* Fix merging of existing and fetched entry content in https://github.com/wallabag/wallabag/pull/8985
+* Escape dynamic data in ePub exports in https://github.com/wallabag/wallabag/pull/8968
+* Reuse supplied HTML when fetching entry metadata in https://github.com/wallabag/wallabag/pull/8889
+* Hide the delete public link action when no public link exists in https://github.com/wallabag/wallabag/pull/8878
+* Fix Redis URL configuration in https://github.com/wallabag/wallabag/pull/8868
+* Isolate prefetched HTML between entries and preserve available metadata when fetching fails.
+* Preserve existing Redis connection parameters, including authentication and passwords containing special characters, when `REDIS_URL` is not set.
+* Fix Redis-backed sessions in the Docker configuration example.
+
+### Technical stuff
+
+* Update phpseclib to 3.0.55 in https://github.com/wallabag/wallabag/pull/8919
+* Update Graby and PHP Readability dependencies in https://github.com/wallabag/wallabag/pull/8891
+* Update volatile test URLs in https://github.com/wallabag/wallabag/pull/8892
+* Include the documentation in the main repository.
+
 ## [2.6.14](https://github.com/wallabag/wallabag/tree/2.6.14)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.13...2.6.14)
 
