@@ -23,6 +23,8 @@ test "$label" = "$PHP_VERSION" || { echo "Image PHP version label mismatch: expe
 test "$image_revision" = "$revision" || { echo "Image source revision label mismatch: expected $revision, got $image_revision" >&2; exit 1; }
 runtime=$(docker run --rm --network none --entrypoint php "$1" -r 'echo PHP_VERSION;')
 test "$runtime" = "$PHP_VERSION" || { echo "Image PHP runtime mismatch: expected $PHP_VERSION, got $runtime" >&2; exit 1; }
+display_errors=$(docker run --rm --network none --entrypoint php "$1" -r 'echo ini_get("display_errors") ? "1" : "0";')
+test "$display_errors" = "0" || { echo "Image exposes PHP errors in HTTP responses: display_errors=$display_errors" >&2; exit 1; }
 source_revision=$(docker run --rm --network none --entrypoint cat "$1" /var/www/wallabag/.source-revision)
 test "$source_revision" = "$revision" || { echo "Image source file mismatch: expected $revision, got $source_revision" >&2; exit 1; }
-printf 'image=%s php_label=%s php_runtime=%s revision_label=%s source_revision=%s\n' "$1" "$label" "$runtime" "$image_revision" "$source_revision"
+printf 'image=%s php_label=%s php_runtime=%s display_errors=off revision_label=%s source_revision=%s\n' "$1" "$label" "$runtime" "$image_revision" "$source_revision"

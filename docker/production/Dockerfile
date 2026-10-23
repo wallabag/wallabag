@@ -42,6 +42,7 @@ RUN apt-get update \
 
 COPY --from=composer:2@sha256:d0c32820c62cc860fddd22adceed4eeda7698b093a7a88d503414172ce400626 /usr/bin/composer /usr/local/bin/composer
 COPY . /var/www/wallabag
+COPY docker/production/php-production.ini /usr/local/etc/php/conf.d/99-wallabag-production.ini
 COPY docker/production/entrypoint.sh /usr/local/bin/wallabag-source-entrypoint
 
 RUN set -eux; \

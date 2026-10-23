@@ -46,7 +46,7 @@ class ProductionContextTest(unittest.TestCase):
                 'elif sys.argv[1] == "run":\n'
                 ' entrypoint=sys.argv[sys.argv.index("--entrypoint")+1]\n'
                 ' revision=next(a.split("=",1)[1] for a in calls[0]["arguments"] if a.startswith("VCS_REF="))\n'
-                ' print("8.2.35" if entrypoint == "php" else revision)\n'
+                ' print(("0" if "ini_get(\\"display_errors\\")" in sys.argv[-1] else "8.2.35") if entrypoint == "php" else revision)\n'
             )
             docker.chmod(0o755)
             # Recorder is outside the Git build context.
@@ -58,7 +58,7 @@ class ProductionContextTest(unittest.TestCase):
                 text=True,
             )
             calls = json.loads(record.read_text())
-            build, inspect, run, source = calls
+            build, inspect, run, display_errors, source = calls
             self.assertIn('tracked.txt', build['members'])
             self.assertFalse(any(path.startswith(('web/uploads', 'data/', '.git/')) for path in build['members']))
             self.assertFalse(any(path in {'.env', '.env.local', '.composer-auth.json'} for path in build['members']))
@@ -73,8 +73,12 @@ class ProductionContextTest(unittest.TestCase):
             self.assertIn('none', run['arguments'])
             self.assertIn('--entrypoint', run['arguments'])
             self.assertEqual('php', run['arguments'][run['arguments'].index('--entrypoint') + 1])
+            self.assertIn('display_errors', display_errors['arguments'][-1])
+            self.assertIn('--network', display_errors['arguments'])
+            self.assertIn('none', display_errors['arguments'])
             self.assertEqual('cat', source['arguments'][source['arguments'].index('--entrypoint') + 1])
             self.assertIn('source_revision=', result)
+            self.assertIn('display_errors=off', result)
 
     def test_production_image_declares_and_checks_patched_php(self):
         dockerfile = (ROOT / 'docker/production/Dockerfile').read_text()
@@ -84,7 +88,16 @@ class ProductionContextTest(unittest.TestCase):
         self.assertIn('test "$(php -r \'echo PHP_VERSION;\')" = "$PHP_VERSION"', dockerfile)
         self.assertIn('WALLABAG_USER_AGENT="Mozilla/5.0 (Windows NT 6.1; WOW64)', dockerfile)
         self.assertIn('        sockets \\\n', dockerfile)
+        self.assertIn('COPY docker/production/php-production.ini /usr/local/etc/php/conf.d/99-wallabag-production.ini', dockerfile)
         self.assertNotIn('wallabag/wallabag:2.6.14', dockerfile)
+        production_ini = (ROOT / 'docker/production/php-production.ini').read_text()
+        self.assertIn('display_errors=Off', production_ini)
+        self.assertIn('display_startup_errors=Off', production_ini)
+        self.assertIn('log_errors=On', production_ini)
+        htaccess = (ROOT / 'web/.htaccess').read_text()
+        self.assertIn('DirectoryIndex index.php', htaccess)
+        self.assertIn('RewriteRule ^ %{ENV:BASE}/index.php [L]', htaccess)
+        self.assertNotIn('RewriteRule ^ %{ENV:BASE}/app.php [L]', htaccess)
         production_config = (ROOT / 'app/config/config_prod.yml').read_text()
         self.assertIn('env(string:default:wallabag.sentry_dsn:SENTRY_DSN)', production_config)
         exclusions = (ROOT / '.dockerignore').read_text().splitlines()
