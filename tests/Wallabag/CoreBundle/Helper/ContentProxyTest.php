@@ -3,6 +3,8 @@
 namespace Tests\Wallabag\CoreBundle\Helper;
 
 use Graby\Graby;
+use GuzzleHttp\Psr7\Response;
+use Http\Mock\Client as MockClient;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
@@ -736,6 +738,86 @@ class ContentProxyTest extends TestCase
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame('200', $entry->getHttpStatus());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
+    }
+
+    /**
+     * @dataProvider dataForPrefetchedContentIsolation
+     */
+    public function testPrefetchedContentIsNotReused($disableContentUpdate)
+    {
+        $html = static function ($marker, $author) {
+            return '<html lang="en"><head><meta charset="utf-8"><title>' . $marker . '</title><meta name="author" content="' . $author . '"></head><body><p>' . str_repeat($marker . ' article content. ', 30) . '</p></body></html>';
+        };
+        $httpClient = new MockClient();
+        $httpClient->addResponse(new Response(200, ['Content-Type' => 'text/html; charset=utf-8'], $html('Second article', 'Bob')));
+        $proxy = new ContentProxy(new Graby([], $httpClient), $this->getTaggerMock(), $this->getRuleBasedIgnoreOriginProcessorMock(), $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+
+        $first = new Entry(new User());
+        $proxy->updateEntry($first, 'https://1.1.1.1/first', ['html' => $html('First article', 'Alice')], $disableContentUpdate);
+        $this->assertStringContainsString('First article', $first->getContent());
+        $this->assertCount(0, $httpClient->getRequests());
+
+        $second = new Entry(new User());
+        $proxy->updateEntry($second, 'https://8.8.8.8/second');
+        $this->assertStringContainsString('Second article', $second->getContent());
+        $this->assertStringNotContainsString('First article', $second->getContent());
+        $this->assertSame(['Bob'], $second->getPublishedBy());
+        $this->assertCount(1, $httpClient->getRequests());
+    }
+
+    public function dataForPrefetchedContentIsolation()
+    {
+        return [
+            'with metadata extraction' => [false],
+            'without metadata extraction' => [true],
+        ];
+    }
+
+    public function testFetchFailureKeepsAvailableMetadata()
+    {
+        $graby = $this->getMockBuilder(Graby::class)
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $graby->method('fetchContent')->willReturn([
+            'html' => $this->fetchingErrorMessage,
+            'title' => 'Page unavailable',
+            'url' => 'https://example.com/missing',
+            'status' => 404,
+            'headers' => ['content-type' => 'text/html'],
+        ]);
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $this->getRuleBasedIgnoreOriginProcessorMock(), $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'https://example.com/missing');
+
+        $this->assertSame($this->fetchingErrorMessage, $entry->getContent());
+        $this->assertSame('Page unavailable', $entry->getTitle());
+        $this->assertSame(404, $entry->getHttpStatus());
+        $this->assertSame('text/html', $entry->getMimetype());
+    }
+
+    public function testFetchFailurePreservesProvidedContent()
+    {
+        $graby = $this->getMockBuilder(Graby::class)
+            ->setMethods(['fetchContent'])
+            ->getMock();
+        $graby->method('fetchContent')->willReturn([
+            'html' => $this->fetchingErrorMessage,
+            'title' => 'Page unavailable',
+            'status' => 404,
+        ]);
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $this->getRuleBasedIgnoreOriginProcessorMock(), $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'https://1.1.1.1/article', [
+            'html' => '<p>Original imported content.</p>',
+            'title' => 'Original title',
+            'status' => 200,
+        ]);
+
+        $this->assertStringContainsString('Original imported content.', $entry->getContent());
+        $this->assertStringNotContainsString($this->fetchingErrorMessage, $entry->getContent());
+        $this->assertSame('Original title', $entry->getTitle());
+        $this->assertSame(200, $entry->getHttpStatus());
     }
 
     public function testWithImageAsContent()
