@@ -45,6 +45,8 @@
 
 // adapted from anchor styles from node_modules/@materializecss/materialize/sass/components/_sidenav.scss
 .sidenav li button {
+  background: none;
+  border: 0;
   color: rgba(0 0 0 / 87%);
   display: block;
   font-size: 14px;

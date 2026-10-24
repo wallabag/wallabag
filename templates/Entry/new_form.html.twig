@@ -9,7 +9,7 @@
     {% endif %}
 
     {{ form_widget(form.url, {'attr': {'autocomplete': 'off', 'placeholder': 'entry.new.placeholder', 'data-topbar-target': 'addUrlInput'}}) }}
-    <i class="material-icons close" aria-label="clear" role="button" data-action="click->topbar#showActions" data-shortcuts-target="showActions"></i>
+    <button type="button" class="nav-form-button nav-panel-close" aria-label="clear" data-action="click->topbar#showActions" data-shortcuts-target="showActions"><i class="material-icons close"></i></button>
 
     {{ form_rest(form) }}
 </form>
