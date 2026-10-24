@@ -115,6 +115,7 @@ config:
             starred: 'Starred'
             archive: 'Archived'
             all: 'All'
+            opds: 'OPDS catalog (e-readers)'
         feed_limit: 'Number of items in the feed'
     form_user:
         two_factor_description: Enabling two factor authentication means you'll receive an email with a code on every new untrusted connection.
