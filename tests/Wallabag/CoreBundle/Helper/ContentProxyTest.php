@@ -773,6 +773,53 @@ class ContentProxyTest extends TestCase
         ];
     }
 
+    public function testFetchFailureKeepsAvailableMetadata()
+    {
+        $graby = $this->getMockBuilder(Graby::class)
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $graby->method('fetchContent')->willReturn([
+            'html' => $this->fetchingErrorMessage,
+            'title' => 'Page unavailable',
+            'url' => 'https://example.com/missing',
+            'status' => 404,
+            'headers' => ['content-type' => 'text/html'],
+        ]);
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $this->getRuleBasedIgnoreOriginProcessorMock(), $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'https://example.com/missing');
+
+        $this->assertSame($this->fetchingErrorMessage, $entry->getContent());
+        $this->assertSame('Page unavailable', $entry->getTitle());
+        $this->assertSame(404, $entry->getHttpStatus());
+        $this->assertSame('text/html', $entry->getMimetype());
+    }
+
+    public function testFetchFailurePreservesProvidedContent()
+    {
+        $graby = $this->getMockBuilder(Graby::class)
+            ->setMethods(['fetchContent'])
+            ->getMock();
+        $graby->method('fetchContent')->willReturn([
+            'html' => $this->fetchingErrorMessage,
+            'title' => 'Page unavailable',
+            'status' => 404,
+        ]);
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $this->getRuleBasedIgnoreOriginProcessorMock(), $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'https://1.1.1.1/article', [
+            'html' => '<p>Original imported content.</p>',
+            'title' => 'Original title',
+            'status' => 200,
+        ]);
+
+        $this->assertStringContainsString('Original imported content.', $entry->getContent());
+        $this->assertStringNotContainsString($this->fetchingErrorMessage, $entry->getContent());
+        $this->assertSame('Original title', $entry->getTitle());
+        $this->assertSame(200, $entry->getHttpStatus());
+    }
+
     public function testWithImageAsContent()
     {
         $tagger = $this->getTaggerMock();
