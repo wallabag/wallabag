@@ -4,6 +4,12 @@ imports:
     - { resource: parameters_addons.yml }
 
 parameters:
+    wallabag_core_redis_parameters:
+        scheme: '%redis_scheme%'
+        host: '%redis_host%'
+        port: '%redis_port%'
+        path: '%redis_path%'
+        password: '%redis_password%'
     lexik_form_filter.get_filter.doctrine_orm.class: Wallabag\CoreBundle\Event\Subscriber\CustomDoctrineORMSubscriber
 
 services:
@@ -269,7 +275,7 @@ services:
 
     Predis\Client:
         arguments:
-            $parameters: '%env(REDIS_URL)%'
+            $parameters: '%env(default:wallabag_core_redis_parameters:REDIS_URL)%'
 
     Wallabag\CoreBundle\Event\Subscriber\SQLiteCascadeDeleteSubscriber:
         tags:

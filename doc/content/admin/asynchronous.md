@@ -117,6 +117,10 @@ redis_host: localhost
 redis_port: 6379
 ```
 
+These parameters continue to work in 2.6.15. A non-empty `REDIS_URL` environment
+variable overrides them; see the [Redis parameters documentation]({{< relref "parameters.md" >}}#redis-options)
+for connection and password formats.
+
 ### Enable Redis in wallabag
 
 In internal settings, in the **Import** section, enable Redis (with the
