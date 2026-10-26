@@ -3,7 +3,23 @@ title: Requirements
 weight: 1
 ---
 
-wallabag is compatible with **PHP >= 7.4**.
+wallabag is compatible with **PHP >= 7.4**, including **PHP 8.4** since wallabag 2.6.15.
+
+### PHP 8.4 and legacy dependencies
+
+The 2.6 release series retains legacy dependencies. PHP 8.4 may emit deprecation
+notices, and `composer check-platform-reqs` may report outdated PHP upper bounds
+in these packages even though the application runs with them.
+
+Install the dependencies using `composer install` and the supplied `composer.lock`.
+Keep the Composer PHP platform override at 7.4.29 to preserve compatibility with
+older supported PHP versions. A general dependency update or
+`--ignore-platform-reqs` is not required for installation.
+
+In production, set `display_errors = Off` and `log_errors = On` in the PHP
+configuration used by your web server. This keeps notices out of HTTP responses
+without hiding errors from the logs. CLI and web server PHP configurations may
+differ.
 
 {{< callout type="info" >}}
 To install wallabag easily, we provide a `Makefile`, so you need to have the `make` tool.
