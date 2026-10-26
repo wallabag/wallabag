@@ -3,6 +3,8 @@
 namespace Tests\Wallabag\CoreBundle\Helper;
 
 use Graby\Graby;
+use GuzzleHttp\Psr7\Response;
+use Http\Mock\Client as MockClient;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
@@ -736,6 +738,39 @@ class ContentProxyTest extends TestCase
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame('200', $entry->getHttpStatus());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
+    }
+
+    /**
+     * @dataProvider dataForPrefetchedContentIsolation
+     */
+    public function testPrefetchedContentIsNotReused($disableContentUpdate)
+    {
+        $html = static function ($marker, $author) {
+            return '<html lang="en"><head><meta charset="utf-8"><title>' . $marker . '</title><meta name="author" content="' . $author . '"></head><body><p>' . str_repeat($marker . ' article content. ', 30) . '</p></body></html>';
+        };
+        $httpClient = new MockClient();
+        $httpClient->addResponse(new Response(200, ['Content-Type' => 'text/html; charset=utf-8'], $html('Second article', 'Bob')));
+        $proxy = new ContentProxy(new Graby([], $httpClient), $this->getTaggerMock(), $this->getRuleBasedIgnoreOriginProcessorMock(), $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+
+        $first = new Entry(new User());
+        $proxy->updateEntry($first, 'https://1.1.1.1/first', ['html' => $html('First article', 'Alice')], $disableContentUpdate);
+        $this->assertStringContainsString('First article', $first->getContent());
+        $this->assertCount(0, $httpClient->getRequests());
+
+        $second = new Entry(new User());
+        $proxy->updateEntry($second, 'https://8.8.8.8/second');
+        $this->assertStringContainsString('Second article', $second->getContent());
+        $this->assertStringNotContainsString('First article', $second->getContent());
+        $this->assertSame(['Bob'], $second->getPublishedBy());
+        $this->assertCount(1, $httpClient->getRequests());
+    }
+
+    public function dataForPrefetchedContentIsolation()
+    {
+        return [
+            'with metadata extraction' => [false],
+            'without metadata extraction' => [true],
+        ];
     }
 
     public function testWithImageAsContent()
