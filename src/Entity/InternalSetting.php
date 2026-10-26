@@ -15,9 +15,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: SettingRepository::class)]
 class InternalSetting extends BaseSetting
 {
-    /**
-     * @var string|null
-     */
     #[ORM\Column(name: 'value', type: 'string', nullable: true)]
-    protected $value;
+    protected ?string $value = null;
 }

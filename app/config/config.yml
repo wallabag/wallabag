@@ -3,10 +3,11 @@ imports:
     - { resource: services.yml }
     - { resource: wallabag.yml }
 
-parameters:
-    craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
-
 framework:
+    cache:
+        pools:
+            craue_config_cache:
+                adapter: cache.adapter.filesystem
     #esi:             ~
     translator:
         enabled: true
