@@ -1368,10 +1368,10 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/merge-streams/-/merge-streams-4.0.0.tgz#abb11d99aeb6d27f1b563c38147a72d50058e339"
   integrity sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ==
 
-"@symfony/stimulus-bridge@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@symfony/stimulus-bridge/-/stimulus-bridge-4.0.1.tgz#af0ddabc88254648a812fc328c0f407a6d5f40dc"
-  integrity sha512-+/kSQ4qFXMbZS+HjkhzOxwdN+60pMev7kzzDpQV/Tdm/iIWoxx5GDsVcdLaBb2783BVQHyrBP72JerF2SXTbTg==
+"@symfony/stimulus-bridge@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@symfony/stimulus-bridge/-/stimulus-bridge-4.0.2.tgz#a95b0ea09a20179376c669e809ec75fad70a3a4d"
+  integrity sha512-MDTCDQChzRA4uL4Up005GU5ZdQkJ/1EWT7MyKnZKN89YRdpV1IqBfxTyglMf5b6mbJweHoHNu0hWwY7PSqpWJA==
   dependencies:
     "@hotwired/stimulus-webpack-helpers" "^1.0.1"
     "@types/webpack-env" "^1.16.4"
