@@ -5,3 +5,4 @@ validator:
     item_per_page_too_high: با این تعداد برنامه به فنا می‌رود
     rss_limit_too_high: با این تعداد برنامه به فنا می‌رود
     quote_length_too_high: نقل‌قول بسیار طولانی است. می‌بایست {{ limit }} حرف یا کمتر باشد.
+    feed_limit_too_high: با این تعداد برنامه به فنا می‌رود

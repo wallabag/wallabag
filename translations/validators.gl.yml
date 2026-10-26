@@ -5,3 +5,4 @@ validator:
     password_wrong_value: O contrasinal escrito non é o actual.
     password_too_short: O teu contrasinal debe ter polo menos 8 caracteres.
     password_must_match: Os contrasinais deben concordar.
+    feed_limit_too_high: Esto certarmente estragará a app

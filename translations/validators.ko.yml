@@ -5,3 +5,4 @@ validator:
     password_wrong_value: 현재 비밀번호가 잘못되었습니다.
     password_too_short: 비밀번호는 8자 이상이어야합니다.
     password_must_match: 비밀번호가 일치해야합니다.
+    feed_limit_too_high: 확실히 앱을 종료합니다

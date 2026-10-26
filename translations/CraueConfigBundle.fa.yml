@@ -21,3 +21,15 @@ export: "برون‌سپاری"
 import: "درون‌ریزی"
 misc: "غیره"
 modify_settings: "اعمال"
+share_public: اعطای اجازهٔ نشانی عمومی برای ورودی‌ها
+matomo_host: میزبان وبگاه شما در Matomo (بدون ‭http://‬ یا ‭https://‬)
+api_user_registration: فعال‌سازی نام‌نویسی کاربر از راه API
+import_with_rabbitmq: برای درون‌ریزی ناهمگام داده، RabbitMQ را فعال کنید
+restricted_access: فعال‌سازی احراز هویت برای وبگاه‌های paywalled
+download_images_enabled: بارگیری محلی تصاویر
+matomo_enabled: فعال‌سازی Matomo
+settings_changed: پیکربندی روزآمد شد
+import_with_redis: برای درون‌ریزی ناهمگام داده، Redis را فعال کنید
+matomo_site_id: شناسه (ID) وبگاه شما در Matomo
+store_article_headers: فعال‌سازی ذخیره‌ٔ سرآیندهای HTTP برای هر مقاله
+shaarli_share_origin_url: فعال‌سازی هم‌رسانی نشانی مبدأ در صورت فعال بودن این خدمت

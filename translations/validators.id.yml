@@ -5,3 +5,4 @@ validator:
     item_per_page_too_high: Ini akan mematikan aplikasi
     rss_limit_too_high: Ini akan mematikan aplikasi
     quote_length_too_high: Kutipannya terlalu panjang. Setidaknya butuh {{ limit }} karakter atau kurang.
+    feed_limit_too_high: Ini akan mematikan aplikasi

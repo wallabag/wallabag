@@ -5,3 +5,4 @@ validator:
     item_per_page_too_high: Ettől minden bizonnyal nagyon lassú lesz az alkalmazás
     rss_limit_too_high: Ettől minden bizonnyal nagyon lassú lesz az alkalmazás
     quote_length_too_high: Az idézet az túl hosszú. {{ limit }} karakterek vagy annál kevesebbnek kell lennie.
+    feed_limit_too_high: Ettől minden bizonnyal nagyon lassú lesz az alkalmazás
