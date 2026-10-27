@@ -127,3 +127,28 @@ You can check about how to properly [configure email in the dedicated section]({
 | redis_port | TCP/IP port of the target server (ignored for unix scheme) | 6379 |
 | redis_path | Path of the UNIX domain socket file used when connecting to Redis using UNIX domain sockets | null
 | redis_password | Password defined in the Redis server configuration (parameter `requirepass` in `redis.conf`) | null
+
+### REDIS_URL
+
+Since wallabag 2.6.15, a non-empty `REDIS_URL` environment variable takes priority
+over the `redis_*` parameters above. If it is unset or empty, wallabag passes the
+existing parameters directly to Predis, without converting them to a URL. No
+configuration change is required when upgrading from 2.6.14.
+
+When using `redis_password` in `parameters.yml`, keep the literal password: do not
+URL-encode it.
+
+For `REDIS_URL`, use the `password` query parameter if the password needs URL
+encoding. For example, the password `p@ss:word+&%` can be configured as:
+
+```bash
+export REDIS_URL='redis://localhost:6379/0?password=p%40ss%3Aword%2B%26%25'
+```
+
+The bundled Predis version decodes this query parameter, but does not decode an
+encoded password in `redis://:password@host`. Do not combine both password forms.
+Set the variable in the environment of the PHP web process and import workers.
+
+This variable configures imports through Predis, not PHP's Redis session handler.
+For Redis-backed PHP sessions, keep a `tcp://` save path as shown in the Docker
+configuration example.
