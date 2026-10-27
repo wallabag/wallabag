@@ -266,7 +266,7 @@ howto:
         android:
             via_f_droid: ''
             via_google_play: ''
-        ios: 'na iTunes Store'
+        ios: 'na App Store'
         windows: 'na Microsoft Store'
     bookmarklet:
         description: 'Arraste e solve este link na sua barra de favoritos:'

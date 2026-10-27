@@ -81,7 +81,7 @@ entry:
         reading_time_less_one_minute: 'odhadovaný čas čtení: &lt; 1 min'
         reading_time_minutes: 'odhadovaný čas čtení: %readingTime% min'
         reading_time: odhadovaný čas čtení
-        number_on_the_page: '{0} Nemáte žádné položky.|{1} Máte jednu položku.|]1,4[ Máte %count% položky.|]4,Inf[ Máte %count% položek.'
+        number_on_the_page: '{0} Nemáte žádné položky.|{1} Máte jednu položku.|]1,4] Máte %count% položky.|[5,Inf] Máte %count% položek.'
         show_same_domain: Zobrazit články se stejnou doménou
         assign_search_tag: Přiřadit toto hledání jako štítek ke každému výsledku
         toggle_mass_action: Přepnout hromadnou akci
@@ -97,6 +97,7 @@ entry:
         delete_tag: Opravdu chcete odebrat tento štítek z tohoto článku?
         delete: Opravdu chcete tento článek odebrat?
         delete_entries: Opravdu chcete odebrat tyto články?
+        reload: Opravdu chcete znovu načíst tento článek?
     public:
         shared_by_wallabag: Tento článek již sdílel %username% s <a href='%wallabag_instance%'>wallabagem</a>
     edit:
@@ -337,7 +338,7 @@ tag:
         untagged: Položky bez štítků
         no_untagged_entries: Nejsou žádné položky bez štítků.
         see_untagged_entries: Zobrazit položky bez štítků
-        number_on_the_page: '{0}Nejsou žádné štítky.|{1} Je jeden štítek.|]1,4[ Jsou %count% štítky.|]4,Inf[ Je %count% štítků.'
+        number_on_the_page: '{0}Nejsou žádné štítky.|{1} Je jeden štítek.|]1,4] Jsou %count% štítky.|[5,Inf] Je %count% štítků.'
     confirm:
         delete: Odstranit štítek %name%
 quickstart:
@@ -346,6 +347,7 @@ quickstart:
         email: E-mailem
         github: Na GitHubu
         description: Pokud potřebujete pomoc, jsme tu pro vás.
+        matrix: Na Matrixu
     docs:
         title: Úplná dokumentace
         all_docs: A spousta dalších článků!
@@ -385,7 +387,7 @@ quickstart:
     configure:
         tagging_rules: Napište pravidla pro automatické štítkování článků
         feed: Povolte kanály
-        language: Změňte jazyk a vzhled
+        language: Změňte jazyk a rozhraní
         description: Abyste měli aplikaci, která vám vyhovuje, podívejte se na konfiguraci wallabagu.
         title: Nakonfigurujte aplikaci
     intro:
@@ -533,11 +535,12 @@ import:
         enabled: 'Import se provádí asynchronně. Po spuštění úlohy importu bude externí pracovní proces zpracovávat úlohy jednu po druhé. Aktuální služba je:'
     readability:
         how_to: Vyberte svůj export z Readability a kliknutím na níže uvedené tlačítko jej nahrajte a importujte.
-        description: Tento importér importuje všechny vaše články Readability. Na stránce s nástroji (https://www.readability.com/tools/) klikněte v části „Export dat“ na „Exportovat data“. Obdržíte e-mail pro stažení souboru json (který ve skutečnosti nekončí příponou .json).
+        description: Tento importér importuje všechny vaše články z Readability.
         page_title: Import > Readability
     elcurator:
-        description: Tento importér naimportuje všechny vaše články z elCurator. Přejděte do svých předvoleb v účtu elCurator a poté exportujte svůj obsah. Získáte soubor JSON.
+        description: Tento importér naimportuje všechny vaše články z elCurator.
         page_title: Import > elCurator
+        how_to: Vyberte svůj export z elCuratoru a kliknutím na níže uvedené tlačítko jej nahrajte a importujte.
     wallabag_v2:
         description: Tento importér naimportuje všechny vaše články z wallabagu v2. Přejděte na Všechny články a pak na postranním panelu pro export klikněte na „JSON“. Získáte soubor „All articles.json“.
         page_title: Import > Wallabag v2
@@ -545,6 +548,22 @@ import:
         page_title: Import > del.icio.us
         how_to: Vyberte svůj export Delicious a kliknutím na níže uvedené tlačítko jej nahrajte a importujte.
         description: Tento importér naimportuje všechny vaše záložky z Delicious. Od roku 2021 z něj můžete opět exportovat data pomocí stránky pro export (https://del.icio.us/export). Zvolte formát „JSON“ a stáhněte jej (například „delicious_export.2021.02.06_21.10.json“).
+    shaarli:
+        page_title: Import > Shaarli
+        how_to: Zvolte soubor zálohy záložek a kliknutím na níže uvedené tlačítko jej naimportujte. Pamatujte na to, že tento proces může trvat dlouho, protože je třeba načíst všechny články.
+        description: Tento importér naimportuje všechny vaše záložky ze Shaarli. Stačí přejít do sekce Nástroje, pak do „Exportovat databázi“, zvolit záložky a exportovat je. Získáte soubor HTML.
+    pocket_html:
+        how_to: Zvolte soubor zálohy záložek a kliknutím na níže uvedené tlačítko jej naimportujte. Pamatujte na to, že tento proces může trvat dlouho, protože je třeba načíst všechny články.
+        page_title: Import > Pocket HTML
+        description: Tento importér naimportuje všechny vaše záložky z Pocketu (prostřednictvím HTML exportu). Stačí přejít na https://getpocket.com/export a exportovat soubor HTML, který bude stažen (například „ril_export.html“).
+    omnivore:
+        how_to: Rozbalte prosím svůj export z Omnivoru, následně nahrajte jeden po druhém všechny JSON soubory s názevem "metadata_x_to_y.json".
+        page_title: Import > Omnivore
+        description: Tento importér naimportuje všechny vaše články z Omnivore.
+    pocket_csv:
+        page_title: Import > Pocket CSV
+        description: Tento importér naimportuje všechny vaše záložky z Pocketu (prostřednictvím CSV exportu). Stačí přejít na https://getpocket.com/export a exportovat soubor. Stáhne se ZIP soubor (např. „pocket.zip“). Po rozbalení získáte CSV soubor, nazvaný „part_000000.csv“.
+        how_to: Zvolte soubor zálohy záložek a kliknutím na níže uvedené tlačítko jej naimportujte. Pamatujte na to, že tento proces může trvat dlouho, protože je třeba načíst všechny články.
 flashes:
     config:
         notice:
@@ -567,6 +586,7 @@ flashes:
             user_updated: Informace byla aktualizována
             password_not_updated_demo: V ukázkovém režimu nelze pro tohoto uživatele změnit heslo.
             config_saved: Konfigurace byla uložena.
+            otp_code_invalid: Neplatný dvoufaktorový autentizační kód
     ignore_origin_instance_rule:
         notice:
             deleted: Globální pravidlo ignorování bylo odstraněno
@@ -682,7 +702,7 @@ howto:
         description: 'Přetáhněte tento odkaz na svůj panel záložek:'
     mobile_apps:
         windows: na Microsoft Store
-        ios: na iTunes Store
+        ios: na App Store
         android:
             via_google_play: prostřednictvím Google Play
             via_f_droid: prostřednictvím F-Droid

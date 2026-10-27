@@ -7,7 +7,7 @@ demo_mode_username: Demo gebruiker
 demo_mode_enabled: Schakel demo modus in? (Gebruik dit alleen voor de publieke wallabag demo)
 matomo_enabled: Schakel Matomo in
 matomo_site_id: ID van uw Matomo website
-matomo_host: Adres van uw Matomo website (zonder http:// of https://)
+matomo_host: Adres van jouw Matomo website (zonder http:// of https://)
 modify_settings: bevestig
 misc: overig
 import: importeer
@@ -35,4 +35,4 @@ export_epub: Schakel ePub-export in
 download_pictures: Download foto's naar jouw server
 settings_changed: Instellingen bijgewerkt
 diaspora_url: diaspora* URL, als de dienst is aangezet
-share_public: Sta openbare URL's toe voor items
+share_public: Sta openbare URL's toe voor artikelen

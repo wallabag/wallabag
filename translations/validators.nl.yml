@@ -5,3 +5,4 @@ validator:
     item_per_page_too_high: Dit breekt vrijwel zeker de app
     password_wrong_value: Verkeerd huidig wachtwoord opgegeven.
     password_too_short: Uw wachtwoord moet minimaal 8 tekens bevatten.
+    feed_limit_too_high: Dit breekt zeker de app

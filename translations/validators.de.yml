@@ -5,3 +5,4 @@ validator:
     item_per_page_too_high: Dies wird die Anwendung möglicherweise beenden
     rss_limit_too_high: Dies wird die Anwendung möglicherweise beenden
     quote_length_too_high: Das Zitat ist zu lang. Es sollte nicht mehr als {{ limit }} Zeichen enthalten.
+    feed_limit_too_high: Dies wird die Anwendung möglicherweise beenden

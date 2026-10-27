@@ -3,5 +3,6 @@ validator:
     password_too_short: Lozinka mora sadržati barem 8 znakova.
     password_wrong_value: Dostavljena je kriva trenutačna lozinka.
     rss_limit_too_high: Ovo će zasigurno urušiti program
-    item_per_page_too_high: Ovo će zasigurno urušiti program
+    item_per_page_too_high: Ovo će zasigurno prekinuti rad programa
     password_must_match: Polja lozinki moraju se poklapati.
+    feed_limit_too_high: Ovo će zasigurno prekinuti rad programa
