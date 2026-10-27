@@ -25,4 +25,24 @@ class EntryTest extends WallabagCoreTestCase
             $this->assertSame($lang, $entry->getHTMLLanguage());
         }
     }
+
+    public function testSetPublishedByFiltersEmptyAuthors()
+    {
+        $this->logInAs('admin');
+        $entry = new Entry($this->getLoggedInUser());
+
+        $entry->setPublishedBy(['', ' bob ', '  ', 'helen']);
+
+        $this->assertSame(['bob', 'helen'], $entry->getPublishedBy());
+    }
+
+    public function testSetPublishedByStoresNullWhenOnlyEmptyAuthorsAreProvided()
+    {
+        $this->logInAs('admin');
+        $entry = new Entry($this->getLoggedInUser());
+
+        $entry->setPublishedBy(['', '  ']);
+
+        $this->assertNull($entry->getPublishedBy());
+    }
 }

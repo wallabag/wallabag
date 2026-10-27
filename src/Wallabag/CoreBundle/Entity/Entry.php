@@ -908,7 +908,7 @@ class Entry
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getPublishedBy()
     {
@@ -916,13 +916,23 @@ class Entry
     }
 
     /**
-     * @param array $publishedBy
+     * @param array|null $publishedBy
      *
      * @return Entry
      */
     public function setPublishedBy($publishedBy)
     {
-        $this->publishedBy = $publishedBy;
+        if (\is_array($publishedBy)) {
+            $publishedBy = array_values(array_filter(
+                array_map(
+                    static fn ($author) => is_scalar($author) ? trim((string) $author) : '',
+                    $publishedBy
+                ),
+                static fn ($author) => '' !== $author
+            ));
+        }
+
+        $this->publishedBy = empty($publishedBy) ? null : $publishedBy;
 
         return $this;
     }
