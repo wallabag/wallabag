@@ -117,6 +117,14 @@ class ContentProxy
     }
 
     /**
+     * Check whether imported content includes the fields required to skip a source-specific grabber.
+     */
+    private function validateContent(array $content): bool
+    {
+        return !empty($content['title']) && !empty($content['html']) && !empty($content['url']);
+    }
+
+    /**
      * Use a Symfony validator to ensure the language is well formatted.
      *
      * @param string $value Language to validate and save

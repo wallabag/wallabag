@@ -1,4 +1,15 @@
 ARG PHP_VERSION=8.2.35
+
+FROM node:24-bookworm-slim@sha256:2dd9a4f758e173b65fee15388f7706af6fb01ef50cf7a2c0538711d67a6981ae AS frontend-assets
+WORKDIR /var/www/wallabag
+COPY package.json yarn.lock ./
+RUN corepack prepare yarn@1.22.22 --activate \
+    && yarn install --frozen-lockfile --non-interactive
+COPY . .
+RUN yarn build:prod \
+    && test -s web/build/manifest.json \
+    && test -s web/build/entrypoints.json
+
 FROM php:${PHP_VERSION}-apache-trixie@sha256:fa8966fbaaa06981e549e7a33eb8a68f4cf677d6a82e1d6350adc5d85fe8f740
 
 ARG PHP_VERSION
@@ -42,6 +53,7 @@ RUN apt-get update \
 
 COPY --from=composer:2@sha256:d0c32820c62cc860fddd22adceed4eeda7698b093a7a88d503414172ce400626 /usr/bin/composer /usr/local/bin/composer
 COPY . /var/www/wallabag
+COPY --from=frontend-assets /var/www/wallabag/web/build /var/www/wallabag/web/build
 COPY docker/production/php-production.ini /usr/local/etc/php/conf.d/99-wallabag-production.ini
 COPY docker/production/entrypoint.sh /usr/local/bin/wallabag-source-entrypoint
 
@@ -53,6 +65,8 @@ RUN set -eux; \
     test -s vendor/autoload_runtime.php; \
     composer check-platform-reqs --no-dev; \
     mkdir -p data var/cache var/logs var/sessions web/assets/images; \
+    test -s web/build/manifest.json; \
+    test -s web/build/entrypoints.json; \
     APP_ENV=prod APP_DEBUG=0 APP_SECRET=build-only-secret DEFAULT_LOCALE=en WALLABAG_BASE_URL=https://build.invalid MAILER_DSN=null://null WALLABAG_REGISTRATION_ENABLED=0 WALLABAG_CAPTCHA_ENABLED=0 WALLABAG_CONFIRMATION_ENABLED=0 WALLABAG_FROM_EMAIL=wallabag@example.invalid WALLABAG_SERVER_NAME=wallabag-build WALLABAG_TWOFACTOR_SENDER=no-reply@example.invalid WALLABAG_LOG_LEVEL=error WALLABAG_RABBITMQ_PREFETCH_COUNT=10 REDIS_URL=redis://127.0.0.1 RABBITMQ_URL=amqp://guest:guest@127.0.0.1:5672/%2f WALLABAG_USER_AGENT=wallabag-build WALLABAG_OAUTH_ACCESS_TOKEN_LIFETIME=3600 WALLABAG_OAUTH_REFRESH_TOKEN_LIFETIME=1209600 WALLABAG_TABLE_PREFIX=wallabag_ WALLABAG_ARTICLE_REPORTING_URL= DATABASE_URL=sqlite:////tmp/wallabag-image-build.sqlite bin/console assets:install web --symlink --relative --no-interaction --env=prod --no-debug; \
     rm -rf var/cache/* /tmp/wallabag-image-build.sqlite; \
     usermod --non-unique --uid 65534 --gid nogroup www-data; \
