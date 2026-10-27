@@ -192,6 +192,7 @@ config:
             archive: Zarchiwizowane
             starred: Wyróżnione
             unread: Nieprzeczytane
+            opds: Katalog OPDS (czytniki e-booków)
         feed_links: Linki do aktualności
         token_revoke: Anuluj token
         token_reset: Stwórz ponownie token
