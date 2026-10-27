@@ -220,6 +220,7 @@ config:
             archive: Arşiv
             starred: Favoriler
             unread: Okunmamış
+            opds: OPDS kataloğu (e-okuyucular)
         feed_links: Akış bağlantıları
         token_revoke: Belirteci iptal edin
         token_reset: Belirtecinizi yeniden oluşturun
