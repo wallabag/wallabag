@@ -102,6 +102,8 @@ config:
         fontsize_label: Font size
         lineheight_label: Line height
         maxwidth_label: Maximal width
+        open_original_url_label: Open articles on the original website
+        help_open_original_url: 'Article titles and thumbnails open the original website instead of the reader. Opening an article does not mark it as read. The reader remains available from each article.'
     form_feed:
         description: 'Atom feeds provided by wallabag allow you to read your saved articles with your favourite Atom reader. You need to generate a token first.'
         token_label: 'Feed token'
@@ -229,6 +231,7 @@ config:
             enable: Enable
             qrcode_label: QR code
 entry:
+    open_reader: Open in reader
     default_title: Title of the entry
     page_titles:
         unread: Unread entries

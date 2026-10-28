@@ -380,6 +380,20 @@ class EntryController extends AbstractController
         return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
     }
 
+    #[Route(path: '/open/{id}', name: 'open_entry', methods: ['GET'], requirements: ['id' => '\\d+'])]
+    #[IsGranted('VIEW', subject: 'entry')]
+    public function openAction(Entry $entry): RedirectResponse
+    {
+        $url = $entry->getUrl();
+        if ($this->getUser()->getConfig()->getOpenOriginalUrl()
+            && filter_var($url, \FILTER_VALIDATE_URL)
+            && \in_array(strtolower(parse_url($url, \PHP_URL_SCHEME)), ['http', 'https'], true)) {
+            return $this->redirect($url);
+        }
+
+        return $this->redirectToRoute('view', ['id' => $entry->getId()]);
+    }
+
     /**
      * Shows entry content.
      *
