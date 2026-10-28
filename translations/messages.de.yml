@@ -219,6 +219,7 @@ config:
             archive: Archiviert
             starred: Favoriten
             unread: Ungelesen
+            opds: OPDS Katalog (eBook Reader)
         token_create: Erstelle deinen Token
         no_token: Kein Token
         description: Durch Wallabag bereitgestellte Atom Feeds erlauben es dir, deine gespeicherten Artikel später mit deinem favorisierten Atom Reader zu lesen. Du musst zuerst einen Token erstellen.
