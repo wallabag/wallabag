@@ -822,7 +822,7 @@ class Entry
     /**
      * @return Entry
      */
-    public function setPublishedAt(\DateTimeInterface $publishedAt)
+    public function setPublishedAt(?\DateTimeInterface $publishedAt)
     {
         $this->publishedAt = $publishedAt;
 
