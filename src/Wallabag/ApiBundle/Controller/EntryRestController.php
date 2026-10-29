@@ -731,7 +731,7 @@ class EntryRestController extends WallabagRestController
                     'date' => !empty($data['publishedAt']) ? $data['publishedAt'] : $entry->getPublishedAt(),
                     // faking the open graph preview picture
                     'image' => !empty($data['picture']) ? $data['picture'] : $entry->getPreviewPicture(),
-                    'authors' => \is_string($data['authors']) ? explode(',', $data['authors']) : $entry->getPublishedBy(),
+                    'authors' => isset($data['authors']) && \is_string($data['authors']) ? explode(',', $data['authors']) : $entry->getPublishedBy(),
                 ]
             );
         } catch (\Exception $e) {
@@ -741,35 +741,13 @@ class EntryRestController extends WallabagRestController
             ]);
         }
 
-        if (null !== $data['isArchived']) {
-            $entry->updateArchived((bool) $data['isArchived']);
-        }
-
-        if (null !== $data['isStarred']) {
-            $entry->updateStar((bool) $data['isStarred']);
-        }
-
-        if (!empty($data['tags'])) {
-            $tagsAssigner->assignTagsToEntry($entry, $data['tags']);
-        }
-
-        if (!empty($data['origin_url'])) {
-            $entry->setOriginUrl($data['origin_url']);
-        }
-
-        if (null !== $data['isPublic']) {
-            if (true === (bool) $data['isPublic'] && null === $entry->getUid()) {
-                $entry->generateUid();
-            } elseif (false === (bool) $data['isPublic']) {
-                $entry->cleanUid();
-            }
-        }
+        $this->applyEntryData($entry, $data, $contentProxy, $tagsAssigner, false);
 
         if (empty($entry->getDomainName())) {
             $contentProxy->setEntryDomainName($entry);
         }
 
-        if (empty($entry->getTitle())) {
+        if (null === $entry->getTitle() || '' === $entry->getTitle()) {
             $contentProxy->setDefaultEntryTitle($entry);
         }
 
@@ -919,7 +897,7 @@ class EntryRestController extends WallabagRestController
         // this is a special case where user want to manually update the entry content
         // the ContentProxy will only cleanup the html
         // and also we force to not re-fetch the content in case of error
-        if (!empty($data['content'])) {
+        if (isset($data['content'])) {
             try {
                 $contentProxy->updateEntry(
                     $entry,
@@ -937,56 +915,13 @@ class EntryRestController extends WallabagRestController
             }
         }
 
-        if (!empty($data['title'])) {
-            $entry->setTitle($data['title']);
-        }
-
-        if (!empty($data['language'])) {
-            $contentProxy->updateLanguage($entry, $data['language']);
-        }
-
-        if (!empty($data['authors']) && \is_string($data['authors'])) {
-            $entry->setPublishedBy(explode(',', $data['authors']));
-        }
-
-        if (!empty($data['picture'])) {
-            $contentProxy->updatePreviewPicture($entry, $data['picture']);
-        }
-
-        if (!empty($data['publishedAt'])) {
-            $contentProxy->updatePublishedAt($entry, $data['publishedAt']);
-        }
-
-        if (null !== $data['isArchived']) {
-            $entry->updateArchived((bool) $data['isArchived']);
-        }
-
-        if (null !== $data['isStarred']) {
-            $entry->updateStar((bool) $data['isStarred']);
-        }
-
-        if (!empty($data['tags'])) {
-            $entry->removeAllTags();
-            $tagsAssigner->assignTagsToEntry($entry, $data['tags']);
-        }
-
-        if (null !== $data['isPublic']) {
-            if (true === (bool) $data['isPublic'] && null === $entry->getUid()) {
-                $entry->generateUid();
-            } elseif (false === (bool) $data['isPublic']) {
-                $entry->cleanUid();
-            }
-        }
-
-        if (!empty($data['origin_url'])) {
-            $entry->setOriginUrl($data['origin_url']);
-        }
+        $this->applyEntryData($entry, $data, $contentProxy, $tagsAssigner, true);
 
         if (empty($entry->getDomainName())) {
             $contentProxy->setEntryDomainName($entry);
         }
 
-        if (empty($entry->getTitle())) {
+        if (null === $entry->getTitle() || '' === $entry->getTitle()) {
             $contentProxy->setDefaultEntryTitle($entry);
         }
 
@@ -1390,24 +1325,107 @@ class EntryRestController extends WallabagRestController
 
     /**
      * Retrieve value from the request.
-     * Used for POST & PATCH on a an entry.
+     * Used for POST & PATCH on an entry. Omitted keys are excluded; empty strings and null clear values.
      *
      * @return array
      */
     private function retrieveValueFromRequest(Request $request)
     {
-        return [
-            'title' => $request->request->get('title'),
-            'tags' => $request->request->get('tags', []),
-            'isArchived' => $request->request->get('archive'),
-            'isStarred' => $request->request->get('starred'),
-            'isPublic' => $request->request->get('public'),
-            'content' => $request->request->get('content'),
-            'language' => $request->request->get('language'),
-            'picture' => $request->request->get('preview_picture'),
-            'publishedAt' => $request->request->get('published_at'),
-            'authors' => $request->request->get('authors', ''),
-            'origin_url' => $request->request->get('origin_url', ''),
+        $parameters = [
+            'title' => 'title',
+            'tags' => 'tags',
+            'archive' => 'isArchived',
+            'starred' => 'isStarred',
+            'public' => 'isPublic',
+            'content' => 'content',
+            'language' => 'language',
+            'preview_picture' => 'picture',
+            'published_at' => 'publishedAt',
+            'authors' => 'authors',
+            'origin_url' => 'origin_url',
         ];
+        $data = [];
+
+        foreach ($parameters as $parameter => $key) {
+            if ($request->request->has($parameter)) {
+                $value = $request->request->get($parameter);
+                $data[$key] = '' === $value ? null : $value;
+            }
+        }
+
+        return $data;
+    }
+
+    private function applyEntryData(Entry $entry, array $data, ContentProxy $contentProxy, TagsAssigner $tagsAssigner, bool $isPatch): void
+    {
+        if (\array_key_exists('content', $data) && null === $data['content']) {
+            $entry->setContent(null);
+            $entry->setReadingTime(0);
+        }
+
+        if (\array_key_exists('title', $data) && ($isPatch || null === $data['title'])) {
+            $entry->setTitle($data['title']);
+        }
+
+        if (\array_key_exists('language', $data)) {
+            if (null === $data['language']) {
+                $entry->setLanguage(null);
+            } else {
+                $contentProxy->updateLanguage($entry, $data['language']);
+            }
+        }
+
+        if (\array_key_exists('authors', $data)) {
+            if (null === $data['authors'] || [] === $data['authors']) {
+                $entry->setPublishedBy([]);
+            } elseif (\is_string($data['authors'])) {
+                $entry->setPublishedBy(explode(',', $data['authors']));
+            }
+        }
+
+        if (\array_key_exists('picture', $data)) {
+            if (null === $data['picture']) {
+                $entry->setPreviewPicture(null);
+            } else {
+                $contentProxy->updatePreviewPicture($entry, $data['picture']);
+            }
+        }
+
+        if (\array_key_exists('publishedAt', $data)) {
+            if (null === $data['publishedAt']) {
+                $entry->setPublishedAt(null);
+            } else {
+                $contentProxy->updatePublishedAt($entry, $data['publishedAt']);
+            }
+        }
+
+        if (\array_key_exists('isArchived', $data)) {
+            $entry->updateArchived((bool) $data['isArchived']);
+        }
+
+        if (\array_key_exists('isStarred', $data)) {
+            $entry->updateStar((bool) $data['isStarred']);
+        }
+
+        if (\array_key_exists('tags', $data)) {
+            if ($isPatch || null === $data['tags'] || [] === $data['tags']) {
+                $entry->removeAllTags();
+            }
+            if (null !== $data['tags'] && [] !== $data['tags']) {
+                $tagsAssigner->assignTagsToEntry($entry, $data['tags']);
+            }
+        }
+
+        if (\array_key_exists('isPublic', $data)) {
+            if ((bool) $data['isPublic'] && null === $entry->getUid()) {
+                $entry->generateUid();
+            } elseif (!(bool) $data['isPublic']) {
+                $entry->cleanUid();
+            }
+        }
+
+        if (\array_key_exists('origin_url', $data)) {
+            $entry->setOriginUrl($data['origin_url']);
+        }
     }
 }
