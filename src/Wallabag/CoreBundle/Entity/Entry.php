@@ -900,7 +900,7 @@ class Entry
     /**
      * @return Entry
      */
-    public function setPublishedAt(\DateTime $publishedAt)
+    public function setPublishedAt(?\DateTime $publishedAt)
     {
         $this->publishedAt = $publishedAt;
 
