@@ -502,13 +502,17 @@ class EntryRestController extends WallabagRestController
      *     @OA\Parameter(
      *         name="urls",
      *         in="query",
-     *         description="Urls (as an array) to create. A JSON array of urls ['http://...', 'http://...']",
+     *         description="Urls (as an array) to create. A JSON array of URL strings, e.g. [""https://wallabag.org/"", ""https://example.com/""]",
      *         required=true,
-     *         @OA\Schema(type="string")
+     *         @OA\Schema(type="string", example="[""https://wallabag.org/"", ""https://example.com/""]")
      *     ),
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
+     *     ),
+     *     @OA\Response(
+     *         response="400",
+     *         description="Returned when urls is invalid or the API limit is reached"
      *     )
      * )
      *
@@ -522,12 +526,22 @@ class EntryRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $urls = json_decode($request->query->get('urls', []));
+        $urls = json_decode($request->query->get('urls', '[]'));
+
+        if (!\is_array($urls)) {
+            throw new BadRequestHttpException('urls must be a JSON array of non-empty strings');
+        }
 
         $limit = $this->getParameter('wallabag_core.api_limit_mass_actions');
 
         if (\count($urls) > $limit) {
             throw new HttpException(400, 'API limit reached');
+        }
+
+        foreach ($urls as $url) {
+            if (!\is_string($url) || '' === trim($url)) {
+                throw new BadRequestHttpException('urls must be a JSON array of non-empty strings');
+            }
         }
 
         $results = [];

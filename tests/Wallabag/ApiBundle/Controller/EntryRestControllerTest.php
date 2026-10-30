@@ -1304,6 +1304,32 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertEmpty($content);
     }
 
+    /**
+     * @dataProvider dataForInvalidEntriesList
+     */
+    public function testPostEntriesListActionWithInvalidUrls(string $urls): void
+    {
+        $repository = $this->client->getContainer()->get(EntityManagerInterface::class)->getRepository(Entry::class);
+        $count = $repository->count([]);
+
+        $this->client->request('POST', '/api/entries/lists?' . http_build_query(['urls' => $urls]));
+
+        $this->assertSame(400, $this->client->getResponse()->getStatusCode());
+        $this->assertStringContainsString('urls must be a JSON array of non-empty strings', $this->client->getResponse()->getContent());
+        $this->assertSame($count, $repository->count([]));
+    }
+
+    public static function dataForInvalidEntriesList(): array
+    {
+        return [
+            'invalid JSON from documentation' => ["[{'url': 'https://wallabag.org/'}]"],
+            'objects from documentation' => ['[{"url":"https://wallabag.org/"}]'],
+            'null' => ['null'],
+            'empty string' => ['[""]'],
+            'invalid item after valid URL' => ['["https://wallabag.org/",null]'],
+        ];
+    }
+
     public function testDeleteEntriesListAction()
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
