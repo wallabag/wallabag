@@ -70,6 +70,22 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString('flashes.config.notice.config_saved', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
+    public function testOriginalUrlPreference(): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        foreach ([true, false] as $enabled) {
+            $crawler = $client->request('GET', '/config');
+            $form = $crawler->filter('button[id=config_save]')->form();
+            $client->submit($form, ['config[open_original_url]' => $enabled]);
+            $this->assertSame(302, $client->getResponse()->getStatusCode());
+            $crawler = $client->followRedirect();
+            $this->assertSame($enabled, null !== $crawler->filter('#config_open_original_url')->attr('checked'));
+            $this->assertSame($enabled, $this->getLoggedInUser()->getConfig()->getOpenOriginalUrl());
+        }
+    }
+
     public function testChangeReadingSpeed(): void
     {
         $this->logInAs('admin');

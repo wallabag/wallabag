@@ -2,6 +2,7 @@
 
 ## Upcoming changes
 
+* Add a per-user preference to open article titles and thumbnails on the original website.
 * **[BC BREAK]** Convert 403 errors to 404 errors by @yguedidi in https://github.com/wallabag/wallabag/pull/8075
 * `wallassets/` folder renamed to `build/`
 

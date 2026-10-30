@@ -68,6 +68,11 @@ class ConfigType extends AbstractType
                 'property_path' => 'displayThumbnails',
                 'required' => false,
             ])
+            ->add('open_original_url', CheckboxType::class, [
+                'label' => 'config.form_settings.open_original_url_label',
+                'property_path' => 'openOriginalUrl',
+                'required' => false,
+            ])
             ->add('reading_speed', IntegerType::class, [
                 'label' => 'config.form_settings.reading_speed.label',
                 'property_path' => 'readingSpeed',

@@ -53,6 +53,15 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="input-field col s12 settings-checkbox-col">
+                                {{ form_errors(form.config.open_original_url) }}
+                                {{ form_widget(form.config.open_original_url) }}
+                                {{ form_label(form.config.open_original_url, null, {'label_attr': {'class': 'settings-checkbox-label'}}) }}
+                                <p>{{ 'config.form_settings.help_open_original_url'|trans }}</p>
+                            </div>
+                        </div>
+
                             <div class="row">
                                 <div class="input-field col s11">
                                     {{ form_errors(form.config.reading_speed) }}

@@ -96,6 +96,9 @@ class Config
     #[Groups(['config_api'])]
     private $displayThumbnails;
 
+    #[ORM\Column(name: 'open_original_url', type: 'boolean', options: ['default' => false])]
+    private bool $openOriginalUrl = false;
+
     /**
      * @var string|null
      */
@@ -384,6 +387,18 @@ class Config
     public function setDisplayThumbnails(bool $displayThumbnails)
     {
         $this->displayThumbnails = $displayThumbnails ? 1 : 0;
+
+        return $this;
+    }
+
+    public function getOpenOriginalUrl(): bool
+    {
+        return $this->openOriginalUrl;
+    }
+
+    public function setOpenOriginalUrl(bool $openOriginalUrl): self
+    {
+        $this->openOriginalUrl = $openOriginalUrl;
 
         return $this;
     }
