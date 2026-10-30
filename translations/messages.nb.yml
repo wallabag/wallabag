@@ -203,6 +203,7 @@ config:
             archive: Arkivert
             starred: Stjernemerket
             unread: Ulest
+            opds: OPDS-katalog (e-lesere)
         feed_links: Strøm-lenker
         token_revoke: Tilbakekall symbolet
         token_reset: Nullstill ditt symbol
