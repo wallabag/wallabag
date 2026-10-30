@@ -341,6 +341,7 @@ config:
             archive: Arquivado
             starred: Con estrela
             unread: Sen ler
+            opds: Catálogo OPDS (libros-e)
         feed_links: Ligazóns da canle
         token_revoke: Revogar o token
         token_reset: Volver a crear o token
