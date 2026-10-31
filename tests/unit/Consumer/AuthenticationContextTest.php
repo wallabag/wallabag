@@ -90,4 +90,57 @@ class AuthenticationContextTest extends TestCase
             self::assertCount(0, $browser->getCookieJar()->all());
         }
     }
+
+    public function testInvalidEntryRestoresContextAndClearsCookies(): void
+    {
+        $user = new User();
+        $storage = new TokenStorage();
+        $original = new UsernamePasswordToken(new User(), 'main', ['ROLE_USER']);
+        $storage->setToken($original);
+        $browser = new HttpBrowser();
+        $em = $this->createMock(EntityManagerInterface::class);
+        $em->expects(self::never())->method('flush');
+        $repository = $this->getMockBuilder(UserRepository::class)->disableOriginalConstructor()->getMock();
+        $repository->method('find')->willReturn($user);
+        $import = $this->getMockBuilder(AbstractImport::class)->disableOriginalConstructor()->getMockForAbstractClass();
+        $import->method('validateEntry')->willReturnCallback(static function () use ($user, $storage, $browser) {
+            self::assertSame($user, $storage->getToken()->getUser());
+            $browser->getCookieJar()->set(new Cookie('session', 'current-user', null, '/', 'example.org'));
+
+            return false;
+        });
+        $import->expects(self::never())->method('parseEntry');
+        $consumer = new RedisEntryConsumer($em, $repository, $import, new EventDispatcher(), null, $storage, $browser);
+        self::assertTrue($consumer->manage(json_encode(['userId' => 1, 'url' => 'https://example.org/article'])));
+        self::assertSame($original, $storage->getToken());
+        self::assertCount(0, $browser->getCookieJar()->all());
+    }
+
+    public function testSaveFailureRestoresContextAndClearsCookies(): void
+    {
+        $user = new User();
+        $storage = new TokenStorage();
+        $original = new UsernamePasswordToken(new User(), 'main', ['ROLE_USER']);
+        $storage->setToken($original);
+        $browser = new HttpBrowser();
+        $em = $this->createMock(EntityManagerInterface::class);
+        $em->method('flush')->willThrowException(new \RuntimeException('simulated database failure'));
+        $em->expects(self::never())->method('clear');
+        $repository = $this->getMockBuilder(UserRepository::class)->disableOriginalConstructor()->getMock();
+        $repository->method('find')->willReturn($user);
+        $import = $this->getMockBuilder(AbstractImport::class)->disableOriginalConstructor()->getMockForAbstractClass();
+        $import->method('validateEntry')->willReturn(true);
+        $import->method('parseEntry')->willReturnCallback(static function () use ($user, $storage, $browser) {
+            self::assertSame($user, $storage->getToken()->getUser());
+            $browser->getCookieJar()->set(new Cookie('session', 'current-user', null, '/', 'example.org'));
+
+            return new Entry($user);
+        });
+        $dispatcher = $this->createMock(EventDispatcher::class);
+        $dispatcher->expects(self::never())->method('dispatch');
+        $consumer = new RedisEntryConsumer($em, $repository, $import, $dispatcher, null, $storage, $browser);
+        self::assertFalse($consumer->manage(json_encode(['userId' => 1, 'url' => 'https://example.org/article'])));
+        self::assertSame($original, $storage->getToken());
+        self::assertCount(0, $browser->getCookieJar()->all());
+    }
 }
