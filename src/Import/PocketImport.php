@@ -164,15 +164,15 @@ class PocketImport extends AbstractImport
 
         $existingEntry = $this->em
             ->getRepository(Entry::class)
-            ->findByUrlAndUserId($url, $this->user->getId());
+            ->findByUrlAndUserId($url, $this->user->getId(), includeDeleted: true);
 
-        if (false !== $existingEntry) {
+        if ($existingEntry instanceof Entry && !$existingEntry->isDeleted()) {
             ++$this->skippedEntries;
 
             return null;
         }
 
-        $entry = new Entry($this->user);
+        $entry = ($existingEntry instanceof Entry) ? $existingEntry : new Entry($this->user);
         $entry->setUrl($url);
 
         // update entry with content (in case fetching failed, the given entry will be return)
