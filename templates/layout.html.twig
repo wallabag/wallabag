@@ -82,7 +82,7 @@
         <div class="nav-panels" data-controller="topbar">
             <div class="nav-panel-item" data-topbar-target="actions">
                 <div class="nav-panel-top">
-                    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <button type="button" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></button>
                     <h1 class="left action">
                         {% block title %}
                         {% endblock %}
@@ -95,15 +95,15 @@
                         </a>
                     </li>
                     <li>
-                        <a class="waves-effect" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.search'|trans }}" href="javascript: void(null);" data-action="topbar#showSearch:prevent:stop" data-shortcuts-target="showSearch">
+                        <button type="button" class="waves-effect" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.search'|trans }}" data-action="topbar#showSearch:stop" data-shortcuts-target="showSearch">
                             <i class="material-icons">search</i>
-                        </a>
+                        </button>
                     </li>
                     {% block nav_panel_extra_actions '' %}
                     <li class="bold">
-                        <a class="waves-effect dropdown-trigger" data-controller="materialize--dropdown materialize--tooltip" data-target="dropdown-account" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.account'|trans }}" href="#" id="news_menu">
+                        <button type="button" class="waves-effect dropdown-trigger" data-controller="materialize--dropdown materialize--tooltip" data-target="dropdown-account" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.account'|trans }}" id="news_menu">
                             <i class="material-icons" id="news_link">account_circle</i>
-                        </a>
+                        </button>
                     </li>
                 </ul>
                 <ul id="dropdown-account" class="dropdown-content">
@@ -134,22 +134,22 @@
                         <li class="divider"></li>
                     {% endif %}
                     <li>
-                        <a href="#" data-action="click->dark-theme#useLight:prevent">
+                        <button type="button" data-action="click->dark-theme#useLight">
                             <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
                             <span>{{ 'menu.left.theme_toggle_light'|trans }}</span>
-                        </a>
+                        </button>
                     </li>
                     <li>
-                        <a href="#" data-action="click->dark-theme#useDark:prevent">
+                        <button type="button" data-action="click->dark-theme#useDark">
                             <i class="theme-toggle-icon material-icons tiny">brightness_low</i>
                             <span>{{ 'menu.left.theme_toggle_dark'|trans }}</span>
-                        </a>
+                        </button>
                     </li>
                     <li>
-                        <a href="#" data-action="click->dark-theme#useAuto:prevent">
+                        <button type="button" data-action="click->dark-theme#useAuto">
                             <i class="theme-toggle-icon material-icons tiny">brightness_auto</i>
                             <span>{{ 'menu.left.theme_toggle_auto'|trans }}</span>
-                        </a>
+                        </button>
                     </li>
                     <li class="divider"></li>
                     <li><a href="{{ path('howto') }}"><i class="material-icons">live_help</i> {{ 'menu.left.howto'|trans }}</a></li>
