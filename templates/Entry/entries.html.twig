@@ -31,15 +31,15 @@
     {% endif %}
     {% if has_filters %}
         <li class="button-filters">
-            <button type="button" class="sidenav-trigger" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" data-target="filters">
-                <i class="material-icons">filter_list</i>
+            <button type="button" class="sidenav-trigger" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" data-target="filters" aria-label="{{ 'menu.top.filter_entries'|trans }}" aria-controls="filters" aria-expanded="false">
+                <i class="material-icons" aria-hidden="true">filter_list</i>
             </button>
         </li>
     {% endif %}
     {% if has_exports %}
         <li class="button-export">
-            <button type="button" class="sidenav-trigger" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.export'|trans }}" data-target="export">
-                <i class="material-icons">file_download</i>
+            <button type="button" class="sidenav-trigger" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.export'|trans }}" data-target="export" aria-label="{{ 'menu.top.export'|trans }}" aria-controls="export" aria-expanded="false">
+                <i class="material-icons" aria-hidden="true">file_download</i>
             </button>
         </li>
     {% endif %}
