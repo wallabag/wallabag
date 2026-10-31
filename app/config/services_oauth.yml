@@ -1,0 +1,32 @@
+# OAuth and PKCE Services Configuration
+
+services:
+    # PKCE Service for code challenge generation and verification
+    wallabag.oauth.pkce_service:
+        class: Wallabag\Service\OAuth\PkceService
+        autowire: false
+        autoconfigure: false
+        public: true
+
+    # PkceOAuthStorage requires manual argument ordering for parent class compatibility
+    Wallabag\Service\OAuth\PkceOAuthStorage:
+        arguments:
+            - '@fos_oauth_server.client_manager'
+            - '@fos_oauth_server.access_token_manager'
+            - '@fos_oauth_server.refresh_token_manager'
+            - '@fos_oauth_server.auth_code_manager'
+            - '@fos_user.user_provider.username_email'
+            - '@security.encoder_factory'
+            - '@wallabag.oauth.pkce_service'
+            - '@request_stack'
+
+    # PKCE-enhanced OAuth Storage (replaces the default storage)
+    wallabag.oauth.storage:
+        alias: Wallabag\Service\OAuth\PkceOAuthStorage
+        public: true
+
+    # Override the default OAuth storage with our PKCE-enabled one
+    fos_oauth_server.storage:
+        alias: wallabag.oauth.storage
+        public: true
+
