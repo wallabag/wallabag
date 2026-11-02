@@ -81,15 +81,6 @@ import:
     wallabag_v2:
         description: 이 가져오기 도구는 모든 wallabag v2 문서를 가져옵니다. 모든 문서로 이동 한 다음 내보내기 사이드 바에서 "JSON"을 클릭합니다. "All articles.json" 파일이 생성됩니다.
         page_title: 가져오기 > Wallabag v2
-    pocket:
-        authorize_message: Pocket 계정에서 데이터를 가져올 수 있습니다. 아래 버튼을 클릭하고 애플리케이션이 getpocket.com 에 연결하도록 승인하면 됩니다.
-        description: 이 가져오기 도구는 모든 Pocket 데이터를 가져옵니다. Pocket은 서비스에서 콘텐츠를 검색하는 것을 허용하지 않으므로, wallabag에서 각 문서의 읽을 수있는 콘텐츠를 다시 가져옵니다.
-        connect_to_pocket: Pocket에 연결하고 데이터 가져오기
-        config_missing:
-            user_message: 서버 관리자가 Pocket용 API 키를 정의해야 합니다.
-            admin_message: '%keyurls%pocket_consumer_key%keyurle%를 정의해야합니다.'
-            description: Pocker 가져오기가 구성되지 않았습니다.
-        page_title: 가져오기 > Pocket
     form:
         mark_as_read_label: 가져온 모든 문서를 읽은 상태로 표시
         file_label: 파일
@@ -515,11 +506,9 @@ config:
             redirect_current_page: 현재 페이지 유지
             redirect_homepage: 홈페이지로 이동
         items_per_page_label: 페이지 당 항목
-        help_pocket_consumer_key: Pocket 가져오기에 필요합니다. Pocket 계정에서 만들 수 있습니다.
         help_language: wallabag 인터페이스 언어를 변경할 수 있습니다.
         android_instruction: Android 앱 정보를 입력하려면 여기를 클릭하세요
         android_configuration: Android 앱 구성
-        pocket_consumer_key_label: 콘텐츠를 가져 오기 위한 Pocket의 Consumer key
         reading_speed:
             200_word: 나는 분당 ~200 단어를 읽습니다
             100_word: 나는 분당 ~100 단어를 읽습니다

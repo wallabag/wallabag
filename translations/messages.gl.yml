@@ -271,12 +271,10 @@ config:
         page_title: Autenticación con dous factores
     form_settings:
         android_instruction: Toca aquí para precompletar a aap Android
-        help_pocket_consumer_key: Requerido para importación en Pocket. Podes creala na túa conta Pocket.
         help_language: Podes cambiar o idioma da interface de wallabag.
         help_reading_speed: wallabag calcula o tempo de lectura de cada artigo. Podes definir aquí, grazas a esta lista, se es lectora rápida ou lenta. wallabag volverá a calcular a velocidade de lectura para cada artigo.
         help_items_per_page: Podes cambiar o número de artigos mostrados en cada páxina.
         android_configuration: Configurar a app Android
-        pocket_consumer_key_label: Consumer Key para importar contidos de Pocket
         action_mark_as_read:
             redirect_current_page: Permanecer na páxina actual
             redirect_homepage: Ir á páxina de inicio
@@ -425,15 +423,6 @@ import:
         how_to: Selecciona o ficheiro de wallabag e preme no botón inferior para subilo e importalo.
         description: Este importador traerá todos os teus artigos desde wallabag v1. Na páxina de configuración, preme en "Exportar JSON" na sección "Exportar datos wallabag". Obterás un ficheiro "wallabag-export-1-xxxx-xx-xx.json".
         page_title: Importar > Wallabag v1
-    pocket:
-        connect_to_pocket: Conectar con Pocket e importar datos
-        authorize_message: Podes importar os teus datos desde a túa conta Pocket. Só tes que premer no botón inferior e autorizar á aplicación para que se conecte a getpocket.com.
-        config_missing:
-            user_message: A administración do servidor ten que definir unha API Key para Pocket.
-            admin_message: Tes que establecer %keyurls%a pocket_consumer_key%keyurle%.
-            description: A importación desde Pocket non está configurado.
-        description: Este importador traerá todos os datos desde Pocket. Pocket non permite que traiamos os datos desde o seu servizo, así que os contidos de cada artigo teñen que ser obtidos por wallabag.
-        page_title: Importar > Pocket
     form:
         save_label: Subir ficheiro
         file_label: Ficheiro

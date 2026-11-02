@@ -73,8 +73,6 @@ config:
             200_word: 'Posso ler ~200 palavras por minuto'
             300_word: 'Posso ler ~300 palavras por minuto'
             400_word: 'Posso ler ~400 palavras por minuto'
-        pocket_consumer_key_label: 'Chave do consumidor do Pocket para importar conteúdo'
-        help_pocket_consumer_key: Necessário para importar do Pocket. Pode criá-lo na sua conta do Pocket.
     form_user:
         two_factor_description: 'Habilitar autenticação de dois passos significa que você receberá um e-mail com um código a cada nova conexão desconhecida.'
         name_label: 'Nome'
@@ -317,15 +315,6 @@ import:
         mark_as_read_label: 'Marcar todas as entradas importadas como lidas'
         file_label: Ficheiro
         save_label: Enviar ficheiro
-    pocket:
-        page_title: 'Importar > Pocket'
-        description: 'Com este importador você importa todos os seus dados do Pocket. O Pocket não nos permite recuperar o conteúdo de seu serviço, então o conteúdo que pode ser lido é recarregado pelo wallabag.'
-        config_missing:
-            description: 'O importador do Pocket não está configurado.'
-            admin_message: 'Você precisa definir uma %keyurls%a pocket_consumer_key%keyurle%.'
-            user_message: 'Seu administrador do servidor precisa definir uma chave de API para o Pocket.'
-        authorize_message: 'Você pode importar seus dados de sua conta do Pocket. Você somente precisa clicar no botão abaixo e autorizar a aplicação a conectar-se ao getpocket.com.'
-        connect_to_pocket: 'Conecte ao Pocket e importe os dados'
     wallabag_v1:
         page_title: 'Importar > Wallabag v1'
         description: Com este importador você importa todos os seus artigos do wallabag v1. Na sua página de configuração, clique em "JSON export" na opção "Export your wallabag data". Você irá criar um ficheiro "wallabag-export-1-xxxx-xx-xx.json".

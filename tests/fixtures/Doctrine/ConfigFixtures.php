@@ -17,7 +17,6 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
         $adminConfig->setItemsPerPage(30);
         $adminConfig->setReadingSpeed(200);
         $adminConfig->setLanguage('en');
-        $adminConfig->setPocketConsumerKey('xxxxx');
         $adminConfig->setActionMarkAsRead(0);
         $adminConfig->setListMode(0);
         $adminConfig->setDisplayThumbnails(false);

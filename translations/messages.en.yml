@@ -92,14 +92,12 @@ config:
             archive: Archive
             starred: Starred
             tags: Tags
-        pocket_consumer_key_label: Consumer key for Pocket to import contents
         android_configuration: Configure your Android app
         android_instruction: Touch here to prefill your Android app
         help_default_homepage: Choose the page displayed when you open wallabag.
         help_items_per_page: You can change the number of articles displayed on each page.
         help_reading_speed: wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article.
         help_language: You can change the language of wallabag interface.
-        help_pocket_consumer_key: Required for Pocket import. You can create it in your Pocket account.
         help_display_thumbnails: You can decide if you want to display or not articles thumbnails. Useful for slow connections.
         help_font: You can choose the font family you want to use.
         help_fontsize: You can choose the font size you want to use.
@@ -507,15 +505,6 @@ import:
         mark_as_read_label: Mark all imported entries as read
         file_label: File
         save_label: Upload file
-    pocket:
-        page_title: Import > Pocket
-        description: This importer will import all of your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag.
-        config_missing:
-            description: Pocket import isn't configured.
-            admin_message: You need to define %keyurls%a pocket_consumer_key%keyurle%.
-            user_message: Your server admin needs to define an API Key for Pocket.
-        authorize_message: You can import your data from your Pocket account. You just have to click on the button below and authorize the application to connect to getpocket.com.
-        connect_to_pocket: Connect to Pocket and import data
     wallabag_v1:
         page_title: Import > Wallabag v1
         description: This importer will import all your wallabag v1 articles. On your config page, click on "JSON export" in the "Export your wallabag data" section. You will have a "wallabag-export-1-xxxx-xx-xx.json" file.

@@ -44,7 +44,6 @@ config:
         theme_label: 'Tema'
         items_per_page_label: 'Poster pr. side'
         language_label: 'Sprog'
-        pocket_consumer_key_label: Brugers nøgle til Pocket for at importere materialer
     form_feed:
         description: 'RSS-feeds fra wallabag gør det muligt at læse de artikler, der gemmes i wallabag, med din RSS-læser. Det kræver, at du genererer et token først.'
         token_label: 'RSS-Token'

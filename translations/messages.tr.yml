@@ -82,13 +82,11 @@ config:
             label: Makaleyi okundu olarak işaretleme, yıldızlama veya kaldırma ardından ne yapılsın?
             redirect_homepage: Ana sayfaya git
             redirect_current_page: Mevcut sayfada kal
-        pocket_consumer_key_label: Pocket'tan içerikleri aktarmak için Consumer anahtarı
         android_configuration: Android uygulamanızı ayarlayın
         android_instruction: Android uygulamanızın bilgilerini doldurmak için buraya tıklayın
         help_items_per_page: Sayfa başına görüntülenecek makale sayısını değiştirebilirsiniz.
         help_reading_speed: wallabag her bir makale için ortalama okuma sürenizi hesaplar. Buradan, bunun sayesinde hızlı veya yavaş okuyan birisi olduğunuzu tanımlayabilirsiniz. Wallabag her bir makale okunması ardından bunu yeniden hesaplayacaktır.
         help_language: Wallabag arayüzünü kullanacağınız dili değiştirebilirsiniz.
-        help_pocket_consumer_key: Pocket'tan içeri aktarım için gerekli. Pocket hesabınızdan oluşturabilirsiniz.
         display_thumbnails_label: Makale küçük resimlerini göster (yavaş bağlantılar için yararlıdır).
         help_display_thumbnails: Makale küçük resimlerini görüntülemek isteyip istemediğinize karar verebilirsiniz. Yavaş bağlantılar için yararlıdır.
         maxwidth_label: Azami genişlik
@@ -496,15 +494,6 @@ import:
         save_label: Dosyayı yükle
         mark_as_read_title: Tümünü okundu olarak işaretlensin mi?
         mark_as_read_label: Tüm içe aktarılmış makaleleri okundu olarak işaretle
-    pocket:
-        page_title: İçe Aktar > Pocket
-        description: Bu araç tüm Pocket verinizi içe aktarır. Pocket içeriklerin getirilmesine izin vermez, okunabilen içerikler wallabag tarafından yeniden getirilir.
-        authorize_message: Pocket hesabınızda verilerinizi içe aktarabilmemiz için öncelikle aşağıdaki düğmeye tıklayın. Daha sonra, getpocket.com üzerindeki uygulamamıza gereken izinleri verin.
-        connect_to_pocket: Pocket'a bağlanın ve verilerinizi içe aktarın
-        config_missing:
-            description: Pocket üzerinden içe aktarım ayarlanmamış.
-            admin_message: '%keyurls%bir pocket_consumer_key%keyurle% tanımlamalısınız.'
-            user_message: Sunucu yöneticiniz Pocket için bir API anahtarı tanımlamalıdır.
     wallabag_v1:
         page_title: İçe Aktar > Wallabag v1
         description: Bu araç wallabag v1 üzerindeki tüm makalelerinizi içe aktarır. Yapılandırma sayfasında, "Export your wallabag data" sekmesinden "JSON export" adımını izleyin. Bu adım size "wallabag-export-1-xxxx-xx-xx.json" isimli bir dosya verecektir.

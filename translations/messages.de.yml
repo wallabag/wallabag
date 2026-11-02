@@ -82,13 +82,11 @@ config:
             label: Wohin soll nach dem Gelesenmarkieren eines Artikels weitergeleitet werden?
             redirect_homepage: Zur Homepage
             redirect_current_page: Zur aktuellen Seite
-        pocket_consumer_key_label: Consumer-Key für Pocket, um Inhalte zu importieren
         android_configuration: Konfiguriere deine Android-App
         android_instruction: Hier berühren, um deine Android-App auszufüllen
         help_items_per_page: Du kannst die Nummer von Artikeln pro Seite anpassen.
         help_reading_speed: wallabag berechnet eine Lesezeit pro Artikel. Hier kannst du definieren, ob du ein schneller oder langsamer Leser bist. wallabag wird die Lesezeiten danach neu berechnen.
         help_language: Du kannst die Sprache der wallabag-Oberfläche ändern.
-        help_pocket_consumer_key: Nötig für den Pocket-Import. Du kannst ihn in deinem Pocket account einrichten.
         help_display_thumbnails: Du kannst entscheiden, ob Vorschaubilder der Artikel angezeigt werden oder nicht. Das kann bei langsamen Verbindungen helfen.
         help_font: Du kannst die Schriftfamilie auswählen, die du verwenden möchtest.
         help_fontsize: Du kannst die Schriftgröße auswählen, die du verwenden möchtest.
@@ -499,15 +497,6 @@ import:
         mark_as_read_label: Alle importierten Einträge als gelesen markieren
         file_label: Datei
         save_label: Datei hochladen
-    pocket:
-        page_title: Aus Pocket importieren
-        description: Dieser Importer wird all deine Pocket-Daten importieren. Pocket erlaubt es uns nicht, den Inhalt zu migrieren, daher wird der lesbare Inhalt erneut von wallabag heruntergeladen.
-        config_missing:
-            description: Pocket-Import ist nicht konfiguriert.
-            admin_message: Du musst noch den %keyurls%pocket_consumer_key%keyurle% eintragen.
-            user_message: Der Administrator des Servers muss noch einen API-Schlüssel für Pocket konfigurieren.
-        authorize_message: Du kannst deine Daten von deinem Pocket-Konto importieren. Dazu musst du nur den nachfolgenden Button klicken und die Anwendung authentifizieren, sich mit getpocket.com zu verbinden zu dürfen.
-        connect_to_pocket: Mit Pocket verbinden und Daten importieren
     wallabag_v1:
         page_title: Aus wallabag v1 importieren
         description: Dieser Import wird all deine Artikel aus wallabag v1 importieren. Klicke in der Konfigurationsseite auf "JSON-Export" im "wallabag-Daten exportieren"-Abschnitt. Du erhältst eine "wallabag-export-1-xxxx-xx-xx.json"-Datei.

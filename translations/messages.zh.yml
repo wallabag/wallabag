@@ -82,13 +82,11 @@ config:
             label: '将一个项目删除、收藏或是标记为已读后该做什么？'
             redirect_homepage: '返回主页'
             redirect_current_page: '停留在当前页面'
-        pocket_consumer_key_label: '用于从 Pocket 导入内容的 Consumer key'
         android_configuration: '配置你的 Android 应用程序'
         android_instruction: "点按此处以预填充你的 Android 应用"
         help_items_per_page: "你可以选择每页显示的文章数目。"
         help_reading_speed: "wallabag 会为每篇文章计算阅读时间，你可以通过这个列表选择自己是个速读者或是慢读者。wallabag 会根据你的选择重新计算每篇文章的阅读时间。"
         help_language: "你可以在此处更改 wallabag 的界面语言。"
-        help_pocket_consumer_key: "导入 Pocket 项目时需要用到。你可以在自己的 Pocket 账户中创建。"
         help_display_thumbnails: 您可以决定是否显示文章缩略图。对于网速较慢的情况很有用。
         display_thumbnails_label: 显示文章缩略图（对于网速不快有用）。
         help_font: 您可以选择想要使用的字体系列。
@@ -499,15 +497,6 @@ import:
         mark_as_read_label: '将全部项目标记为已读'
         file_label: '文件'
         save_label: '上传文件'
-    pocket:
-        page_title: '导入 > Pocket'
-        description: "这个导入器会导入你 Pocket 账户中的所有内容。Pocket 不允许我们从它的服务器获取文章全文，所以导入的文章将由 wallabag 来重新抓取可读内容。"
-        config_missing:
-            description: "尚未配置好从 Pocket 中导入的功能。"
-            admin_message: '你需要定义 %keyurls%a pocket_consumer_key%keyurle%.'
-            user_message: '你的服务器管理员需要先为 Pocket 配置一个 API Key。'
-        authorize_message: '你可以从你的 Pocket 账号中汇入数据。只需要点击下方按钮并授权该应用程序连接 getpocket.com。'
-        connect_to_pocket: '连接到 Pocket 并导入数据'
     wallabag_v1:
         page_title: 'Import > Wallabag v1'
         description: '这个导入器会导入你 wallabag v1 账户中的所有文章。在你的配置页面中的“到处你的 wallabag 数据”一栏，点击“JSON 导出”。你就会得到一个名为 "wallabag-export-1-xxxx-xx-xx.json" 的文件。'

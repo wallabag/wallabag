@@ -83,8 +83,6 @@ config:
             redirect_current_page: Bli på nåværende side
             label: Hva skjer etter fjerning, stjernemerking eller markere artikkel som lest?
         help_reading_speed: wallabag beregner lesetid for hver artikkel. Du kan definere om du er en rask eller en treg leser her. wallabag vil gjøre en ny bergning av lesetid for hver artikkel.
-        pocket_consumer_key_label: Brukernøkkel for Pocket brukt til import av innhold
-        help_pocket_consumer_key: Kreves for Pocket-import. Kan opprettes i din Pocket-konto.
         help_language: Du kan endre språk for wallabag-grensesnittet.
         help_items_per_page: Du kan endre antallet artikler som vises på hver side.
         android_instruction: Trykk her for å forhåndsutfylle din Android-app
@@ -412,15 +410,6 @@ developer:
     welcome_message: Velkommen til wallabag-API-et
     page_title: API-klientstyring
 import:
-    pocket:
-        connect_to_pocket: Koble til Pocket og importer data
-        config_missing:
-            user_message: Din tjener-administrator må definere en API-nøkkel for Pocket.
-            admin_message: Du må definere %keyurls%a pocket_consumer_key%keyurle%.
-            description: Pocket-import er ikke satt opp.
-        page_title: Importer > Pocket
-        description: Denne importøren vil importere alle dine Pocket oppføringer. Pocket tillater ikke at vi henter innhold fra deres tjeneste, så det lesbare innholdet i hver artikkel vil bli hentet på nytt av wallabag.
-        authorize_message: Du kan importere data fra Pocket-kontoen din. Du trenger bare å klikke på knappen nedenfor og autorisere applikasjonen til å koble seg til getpocket.com.
     form:
         save_label: Last opp fil
         file_label: Fil

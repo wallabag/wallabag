@@ -81,7 +81,6 @@ config:
             label: Яку дію виконати після видалення, додавання в закладки чи позначення статті прочитаною?
             redirect_homepage: Повернутись на домашню сторінку
             redirect_current_page: Залишатись на поточній сторінці
-        pocket_consumer_key_label: Consumer key із Pocket для імпорту контенту
         android_configuration: Налаштувати Android-застосунок
         fontsize_label: Розмір шрифта
         lineheight_label: Висота лінії

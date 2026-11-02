@@ -816,7 +816,6 @@ class ConfigControllerTest extends WallabagTestCase
         $config->setItemsPerPage(30);
         $config->setReadingSpeed(200);
         $config->setLanguage('en');
-        $config->setPocketConsumerKey('xxxxx');
 
         $em->persist($config);
         $em->flush();

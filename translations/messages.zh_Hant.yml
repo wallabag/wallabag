@@ -29,8 +29,6 @@ config:
         android_configuration: 設置你的 Android 應用程式
         help_display_thumbnails: 可以決定是否顯示文章縮圖。連線緩慢時有所幫助。
         display_thumbnails_label: 顯示文章縮圖（用於連線緩慢時）。
-        help_pocket_consumer_key: 匯入 Pocket 時必須。可於你的 Pocket 帳號內建立。
-        pocket_consumer_key_label: 使用 Pocket 的消費者密鑰匯入內容
         help_reading_speed: wallabag 能夠計算閱讀每篇文章的所需時間。你可在此設定，不論你偏好快速或慢速閱讀，wallabag 均能運算每篇文章需要的閱讀時間。
         fontsize_label: 字體大小
         help_language: 你可以變更 wallabag 介面的語言。
@@ -447,15 +445,6 @@ import:
         page_title: 匯入 > Wallabag v1
         how_to: 請選取你的 wallabag 匯出檔案然後點擊以下按鈕上載以匯入資料。
     page_title: 匯入
-    pocket:
-        config_missing:
-            admin_message: 你需要設定 %keyurls%pocket_consumer_key%keyurle%（Pocket 的消費者密鑰） 。
-            description: 尚未設置匯入 Pocket。
-            user_message: 你的伺服器管理員需要設定 Pocket 用 API 密鑰。
-        page_title: 匯入 > Pocket
-        description: 這匯入器將匯入你在 Pocket 中的所有資料。Pocket 並不允許我們從他們那邊擷取內容，因此 wallabag 將重新存取可讀的文章。
-        connect_to_pocket: 和 Pocket 連線並匯入資料
-        authorize_message: 你能夠匯入在 Pocket 中的所有資料。只需點擊以下按鈕並允許應用程式連上 getpocket.com。
     wallabag_v2:
         description: 這匯入器將匯入你在 wallabag v2 中的所有文章。先前往「全部文章」，然後於側邊欄點選「JSON」，你將得到名為「All articles.json」的檔案。
         page_title: 匯入 > Wallabag v2
