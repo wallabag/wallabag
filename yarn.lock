@@ -899,20 +899,20 @@
   resolved "https://registry.yarnpkg.com/@colordx/core/-/core-5.5.0.tgz#d786dfde8781bbe56a0be9f862f9ab5d1ab4629d"
   integrity sha512-3PxTH8itZzltK0U9jTwVVnjLXvnDYuq3m+QXsHkENxWiPRh4WaoLcs1SQjqgZ55kS+QyirpH5BVwzP2gMVG6EQ==
 
-"@csstools/css-calc@^3.3.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@csstools/css-calc/-/css-calc-3.4.0.tgz#fe91cb64d01b562ebc5c028940657c7631516890"
-  integrity sha512-XQKj5B7QiZcHiegCOCAzcAOJdhGgWOHbbu62h5e5mkHnn8lWcfiJhllkqWmxu5zWR9jucPHuo1iTB56P033hcg==
+"@csstools/css-calc@^3.3.0", "@csstools/css-calc@^3.4.3":
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@csstools/css-calc/-/css-calc-3.4.3.tgz#f3708018243c508ed9fca99835d3b03e9112cf95"
+  integrity sha512-iex20d8CHVkyvg6B7UKV7uHnI2Bqo9g+EFfT9E0y+GvTvhZ/DwONJ+9aKb1dlqm0ZiGsL5RXjp0fCoJYnkeDjA==
 
 "@csstools/css-parser-algorithms@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@csstools/css-parser-algorithms/-/css-parser-algorithms-4.0.0.tgz#e1c65dc09378b42f26a111fca7f7075fc2c26164"
   integrity sha512-+B87qS7fIG3L5h3qwJ/IFbjoVoOe/bpOdh9hAjXbvx0o8ImEmUsGXN0inFOnk2ChCFgqkkGFQ+TpM5rbhkKe4w==
 
-"@csstools/css-syntax-patches-for-csstree@^1.1.8", "@csstools/css-syntax-patches-for-csstree@^1.1.9":
-  version "1.1.14"
-  resolved "https://registry.yarnpkg.com/@csstools/css-syntax-patches-for-csstree/-/css-syntax-patches-for-csstree-1.1.14.tgz#292b8ec20123881fba878d4b42e6feb13b1f4b5e"
-  integrity sha512-HpbVXyrofRXpHpgkNIjU/3EWR4WJvOkO3emNK/L6X/mTJU7bGUI3AkkpoTNXznQLp0KRjLHELTGeKI5dIkI9JQ==
+"@csstools/css-syntax-patches-for-csstree@^1.1.15", "@csstools/css-syntax-patches-for-csstree@^1.1.9":
+  version "1.1.16"
+  resolved "https://registry.yarnpkg.com/@csstools/css-syntax-patches-for-csstree/-/css-syntax-patches-for-csstree-1.1.16.tgz#0fdd6a92cb26ac2afa17fe8c4345026ddc6fca36"
+  integrity sha512-LsDbJPP/B8cPasUJyTA5S99F7C4G93ngW8hUluXz8CFeOaaRnBPtBiIlvgcPYU0HmHNz8CXg+1vwFrIB4F6Dgw==
 
 "@csstools/css-tokenizer@^4.0.0":
   version "4.0.0"
@@ -4358,10 +4358,10 @@ postcss-reduce-transforms@^7.0.3:
   dependencies:
     postcss-value-parser "^4.2.0"
 
-postcss-resolve-nested-selector@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/postcss-resolve-nested-selector/-/postcss-resolve-nested-selector-0.1.6.tgz#3d84dec809f34de020372c41b039956966896686"
-  integrity sha512-0sglIs9Wmkzbr8lQwEyIzlDOOC9bGmfVKcJTaxv3vMmd3uo4o4DerC3En0bnmgceeql9BfC8hRkp7cg0fjdVqw==
+postcss-resolve-nested-selector@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/postcss-resolve-nested-selector/-/postcss-resolve-nested-selector-0.1.7.tgz#3e69672958a9d28b79ecdb89e5a27e50d88c4e29"
+  integrity sha512-lFcugRCQXWManq7nyZ0dDtir52wc7gKYJfWpSuz4GxvnGc7dtlpXcZYX4A0asatzTuqpQ3ngDdyD+QG/szeXWw==
 
 postcss-safe-parser@^7.0.1:
   version "7.0.1"
@@ -5096,20 +5096,20 @@ stylelint-config-standard@^40.0.0:
   dependencies:
     stylelint-config-recommended "^18.0.0"
 
-stylelint-scss@^7.0.0, stylelint-scss@^7.3.0:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/stylelint-scss/-/stylelint-scss-7.3.0.tgz#f0f45f8114b88845ed56a82eb4235c6912943934"
-  integrity sha512-FBz075AUFoEJ1WQKsgsRr6EJKcjy7jxQjV8xsAqbPcnhNiXnJ7C489vqUyDZccBy1GorewlshERkaMuCyOKXaw==
+stylelint-scss@^7.0.0, stylelint-scss@^7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/stylelint-scss/-/stylelint-scss-7.4.0.tgz#0294b16bcc3184bbe8843f81ab521192f9e32e71"
+  integrity sha512-OvN+AestcvtB/IFvde1kpFLq2mpIsPaeB8E+Cjlxu7qjf0ja7NCoTrDW97tuNeXFlYGUdwqGq5cXaByLpNwuxA==
   dependencies:
-    "@csstools/css-calc" "^3.3.0"
+    "@csstools/css-calc" "^3.4.3"
     "@csstools/css-parser-algorithms" "^4.0.0"
-    "@csstools/css-syntax-patches-for-csstree" "^1.1.8"
+    "@csstools/css-syntax-patches-for-csstree" "^1.1.15"
     "@csstools/css-tokenizer" "^4.0.0"
     css-tree "^3.2.1"
     is-plain-object "^5.1.0"
     known-css-properties "^0.37.0"
     postcss-media-query-parser "^0.2.3"
-    postcss-resolve-nested-selector "^0.1.6"
+    postcss-resolve-nested-selector "^0.1.7"
     postcss-selector-parser "^7.1.6"
     postcss-value-parser "^4.2.0"
 
