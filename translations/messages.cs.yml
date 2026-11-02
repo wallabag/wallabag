@@ -310,6 +310,7 @@ config:
             archive: Archivované
             starred: S hvězdičkou
             unread: Nepřečtené
+            opds: OPDS katalog (elektronické čtečky)
         feed_links: Odkazy na kanál
         token_revoke: Odvolat token
         token_reset: Znovu vygenerujte svůj token
