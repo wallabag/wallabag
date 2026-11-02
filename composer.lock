@@ -1235,23 +1235,23 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "6d6c96277ea252fc1304627204c3d5e6e15faa3b"
+                "reference": "46351b6812b7b6d52b82c3efa5dfb786a198ec88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/6d6c96277ea252fc1304627204c3d5e6e15faa3b",
-                "reference": "6d6c96277ea252fc1304627204c3d5e6e15faa3b",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/46351b6812b7b6d52b82c3efa5dfb786a198ec88",
+                "reference": "46351b6812b7b6d52b82c3efa5dfb786a198ec88",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^12.0 || ^13.0",
+                "doctrine/coding-standard": "^12.0 || ^14.0",
                 "phpstan/phpstan": "^1.12 || ^2.0",
                 "phpstan/phpstan-phpunit": "^1.4 || ^2.0",
                 "phpstan/phpstan-strict-rules": "^1.6 || ^2.0",
@@ -1305,7 +1305,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/inflector/issues",
-                "source": "https://github.com/doctrine/inflector/tree/2.1.0"
+                "source": "https://github.com/doctrine/inflector/tree/2.1.1"
             },
             "funding": [
                 {
@@ -1321,7 +1321,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-10T19:31:58+00:00"
+            "time": "2026-10-26T08:14:14+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -1573,16 +1573,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "2.20.13",
+            "version": "2.20.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "f525f32e11efc60a34f5eecd88093f476c90f90e"
+                "reference": "68d6a262e35c7e4622a718e02af68eba0e9657a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/f525f32e11efc60a34f5eecd88093f476c90f90e",
-                "reference": "f525f32e11efc60a34f5eecd88093f476c90f90e",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/68d6a262e35c7e4622a718e02af68eba0e9657a2",
+                "reference": "68d6a262e35c7e4622a718e02af68eba0e9657a2",
                 "shasum": ""
             },
             "require": {
@@ -1668,9 +1668,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/2.20.13"
+                "source": "https://github.com/doctrine/orm/tree/2.20.14"
             },
-            "time": "2026-05-25T05:46:05+00:00"
+            "time": "2026-09-12T18:45:41+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -5779,16 +5779,16 @@
         },
         {
             "name": "pagerfanta/core",
-            "version": "v4.10.0",
+            "version": "v4.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Pagerfanta/core.git",
-                "reference": "5fceafafedf5a78080c4ee82ab36e32c6d614b8e"
+                "reference": "f77157ff2154b6e053ba0601dabf1a8058ab914e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Pagerfanta/core/zipball/5fceafafedf5a78080c4ee82ab36e32c6d614b8e",
-                "reference": "5fceafafedf5a78080c4ee82ab36e32c6d614b8e",
+                "url": "https://api.github.com/repos/Pagerfanta/core/zipball/f77157ff2154b6e053ba0601dabf1a8058ab914e",
+                "reference": "f77157ff2154b6e053ba0601dabf1a8058ab914e",
                 "shasum": ""
             },
             "require": {
@@ -5817,13 +5817,13 @@
                 "pagerfanta"
             ],
             "support": {
-                "source": "https://github.com/Pagerfanta/core/tree/v4.10.0"
+                "source": "https://github.com/Pagerfanta/core/tree/v4.11.0"
             },
-            "time": "2026-10-09T12:41:36+00:00"
+            "time": "2026-10-29T17:10:24+00:00"
         },
         {
             "name": "pagerfanta/doctrine-orm-adapter",
-            "version": "v4.10.0",
+            "version": "v4.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Pagerfanta/doctrine-orm-adapter.git",
@@ -5864,22 +5864,22 @@
                 "pagerfanta"
             ],
             "support": {
-                "source": "https://github.com/Pagerfanta/doctrine-orm-adapter/tree/v4.10.0"
+                "source": "https://github.com/Pagerfanta/doctrine-orm-adapter/tree/v4.11.0"
             },
             "time": "2026-10-09T12:41:36+00:00"
         },
         {
             "name": "pagerfanta/twig",
-            "version": "v4.10.0",
+            "version": "v4.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Pagerfanta/twig.git",
-                "reference": "bb752154488ed04ab3609f6819ae1dad93e043c2"
+                "reference": "46e679b32bbf361615c9ff6121c01d71e6327462"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Pagerfanta/twig/zipball/bb752154488ed04ab3609f6819ae1dad93e043c2",
-                "reference": "bb752154488ed04ab3609f6819ae1dad93e043c2",
+                "url": "https://api.github.com/repos/Pagerfanta/twig/zipball/46e679b32bbf361615c9ff6121c01d71e6327462",
+                "reference": "46e679b32bbf361615c9ff6121c01d71e6327462",
                 "shasum": ""
             },
             "require": {
@@ -5909,9 +5909,9 @@
                 "pagerfanta"
             ],
             "support": {
-                "source": "https://github.com/Pagerfanta/twig/tree/v4.10.0"
+                "source": "https://github.com/Pagerfanta/twig/tree/v4.11.0"
             },
-            "time": "2026-10-09T12:41:36+00:00"
+            "time": "2026-10-29T16:09:57+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -8989,16 +8989,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.4.54",
+            "version": "v5.4.55",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "68a4a45af9fcb8c9bee567a88ae29e721fb22986"
+                "reference": "0b8208c757a9f97e372c6297a1863ffe19686dc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/68a4a45af9fcb8c9bee567a88ae29e721fb22986",
-                "reference": "68a4a45af9fcb8c9bee567a88ae29e721fb22986",
+                "url": "https://api.github.com/repos/symfony/console/zipball/0b8208c757a9f97e372c6297a1863ffe19686dc0",
+                "reference": "0b8208c757a9f97e372c6297a1863ffe19686dc0",
                 "shasum": ""
             },
             "require": {
@@ -9068,7 +9068,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v5.4.54"
+                "source": "https://github.com/symfony/console/tree/v5.4.55"
             },
             "funding": [
                 {
@@ -9088,7 +9088,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-10-07T15:50:15+00:00"
+            "time": "2026-10-28T09:02:56+00:00"
         },
         {
             "name": "symfony/dependency-injection",
@@ -11229,16 +11229,16 @@
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
-            "version": "v1.43.0",
+            "version": "v1.43.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-grapheme.git",
-                "reference": "5cac8f4db97208823aa353f59a01faad2da52c75"
+                "reference": "5a8f33c87aeecffce24e721b5064fab05f4becf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/5cac8f4db97208823aa353f59a01faad2da52c75",
-                "reference": "5cac8f4db97208823aa353f59a01faad2da52c75",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/5a8f33c87aeecffce24e721b5064fab05f4becf8",
+                "reference": "5a8f33c87aeecffce24e721b5064fab05f4becf8",
                 "shasum": ""
             },
             "require": {
@@ -11287,7 +11287,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.43.0"
+                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.43.3"
             },
             "funding": [
                 {
@@ -11307,7 +11307,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-25T15:46:47+00:00"
+            "time": "2026-10-15T09:18:53+00:00"
         },
         {
             "name": "symfony/polyfill-intl-icu",
@@ -11571,16 +11571,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.43.0",
+            "version": "v1.43.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "4d5d331bf731e0aedbc6b2f5e61135b7b7996a72"
+                "reference": "122889ed24dc000165bcbfd77ec412f15cbdfc6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/4d5d331bf731e0aedbc6b2f5e61135b7b7996a72",
-                "reference": "4d5d331bf731e0aedbc6b2f5e61135b7b7996a72",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/122889ed24dc000165bcbfd77ec412f15cbdfc6a",
+                "reference": "122889ed24dc000165bcbfd77ec412f15cbdfc6a",
                 "shasum": ""
             },
             "require": {
@@ -11632,7 +11632,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.43.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.43.3"
             },
             "funding": [
                 {
@@ -11652,7 +11652,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-24T15:19:04+00:00"
+            "time": "2026-10-28T09:35:49+00:00"
         },
         {
             "name": "symfony/polyfill-php84",
@@ -12930,16 +12930,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v6.4.48",
+            "version": "v6.4.49",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "9459a27a00b1f0fec1954e9eb362d00aedcfe048"
+                "reference": "6910c3715e0bd5cb2d3416348c0051bf54d43201"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/9459a27a00b1f0fec1954e9eb362d00aedcfe048",
-                "reference": "9459a27a00b1f0fec1954e9eb362d00aedcfe048",
+                "url": "https://api.github.com/repos/symfony/string/zipball/6910c3715e0bd5cb2d3416348c0051bf54d43201",
+                "reference": "6910c3715e0bd5cb2d3416348c0051bf54d43201",
                 "shasum": ""
             },
             "require": {
@@ -12995,7 +12995,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v6.4.48"
+                "source": "https://github.com/symfony/string/tree/v6.4.49"
             },
             "funding": [
                 {
@@ -13015,7 +13015,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-10-03T14:51:46+00:00"
+            "time": "2026-10-23T15:23:41+00:00"
         },
         {
             "name": "symfony/templating",
