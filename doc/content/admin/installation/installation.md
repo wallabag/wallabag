@@ -123,6 +123,15 @@ a persistent volume and HTTPS. It asks for a password and creates the
 
 [Install wallabag on Pethost](https://pethost.dev/templates/wallabag/)
 
+## Installation on Hostim
+
+Hostim has a one-click template that runs the wallabag Docker image with a
+managed PostgreSQL database, a persistent volume for downloaded images, and
+HTTPS. It generates the `wallabag` user's password on deploy and turns
+sign-ups off.
+
+[Install wallabag on Hostim](https://hostim.dev/docs/templates/wallabag/)
+
 ## Installation on Synology
 
 The SynoCommunity provides a package to install wallabag on your Synology NAS.
