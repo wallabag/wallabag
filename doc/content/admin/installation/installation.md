@@ -132,6 +132,14 @@ sign-ups off.
 
 [Install wallabag on Hostim](https://hostim.dev/docs/templates/wallabag/)
 
+## Installation on ZopDay
+
+ZopDay lets you deploy Docker-based applications to managed infrastructure or
+to your own AWS/GCP account. The deploy link pre-fills the wallabag Docker
+image (`wallabag/wallabag`) with port `80` already set.
+
+[![Deploy to ZopDay](https://zop.dev/deploytozopday-inkhard.svg)](https://zop.dev/zopday/app/deploy?image=wallabag/wallabag&port=80&name=wallabag&utm_source=github&utm_medium=one_click&utm_content=wallabag)
+
 ## Installation on Synology
 
 The SynoCommunity provides a package to install wallabag on your Synology NAS.
