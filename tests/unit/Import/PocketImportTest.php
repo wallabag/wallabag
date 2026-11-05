@@ -194,9 +194,12 @@ JSON, ['response_headers' => ['Content-Type: application/json']]),
             ->disableOriginalConstructor()
             ->getMock();
 
+        $existingEntry = $this->createMock(Entry::class);
+        $existingEntry->method('isDeleted')->willReturn(false);
+
         $entryRepo->expects($this->exactly(2))
             ->method('findByUrlAndUserId')
-            ->will($this->onConsecutiveCalls(false, true));
+            ->will($this->onConsecutiveCalls(false, $existingEntry));
 
         $this->em
             ->expects($this->exactly(2))

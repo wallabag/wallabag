@@ -78,9 +78,12 @@ class InstapaperImportTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $existingEntry = $this->createMock(Entry::class);
+        $existingEntry->method('isDeleted')->willReturn(false);
+
         $entryRepo->expects($this->exactly(4))
             ->method('findByUrlAndUserId')
-            ->will($this->onConsecutiveCalls(false, true, true, true));
+            ->will($this->onConsecutiveCalls(false, $existingEntry, $existingEntry, $existingEntry));
 
         $this->em
             ->expects($this->any())

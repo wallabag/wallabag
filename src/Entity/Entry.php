@@ -167,6 +167,10 @@ class Entry
     #[Groups(['entries_for_user', 'export_all'])]
     private $starredAt;
 
+    #[ORM\Column(name: 'deleted_at', type: 'datetime', nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
+    private ?\DateTimeInterface $deletedAt = null;
+
     #[ORM\JoinTable]
     #[ORM\OneToMany(targetEntity: Annotation::class, mappedBy: 'entry', cascade: ['persist', 'remove'])]
     #[Groups(['entries_for_user', 'export_all'])]
@@ -309,6 +313,33 @@ class Entry
     public function getUrl()
     {
         return $this->url;
+    }
+
+    public function getDeletedAt(): ?\DateTimeInterface
+    {
+        return $this->deletedAt;
+    }
+
+    public function isDeleted(): bool
+    {
+        return null !== $this->deletedAt;
+    }
+
+    public function delete(): static
+    {
+        $this->deletedAt = new \DateTimeImmutable();
+        $this->content = null;
+        $this->previewPicture = null;
+        $this->uid = null;
+
+        return $this;
+    }
+
+    public function restore(): static
+    {
+        $this->deletedAt = null;
+
+        return $this;
     }
 
     /**

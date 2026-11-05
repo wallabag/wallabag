@@ -81,9 +81,9 @@ class PinboardImport extends AbstractImport
     {
         $existingEntry = $this->em
             ->getRepository(Entry::class)
-            ->findByUrlAndUserId($importedEntry['href'], $this->user->getId());
+            ->findByUrlAndUserId($importedEntry['href'], $this->user->getId(), includeDeleted: true);
 
-        if (false !== $existingEntry) {
+        if ($existingEntry instanceof Entry && !$existingEntry->isDeleted()) {
             ++$this->skippedEntries;
 
             return null;
@@ -98,7 +98,7 @@ class PinboardImport extends AbstractImport
             'tags' => array_filter(explode(' ', (string) $importedEntry['tags'])),
         ];
 
-        $entry = new Entry($this->user);
+        $entry = ($existingEntry instanceof Entry) ? $existingEntry : new Entry($this->user);
         $entry->setUrl($data['url']);
         $entry->setTitle($data['title']);
 
