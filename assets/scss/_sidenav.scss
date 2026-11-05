@@ -48,6 +48,7 @@
   background: none;
   border: 0;
   color: rgba(0 0 0 / 87%);
+  cursor: pointer;
   display: block;
   font-size: 14px;
   font-weight: 500;
@@ -69,6 +70,15 @@
     margin: 0 (16px * 2) 0 0;
     width: 24px;
     color: rgba(0 0 0 / 54%);
+  }
+}
+
+.sidenav .collapsible-body li button {
+  padding: 0 23.5px 0 31px;
+
+  &:focus-visible {
+    outline: auto;
+    outline-offset: -2px;
   }
 }
 
