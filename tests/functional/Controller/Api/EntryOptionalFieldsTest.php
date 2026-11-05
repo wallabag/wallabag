@@ -125,7 +125,7 @@ class EntryOptionalFieldsTest extends WallabagApiTestCase
         $expected = $this->snapshot($entry);
         $expected['title'] = '0';
         $expected['authors'] = ['0'];
-        $expected['published_at'] = '1970-01-01T00:00:00+00:00';
+        $expected['published_at'] = '1970-01-01 00:00:00';
         $this->mockExtraction('PATCH');
         $this->requestEntry('PATCH', $entry, [
             'title' => '0',
@@ -198,13 +198,13 @@ class EntryOptionalFieldsTest extends WallabagApiTestCase
         $entry->setReadingTime(7);
         $entry->setLanguage('fr');
         $entry->setPreviewPicture('https://example.org/image.jpg');
-        $entry->setPublishedAt(new \DateTime('2020-01-02T03:04:05+00:00'));
+        $entry->setPublishedAt(new \DateTime('2020-01-02 03:04:05'));
         $entry->setPublishedBy(['Original author']);
         $entry->setOriginUrl('https://example.org/source');
         $entry->updateArchived(true);
-        $entry->setArchivedAt(new \DateTime('2020-02-03T04:05:06+00:00'));
+        $entry->setArchivedAt(new \DateTime('2020-02-03 04:05:06'));
         $entry->updateStar(true);
-        $entry->setStarredAt(new \DateTime('2020-03-04T05:06:07+00:00'));
+        $entry->setStarredAt(new \DateTime('2020-03-04 05:06:07'));
         $entry->generateUid();
         $tag = $em->getRepository(Tag::class)->findOneByLabel('original tag');
         $newTag = null === $tag;
@@ -277,14 +277,14 @@ class EntryOptionalFieldsTest extends WallabagApiTestCase
             'reading_time' => $entry->getReadingTime(),
             'language' => $entry->getLanguage(),
             'preview_picture' => $entry->getPreviewPicture(),
-            'published_at' => $entry->getPublishedAt() ? $entry->getPublishedAt()->format('c') : null,
+            'published_at' => $entry->getPublishedAt() ? $entry->getPublishedAt()->format('Y-m-d H:i:s') : null,
             'authors' => $entry->getPublishedBy(),
             'tags' => $tags,
             'origin_url' => $entry->getOriginUrl(),
             'archive' => $entry->isArchived(),
-            'archived_at' => $entry->getArchivedAt() ? $entry->getArchivedAt()->format('c') : null,
+            'archived_at' => $entry->getArchivedAt() ? $entry->getArchivedAt()->format('Y-m-d H:i:s') : null,
             'starred' => $entry->isStarred(),
-            'starred_at' => $entry->getStarredAt() ? $entry->getStarredAt()->format('c') : null,
+            'starred_at' => $entry->getStarredAt() ? $entry->getStarredAt()->format('Y-m-d H:i:s') : null,
             'public' => $entry->getUid(),
         ];
     }
