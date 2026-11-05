@@ -61,13 +61,9 @@ please edit your `web/app.php` file and add this line:
 This is a Doctrine / PHP bug, nothing we can do about it.
 
 
-## Why has SQLite support been dropped?
+## Why is SQLite not recommended for production installations?
 
-Since June 2017, [SQLite support has been
-dropped](https://github.com/wallabag/wallabag/pull/3171)
-and MySQL is the default database now. SQLite support has been dropped
-because it's awful for database migrations. It's just you'll have to
-do migrations the hard way and lose data each time.
+MySQL is the default database for standard wallabag installations. SQLite is still useful for development and small/simple setups, but it is not recommended as the main production database because database migrations can be difficult to support reliably.
 
-For development purposes, SQLite is still fine though.
+For production installations, we recommend using MySQL or PostgreSQL.
 
