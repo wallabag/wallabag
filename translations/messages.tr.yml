@@ -26,7 +26,6 @@ menu:
         logout: Çıkış Yap
         about: Hakkımızda
         search: Ara
-        back_to_unread: Okunmayan makalelere geri dön
         internal_settings: Dahili Ayarlar
         developer: API istemcileri yönetimi
         save_link: Bağlantıyı kaydet

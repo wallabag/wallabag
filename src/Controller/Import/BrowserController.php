@@ -63,7 +63,7 @@ abstract class BrowserController extends AbstractController
 
                 $this->addFlash('notice', $message);
 
-                return $this->redirect($this->generateUrl('homepage'));
+                return $this->redirectToDefaultHomepage();
             }
             $this->addFlash('notice', 'flashes.import.notice.failed_on_file');
         }
