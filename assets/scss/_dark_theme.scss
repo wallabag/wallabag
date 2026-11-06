@@ -1,3 +1,5 @@
+@use "variables";
+
 .dark-theme {
   body {
     background-color: #101010;
@@ -68,6 +70,11 @@
   .sidenav li button,
   .sidenav li button > i.material-icons {
     color: #dfdfdf;
+  }
+
+  .dropdown-content button[data-dark-theme-target][aria-pressed="true"],
+  .sidenav button[data-dark-theme-target][aria-pressed="true"] {
+    color: variables.$blue-accent-color;
   }
 
   .cyan,
