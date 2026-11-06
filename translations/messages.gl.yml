@@ -298,6 +298,14 @@ config:
         help_fontsize: Podes elexir o tamaño da letra que queres usar.
         help_maxwidth: Podes elexir o ancho máximo que queres usar.
         lineheight_label: Altura da liña
+        default_homepage:
+            label: Inicio predeterminado
+            unread: Sen ler
+            all: Todos os artigos
+            archive: Arquivo
+            starred: Con estrela
+            tags: Etiquetas
+        help_default_homepage: Elixe a páxina que se vai mostrar cando abras wallabag.
     form_password:
         repeat_new_password_label: Repite o novo contrasinal
         new_password_label: Novo contrasinal
@@ -400,6 +408,7 @@ menu:
         starred: Con estrela
         unread: Sen ler
         with_annotations: Con notas
+        back_to_homepage: Volver ao inicio
 security:
     register:
         go_to_account: Vai á túa conta
