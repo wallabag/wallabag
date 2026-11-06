@@ -71,12 +71,6 @@ class Config
     private $readingSpeed;
 
     /**
-     * @var string|null
-     */
-    #[ORM\Column(name: 'pocket_consumer_key', type: 'string', nullable: true)]
-    private $pocketConsumerKey;
-
-    /**
      * @var int|null
      */
     #[ORM\Column(name: 'action_mark_as_read', type: 'integer', nullable: true, options: ['default' => 0])]
@@ -311,30 +305,6 @@ class Config
     public function getReadingSpeed()
     {
         return $this->readingSpeed;
-    }
-
-    /**
-     * Set pocketConsumerKey.
-     *
-     * @param string $pocketConsumerKey
-     *
-     * @return Config
-     */
-    public function setPocketConsumerKey($pocketConsumerKey)
-    {
-        $this->pocketConsumerKey = $pocketConsumerKey;
-
-        return $this;
-    }
-
-    /**
-     * Get pocketConsumerKey.
-     *
-     * @return string
-     */
-    public function getPocketConsumerKey()
-    {
-        return $this->pocketConsumerKey;
     }
 
     /**

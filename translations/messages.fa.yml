@@ -79,7 +79,6 @@ config:
             200_word: من تقریباً ۲۰۰ واژه را در دقیقه می‌خوانم
             300_word: من تقریباً ۳۰۰ واژه را در دقیقه می‌خوانم
             400_word: من تقریباً ۴۰۰ واژه را در دقیقه می‌خوانم
-        pocket_consumer_key_label: کلید کاربری Pocket برای درون‌ریزی مطالب
         android_configuration: پیکربندی برنامه اندرویدتان
         action_mark_as_read:
             redirect_homepage: رفتن به صفحه اصلی
@@ -282,15 +281,6 @@ import:
         mark_as_read_label: همهٔ مقاله‌های درون‌ریزی شده را به عنوان خوانده‌شده علامت بزن
         file_label: پرونده
         save_label: بارگذاری پرونده
-    pocket:
-        page_title: درون‌ریزی > Pocket
-        description: این برنامه همهٔ داده‌های Pocket شما را درون‌ریزی می‌کند. سرویس Pocket اجازه نمی‌دهد که متن مقاله‌ها را درون‌ریزی کنیم، بنابراین wallabag متن مقاله‌ها را دوباره از اینترنت دریافت می‌کند.
-        config_missing:
-            description: درون‌ریزی از Pocket تنظیم نشده است.
-            admin_message: شما باید %keyurls%یک pocket_consumer_key%keyurle% تعریف کنید.
-            user_message: مدیر سرور شما باید یک API Key برای Pocket تعریف کند.
-        authorize_message: شما می‌توانید داده‌هایتان را از حساب Pocket خود درون‌ریزی کنید. روی دکمهٔ زیر کلیک کنید و به برنامه اجازه دهید تا به getpocket.com وصل شود.
-        connect_to_pocket: به Pocket وصل شو و داده‌ها را دریافت کن
     wallabag_v1:
         page_title: درون‌ریزی > Wallabag v1
         description: این برنامه همهٔ داده‌های شما را در نسخهٔ ۱ wallabag درون‌ریزی می‌کند. در صفحهٔ تنظیمات، روی "JSON export" در بخش "Export your wallabag data" کلیک کنید. با این کار شما پرونده‌ای به شکل "wallabag-export-1-xxxx-xx-xx.json" دریافت خواهید کرد.

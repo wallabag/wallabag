@@ -55,9 +55,6 @@ Depending on which service you want to import from you need to enable
 one (or many if you want to support many) cron job:
 
 ```
-# for Pocket import
-bin/console rabbitmq:consumer --env=prod import_pocket -w
-
 # for Pocket CSV import
 bin/console rabbitmq:consumer --env=prod import_pocket_csv -w
 
@@ -125,9 +122,6 @@ Depending on which service you want to import from you need to enable
 one (or many if you want to support many) cron job:
 
 ```
-# for Pocket import
-bin/console wallabag:import:redis-worker --env=prod pocket -vv >> /path/to/wallabag/var/logs/redis-pocket.log
-
 # for Pocket CSV import
 bin/console wallabag:import:redis-worker --env=prod pocket_csv -vv >> /path/to/wallabag/var/logs/redis-pocket.log
 
@@ -155,5 +149,5 @@ can specify this number (here 12) and the worker will stop right after
 the 12th message :
 
 ```
-bin/console wallabag:import:redis-worker --env=prod pocket -vv --maxIterations=12
+bin/console wallabag:import:redis-worker --env=prod pocket_csv -vv --maxIterations=12
 ```

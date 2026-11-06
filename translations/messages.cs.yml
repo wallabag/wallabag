@@ -231,11 +231,9 @@ config:
             label: Rychlost čtení
             help_message: 'Pro odhad vaší rychlosti čtení můžete použít online nástroje:'
         language_label: Jazyk
-        help_pocket_consumer_key: Vyžadováno pro import z Pocketu. Můžete ho vytvořit ve svém účtu Pocket.
         help_items_per_page: Můžete změnit počet článků zobrazených na každé stránce.
         android_instruction: Klepnutím sem předvyplníte svou aplikaci pro Android
         android_configuration: Nakonfigurujte svou aplikaci pro Android
-        pocket_consumer_key_label: Zákaznický klíč pro Pocket k importu obsahu
         display_thumbnails_label: Zobrazit náhledy článků (užitečné pro pomalá připojení).
         help_display_thumbnails: Můžete se rozhodnout, zda chcete zobrazit náhledy článků, nebo ne. Užitečné pro pomalá připojení.
         maxwidth_label: Maximální šířka
@@ -501,15 +499,6 @@ import:
         file_label: Soubor
         mark_as_read_label: Označit všechny importované položky jako přečtené
         mark_as_read_title: Označit vše jako přečtené?
-    pocket:
-        connect_to_pocket: Připojit se k Pocketu a importovat data
-        authorize_message: Můžete importovat data z účtu Pocket. Stačí kliknout na níže uvedené tlačítko a autorizovat aplikaci pro připojení k webu getpocket.com.
-        config_missing:
-            user_message: Správce serveru musí definovat klíč API pro službu Pocket.
-            admin_message: Musíte definovat %keyurls%a pocket_consumer_key%keyurle%.
-            description: Import z Pocket není nakonfigurován.
-        description: Tento nástroj pro import importuje všechna vaše data z Pocket. Pocket nám neumožňuje načítat obsah z jejich služby, takže čitelný obsah každého článku bude znovu načten pomocí aplikace wallabag.
-        page_title: Import > Pocket
     wallabag_v1:
         description: Tento nástroj pro import importuje všechny vaše články z wallabagu v1. Na stránce konfigurace klikněte na „JSON export“ v části „Exportovat vaše data wallabagu“. Získáte soubor „wallabag-export-1-xxxx-xx-xx.json“.
         page_title: Import > Wallabag v1

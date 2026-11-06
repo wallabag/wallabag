@@ -41,11 +41,6 @@ framework:
         scoped_clients:
             download_images.client:
                 scope: '.*'
-            pocket.client:
-                scope: '.*'
-                headers:
-                    Content-Type: 'application/json'
-                    X-Accept: 'application/json'
             request_html_function.client:
                 scope: '.*'
             browser.client:
@@ -252,11 +247,6 @@ old_sound_rabbit_mq:
             url: "%env(RABBITMQ_URL)%"
             lazy: true
     producers:
-        import_pocket:
-            connection: default
-            exchange_options:
-                name: 'wallabag.import.pocket'
-                type: topic
         import_readability:
             connection: default
             exchange_options:
@@ -323,15 +313,6 @@ old_sound_rabbit_mq:
                 name: 'wallabag.import.pocket_csv'
                 type: topic
     consumers:
-        import_pocket:
-            connection: default
-            exchange_options:
-                name: 'wallabag.import.pocket'
-                type: topic
-            queue_options:
-                name: 'wallabag.import.pocket'
-            callback: wallabag.consumer.amqp.pocket
-            qos_options: {prefetch_count: "%env(int:WALLABAG_RABBITMQ_PREFETCH_COUNT)%"}
         import_readability:
             connection: default
             exchange_options:

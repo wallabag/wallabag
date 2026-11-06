@@ -92,11 +92,6 @@ services:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pinboard_producer'
             $redisProducer: '@wallabag.producer.redis.pinboard'
 
-    Wallabag\Controller\Import\PocketController:
-        arguments:
-            $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_producer'
-            $redisProducer: '@wallabag.producer.redis.pocket'
-
     Wallabag\Controller\Import\ReadabilityController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_readability_producer'
@@ -285,12 +280,6 @@ services:
     Wallabag\Event\Listener\AuthenticationFailureListener:
         tags:
             - { name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure }
-
-    Wallabag\Import\PocketImport:
-        calls:
-            - [ setClient, [ '@Symfony\Contracts\HttpClient\HttpClientInterface $pocketClient' ] ]
-        tags:
-            -  { name: wallabag.import, alias: pocket }
 
     Wallabag\Import\WallabagV1Import:
         tags:

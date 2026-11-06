@@ -76,15 +76,6 @@ import:
         page_title: Uvoz > Instapaper
         how_to: Odaberi Instapaper izvoz i pritisni donji gumb za slanje i uvoz datoteke.
         description: Ovaj uvoznik uvozi sve tvoje Instapaper članke. Na stranici postavki (https://www.instapaper.com/user) pritisni „Preuzmi .CSV datoteku” u odjeljku „Izvoz”. Preuzet će se CSV datoteka (poput „instapaper-export.csv”).
-    pocket:
-        config_missing:
-            admin_message: Moraš definirati %keyurls%jedan pocket_consumer_key%keyurle% (ključ Pocket korisnika).
-            description: Uvoz iz Pocketa nije konfiguriran.
-            user_message: Administrator tvog poslužitelja mora definirati ključ za sučelje za Pocket.
-        description: Ovaj uvoznik će uvesti sve tvoje Pocket podatke. Pocket nam ne dopušta dohvaćanje sadržaja iz njihove usluge, stoga će se čitljiv sadržaj svakog članka ponovno dohvatiti pomoću wallabaga.
-        authorize_message: Tvoje podatke možeš uvesti s tvog Pocket računa. Jednostavno pritisni donji gumb i autoriziraj program da se poveže na getpocket.com.
-        connect_to_pocket: Spoji se na Pocket i uvezi podatke
-        page_title: Uvoz > Pocket
     form:
         mark_as_read_label: Označi sve uvezene zapise kao pročitane
         mark_as_read_title: Označiti kao pročitano?
@@ -214,8 +205,6 @@ config:
             300_word: Čitam ~300 riječi u minuti
             help_message: 'Možeš koristiti online alate za procjenu tvoje brzine čitanja:'
             100_word: Čitam ~100 riječi u minuti
-        help_pocket_consumer_key: Potrebno za uvoz Pocketa. Možeš stvoriti u tvom Pocket računu.
-        pocket_consumer_key_label: Korisnički ključ za Pocket za uvoz sadržaja
         items_per_page_label: Broj stavki po stranici
         help_reading_speed: wallabag izračunava vrijeme čitanja za svaki članak. Ovdje možeš definirati, zahvaljujući ovom popisu, jesi li brz ili spor čitač. wallabag će izračunati vrijeme čitanja za svaki članak.
         language_label: Jezik

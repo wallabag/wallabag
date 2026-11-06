@@ -13,13 +13,11 @@ config:
             label: Leessnelheid
         language_label: Taal
         items_per_page_label: Artikelen per pagina
-        help_pocket_consumer_key: Verplicht voor het importeren uit Pocket. Je kan dit aanmaken in je Pocket account.
         help_language: U kan de taal van wallabag aanpassen.
         help_reading_speed: wallabag berekend een leestijd voor ieder artikel aan de hand van hoe snel je leest. Hier kan je aangeven hoe snel je leest.
         help_items_per_page: U kan de hoeveelheid getoonde artikelen per pagina aanpassen.
         android_instruction: Tik hier om je Android-app vooraf in te vullen
         android_configuration: Configureer je Android applicatie
-        pocket_consumer_key_label: Consumer key voor Pocket om inhoud te importeren
         help_display_thumbnails: Jij bepaalt of je de artikel mini-afbeelding wilt zien. Uitzetten is handig bij een langzame verbinding.
         display_thumbnails_label: Toon artikel mini-afbeelding (handig bij langzame verbindingen).
         help_font: Kies de lettertypefamilie die je wil gebruiken.
@@ -422,15 +420,6 @@ import:
         how_to: Kies je wallabag exportbestand en klik op de knop om deze te uploaden en importeren.
         page_title: Importeren > Wallabag v1
         description: Importeer al je Wallabag v1-artikelen. Klik in de configuratiepagina op "JSON-exporteren" in de sectie "Exporteer je wallabag-gegevens". Je krijgt dan het bestand "wallabag-export-1-xxxx-xx-xx.json".
-    pocket:
-        connect_to_pocket: Verbind Pocket en importeer data
-        config_missing:
-            user_message: Uw server administrator moet een API sleutel definiëren voor Pocket.
-            admin_message: U moet %keyurls%a pocket_consumer_key%keyurle% definiëren.
-            description: Pocket importeren is niet geconfigureerd.
-        page_title: Importeer > Pocket
-        authorize_message: Je kunt je gegevens importeren vanuit jouw Pocket-account. Je hoeft alleen maar op de onderstaande knop te klikken en de applicatie te autoriseren om verbinding te maken met getpocket.com.
-        description: Importeer je gegevens van Pocket. Pocket staat het niet toe om inhoud van hun dienst op te halen, dus de leesbare inhoud van elk artikel wordt opnieuw opgehaald door wallabag.
     form:
         file_label: Bestand
         mark_as_read_label: Markeer alle geïmporteerde artikelen als gelezen

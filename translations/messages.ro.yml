@@ -42,7 +42,6 @@ config:
         theme_label: 'Temă'
         items_per_page_label: 'Articole pe pagină'
         language_label: 'Limbă'
-        pocket_consumer_key_label: Cheie consumator pentru importarea contentului din Pocket
     form_feed:
         description: 'Feed-urile RSS oferite de wallabag îți permit să-ți citești articolele salvate în reader-ul tău preferat RSS.'
         token_label: 'RSS-Token'

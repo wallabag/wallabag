@@ -46,8 +46,7 @@ class ImportController extends AbstractController
         if ($craueConfig->get('import_with_rabbitmq')) {
             // in case rabbit is activated but not installed
             try {
-                $nbRabbitMessages = $this->rabbitMQConsumerTotalProxy->getTotalMessage('pocket')
-                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('readability')
+                $nbRabbitMessages = $this->rabbitMQConsumerTotalProxy->getTotalMessage('readability')
                     + $this->rabbitMQConsumerTotalProxy->getTotalMessage('wallabag_v1')
                     + $this->rabbitMQConsumerTotalProxy->getTotalMessage('wallabag_v2')
                     + $this->rabbitMQConsumerTotalProxy->getTotalMessage('firefox')
@@ -66,8 +65,7 @@ class ImportController extends AbstractController
             }
         } elseif ($craueConfig->get('import_with_redis')) {
             try {
-                $nbRedisMessages = $this->redisClient->llen('wallabag.import.pocket')
-                    + $this->redisClient->llen('wallabag.import.readability')
+                $nbRedisMessages = $this->redisClient->llen('wallabag.import.readability')
                     + $this->redisClient->llen('wallabag.import.wallabag_v1')
                     + $this->redisClient->llen('wallabag.import.wallabag_v2')
                     + $this->redisClient->llen('wallabag.import.firefox')

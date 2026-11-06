@@ -11,7 +11,6 @@ use OldSound\RabbitMqBundle\RabbitMq\Consumer;
 class RabbitMQConsumerTotalProxy
 {
     public function __construct(
-        private readonly Consumer $pocketConsumer,
         private readonly Consumer $readabilityConsumer,
         private readonly Consumer $wallabagV1Consumer,
         private readonly Consumer $wallabagV2Consumer,
@@ -35,14 +34,11 @@ class RabbitMQConsumerTotalProxy
      * which will include the total of *other* messages in the queue.
      * Adding one to that messages will result in the full total message.
      *
-     * @param string $importService The import service related: pocket, readability, wallabag_v1 or wallabag_v2
+     * @param string $importService The import service related: readability, wallabag_v1 or wallabag_v2
      */
     public function getTotalMessage(string $importService): int
     {
         switch ($importService) {
-            case 'pocket':
-                $consumer = $this->pocketConsumer;
-                break;
             case 'readability':
                 $consumer = $this->readabilityConsumer;
                 break;

@@ -70,13 +70,11 @@ config:
             label: Mit tehetek miután eltávolítottam, megcsillagoztam vagy olvasottnak jelöltem egy cikket?
             redirect_homepage: Vissza a kezdőoldalra
             redirect_current_page: Maradj a jelenlegi oldalon
-        pocket_consumer_key_label: A tartalom importálásához szükséges Pocket „Consumer key”
         android_configuration: Az Android alkalmazásának beállítása
         android_instruction: Érintsen ide az Android alkalmazásának előtöltéséhez
         help_items_per_page: Megváltoztathatja az oldalanként megjelenített cikkek számát.
         help_reading_speed: A wallabag kiszámítja az elolvasási időt minden egyes cikkre. Itt meghatározhatja, ennek a listának köszönhetően, hogy mennyire gyors vagy lassú olvasó. A wallabag újra ki fogja számítani az elolvasási időt minden egyes cikkre.
         help_language: Megváltoztathatja a wallabag felületének a nyelvét.
-        help_pocket_consumer_key: A Pocket importálásához szükséges. Ezt a Pocket fiókodban hozhatod létre.
     form_user:
         two_factor_description: A kétfaktoros hitelesítés engedélyezésével egy biztonsági kódot tartalmazó e-mailt fog kapni minden új, nem azonosítható eszközről történő bejelentkezés esetén.
         name_label: Név
@@ -392,10 +390,5 @@ import:
         mark_as_read_label: Az összes importált bejegyzés megjelölése olvasottként
         file_label: Fájl
         save_label: Fájl feltöltése
-    pocket:
-        page_title: Importálás > Pocket
-        description: Ez az importáló az összes Pocket adatát be fogja importálni. Mivel a Pocket nem engedélyezi nekünk hogy tartalmakat szerezzünk a szolgáltatásukból, így az egyes cikkek olvasható tartalmát a wallabag újra le fogja tölteni.
-        config_missing:
-            description: A Pocket import nincs konfigurálva.
     wallabag_v1:
         page_title: Importálás > Wallabag v1

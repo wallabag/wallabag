@@ -8,7 +8,6 @@ services:
     Wallabag\Consumer\RabbitMQConsumerTotalProxy:
         lazy: true
         arguments:
-            $pocketConsumer: '@old_sound_rabbit_mq.import_pocket_consumer'
             $readabilityConsumer: '@old_sound_rabbit_mq.import_readability_consumer'
             $wallabagV1Consumer: '@old_sound_rabbit_mq.import_wallabag_v1_consumer'
             $wallabagV2Consumer: '@old_sound_rabbit_mq.import_wallabag_v2_consumer'
@@ -22,11 +21,6 @@ services:
             $pocketHtmlConsumer: '@old_sound_rabbit_mq.import_pocket_html_consumer'
             $pocketCsvConsumer: '@old_sound_rabbit_mq.import_pocket_csv_consumer'
             $omnivoreConsumer: '@old_sound_rabbit_mq.import_omnivore_consumer'
-
-    wallabag.consumer.amqp.pocket:
-        class: Wallabag\Consumer\AMQPEntryConsumer
-        arguments:
-            $import: '@Wallabag\Import\PocketImport'
 
     wallabag.consumer.amqp.readability:
         class: Wallabag\Consumer\AMQPEntryConsumer
