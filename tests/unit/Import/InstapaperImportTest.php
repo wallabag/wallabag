@@ -63,9 +63,56 @@ class InstapaperImportTest extends TestCase
             ->expects($this->exactly(4))
             ->method('updateEntry');
 
+        // Verify that assignTagsToEntry is called once for the entry with a folder tag
+        // (the other 3 entries have status folders: Unread, Archive, Starred which shouldn't become tags)
+        $this->tagsAssigner
+            ->expects($this->once())
+            ->method('assignTagsToEntry')
+            ->with($this->anything(), ['test_tag'], []);
+
         $res = $instapaperImport->import();
 
         $this->assertTrue($res);
+        $this->assertSame(['skipped' => 0, 'imported' => 4, 'queued' => 0], $instapaperImport->getSummary());
+    }
+
+    public function testImportNewFormat(): void
+    {
+        $instapaperImport = $this->getInstapaperImport(false, 4);
+        $instapaperImport->setFilepath(__DIR__ . '/../../fixtures/Import/instapaper-export-new.csv');
+
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->exactly(4))
+            ->method('findByUrlAndUserId')
+            ->willReturn(false);
+
+        $this->em
+            ->expects($this->any())
+            ->method('getRepository')
+            ->willReturn($entryRepo);
+
+        $this->contentProxy
+            ->expects($this->exactly(4))
+            ->method('updateEntry');
+
+        // Entries are imported in reverse order and the first one has no tags
+        $assignedTags = [];
+        $this->tagsAssigner
+            ->expects($this->exactly(3))
+            ->method('assignTagsToEntry')
+            ->willReturnCallback(static function ($entry, $tags) use (&$assignedTags) {
+                $assignedTags[] = $tags;
+
+                return [];
+            });
+
+        $res = $instapaperImport->import();
+
+        $this->assertTrue($res);
+        $this->assertSame([['test_tag', 'politics', 'twitter', 'news'], ['social'], ['react', 'javascript']], $assignedTags);
         $this->assertSame(['skipped' => 0, 'imported' => 4, 'queued' => 0], $instapaperImport->getSummary());
     }
 
