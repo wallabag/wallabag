@@ -170,9 +170,15 @@ abstract class AbstractImport implements ImportInterface
                     $this->eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
                 }
 
-                $entryToBeFlushed = [];
+                foreach ($entryToBeFlushed as $entry) {
+                    foreach ($entry->getTags() as $tag) {
+                        $this->em->detach($tag);
+                    }
 
-                $this->em->clear();
+                    $this->em->detach($entry);
+                }
+
+                $entryToBeFlushed = [];
             }
             ++$i;
         }
