@@ -14,6 +14,8 @@ Click, save and read it when you want. It extracts content so that you won't be 
 
 You can install it on your own server, or you can create an account on [wallabag.it](https://wallabag.it).
 
+[![Deploy to Railyard](https://app.railyard.run/deploy/badge)](https://app.railyard.run/deploy?repo=https://github.com/wallabag/wallabag)
+
 ![wallabag](./.github/images/screenshot.png)
 
 * Website: [wallabag.org](https://wallabag.org)
