@@ -4,22 +4,22 @@ namespace Wallabag\HttpClient;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\BrowserKit\HttpBrowser;
-use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Symfony\Contracts\HttpClient\ResponseStreamInterface;
 
 class WallabagClient implements HttpClientInterface
 {
-    private readonly HttpClientInterface $httpClient;
+    private HttpClientInterface $httpClient;
 
     public function __construct(
+        HttpClientInterface $httpClient,
         private $restrictedAccess,
         private readonly HttpBrowser $browser,
         private readonly Authenticator $authenticator,
         private readonly LoggerInterface $logger,
     ) {
-        $this->httpClient = HttpClient::create([
+        $this->httpClient = $httpClient->withOptions([
             'timeout' => 10,
         ]);
     }
@@ -64,7 +64,10 @@ class WallabagClient implements HttpClientInterface
 
     public function withOptions(array $options): HttpClientInterface
     {
-        return new self($this->restrictedAccess, $this->browser, $this->authenticator, $this->logger);
+        $clone = clone $this;
+        $clone->httpClient = $this->httpClient->withOptions($options);
+
+        return $clone;
     }
 
     private function getCookieHeader(string $url): ?string
