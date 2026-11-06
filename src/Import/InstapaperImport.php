@@ -3,12 +3,10 @@
 namespace Wallabag\Import;
 
 use Wallabag\Entity\Entry;
-use Wallabag\Entity\User;
 
 class InstapaperImport extends AbstractImport
 {
     private $filepath;
-    private $userId;
 
     public function getName()
     {
@@ -43,11 +41,6 @@ class InstapaperImport extends AbstractImport
             $this->logger->error('InstapaperImport: user is not defined');
 
             return false;
-        }
-
-        // Store user ID to reattach user entity after em->clear()
-        if ($this->user->getId()) {
-            $this->userId = $this->user->getId();
         }
 
         if (!file_exists($this->filepath) || !is_readable($this->filepath)) {
@@ -126,14 +119,9 @@ class InstapaperImport extends AbstractImport
 
     public function parseEntry(array $importedEntry)
     {
-        // Reattach user entity if it was detached by em->clear() in AbstractImport
-        if ($this->userId && !$this->em->contains($this->user)) {
-            $this->user = $this->em->getReference(User::class, $this->userId);
-        }
-
         $existingEntry = $this->em
             ->getRepository(Entry::class)
-            ->findByUrlAndUserId($importedEntry['url'], $this->userId ?: $this->user->getId());
+            ->findByUrlAndUserId($importedEntry['url'], $this->user->getId());
 
         if (false !== $existingEntry) {
             ++$this->skippedEntries;
