@@ -83,11 +83,13 @@ class CaptchaUserControllerTest extends WallabagTestCase
 
     private function getNewUserForm(Crawler $crawler, string $username, string $captcha): Form
     {
+        $password = bin2hex(random_bytes(16));
+
         return $crawler->selectButton('user.form.save')->form([
             'new_user[username]' => $username,
             'new_user[email]' => $username . '@wallabag.org',
-            'new_user[plainPassword][first]' => 'captcha-password',
-            'new_user[plainPassword][second]' => 'captcha-password',
+            'new_user[plainPassword][first]' => $password,
+            'new_user[plainPassword][second]' => $password,
             'new_user[captcha]' => $captcha,
         ]);
     }

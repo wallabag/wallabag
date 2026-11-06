@@ -46,6 +46,7 @@ After changing configuration in production, clear the cache with
 | WALLABAG_REGISTRATION_ENABLED | Enable public registration | `0` |
 | WALLABAG_CAPTCHA_ENABLED | Require an image CAPTCHA for HTML user creation | `0` |
 | WALLABAG_CONFIRMATION_ENABLED | Send a confirmation email for each registration | `1` |
+| WALLABAG_NO_COMPROMISED_PASSWORDS | Enable compromised-password checks for user creation, password changes and resets, and production installation | `0` when unset, `1` in development `.env` |
 | WALLABAG_FROM_EMAIL | Address used in the `From:` field for application emails | `wallabag@example.com` |
 | WALLABAG_SERVER_NAME | User-friendly name of your instance for 2FA issuer strings | `Your wallabag instance` |
 | WALLABAG_TWOFACTOR_SENDER | Sender address for emailed 2FA codes | `no-reply@wallabag.org` |
@@ -57,6 +58,18 @@ After changing configuration in production, clear the cache with
 | WALLABAG_SITE_CONFIG_FOLDERS | Optional comma-separated list of extra graby site-config folders | empty |
 | WALLABAG_ARTICLE_REPORTING_URL | Destination used to report display problems with an article | `mailto:siteconfig@wallabag.org?subject=Wrong%20display%20in%20wallabag` |
 | SENTRY_DSN | Optional Sentry DSN used to report application errors | empty |
+
+### Compromised-password protection
+
+Set `WALLABAG_NO_COMPROMISED_PASSWORDS=1` in production to check passwords
+against Have I Been Pwned. Only a prefix of the password hash is sent, and
+temporary service errors do not block password validation.
+The check applies to public registration, administrator and API user creation,
+password changes and resets, and production installation.
+The `fos:user:create` and `fos:user:change-password` console commands do not
+perform this check. The development installation also skips it.
+The setting defaults to `0` when absent; the committed `.env` enables it for
+local development. Clear the production cache after changing it.
 
 ### CAPTCHA protection for user creation
 
