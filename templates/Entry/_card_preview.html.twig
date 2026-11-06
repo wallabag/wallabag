@@ -10,7 +10,7 @@
             {% if app.user.config.displayThumbnails %}
                 {% set preview_class_modifier = entry.previewPicture ? '' : ' preview--default' %}
                 {% if is_granted('VIEW', entry) %}
-                    <a href="{{ path('view', {'id': entry.id}) }}">
+                    <a href="{{ path(app.user.config.openOriginalUrl ? 'open_entry' : 'view', {'id': entry.id}) }}">
                         <span class="preview{{ preview_class_modifier }}" style="background-image: url({{ entry.previewPicture|default(asset('img/logo-square.svg')) }})"></span>
                     </a>
                 {% else %}
@@ -25,7 +25,7 @@
         <i class="card-title activator grey-text text-darken-4 material-icons right">clear</i>
         <span class="card-title">
             {% if is_granted('VIEW', entry) %}
-                <a href="{{ path('view', {'id': entry.id}) }}" title="{{ entry.title|striptags|e('html_attr') }}">
+                <a href="{{ path(app.user.config.openOriginalUrl ? 'open_entry' : 'view', {'id': entry.id}) }}" title="{{ entry.title|striptags|e('html_attr') }}">
                     {{ entry.title|striptags|u.truncate(80, '…', false)|raw }}
                 </a>
             {% else %}

@@ -3,7 +3,7 @@
         <i class="grey-text text-darken-4 activator material-icons right">more_vert</i>
     {% endif %}
     {% if is_granted('VIEW', entry) %}
-        <a href="{{ path('view', {'id': entry.id}) }}" title="{{ entry.title|striptags|e('html_attr') }}" class="card-title">
+        <a href="{{ path(app.user.config.openOriginalUrl ? 'open_entry' : 'view', {'id': entry.id}) }}" title="{{ entry.title|striptags|e('html_attr') }}" class="card-title">
             {{ entry.title|striptags|default('entry.default_title'|trans)|raw }}
         </a>
     {% else %}
@@ -12,6 +12,9 @@
 
     <div class="{{ subClass|default('original grey-text') }}">
         <a href="{{ entry.url|e }}" target="_blank" title="{{ entry.domainName|removeWww }}" class="tool grey-text">{{ entry.domainName|removeWww }}</a>
+        {% if app.user.config.openOriginalUrl and is_granted('VIEW', entry) %}
+            <a href="{{ path('view', {'id': entry.id}) }}" class="tool grey-text" title="{{ 'entry.open_reader'|trans }}" aria-label="{{ 'entry.open_reader'|trans }}"><i class="material-icons" aria-hidden="true">chrome_reader_mode</i></a>
+        {% endif %}
         {% if withMetadata is defined %}
             {% include "Entry/_tags.html.twig" with {'tags': entry.tags|slice(0, 3), 'entryId': entry.id, 'listClass': ' hide-on-med-and-down'} only %}
             <div class="reading-time grey-text">
