@@ -61,18 +61,18 @@ class InstapaperImport extends AbstractImport
             // New format (6 columns, as of 11/20/25): URL,Title,Selection,Folder,Timestamp,Tags
             // where Tags is a JSON array (e.g. '["programming", "go", "security"]')
 
-            $hasNewFormat = isset($data[5]) || isset($data[4]);
-            $tags = null;
+            $tags = [];
 
-            if ($hasNewFormat && !empty($data[5])) {
-                // New format: Tags column exists and contains JSON array
+            // Folder column becomes a tag unless it's a status folder
+            if (false === \in_array($data[3], ['Archive', 'Unread', 'Starred'], true)) {
+                $tags[] = $data[3];
+            }
+
+            if (!empty($data[5])) {
                 $parsedTags = json_decode($data[5], true);
-                if (\is_array($parsedTags) && !empty($parsedTags)) {
-                    $tags = $parsedTags;
+                if (\is_array($parsedTags)) {
+                    $tags = array_merge($tags, $parsedTags);
                 }
-            } elseif (!$hasNewFormat && false === \in_array($data[3], ['Archive', 'Unread', 'Starred'], true)) {
-                // Old format: Folder column becomes a tag unless it's a status folder
-                $tags = [$data[3]];
             }
 
             $entries[] = [
@@ -81,8 +81,8 @@ class InstapaperImport extends AbstractImport
                 'is_archived' => 'Archive' === $data[3] || 'Starred' === $data[3],
                 'is_starred' => 'Starred' === $data[3],
                 'html' => false,
-                'created_at' => $hasNewFormat && isset($data[4]) ? $data[4] : null,
-                'tags' => $tags,
+                'created_at' => isset($data[4]) && ctype_digit($data[4]) ? $data[4] : null,
+                'tags' => $tags ?: null,
             ];
         }
         fclose($handle);

@@ -112,7 +112,7 @@ class InstapaperImportTest extends TestCase
         $res = $instapaperImport->import();
 
         $this->assertTrue($res);
-        $this->assertSame([['politics', 'twitter', 'news'], ['social'], ['react', 'javascript']], $assignedTags);
+        $this->assertSame([['test_tag', 'politics', 'twitter', 'news'], ['social'], ['react', 'javascript']], $assignedTags);
         $this->assertSame(['skipped' => 0, 'imported' => 4, 'queued' => 0], $instapaperImport->getSummary());
     }
 
