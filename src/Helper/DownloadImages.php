@@ -228,8 +228,13 @@ class DownloadImages
      */
     public function removeImages($entryId): void
     {
-        $relativePath = $this->getRelativePath($entryId);
+        $relativePath = $this->getRelativePath($entryId, false);
         $folderPath = $this->baseFolder . '/' . $relativePath;
+
+        // no images were downloaded for this entry
+        if (!is_dir($folderPath)) {
+            return;
+        }
 
         $finder = new Finder();
         $finder
