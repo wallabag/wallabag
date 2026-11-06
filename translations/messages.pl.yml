@@ -37,6 +37,7 @@ menu:
         theme_toggle_dark: Ciemny motyw
         theme_toggle_light: Jasny motyw
         with_annotations: Z adnotacjami
+        back_to_homepage: Powrót do strony głównej
     top:
         add_new_entry: Dodaj nowy wpis
         search: Szukaj
@@ -97,6 +98,14 @@ config:
         lineheight_label: Wysokość linii
         maxwidth_label: Maksymalna szerokość
         help_fontsize: Możesz wybrać rozmiar czcionek do użycia.
+        default_homepage:
+            label: Domyślna strona główna
+            unread: Nieprzeczytane
+            all: Wszystkie artykuły
+            archive: Archiwum
+            starred: Wyróżnione
+            tags: Tagi
+        help_default_homepage: Wybierz stronę, która ma być wyświetlana po otwarciu wallabag.
     form_user:
         two_factor_description: Włączenie autoryzacji dwuetapowej oznacza, że będziesz otrzymywał maile z kodem przy każdym nowym, niezaufanym połączeniu.
         name_label: Nazwa
