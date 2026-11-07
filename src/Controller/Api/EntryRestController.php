@@ -847,105 +847,75 @@ class EntryRestController extends WallabagRestController
      *             pattern="\w+",
      *         )
      *     ),
-     *     @OA\Parameter(
-     *         name="title",
-     *         in="query",
-     *         description="",
+     *     @OA\RequestBody(
+     *         description="Properties to update on the entry. Send them in the request body: the endpoint reads them from there, not from the query string.",
      *         required=false,
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         name="tags",
-     *         in="query",
-     *         description="a comma-separated list of tags.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string",
-     *             example="tag1,tag2,tag3",
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="archive",
-     *         in="query",
-     *         description="archived the entry.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="integer",
-     *             enum={"1", "0"},
-     *             default="0"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="starred",
-     *         in="query",
-     *         description="starred the entry.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="integer",
-     *             enum={"1", "0"},
-     *             default="0"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="content",
-     *         in="query",
-     *         description="Content of the entry",
-     *         required=false,
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         name="language",
-     *         in="query",
-     *         description="Language of the entry",
-     *         required=false,
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         name="preview_picture",
-     *         in="query",
-     *         description="Preview picture of the entry",
-     *         required=false,
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         name="published_at",
-     *         in="query",
-     *         description="Published date of the entry",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="datetime|integer",
-     *             format="YYYY-MM-DDTHH:II:SS+TZ or a timestamp",
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="authors",
-     *         in="query",
-     *         description="Authors of the entry",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string",
-     *             example="Name Firstname,author2,author3",
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="public",
-     *         in="query",
-     *         description="will generate a public link for the entry",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="integer",
-     *             enum={"1", "0"},
-     *             default="0"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="origin_url",
-     *         in="query",
-     *         description="Origin url for the entry (from where you found it).",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string",
-     *             example="http://www.test.com/article.html",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="title",
+     *                 type="string",
+     *             ),
+     *             @OA\Property(
+     *                 property="tags",
+     *                 description="a comma-separated list of tags.",
+     *                 type="string",
+     *                 example="tag1,tag2,tag3",
+     *             ),
+     *             @OA\Property(
+     *                 property="archive",
+     *                 description="archived the entry.",
+     *                 type="integer",
+     *                 enum={"1", "0"},
+     *                 default="0"
+     *             ),
+     *             @OA\Property(
+     *                 property="starred",
+     *                 description="starred the entry.",
+     *                 type="integer",
+     *                 enum={"1", "0"},
+     *                 default="0"
+     *             ),
+     *             @OA\Property(
+     *                 property="content",
+     *                 description="Content of the entry",
+     *                 type="string",
+     *             ),
+     *             @OA\Property(
+     *                 property="language",
+     *                 description="Language of the entry",
+     *                 type="string",
+     *             ),
+     *             @OA\Property(
+     *                 property="preview_picture",
+     *                 description="Preview picture of the entry",
+     *                 type="string",
+     *             ),
+     *             @OA\Property(
+     *                 property="published_at",
+     *                 description="Published date of the entry",
+     *                 type="datetime|integer",
+     *                 example="YYYY-MM-DDTHH:II:SS+TZ or a timestamp",
+     *             ),
+     *             @OA\Property(
+     *                 property="authors",
+     *                 description="Authors of the entry",
+     *                 type="string",
+     *                 example="Name Firstname,author2,author3",
+     *             ),
+     *             @OA\Property(
+     *                 property="public",
+     *                 description="will generate a public link for the entry",
+     *                 type="integer",
+     *                 enum={"1", "0"},
+     *                 default="0"
+     *             ),
+     *             @OA\Property(
+     *                 property="origin_url",
+     *                 description="Origin url for the entry (from where you found it).",
+     *                 type="string",
+     *                 example="http://www.test.com/article.html",
+     *             ),
      *         )
      *     ),
      *     @OA\Response(
