@@ -5,3 +5,6 @@ validator:
     item_per_page_too_high: Esto matará la aplicación
     feed_limit_too_high: Esto matará la aplicación
     quote_length_too_high: La cita es muy larga. Debe tener {{ limit }} caracteres o menos.
+    captcha_invalid: El código de seguridad es inválido o ha expirado. Por favor, inténtalo de nuevo.
+    item_per_page_too_low: Este valor debe ser mayor o igual que 1.
+    feed_limit_too_low: Este valor debe ser mayor o igual que 1.
