@@ -37,6 +37,7 @@ menu:
         theme_toggle_light: Tema claro
         ignore_origin_instance_rules: Ignorar las reglas de origen de forma global
         with_annotations: Con anotaciones
+        back_to_homepage: Volver a la página de inicio
     top:
         add_new_entry: 'Añadir un nuevo artículo'
         search: 'Buscar'
@@ -87,16 +88,24 @@ config:
         help_reading_speed: "wallabag calcula un tiempo de lectura para cada artículo. Aquí puedes definir, gracias a esta lista, si eres un lector rápido o lento. wallabag recalculará el tiempo de lectura para cada artículo."
         help_language: "Puedes cambiar el idioma de la interfaz de wallabag."
         android_instruction: Pulse aquí para completar tu aplicación Android
-        help_font: Puedes elegir la familia de las fuentes que deseas utilizar.
+        help_font: Puedes elegir la familia de fuentes que deseas utilizar.
         help_fontsize: Puedes elegir el tamaño de letra que deseas utilizar.
-        help_lineheight: Puedes elegir la interlineación para la línea que deseas utilizar.
-        help_maxwidth: Puedes elegir la anchura máxima que deseas utilizar.
+        help_lineheight: Puedes elegir el interlineado que deseas utilizar.
+        help_maxwidth: Puedes elegir la anchura máxima que quieres utilizar.
         font_label: Familias de tipos de letra
-        fontsize_label: Tamaño de las letras
-        lineheight_label: Interlineación
+        fontsize_label: Tamaño de letra
+        lineheight_label: Interlineado
         maxwidth_label: Anchura máxima
         help_display_thumbnails: Puedes decidir si deseas mostrar o no las miniaturas de los artículos. Útil para conexiones lentas.
-        display_thumbnails_label: Mostrar las miniaturas de los artículos (útil para conexiones lentas).'
+        display_thumbnails_label: Mostrar las miniaturas de los artículos (útil para conexiones lentas).
+        default_homepage:
+            label: Página de inicio por defecto
+            unread: No leídos
+            all: Todos los artículos
+            archive: Archivados
+            starred: Favoritos
+            tags: Etiquetas
+        help_default_homepage: Escoge la página que se muestra cuando se abre wallabag.
     form_user:
         two_factor_description: "Activar la autenticación en dos pasos significa que recibirás un código por correo electrónico en cada nueva conexión que no sea de confianza."
         name_label: 'Nombre'
@@ -214,8 +223,9 @@ config:
         feed_link:
             all: Todos
             archive: Archivados
-            starred: Favorito
+            starred: Favoritos
             unread: No leídos
+            opds: Catálogo OPDS (lectores de ebooks)
         token_reset: Regenerar tu token
         token_create: Crear tu token
         no_token: Sin token
@@ -739,3 +749,6 @@ ignore_origin_instance_rule:
     page_title: Reglas de origen ignoradas globales
     new_ignore_origin_instance_rule: Crear una regla de origen ignorada global
     description: Aquí puede administrar las reglas de origen ignoradas globales utilizadas para ignorar algunos patrones de la URL de origen.
+captcha:
+    label: Comprobación de seguridad
+    help: Introduzca los caracteres que se muestran en la imagen. Refrescar la imagen invalida la respuesta previa.
