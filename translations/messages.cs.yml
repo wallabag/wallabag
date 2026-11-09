@@ -144,6 +144,7 @@ menu:
         config: Konfigurace
         starred: S hvězdičkou
         with_annotations: S anotacemi
+        back_to_homepage: Zpět na domovskou stránku
     search_form:
         input_label: Zadejte sem své hledání
 config:
@@ -244,6 +245,14 @@ config:
         help_lineheight: Můžete zvolit výšku řádku, kterou chcete použít.
         font_label: Rodina písem
         help_fontsize: Můžete zvolit velikost písma, kterou chcete použít.
+        default_homepage:
+            label: Výchozí domovská stránka
+            unread: Nepřečtené
+            all: Všechny články
+            archive: Archiv
+            starred: S hvězdičkou
+            tags: Štítky
+        help_default_homepage: Zvolte stránku, která se zobrazí, když otevřete wallabag.
     form_password:
         new_password_label: Nové heslo
         old_password_label: Aktuální heslo
