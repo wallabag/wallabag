@@ -56,12 +56,23 @@ class InstapaperImport extends AbstractImport
                 continue;
             }
 
-            // last element in the csv is the folder where the content belong
-            // BUT it can also be the status (since status = folder in Instapaper)
-            // and we don't want archive, unread & starred to become a tag
-            $tags = null;
+            // Instapaper has two CSV export formats:
+            // Old format (4 columns): URL,Title,Selection,Folder
+            // New format (6 columns, as of 11/20/25): URL,Title,Selection,Folder,Timestamp,Tags
+            // where Tags is a JSON array (e.g. '["programming", "go", "security"]')
+
+            $tags = [];
+
+            // Folder column becomes a tag unless it's a status folder
             if (false === \in_array($data[3], ['Archive', 'Unread', 'Starred'], true)) {
-                $tags = [$data[3]];
+                $tags[] = $data[3];
+            }
+
+            if (!empty($data[5])) {
+                $parsedTags = json_decode($data[5], true);
+                if (\is_array($parsedTags)) {
+                    $tags = array_merge($tags, $parsedTags);
+                }
             }
 
             $entries[] = [
@@ -70,7 +81,8 @@ class InstapaperImport extends AbstractImport
                 'is_archived' => 'Archive' === $data[3] || 'Starred' === $data[3],
                 'is_starred' => 'Starred' === $data[3],
                 'html' => false,
-                'tags' => $tags,
+                'created_at' => isset($data[4]) && ctype_digit($data[4]) ? $data[4] : null,
+                'tags' => $tags ?: null,
             ];
         }
         fclose($handle);
@@ -134,6 +146,10 @@ class InstapaperImport extends AbstractImport
 
         $entry->updateArchived($importedEntry['is_archived']);
         $entry->setStarred($importedEntry['is_starred']);
+
+        if (!empty($importedEntry['created_at'])) {
+            $entry->setCreatedAt(\DateTime::createFromFormat('U', $importedEntry['created_at']));
+        }
 
         $this->em->persist($entry);
         ++$this->importedEntries;
