@@ -25,4 +25,22 @@ class EntryTest extends TestCase
             $this->assertSame($lang, $entry->getHTMLLanguage());
         }
     }
+
+    public function testSetPublishedByFiltersEmptyAuthors(): void
+    {
+        $entry = new Entry(new User());
+
+        $entry->setPublishedBy(['', ' bob ', '  ', 'helen']);
+
+        $this->assertSame(['bob', 'helen'], $entry->getPublishedBy());
+    }
+
+    public function testSetPublishedByStoresNullWhenOnlyEmptyAuthorsAreProvided(): void
+    {
+        $entry = new Entry(new User());
+
+        $entry->setPublishedBy(['', '  ']);
+
+        $this->assertNull($entry->getPublishedBy());
+    }
 }

@@ -46,7 +46,7 @@ class EntryOptionalFieldsTest extends WallabagApiTestCase
             $expected[$field] = 'article';
         } elseif ('content' === $field) {
             $expected['reading_time'] = 0;
-        } elseif ('tags' === $field || 'authors' === $field) {
+        } elseif ('tags' === $field) {
             $expected[$field] = [];
         } elseif ('archive' === $field) {
             $expected[$field] = false;
@@ -173,7 +173,7 @@ class EntryOptionalFieldsTest extends WallabagApiTestCase
         $this->assertNull($saved['language']);
         $this->assertNull($saved['preview_picture']);
         $this->assertNull($saved['published_at']);
-        $this->assertSame([], $saved['authors']);
+        $this->assertNull($saved['authors']);
     }
 
     public function testPatchContentKeepsOmittedMetadata(): void
