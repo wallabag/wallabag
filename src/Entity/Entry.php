@@ -279,7 +279,7 @@ class Entry
     /**
      * Get title.
      *
-     * @return string
+     * @return string|null
      */
     public function getTitle()
     {
@@ -686,7 +686,7 @@ class Entry
     /**
      * Set previewPicture.
      *
-     * @param string $previewPicture
+     * @param string|null $previewPicture
      *
      * @return Entry
      */
@@ -822,7 +822,7 @@ class Entry
     /**
      * @return Entry
      */
-    public function setPublishedAt(\DateTimeInterface $publishedAt)
+    public function setPublishedAt(?\DateTimeInterface $publishedAt)
     {
         $this->publishedAt = $publishedAt;
 
