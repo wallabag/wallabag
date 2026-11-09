@@ -181,7 +181,7 @@ class ContentProxy
     public function setDefaultEntryTitle(Entry $entry): void
     {
         $url = parse_url($entry->getUrl());
-        $path = pathinfo($url['path'], \PATHINFO_BASENAME);
+        $path = pathinfo($url['path'] ?? '', \PATHINFO_BASENAME);
 
         if (empty($path)) {
             $path = $url['host'];
