@@ -20,6 +20,17 @@ class ContentProxyTest extends TestCase
 {
     private $fetchingErrorMessage = 'wallabag can\'t retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.';
 
+    public function testSetDefaultEntryTitleWithoutTrailingSlash(): void
+    {
+        $proxy = new ContentProxy(new Graby(), $this->getTaggerMock(), $this->getRuleBasedIgnoreOriginProcessorMock(), $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $entry->setUrl('https://example.com');
+
+        $proxy->setDefaultEntryTitle($entry);
+
+        $this->assertSame('example.com', $entry->getTitle());
+    }
+
     public function testWithBadUrl(): void
     {
         $tagger = $this->getTaggerMock();
