@@ -4229,16 +4229,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.216",
+            "version": "1.0.217",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "c6ffaf0a34742d466b50733ae10fc46eac5bbf36"
+                "reference": "7bdaa907a9a70294f75fa0f4f677aadee2bbb4b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/c6ffaf0a34742d466b50733ae10fc46eac5bbf36",
-                "reference": "c6ffaf0a34742d466b50733ae10fc46eac5bbf36",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/7bdaa907a9a70294f75fa0f4f677aadee2bbb4b0",
+                "reference": "7bdaa907a9a70294f75fa0f4f677aadee2bbb4b0",
                 "shasum": ""
             },
             "require": {
@@ -4267,9 +4267,9 @@
             "description": "Graby site config files",
             "support": {
                 "issues": "https://github.com/j0k3r/graby-site-config/issues",
-                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.216"
+                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.217"
             },
-            "time": "2026-10-01T07:57:44+00:00"
+            "time": "2026-11-02T08:29:23+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -9182,16 +9182,16 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v3.7.1",
+            "version": "v3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "f3202fa1b5097b0af062dc978b32ecf63404e31d"
+                "reference": "feb1edf4e546af3b85c5caebe8359a20db230ca3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/f3202fa1b5097b0af062dc978b32ecf63404e31d",
-                "reference": "f3202fa1b5097b0af062dc978b32ecf63404e31d",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/feb1edf4e546af3b85c5caebe8359a20db230ca3",
+                "reference": "feb1edf4e546af3b85c5caebe8359a20db230ca3",
                 "shasum": ""
             },
             "require": {
@@ -9204,7 +9204,7 @@
                     "name": "symfony/contracts"
                 },
                 "branch-alias": {
-                    "dev-main": "3.7-dev"
+                    "dev-main": "3.8-dev"
                 }
             },
             "autoload": {
@@ -9229,7 +9229,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.7.1"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.8.1"
             },
             "funding": [
                 {
@@ -9249,7 +9249,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-05T06:23:12+00:00"
+            "time": "2026-09-16T14:15:10+00:00"
         },
         {
             "name": "symfony/doctrine-bridge",
