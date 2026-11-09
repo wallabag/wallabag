@@ -4,6 +4,7 @@ namespace Wallabag\Tests\Functional\Controller;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
+use Graby\Graby;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\Entity\Annotation;
 use Wallabag\Entity\Config as ConfigEntity;
@@ -360,13 +361,21 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertStringContainsString('/view/', $client->getResponse()->getTargetUrl());
     }
 
-    /**
-     * @group NetworkCalls
-     */
     public function testPostNewThatWillBeTagged(): void
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
+        $client->disableReboot(); // Keep the mocked fetcher across both submissions.
+
+        $graby = $this->createMock(Graby::class);
+        $graby->expects($this->exactly(2))
+            ->method('fetchContent')
+            ->willReturn([
+                'title' => 'wallabag',
+                'html' => '<p>A read-it-later application.</p>',
+                'language' => 'en',
+            ]);
+        $client->getContainer()->set(Graby::class, $graby);
 
         $crawler = $client->request('GET', '/new');
 
@@ -392,6 +401,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $this->assertCount(2, $tags);
         $this->assertContains('wallabag', $tags);
+        $this->assertContains('foot', $tags);
         $this->assertSame('en', $entry->getLanguage());
 
         $em->remove($entry);
@@ -422,6 +432,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $this->assertCount(2, $tags);
         $this->assertContains('wallabag', $tags);
+        $this->assertContains('foot', $tags);
 
         $em->remove($entry);
         $em->flush();
