@@ -37,6 +37,7 @@ menu:
         theme_toggle_dark: Dunkles Design
         theme_toggle_light: Helles Design
         with_annotations: Mit Anmerkungen
+        back_to_homepage: Zurück zur Homepage
     top:
         add_new_entry: Neuen Artikel hinzufügen
         search: Suche
@@ -97,6 +98,14 @@ config:
         fontsize_label: Schriftgröße
         lineheight_label: Zeilenhöhe
         maxwidth_label: Maximale Breite
+        default_homepage:
+            label: Standard Homepage
+            unread: Ungelesen
+            all: Alle Artikel
+            archive: Archiv
+            starred: Favorisiert
+            tags: Tags
+        help_default_homepage: Wähle die Seite die beim Öffnen von wallabag angezeigt wird.
     form_user:
         two_factor_description: Wenn du die Zwei-Faktor-Authentifizierung aktivierst, erhältst du eine E-Mail mit einem Code bei jeder nicht vertrauenswürdigen Verbindung.
         name_label: Name
