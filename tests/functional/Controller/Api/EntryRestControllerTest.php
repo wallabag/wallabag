@@ -50,7 +50,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         }
 
         $entryId = $entry->getId();
-        $entityManager->detach($entry);
+        $originalContent = $entry->getContent();
 
         $this->client->request('GET', '/api/entries/' . $entryId . '.json?detail=metadata');
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -59,6 +59,10 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertNull($content['content']);
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+
+        // Ensure the underlying entity in the database was not modified
+        $freshEntry = $entityManager->getRepository(Entry::class)->find($entryId);
+        $this->assertSame($originalContent, $freshEntry->getContent());
     }
 
     public function testGetOneEntryWrongDetail(): void
