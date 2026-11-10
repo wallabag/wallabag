@@ -259,4 +259,39 @@ class DownloadImagesTest extends TestCase
 
         $this->assertFalse($res);
     }
+
+    public function testRemoveImages(): void
+    {
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']])]);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $baseFolder = sys_get_temp_dir() . '/wallabag_test_' . uniqid();
+        $download = new DownloadImages($mockHttpClient, $baseFolder, 'http://wallabag.io/', $logger);
+        $download->processSingleImage(123, 'http://i.imgur.com/T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
+
+        $this->assertDirectoryExists($baseFolder . '/9/b/9b0ead26');
+
+        $download->removeImages(123);
+
+        $this->assertDirectoryDoesNotExist($baseFolder . '/9/b/9b0ead26');
+    }
+
+    public function testRemoveImagesWhenNoImagesWereDownloaded(): void
+    {
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $baseFolder = sys_get_temp_dir() . '/wallabag_test_' . uniqid();
+        $download = new DownloadImages(new MockHttpClient(), $baseFolder, 'http://wallabag.io/', $logger);
+
+        // the folder of the entry can not be created, like when the images folder is not writable
+        touch($baseFolder . '/9');
+
+        $download->removeImages(123);
+
+        $this->assertFileExists($baseFolder . '/9');
+        $this->assertDirectoryDoesNotExist($baseFolder . '/9/b/9b0ead26');
+    }
 }
