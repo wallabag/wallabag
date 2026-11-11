@@ -39,7 +39,8 @@ class ChromeImport extends BrowserImport
             'is_archived' => (int) $this->markAsRead,
             'is_starred' => false,
             'tags' => '',
-            'created_at' => substr((string) $entry['date_added'], 0, 10),
+            // Chrome stores microseconds since 1601-01-01
+            'created_at' => empty($entry['date_added']) ? '' : (string) (intdiv((int) $entry['date_added'], 1000000) - 11644473600),
         ];
 
         if (\array_key_exists('tags', $entry) && '' !== $entry['tags']) {

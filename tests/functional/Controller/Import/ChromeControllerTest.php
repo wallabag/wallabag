@@ -128,8 +128,8 @@ class ChromeControllerTest extends WallabagTestCase
         $this->assertCount(1, $content->getTags());
 
         $createdAt = $content->getCreatedAt();
-        $this->assertSame('2011', $createdAt->format('Y'));
-        $this->assertSame('07', $createdAt->format('m'));
+        $this->assertSame('2016', $createdAt->format('Y'));
+        $this->assertSame('09', $createdAt->format('m'));
     }
 
     public function testImportWallabagWithEmptyFile(): void
