@@ -21,6 +21,8 @@ framework:
     csrf_protection: ~
     validation:
         enable_annotations: true
+        not_compromised_password:
+            enabled: '%env(bool:WALLABAG_COMPROMISED_PASSWORD_CHECK_ENABLED)%'
     default_locale: "%env(DEFAULT_LOCALE)%"
     trusted_hosts: ~
     session:

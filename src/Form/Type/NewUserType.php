@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
 use Wallabag\Entity\User;
 
 class NewUserType extends AbstractType
@@ -35,6 +36,7 @@ class NewUserType extends AbstractType
                         'minMessage' => 'validator.password_too_short',
                     ]),
                     new NotBlank(),
+                    new NotCompromisedPassword(['skipOnError' => true]),
                 ],
                 'label' => 'user.form.plain_password_label',
             ])

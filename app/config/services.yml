@@ -7,6 +7,7 @@ parameters:
     spiriit_form_filter.get_filter.doctrine_orm.class: Wallabag\Event\Subscriber\CustomDoctrineORMSubscriber
     env(WALLABAG_LOG_LEVEL): error
     env(WALLABAG_SITE_CONFIG_FOLDERS): ''
+    env(WALLABAG_COMPROMISED_PASSWORD_CHECK_ENABLED): '0'
     wallabag.site_config_folders: '%env(csv:WALLABAG_SITE_CONFIG_FOLDERS)%'
 
 services:
