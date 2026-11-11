@@ -37,6 +37,7 @@ menu:
         ignore_origin_instance_rules: Globale regler for å ignorerer opprinnelse
         with_annotations: Med merknader
         site_credentials: Akkreditiver
+        back_to_homepage: Tilbake til startsiden
     top:
         add_new_entry: Legg til en ny oppføring
         search: Søk
@@ -97,6 +98,14 @@ config:
         help_lineheight: Du kan velge linjehøyde du vil bruke.
         font_label: Skrifttype
         help_fontsize: Du kan velge skriftstørrelse du vil bruke.
+        default_homepage:
+            label: Standard startside
+            unread: Ulest
+            all: Alle artikler
+            archive: Arkiv
+            starred: Stjernemerket
+            tags: Stikkord
+        help_default_homepage: Velg hvilken side som vises når du åpner wallabag.
     form_user:
         name_label: Navn
         email_label: E-post
