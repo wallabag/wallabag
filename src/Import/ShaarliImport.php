@@ -33,7 +33,7 @@ class ShaarliImport extends HtmlImport
     protected function prepareEntry(array $entry = [])
     {
         $data = [
-            'title' => '',
+            'title' => $entry['title'] ?? '',
             'html' => false,
             'url' => $entry['url'],
             'is_archived' => (int) $this->markAsRead,

@@ -42,6 +42,7 @@ abstract class HtmlImport extends AbstractImport
 
         $entries = $hrefs->each(static fn (Crawler $node) => [
             'url' => $node->attr('href'),
+            'title' => trim($node->text()),
             'tags' => $node->attr('tags'),
             'created_at' => $node->attr('add_date'),
         ]);

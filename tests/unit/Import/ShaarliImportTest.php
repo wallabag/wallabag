@@ -57,14 +57,19 @@ class ShaarliImportTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $titles = [];
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('updateEntry');
+            ->method('updateEntry')
+            ->willReturnCallback(static function ($entry, $url, array $content) use (&$titles): void {
+                $titles[] = $content['title'];
+            });
 
         $res = $shaarliImport->import();
 
         $this->assertTrue($res);
         $this->assertSame(['skipped' => 0, 'imported' => 2, 'queued' => 0], $shaarliImport->getSummary());
+        $this->assertSame('JO Paris 2024 : Où courir dans la capitale maintenant que les quais sont fermés ?', $titles[1]);
     }
 
     public function testImportAndMarkAllAsRead(): void
