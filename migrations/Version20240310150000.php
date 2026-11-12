@@ -61,7 +61,7 @@ final class Version20240310150000 extends WallabagMigration
             case $this->platform instanceof PostgreSQLPlatform:
                 $this->write('Align database schema with Doctrine metadata.');
 
-                $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_clients') . ' ALTER name TYPE TEXT;');
+                $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_clients') . ' ALTER name TYPE TEXT USING convert_from(name, \'UTF8\');');
 
                 $this->addSql('ALTER TABLE ' . $this->getTable('ignore_origin_instance_rule') . ' ALTER id DROP DEFAULT;');
 
