@@ -27,7 +27,7 @@ final class Version20261112100000 extends WallabagMigration
             // The SERIAL sequence is named after the prefixed table, or gets a suffix when there is no prefix
             $sequence = $this->connection->fetchOne('SELECT pg_get_serial_sequence(?, ?)', [$this->getTable($table, true), 'id']);
 
-            if (null === $sequence || false === $sequence || 'public.' . $table . '_id_seq' === $sequence) {
+            if (null === $sequence || false === $sequence || $table . '_id_seq' === substr($sequence, strrpos($sequence, '.') + 1)) {
                 continue;
             }
 
