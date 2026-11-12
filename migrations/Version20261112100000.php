@@ -24,16 +24,19 @@ final class Version20261112100000 extends WallabagMigration
         $this->skipIf(!$this->connection->getDatabasePlatform() instanceof PostgreSQLPlatform, 'This migration only apply to PostgreSQL');
 
         foreach (self::TABLES as $table) {
-            $this->addSql('DROP SEQUENCE IF EXISTS ' . $this->getTable($table . '_id_seq', true));
+            // The SERIAL sequence is named after the prefixed table, or gets a suffix when there is no prefix
+            $sequence = $this->connection->fetchOne('SELECT pg_get_serial_sequence(?, ?)', [$this->getTable($table, true), 'id']);
+
+            if (null === $sequence || false === $sequence || 'public.' . $table . '_id_seq' === $sequence) {
+                continue;
+            }
+
+            $this->addSql('DROP SEQUENCE IF EXISTS ' . $sequence);
         }
     }
 
     public function down(Schema $schema): void
     {
-        $this->skipIf(!$this->connection->getDatabasePlatform() instanceof PostgreSQLPlatform, 'This migration only apply to PostgreSQL');
-
-        foreach (self::TABLES as $table) {
-            $this->addSql('CREATE SEQUENCE IF NOT EXISTS ' . $this->getTable($table . '_id_seq', true));
-        }
+        $this->throwIrreversibleMigrationException('The orphan sequences have been deleted.');
     }
 }
