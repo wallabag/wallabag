@@ -39,8 +39,7 @@ class ChromeImport extends BrowserImport
             'is_archived' => (int) $this->markAsRead,
             'is_starred' => false,
             'tags' => '',
-            // Chrome stores microseconds since 1601-01-01
-            'created_at' => empty($entry['date_added']) ? '' : (string) (intdiv((int) $entry['date_added'], 1000000) - 11644473600),
+            'created_at' => $this->convertChromeDateToUnixTimestamp($entry['date_added'] ?? null),
         ];
 
         if (\array_key_exists('tags', $entry) && '' !== $entry['tags']) {
@@ -48,5 +47,19 @@ class ChromeImport extends BrowserImport
         }
 
         return $data;
+    }
+
+    /**
+     * Converts Chrome's date_added (microseconds since 1601-01-01) to a Unix timestamp.
+     *
+     * @see https://chromium.googlesource.com/chromium/src/+/main/components/bookmarks/browser/bookmark_codec.cc#183
+     */
+    private function convertChromeDateToUnixTimestamp($dateAdded): string
+    {
+        if (empty($dateAdded)) {
+            return '';
+        }
+
+        return (string) (intdiv((int) $dateAdded, 1_000_000) - 11_644_473_600);
     }
 }
