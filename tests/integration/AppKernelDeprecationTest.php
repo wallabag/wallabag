@@ -31,6 +31,10 @@ class AppKernelDeprecationTest extends KernelTestCase
 
         self::ensureKernelShutdown();
 
+        // Booting with legacy parameters drops the .env defaults they replace: restore them for the next kernels
+        $server = $_SERVER;
+        $env = $_ENV;
+
         try {
             $filesystem->remove($sqlitePath);
             $filesystem->dumpFile($legacyParametersPath, $this->renderLegacyParametersFile($sqlitePath));
@@ -50,6 +54,15 @@ class AppKernelDeprecationTest extends KernelTestCase
             }
 
             $filesystem->remove([$cachePath, $sqlitePath]);
+
+            foreach (array_diff_key($server, $_SERVER) as $name => $value) {
+                if (\is_string($value)) {
+                    putenv($name . '=' . $value);
+                }
+            }
+
+            $_SERVER = $server;
+            $_ENV = $env;
         }
     }
 

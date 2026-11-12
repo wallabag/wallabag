@@ -32,6 +32,7 @@ use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
 use Symfony\Bundle\WebServerBundle\WebServerBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\WebpackEncoreBundle\WebpackEncoreBundle;
 use Twig\Extra\TwigExtraBundle\TwigExtraBundle;
@@ -125,6 +126,15 @@ class AppKernel extends Kernel
         }
     }
 
+    protected function initializeContainer(): void
+    {
+        parent::initializeContainer();
+
+        if ($this->container->hasParameter('wallabag.legacy_env_vars')) {
+            $this->preferLegacyParametersOverDotenvDefaults($this->container->getParameter('wallabag.legacy_env_vars'));
+        }
+    }
+
     protected function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new ImportCompilerPass());
@@ -155,10 +165,57 @@ class AppKernel extends Kernel
 
     private function defineLegacyEnvFallbacks(ContainerBuilder $container): void
     {
+        $parametersBefore = array_keys($container->getParameterBag()->all());
+
         $this->defineLegacySimpleEnvFallbacks($container);
         $this->defineLegacyDatabaseUrlFallback($container);
         $this->defineLegacyRedisUrlFallback($container);
         $this->defineLegacyRabbitMqUrlFallback($container);
+
+        $legacyEnvVars = [];
+        foreach (array_diff(array_keys($container->getParameterBag()->all()), $parametersBefore) as $parameter) {
+            if (preg_match('/^env\((\w+)\)$/', $parameter, $matches)) {
+                $legacyEnvVars[] = $matches[1];
+            }
+        }
+
+        $container->setParameter('wallabag.legacy_env_vars', $legacyEnvVars);
+
+        // The container may be warmed up right after being built, before initializeContainer() returns
+        $this->preferLegacyParametersOverDotenvDefaults($legacyEnvVars);
+    }
+
+    /**
+     * The default values shipped in .env are loaded as real environment variables,
+     * so they would win over the env(...) fallbacks built from app/config/parameters.yml.
+     * When a variable still holds its .env default, drop it so the legacy value is used.
+     * Real environment variables and values customized in .env.local are kept.
+     */
+    private function preferLegacyParametersOverDotenvDefaults(array $legacyEnvVars): void
+    {
+        $dotenvFile = $this->getProjectDir() . '/.env';
+        $dotenvVars = array_filter(explode(',', $_SERVER['SYMFONY_DOTENV_VARS'] ?? $_ENV['SYMFONY_DOTENV_VARS'] ?? ''));
+
+        if (!is_file($dotenvFile) || [] === $dotenvVars) {
+            return;
+        }
+
+        $dotenvDefaults = (new Dotenv())->parse((string) file_get_contents($dotenvFile), $dotenvFile);
+
+        foreach ($legacyEnvVars as $name) {
+            if (!in_array($name, $dotenvVars, true) || !array_key_exists($name, $dotenvDefaults)) {
+                continue;
+            }
+
+            $value = $_SERVER[$name] ?? $_ENV[$name] ?? null;
+
+            if ($value !== $dotenvDefaults[$name]) {
+                continue;
+            }
+
+            unset($_SERVER[$name], $_ENV[$name]);
+            putenv($name);
+        }
     }
 
     private function defineLegacySimpleEnvFallbacks(ContainerBuilder $container): void
