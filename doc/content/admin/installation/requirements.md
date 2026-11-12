@@ -3,7 +3,7 @@ title: Requirements
 weight: 1
 ---
 
-wallabag is compatible with **PHP >= 7.4**.
+wallabag is compatible with PHP 8.2.35 or later in the 8.2 series, PHP 8.3.36 or later in the 8.3 series, and PHP 8.4.27 or later in the 8.4 series.
 
 {{< callout type="info" >}}
 To install wallabag easily, we provide a `Makefile`, so you need to have the `make` tool.

@@ -44,7 +44,7 @@
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
     "require": {
-        "php": ">=8.2",
+        "php": "~8.2.35 || ~8.3.36 || ~8.4.27",
         "ext-ctype": "*",
         "ext-curl": "*",
         "ext-dom": "*",

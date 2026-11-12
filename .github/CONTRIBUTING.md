@@ -44,7 +44,7 @@ If you want to test using an other database than SQLite, uncomment the `postgres
 
 ### Using your own PHP server
 
-- Ensure you are running PHP >= 8.2.
+- Ensure you are running PHP 8.2.35 or later in the 8.2 series, PHP 8.3.36 or later in the 8.3 series, or PHP 8.4.27 or later in the 8.4 series.
 - Clone the repository
 - Run `make dev` to bootstrap wallabag and start the built-in server in `dev`
 - If you got some errors, fix them (they might be related to some missing PHP extension from your machine)
