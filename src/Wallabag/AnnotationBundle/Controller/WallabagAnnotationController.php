@@ -8,6 +8,7 @@ use JMS\Serializer\SerializerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\AnnotationBundle\Entity\Annotation;
@@ -40,6 +41,8 @@ class WallabagAnnotationController extends AbstractFOSRestController
      */
     public function getAnnotationsAction(Entry $entry, AnnotationRepository $annotationRepository)
     {
+        $this->checkEntryOwnership($entry);
+
         $annotationRows = $annotationRepository->findByEntryIdAndUserId($entry->getId(), $this->getUser()->getId());
 
         $total = \count($annotationRows);
@@ -61,6 +64,8 @@ class WallabagAnnotationController extends AbstractFOSRestController
      */
     public function postAnnotationAction(Request $request, Entry $entry)
     {
+        $this->checkEntryOwnership($entry);
+
         $data = json_decode($request->getContent(), true);
 
         $annotation = new Annotation($this->getUser());
@@ -143,6 +148,15 @@ class WallabagAnnotationController extends AbstractFOSRestController
             return (new JsonResponse())->setJson($json);
         } catch (\InvalidArgumentException $e) {
             throw new NotFoundHttpException($e);
+        }
+    }
+
+    private function checkEntryOwnership(Entry $entry): void
+    {
+        $user = $this->getUser();
+
+        if (null === $user || $user->getId() !== $entry->getUser()->getId()) {
+            throw new AccessDeniedHttpException('You can not access this entry.');
         }
     }
 

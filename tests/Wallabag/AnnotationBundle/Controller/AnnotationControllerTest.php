@@ -67,10 +67,43 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
         }
 
         $this->client->request('GET', $prefixUrl . '/' . $entry->getId() . '.json');
-        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(403, $this->client->getResponse()->getStatusCode());
+    }
 
-        $content = json_decode($this->client->getResponse()->getContent(), true);
-        $this->assertGreaterThanOrEqual(0, $content['total']);
+    /**
+     * @dataProvider dataForEachAnnotations
+     */
+    public function testSetAnnotationOnEntryOfAnOtherUser($prefixUrl)
+    {
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
+
+        $otherUser = $em
+            ->getRepository(User::class)
+            ->findOneByUserName('bob');
+        $entry = $em
+            ->getRepository(Entry::class)
+            ->findByUrlAndUserId('http://0.0.0.0/entry3', $otherUser->getId());
+        $countBefore = \count($entry->getAnnotations());
+
+        if ('annotations' === $prefixUrl) {
+            $this->logInAs('admin');
+        }
+
+        $headers = ['CONTENT_TYPE' => 'application/json'];
+        $content = json_encode([
+            'text' => 'my annotation',
+            'quote' => 'my quote',
+            'ranges' => [
+                ['start' => '', 'startOffset' => 24, 'end' => '', 'endOffset' => 31],
+            ],
+        ]);
+        $this->client->request('POST', $prefixUrl . '/' . $entry->getId() . '.json', [], [], $headers, $content);
+
+        $this->assertSame(403, $this->client->getResponse()->getStatusCode());
+
+        $em->clear();
+        $entry = $em->getRepository(Entry::class)->find($entry->getId());
+        $this->assertCount($countBefore, $entry->getAnnotations());
     }
 
     /**
