@@ -69,7 +69,10 @@ class ShaarliImportTest extends TestCase
 
         $this->assertTrue($res);
         $this->assertSame(['skipped' => 0, 'imported' => 2, 'queued' => 0], $shaarliImport->getSummary());
-        $this->assertSame('JO Paris 2024 : Où courir dans la capitale maintenant que les quais sont fermés ?', $titles[1]);
+        $this->assertSame([
+            'The Legacy of Firefox OS. In the two years or so since Mozilla… | by Ben Francis | Medium',
+            'JO Paris 2024 : Où courir dans la capitale maintenant que les quais sont fermés ?',
+        ], $titles);
     }
 
     public function testImportAndMarkAllAsRead(): void
