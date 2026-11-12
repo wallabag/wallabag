@@ -8,6 +8,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+use Wallabag\Entity\Annotation;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
 use Wallabag\Helper\UrlHasher;
@@ -192,12 +193,10 @@ class EntryRepository extends ServiceEntityRepository
         }
 
         // We lower() all parts here because PostgreSQL 'LIKE' verb is case-sensitive
+        // Annotations are checked with a subquery: joining them would repeat each entry once per annotation
         $qb
-            ->andWhere('lower(e.content) LIKE lower(:term) OR lower(e.title) LIKE lower(:term) OR lower(e.url) LIKE lower(:term) OR lower(a.text) LIKE lower(:term)')
-            ->setParameter('term', '%' . $term . '%')
-            ->leftJoin('e.tags', 't')
-            ->leftJoin('e.annotations', 'a')
-            ->groupBy('e.id');
+            ->andWhere('lower(e.content) LIKE lower(:term) OR lower(e.title) LIKE lower(:term) OR lower(e.url) LIKE lower(:term) OR e.id IN (SELECT IDENTITY(a.entry) FROM ' . Annotation::class . ' a WHERE a.user = :userId AND lower(a.text) LIKE lower(:term))')
+            ->setParameter('term', '%' . $term . '%');
 
         return $qb;
     }
