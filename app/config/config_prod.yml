@@ -24,4 +24,4 @@ monolog:
             type: console
 
 sentry:
-    dsn: "%env(default:wallabag.sentry_dsn:SENTRY_DSN)%"
+    dsn: "%env(string:default:wallabag.sentry_dsn:SENTRY_DSN)%"
