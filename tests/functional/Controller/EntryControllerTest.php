@@ -1609,6 +1609,54 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(2, $crawler->filter($this->entryDataTestAttribute));
     }
 
+    public function testSearchInAnnotations(): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $user = $this->getLoggedInUser();
+
+        // An entry with several tags and several matching annotations must be listed only once
+        $entry = new Entry($user);
+        $entry->setUrl('http://0.0.0.0/search-in-annotations');
+        $entry->setTitle('An entry without the term');
+        foreach (['search-tag-1', 'search-tag-2'] as $label) {
+            $tag = (new Tag())->setLabel($label);
+            $this->getEntityManager()->persist($tag);
+            $entry->addTag($tag);
+        }
+        $this->getEntityManager()->persist($entry);
+
+        foreach (['First Qwertyuiop note', 'second qwertyuiop note', 'unrelated note'] as $text) {
+            $annotation = new Annotation($user);
+            $annotation->setEntry($entry);
+            $annotation->setText($text);
+            $annotation->setQuote('quote');
+            $this->getEntityManager()->persist($annotation);
+        }
+
+        // An entry with only non-matching annotations must not be listed
+        $otherEntry = new Entry($user);
+        $otherEntry->setUrl('http://0.0.0.0/search-in-annotations-other');
+        $otherEntry->setTitle('Another entry without the term');
+        $this->getEntityManager()->persist($otherEntry);
+
+        $annotation = new Annotation($user);
+        $annotation->setEntry($otherEntry);
+        $annotation->setText('nothing to see');
+        $annotation->setQuote('quote');
+        $this->getEntityManager()->persist($annotation);
+
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->request('GET', '/unread/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $crawler = $client->submit($form, ['search_entry[term]' => 'QWERTYuiop']);
+
+        $this->assertCount(1, $crawler->filter($this->entryDataTestAttribute));
+        $this->assertStringContainsString('/view/' . $entry->getId(), $crawler->filter($this->entryDataTestAttribute)->html());
+    }
+
     public function testActionInSearchResults(): void
     {
         $this->logInAs('admin');
