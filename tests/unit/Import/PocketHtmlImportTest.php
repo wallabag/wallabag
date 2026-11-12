@@ -57,14 +57,22 @@ class PocketHtmlImportTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $titles = [];
         $this->contentProxy
             ->expects($this->exactly(2))
-            ->method('updateEntry');
+            ->method('updateEntry')
+            ->willReturnCallback(static function ($entry, $url, array $content) use (&$titles): void {
+                $titles[] = $content['title'];
+            });
 
         $res = $pocketHtmlImport->import();
 
         $this->assertTrue($res);
         $this->assertSame(['skipped' => 0, 'imported' => 2, 'queued' => 0], $pocketHtmlImport->getSummary());
+        $this->assertSame([
+            'Tarn : Des lapins ravagent le terrain, le match de rugby doit être annulé',
+            'JO Paris 2024 : Où courir dans la capitale maintenant que les quais sont fermés ?',
+        ], $titles);
     }
 
     public function testImportAndMarkAllAsRead(): void

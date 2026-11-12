@@ -58,6 +58,7 @@ class PocketHtmlImport extends HtmlImport
 
         $entries = $hrefs->each(static fn (Crawler $node) => [
             'url' => $node->attr('href'),
+            'title' => trim($node->text()),
             'tags' => $node->attr('tags'),
             'created_at' => $node->attr('time_added'),
         ]);
@@ -76,7 +77,7 @@ class PocketHtmlImport extends HtmlImport
     protected function prepareEntry(array $entry = [])
     {
         $data = [
-            'title' => '',
+            'title' => $entry['title'] ?? '',
             'html' => false,
             'url' => $entry['url'],
             'is_archived' => (int) $this->markAsRead,
