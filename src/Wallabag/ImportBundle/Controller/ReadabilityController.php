@@ -42,13 +42,18 @@ class ReadabilityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
             $markAsRead = $form->get('mark_as_read')->getData();
-            $name = 'readability_' . $this->getUser()->getId() . '.json';
+            $name = bin2hex(random_bytes(16)) . '.json';
 
             if (null !== $file && \in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
-                $res = $readability
-                    ->setFilepath($this->getParameter('wallabag_import.resource_dir') . '/' . $name)
-                    ->setMarkAsRead($markAsRead)
-                    ->import();
+                try {
+                    $res = $readability
+                        ->setFilepath($this->getParameter('wallabag_import.resource_dir') . '/' . $name)
+                        ->setMarkAsRead($markAsRead)
+                        ->import();
+                } finally {
+                    // never leave the uploaded file on disk, whatever the import result is
+                    @unlink($this->getParameter('wallabag_import.resource_dir') . '/' . $name);
+                }
 
                 $message = 'flashes.import.notice.failed';
 
@@ -64,8 +69,6 @@ class ReadabilityController extends AbstractController
                             '%queued%' => $summary['queued'],
                         ]);
                     }
-
-                    unlink($this->getParameter('wallabag_import.resource_dir') . '/' . $name);
                 }
 
                 $this->addFlash('notice', $message);

@@ -165,4 +165,25 @@ class PocketHtmlControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.failed', $body[0]);
     }
+
+    public function testFailedImportDoesNotKeepTheUploadedFile()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $resourceDir = $client->getContainer()->getParameter('wallabag_import.resource_dir');
+
+        // the upload directory must never be reachable from the web root
+        $this->assertStringNotContainsString('/web/', $resourceDir);
+
+        $crawler = $client->request('GET', '/import/pocket_html');
+        $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
+
+        $file = new UploadedFile(__DIR__ . '/../fixtures/test.html', 'test.html');
+
+        $client->submit($form, ['upload_import_file[file]' => $file]);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertSame([], glob($resourceDir . '/*'));
+    }
 }

@@ -174,4 +174,4 @@ wallabag_import:
         - 'text/csv'
         - 'text/html'
         - 'application/vnd.ms-excel'
-    resource_dir: "%kernel.project_dir%/web/uploads/import"
+    resource_dir: "%kernel.project_dir%/var/import"
