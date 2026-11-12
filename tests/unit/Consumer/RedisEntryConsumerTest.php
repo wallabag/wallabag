@@ -4,7 +4,9 @@ namespace Wallabag\Tests\Unit\Consumer;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Wallabag\Consumer\RedisEntryConsumer;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
@@ -128,7 +130,9 @@ JSON;
             $em,
             $userRepository,
             $import,
-            $dispatcher
+            $dispatcher,
+            new TokenStorage(),
+            new HttpBrowser()
         );
 
         $res = $consumer->manage($body);
@@ -182,7 +186,9 @@ JSON;
             $em,
             $userRepository,
             $import,
-            $dispatcher
+            $dispatcher,
+            new TokenStorage(),
+            new HttpBrowser()
         );
 
         $res = $consumer->manage($body);
@@ -246,7 +252,9 @@ JSON;
             $em,
             $userRepository,
             $import,
-            $dispatcher
+            $dispatcher,
+            new TokenStorage(),
+            new HttpBrowser()
         );
 
         $res = $consumer->manage($body);
