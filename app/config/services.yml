@@ -7,6 +7,8 @@ parameters:
     spiriit_form_filter.get_filter.doctrine_orm.class: Wallabag\Event\Subscriber\CustomDoctrineORMSubscriber
     env(WALLABAG_LOG_LEVEL): error
     env(WALLABAG_SITE_CONFIG_FOLDERS): ''
+    env(WALLABAG_CAPTCHA_ENABLED): '0'
+    wallabag.default_user_agent: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2'
     env(WALLABAG_COMPROMISED_PASSWORD_CHECK_ENABLED): '0'
     wallabag.site_config_folders: '%env(csv:WALLABAG_SITE_CONFIG_FOLDERS)%'
 
@@ -44,7 +46,7 @@ services:
             $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
             $fonts: '%wallabag.fonts%'
             $defaultIgnoreOriginInstanceRules: '%wallabag.default_ignore_origin_instance_rules%'
-            $defaultUserAgent: '%env(WALLABAG_USER_AGENT)%'
+            $defaultUserAgent: '%env(default:wallabag.default_user_agent:WALLABAG_USER_AGENT)%'
             $addonsUrl: "%addons_url%"
 
     Wallabag\:
@@ -209,7 +211,7 @@ services:
                 error_message: '%wallabag.fetching_error_message%'
                 error_message_title: '%wallabag.fetching_error_message_title%'
                 http_client:
-                    ua_browser: '%env(WALLABAG_USER_AGENT)%'
+                    ua_browser: '%env(default:wallabag.default_user_agent:WALLABAG_USER_AGENT)%'
             $client: '@psr18.wallabag.client'
         calls:
             - [ setLogger, [ "@logger" ] ]
