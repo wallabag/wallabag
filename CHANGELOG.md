@@ -5,6 +5,67 @@
 * **[BC BREAK]** Convert 403 errors to 404 errors by @yguedidi in https://github.com/wallabag/wallabag/pull/8075
 * `wallassets/` folder renamed to `build/`
 
+## [2.6.16](https://github.com/wallabag/wallabag/tree/2.6.16)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.15...2.6.16)
+
+This is a security release. After upgrading, delete the content of the `web/uploads/import` folder: import uploads are now stored in `var/import`.
+
+### Security fixes
+
+* Escape the author of an entry in the entry view, see [GHSA-rr6m-92cx-w69q](https://github.com/wallabag/wallabag/security/advisories/GHSA-rr6m-92cx-w69q)
+* Block requests to private and reserved addresses when downloading images, see [GHSA-46jc-m2hq-v399](https://github.com/wallabag/wallabag/security/advisories/GHSA-46jc-m2hq-v399)
+* Check entry ownership when listing and creating annotations, see [GHSA-q2r9-jqp3-5f26](https://github.com/wallabag/wallabag/security/advisories/GHSA-q2r9-jqp3-5f26)
+* Store import uploads outside the web root and always delete them, see [GHSA-q4v7-v68c-x6hx](https://github.com/wallabag/wallabag/security/advisories/GHSA-q4v7-v68c-x6hx)
+
+### Fixes
+
+* Skip pre-release tags in `make update` in https://github.com/wallabag/wallabag/pull/9170
+
+## [2.6.15](https://github.com/wallabag/wallabag/tree/2.6.15)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.14...2.6.15)
+
+### Improvements
+
+* Support PHP 8.4 while retaining compatibility with PHP 7.4 and the locked legacy dependencies. Deprecation notices may still be emitted.
+
+### Fixes
+
+* Fix merging of existing and fetched entry content in https://github.com/wallabag/wallabag/pull/8985
+* Escape dynamic data in ePub exports in https://github.com/wallabag/wallabag/pull/8968
+* Reuse supplied HTML when fetching entry metadata in https://github.com/wallabag/wallabag/pull/8889
+* Hide the delete public link action when no public link exists in https://github.com/wallabag/wallabag/pull/8878
+* Fix Redis URL configuration in https://github.com/wallabag/wallabag/pull/8868
+* Isolate prefetched HTML between entries and preserve available metadata when fetching fails.
+* Preserve existing Redis connection parameters, including authentication and passwords containing special characters, when `REDIS_URL` is not set.
+* Fix Redis-backed sessions in the Docker configuration example.
+
+### Technical stuff
+
+* Update phpseclib to 3.0.55 in https://github.com/wallabag/wallabag/pull/8919
+* Update Graby and PHP Readability dependencies in https://github.com/wallabag/wallabag/pull/8891
+* Update volatile test URLs in https://github.com/wallabag/wallabag/pull/8892
+* Include the documentation in the main repository.
+
+## [2.6.14](https://github.com/wallabag/wallabag/tree/2.6.14)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.13...2.6.14)
+
+### Improvements
+
+* Add annotations filter to entries API endpoint by @skn in https://github.com/wallabag/wallabag/pull/8346
+
+### Fixes
+
+* Fix reading time computation for short entries by @andreadecorte in https://github.com/wallabag/wallabag/pull/8332
+* Fix `urls` parameter when sending many urls to be stored using the API by @j0k3r in https://github.com/wallabag/wallabag/pull/8488
+* Fix docker base image by @yguedidi in https://github.com/wallabag/wallabag/pull/8440
+
+### Technical stuff
+
+* Change version in wallabag.yml by @nicosomb in https://github.com/wallabag/wallabag/pull/8251
+* Fix deprecation by @j0k3r in https://github.com/wallabag/wallabag/pull/8267
+* Update dependencies by @yguedidi in https://github.com/wallabag/wallabag/pull/8435
+* Bump deps (mostly for siteconfig) by @j0k3r in https://github.com/wallabag/wallabag/pull/8489
+
 ## [2.6.13](https://github.com/wallabag/wallabag/tree/2.6.13)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.12...2.6.13)
 
