@@ -42,6 +42,7 @@ class AppKernelDeprecationTest extends KernelTestCase
                 'WALLABAG_BASE_URL' => 'http://127.0.0.1:8000',
                 'MAILER_DSN' => 'smtp://127.0.0.1',
                 'WALLABAG_REGISTRATION_ENABLED' => '0',
+                'WALLABAG_CAPTCHA_ENABLED' => '0',
                 'WALLABAG_CONFIRMATION_ENABLED' => '1',
                 'WALLABAG_FROM_EMAIL' => 'wallabag@example.com',
                 'WALLABAG_SERVER_NAME' => 'Your wallabag instance',
