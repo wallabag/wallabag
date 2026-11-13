@@ -4,7 +4,7 @@
     <div class="card-preview">
         {% set preview_class_modifier = entry.previewPicture ? '' : ' preview--default' %}
         {% if is_granted('VIEW', entry) %}
-            <a href="{{ path('view', {'id': entry.id}) }}">
+            <a href="{{ path(app.user.config.openOriginalUrl ? 'open_entry' : 'view', {'id': entry.id}) }}">
                 <span class="preview{{ preview_class_modifier }}" style="background-image: url({{ entry.previewPicture|default(asset('img/logo-square.svg')) }})"></span>
             </a>
         {% else %}
