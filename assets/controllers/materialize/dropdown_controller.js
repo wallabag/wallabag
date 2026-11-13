@@ -12,7 +12,7 @@ export default class extends Controller {
       onCloseStart: () => this.element.setAttribute('aria-expanded', 'false'),
     });
     this.element.setAttribute('aria-expanded', 'false');
-    this.spaceHandler = this.constructor.#activateWithSpace;
+    this.spaceHandler = this.#activateWithSpace.bind(this);
     this.instance.dropdownEl.addEventListener('keydown', this.spaceHandler);
   }
 
@@ -27,7 +27,7 @@ export default class extends Controller {
       ?.focus({ preventScroll: true });
   }
 
-  static #activateWithSpace(event) {
+  #activateWithSpace(event) {
     if (event.key !== ' ') {
       return;
     }
