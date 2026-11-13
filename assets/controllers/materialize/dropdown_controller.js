@@ -27,6 +27,7 @@ export default class extends Controller {
       ?.focus({ preventScroll: true });
   }
 
+  // eslint-disable-next-line class-methods-use-this
   #activateWithSpace(event) {
     if (event.key !== ' ') {
       return;
