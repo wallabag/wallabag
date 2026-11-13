@@ -25,6 +25,7 @@ export default class extends Controller {
     this.instance.destroy();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   #setExpanded(listItem, expanded) {
     const header = listItem.querySelector(':scope > .collapsible-header[aria-expanded]');
 
