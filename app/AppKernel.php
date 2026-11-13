@@ -101,6 +101,8 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
+        $loader->load($this->getProjectDir() . '/app/config/env_fallback.yml');
+
         $legacyParametersLoaded = $this->loadLegacyParametersIfPresent($loader);
 
         $loader->load(function (ContainerBuilder $container): void {
