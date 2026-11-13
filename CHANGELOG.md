@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.6.17](https://github.com/wallabag/wallabag/tree/2.6.17)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.16...2.6.17)
+
+This release also makes `make update` pick a stable release again, on instances running 2.6.15 or older: they picked 2.7.0-alpha.1 instead.
+
+### Fixes
+
+* Handle Pocket CSV imports in their own controller, with the import upload fixes of 2.6.16
+
 ## [2.6.16](https://github.com/wallabag/wallabag/tree/2.6.16)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.15...2.6.16)
 
