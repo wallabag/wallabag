@@ -33,6 +33,8 @@ final class Version20261112090000 extends WallabagMigration
 
     public function down(Schema $schema): void
     {
-        // Converting back to utf8mb3 would break rows that contain 4-byte characters
+        $this->skipIf(!$this->connection->getDatabasePlatform() instanceof MySQLPlatform, 'This migration only apply to MySQL');
+
+        $this->throwIrreversibleMigrationException('Converting back to utf8mb3 would break rows that contain 4-byte characters.');
     }
 }
