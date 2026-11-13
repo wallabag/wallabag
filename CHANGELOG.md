@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.6.16](https://github.com/wallabag/wallabag/tree/2.6.16)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.15...2.6.16)
+
+This is a security release. After upgrading, delete the content of the `web/uploads/import` folder: import uploads are now stored in `var/import`.
+
+### Security fixes
+
+* Escape the author of an entry in the entry view, see [GHSA-rr6m-92cx-w69q](https://github.com/wallabag/wallabag/security/advisories/GHSA-rr6m-92cx-w69q)
+* Block requests to private and reserved addresses when downloading images, see [GHSA-46jc-m2hq-v399](https://github.com/wallabag/wallabag/security/advisories/GHSA-46jc-m2hq-v399)
+* Check entry ownership when listing and creating annotations, see [GHSA-q2r9-jqp3-5f26](https://github.com/wallabag/wallabag/security/advisories/GHSA-q2r9-jqp3-5f26)
+* Store import uploads outside the web root and always delete them, see [GHSA-q4v7-v68c-x6hx](https://github.com/wallabag/wallabag/security/advisories/GHSA-q4v7-v68c-x6hx)
+
+### Fixes
+
+* Skip pre-release tags in `make update` in https://github.com/wallabag/wallabag/pull/9170
+
 ## [2.6.15](https://github.com/wallabag/wallabag/tree/2.6.15)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.14...2.6.15)
 
