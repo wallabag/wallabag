@@ -5,6 +5,7 @@ namespace Wallabag\HttpClient;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpClient\NoPrivateNetworkHttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Symfony\Contracts\HttpClient\ResponseStreamInterface;
@@ -19,9 +20,9 @@ class WallabagClient implements HttpClientInterface
         private readonly Authenticator $authenticator,
         private readonly LoggerInterface $logger,
     ) {
-        $this->httpClient = HttpClient::create([
+        $this->httpClient = new NoPrivateNetworkHttpClient(HttpClient::create([
             'timeout' => 10,
-        ]);
+        ]));
     }
 
     public function request(string $method, string $url, array $options = []): ResponseInterface

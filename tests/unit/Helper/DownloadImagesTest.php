@@ -5,7 +5,9 @@ namespace Wallabag\Tests\Unit\Helper;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpClient\MockHttpClient;
+use Symfony\Component\HttpClient\NoPrivateNetworkHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Wallabag\Helper\DownloadImages;
 
@@ -54,6 +56,28 @@ class DownloadImagesTest extends TestCase
         $res = $download->processHtml(123, '<div><img src="http://i.imgur.com/T9qgcHc.jpg" /></div>', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertStringContainsString('http://i.imgur.com/T9qgcHc.jpg', $res, 'Image were not replace because of content-type');
+    }
+
+    public function testProcessHtmlWithPrivateNetworkImage()
+    {
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages(
+            new NoPrivateNetworkHttpClient(HttpClient::create()),
+            sys_get_temp_dir() . '/wallabag_test',
+            'http://wallabag.io/',
+            $logger
+        );
+
+        $html = '<div><img src="http://169.254.169.254/latest/meta-data/" /></div>';
+        $res = $download->processHtml(123, $html, 'https://example.com/article');
+
+        $this->assertSame($html, $res, 'Private network images should not be downloaded nor replaced.');
+
+        $records = $logHandler->getRecords();
+        $this->assertTrue($logHandler->hasErrorRecords());
+        $this->assertSame('DownloadImages: Can not retrieve image, skipping.', $records[2]['message']);
     }
 
     public function singleImage()
