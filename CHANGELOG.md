@@ -1,9 +1,158 @@
 # Changelog
 
-## Upcoming changes
+## [2.7.0-alpha.1](https://github.com/wallabag/wallabag/tree/2.7.0-alpha.1)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.16...2.7.0-alpha.1)
 
-* **[BC BREAK]** Convert 403 errors to 404 errors by @yguedidi in https://github.com/wallabag/wallabag/pull/8075
+This is an alpha release: **do not use it in production, and back up your database before upgrading**.
+
+### Security fixes
+
+* Escape the author of an entry in the entry view, see [GHSA-rr6m-92cx-w69q](https://github.com/wallabag/wallabag/security/advisories/GHSA-rr6m-92cx-w69q), in https://github.com/wallabag/wallabag/pull/9171
+* Block requests to private and reserved addresses when downloading images, see [GHSA-46jc-m2hq-v399](https://github.com/wallabag/wallabag/security/advisories/GHSA-46jc-m2hq-v399)
+* Store import uploads outside the web root and always delete them, see [GHSA-q4v7-v68c-x6hx](https://github.com/wallabag/wallabag/security/advisories/GHSA-q4v7-v68c-x6hx), in https://github.com/wallabag/wallabag/pull/9171
+
+### BC breaks
+
+* Drop PHP 7.4, 8.0 and 8.1: PHP 8.2 or later is now required by @yguedidi in https://github.com/wallabag/wallabag/pull/8063
+* Convert 403 errors to 404 errors by @yguedidi in https://github.com/wallabag/wallabag/pull/8075
+* Remove MOBI export by @nicosomb in https://github.com/wallabag/wallabag/pull/6768 and @j0k3r in https://github.com/wallabag/wallabag/pull/6876
+* Remove Pocket API import by @nicosomb in https://github.com/wallabag/wallabag/pull/9135
+* Remove demo mode by @nicosomb in https://github.com/wallabag/wallabag/pull/6767
+* Change public registration to false by default by @nicosomb in https://github.com/wallabag/wallabag/pull/6791
+* Remove site config authenticator extension point by @yguedidi in https://github.com/wallabag/wallabag/pull/7851
 * `wallassets/` folder renamed to `build/`
+
+### Deprecations
+
+* Introduce Symfony Runtime and deprecate legacy front controllers by @yguedidi in https://github.com/wallabag/wallabag/pull/8740
+* Add `DATABASE_URL` dotenv support and deprecate `parameters.yml` for database config by @yguedidi in https://github.com/wallabag/wallabag/pull/8743
+* Switch wallabag to env-first configuration loading by @yguedidi in https://github.com/wallabag/wallabag/pull/8776
+
+### Features
+
+* Add an OPDS 1.2 catalog for e-reader clients by @djbriane in https://github.com/wallabag/wallabag/pull/9074
+* Add Markdown export by @nicosomb in https://github.com/wallabag/wallabag/pull/7799
+* Add font size and font selectors by @nicosomb in https://github.com/wallabag/wallabag/pull/6773
+* Add a new configuration to change the homepage view by @nicosomb in https://github.com/wallabag/wallabag/pull/8778
+* Add a two-step setup of OTP by @Kdecherf in https://github.com/wallabag/wallabag/pull/8142
+* Add optional CAPTCHA protection to user creation by @yguedidi in https://github.com/wallabag/wallabag/pull/8960
+* Add an optional compromised-password check on user forms by @yguedidi in https://github.com/wallabag/wallabag/pull/8767
+* Add sharing to linkding by @AlexanderS in https://github.com/wallabag/wallabag/pull/7491
+* Add tagging rules reset by @KevinSJ in https://github.com/wallabag/wallabag/pull/7570
+* Add tags to EPUB and PDF exports by @jqno in https://github.com/wallabag/wallabag/pull/8790
+* Add articles which have annotations with search term in results by @nicosomb in https://github.com/wallabag/wallabag/pull/6771
+* Add command to import URL for user from command-line by @ldidry in https://github.com/wallabag/wallabag/pull/8189
+* Add `wallabag:api-client:create` console command by @juherr in https://github.com/wallabag/wallabag/pull/8842
+* Add command to clean pictures path when changing instance URL by @nicosomb in https://github.com/wallabag/wallabag/pull/6655
+* Add `http_status` filter to `/api/entries` by @KevinSJ in https://github.com/wallabag/wallabag/pull/7588
+* Add parameter `detail` to the entry endpoint by @j0k3r in https://github.com/wallabag/wallabag/pull/8927
+* Add Galician language by @xmgz in https://github.com/wallabag/wallabag/pull/7353
+* Add Korean language by @Akhilanandateja in https://github.com/wallabag/wallabag/pull/8434
+
+### Improvements
+
+* Upgrade to Symfony 5 by @yguedidi in https://github.com/wallabag/wallabag/pull/7137
+* Make all parameters configurable with environment variables by @yguedidi in https://github.com/wallabag/wallabag/pull/8019
+* Introduce a `REDIS_URL` by @yguedidi in https://github.com/wallabag/wallabag/pull/8028
+* Introduce a `RABBITMQ_URL` by @yguedidi in https://github.com/wallabag/wallabag/pull/8029
+* Allow `WALLABAG_SITE_CONFIG_FOLDERS` to configure an external site config folder by @yguedidi in https://github.com/wallabag/wallabag/pull/8745
+* Configure nested log verbosity with `WALLABAG_LOG_LEVEL` by @yguedidi in https://github.com/wallabag/wallabag/pull/8957
+* Make the article reporting URL configurable by @yguedidi in https://github.com/wallabag/wallabag/pull/8958
+* Define a custom user-agent for wallabag by @e-adrien in https://github.com/wallabag/wallabag/pull/7887
+* Use Graby's http headers configuration for the authentication request by @e-adrien in https://github.com/wallabag/wallabag/pull/7920
+* Prefetch content instead of fetching URL content by @Simounet in https://github.com/wallabag/wallabag/pull/8585
+* Improve import page by @nicosomb in https://github.com/wallabag/wallabag/pull/7805
+* Update Instapaper import by @rootshellz in https://github.com/wallabag/wallabag/pull/8558
+* Add `application/vnd.ms-excel` to allowed MIME types config by @ktx in https://github.com/wallabag/wallabag/pull/8036
+* Show display name on shared entries instead of username by @Aldarone in https://github.com/wallabag/wallabag/pull/8220
+* Restore pre-Atom behavior of linking directly to the article by @anarcat in https://github.com/wallabag/wallabag/pull/7849
+* Upgrade Materialize by @yguedidi in https://github.com/wallabag/wallabag/pull/8013
+* Use Stimulus by @yguedidi in https://github.com/wallabag/wallabag/pull/8031
+* Back-end hide/show of random, export and filters by @yguedidi in https://github.com/wallabag/wallabag/pull/8030
+* Replace hardcoded title truncate with CSS text-overflow by @Kdecherf in https://github.com/wallabag/wallabag/pull/8141
+* Extract the tag list into a dedicated tag chip component by @yguedidi in https://github.com/wallabag/wallabag/pull/8759
+* Lazy-load MathJax and fix missing rendering on the public share page by @yguedidi in https://github.com/wallabag/wallabag/pull/8747
+* Update Annotator by @yguedidi in https://github.com/wallabag/wallabag/pull/8027
+* Improve install command by @yguedidi in https://github.com/wallabag/wallabag/pull/7196
+* Skip admin user creation prompt when existing schema is kept by @yguedidi in https://github.com/wallabag/wallabag/pull/8727
+* Hide sensitive information in production by @nicosomb in https://github.com/wallabag/wallabag/pull/8291
+* Add a validator on URL entity by @nicosomb in https://github.com/wallabag/wallabag/pull/6906
+* Add `isNotParsed` field on Entry entity by @nicosomb in https://github.com/wallabag/wallabag/pull/6769
+* Dispatch `EntryDeletedEvent` when removing duplicated entries by @casimir in https://github.com/wallabag/wallabag/pull/8248
+* Update text iTunes to App Store by @sonvir249 in https://github.com/wallabag/wallabag/pull/7002
+
+### Fixes
+
+* Fix website authentication context in queued imports by @nicosomb in https://github.com/wallabag/wallabag/pull/9122
+* Fix search slowness by searching annotations with a subquery instead of joins by @nicosomb in https://github.com/wallabag/wallabag/pull/9164
+* Convert remaining MySQL tables to utf8mb4 by @nicosomb in https://github.com/wallabag/wallabag/pull/9163
+* Fix deleting an entry when its images folder does not exist by @Lars- in https://github.com/wallabag/wallabag/pull/9141
+* Fix bulk entry validation by @nicosomb in https://github.com/wallabag/wallabag/pull/9119
+* Fix API `origin_url` unset by @nicosomb in https://github.com/wallabag/wallabag/pull/8921
+* Avoid `Undefined` error in case url has no path by @j0k3r in https://github.com/wallabag/wallabag/pull/9151
+* Avoid empty array to be saved in `published_by` field by @j0k3r in https://github.com/wallabag/wallabag/pull/8970
+* Detach imported entries instead of clearing entity manager by @nicosomb in https://github.com/wallabag/wallabag/pull/9140
+* Fix PostgreSQL tag list entry counts by @yguedidi in https://github.com/wallabag/wallabag/pull/8721
+* Fix search when search term has useless space by @nicosomb in https://github.com/wallabag/wallabag/pull/6793
+* Fix tagging rule allowed variables to match the documentation by @rosenstrauch in https://github.com/wallabag/wallabag/pull/7816
+* Fix long tag words on mobile by @Simounet in https://github.com/wallabag/wallabag/pull/8658
+* Fix tag chip edit input to stay within chip bounds and match chip text style by @yguedidi in https://github.com/wallabag/wallabag/pull/8764
+* Fix dark theme auto-detection initialization order by @yguedidi in https://github.com/wallabag/wallabag/pull/8697
+* Fix dark mode disabled URL by @Simounet in https://github.com/wallabag/wallabag/pull/7131
+* Fix focus card in dark mode by @yguedidi in https://github.com/wallabag/wallabag/pull/8041
+* Fix checkboxes from form type by @yguedidi in https://github.com/wallabag/wallabag/pull/8039
+* Fix display thumbnails checkbox by @yguedidi in https://github.com/wallabag/wallabag/pull/8097
+* Fix toast since Materialize upgrade by @yguedidi in https://github.com/wallabag/wallabag/pull/8042
+* Fix Floating Action Button by @yguedidi in https://github.com/wallabag/wallabag/pull/8043
+* Fix jrQrcode by @yguedidi in https://github.com/wallabag/wallabag/pull/8014
+* Fix about and quickstart pages by @nicosomb in https://github.com/wallabag/wallabag/pull/8374
+* Fix default support URL by @nicosomb in https://github.com/wallabag/wallabag/pull/7808
+* Fix default `DOMAIN_NAME` to avoid Cross-Origin issues by @yguedidi in https://github.com/wallabag/wallabag/pull/8064
+* Fix `database_path` default value by @yguedidi in https://github.com/wallabag/wallabag/pull/7968
+* Fix `CreateConfigListener` to not use session in CLI context by @yguedidi in https://github.com/wallabag/wallabag/pull/7216
+* Restore lazy connections for RabbitMQ by @nicosomb in https://github.com/wallabag/wallabag/pull/7768
+* Change `NB_ELEMENTS` in Pocket importer to 30 to comply with Pocket API by @ruffinge in https://github.com/wallabag/wallabag/pull/7797
+* Document PATCH entries parameters as request body in the API doc by @CloudCorpRecords in https://github.com/wallabag/wallabag/pull/9095
+* Enable Swagger JSON output by @voltagex in https://github.com/wallabag/wallabag/pull/7464
+
+### Docker
+
+* Modern Docker by @yguedidi in https://github.com/wallabag/wallabag/pull/7835
+* Pin the Docker base image to bookworm by @rootshellz in https://github.com/wallabag/wallabag/pull/8556
+* Include `wallabag_user_agent` in the Docker `parameters.yml` by @rootshellz in https://github.com/wallabag/wallabag/pull/8557
+* Install envsubst from source to support more targets by @casimir in https://github.com/wallabag/wallabag/pull/8230
+* Isolate Docker authentication cookies by port by @yguedidi in https://github.com/wallabag/wallabag/pull/8975
+
+### Documentation
+
+* Merge documentation repository into the monorepo by @yguedidi in https://github.com/wallabag/wallabag/pull/8750
+* Explain optional site configuration directives by @Hugohong258 in https://github.com/wallabag/wallabag/pull/9042
+* Replace outdated URL in `errors_during_fetching.md` by @DamienCassou in https://github.com/wallabag/wallabag/pull/9028
+* Add Pethost, Hostim and ZopDay to the installation page by @sadfun, @pavel1337 and @muskanbandta23 in https://github.com/wallabag/wallabag/pull/9086, https://github.com/wallabag/wallabag/pull/9136 and https://github.com/wallabag/wallabag/pull/9139
+* Fix typos by @Rotzbua in https://github.com/wallabag/wallabag/pull/6956 and https://github.com/wallabag/wallabag/pull/8941
+* Update vulnerability reporting method by @j0k3r in https://github.com/wallabag/wallabag/pull/8840
+
+### Technical stuff
+
+* Move to a bundle-less application structure by @yguedidi in https://github.com/wallabag/wallabag/pull/7151, https://github.com/wallabag/wallabag/pull/7274, https://github.com/wallabag/wallabag/pull/7268 and https://github.com/wallabag/wallabag/pull/7285
+* Migrate from Guzzle to Symfony HttpClient by @yguedidi in https://github.com/wallabag/wallabag/pull/7947
+* Integrate bdunogier/guzzle-site-authenticator in core by @yguedidi in https://github.com/wallabag/wallabag/pull/7229
+* Migrate to Doctrine attributes by @yguedidi in https://github.com/wallabag/wallabag/pull/8120
+* Modernize code base with Rector by @yguedidi in https://github.com/wallabag/wallabag/pull/8122
+* PHPStan level 5 by @yguedidi in https://github.com/wallabag/wallabag/pull/8156
+* Use `IsGranted` in all controllers by @yguedidi
+* Use Webpack Encore by @yguedidi in https://github.com/wallabag/wallabag/pull/6823
+* Move to Sass modules and `sass-embedded` by @yguedidi in https://github.com/wallabag/wallabag/pull/7819 and @j0k3r in https://github.com/wallabag/wallabag/pull/7665
+* Replace implicit Materialize initialization with explicit Stimulus controllers by @yguedidi in https://github.com/wallabag/wallabag/pull/8739
+* Change font source to `@fontsource` by @Rotzbua in https://github.com/wallabag/wallabag/pull/8938
+* Bump to Node 24 by @j0k3r in https://github.com/wallabag/wallabag/pull/8804
+* Build assets on release by @yguedidi in https://github.com/wallabag/wallabag/pull/6982
+* Harden the release packaging path and the workflow actions by @Totara-thib in https://github.com/wallabag/wallabag/pull/8992
+* Add PHP 8.3 and 8.4 to the CI by @sergiy-petrov in https://github.com/wallabag/wallabag/pull/7018 and @nicosomb in https://github.com/wallabag/wallabag/pull/7833
+* Better Makefile and development workflow by @yguedidi in https://github.com/wallabag/wallabag/pull/7828, https://github.com/wallabag/wallabag/pull/8698 and https://github.com/wallabag/wallabag/pull/8699
+* Add dev fixtures for local development by @yguedidi in https://github.com/wallabag/wallabag/pull/8736
+* Split PHPUnit suites and add Codecov reporting by @yguedidi in https://github.com/wallabag/wallabag/pull/8702, https://github.com/wallabag/wallabag/pull/8715 and https://github.com/wallabag/wallabag/pull/8718
+* Many deprecation fixes, test and CI improvements, mostly by @yguedidi
 
 ## [2.6.16](https://github.com/wallabag/wallabag/tree/2.6.16)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.15...2.6.16)
