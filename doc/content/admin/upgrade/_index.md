@@ -5,6 +5,7 @@ weight: 10
 
 You will find here different ways to upgrade your wallabag:
 
+-   [from 2.6.x to 2.7.x](#upgrading-from-26x-to-27x)
 -   [from 2.5.x to 2.6.x](#upgrading-from-25x-to-26x)
 -   [from 2.3.x to 2.4.x](#upgrading-from-23x-to-24x)
 -   [from 2.3.x to 2.3.y](#upgrading-from-23x-to-23y)
@@ -22,6 +23,49 @@ at the time of each release. Current wallabag releases are configured with
 environment variables instead. See [Parameters]({{< relref "../parameters.md" >}})
 for the current variable list and the legacy-to-env mapping.
 {{< /callout >}}
+
+## Upgrading from 2.6.x to 2.7.x
+
+{{< callout type="warning" >}}
+Back up your database, your `app/config/parameters.yml` file and your `data/` folder before upgrading.
+{{< /callout >}}
+
+### What changed
+
+-   **PHP 8.2 or later is required**. PHP 7.4, 8.0 and 8.1 are no longer supported.
+-   **wallabag is now configured with environment variables**. Your `app/config/parameters.yml` file is still read, so you can keep it for now, but it is deprecated and will be removed in wallabag 3.0. See [Parameters]({{< relref "../parameters.md" >}}) for the list of variables and how each legacy key maps to them. The `rss_limit` key is no longer used.
+-   **The front controller is now `web/index.php`**. `web/app.php` still works but is deprecated. If you switch your web server configuration to `web/index.php`, set `APP_ENV=prod` (in your web server environment or in `.env.local`), otherwise wallabag starts in the `dev` environment.
+-   **Built assets moved from `web/wallassets/` to `web/build/`**. Update your web server configuration if it references `wallassets`.
+-   Pages and API endpoints you are not allowed to access now return a 404 error instead of a 403 error.
+-   Public registration is disabled by default (`WALLABAG_REGISTRATION_ENABLED=0`). If you keep `parameters.yml`, your `fosuser_registration` value is still used.
+-   A compromised-password check can be enabled on user forms with `WALLABAG_COMPROMISED_PASSWORD_CHECK_ENABLED`. It is disabled by default.
+-   The MOBI export, the Pocket API import and the demo mode have been removed. You can still import from Pocket with the CSV export.
+-   On MySQL and MariaDB, the database migrations convert the remaining `utf8mb3` tables to `utf8mb4`. This can take a while on large databases.
+-   If you configure wallabag only with environment variables (without `parameters.yml`), `APP_SECRET` is required: it has no default value.
+-   Import files are now stored in `var/import`, outside of the `web` folder. If you upgrade from 2.6.15 or an older version, delete the content of the `web/uploads/import` folder: it may contain files left by previous imports.
+
+### Upgrade on a dedicated web server
+
+```bash
+make update
+```
+
+`make update` checks out the latest release tag of the repository (pre-releases such as alpha or beta versions are skipped), installs the dependencies and runs the database migrations.
+
+### Upgrade on a shared hosting
+
+1. Back up your database. If you use SQLite, it is in the `data/` folder copied below.
+1. Download and extract the 2.7.x package in a new folder.
+1. Copy from your current installation:
+    - `app/config/parameters.yml` (or set the equivalent environment variables, see [Parameters]({{< relref "../parameters.md" >}})),
+    - the `data/` folder: it contains the key used to encrypt your site credentials, and your database if you use SQLite,
+    - the `web/assets/images/` folder if you enabled images download.
+1. Run the database migrations, then clear the cache:
+
+    ```bash
+    php bin/console doctrine:migrations:migrate --env=prod --no-interaction
+    php bin/console cache:clear --env=prod
+    ```
 
 ## Upgrading from 2.5.x to 2.6.x
 
