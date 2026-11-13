@@ -9,8 +9,8 @@ export default class extends Controller {
   connect() {
     this.instance = M.Collapsible.init(this.element, {
       accordion: this.accordionValue,
-      onOpenStart: (listItem) => this.constructor.#setExpanded(listItem, true),
-      onCloseStart: (listItem) => this.constructor.#setExpanded(listItem, false),
+      onOpenStart: (listItem) => this.#setExpanded(listItem, true),
+      onCloseStart: (listItem) => this.#setExpanded(listItem, false),
     });
     this.buttonHeaders = [...this.element.querySelectorAll('button.collapsible-header')];
     // eslint-disable-next-line dot-notation
@@ -25,7 +25,7 @@ export default class extends Controller {
     this.instance.destroy();
   }
 
-  static #setExpanded(listItem, expanded) {
+  #setExpanded(listItem, expanded) {
     const header = listItem.querySelector(':scope > .collapsible-header[aria-expanded]');
 
     header?.setAttribute('aria-expanded', expanded.toString());
