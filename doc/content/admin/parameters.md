@@ -126,6 +126,20 @@ bin/console cache:clear --env=prod
 | RABBITMQ_URL | RabbitMQ connection string used by the async import worker | `amqp://guest:guest@127.0.0.1:5672` |
 | WALLABAG_RABBITMQ_PREFETCH_COUNT | RabbitMQ consumer prefetch value | `10` |
 
+## Redis password
+
+If your Redis password contains characters that need URL encoding, pass it in
+the `password` query parameter of `REDIS_URL`. Predis decodes this parameter,
+but not an encoded password in `redis://:password@host`. For example, the
+password `p@ss:word+&%` can be configured as:
+
+```dotenv
+REDIS_URL="redis://localhost:6379/0?password=p%40ss%3Aword%2B%26%25"
+```
+
+`REDIS_URL` only configures the asynchronous imports. For Redis-backed PHP
+sessions, use a `tcp://` save path, as in `docker/php/env.example`.
+
 ## Article problem-reporting destination
 
 `WALLABAG_ARTICLE_REPORTING_URL` accepts an absolute `https:` URL or a
