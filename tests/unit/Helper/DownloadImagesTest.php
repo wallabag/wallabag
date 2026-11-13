@@ -58,7 +58,7 @@ class DownloadImagesTest extends TestCase
         $this->assertStringContainsString('http://i.imgur.com/T9qgcHc.jpg', $res, 'Image were not replace because of content-type');
     }
 
-    public function testProcessHtmlWithPrivateNetworkImage()
+    public function testProcessHtmlWithPrivateNetworkImage(): void
     {
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);

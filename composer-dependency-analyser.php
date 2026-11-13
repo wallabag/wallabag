@@ -28,7 +28,6 @@ $config
         'mnapoli/piwik-twig-extension',
         'ocramius/proxy-manager',
         'pagerfanta/twig',
-        'php-http/mock-client',
         'phpstan/extension-installer',
         'phpstan/phpstan',
         'phpstan/phpstan-doctrine',

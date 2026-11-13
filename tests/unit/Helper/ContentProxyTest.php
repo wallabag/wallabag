@@ -3,6 +3,8 @@
 namespace Wallabag\Tests\Unit\Helper;
 
 use Graby\Graby;
+use GuzzleHttp\Psr7\Response;
+use Http\Mock\Client as MockClient;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
@@ -198,6 +200,55 @@ class ContentProxyTest extends TestCase
         $this->assertSame(4, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
         $this->assertFalse($entry->isNotParsed());
+    }
+
+    public function testWithContentAndEmptyProvidedContent(): void
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+        $ruleBasedIgnoreOriginProcessor->expects($this->once())
+            ->method('process');
+
+        $graby = $this->getMockBuilder(Graby::class)
+            ->onlyMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => str_repeat('this is my content', 325),
+                'title' => 'this is my title',
+                'url' => 'http://1.1.1.1',
+                'language' => 'fr',
+                'status' => '200',
+                'description' => 'OG desc',
+                'image' => 'http://3.3.3.3/cover.jpg',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        // empty values provided along the import should not override the fetched content
+        $proxy->updateEntry($entry, 'http://0.0.0.0', [
+            'title' => '',
+            'language' => '',
+            'image' => '',
+        ]);
+
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
+        $this->assertStringContainsString('content', $entry->getContent());
+        $this->assertSame('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
+        $this->assertSame('text/html', $entry->getMimetype());
+        $this->assertSame('fr', $entry->getLanguage());
+        $this->assertSame('200', $entry->getHttpStatus());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
     public function testWithContentAndNoOgImage(): void
@@ -712,6 +763,84 @@ class ContentProxyTest extends TestCase
         $this->assertSame('200', $entry->getHttpStatus());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
         $this->assertFalse($entry->isNotParsed());
+    }
+
+    /**
+     * @dataProvider dataForPrefetchedContentIsolation
+     */
+    public function testPrefetchedContentIsNotReused(bool $disableContentUpdate): void
+    {
+        $html = static fn ($marker, $author) => '<html lang="en"><head><meta charset="utf-8"><title>' . $marker . '</title><meta name="author" content="' . $author . '"></head><body><p>' . str_repeat($marker . ' article content. ', 30) . '</p></body></html>';
+        $httpClient = new MockClient();
+        $httpClient->addResponse(new Response(200, ['Content-Type' => 'text/html; charset=utf-8'], $html('Second article', 'Bob')));
+        $proxy = new ContentProxy(new Graby([], $httpClient), $this->getTaggerMock(), $this->getRuleBasedIgnoreOriginProcessorMock(), $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+
+        $first = new Entry(new User());
+        $proxy->updateEntry($first, 'https://1.1.1.1/first', ['html' => $html('First article', 'Alice')], $disableContentUpdate);
+        $this->assertStringContainsString('First article', $first->getContent());
+        $this->assertCount(0, $httpClient->getRequests());
+
+        $second = new Entry(new User());
+        $proxy->updateEntry($second, 'https://8.8.8.8/second');
+        $this->assertStringContainsString('Second article', $second->getContent());
+        $this->assertStringNotContainsString('First article', $second->getContent());
+        $this->assertSame(['Bob'], $second->getPublishedBy());
+        $this->assertCount(1, $httpClient->getRequests());
+    }
+
+    public static function dataForPrefetchedContentIsolation(): array
+    {
+        return [
+            'with metadata extraction' => [false],
+            'without metadata extraction' => [true],
+        ];
+    }
+
+    public function testFetchFailureKeepsAvailableMetadata(): void
+    {
+        $graby = $this->getMockBuilder(Graby::class)
+            ->onlyMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $graby->method('fetchContent')->willReturn([
+            'html' => $this->fetchingErrorMessage,
+            'title' => 'Page unavailable',
+            'url' => 'https://example.com/missing',
+            'status' => '404',
+            'headers' => ['content-type' => 'text/html'],
+        ]);
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $this->getRuleBasedIgnoreOriginProcessorMock(), $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'https://example.com/missing');
+
+        $this->assertSame($this->fetchingErrorMessage, $entry->getContent());
+        $this->assertSame('Page unavailable', $entry->getTitle());
+        $this->assertSame('404', $entry->getHttpStatus());
+        $this->assertSame('text/html', $entry->getMimetype());
+    }
+
+    public function testFetchFailurePreservesProvidedContent(): void
+    {
+        $graby = $this->getMockBuilder(Graby::class)
+            ->onlyMethods(['fetchContent'])
+            ->getMock();
+        $graby->method('fetchContent')->willReturn([
+            'html' => $this->fetchingErrorMessage,
+            'title' => 'Page unavailable',
+            'status' => '404',
+        ]);
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $this->getRuleBasedIgnoreOriginProcessorMock(), $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'https://1.1.1.1/article', [
+            'html' => '<p>Original imported content.</p>',
+            'title' => 'Original title',
+            'status' => '200',
+        ]);
+
+        $this->assertStringContainsString('Original imported content.', $entry->getContent());
+        $this->assertStringNotContainsString($this->fetchingErrorMessage, $entry->getContent());
+        $this->assertSame('Original title', $entry->getTitle());
+        $this->assertSame('200', $entry->getHttpStatus());
     }
 
     public function testWithImageAsContent(): void

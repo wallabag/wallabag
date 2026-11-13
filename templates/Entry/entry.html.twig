@@ -182,7 +182,7 @@
                                 </form>
                             </li>
                         {% endif %}
-                        {% if is_granted('UNSHARE', entry) %}
+                        {% if is_granted('UNSHARE', entry) and entry.uid %}
                             <li>
                                 <form action="{{ path('delete_share', {'id': entry.id}) }}" method="post">
                                     <input type="hidden" name="token" value="{{ csrf_token('delete-share') }}"/>
@@ -323,7 +323,7 @@
                         <li>
                             <i class="material-icons grey-text" title="{{ 'entry.view.published_by'|trans }}">person</i>
                             {% for author in entry.publishedBy %}
-                                {{ author|raw }}{% if not loop.last %}, {% endif %}
+                                {{ author|striptags|raw }}{% if not loop.last %}, {% endif %}
                             {% endfor %}
                         </li>
                     {% endif %}

@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\Helper\EntityTimestampsTrait;
 use Wallabag\Helper\UrlHasher;
 use Wallabag\Repository\EntryRepository;
+use Wallabag\Tools\Utils;
 
 /**
  * Entry.
@@ -582,6 +583,14 @@ class Entry
     public function getReadingTime()
     {
         return $this->readingTime;
+    }
+
+    /**
+     * Reading time adjusted to the reading speed of the entry owner.
+     */
+    public function getUserReadingTime(): float
+    {
+        return round($this->readingTime / $this->getUser()->getConfig()->getReadingSpeed() * Utils::DEFAULT_WORDS_PER_MINUTE);
     }
 
     /**

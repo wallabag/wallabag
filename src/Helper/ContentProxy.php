@@ -42,14 +42,16 @@ class ContentProxy
      */
     public function updateEntry(Entry $entry, $url, array $content = [], $disableContentUpdate = false): void
     {
-        $this->graby->toggleImgNoReferrer(true);
+        // Graby retains prefetched HTML, so keep it local to this entry.
+        $graby = clone $this->graby;
+        $graby->toggleImgNoReferrer(true);
         if (!empty($content['html'])) {
-            $this->graby->setContentAsPrefetched($content['html']);
-            $content['html'] = $this->graby->cleanupHtml($content['html'], $url);
+            $graby->setContentAsPrefetched($content['html']);
+            $content['html'] = $graby->cleanupHtml($content['html'], $url);
         }
 
         if (false === $disableContentUpdate) {
-            $fetchedContent = array_filter($this->graby->fetchContent($url), static function ($value, $key) {
+            $fetchedContent = array_filter($graby->fetchContent($url), static function ($value, $key) {
                 if ('html' === $key) {
                     return true;
                 }
@@ -67,8 +69,8 @@ class ContentProxy
 
             // when content is imported, we have information in $content
             // in case fetching content goes bad, we'll keep the imported information instead of overriding them
-            if ($fetchedContent['html'] !== $this->fetchingErrorMessage) {
-                $content = array_merge($fetchedContent, $content);
+            if (empty($content) || $fetchedContent['html'] !== $this->fetchingErrorMessage) {
+                $content = array_merge(array_filter($fetchedContent), array_filter($content));
             }
         }
 

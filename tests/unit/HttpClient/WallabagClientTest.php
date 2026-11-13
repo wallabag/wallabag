@@ -13,7 +13,7 @@ use Wallabag\SiteConfig\LoginFormAuthenticator;
 
 class WallabagClientTest extends TestCase
 {
-    public function testRequestBlocksPrivateNetworkTargets()
+    public function testRequestBlocksPrivateNetworkTargets(): void
     {
         $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()

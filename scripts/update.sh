@@ -46,8 +46,13 @@ fi
 rm -rf var/cache/*
 git fetch origin
 git fetch --tags
-TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
+# Latest stable release: skip pre-releases (alpha, beta, rc)
+TAG=$(git tag --list --sort=-version:refname | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1)
+if [ -z "$TAG" ]; then
+    echo "Can not find the latest release tag. Aborting."
+    exit 3
+fi
 git checkout $TAG --force
-APP_ENV=$ENV $COMPOSER_COMMAND install --no-dev -o --prefer-dist
+SYMFONY_ENV=$ENV $COMPOSER_COMMAND install --no-dev -o --prefer-dist
 php bin/console doctrine:migrations:migrate --no-interaction --env=$ENV
 php bin/console cache:clear --env=$ENV

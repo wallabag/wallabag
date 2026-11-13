@@ -321,13 +321,7 @@ class AppKernel extends Kernel
             return;
         }
 
-        $url = $scheme . '://';
-
-        if ('' !== $password) {
-            $url .= ':' . rawurlencode($password) . '@';
-        }
-
-        $url .= $host;
+        $url = $scheme . '://' . $host;
 
         if ('' !== $port) {
             $url .= ':' . $port;
@@ -335,6 +329,11 @@ class AppKernel extends Kernel
 
         if ('' !== $path) {
             $url .= '/' . ltrim($path, '/');
+        }
+
+        // Predis decodes the password query parameter, but not an encoded password in the userinfo part
+        if ('' !== $password) {
+            $url .= '?password=' . rawurlencode($password);
         }
 
         $container->setParameter('env(REDIS_URL)', $url);

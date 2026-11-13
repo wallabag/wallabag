@@ -41,13 +41,18 @@ class OmnivoreController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
             $markAsRead = $form->get('mark_as_read')->getData();
-            $name = 'omnivore_' . $this->getUser()->getId() . '.json';
+            $name = bin2hex(random_bytes(16)) . '.json';
 
             if (null !== $file && \in_array($file->getClientMimeType(), $this->allowMimetypes, true) && $file->move($this->resourceDir, $name)) {
-                $res = $omnivore
-                    ->setFilepath($this->resourceDir . '/' . $name)
-                    ->setMarkAsRead($markAsRead)
-                    ->import();
+                try {
+                    $res = $omnivore
+                        ->setFilepath($this->resourceDir . '/' . $name)
+                        ->setMarkAsRead($markAsRead)
+                        ->import();
+                } finally {
+                    // never leave the uploaded file on disk, whatever the import result is
+                    @unlink($this->resourceDir . '/' . $name);
+                }
 
                 $message = 'flashes.import.notice.failed';
 
@@ -63,8 +68,6 @@ class OmnivoreController extends AbstractController
                             '%queued%' => $summary['queued'],
                         ]);
                     }
-
-                    unlink($this->resourceDir . '/' . $name);
                 }
 
                 $this->addFlash('notice', $message);
