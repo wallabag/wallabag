@@ -495,6 +495,31 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString($entry->getTitle(), $body[0]);
     }
 
+    public function testViewStripsHtmlFromAuthors()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://example.com/authors');
+        $entry->setTitle('title with authors');
+        $entry->setContent('foo bar baz');
+        $entry->setPublishedBy([
+            '<a href="https://evil.example">Alice</a>',
+            '<em>Bob</em>',
+        ]);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $authorLine = preg_replace('/\s+/', ' ', $crawler->filterXPath('//aside[contains(@class, "entry-info")]//li[i[normalize-space()="person"]]')->text());
+        $this->assertStringContainsString('Alice, Bob', (string) $authorLine);
+        $this->assertStringNotContainsString('<a href="https://evil.example">Alice</a>', $client->getResponse()->getContent());
+        $this->assertStringNotContainsString('<em>Bob</em>', $client->getResponse()->getContent());
+    }
+
     /**
      * @group NetworkCalls
      */

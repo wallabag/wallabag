@@ -292,7 +292,7 @@
                         <li>
                             <i class="material-icons grey-text" title="{{ 'entry.view.published_by'|trans }}">person</i>
                             {% for author in entry.publishedBy %}
-                                {{ author|raw }}{% if not loop.last %}, {% endif %}
+                                {{ author|striptags|raw }}{% if not loop.last %}, {% endif %}
                             {% endfor %}
                         </li>
                     {% endif %}
