@@ -85,6 +85,11 @@
   padding: 0 23.5px 0 31px;
 }
 
+.sidenav li > button.collapsible-header:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: -2px;
+}
+
 .bold > a,
 .bold > button {
   font-weight: bold;
