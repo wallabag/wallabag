@@ -11,16 +11,22 @@ use Wallabag\CoreBundle\Helper\DownloadImages;
 
 class DownloadImagesTest extends TestCase
 {
+    private const PUBLIC_HTTP_IP = '1.1.1.1';
+    private const PUBLIC_HTTP_BASE = 'http://' . self::PUBLIC_HTTP_IP;
+    private const PUBLIC_HTTPS_BASE = 'https://8.8.8.8';
+    private const ENTRY_ASSET_PATH = '/assets/images/9/b/9b0ead26/';
+    private const ENTRY_ASSET_PREFIX = 'http://wallabag.io' . self::ENTRY_ASSET_PATH;
+
     public function dataForSuccessImage()
     {
         return [
             'imgur' => [
-                '<div><img src="http://i.imgur.com/T9qgcHc.jpg" /></div>',
-                'http://imgur.com/gallery/WxtWY',
+                '<div><img src="' . self::PUBLIC_HTTP_BASE . '/T9qgcHc.jpg" /></div>',
+                self::PUBLIC_HTTP_BASE . '/gallery/WxtWY',
             ],
             'image with &' => [
-                '<div><img src="https://i2.wp.com/www.tvaddons.ag/wp-content/uploads/2017/01/Screen-Shot-2017-01-07-at-10.17.40-PM.jpg?w=640&amp;ssl=1" /></div>',
-                'https://www.tvaddons.ag/realdebrid-kodi-jarvis/',
+                '<div><img src="' . self::PUBLIC_HTTPS_BASE . '/wp-content/uploads/2017/01/screen-shot.jpg?w=640&amp;ssl=1" /></div>',
+                self::PUBLIC_HTTPS_BASE . '/realdebrid-kodi-jarvis/',
             ],
         ];
     }
@@ -41,7 +47,7 @@ class DownloadImagesTest extends TestCase
         $res = $download->processHtml(123, $html, $url);
 
         // this the base path of all image (since it's calculated using the entry id: 123)
-        $this->assertStringContainsString('http://wallabag.io/assets/images/9/b/9b0ead26/', $res);
+        $this->assertStringContainsString(self::ENTRY_ASSET_PREFIX, $res);
     }
 
     public function testProcessHtmlWithBadImage()
@@ -53,9 +59,9 @@ class DownloadImagesTest extends TestCase
         $logger = new Logger('test', [$logHandler]);
 
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
-        $res = $download->processHtml(123, '<div><img src="http://i.imgur.com/T9qgcHc.jpg" /></div>', 'http://imgur.com/gallery/WxtWY');
+        $res = $download->processHtml(123, '<div><img src="' . self::PUBLIC_HTTP_BASE . '/T9qgcHc.jpg" /></div>', self::PUBLIC_HTTP_BASE . '/gallery/WxtWY');
 
-        $this->assertStringContainsString('http://i.imgur.com/T9qgcHc.jpg', $res, 'Image were not replace because of content-type');
+        $this->assertStringContainsString(self::PUBLIC_HTTP_BASE . '/T9qgcHc.jpg', $res, 'Image were not replace because of content-type');
     }
 
     public function singleImage()
@@ -81,9 +87,9 @@ class DownloadImagesTest extends TestCase
         $logger = new Logger('test', [$logHandler]);
 
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
-        $res = $download->processSingleImage(123, 'T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
+        $res = $download->processSingleImage(123, 'T9qgcHc.jpg', self::PUBLIC_HTTP_BASE . '/gallery/WxtWY');
 
-        $this->assertStringContainsString('/assets/images/9/b/9b0ead26/ebe60399.' . $extension, $res);
+        $this->assertStringContainsString($this->assetPathFor(self::PUBLIC_HTTP_BASE . '/gallery/T9qgcHc.jpg', $extension), $res);
     }
 
     public function testProcessSingleImageWithBadUrl()
@@ -95,7 +101,7 @@ class DownloadImagesTest extends TestCase
         $logger = new Logger('test', [$logHandler]);
 
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
-        $res = $download->processSingleImage(123, 'T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
+        $res = $download->processSingleImage(123, 'T9qgcHc.jpg', self::PUBLIC_HTTP_BASE . '/gallery/WxtWY');
 
         $this->assertFalse($res, 'Image can not be found, so it will not be replaced');
     }
@@ -109,7 +115,7 @@ class DownloadImagesTest extends TestCase
         $logger = new Logger('test', [$logHandler]);
 
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
-        $res = $download->processSingleImage(123, 'http://i.imgur.com/T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
+        $res = $download->processSingleImage(123, self::PUBLIC_HTTP_BASE . '/T9qgcHc.jpg', self::PUBLIC_HTTP_BASE . '/gallery/WxtWY');
 
         $this->assertFalse($res, 'Image can not be loaded, so it will not be replaced');
     }
@@ -123,7 +129,7 @@ class DownloadImagesTest extends TestCase
         $logger = new Logger('test', [$logHandler]);
 
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
-        $res = $download->processSingleImage(123, '/i.imgur.com/T9qgcHc.jpg', 'imgur.com/gallery/WxtWY');
+        $res = $download->processSingleImage(123, '/T9qgcHc.jpg', self::PUBLIC_HTTP_IP . '/gallery/WxtWY');
 
         $this->assertFalse($res, 'Absolute image can not be determined, so it will not be replaced');
     }
@@ -140,11 +146,11 @@ class DownloadImagesTest extends TestCase
 
         $res = $download->processSingleImage(
             123,
-            'https://cdn.theconversation.com/files/157200/article/width926/gsj2rjp2-1487348607.jpg',
-            'https://theconversation.com/conversation-avec-gerald-bronner-ce-nest-pas-la-post-verite-qui-nous-menace-mais-lextension-de-notre-credulite-73089'
+            self::PUBLIC_HTTPS_BASE . '/files/article.jpg',
+            self::PUBLIC_HTTPS_BASE . '/conversation'
         );
 
-        $this->assertStringContainsString('http://wallabag.io/assets/images/9/b/9b0ead26/', $res, 'Content-Type was empty but data is ok for an image');
+        $this->assertStringContainsString(self::ENTRY_ASSET_PREFIX, $res, 'Content-Type was empty but data is ok for an image');
         $this->assertStringContainsString('DownloadImages: Checking extension (alternative)', $logHandler->getRecords()[3]['message']);
     }
 
@@ -159,9 +165,9 @@ class DownloadImagesTest extends TestCase
         $logger = new Logger('test', [$logHandler]);
 
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
-        $res = $download->processHtml(123, '<p><img class="alignnone wp-image-1153" src="http://piketty.blog.lemonde.fr/files/2017/10/F1FR-530x375.jpg" alt="" width="628" height="444" srcset="http://piketty.blog.lemonde.fr/files/2017/10/F1FR-530x375.jpg 530w, http://piketty.blog.lemonde.fr/files/2017/10/F1FR-768x543.jpg 768w, http://piketty.blog.lemonde.fr/files/2017/10/F1FR-900x636.jpg 900w" sizes="(max-width: 628px) 100vw, 628px" /></p>', 'http://piketty.blog.lemonde.fr/2017/10/12/budget-2018-la-jeunesse-sacrifiee/');
+        $res = $download->processHtml(123, '<p><img class="alignnone wp-image-1153" src="' . self::PUBLIC_HTTP_BASE . '/files/F1FR-530x375.jpg" alt="" width="628" height="444" srcset="' . self::PUBLIC_HTTP_BASE . '/files/F1FR-530x375.jpg 530w, ' . self::PUBLIC_HTTP_BASE . '/files/F1FR-768x543.jpg 768w, ' . self::PUBLIC_HTTP_BASE . '/files/F1FR-900x636.jpg 900w" sizes="(max-width: 628px) 100vw, 628px" /></p>', self::PUBLIC_HTTP_BASE . '/budget-2018');
 
-        $this->assertStringNotContainsString('http://piketty.blog.lemonde.fr/', $res, 'Image srcset attribute were not replaced');
+        $this->assertStringNotContainsString(self::PUBLIC_HTTP_BASE . '/files/', $res, 'Image srcset attribute were not replaced');
     }
 
     public function testProcessImageWithTrickySrcset()
@@ -175,11 +181,11 @@ class DownloadImagesTest extends TestCase
         $logger = new Logger('test', [$logHandler]);
 
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
-        $res = $download->processHtml(123, '<figure id="post-257260" class="align-none media-257260"><img src="https://cdn.css-tricks.com/wp-content/uploads/2017/08/the-critical-request.png" srcset="https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1000,f_auto,q_auto/v1501594717/the-critical-request_bqdfaa.png 1000w, https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_200,f_auto,q_auto/v1501594717/the-critical-request_bqdfaa.png 200w" sizes="(min-width: 1850px) calc( (100vw - 555px) / 3 )
+        $res = $download->processHtml(123, '<figure id="post-257260" class="align-none media-257260"><img src="' . self::PUBLIC_HTTPS_BASE . '/wp-content/uploads/the-critical-request.png" srcset="' . self::PUBLIC_HTTPS_BASE . '/image/upload/c_scale,w_1000,f_auto,q_auto/the-critical-request.png 1000w, ' . self::PUBLIC_HTTPS_BASE . '/image/upload/c_scale,w_200,f_auto,q_auto/the-critical-request.png 200w" sizes="(min-width: 1850px) calc( (100vw - 555px) / 3 )
        (min-width: 1251px) calc( (100vw - 530px) / 2 )
        (min-width: 1086px) calc(100vw - 480px)
        (min-width: 626px)  calc(100vw - 335px)
-                           calc(100vw - 30px)" alt="" /></figure>', 'https://css-tricks.com/the-critical-request/');
+                           calc(100vw - 30px)" alt="" /></figure>', self::PUBLIC_HTTPS_BASE . '/the-critical-request/');
 
         $this->assertStringNotContainsString('f_auto,q_auto', $res, 'Image srcset attribute were not replaced');
     }
@@ -196,9 +202,9 @@ class DownloadImagesTest extends TestCase
 
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         // wordpress.com sites using &#038; as an &amp; alternative
-        $res = $download->processHtml(123, '<img srcset="https://example.com/20191204_133626-scaled.jpg?strip=info&#038;w=600&#038;ssl=1 600w,https://example.com/20191204_133626-scaled.jpg?strip=info&#038;w=900&#038;ssl=1 900w" src="https://example.com/20191204_133626-scaled.jpg?ssl=1"/>', 'https://example.com/about/');
+        $res = $download->processHtml(123, '<img srcset="' . self::PUBLIC_HTTPS_BASE . '/20191204_133626-scaled.jpg?strip=info&#038;w=600&#038;ssl=1 600w,' . self::PUBLIC_HTTPS_BASE . '/20191204_133626-scaled.jpg?strip=info&#038;w=900&#038;ssl=1 900w" src="' . self::PUBLIC_HTTPS_BASE . '/20191204_133626-scaled.jpg?ssl=1"/>', self::PUBLIC_HTTPS_BASE . '/about/');
 
-        $this->assertStringNotContainsString('https://example.com', $res, 'Image srcset attribute were not replaced');
+        $this->assertStringNotContainsString(self::PUBLIC_HTTPS_BASE, $res, 'Image srcset attribute were not replaced');
     }
 
     public function testProcessImageWithNullPath()
@@ -214,9 +220,38 @@ class DownloadImagesTest extends TestCase
         $res = $download->processSingleImage(
             123,
             null,
-            'https://framablog.org/2018/06/30/engagement-atypique/'
+            self::PUBLIC_HTTPS_BASE . '/engagement-atypique/'
         );
         $this->assertFalse($res);
+    }
+
+    public function provideBlockedLocalImageUrls(): array
+    {
+        return [
+            'loopback' => ['http://127.0.0.1/image.png'],
+            'private class a' => ['http://10.0.0.1/image.png'],
+            'link-local metadata' => ['http://169.254.169.254/image.png'],
+            'private class b' => ['http://172.16.0.1/image.png'],
+            'private class c' => ['http://192.168.1.1/image.png'],
+        ];
+    }
+
+    /**
+     * @dataProvider provideBlockedLocalImageUrls
+     */
+    public function testProcessSingleImageBlocksLocalAddress($imageUrl)
+    {
+        $httpMockClient = new HttpMockClient();
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $res = $download->processSingleImage(123, $imageUrl, self::PUBLIC_HTTP_BASE . '/article');
+
+        $this->assertFalse($res);
+        $this->assertCount(0, $httpMockClient->getRequests());
+        $this->assertTrue($logHandler->hasErrorThatContains('DownloadImages: Can not retrieve image, skipping.'));
     }
 
     public function testEnsureOnlyFirstOccurrenceIsReplaced()
@@ -230,12 +265,15 @@ class DownloadImagesTest extends TestCase
 
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
 
-        $html = '<img src="https://images.wsj.net/im-410981?width=860&height=573" srcset="https://images.wsj.net/im-410981?width=860&height=573&pixel_ratio=1.5 1290w" height="573" width="860" alt="" referrerpolicy="no-referrer">';
-        $url = 'https://www.wsj.com/articles/5-interior-design-tips-to-max-out-your-basement-space-11633435201';
+        $html = '<img src="' . self::PUBLIC_HTTPS_BASE . '/im-410981?width=860&height=573" srcset="' . self::PUBLIC_HTTPS_BASE . '/im-410981?width=860&height=573&pixel_ratio=1.5 1290w" height="573" width="860" alt="" referrerpolicy="no-referrer">';
+        $url = self::PUBLIC_HTTPS_BASE . '/articles/interior-design';
 
         $res = $download->processHtml(123, $html, $url);
 
-        $this->assertSame('<img src="http://wallabag.io/assets/images/9/b/9b0ead26/6bef06fe.png" srcset="http://wallabag.io/assets/images/9/b/9b0ead26/43cc0123.png 1290w" height="573" width="860" alt="" referrerpolicy="no-referrer">', $res);
+        $this->assertSame(
+            '<img src="' . $this->assetUrlFor(self::PUBLIC_HTTPS_BASE . '/im-410981?width=860&height=573', 'png') . '" srcset="' . $this->assetUrlFor(self::PUBLIC_HTTPS_BASE . '/im-410981?width=860&height=573&pixel_ratio=1.5', 'png') . ' 1290w" height="573" width="860" alt="" referrerpolicy="no-referrer">',
+            $res
+        );
     }
 
     public function testProcessSingleImageWithSvg()
@@ -247,9 +285,9 @@ class DownloadImagesTest extends TestCase
         $logger = new Logger('test', [$logHandler]);
 
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
-        $res = $download->processSingleImage(123, 'modal-content.svg', 'http://imgur.com/gallery/WxtWY');
+        $res = $download->processSingleImage(123, 'modal-content.svg', self::PUBLIC_HTTP_BASE . '/gallery/WxtWY');
 
-        $this->assertStringContainsString('/assets/images/9/b/9b0ead26/400e29f9.svg', $res);
+        $this->assertStringContainsString($this->assetPathFor(self::PUBLIC_HTTP_BASE . '/gallery/modal-content.svg', 'svg'), $res);
     }
 
     public function testProcessSingleImageWithBadSvg()
@@ -261,7 +299,7 @@ class DownloadImagesTest extends TestCase
         $logger = new Logger('test', [$logHandler]);
 
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
-        $res = $download->processSingleImage(123, 'modal-content.svg', 'http://imgur.com/gallery/WxtWY');
+        $res = $download->processSingleImage(123, 'modal-content.svg', self::PUBLIC_HTTP_BASE . '/gallery/WxtWY');
 
         $this->assertFalse($res);
     }
@@ -276,8 +314,18 @@ class DownloadImagesTest extends TestCase
         $logger = new Logger('test', [$logHandler]);
 
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
-        $res = $download->processSingleImage(123, '', 'https://example.com/unnamed.png');
+        $res = $download->processSingleImage(123, '', self::PUBLIC_HTTPS_BASE . '/unnamed.png');
 
-        $this->assertStringContainsString('/assets/images/9/b/9b0ead26/66953334.png', $res, "Fetch client didn't follow the HTTP redirection");
+        $this->assertStringContainsString($this->assetPathFor(self::PUBLIC_HTTPS_BASE . '/unnamed.png', 'png'), $res, "Fetch client didn't follow the HTTP redirection");
+    }
+
+    private function assetUrlFor(string $absolutePath, string $extension): string
+    {
+        return self::ENTRY_ASSET_PREFIX . hash('crc32', $absolutePath) . '.' . $extension;
+    }
+
+    private function assetPathFor(string $absolutePath, string $extension): string
+    {
+        return self::ENTRY_ASSET_PATH . hash('crc32', $absolutePath) . '.' . $extension;
     }
 }
