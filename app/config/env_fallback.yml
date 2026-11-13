@@ -1,6 +1,5 @@
 # TODO wallabag 3.0: remove this file and define these environment fallbacks directly in the application configuration.
 parameters:
-    env(APP_SECRET): 'ch4n63m31fy0uc4n'
     env(DEFAULT_LOCALE): 'en'
     env(WALLABAG_BASE_URL): 'http://127.0.0.1:8000'
     env(MAILER_DSN): 'smtp://127.0.0.1'

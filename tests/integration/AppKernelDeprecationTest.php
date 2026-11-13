@@ -4,6 +4,7 @@ namespace Wallabag\Tests\Integration;
 
 use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\DependencyInjection\Exception\EnvNotFoundException;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -37,7 +38,6 @@ class AppKernelDeprecationTest extends KernelTestCase
 
             $container = self::getContainer();
             $expectedFallbacks = [
-                'APP_SECRET' => 'ch4n63m31fy0uc4n',
                 'DEFAULT_LOCALE' => 'en',
                 'WALLABAG_BASE_URL' => 'http://127.0.0.1:8000',
                 'MAILER_DSN' => 'smtp://127.0.0.1',
@@ -60,6 +60,7 @@ class AppKernelDeprecationTest extends KernelTestCase
             foreach ($expectedFallbacks as $name => $value) {
                 self::assertSame($value, $container->getParameter('env(' . $name . ')'), $name);
             }
+            self::assertFalse($container->hasParameter('env(APP_SECRET)'));
         } finally {
             self::ensureKernelShutdown();
 
@@ -158,6 +159,43 @@ class AppKernelDeprecationTest extends KernelTestCase
             }
 
             $filesystem->remove([$cachePath, $sqlitePath]);
+            $this->restoreEnvironmentVariables($originalEnvironment);
+        }
+    }
+
+    public function testFailsToResolveAppSecretWhenMissing(): void
+    {
+        $filesystem = new Filesystem();
+        $legacyParametersPath = $this->getLegacyParametersPath();
+        $cachePath = $this->getTestCachePath();
+        $backupPath = $legacyParametersPath . '.bak';
+        $hasLegacyParameters = is_file($legacyParametersPath);
+
+        if ($hasLegacyParameters && file_exists($backupPath)) {
+            throw new \RuntimeException('Cannot back up app/config/parameters.yml: parameters.yml.bak already exists.');
+        }
+
+        $originalEnvironment = $this->unsetEnvironmentVariables(['APP_SECRET']);
+        self::ensureKernelShutdown();
+
+        try {
+            if ($hasLegacyParameters) {
+                $filesystem->rename($legacyParametersPath, $backupPath);
+            }
+            $filesystem->remove($cachePath);
+
+            $this->expectException(EnvNotFoundException::class);
+            $this->expectExceptionMessage('APP_SECRET');
+            self::bootKernel();
+            self::getContainer()->getParameter('kernel.secret');
+        } finally {
+            self::ensureKernelShutdown();
+
+            if ($hasLegacyParameters && is_file($backupPath)) {
+                $filesystem->rename($backupPath, $legacyParametersPath);
+            }
+
+            $filesystem->remove($cachePath);
             $this->restoreEnvironmentVariables($originalEnvironment);
         }
     }
