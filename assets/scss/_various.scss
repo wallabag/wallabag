@@ -52,7 +52,42 @@ nav .input-field input {
   }
 }
 
+button:not(:disabled, .disabled) {
+  cursor: pointer;
+}
+
+button:disabled,
+button.disabled {
+  cursor: default;
+}
+
+button:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
+}
+
+.sidenav a:focus-visible,
+.dropdown-content a:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: -2px;
+}
+
+.dropdown-content li:focus-visible {
+  outline: 2px solid variables.$blue-accent-color;
+  outline-offset: -2px;
+}
+
 .config-help {
   font: inherit;
   line-height: inherit;
+}
+
+.dropdown-content button[data-dark-theme-target][aria-pressed="true"],
+.sidenav button[data-dark-theme-target][aria-pressed="true"] {
+  color: variables.$blue-accent-color;
+  font-weight: bold;
+
+  > i {
+    color: inherit;
+  }
 }
