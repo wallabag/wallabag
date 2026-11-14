@@ -110,6 +110,44 @@ class FeedControllerTest extends WallabagTestCase
         $this->validateDom($client->getResponse()->getContent(), 'unread', 2);
     }
 
+    public function testEntryPreviewPictureIsExposedAsEnclosure(): void
+    {
+        $client = $this->getTestClient();
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
+        $user = $em
+            ->getRepository(User::class)
+            ->findOneByUsername('admin');
+
+        $config = $user->getConfig();
+        $config->setFeedToken('SUPERTOKEN');
+        $config->setFeedLimit(null);
+        $em->persist($config);
+
+        $withPicture = $em
+            ->getRepository(Entry::class)
+            ->findByUrlAndUserId('http://0.0.0.0/entry1', $user->getId());
+        $withoutPicture = $em
+            ->getRepository(Entry::class)
+            ->findByUrlAndUserId('http://0.0.0.0/entry2', $user->getId());
+
+        \assert($withPicture instanceof Entry);
+        \assert($withoutPicture instanceof Entry);
+
+        $withPicture->setPreviewPicture('https://example.org/thumbnail.jpg?size=small&format=jpg');
+        $withoutPicture->setPreviewPicture(null);
+        $em->flush();
+
+        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/all');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $enclosures = $crawler->filterXPath(\sprintf('//feed/entry[title="%s"]/link[@rel="enclosure"]', $withPicture->getTitle()));
+        $this->assertCount(1, $enclosures);
+        $this->assertSame('https://example.org/thumbnail.jpg?size=small&format=jpg', $enclosures->attr('href'));
+
+        $this->assertCount(0, $crawler->filterXPath(\sprintf('//feed/entry[title="%s"]/link[@rel="enclosure"]', $withoutPicture->getTitle())));
+    }
+
     public function testStarred(): void
     {
         $client = $this->getTestClient();

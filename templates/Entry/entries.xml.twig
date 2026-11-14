@@ -34,6 +34,9 @@
         <link rel="alternate" href="{{ entry.url }}"/>
         <link rel="via" type="text/html"
               href="{{ url('view', {'id': entry.id}) }}"/>
+        {% if entry.previewPicture %}
+        <link rel="enclosure" href="{{ entry.previewPicture }}"/>
+        {% endif %}
         <id>wallabag:{{ wallabag_url|removeScheme|removeWww }}:{{ user }}:entry:{{ entry.id }}</id>
         <updated>{{ entry.updatedAt|date('c') }}</updated>
         <published>{{ entry.createdAt|date('c') }}</published>
