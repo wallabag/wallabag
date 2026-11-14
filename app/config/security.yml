@@ -45,6 +45,7 @@ security:
 
             anonymous: true
             remember_me:
+                name: "%env(WALLABAG_REMEMBER_ME_COOKIE_NAME)%"
                 secret: "%env(APP_SECRET)%"
                 lifetime: 31536000
                 path: /
