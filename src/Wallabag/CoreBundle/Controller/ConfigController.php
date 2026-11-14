@@ -190,7 +190,7 @@ class ConfigController extends AbstractController
                         // imported rules must go through the same validation as the ones created from the form,
                         // otherwise they are compiled to PHP and executed without any check
                         if (!\is_array($rule) || !isset($rule['rule'], $rule['tags']) || !\is_string($rule['rule']) || !\is_array($rule['tags']) || \count($rule['tags']) !== \count(array_filter($rule['tags'], 'is_string'))) {
-                            $taggingRules = null;
+                            $taggingRules = [];
 
                             break;
                         }
@@ -201,7 +201,7 @@ class ConfigController extends AbstractController
                         $taggingRule->setConfig($config);
 
                         if (0 < \count($validator->validate($taggingRule))) {
-                            $taggingRules = null;
+                            $taggingRules = [];
 
                             break;
                         }
@@ -210,13 +210,13 @@ class ConfigController extends AbstractController
                     }
 
                     // nothing is imported if one rule is invalid
-                    if (null !== $taggingRules) {
-                        foreach ($taggingRules as $taggingRule) {
-                            $this->entityManager->persist($taggingRule);
-                        }
+                    foreach ($taggingRules as $taggingRule) {
+                        $this->entityManager->persist($taggingRule);
+                    }
 
-                        $this->entityManager->flush();
+                    $this->entityManager->flush();
 
+                    if ([] !== $taggingRules) {
                         $message = 'flashes.config.notice.tagging_rules_imported';
                     }
                 }
