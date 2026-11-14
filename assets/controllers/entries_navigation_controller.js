@@ -29,8 +29,9 @@ export default class extends Controller {
       return;
     }
 
-    if (this.pagination && this.pagination.querySelector('a[rel="next"]')) {
-      window.location.href = this.pagination.querySelector('a[rel="next"]').href;
+    const nextLink = this.pagination?.querySelector('a[rel="next"]');
+    if (nextLink) {
+      window.location.href = nextLink.href;
     }
   }
 
@@ -44,8 +45,9 @@ export default class extends Controller {
       return;
     }
 
-    if (this.pagination && this.pagination.querySelector('a[rel="prev"]')) {
-      window.location.href = `${this.pagination.querySelector('a[rel="prev"]').href}#prev`;
+    const previousLink = this.pagination?.querySelector('a[rel="prev"]');
+    if (previousLink) {
+      window.location.href = `${previousLink.href}#prev`;
     }
   }
 
