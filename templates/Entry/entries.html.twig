@@ -139,7 +139,7 @@
             {% set export_search_term = searchTerm %}
         {% endif %}
         {% set entry = app.request.attributes.get('id') %}
-        {% set previous_route = app.request.attributes.get('currentRoute') %}
+        {% set previous_route = app.request.query.get('currentRoute') %}
             <h4 class="center">{{ 'entry.list.export_title'|trans }}</h4>
             <ul>
                 {% if craue_setting('export_epub') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'epub', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">EPUB</a></li>{% endif %}

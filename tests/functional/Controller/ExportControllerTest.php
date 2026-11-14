@@ -444,7 +444,7 @@ class ExportControllerTest extends WallabagTestCase
         $this->assertCount(1, $exportLink);
 
         $query = [];
-        parse_str((string) parse_url($exportLink->attr('href'), PHP_URL_QUERY), $query);
+        parse_str((string) parse_url($exportLink->attr('href'), \PHP_URL_QUERY), $query);
         $this->assertSame((string) $referenceId, $query['entry']);
 
         $client->click($exportLink->link());
@@ -461,6 +461,69 @@ class ExportControllerTest extends WallabagTestCase
             $cleanupEm->remove($cleanupEm->find(Entry::class, $entryId));
         }
         $cleanupEm->flush();
+    }
+
+    /**
+     * @dataProvider searchExportContexts
+     */
+    public function testJsonExportLinkFromSearchPreservesContext(string $currentRoute, array $expectedKeys): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $em = $this->getEntityManager();
+        $user = $em->getRepository(User::class)->findOneBy(['username' => 'admin']);
+
+        $entries = [];
+        foreach ([
+            'starred-unread' => ['starred' => true, 'archived' => false],
+            'starred-archive' => ['starred' => true, 'archived' => true],
+            'unstarred-unread' => ['starred' => false, 'archived' => false],
+            'unstarred-archive' => ['starred' => false, 'archived' => true],
+        ] as $key => $state) {
+            $entry = new Entry($user);
+            $entry->setUrl('http://search-export.test/' . $key);
+            $entry->setTitle('search-export-context-needle ' . $key);
+            $entry->setContent('search-export-context-needle');
+            $entry->setStarred($state['starred']);
+            $entry->updateArchived($state['archived']);
+            $em->persist($entry);
+            $entries[$key] = $entry;
+        }
+        $em->flush();
+        $entryIds = array_map(static fn (Entry $entry): int => $entry->getId(), $entries);
+
+        $searchUrl = '/search?search_entry%5Bterm%5D=search-export-context-needle&currentRoute=' . $currentRoute;
+        $crawler = $client->request('GET', $searchUrl);
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertCount(\count($expectedKeys), $crawler->filter('[data-test="entry"]'));
+
+        $exportLink = $crawler->filter('#export a[href*="/export/search.json"]');
+        $this->assertCount(1, $exportLink);
+        $query = [];
+        parse_str((string) parse_url($exportLink->attr('href'), \PHP_URL_QUERY), $query);
+        $this->assertSame('search-export-context-needle', $query['search_entry']['term']);
+        $this->assertSame($currentRoute, $query['currentRoute']);
+
+        $client->click($exportLink->link());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $content = json_decode((string) $client->getResponse()->getContent(), true);
+        $this->assertEqualsCanonicalizing(
+            array_map(static fn (string $key): int => $entryIds[$key], $expectedKeys),
+            array_column($content, 'id')
+        );
+
+        $cleanupEm = $client->getContainer()->get(EntityManagerInterface::class);
+        foreach ($entryIds as $entryId) {
+            $cleanupEm->remove($cleanupEm->find(Entry::class, $entryId));
+        }
+        $cleanupEm->flush();
+    }
+
+    public static function searchExportContexts(): iterable
+    {
+        yield 'starred filter' => ['starred', ['starred-unread', 'starred-archive']];
+        yield 'unread filter' => ['unread', ['starred-unread', 'unstarred-unread']];
+        yield 'archive filter' => ['archive', ['starred-archive', 'unstarred-archive']];
     }
 
     private function setUpForJsonExportFromSearch(): void
