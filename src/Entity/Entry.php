@@ -168,10 +168,13 @@ class Entry
     #[Groups(['entries_for_user', 'export_all'])]
     private $starredAt;
 
+    /**
+     * @var Collection<Annotation>
+     */
     #[ORM\JoinTable]
     #[ORM\OneToMany(targetEntity: Annotation::class, mappedBy: 'entry', cascade: ['persist', 'remove'])]
     #[Groups(['entries_for_user', 'export_all'])]
-    private $annotations;
+    private Collection $annotations;
 
     /**
      * @var string|null
@@ -251,6 +254,7 @@ class Entry
     {
         $this->user = $user;
         $this->tags = new ArrayCollection();
+        $this->annotations = new ArrayCollection();
     }
 
     /**
@@ -549,7 +553,7 @@ class Entry
     }
 
     /**
-     * @return ArrayCollection<Annotation>
+     * @return Collection<Annotation>
      */
     public function getAnnotations()
     {
