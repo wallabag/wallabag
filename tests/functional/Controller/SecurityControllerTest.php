@@ -8,6 +8,15 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 
 class SecurityControllerTest extends WallabagTestCase
 {
+    public function testCookieNamesAreConfigurable(): void
+    {
+        $client = $this->getTestClient();
+        $container = $client->getContainer();
+
+        $this->assertSame('PHPSESSID', $container->getParameter('session.storage.options')['name']);
+        $this->assertSame('wllbg_trusted_computer', $container->getParameter('scheb_two_factor.trusted_device.cookie_name'));
+    }
+
     public function testLoginWithEmail(): void
     {
         $this->logInAsUsingHttp('bigboss@wallabag.org');

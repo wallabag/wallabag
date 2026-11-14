@@ -52,6 +52,9 @@ After changing configuration in production, clear the cache with
 | WALLABAG_TWOFACTOR_SENDER | Sender address for emailed 2FA codes | `no-reply@wallabag.org` |
 | WALLABAG_LOG_LEVEL | Minimum level written by the nested production log handler | `error` |
 | WALLABAG_USER_AGENT | Default User-Agent used when wallabag fetches content | `Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2` |
+| WALLABAG_SESSION_COOKIE_NAME | Name of the session cookie. Change it if several services share the same host and log each other out | `PHPSESSID` |
+| WALLABAG_REMEMBER_ME_COOKIE_NAME | Name of the "remember me" cookie | `REMEMBERME` |
+| WALLABAG_TRUSTED_DEVICE_COOKIE_NAME | Name of the two-factor trusted device cookie | `wllbg_trusted_computer` |
 | WALLABAG_OAUTH_ACCESS_TOKEN_LIFETIME | OAuth access-token lifetime in seconds | `3600` |
 | WALLABAG_OAUTH_REFRESH_TOKEN_LIFETIME | OAuth refresh-token lifetime in seconds | `1209600` |
 | WALLABAG_TABLE_PREFIX | Prefix added to wallabag database tables | `wallabag_` |

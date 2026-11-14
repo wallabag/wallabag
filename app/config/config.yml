@@ -26,6 +26,7 @@ framework:
     default_locale: "%env(DEFAULT_LOCALE)%"
     trusted_hosts: ~
     session:
+        name: "%env(WALLABAG_SESSION_COOKIE_NAME)%"
         # handler_id set to null will use default session handler from php.ini
         handler_id: session.handler.native_file
         save_path: "%kernel.project_dir%/var/sessions/%kernel.environment%"
@@ -225,7 +226,7 @@ fos_oauth_server:
 scheb_two_factor:
     trusted_device:
         enabled: true
-        cookie_name: wllbg_trusted_computer
+        cookie_name: "%env(WALLABAG_TRUSTED_DEVICE_COOKIE_NAME)%"
         lifetime: 2592000
 
     backup_codes:
