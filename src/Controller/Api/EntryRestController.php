@@ -424,6 +424,7 @@ class EntryRestController extends WallabagRestController
         }
 
         if ('metadata' === $detail) {
+            $entry = clone $entry;
             $entry->setContent(null);
         }
 
