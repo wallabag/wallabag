@@ -403,6 +403,66 @@ class ExportControllerTest extends WallabagTestCase
         $this->assertCount(4, $content);
     }
 
+    public function testJsonExportLinkFromSameDomainPreservesReferenceEntry(): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $em = $this->getEntityManager();
+        $user = $em->getRepository(User::class)->findOneBy(['username' => 'admin']);
+
+        $reference = new Entry($user);
+        $reference->setUrl('http://same-domain-export.test/reference');
+        $reference->setDomainName('same-domain-export.test');
+        $reference->setTitle('Reference entry');
+        $em->persist($reference);
+
+        $sameDomainEntries = [];
+        foreach (['first', 'second'] as $name) {
+            $entry = new Entry($user);
+            $entry->setUrl('http://same-domain-export.test/' . $name);
+            $entry->setDomainName('same-domain-export.test');
+            $entry->setTitle('Same domain ' . $name);
+            $em->persist($entry);
+            $sameDomainEntries[] = $entry;
+        }
+
+        $otherDomainEntry = new Entry($user);
+        $otherDomainEntry->setUrl('http://other-domain-export.test/article');
+        $otherDomainEntry->setDomainName('other-domain-export.test');
+        $otherDomainEntry->setTitle('Other domain');
+        $em->persist($otherDomainEntry);
+        $em->flush();
+        $referenceId = $reference->getId();
+        $sameDomainEntryIds = array_map(static fn (Entry $entry): int => $entry->getId(), $sameDomainEntries);
+        $otherDomainEntryId = $otherDomainEntry->getId();
+
+        $crawler = $client->request('GET', '/domain/' . $referenceId);
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertCount(2, $crawler->filter('ol.entries > li'));
+
+        $exportLink = $crawler->filter('#export a[href*="/export/same_domain.json"]');
+        $this->assertCount(1, $exportLink);
+
+        $query = [];
+        parse_str((string) parse_url($exportLink->attr('href'), PHP_URL_QUERY), $query);
+        $this->assertSame((string) $referenceId, $query['entry']);
+
+        $client->click($exportLink->link());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $content = json_decode((string) $client->getResponse()->getContent(), true);
+        $this->assertEqualsCanonicalizing(
+            $sameDomainEntryIds,
+            array_column($content, 'id')
+        );
+        $this->assertNotContains($otherDomainEntryId, array_column($content, 'id'));
+
+        $cleanupEm = $client->getContainer()->get(EntityManagerInterface::class);
+        foreach ([$referenceId, ...$sameDomainEntryIds, $otherDomainEntryId] as $entryId) {
+            $cleanupEm->remove($cleanupEm->find(Entry::class, $entryId));
+        }
+        $cleanupEm->flush();
+    }
+
     private function setUpForJsonExportFromSearch(): void
     {
         $em = $this->getEntityManager();

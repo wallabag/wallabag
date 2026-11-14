@@ -138,7 +138,7 @@
         {% if searchTerm is defined %}
             {% set export_search_term = searchTerm %}
         {% endif %}
-        {% set entry = app.request.attributes.get('entry') %}
+        {% set entry = app.request.attributes.get('id') %}
         {% set previous_route = app.request.attributes.get('currentRoute') %}
             <h4 class="center">{{ 'entry.list.export_title'|trans }}</h4>
             <ul>
