@@ -34,6 +34,8 @@ use Wallabag\Repository\TagRepository;
 
 class EntryController extends AbstractController
 {
+    public const LAST_ENTRIES_LIST_SESSION_KEY = 'wallabag.last_entries_list';
+
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly EventDispatcherInterface $eventDispatcher,
@@ -534,6 +536,10 @@ class EntryController extends AbstractController
         $prev = $request->query->get('redirect', '');
         $to = (1 !== preg_match('#' . $url . '$#i', $prev) ? $prev : null);
 
+        if (null === $to) {
+            $to = $request->getSession()->get(self::LAST_ENTRIES_LIST_SESSION_KEY);
+        }
+
         $redirectUrl = $this->redirectHelper->to($to);
 
         return $this->redirect($redirectUrl);
@@ -669,6 +675,8 @@ class EntryController extends AbstractController
             default:
                 throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type));
         }
+
+        $request->getSession()->set(self::LAST_ENTRIES_LIST_SESSION_KEY, $request->getRequestUri());
 
         $form = $this->createForm(EntryFilterType::class, [], $formOptions);
 

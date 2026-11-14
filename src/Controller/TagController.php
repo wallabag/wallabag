@@ -143,6 +143,8 @@ class TagController extends AbstractController
     #[IsGranted('VIEW', subject: 'tag')]
     public function showEntriesForTagAction(Tag $tag, EntryRepository $entryRepository, PreparePagerForEntries $preparePagerForEntries, $page, Request $request)
     {
+        $request->getSession()->set(EntryController::LAST_ENTRIES_LIST_SESSION_KEY, $request->getRequestUri());
+
         $entriesByTag = $entryRepository->findAllByTagId(
             $this->getUser()->getId(),
             $tag->getId()

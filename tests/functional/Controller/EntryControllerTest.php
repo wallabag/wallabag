@@ -831,6 +831,32 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
+    public function testViewAndDeleteRedirectsToTheLastList(): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
+        $user = $em->getRepository(User::class)->findOneByUserName('admin');
+        $user->getConfig()->setActionMarkAsRead(ConfigEntity::REDIRECT_TO_CURRENT_PAGE);
+
+        $content = new Entry($user);
+        $content->setUrl('http://1.1.1.1/entry-to-delete');
+        $content->setTitle('entry to delete');
+        $content->updateArchived(true);
+        $em->persist($content);
+        $em->flush();
+
+        $client->request('GET', '/archive/list');
+        $crawler = $client->request('GET', '/view/' . $content->getId());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.delete')->form());
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertStringEndsWith('/archive/list', $client->getResponse()->headers->get('Location'));
+    }
+
     public function testViewOtherUserEntry(): void
     {
         $this->logInAs('admin');
