@@ -28,6 +28,11 @@ class IgnoreOriginInstanceRule implements IgnoreOriginRuleInterface, RuleInterfa
      *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
+     * @Assert\Regex(
+     *  pattern="/[\x00-\x08\x0A-\x1F\x7F]|\?>/",
+     *  match=false,
+     *  message="The rule can not contain control characters or the ?> sequence."
+     * )
      * @RulerZAssert\ValidRule(
      *  allowed_variables={"host","_all"},
      *  allowed_operators={"=","~"}

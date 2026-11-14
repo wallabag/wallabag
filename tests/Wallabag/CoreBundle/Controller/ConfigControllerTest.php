@@ -1351,6 +1351,52 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertSame('title matches "football"', $taggingRules[4]->getRule());
     }
 
+    public function dataForInvalidTaggingRulesImport(): array
+    {
+        return [
+            'variable not allowed' => [[['rule' => 'foo = "bar"', 'tags' => ['tag']]]],
+            'carriage return in the rule' => [[['rule' => "title = \"a\r}\"", 'tags' => ['tag']]]],
+            'php closing tag in the rule' => [[['rule' => 'title = "?>"', 'tags' => ['tag']]]],
+            'missing rule' => [[['tags' => ['tag']]]],
+            'tag is not a string' => [[['rule' => 'title = "a"', 'tags' => [['tag']]]]],
+            'one invalid rule among valid ones' => [[
+                ['rule' => 'title matches "football"', 'tags' => ['tag']],
+                ['rule' => 'foo = "bar"', 'tags' => ['tag']],
+            ]],
+        ];
+    }
+
+    /**
+     * @dataProvider dataForInvalidTaggingRulesImport
+     */
+    public function testImportInvalidTaggingRulesIsRejected(array $rules)
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $user = $client->getContainer()->get('fos_user.user_manager.test')->findUserBy(['username' => 'admin']);
+        $before = \count($user->getConfig()->getTaggingRules());
+
+        $path = tempnam(sys_get_temp_dir(), 'tagging_rules_');
+        file_put_contents($path, json_encode($rules));
+
+        $crawler = $client->request('GET', '/config');
+        $form = $crawler->filter('form[name=upload_tagging_rule_file] > button[type=submit]')->form();
+
+        $client->submit($form, [
+            'upload_tagging_rule_file[file]' => new UploadedFile($path, 'tagging_rules.json', 'application/json', null, true),
+        ]);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+        $this->assertStringContainsString('flashes.config.notice.tagging_rules_not_imported', $crawler->filter('body')->text());
+
+        $user = $client->getContainer()->get('fos_user.user_manager.test')->findUserBy(['username' => 'admin']);
+        $client->getContainer()->get('doctrine.orm.entity_manager')->refresh($user->getConfig());
+        $this->assertCount($before, $user->getConfig()->getTaggingRules());
+    }
+
     public function testSwitchDisplayThumbnails()
     {
         $this->logInAs('admin');
