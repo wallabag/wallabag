@@ -25,6 +25,7 @@ use Wallabag\Import\PocketCsvImport;
 use Wallabag\Import\PocketHtmlImport;
 use Wallabag\Import\ReadabilityImport;
 use Wallabag\Import\ShaarliImport;
+use Wallabag\Import\UrlListImport;
 use Wallabag\Import\WallabagV1Import;
 use Wallabag\Import\WallabagV2Import;
 use Wallabag\Repository\UserRepository;
@@ -51,6 +52,7 @@ class ImportCommand extends Command
         private readonly PocketHtmlImport $pocketHtmlImport,
         private readonly PocketCsvImport $pocketCsvImport,
         private readonly OmnivoreImport $omnivoreImport,
+        private readonly UrlListImport $urlListImport,
     ) {
         parent::__construct();
     }
@@ -60,7 +62,7 @@ class ImportCommand extends Command
         $this
             ->addArgument('username', InputArgument::REQUIRED, 'User to populate')
             ->addArgument('filepath', InputArgument::REQUIRED, 'Path to the JSON file')
-            ->addOption('importer', null, InputOption::VALUE_OPTIONAL, 'The importer to use: v1, v2, instapaper, pinboard, delicious, readability, firefox, chrome, elcurator, shaarli, pocket or pocket_csv', 'v1')
+            ->addOption('importer', null, InputOption::VALUE_OPTIONAL, 'The importer to use: v1, v2, instapaper, pinboard, delicious, readability, firefox, chrome, elcurator, shaarli, pocket, pocket_csv or url_list', 'v1')
             ->addOption('markAsRead', null, InputOption::VALUE_OPTIONAL, 'Mark all entries as read', false)
             ->addOption('useUserId', null, InputOption::VALUE_NONE, 'Use user id instead of username to find account')
             ->addOption('disableContentUpdate', null, InputOption::VALUE_NONE, 'Disable fetching updated content from URL')
@@ -113,6 +115,7 @@ class ImportCommand extends Command
             'pocket' => $this->pocketHtmlImport,
             'pocket_csv' => $this->pocketCsvImport,
             'omnivore' => $this->omnivoreImport,
+            'url_list' => $this->urlListImport,
             default => $this->wallabagV1Import,
         };
 

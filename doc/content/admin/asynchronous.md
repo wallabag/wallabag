@@ -75,6 +75,9 @@ bin/console rabbitmq:consumer --env=prod import_firefox -w
 
 # for Chrome import
 bin/console rabbitmq:consumer --env=prod import_chrome -w
+
+# for URL list import
+bin/console rabbitmq:consumer --env=prod import_url_list -w
 ```
 
 Install Redis for asynchronous tasks
@@ -142,6 +145,9 @@ bin/console wallabag:import:redis-worker --env=prod firefox -vv >> /path/to/wall
 
 # for Chrome import
 bin/console wallabag:import:redis-worker --env=prod chrome -vv >> /path/to/wallabag/var/logs/redis-chrome.log
+
+# for URL list import
+bin/console wallabag:import:redis-worker --env=prod url_list -vv >> /path/to/wallabag/var/logs/redis-url_list.log
 ```
 
 If you want to launch the import only for some messages and not all, you

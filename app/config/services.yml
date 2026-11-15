@@ -123,6 +123,11 @@ services:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_csv_producer'
             $redisProducer: '@wallabag.producer.redis.pocket_csv'
 
+    Wallabag\Controller\Import\UrlListController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_url_list_producer'
+            $redisProducer: '@wallabag.producer.redis.url_list'
+
     Wallabag\Doctrine\MigrationFactoryDecorator:
         decorates: doctrine.migrations.migrations_factory
 
@@ -333,6 +338,10 @@ services:
     Wallabag\Import\PocketCsvImport:
         tags:
             -  { name: wallabag.import, alias: pocket_csv }
+
+    Wallabag\Import\UrlListImport:
+        tags:
+            -  { name: wallabag.import, alias: url_list }
 
     # to factorize the proximity and bypass translation for prev & next
     pagerfanta.view.default_wallabag:

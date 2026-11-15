@@ -212,3 +212,19 @@ services:
         class: Wallabag\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\Import\PocketCsvImport'
+
+    # url list
+    wallabag.queue.redis.url_list:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.url_list"
+
+    wallabag.producer.redis.url_list:
+        class: Wallabag\Redis\Producer
+        arguments:
+            - "@wallabag.queue.redis.url_list"
+
+    wallabag.consumer.redis.url_list:
+        class: Wallabag\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@Wallabag\Import\UrlListImport'
