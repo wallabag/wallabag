@@ -9,7 +9,7 @@ nav {
 }
 
 // adapted from anchor styles from node_modules/@materializecss/materialize/sass/components/_navbar.scss
-nav ul button {
+nav button {
   transition: background-color .3s;
   font-size: 1rem;
   color: #fff;
@@ -48,6 +48,7 @@ nav {
   line-height: 1;
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
 .nav-panel-item {
