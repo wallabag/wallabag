@@ -60,6 +60,11 @@ nav {
   button,
   a {
     padding: 10px 15px;
+
+    &:focus-visible {
+      outline: auto;
+      outline-offset: -2px;
+    }
   }
 }
 

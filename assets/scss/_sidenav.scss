@@ -23,6 +23,14 @@
     margin: 0;
   }
 
+  a,
+  button {
+    &:focus-visible {
+      outline: auto;
+      outline-offset: -2px;
+    }
+  }
+
   &.sidenav-fixed button,
   &.sidenav-fixed a {
     font-size: 13px;
