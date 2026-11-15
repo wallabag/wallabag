@@ -1,6 +1,8 @@
 /* ==========================================================================
    Nav
    ========================================================================== */
+@use "variables";
+
 nav {
   height: auto;
   line-height: initial;
@@ -180,6 +182,7 @@ nav {
 
   li > a {
     display: flex;
+    color: variables.$blue-accent-color;
     padding: 14px 10px;
     align-items: center;
     white-space: initial;
