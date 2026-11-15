@@ -244,7 +244,13 @@
 
         {% if craue_setting('show_printlink') %}
         <li class="bold border-bottom hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.print'|trans }}" href="javascript: window.print();">
+            <a
+                class="waves-effect collapsible-header"
+                title="{{ 'entry.view.left_menu.print'|trans }}"
+                href="{{ app.request.uri }}"
+                data-controller="print"
+                data-action="click->print#print:prevent"
+            >
                 <i class="material-icons small">print</i>
                 <span>{{ 'entry.view.left_menu.print'|trans }}</span>
             </a>
