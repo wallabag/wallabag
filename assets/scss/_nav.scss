@@ -189,12 +189,28 @@ nav {
     padding-right: 15px;
   }
 
-  li > a {
+  li > a,
+  li > button {
     display: flex;
     color: variables.$blue-accent-color;
     padding: 14px 10px;
     align-items: center;
+    width: 100%;
+    text-align: left;
     white-space: initial;
+  }
+
+  li > button {
+    font-size: 16px;
+    line-height: 22px;
+
+    > i {
+      flex: 0 0 24px;
+      height: inherit;
+      line-height: inherit;
+      margin: 0 24px 0 0;
+      width: 24px;
+    }
   }
 }
 
