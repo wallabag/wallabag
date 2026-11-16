@@ -7,7 +7,11 @@ export default class extends Controller {
   };
 
   connect() {
-    this.instance = M.Collapsible.init(this.element, { accordion: this.accordionValue });
+    this.instance = M.Collapsible.init(this.element, {
+      accordion: this.accordionValue,
+      onOpenStart: (listItem) => this.#setExpanded(listItem, true),
+      onCloseStart: (listItem) => this.#setExpanded(listItem, false),
+    });
     this.boundHandleKeydown = this.handleKeydown.bind(this);
     this.element.addEventListener('keydown', this.boundHandleKeydown, true);
   }
@@ -29,5 +33,12 @@ export default class extends Controller {
   disconnect() {
     this.element.removeEventListener('keydown', this.boundHandleKeydown, true);
     this.instance.destroy();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  #setExpanded(listItem, expanded) {
+    const header = listItem.querySelector(':scope > .collapsible-header[aria-expanded]');
+
+    header?.setAttribute('aria-expanded', expanded.toString());
   }
 }
