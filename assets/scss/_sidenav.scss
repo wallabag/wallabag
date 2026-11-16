@@ -23,6 +23,14 @@
     margin: 0;
   }
 
+  a,
+  button {
+    &:focus-visible {
+      outline: auto;
+      outline-offset: -2px;
+    }
+  }
+
   &.sidenav-fixed button,
   &.sidenav-fixed a {
     font-size: 13px;
@@ -45,7 +53,10 @@
 
 // adapted from anchor styles from node_modules/@materializecss/materialize/sass/components/_sidenav.scss
 .sidenav li button {
+  background: none;
+  border: 0;
   color: rgba(0 0 0 / 87%);
+  cursor: pointer;
   display: block;
   font-size: 14px;
   font-weight: 500;
@@ -68,6 +79,10 @@
     width: 24px;
     color: rgba(0 0 0 / 54%);
   }
+}
+
+.sidenav .collapsible-body li button {
+  padding: 0 23.5px 0 31px;
 }
 
 .bold > a,
