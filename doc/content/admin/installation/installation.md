@@ -54,7 +54,7 @@ Execute this command to download and extract the latest package:
 wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 ```
 
-You will find the [md5 hash of the latest package on our website](https://wallabag.org/en#download).
+You will find the [md5 hash of the latest package on our website](https://wallabag.org/#download).
 
 The static package requires each command to be appended by `--env=prod` as the static package is only usable as a prod environment (dev environment is not supported and won't work at all).
 

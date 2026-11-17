@@ -132,7 +132,7 @@ make update
     wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
     ```
 
-    You will find the [md5 hash of the latest package on our website](https://wallabag.org/en#download).
+    You will find the [md5 hash of the latest package on our website](https://wallabag.org/#download).
 
 1. Extract the archive in your wallabag folder and replace `app/config/parameters.yml` with yours.
 1. Please check that your `app/config/parameters.yml` contains all the parameters as they are **all mandatory**. You can find documentation about parameters [here]({{< relref "parameters.md" >}}).
