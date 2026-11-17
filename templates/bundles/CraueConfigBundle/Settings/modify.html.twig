@@ -3,6 +3,7 @@
 {% block title %}{{ 'menu.left.internal_settings'|trans }}{% endblock %}
 
 {% block content %}
+    {% set sortedSections = sections|craue_sortSections %}
     <div class="row">
         <div class="col s12">
             <div class="card-panel settings">
@@ -12,13 +13,13 @@
                     <div class="row">
                         <div class="div_tabs col s12">
                             <ul class="tabs" data-controller="materialize--tabs">
-                                {% for section in sections|craue_sortSections %}
+                                {% for section in sortedSections %}
                                     <li class="tab col s12 m6 l3"><a href="#set-{{ section }}">{{ section|trans({}, 'CraueConfigBundle') }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>
 
-                        {% for section in sections|craue_sortSections %}
+                        {% for section in sortedSections %}
                             <div id="set-{{ section }}" class="col s12">
                                 {% for setting in form.settings %}
                                     {% if setting.vars.value.section == section %}
