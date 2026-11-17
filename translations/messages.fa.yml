@@ -101,6 +101,11 @@ config:
             title: پرسش‌های متداول
             tagging_rules_definition_title: برچسب‌گذاری خودکار یعنی چه؟
 entry:
+    action:
+        delete: پاک کردن
+        set_as_read: خوانده‌شده
+        set_as_unread: به عنوان خوانده‌نشده علامت بزن
+        star: برگزیده
     page_titles:
         unread: مقاله‌های خوانده‌نشده
         starred: مقاله‌های برگزیده
@@ -143,12 +148,8 @@ entry:
         left_menu:
             back_to_top: بازگشت به بالای صفحه
             back_to_homepage: بازگشت
-            set_as_read: خوانده‌شده
-            set_as_unread: به عنوان خوانده‌نشده علامت بزن
-            set_as_starred: برگزیده
             view_original_article: مقالهٔ اصلی
             re_fetch_content: مقاله‌ها را دوباره دریافت کن
-            delete: پاک کردن
             add_a_tag: افزودن برچسب
             share_content: هم‌رسانی
             share_email_label: نشانی ایمیل

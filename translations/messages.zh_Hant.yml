@@ -220,6 +220,11 @@ footer:
         about: 關於
     stats: 自 %user_creation% 以來，你已閱讀 %nb_archives% 篇文章。這大約是 %per_day% 篇一天！
 entry:
+    action:
+        delete: 刪除
+        set_as_read: 標記為已讀
+        set_as_unread: 標記為未讀
+        star: 變更收藏狀態
     list:
         show_same_domain: 顯示同一域名的文章
         export_title: 匯出
@@ -251,14 +256,11 @@ entry:
         page_title: 儲存新條目
     view:
         left_menu:
-            delete: 刪除
-            set_as_unread: 標記為未讀
             export: 匯出
             print: 列印
             add_a_tag: 添加標籤
             share_content: 分享
             back_to_homepage: 返回
-            set_as_read: 標記為已讀
             share_email_label: 電子郵件
             problem:
                 description: 這篇文章出問題了嗎？
@@ -267,7 +269,6 @@ entry:
             public_link: 公開連結
             theme_toggle: 變更主題
             back_to_top: 回到頂端
-            set_as_starred: 變更收藏狀態
             re_fetch_content: 再次擷取內容
             view_original_article: 原文連結
         edit_title: 編輯標題

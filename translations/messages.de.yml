@@ -232,6 +232,11 @@ config:
         token_reset: Token erneut generieren
         token_label: Feedtoken
 entry:
+    action:
+        delete: Löschen
+        set_as_read: Als gelesen markieren
+        set_as_unread: Als ungelesen markieren
+        star: Favorisieren
     default_title: Titel des Eintrags
     page_titles:
         unread: Ungelesene Einträge
@@ -292,12 +297,8 @@ entry:
         left_menu:
             back_to_top: Nach oben
             back_to_homepage: Zurück
-            set_as_read: Als gelesen markieren
-            set_as_unread: Als ungelesen markieren
-            set_as_starred: Favorisieren
             view_original_article: Originalartikel
             re_fetch_content: Inhalt neu laden
-            delete: Löschen
             add_a_tag: Tag hinzufügen
             share_content: Teilen
             share_email_label: E-Mail

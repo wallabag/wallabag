@@ -222,6 +222,11 @@ config:
             variables_available_description: '下列变量和操作符可以用来创建忽略来源规则:'
             how_to_use_them_description: 让我们假设你想忽略一个源自“<i>rss.example.com</i>”的条目的来源 (<i>知道重定向后，实际地址是 example.com</i>)。<br />在那种情况下，你应当把“host = "rss.example.com"”放在<i>规则</i>字段中。
 entry:
+    action:
+        delete: '删除'
+        set_as_read: '标为已读'
+        set_as_unread: '标为未读'
+        star: '添加到收藏'
     default_title: '项目标题'
     page_titles:
         unread: '未读项目'
@@ -281,12 +286,8 @@ entry:
         left_menu:
             back_to_top: '返回顶部'
             back_to_homepage: '返回主页'
-            set_as_read: '标为已读'
-            set_as_unread: '标为未读'
-            set_as_starred: '添加到收藏'
             view_original_article: '原始文章'
             re_fetch_content: '重新抓取'
-            delete: '删除'
             add_a_tag: '添加标签'
             share_content: '分享'
             share_email_label: '邮件分享'

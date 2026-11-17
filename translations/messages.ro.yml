@@ -61,6 +61,10 @@ config:
         old_password_label: 'Parola veche'
         new_password_label: 'Parola nouă'
 entry:
+    action:
+        delete: 'Șterge'
+        set_as_read: 'Marchează ca citit'
+        star: 'Favorit'
     list:
         reading_time: 'timp estimat de citire'
         reading_time_minutes: 'timp estimat de citire: %readingTime% min'
@@ -95,10 +99,7 @@ entry:
     view:
         left_menu:
             back_to_homepage: 'Înapoi'
-            set_as_read: 'Marchează ca citit'
-            set_as_starred: 'Favorit'
             view_original_article: 'Articol original'
-            delete: 'Șterge'
             add_a_tag: 'Adaugă un tag'
             share_content: 'Dă mai departe'
             share_email_label: 'E-mail'

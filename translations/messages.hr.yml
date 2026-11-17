@@ -370,6 +370,11 @@ footer:
     stats: Od %user_creation% pročitao/pročitala si %nb_archives% članaka. To je otprilike %per_day% na dan!
 flashes:
     entry:
+    action:
+        delete: Izbriši
+        set_as_read: Označi kao pročitano
+        set_as_unread: Označi kao nepročitano
+        star: Uklj/Isklj omiljene
         notice:
             entry_unstarred: Zapis isključen iz omiljenih
             entry_already_saved: Zapis je već spremljen %date%
@@ -506,7 +511,6 @@ entry:
         add_tags: Dodaj oznake
     view:
         left_menu:
-            set_as_starred: Uklj/Isklj omiljene
             back_to_homepage: Natrag
             share_email_label: E-mail
             back_to_top: Natrag na vrh
@@ -514,14 +518,11 @@ entry:
             public_link: javna poveznica
             export: Izvoz
             re_fetch_content: Ponovo dohvati sadržaj
-            set_as_unread: Označi kao nepročitano
             delete_public_link: izbriši javnu poveznicu
-            set_as_read: Označi kao pročitano
             problem:
                 description: Izgleda li članak pogrešno?
                 label: Problemi?
             add_a_tag: Dodaj oznaku
-            delete: Izbriši
             share_content: Dijeli
             print: Ispis
             theme_toggle: Mijenjanje teme

@@ -124,6 +124,11 @@ config:
         app:
             cancel: Cancelar
 entry:
+    action:
+        delete: 'Apagar'
+        set_as_read: 'Marcar como lido'
+        set_as_unread: 'Marcar como não lido'
+        star: 'Alternar destaque'
     default_title: 'Título da entrada'
     page_titles:
         unread: 'Entradas não lidas'
@@ -169,12 +174,8 @@ entry:
         left_menu:
             back_to_top: 'Voltar ao topo'
             back_to_homepage: 'Voltar'
-            set_as_read: 'Marcar como lido'
-            set_as_unread: 'Marcar como não lido'
-            set_as_starred: 'Alternar destaque'
             view_original_article: 'Artigo original'
             re_fetch_content: 'Recapturar o conteúdo'
-            delete: 'Apagar'
             add_a_tag: 'Adicionar uma tag'
             share_content: 'Compartilhar'
             share_email_label: 'E-mail'

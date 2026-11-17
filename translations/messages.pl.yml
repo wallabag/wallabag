@@ -232,6 +232,11 @@ config:
             two_factor_code_description_3: 'Zapisz też te kody zapasowe w bezpiecznym miejscu, możesz ich użyć w przypadku utraty dostępu do aplikacji OTP:'
         page_title: Uwierzytelnianie dwuskładnikowe
 entry:
+    action:
+        delete: Usuń
+        set_as_read: Oznacz jako przeczytane
+        set_as_unread: Oznacz jako nieprzeczytane
+        star: Przełącz wyróżnienie
     default_title: Tytuł wpisu
     page_titles:
         unread: Nieprzeczytane wpisy
@@ -292,12 +297,8 @@ entry:
         left_menu:
             back_to_top: Wróć na górę
             back_to_homepage: Cofnij
-            set_as_read: Oznacz jako przeczytane
-            set_as_unread: Oznacz jako nieprzeczytane
-            set_as_starred: Przełącz wyróżnienie
             view_original_article: Oryginalny artykuł
             re_fetch_content: Pobierz ponownie treść
-            delete: Usuń
             add_a_tag: Dodaj tag
             share_content: Udostępnij
             share_email_label: Adres e-mail

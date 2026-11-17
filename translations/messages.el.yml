@@ -110,6 +110,11 @@ flashes:
             tag_renamed: Η ετικέτα μετονομάστηκε
             tag_added: Η ετικέτα προστέθηκε
     entry:
+    action:
+        delete: Διαγραφή
+        set_as_read: Σήμανση ως αναγνωσμένου
+        set_as_unread: Σήμανση ως μη αναγνωσμένου
+        star: Εναλλαγή σήμανσης ως αγαπημένου
         notice:
             no_random_entry: Κανένα άρθρο δεν βρέθηκε με αυτά τα κριτήρια
             entry_deleted: Η καταχώριση διαγράφηκε
@@ -386,12 +391,8 @@ entry:
             share_email_label: Email
             share_content: Κοινοποίηση
             add_a_tag: Προσθήκη μιας ετικέτας
-            delete: Διαγραφή
             re_fetch_content: Πιάσιμο περιεχομένου ξανά
             view_original_article: Πρωτότυπο άρθρο
-            set_as_starred: Εναλλαγή σήμανσης ως αγαπημένου
-            set_as_unread: Σήμανση ως μη αναγνωσμένου
-            set_as_read: Σήμανση ως αναγνωσμένου
             back_to_homepage: Επιστροφή
             back_to_top: Επιστροφή προς τα πάνω
     filters:

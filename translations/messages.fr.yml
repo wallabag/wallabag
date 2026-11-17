@@ -228,6 +228,11 @@ config:
             enable: Activer
             qrcode_label: Code QR
 entry:
+    action:
+        delete: Supprimer
+        set_as_read: Marquer comme lu
+        set_as_unread: Marquer comme non lu
+        star: Mettre en favori
     default_title: Titre de l’article
     page_titles:
         unread: Articles non lus
@@ -288,12 +293,8 @@ entry:
         left_menu:
             back_to_top: Revenir en haut
             back_to_homepage: Retour
-            set_as_read: Marquer comme lu
-            set_as_unread: Marquer comme non lu
-            set_as_starred: Mettre en favori
             view_original_article: Article original
             re_fetch_content: Recharger le contenu
-            delete: Supprimer
             add_a_tag: Ajouter une étiquette
             share_content: Partager
             share_email_label: Courriel

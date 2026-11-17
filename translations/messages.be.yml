@@ -186,6 +186,11 @@ config:
         new_password_label: Новы пароль
         repeat_new_password_label: Паўтарыце новы пароль
 entry:
+    action:
+        delete: Выдаліць
+        set_as_read: Пазначыць як прачытанае
+        set_as_unread: Пазначыць як непрачытанае
+        star: Пазначыць
     list:
         number_on_the_page: '{0} Няма запісаў.|{1} Ёсьць адзін запіс.|]1,Inf[ Ёсьць %count% запіса/аў.'
         reading_time: разьліковы час чытаньня
@@ -234,11 +239,8 @@ entry:
         left_menu:
             back_to_top: Вернуцца ў пачатак
             back_to_homepage: Назад
-            set_as_read: Пазначыць як прачытанае
-            set_as_unread: Пазначыць як непрачытанае
             view_original_article: Арыґінальны артыкул
             re_fetch_content: Паўторная загрузка зьмесьціва
-            delete: Выдаліць
             add_a_tag: Дадаць тэг
             share_content: Абагуліць
             delete_public_link: выдаліць публічную спасылку
@@ -248,7 +250,6 @@ entry:
             problem:
                 label: Праблемы?
                 description: Штосьці ня так з гэтым артыкулам?
-            set_as_starred: Пазначыць
             share_email_label: Электронная пошта
             public_link: публічная спасылка
         edit_title: Рэдагаваць назву

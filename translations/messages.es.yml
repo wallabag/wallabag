@@ -232,6 +232,11 @@ config:
         feed_limit: Número de artículos en el feed
         description: Los feeds Atom proporcionados por wallabag le permiten leer sus artículos guardados con su lector Atom favorito. Primero debes generar un token.
 entry:
+    action:
+        delete: 'Eliminar'
+        set_as_read: 'Marcar como leído'
+        set_as_unread: 'Marcar como no leído'
+        star: 'Marcar como favorito'
     default_title: 'Título del artículo'
     page_titles:
         unread: 'Artículos no leídos'
@@ -292,12 +297,8 @@ entry:
         left_menu:
             back_to_top: 'Volver al principio'
             back_to_homepage: 'Atrás'
-            set_as_read: 'Marcar como leído'
-            set_as_unread: 'Marcar como no leído'
-            set_as_starred: 'Marcar como favorito'
             view_original_article: 'Artículo original'
             re_fetch_content: 'Redescargar el contenido'
-            delete: 'Eliminar'
             add_a_tag: 'Añadir una etiqueta'
             share_content: 'Compartir'
             share_email_label: 'Correo electrónico'

@@ -155,6 +155,11 @@ about:
         developped_by: 개발사
     page_title: 정보
 entry:
+    action:
+        delete: 삭제
+        set_as_read: 읽음으로 표시
+        set_as_unread: 읽지않음으로 표시
+        star: 즐겨찾기 전환
     view:
         published_by: 게시
         provided_by: 제공
@@ -171,11 +176,7 @@ entry:
             share_email_label: 이메일
             share_content: 공유
             add_a_tag: 태그 추가
-            delete: 삭제
             re_fetch_content: 콘텐츠 다시 가져오기
-            set_as_starred: 즐겨찾기 전환
-            set_as_unread: 읽지않음으로 표시
-            set_as_read: 읽음으로 표시
             back_to_homepage: 뒤로
             back_to_top: 맨 위로
         published_at: 발행일

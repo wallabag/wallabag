@@ -222,6 +222,11 @@ config:
             two_factor_code_description_1: Venètz d’activar l’autentificacion a dos factors, dobrissètz l’aplicacion A2F per configurar la generacion del senhal a usatge unic. Aquestas informacions dispareisseràn après una actualizacion de la pagina.
         page_title: Autentificacion a dos factors
 entry:
+    action:
+        delete: Suprimir
+        set_as_read: Marcar coma legit
+        set_as_unread: Marcar coma pas legit
+        star: Metre en favorit
     default_title: Títol de l'article
     page_titles:
         unread: Articles pas legits
@@ -282,12 +287,8 @@ entry:
         left_menu:
             back_to_top: Tornar en naut
             back_to_homepage: Tornar
-            set_as_read: Marcar coma legit
-            set_as_unread: Marcar coma pas legit
-            set_as_starred: Metre en favorit
             view_original_article: Article original
             re_fetch_content: Tornar cargar lo contengut
-            delete: Suprimir
             add_a_tag: Ajustar una etiqueta
             share_content: Partejar
             share_email_label: Corrièl

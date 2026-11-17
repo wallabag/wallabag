@@ -210,6 +210,11 @@ config:
                 equal_to: Дорівнює…
                 matches: 'Тест шо <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Приклад: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
 entry:
+    action:
+        delete: Видалити
+        set_as_read: Позначити прочитаною
+        set_as_unread: Позначити непрочитаною
+        star: У/із закладок
     default_title: Заголовок статті
     page_titles:
         unread: Непрочитані статті
@@ -270,12 +275,8 @@ entry:
         left_menu:
             back_to_top: Назад догори
             back_to_homepage: Назад
-            set_as_read: Позначити прочитаною
-            set_as_unread: Позначити непрочитаною
-            set_as_starred: У/із закладок
             view_original_article: Оригінальна стаття
             re_fetch_content: Завантажити ще раз
-            delete: Видалити
             add_a_tag: Додай тег
             share_content: Поділитись
             share_email_label: Електронна пошта

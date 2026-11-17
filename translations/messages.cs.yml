@@ -1,4 +1,9 @@
 entry:
+    action:
+        delete: Odstranit
+        set_as_read: Označit jako přečtené
+        set_as_unread: Označit jako nepřečtené
+        star: Přepnout označení s hvězdičkou
     filters:
         action:
             filter: Filtrovat
@@ -31,18 +36,14 @@ entry:
         left_menu:
             share_content: Sdílet
             add_a_tag: Přidat štítek
-            set_as_unread: Označit jako nepřečtené
-            set_as_read: Označit jako přečtené
             theme_toggle: Přepnout motiv
             print: Vytisknout
             export: Export
             delete_public_link: odstranit veřejný odkaz
             public_link: veřejný odkaz
             share_email_label: E-mail
-            delete: Odstranit
             re_fetch_content: Znovu načíst obsah
             view_original_article: Původní článek
-            set_as_starred: Přepnout označení s hvězdičkou
             back_to_homepage: Zpět
             back_to_top: Zpět na začátek
             problem:

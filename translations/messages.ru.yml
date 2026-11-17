@@ -210,6 +210,11 @@ config:
         token_label: Токен ленты
         description: Новостные ленты Atom, предоставляемые wallabag, позволяют читать сохранённые статьи при помощи предпочитаемой вами Atom-читалки. Сначала вам нужно сгенерировать токен.
 entry:
+    action:
+        delete: 'Удалить'
+        set_as_read: 'Пометить, как прочитанное'
+        set_as_unread: 'Пометить, как не прочитанное'
+        star: 'Пометить звездочкой'
     default_title: 'Название записи'
     page_titles:
         unread: 'Непрочитанные записи'
@@ -266,12 +271,8 @@ entry:
         left_menu:
             back_to_top: 'Наверх'
             back_to_homepage: 'Назад'
-            set_as_read: 'Пометить, как прочитанное'
-            set_as_unread: 'Пометить, как не прочитанное'
-            set_as_starred: 'Пометить звездочкой'
             view_original_article: 'Оригинальная статья'
             re_fetch_content: 'Перезагрузить содержимое'
-            delete: 'Удалить'
             add_a_tag: 'Добавить тег'
             share_content: 'Поделиться'
             share_email_label: 'Email'

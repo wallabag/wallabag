@@ -222,6 +222,11 @@ config:
             ignore_origin_rules_definition_title: “転送元無視ルール” とは?
             title: よくある質問
 entry:
+    action:
+        delete: 削除
+        set_as_read: 既読にする
+        set_as_unread: 未読にする
+        star: スター有無の切り替え
     page_titles:
         unread: 未読記事
         starred: スター付きの記事
@@ -280,8 +285,6 @@ entry:
     view:
         left_menu:
             back_to_top: トップへ戻る
-            set_as_read: 既読にする
-            set_as_unread: 未読にする
             view_original_article: オリジナルの記事
             re_fetch_content: コンテンツを再取得
             add_a_tag: タグを追加
@@ -294,8 +297,6 @@ entry:
             public_link: 公開リンク
             export: エクスポート
             share_email_label: 電子メール
-            delete: 削除
-            set_as_starred: スター有無の切り替え
             back_to_homepage: 戻る
             theme_toggle: テーマの切替
         edit_title: タイトルを編集

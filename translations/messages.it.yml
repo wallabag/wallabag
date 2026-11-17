@@ -222,6 +222,11 @@ config:
             enable: Abilita
             qrcode_label: QR Code
 entry:
+    action:
+        delete: Elimina
+        set_as_read: Segna come già letto
+        set_as_unread: Segna come da leggere
+        star: Segna come preferito
     default_title: Titolo del contenuto
     page_titles:
         unread: Contenuti non letti
@@ -276,12 +281,8 @@ entry:
         left_menu:
             back_to_top: Torna all'inizio
             back_to_homepage: Indietro
-            set_as_read: Segna come già letto
-            set_as_unread: Segna come da leggere
-            set_as_starred: Segna come preferito
             view_original_article: Contenuto originale
             re_fetch_content: Ri-ottieni pagina
-            delete: Elimina
             add_a_tag: Aggiungi un'etichetta
             share_content: Condividi
             share_email_label: E-mail

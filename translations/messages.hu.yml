@@ -139,6 +139,11 @@ config:
                 matches: 'Megvizsgálja, hogy a <i>tárgy</i> megegyezik-e a <i>keresendő</i>-vel (kis- és nagybetű érzéketlen).<br />Példa: <code>title matches "labdarúgás"</code>'
                 notmatches: 'Megvizsgálja, hogy a <i>tárgy</i> nem egyezik-e a <i>keresendő</i>-vel (kis- és nagybetű érzéketlen).<br />Példa: <code>title notmatches "labdarúgás"</code>'
 entry:
+    action:
+        delete: Törlés
+        set_as_read: Jelölje olvasottnak
+        set_as_unread: Jelölje olvasatlannak
+        star: Csillagozza meg
     default_title: A bejegyzés címe
     page_titles:
         unread: Olvasatlan bejegyzések
@@ -190,12 +195,8 @@ entry:
         left_menu:
             back_to_top: Vissza a tetejére
             back_to_homepage: Vissza
-            set_as_read: Jelölje olvasottnak
-            set_as_unread: Jelölje olvasatlannak
-            set_as_starred: Csillagozza meg
             view_original_article: Eredeti cikk
             re_fetch_content: Tartalom letöltése újra
-            delete: Törlés
             add_a_tag: Címke hozzáadása
             share_content: Megosztás
             share_email_label: E-mail
