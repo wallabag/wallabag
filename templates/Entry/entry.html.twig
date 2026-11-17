@@ -141,26 +141,28 @@
                 <i class="material-icons small">brightness_medium</i>
                 <span>{{ 'entry.view.left_menu.theme_toggle'|trans }}</span>
             </button>
-            <ul class="collapsible-body">
-                <li>
-                    <button type="button" data-action="click->dark-theme#useLight">
-                        <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
-                        <span>{{ 'theme.action.toggle_light'|trans }}</span>
-                    </button>
-                </li>
-                <li>
-                    <button type="button" data-action="click->dark-theme#useDark">
-                        <i class="theme-toggle-icon material-icons tiny">brightness_low</i>
-                        <span>{{ 'theme.action.toggle_dark'|trans }}</span>
-                    </button>
-                </li>
-                <li>
-                    <button type="button" data-action="click->dark-theme#useAuto">
-                        <i class="theme-toggle-icon material-icons tiny">brightness_auto</i>
-                        <span>{{ 'theme.action.toggle_auto'|trans }}</span>
-                    </button>
-                </li>
-            </ul>
+            <div class="collapsible-body">
+                <ul>
+                    <li>
+                        <button type="button" data-action="click->dark-theme#useLight">
+                            <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
+                            <span>{{ 'theme.action.toggle_light'|trans }}</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" data-action="click->dark-theme#useDark">
+                            <i class="theme-toggle-icon material-icons tiny">brightness_low</i>
+                            <span>{{ 'theme.action.toggle_dark'|trans }}</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" data-action="click->dark-theme#useAuto">
+                            <i class="theme-toggle-icon material-icons tiny">brightness_auto</i>
+                            <span>{{ 'theme.action.toggle_auto'|trans }}</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </li>
         {% if craue_setting('share_public') or craue_setting('share_twitter') or craue_setting('share_shaarli') or craue_setting('share_diaspora') or craue_setting('share_unmark') or craue_setting('share_linkding') or craue_setting('share_mail') %}
         <li class="bold">
