@@ -1,0 +1,27 @@
+{% extends 'Menu/base.html.twig' %}
+
+{% block item %}
+    {% if item.extra('kind') == 'separator' %}
+        {{ block('separator') }}
+    {% else %}
+        {% import 'knp_menu.html.twig' as knp_menu %}
+
+        {% set classes = (item.attribute('class') ~ (item.level == 1 ? ' bold' : ''))|trim %}
+        <li{{ knp_menu.attributes(classes ? item.attributes|merge({class: classes}) : item.attributes) }}>
+            {{ block('control') }}
+
+            {% if item.level == 1 or item.extra('kind') == 'group' %}
+                <div class="collapsible-body">
+                    {% if item.extra('kind') == 'group' %}
+                        {% set listAttributes = item.childrenAttributes %}
+                        {{ block('list') }}
+                    {% endif %}
+                </div>
+            {% endif %}
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block control_classes %}{% if item.level == 1 %}waves-effect collapsible-header{% endif %}{% endblock %}
+
+{% block icon_classes %}material-icons{% if item.level == 1 %} small{% endif %}{% endblock %}

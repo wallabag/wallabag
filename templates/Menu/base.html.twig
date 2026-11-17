@@ -21,7 +21,7 @@
 {% endblock %}
 
 {% block spanElement %}
-    {% if item.extra('kind') in ['button', 'form'] %}
+    {% if item.extra('kind') in ['button', 'form', 'group'] %}
         {{ block('control') }}
     {% else %}
         {{ parent() }}
@@ -54,6 +54,11 @@
         }) %}
     {% endif %}
 
+    {% if item.extra('confirmation') %}
+        {% set confirmation = item.extra('confirmation')|trans|e('js') %}
+        {% set control_attributes = control_attributes|merge({onclick: "return confirm('" ~ confirmation ~ "')"}) %}
+    {% endif %}
+
     {% if item.extra('kind') == 'form' %}
         {% set form_classes = block('form_classes')|trim %}
         <form action="{{ item.uri }}" method="post"{% if form_classes %} class="{{ form_classes }}"{% endif %}>
@@ -61,7 +66,7 @@
 
             <button type="submit"{{ knp_menu.attributes(control_attributes) }}>{{ block('label') }}</button>
         </form>
-    {% elseif item.extra('kind') == 'button' %}
+    {% elseif item.extra('kind') in ['button', 'group'] %}
         <button type="button"{{ knp_menu.attributes(control_attributes) }}>{{ block('label') }}</button>
     {% elseif item.uri is not empty %}
         <a href="{{ item.uri }}"{{ knp_menu.attributes(control_attributes) }}>{{ block('label') }}</a>
@@ -82,7 +87,7 @@
         {% set options = options|merge({matchingDepth: options.matchingDepth - 1}) %}
     {% endif %}
 
-    {% set children = item.children|filter(child => child.displayed) %}
+    {% set children = item.children|filter(child => child.displayed and (child.extra('kind') != 'group' or (child.hasChildren and child.displayChildren))) %}
 
     {% for child in children %}
         {% if child.extra('kind') == 'separator' %}
