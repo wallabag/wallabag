@@ -12,11 +12,9 @@
 
                     <div class="row">
                         <div class="div_tabs col s12">
-                            <ul class="tabs" data-controller="materialize--tabs">
-                                {% for section in sortedSections %}
-                                    <li class="tab col s12 m6 l3"><a href="#set-{{ section }}">{{ section|trans({}, 'CraueConfigBundle') }}</a></li>
-                                {% endfor %}
-                            </ul>
+                            {{ knp_menu_render(knp_menu_get('wallabag_internal_settings_tabs', [], {sortedSections: sortedSections}), {
+                                template: 'Menu/tabs.html.twig',
+                            }) }}
                         </div>
 
                         {% for section in sortedSections %}
@@ -34,13 +32,13 @@
                                 {% endfor %}
                             </div>
                         {% endfor %}
-                </div>
+                    </div>
 
-                <button class="btn waves-effect waves-light" type="submit" name="action">
-                    {{ 'modify_settings'|trans({}, 'CraueConfigBundle') }}
-                </button>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                        {{ 'modify_settings'|trans({}, 'CraueConfigBundle') }}
+                    </button>
 
-                {{ form_widget(form._token) }}
+                    {{ form_widget(form._token) }}
             </div>
         </div>
     </div>
