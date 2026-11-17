@@ -4,17 +4,6 @@
  * Entries
  * ========================================================================== */
 
-.mass-action-toggle {
-  display: inline-flex;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-
-  &:focus {
-    background-color: transparent;
-  }
-}
-
 .mass-action {
   margin: 20px 5px 10px 20px;
 }
@@ -117,10 +106,6 @@
   display: inline-flex;
   margin-bottom: 20px;
   gap: 30px;
-}
-
-.results-item {
-  color: #444;
 }
 
 .pagination {

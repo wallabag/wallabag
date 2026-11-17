@@ -1,13 +1,15 @@
 /* ==========================================================================
    Nav
    ========================================================================== */
+@use "variables";
+
 nav {
   height: auto;
   line-height: initial;
 }
 
 // adapted from anchor styles from node_modules/@materializecss/materialize/sass/components/_navbar.scss
-nav ul button {
+nav button {
   transition: background-color .3s;
   font-size: 1rem;
   color: #fff;
@@ -46,6 +48,7 @@ nav {
   line-height: 1;
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
 .nav-panel-item {
@@ -58,6 +61,11 @@ nav {
   button,
   a {
     padding: 10px 15px;
+
+    &:focus-visible {
+      outline: auto;
+      outline-offset: -2px;
+    }
   }
 }
 
@@ -160,8 +168,11 @@ nav {
   }
 }
 
-.nav-form-button,
-.nav-panel-item .close {
+.nav-panel-item .nav-panel-close {
+  padding: 0;
+}
+
+.nav-form-button {
   margin: 0 1%;
 }
 
@@ -178,11 +189,28 @@ nav {
     padding-right: 15px;
   }
 
-  li > a {
+  li > a,
+  li > button {
     display: flex;
+    color: variables.$blue-accent-color;
     padding: 14px 10px;
     align-items: center;
+    width: 100%;
+    text-align: left;
     white-space: initial;
+  }
+
+  li > button {
+    font-size: 16px;
+    line-height: 22px;
+
+    > i {
+      flex: 0 0 24px;
+      height: inherit;
+      line-height: inherit;
+      margin: 0 24px 0 0;
+      width: 24px;
+    }
   }
 }
 

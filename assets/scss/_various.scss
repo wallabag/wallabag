@@ -42,6 +42,7 @@ nav .input-field input {
 }
 
 .btn-link {
+  cursor: pointer;
   background: none;
   border: 0;
   padding: 0;
@@ -50,4 +51,9 @@ nav .input-field input {
   &:focus {
     background: none;
   }
+}
+
+.config-help {
+  font: inherit;
+  line-height: inherit;
 }
