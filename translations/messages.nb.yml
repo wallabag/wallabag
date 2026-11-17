@@ -28,9 +28,6 @@ menu:
         about: Om
         search: Søk
         save_link: Lagre en lenke
-        theme_toggle_auto: Automatisk drakt
-        theme_toggle_light: Lys drakt
-        theme_toggle_dark: Mørk drakt
         quickstart: Hurtigstart
         users_management: Brukerstyring
         developer: API-klientstyring
@@ -640,9 +637,6 @@ entry:
             re_fetch_content: Hent innhold igjen
             view_original_article: Opprinnelig artikkel
             set_as_starred: Veksle stjernemerking
-            theme_toggle_auto: Automatisk
-            theme_toggle_dark: Mørk
-            theme_toggle_light: Lys
             print: Skriv ut
             export: Eksporter
             delete_public_link: slett offentlig lenke
@@ -746,3 +740,9 @@ export:
 captcha:
     label: Sikkerhetssjekk
     help: Skriv inn tegnene som vises i bildet. Hvis du oppdaterer bildet, blir det forrige svaret ugyldig.
+
+theme:
+    action:
+        toggle_auto: Automatisk drakt
+        toggle_dark: Mørk drakt
+        toggle_light: Lys drakt

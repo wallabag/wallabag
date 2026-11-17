@@ -29,9 +29,6 @@ menu:
         search: 'Pesquisa'
         save_link: 'Salvar um link'
         users_management: 'Gestão de Utilizadores'
-        theme_toggle_light: Tema claro
-        theme_toggle_dark: Tema escuro
-        theme_toggle_auto: Tema automático
         developer: Gestão de clientes da API
     top:
         add_new_entry: 'Adicionar uma nova entrada'
@@ -464,3 +461,9 @@ flashes:
             added: 'Utilizador "%username%" adicionado'
             updated: 'Utilizador "%username%" atualizado'
             deleted: 'Utilizador "%username%" removido'
+
+theme:
+    action:
+        toggle_auto: Tema automático
+        toggle_dark: Tema escuro
+        toggle_light: Tema claro

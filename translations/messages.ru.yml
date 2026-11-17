@@ -33,9 +33,6 @@ menu:
         site_credentials: Реквизиты сайта
         ignore_origin_instance_rules: Глобальные правила игнорирования источника
         quickstart: Быстрый старт
-        theme_toggle_auto: Выбирать тему автоматически
-        theme_toggle_dark: Темная тема
-        theme_toggle_light: Светлая тема
         with_annotations: С аннотациями
     top:
         add_new_entry: 'Добавить новую запись'
@@ -285,9 +282,6 @@ entry:
             problem:
                 label: 'Проблемы?'
                 description: 'Что-то не так с записью?'
-            theme_toggle_auto: Авто
-            theme_toggle_dark: Темная
-            theme_toggle_light: Светлая
             theme_toggle: Выбор темы
         edit_title: 'Изменить название'
         original_article: 'оригинал'
@@ -701,3 +695,9 @@ ignore_origin_instance_rule:
     edit_ignore_origin_instance_rule: Редактировать существующее правило игнорирования источника
     new_ignore_origin_instance_rule: Создать глобальное правило игнорирования источника
     page_title: Глобальные правила игнорирования источника
+
+theme:
+    action:
+        toggle_auto: Выбирать тему автоматически
+        toggle_dark: Темная тема
+        toggle_light: Светлая тема

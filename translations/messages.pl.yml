@@ -33,9 +33,6 @@ menu:
         site_credentials: Poświadczenia strony
         quickstart: Szybki start
         ignore_origin_instance_rules: Globalne zasady ignorowania pochodzenia
-        theme_toggle_auto: Automatyczny motyw
-        theme_toggle_dark: Ciemny motyw
-        theme_toggle_light: Jasny motyw
         with_annotations: Z adnotacjami
         back_to_homepage: Powrót do strony głównej
     top:
@@ -312,9 +309,6 @@ entry:
                 label: Problemy?
                 description: Czy ten artykuł wygląda źle?
             theme_toggle: Przełącznik motywu
-            theme_toggle_light: Jasny
-            theme_toggle_dark: Ciemny
-            theme_toggle_auto: Automatyczny
         edit_title: Edytuj tytuł
         original_article: oryginalny
         annotations_on_the_entry: '{0} Nie ma adnotacji |{1} Jedna adnotacja |]1,Inf[ %count% adnotacji'
@@ -752,3 +746,9 @@ ignore_origin_instance_rule:
 captcha:
     label: Kontrola bezpieczeństwa
     help: Wpisz znaki pokazane na obrazku. Odświeżenie obrazka unieważnia poprzednią odpowiedź.
+
+theme:
+    action:
+        toggle_auto: Automatyczny motyw
+        toggle_dark: Ciemny motyw
+        toggle_light: Jasny motyw

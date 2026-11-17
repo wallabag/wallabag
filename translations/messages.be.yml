@@ -29,9 +29,6 @@ menu:
         users_management: Кіраваньне карыстальнікамі
         site_credentials: Уліковыя даныя сайта
         quickstart: Хуткі старт
-        theme_toggle_light: Сьветлая тэма
-        theme_toggle_dark: Цёмная тэма
-        theme_toggle_auto: Аўтаматычная тэма
         config: Канфігурацыя
         tags: Тэгі
         unread: Непрачытанае
@@ -248,9 +245,6 @@ entry:
             export: Экспарт
             print: Раздрукаваць
             theme_toggle: Пераключэньне тэмы
-            theme_toggle_light: Сьветлая
-            theme_toggle_dark: Цёмная
-            theme_toggle_auto: Аўтаматычная
             problem:
                 label: Праблемы?
                 description: Штосьці ня так з гэтым артыкулам?
@@ -454,3 +448,9 @@ import:
     wallabag_v2:
         page_title: Імпарт > Wallabag v2
         description: Гэты ймпарцёр імпартуе ўсе вашыя артыкулы wallabag v2. На старонцы канфігурацыйі націсьніце «Экспарт JSON» у разьдзеле «Экспарт вашых даных wallabag». У вас зьявіцца файл "All articles.json".
+
+theme:
+    action:
+        toggle_auto: Аўтаматычная тэма
+        toggle_dark: Цёмная тэма
+        toggle_light: Сьветлая тэма

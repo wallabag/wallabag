@@ -35,9 +35,6 @@ menu:
         site_credentials: Accès aux sites
         ignore_origin_instance_rules: "Règles globales d'omission d'origine"
         quickstart: "Pour bien débuter"
-        theme_toggle_light: "Thème clair"
-        theme_toggle_dark: "Thème sombre"
-        theme_toggle_auto: "Thème automatique"
     top:
         add_new_entry: Sauvegarder un nouvel article
         search: Rechercher
@@ -305,9 +302,6 @@ entry:
             export: Exporter
             print: Imprimer
             theme_toggle: Changer le thème
-            theme_toggle_light: "Clair"
-            theme_toggle_dark: "Sombre"
-            theme_toggle_auto: "Automatique"
             problem:
                 label: Un problème ?
                 description: Est-ce que cet article s’affiche mal ?
@@ -744,3 +738,9 @@ ignore_origin_instance_rule:
         rule_label: Règle
 captcha:
     help: Entrez les caractères indiqués dans l'image. Rafraichir l'image invalide la réponse précédente.
+
+theme:
+    action:
+        toggle_auto: "Thème automatique"
+        toggle_dark: "Thème sombre"
+        toggle_light: "Thème clair"

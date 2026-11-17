@@ -163,9 +163,6 @@ entry:
                 description: 이 문서가 잘 안보이나요?
                 label: 문제가 있습니까?
             view_original_article: 원본 문서
-            theme_toggle_auto: 자동
-            theme_toggle_dark: 어두움
-            theme_toggle_light: 밝음
             theme_toggle: 테마 전환
             print: 인쇄
             export: 내보내기
@@ -572,9 +569,6 @@ menu:
         developer: API 클라이언트 관리
         howto: 사용법
         site_credentials: 사이트 자격 증명
-        theme_toggle_auto: 자동 테마
-        theme_toggle_dark: 어두운 테마
-        theme_toggle_light: 밝은 테마
         quickstart: 빠른 시작
         search: 검색
         users_management: 사용자 관리
@@ -730,3 +724,9 @@ tag:
     page_title: 태그
     confirm:
         delete: '%name% 태그 삭제'
+
+theme:
+    action:
+        toggle_auto: 자동 테마
+        toggle_dark: 어두운 테마
+        toggle_light: 밝은 테마

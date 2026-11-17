@@ -524,9 +524,6 @@ entry:
             delete: Izbriši
             share_content: Dijeli
             print: Ispis
-            theme_toggle_auto: Automatski
-            theme_toggle_dark: Tamna
-            theme_toggle_light: Svijetla
             theme_toggle: Mijenjanje teme
         created_at: Datum stvaranja
         original_article: izvorni
@@ -677,9 +674,6 @@ menu:
         developer: Upravljanje klijentima sučelja
         ignore_origin_instance_rules: Globalna pravila za zanemarivanje izvora
         quickstart: Brzo pokretanje
-        theme_toggle_auto: Automatska tema
-        theme_toggle_dark: Tamna tema
-        theme_toggle_light: Svijetla tema
         with_annotations: S napomenama
     top:
         add_new_entry: Dodaj novi zapis
@@ -742,3 +736,9 @@ ignore_origin_instance_rule:
 captcha:
     label: Sigurnosna provjera
     help: Upiši znakove koje su prikazane na slici. Osvježavanjem slike prethodni odgovor postaje nevažeći.
+
+theme:
+    action:
+        toggle_auto: Automatska tema
+        toggle_dark: Tamna tema
+        toggle_light: Svijetla tema

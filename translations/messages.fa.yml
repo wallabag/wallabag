@@ -32,9 +32,6 @@ menu:
         users_management: مدیریت کاربران
         developer: مدیریت کارخواه‌های API
         quickstart: "Quickstart"
-        theme_toggle_light: پوستهٔ روشن
-        theme_toggle_dark: پوستهٔ تاریک
-        theme_toggle_auto: پوستهٔ خودکار
         with_annotations: دارای یادداشت
         ignore_origin_instance_rules: قواعد سراسری نادیده گرفتن مبدأ
     top:
@@ -332,3 +329,9 @@ flashes:
             failed: درون‌ریزی شکست خورد. لطفاً دوباره تلاش کنید.
             failed_on_file: خطا هنگام پردازش پروندهٔ ورودی. آیا پروندهٔ درون‌ریزی شده سالم است.
             summary: 'گزارش درون‌ریزی: %imported% وارد شد, %skipped% از قبل ذخیره شده بود.'
+
+theme:
+    action:
+        toggle_auto: پوستهٔ خودکار
+        toggle_dark: پوستهٔ تاریک
+        toggle_light: پوستهٔ روشن

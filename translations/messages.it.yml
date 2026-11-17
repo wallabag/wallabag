@@ -33,9 +33,6 @@ menu:
         site_credentials: Credenziali sito
         quickstart: Introduzione
         ignore_origin_instance_rules: Regole globali per ignorare l'origine
-        theme_toggle_auto: Tema automatico
-        theme_toggle_dark: Tema scuro
-        theme_toggle_light: Tema chiaro
         with_annotations: Con annotazioni
     top:
         add_new_entry: Aggiungi un nuovo contenuto
@@ -672,3 +669,9 @@ site_credential:
 ignore_origin_instance_rule:
     new_ignore_origin_instance_rule: Crea una regola globale per ignorare l'origine
     page_title: Regole globali per ignorare l'origine
+
+theme:
+    action:
+        toggle_auto: Tema automatico
+        toggle_dark: Tema scuro
+        toggle_light: Tema chiaro

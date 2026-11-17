@@ -32,9 +32,6 @@ menu:
         users_management: 'Configuración de usuarios'
         site_credentials: Credenciales del sitio
         quickstart: Inicio rápido
-        theme_toggle_auto: Tema automático
-        theme_toggle_dark: Tema oscuro
-        theme_toggle_light: Tema claro
         ignore_origin_instance_rules: Ignorar las reglas de origen de forma global
         with_annotations: Con anotaciones
         back_to_homepage: Volver a la página de inicio
@@ -311,9 +308,6 @@ entry:
             problem:
                 label: '¿Algún problema?'
                 description: '¿Este artículo no se muestra bien?'
-            theme_toggle_auto: Automático
-            theme_toggle_dark: Oscuro
-            theme_toggle_light: Claro
             theme_toggle: Alternar tema
         edit_title: 'Modificar el título'
         original_article: 'original'
@@ -752,3 +746,9 @@ ignore_origin_instance_rule:
 captcha:
     label: Comprobación de seguridad
     help: Introduzca los caracteres que se muestran en la imagen. Refrescar la imagen invalida la respuesta previa.
+
+theme:
+    action:
+        toggle_auto: Tema automático
+        toggle_dark: Tema oscuro
+        toggle_light: Tema claro

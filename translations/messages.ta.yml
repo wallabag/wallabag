@@ -459,9 +459,6 @@ menu:
         site_credentials: தள நற்சான்றிதழ்கள்
         ignore_origin_instance_rules: உலகளாவிய புறக்கணிப்பு தோற்றம் விதிகள்
         quickstart: குயிக்ச்டார்ட்
-        theme_toggle_light: ஒளி கருப்பொருள்
-        theme_toggle_dark: இருண்ட கருப்பொருள்
-        theme_toggle_auto: தானியங்கி கருப்பொருள்
     top:
         add_new_entry: புதிய நுழைவைச் சேர்க்கவும்
         search: தேடல்
@@ -553,9 +550,6 @@ entry:
             export: ஏற்றுமதி
             print: அச்சிடுக
             theme_toggle: கருப்பொருள் மாற்று
-            theme_toggle_light: ஒளி
-            theme_toggle_dark: இருண்ட
-            theme_toggle_auto: தானியங்கி
             problem:
                 label: சிக்கல்கள்?
                 description: இந்த கட்டுரை தவறாகத் தோன்றுகிறதா?
@@ -733,3 +727,9 @@ site_credential:
         back_to_list: பட்டியலுக்குத் திரும்பு
 error:
     page_title: பிழை ஏற்பட்டது
+
+theme:
+    action:
+        toggle_auto: தானியங்கி கருப்பொருள்
+        toggle_dark: இருண்ட கருப்பொருள்
+        toggle_light: ஒளி கருப்பொருள்

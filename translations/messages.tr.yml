@@ -33,9 +33,6 @@ menu:
         site_credentials: Site bilgileri
         quickstart: Hızlı başlangıç
         ignore_origin_instance_rules: Genel orijinal kaynağı yok say kuralları
-        theme_toggle_auto: Otomatik tema
-        theme_toggle_dark: Koyu renk tema
-        theme_toggle_light: Açık renk tema
         with_annotations: Açıklama metinleriyle
     top:
         add_new_entry: Yeni bir makale ekle
@@ -291,9 +288,6 @@ entry:
             public_link: herkese açık bağlantı
             delete_public_link: herkese açık bağlantıyı sil
             print: Yazdır
-            theme_toggle_auto: Otomatik
-            theme_toggle_dark: Koyu renk
-            theme_toggle_light: Açık renk
             theme_toggle: Tema değiştir
         edit_title: Başlığı düzenle
         original_article: orijinal
@@ -743,3 +737,9 @@ ignore_origin_instance_rule:
 captcha:
     label: Güvenlik denetimi
     help: Resimde gösterilen karakterleri girin. Resmi yenilediğinizde önceki cevap geçersiz olur.
+
+theme:
+    action:
+        toggle_auto: Otomatik tema
+        toggle_dark: Koyu renk tema
+        toggle_light: Açık renk tema

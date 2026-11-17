@@ -205,9 +205,6 @@ menu:
         unread: Ongelezen
         ignore_origin_instance_rules: Globaal negeer-oorsprongsregels
         quickstart: Snelstart
-        theme_toggle_auto: Thema automatisch
-        theme_toggle_dark: Donker thema
-        theme_toggle_light: Licht thema
         with_annotations: Met aantekeningen
 security:
     login:
@@ -635,9 +632,6 @@ entry:
             set_as_read: Markeer als gelezen
             back_to_homepage: Terug
             back_to_top: Terug naar boven
-            theme_toggle_auto: Automatisch
-            theme_toggle_dark: Donker
-            theme_toggle_light: Licht
             theme_toggle: Schakel tussen thema's
     metadata:
         added_on: Toegevoegd op
@@ -739,3 +733,9 @@ ignore_origin_instance_rule:
         delete: Verwijder
         save: Opslaan
         rule_label: Regel
+
+theme:
+    action:
+        toggle_auto: Thema automatisch
+        toggle_dark: Donker thema
+        toggle_light: Licht thema

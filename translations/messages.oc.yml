@@ -31,9 +31,6 @@ menu:
         save_link: Enregistrar un novèl article
         users_management: Gestion dels utilizaires
         site_credentials: Identificants del site
-        theme_toggle_auto: Tèma automatic
-        theme_toggle_dark: Tèma escur
-        theme_toggle_light: Tèma clar
         quickstart: Primièrs passes
         with_annotations: Amb anotacions
         ignore_origin_instance_rules: Règlas globalas d’omission d’origina
@@ -301,10 +298,7 @@ entry:
             problem:
                 label: Un problèma ?
                 description: Marca mal la presentacion d'aqueste article ?
-            theme_toggle_dark: Escur
             theme_toggle: Bascular tèma
-            theme_toggle_light: Clar
-            theme_toggle_auto: Automatic
         edit_title: Modificar lo títol
         original_article: original
         annotations_on_the_entry: "{0} Pas cap d'anotacion|{1} Una anotacion|]1,Inf[ %count% anotacions"
@@ -730,3 +724,9 @@ ignore_origin_instance_rule:
     new_ignore_origin_instance_rule: Crear una règla globala d’omission d’origina
     edit_ignore_origin_instance_rule: Editar una règla globala d’omission d’origina
     description: Aquí podètz gerir las règlas globalas d’omission d’origina utilizadas per ignorar de modèls d’url d’origina.
+
+theme:
+    action:
+        toggle_auto: Tèma automatic
+        toggle_dark: Tèma escur
+        toggle_light: Tèma clar

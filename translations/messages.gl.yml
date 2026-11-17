@@ -116,9 +116,6 @@ entry:
             problem:
                 description: Non se mostra correctamente o artigo?
                 label: Problemas?
-            theme_toggle_auto: Automático
-            theme_toggle_dark: Escuro
-            theme_toggle_light: Claro
             theme_toggle: Cambiar decorado
             print: Imprimir
             export: Exportar
@@ -386,9 +383,6 @@ menu:
         search: Buscar
         add_new_entry: Engadir nova entrada
     left:
-        theme_toggle_auto: Decorado automático
-        theme_toggle_dark: Decorado escuro
-        theme_toggle_light: Decorado claro
         quickstart: Inicio rápido
         ignore_origin_instance_rules: Ignorar globalmente as regras de orixe
         site_credentials: Credenciais da web
@@ -745,3 +739,9 @@ user:
 captcha:
     label: Comprobación de seguridade
     help: Escribe os caracteres que se mostran na imaxe. Ao actualizar a páxina a imaxe invalida a resposta anterior.
+
+theme:
+    action:
+        toggle_auto: Decorado automático
+        toggle_dark: Decorado escuro
+        toggle_light: Decorado claro

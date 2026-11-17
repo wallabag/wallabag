@@ -33,9 +33,6 @@ menu:
         site_credentials: Zugangsdaten
         quickstart: Schnellstart
         ignore_origin_instance_rules: Globale Regeln fürs Ignorieren des Ursprungs
-        theme_toggle_auto: Automatisches Design
-        theme_toggle_dark: Dunkles Design
-        theme_toggle_light: Helles Design
         with_annotations: Mit Anmerkungen
         back_to_homepage: Zurück zur Homepage
     top:
@@ -311,9 +308,6 @@ entry:
             problem:
                 label: Probleme?
                 description: Erscheint dieser Artikel falsch?
-            theme_toggle_auto: Automatisch
-            theme_toggle_dark: Dunkel
-            theme_toggle_light: Hell
             theme_toggle: Design umschalten
         edit_title: Titel ändern
         original_article: Originalartikel
@@ -752,3 +746,9 @@ ignore_origin_instance_rule:
 captcha:
     label: Sicherheitsprüfung
     help: Geben Sie die im Bild angezeigten Schriftzeichen ein. Durch das Aktualisieren des Bildes wird die vorherige Antwort ungültig.
+
+theme:
+    action:
+        toggle_auto: Automatisches Design
+        toggle_dark: Dunkles Design
+        toggle_light: Helles Design
