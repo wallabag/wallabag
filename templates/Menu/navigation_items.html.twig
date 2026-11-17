@@ -1,0 +1,15 @@
+{% extends 'Menu/base.html.twig' %}
+
+{% block root %}
+    {% set options = options|merge({currentClass: 'active'}) %}
+
+    {{ block('children') }}
+{% endblock %}
+
+{% block label %}
+    {{ parent() }}
+
+    {% if item.extra('counter') is not null %}
+        <span class="items-number grey-text">{{ item.extra('counter') }}</span>
+    {% endif %}
+{% endblock %}

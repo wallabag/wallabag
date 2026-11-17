@@ -1,5 +1,23 @@
 {% extends "layout.html.twig" %}
 
+{% set current_route = app.request.attributes.get('_route') %}
+{% set current_route_from_query_params = app.request.query.get('currentRoute') %}
+
+{% set active_route = null %}
+{% if current_route == 'all' or current_route_from_query_params == 'all' %}
+   {% set active_route = 'all' %}
+{% elseif current_route == 'annotated' or current_route_from_query_params == 'annotated' %}
+   {% set active_route = 'annotated' %}
+{% elseif current_route == 'archive' or current_route_from_query_params == 'archive' %}
+   {% set active_route = 'archive' %}
+{% elseif current_route == 'starred' or current_route_from_query_params == 'starred' %}
+   {% set active_route = 'starred' %}
+{% elseif current_route == 'unread' or current_route_from_query_params == 'unread' %}
+   {% set active_route = 'unread' %}
+{% elseif current_route == 'untagged' %}
+   {% set active_route = 'untagged' %}
+{% endif %}
+
 {% set has_filters = form is not null %}
 {% set has_exports = craue_setting('export_epub') or craue_setting('export_pdf') or craue_setting('export_json') or craue_setting('export_csv') or craue_setting('export_txt') or craue_setting('export_xml') or craue_setting('export_md') %}
 

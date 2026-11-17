@@ -8,9 +8,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\TwigFunction;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
-use Wallabag\Repository\AnnotationRepository;
 use Wallabag\Repository\EntryRepository;
-use Wallabag\Repository\TagRepository;
 use Wallabag\Twig\WallabagExtension;
 
 class WallabagExtensionTest extends TestCase
@@ -93,14 +91,6 @@ class WallabagExtensionTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $annotationRepository = $this->getMockBuilder(AnnotationRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $tagRepository = $this->getMockBuilder(TagRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $tokenStorage = $this->getMockBuilder(TokenStorageInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -109,6 +99,6 @@ class WallabagExtensionTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        return new WallabagExtension($entryRepository, $annotationRepository, $tagRepository, $tokenStorage, 0, $translator, '', $articleReportingUrl);
+        return new WallabagExtension($entryRepository, $tokenStorage, 0, $translator, '', $articleReportingUrl);
     }
 }

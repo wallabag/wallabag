@@ -72,6 +72,10 @@ twig:
         wallabag_url: '%env(WALLABAG_BASE_URL)%'
         registration_enabled: '%env(bool:WALLABAG_REGISTRATION_ENABLED)%'
 
+knp_menu:
+    twig:
+        template: 'Menu/base.html.twig'
+
 # Doctrine Configuration
 doctrine:
     dbal:
