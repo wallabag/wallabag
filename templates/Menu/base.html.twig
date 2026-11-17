@@ -6,3 +6,89 @@
     firstClass: '',
     lastClass: '',
 }) %}
+
+{% block label %}
+    {% if item.extra('icon') %}
+        <i class="material-icons">{{ item.extra('icon') }}</i>
+        <span>{{ parent() }}</span>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block linkElement %}
+    {{ block('control') }}
+{% endblock %}
+
+{% block spanElement %}
+    {% if item.extra('kind') == 'button' %}
+        {{ block('control') }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block control %}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+
+    {% set control_attributes = item.linkAttributes %}
+
+    {% if item.extra('kind') == 'button' %}
+        <button type="button"{{ knp_menu.attributes(control_attributes) }}>{{ block('label') }}</button>
+    {% elseif item.uri is not empty %}
+        <a href="{{ item.uri }}"{{ knp_menu.attributes(control_attributes) }}>{{ block('label') }}</a>
+    {% else %}
+        <span{{ knp_menu.attributes(item.labelAttributes) }}>{{ block('label') }}</span>
+    {% endif %}
+{% endblock %}
+
+{% block children %}
+    {% set pending_separator = null %}
+    {% set rendered = false %}
+
+    {% if options.depth is not null %}
+        {% set options = options|merge({depth: options.depth - 1}) %}
+    {% endif %}
+
+    {% if options.matchingDepth is not null and options.matchingDepth > 0 %}
+        {% set options = options|merge({matchingDepth: options.matchingDepth - 1}) %}
+    {% endif %}
+
+    {% set children = item.children|filter(child => child.displayed) %}
+
+    {% for child in children %}
+        {% if child.extra('kind') == 'separator' %}
+            {% if rendered %}
+                {% set pending_separator = child %}
+            {% endif %}
+        {% else %}
+            {% if pending_separator %}
+                {% with {item: pending_separator} %}
+                    {{ block('item') }}
+                {% endwith %}
+
+                {% set pending_separator = null %}
+            {% endif %}
+
+            {% with {item: child} %}
+                {{ block('item') }}
+            {% endwith %}
+
+            {% set rendered = true %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block item %}
+    {% if item.extra('kind') == 'separator' %}
+        {{ block('separator') }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block separator %}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+
+    <li{{ knp_menu.attributes(item.attributes|merge({class: (item.attribute('class') ~ ' divider')|trim})) }}></li>
+{% endblock %}

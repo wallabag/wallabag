@@ -72,57 +72,7 @@
                         </button>
                     </li>
                 </ul>
-                <ul id="dropdown-account" class="dropdown-content">
-                    {% if is_granted('EDIT_CONFIG') %}
-                        <li><a href="{{ path('config') }}"><i class="material-icons">settings</i> {{ 'menu.left.config'|trans }}</a></li>
-                    {% endif %}
-                    <li><a href="{{ path('developer') }}"><i class="material-icons">smartphone</i> {{ 'menu.left.developer'|trans }}</a></li>
-                    {% if is_granted('IMPORT_ENTRIES') %}
-                        <li><a href="{{ path('import') }}"><i class="material-icons">import_export</i> {{ 'menu.left.import'|trans }}</a></li>
-                    {% endif %}
-                    {% if craue_setting('restricted_access') and is_granted('LIST_SITE_CREDENTIALS') %}
-                        <li><a href="{{ path('site_credentials_index') }}"><i class="material-icons">vpn_key</i> {{ 'menu.left.site_credentials'|trans }}</a></li>
-                    {% endif %}
-                    <li class="divider"></li>
-                    {% set can_list_user = is_granted('LIST_USERS') %}
-                    {% set is_super_admin = is_granted('ROLE_SUPER_ADMIN') %}
-                    {% set can_list_ignore_origin_instance_rules = is_granted('LIST_IGNORE_ORIGIN_INSTANCE_RULES') %}
-                    {% if can_list_user %}
-                        <li><a href="{{ path('user_index') }}"><i class="material-icons">people</i>{{ 'menu.left.users_management'|trans }}</a></li>
-                    {% endif %}
-                    {% if is_super_admin %}
-                        <li><a href="{{ path('craue_config_settings_modify') }}"><i class="material-icons">settings</i> {{ 'menu.left.internal_settings'|trans }}</a></li>
-                    {% endif %}
-                    {% if can_list_ignore_origin_instance_rules %}
-                        <li><a href="{{ path('ignore_origin_instance_rules_index') }}"><i class="material-icons">build</i> {{ 'menu.left.ignore_origin_instance_rules'|trans }}</a></li>
-                    {% endif %}
-                    {% if can_list_user or is_super_admin or can_list_ignore_origin_instance_rules %}
-                        <li class="divider"></li>
-                    {% endif %}
-                    <li>
-                        <button type="button" data-action="click->dark-theme#useLight">
-                            <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
-                            <span>{{ 'theme.action.toggle_light'|trans }}</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button type="button" data-action="click->dark-theme#useDark">
-                            <i class="theme-toggle-icon material-icons tiny">brightness_low</i>
-                            <span>{{ 'theme.action.toggle_dark'|trans }}</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button type="button" data-action="click->dark-theme#useAuto">
-                            <i class="theme-toggle-icon material-icons tiny">brightness_auto</i>
-                            <span>{{ 'theme.action.toggle_auto'|trans }}</span>
-                        </button>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="{{ path('howto') }}"><i class="material-icons">live_help</i> {{ 'menu.left.howto'|trans }}</a></li>
-                    <li><a href="{{ path('quickstart') }}"><i class="material-icons">assistant_photo</i> {{ 'menu.left.quickstart'|trans }}</a></li>
-                    <li class="divider"></li>
-                    <li><a href="{{ path('fos_user_security_logout') }}"><i class="material-icons">input</i> {{ 'menu.left.logout'|trans }}</a></li>
-                </ul>
+                {{ knp_menu_render('wallabag_account') }}
 
             </div>
             {% if is_granted('LIST_ENTRIES') %}
