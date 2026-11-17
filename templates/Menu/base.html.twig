@@ -9,7 +9,7 @@
 
 {% block label %}
     {% if item.extra('icon') %}
-        <i class="material-icons">{{ item.extra('icon') }}</i>
+        {{ block('icon') }}
         <span>{{ parent() }}</span>
     {% else %}
         {{ parent() }}
@@ -28,7 +28,15 @@
     {% endif %}
 {% endblock %}
 
+{% block icon %}
+    <i class="{{ block('icon_classes')|trim }}">{{ item.extra('icon') }}</i>
+{% endblock %}
+
+{% block icon_classes %}material-icons{% endblock %}
+
 {% block control_classes %}{% endblock %}
+
+{% block form_classes %}{% endblock %}
 
 {% block control %}
     {% import 'knp_menu.html.twig' as knp_menu %}
@@ -47,7 +55,8 @@
     {% endif %}
 
     {% if item.extra('kind') == 'form' %}
-        <form action="{{ item.uri }}" method="post">
+        {% set form_classes = block('form_classes')|trim %}
+        <form action="{{ item.uri }}" method="post"{% if form_classes %} class="{{ form_classes }}"{% endif %}>
             <input type="hidden" name="token" value="{{ csrf_token(item.extra('csrf_token_id')) }}"/>
 
             <button type="submit"{{ knp_menu.attributes(control_attributes) }}>{{ block('label') }}</button>

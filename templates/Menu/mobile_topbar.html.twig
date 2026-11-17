@@ -1,0 +1,31 @@
+{% extends 'Menu/base.html.twig' %}
+
+{% block root %}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+
+    <nav{{ knp_menu.attributes(item.attributes) }}>
+        <div class="nav-panel-item cyan darken-1">
+            {% with {item: item.getChild('left')} %}
+                {{ parent() }}
+            {% endwith %}
+
+            {% with {item: item.getChild('right')} %}
+                {{ parent() }}
+            {% endwith %}
+        </div>
+    </nav>
+{% endblock %}
+
+{% block control_classes %}{% if item.parent.name == 'right' %}waves-effect{% endif %}{% endblock %}
+
+{% block form_classes %}inline-block{% endblock %}
+
+{% block icon_classes %}material-icons{% if item.parent.name == 'right' %} small{% endif %}{% endblock %}
+
+{% block label %}
+    {% if item.extra('icon') %}
+        {{ block('icon') }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

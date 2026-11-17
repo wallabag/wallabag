@@ -4,52 +4,15 @@
 
 {% block body_class %}entry{% endblock %}
 
-{% set current_path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+{% set current_path = app.request.requestUri %}
 
 {% block menu %}
     <div class="progress">
         <div class="determinate" data-controller="scroll-indicator" data-action="scroll@window->scroll-indicator#updateWidth"></div>
     </div>
-    <nav class="hide-on-large-only" data-controller="sticky-nav" data-action="materialize--fab:click@window->sticky-nav#toggle">
-        <div class="nav-panel-item cyan darken-1">
-            <ul>
-                <li>
-                    <button type="button" data-target="slide-out" class="sidenav-trigger">
-                        <i class="material-icons">menu</i>
-                    </button>
-                </li>
-                <li>
-                    <a class="waves-effect" href="{{ path('homepage') }}">
-                        <i class="material-icons">arrow_back</i>
-                    </a>
-                </li>
-            </ul>
-            <ul class="right">
-                {% if is_granted('ARCHIVE', entry) %}
-                    <li>
-                        <form action="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
-                            <input type="hidden" name="token" value="{{ csrf_token('archive-entry') }}"/>
-
-                            <button type="submit" class="waves-effect" title="{{ (entry.isArchived ? 'entry.action.set_as_unread' : 'entry.action.set_as_read')|trans }}">
-                                <i class="material-icons small">{% if entry.isArchived == 0 %}archive{% else %}outbox{% endif %}</i>
-                            </button>
-                        </form>
-                    </li>
-                {% endif %}
-                {% if is_granted('STAR', entry) %}
-                    <li>
-                        <form action="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
-                            <input type="hidden" name="token" value="{{ csrf_token('star-entry') }}"/>
-
-                            <button type="submit" class="waves-effect" title="{{ (entry.isStarred ? 'entry.action.unstar' : 'entry.action.star')|trans }}">
-                                <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
-                            </button>
-                        </form>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
+    {{ knp_menu_render(knp_menu_get('wallabag_mobile_topbar', [], {entry: entry, redirect: current_path}), {
+        template: 'Menu/mobile_topbar.html.twig',
+    }) }}
     <ul id="slide-out" class="left-bar collapsible sidenav sidenav-fixed reader-mode" data-controller="materialize--sidenav materialize--collapsible leftbar">
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" href="{{ path('homepage') }}">
