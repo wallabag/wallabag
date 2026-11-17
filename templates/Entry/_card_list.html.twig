@@ -25,7 +25,7 @@
                 <form action="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
                     <input type="hidden" name="token" value="{{ csrf_token('archive-entry') }}"/>
 
-                    <button type="submit" class="btn-link tool grey-text" title="{{ 'entry.list.toogle_as_read'|trans }}">
+                    <button type="submit" class="btn-link tool grey-text" title="{{ (entry.isArchived ? 'entry.action.set_as_unread' : 'entry.action.set_as_read')|trans }}">
                         <i class="material-icons">{% if entry.isArchived == 0 %}archive{% else %}outbox{% endif %}</i>
                     </button>
                 </form>
