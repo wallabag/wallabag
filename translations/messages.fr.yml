@@ -233,6 +233,7 @@ entry:
         set_as_read: Marquer comme lu
         set_as_unread: Marquer comme non lu
         star: Mettre en favori
+        unstar: Retirer des favoris
     default_title: Titre de l’article
     page_titles:
         unread: Articles non lus

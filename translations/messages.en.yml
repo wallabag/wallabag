@@ -236,7 +236,8 @@ entry:
         delete: Delete
         set_as_read: Mark as read
         set_as_unread: Mark as unread
-        star: Toggle starred
+        star: Star
+        unstar: Unstar
     default_title: Title of the entry
     page_titles:
         unread: Unread entries
