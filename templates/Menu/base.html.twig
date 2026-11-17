@@ -21,7 +21,7 @@
 {% endblock %}
 
 {% block spanElement %}
-    {% if item.extra('kind') == 'button' %}
+    {% if item.extra('kind') in ['button', 'form'] %}
         {{ block('control') }}
     {% else %}
         {{ parent() }}
@@ -40,7 +40,19 @@
         {% set control_attributes = control_attributes|merge({class: control_classes}) %}
     {% endif %}
 
-    {% if item.extra('kind') == 'button' %}
+    {% if control_attributes.title is defined %}
+        {% set control_attributes = control_attributes|merge({
+            title: control_attributes.title|trans(item.extra('translation_params', {}), item.extra('translation_domain', 'messages')),
+        }) %}
+    {% endif %}
+
+    {% if item.extra('kind') == 'form' %}
+        <form action="{{ item.uri }}" method="post">
+            <input type="hidden" name="token" value="{{ csrf_token(item.extra('csrf_token_id')) }}"/>
+
+            <button type="submit"{{ knp_menu.attributes(control_attributes) }}>{{ block('label') }}</button>
+        </form>
+    {% elseif item.extra('kind') == 'button' %}
         <button type="button"{{ knp_menu.attributes(control_attributes) }}>{{ block('label') }}</button>
     {% elseif item.uri is not empty %}
         <a href="{{ item.uri }}"{{ knp_menu.attributes(control_attributes) }}>{{ block('label') }}</a>

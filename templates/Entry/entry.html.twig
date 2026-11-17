@@ -145,84 +145,17 @@
                 {{ knp_menu_render('wallabag_theme') }}
             </div>
         </li>
-        {% if craue_setting('share_public') or craue_setting('share_twitter') or craue_setting('share_shaarli') or craue_setting('share_diaspora') or craue_setting('share_unmark') or craue_setting('share_linkding') or craue_setting('share_mail') %}
-        <li class="bold">
-            <button type="button" class="waves-effect collapsible-header">
-                <i class="material-icons small">share</i>
-                <span>{{ 'entry.view.left_menu.share_content'|trans }}</span>
-            </button>
-            <div class="collapsible-body">
-                <ul>
-                    {% if craue_setting('share_public') %}
-                        {% if is_granted('SHARE', entry) %}
-                            <li>
-                                <form action="{{ path('share', {'id': entry.id}) }}" method="post">
-                                    <input type="hidden" name="token" value="{{ csrf_token('share-entry') }}"/>
-
-                                    <button type="submit" formtarget="_blank" class="btn-link tool icon-eye" title="{{ 'entry.view.left_menu.public_link'|trans }}">
-                                        <span>{{ 'entry.view.left_menu.public_link'|trans }}</span>
-                                    </button>
-                                </form>
-                            </li>
-                        {% endif %}
-                        {% if is_granted('UNSHARE', entry) and entry.uid %}
-                            <li>
-                                <form action="{{ path('delete_share', {'id': entry.id}) }}" method="post">
-                                    <input type="hidden" name="token" value="{{ csrf_token('delete-share') }}"/>
-
-                                    <button type="submit" class="btn-link tool icon-no-eye" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}">
-                                        <span>{{ 'entry.view.left_menu.delete_public_link'|trans }}</span>
-                                    </button>
-                                </form>
-                            </li>
-                        {% endif %}
-                    {% endif %}
-                    {% if craue_setting('share_twitter') %}
-                        <li>
-                            <a href="https://twitter.com/share?text={{ entry.title|striptags|url_encode }}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" rel="noopener" class="tool icon-twitter" title="twitter">
-                                <span>twitter</span>
-                            </a>
-                        </li>
-                    {% endif %}
-                    {% if craue_setting('share_shaarli') %}
-                        <li>
-                        <a href="{{ craue_setting('shaarli_url') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;tags={{ entry.tags|join(',')|striptags|url_encode }}{% if craue_setting('shaarli_share_origin_url') %}&amp;original_url={{ entry.originUrl|url_encode }}{% endif %}" target="_blank" rel="noopener" title="shaarli" class="tool icon-image shaarli">
-                                <span>shaarli</span>
-                            </a>
-                        </li>
-                    {% endif %}
-                    {% if craue_setting('share_diaspora') %}
-                        <li>
-                            <a href="{{ craue_setting('diaspora_url') }}/bookmarklet?url={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;notes=&amp;v=1&amp;noui=1&amp;jump=doclose" target="_blank" rel="noopener" class="tool icon-image diaspora" title="diaspora">
-                                <span>diaspora*</span>
-                            </a>
-                        </li>
-                    {% endif %}
-                    {% if craue_setting('share_unmark') %}
-                        <li>
-                            <a href="{{ craue_setting('unmark_url') }}/mark/add?url={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;v=6" target="_blank" rel="noopener" class="tool icon-image unmark" title="unmark">
-                                <span>unmark.it</span>
-                            </a>
-                        </li>
-                    {% endif %}
-                    {% if craue_setting('share_linkding') %}
-                        <li>
-                            <a href="{{ craue_setting('linkding_url') }}/bookmarks/new?url={{ entry.url|url_encode }}" target="_blank" rel="noopener" class="tool icon-image linkding" title="linkding">
-                                <span>linkding</span>
-                            </a>
-                        </li>
-                    {% endif %}
-                    {% if craue_setting('share_mail') %}
-                        <li>
-                            <a href="mailto:?subject={{ entry.title|striptags|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@wallabagapp" title="{{ 'entry.view.left_menu.share_email_label'|trans }}" class="tool icon">
-                                <i class="material-icons">mail</i>
-                                <span>{{ 'entry.view.left_menu.share_email_label'|trans }}</span>
-                            </a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </li>
+        {% set share_menu = knp_menu_get('wallabag_entry_share', [], {entry: entry}) %}
+        {% if share_menu.hasChildren and share_menu.displayChildren %}
+            <li class="bold">
+                <button type="button" class="waves-effect collapsible-header">
+                    <i class="material-icons small">share</i>
+                    <span>{{ 'entry.view.left_menu.share_content'|trans }}</span>
+                </button>
+                <div class="collapsible-body">
+                    {{ knp_menu_render(share_menu) }}
+                </div>
+            </li>
         {% endif %}
 
         {% if craue_setting('show_printlink') %}
