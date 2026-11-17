@@ -13,6 +13,7 @@ use FOS\RestBundle\FOSRestBundle;
 use FOS\UserBundle\FOSUserBundle;
 use Gregwar\CaptchaBundle\GregwarCaptchaBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
+use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use KPhoen\RulerZBundle\KPhoenRulerZBundle;
 use Nelmio\ApiDocBundle\NelmioApiDocBundle;
 use Nelmio\CorsBundle\NelmioCorsBundle;
@@ -46,6 +47,7 @@ class AppKernel extends Kernel
             new FrameworkBundle(),
             new SecurityBundle(),
             new TwigBundle(),
+            new KnpMenuBundle(),
             new MonologBundle(),
             new DoctrineBundle(),
             new SensioFrameworkExtraBundle(),
