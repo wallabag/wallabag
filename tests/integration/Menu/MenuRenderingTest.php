@@ -10,6 +10,22 @@ use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
 class MenuRenderingTest extends WallabagKernelTestCase
 {
+    public function testFabUsesTheFinalMenuContents(): void
+    {
+        $container = static::getContainer();
+        $menu = $container->get('knp_menu.factory')->createItem('fab');
+        $renderer = $container->get('knp_menu.renderer.twig');
+        $options = ['template' => 'Menu/fab.html.twig'];
+
+        $this->assertSame('', trim($renderer->render($menu, $options)));
+
+        $menu->addChild('divider', ['extras' => ['kind' => 'separator']]);
+        $this->assertSame('', trim($renderer->render($menu, $options)));
+
+        $menu->addChild('extension_action', ['uri' => '/extension', 'label' => 'Extension action']);
+        $this->assertStringContainsString('href="/extension"', $renderer->render($menu, $options));
+    }
+
     public function testFormsKeepPostCsrfAndEscapedLabels(): void
     {
         $container = static::getContainer();

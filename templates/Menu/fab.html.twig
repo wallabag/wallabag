@@ -1,0 +1,28 @@
+{% extends 'Menu/base.html.twig' %}
+
+{% block root %}
+    {% set actions = item.children|filter(child => child.displayed and child.extra('kind') != 'separator' and (child.extra('kind') != 'group' or (child.hasChildren and child.displayChildren))) %}
+
+    {% if actions is not empty and item.displayChildren %}
+        {% import 'knp_menu.html.twig' as knp_menu %}
+
+        <div{{ knp_menu.attributes(item.attributes) }}>
+            <button type="button" class="btn-floating btn-large" data-toggle="actions">
+                <i class="material-icons">menu</i>
+            </button>
+            {{ parent() }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block control_classes %}btn-floating{% endblock %}
+
+{% block form_classes %}inline-block{% endblock %}
+
+{% block label %}
+    {% if item.extra('icon') %}
+        {{ block('icon') }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
