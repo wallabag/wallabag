@@ -5,21 +5,31 @@
 
 {% set active_route = null %}
 {% if current_route == 'all' or current_route_from_query_params == 'all' %}
-   {% set active_route = 'all' %}
+    {% set active_route = 'all' %}
 {% elseif current_route == 'annotated' or current_route_from_query_params == 'annotated' %}
-   {% set active_route = 'annotated' %}
+    {% set active_route = 'annotated' %}
 {% elseif current_route == 'archive' or current_route_from_query_params == 'archive' %}
-   {% set active_route = 'archive' %}
+    {% set active_route = 'archive' %}
 {% elseif current_route == 'starred' or current_route_from_query_params == 'starred' %}
-   {% set active_route = 'starred' %}
+    {% set active_route = 'starred' %}
 {% elseif current_route == 'unread' or current_route_from_query_params == 'unread' %}
-   {% set active_route = 'unread' %}
+    {% set active_route = 'unread' %}
 {% elseif current_route == 'untagged' %}
-   {% set active_route = 'untagged' %}
+    {% set active_route = 'untagged' %}
 {% endif %}
 
 {% set has_filters = form is not null %}
-{% set has_exports = craue_setting('export_epub') or craue_setting('export_pdf') or craue_setting('export_json') or craue_setting('export_csv') or craue_setting('export_txt') or craue_setting('export_xml') or craue_setting('export_md') %}
+{% set export_category = current_route == 'homepage' ? 'unread' : current_route %}
+{% set export_filters = {} %}
+{% if export_category == 'tag_entries' %}
+    {% set export_filters = {tag: tag.slug} %}
+{% elseif export_category == 'search' %}
+    {% set export_filters = {search_entry: {term: searchTerm}, currentRoute: current_route_from_query_params} %}
+{% elseif export_category == 'same_domain' %}
+    {% set export_filters = {entry: app.request.attributes.get('id')} %}
+{% endif %}
+{% set list_exports = knp_menu_get('wallabag_list_exports', [], {category: export_category, filters: export_filters}) %}
+{% set has_exports = list_exports.hasChildren and list_exports.displayChildren %}
 
 {% block head %}
     {{ parent() }}
@@ -146,28 +156,10 @@
     </div>
 
     <!-- Export -->
-    {% if has_exports and is_granted('EXPORT_ENTRIES') %}
+    {% if has_exports %}
         <div id="export" class="sidenav" data-controller="materialize--sidenav" data-materialize--sidenav-edge-value="right">
-        {% set current_tag = null %}
-        {% if tag is defined %}
-            {% set current_tag = tag.slug %}
-        {% endif %}
-        {% set export_search_term = null %}
-        {% if searchTerm is defined %}
-            {% set export_search_term = searchTerm %}
-        {% endif %}
-        {% set entry = app.request.attributes.get('id') %}
-        {% set previous_route = app.request.query.get('currentRoute') %}
             <h4 class="center">{{ 'entry.list.export_title'|trans }}</h4>
-            <ul>
-                {% if craue_setting('export_epub') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'epub', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">EPUB</a></li>{% endif %}
-                {% if craue_setting('export_pdf') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'pdf', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">PDF</a></li>{% endif %}
-                {% if craue_setting('export_json') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'json', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">JSON</a></li>{% endif %}
-                {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'csv', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">CSV</a></li>{% endif %}
-                {% if craue_setting('export_txt') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'txt', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">TXT</a></li>{% endif %}
-                {% if craue_setting('export_xml') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'xml', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">XML</a></li>{% endif %}
-                {% if craue_setting('export_md') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'md', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">Markdown</a></li>{% endif %}
-            </ul>
+            {{ knp_menu_render(list_exports) }}
         </div>
     {% endif %}
 
