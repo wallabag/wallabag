@@ -47,21 +47,11 @@ class AccountMenuBuilder
         }
 
         $menu->addChild('before_theme', ['extras' => ['kind' => 'separator']]);
-        $menu->addChild('light', [
-            'label' => 'theme.action.toggle_light',
-            'linkAttributes' => ['data-action' => 'click->dark-theme#useLight', 'class' => 'theme-toggle-icon'],
-            'extras' => ['kind' => 'button', 'icon' => 'brightness_high'],
-        ]);
-        $menu->addChild('dark', [
-            'label' => 'theme.action.toggle_dark',
-            'linkAttributes' => ['data-action' => 'click->dark-theme#useDark', 'class' => 'theme-toggle-icon'],
-            'extras' => ['kind' => 'button', 'icon' => 'brightness_low'],
-        ]);
-        $menu->addChild('auto', [
-            'label' => 'theme.action.toggle_auto',
-            'linkAttributes' => ['data-action' => 'click->dark-theme#useAuto', 'class' => 'theme-toggle-icon'],
-            'extras' => ['kind' => 'button', 'icon' => 'brightness_auto'],
-        ]);
+
+        foreach ($this->menus->get('wallabag_theme')->getChildren() as $child) {
+            $menu->addChild($child->copy());
+        }
+
         $menu->addChild('after_theme', ['extras' => ['kind' => 'separator']]);
         $menu->addChild('howto', ['route' => 'howto', 'label' => 'menu.left.howto', 'extras' => ['icon' => 'live_help']]);
         $menu->addChild('quickstart', ['route' => 'quickstart', 'label' => 'menu.left.quickstart', 'extras' => ['icon' => 'assistant_photo']]);

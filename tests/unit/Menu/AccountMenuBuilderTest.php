@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Wallabag\Menu\AccountMenuBuilder;
 use Wallabag\Menu\AdministrationMenuBuilder;
+use Wallabag\Menu\ThemeMenuBuilder;
 
 class AccountMenuBuilderTest extends TestCase
 {
@@ -21,8 +22,9 @@ class AccountMenuBuilderTest extends TestCase
         $settings = $this->createMock(Config::class);
         $settings->method('get')->with('restricted_access')->willReturn($restricted ? '1' : '0');
         $admin = new AdministrationMenuBuilder($factory, $authorization);
+        $theme = new ThemeMenuBuilder($factory);
         $provider = $this->createMock(MenuProviderInterface::class);
-        $provider->method('get')->willReturnCallback(static fn () => $admin->createMenu([]));
+        $provider->method('get')->willReturnCallback(static fn ($alias) => ('wallabag_theme' === $alias ? $theme : $admin)->createMenu([]));
         $menu = (new AccountMenuBuilder($factory, $authorization, $settings, $provider))->createMenu([]);
 
         foreach (['config', 'import', 'site_credentials', 'users', 'settings', 'ignore_origin'] as $name) {
