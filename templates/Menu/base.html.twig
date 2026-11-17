@@ -28,10 +28,17 @@
     {% endif %}
 {% endblock %}
 
+{% block control_classes %}{% endblock %}
+
 {% block control %}
     {% import 'knp_menu.html.twig' as knp_menu %}
 
     {% set control_attributes = item.linkAttributes %}
+    {% set control_classes = (item.linkAttribute('class') ~ ' ' ~ block('control_classes'))|trim %}
+
+    {% if control_classes is not empty %}
+        {% set control_attributes = control_attributes|merge({class: control_classes}) %}
+    {% endif %}
 
     {% if item.extra('kind') == 'button' %}
         <button type="button"{{ knp_menu.attributes(control_attributes) }}>{{ block('label') }}</button>
