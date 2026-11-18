@@ -49,17 +49,37 @@ services:
 
     Wallabag\:
         resource: '../../src/*'
-        exclude: ['../../src/{Consumer,Controller,Entity,DataFixtures,Redis}', '../../src/Event/*Event.php']
+        exclude: ['../../src/{Consumer,Controller,Entity,DataFixtures,Redis}', '../../src/Event/*Event.php', '../../src/HttpClient/PrivateNetworkResponse.php']
 
     Wallabag\HttpClient\WallabagClient:
         lazy: true
         arguments:
-            $httpClient: '@wallabag.article_fetch.private_network_client'
+            $httpClient: '@wallabag.article_fetch.client'
+
+    wallabag.article_fetch.client:
+        class: Wallabag\HttpClient\HostnameDenyListHttpClient
+        arguments:
+            $client: '@Wallabag\HttpClient\PrivateNetworkClientAdapter'
+
+    Wallabag\HttpClient\PrivateNetworkClientAdapter:
+        public: false
+        arguments:
+            $client: '@wallabag.article_fetch.private_network_client'
 
     wallabag.article_fetch.private_network_client:
         class: Symfony\Component\HttpClient\NoPrivateNetworkHttpClient
         arguments:
-            $client: '@http_client'
+            $client: '@Wallabag\HttpClient\HostnameDenyListHttpClient.inner'
+
+    Wallabag\HttpClient\HostnameDenyList:
+        arguments:
+            $hostnames: '%env(csv:WALLABAG_FETCH_BLOCKED_HOSTS)%'
+
+    Wallabag\HttpClient\HostnameDenyListHttpClient:
+        decorates: http_client
+        decoration_priority: 20
+        arguments:
+            $client: '@Wallabag\HttpClient\HostnameDenyListHttpClient.inner'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
