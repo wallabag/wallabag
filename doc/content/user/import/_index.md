@@ -12,6 +12,7 @@ In wallabag 2.x, you can import data from:
 -   [elCurator]({{< relref "Elcurator.md" >}})
 -   [wallabag 1.x]({{< relref "wallabagv1.md" >}})
 -   [wallabag 2.x]({{< relref "wallabagv2.md" >}})
+-   [a list of URLs]({{< relref "UrlList.md" >}})
 
 We also developed [a script to execute migrations via command-line
 interface](#import-via-command-line-interface-cli).

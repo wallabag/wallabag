@@ -23,6 +23,6 @@ class ImportControllerTest extends WallabagTestCase
 
         $crawler = $client->request('GET', '/import/');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertSame(13, $crawler->filter('.card-title')->count());
+        $this->assertSame(14, $crawler->filter('.card-title')->count());
     }
 }

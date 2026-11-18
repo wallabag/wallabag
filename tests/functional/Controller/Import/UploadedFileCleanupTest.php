@@ -25,6 +25,7 @@ class UploadedFileCleanupTest extends WallabagTestCase
             'pocket_html' => ['/import/pocket_html', 'test.html'],
             'readability' => ['/import/readability', 'test.txt'],
             'shaarli' => ['/import/shaarli', 'test.html'],
+            'url_list' => ['/import/url_list', 'test.txt'],
             'wallabag_v1' => ['/import/wallabag-v1', 'test.txt'],
             'wallabag_v2' => ['/import/wallabag-v2', 'test.txt'],
         ];

@@ -555,6 +555,10 @@ import:
         page_title: Import > Pocket CSV
         description: This importer will import all your Pocket bookmarks (via CSV export). Just go to https://getpocket.com/export, then export the file. A ZIP file will be downloaded (like "pocket.zip"). Extract it, you will obtain a CSV file, called "part_000000.csv".
         how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
+    url_list:
+        page_title: Import > URL list
+        description: This importer will import a plain text file containing one URL per line. Empty lines, lines starting with "#" and lines which aren't web addresses (starting with "http://" or "https://") are ignored.
+        how_to: Please choose your text file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
 developer:
     page_title: API clients management
     welcome_message: Welcome to the wallabag API
