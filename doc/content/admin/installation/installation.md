@@ -150,6 +150,14 @@ encrypted nightly backups kept off the machine.
 
 [Install wallabag on Simafri](https://www.simafri.com/en/guides/self-host-wallabag/)
 
+## Installation on Podway
+
+Podway runs wallabag on its own small machine with a PostgreSQL 16
+database, HTTPS, and an optional custom domain. It creates the
+`wallabag` user with a generated password and turns sign-ups off.
+
+[Install wallabag on Podway](https://podway.io/start?app=wallabag&ref=docs-wallabag)
+
 ## Installation on Synology
 
 The SynoCommunity provides a package to install wallabag on your Synology NAS.
