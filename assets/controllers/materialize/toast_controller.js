@@ -3,7 +3,7 @@ import M from '@materializecss/materialize';
 
 export default class extends Controller {
   connect() {
-    this.instance = M.toast({ text: this.element.innerText });
+    this.instance = M.toast({ text: this.element.textContent });
   }
 
   disconnect() {

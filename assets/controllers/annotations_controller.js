@@ -18,7 +18,9 @@ export default class extends Controller {
     });
 
     const authorization = {
-      permits() { return true; },
+      permits() {
+        return true;
+      },
     };
     this.app.registry.registerUtility(authorization, 'authorizationPolicy');
 
@@ -31,8 +33,8 @@ export default class extends Controller {
         search: this.searchUrlValue,
       },
       entryId: this.entryIdValue,
-      onError(msg, xhr) {
-        if (!Object.prototype.hasOwnProperty.call(xhr, 'responseJSON')) {
+      onError(_msg, xhr) {
+        if (!Object.hasOwn(xhr, 'responseJSON')) {
           annotator.notification.banner('An error occurred', 'error');
           return;
         }
