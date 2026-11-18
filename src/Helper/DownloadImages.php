@@ -115,7 +115,7 @@ class DownloadImages
             $relativePath = $this->getRelativePath($entryId);
         }
 
-        $this->logger->debug('DownloadImages: working on image: ' . $imagePath);
+        $this->logger->debug('DownloadImages: working on image');
 
         $folderPath = $this->baseFolder . '/' . $relativePath;
 
@@ -131,7 +131,7 @@ class DownloadImages
             $res = $this->client->request(Request::METHOD_GET, $absolutePath);
             $ext = $this->getExtensionFromResponse($res, $imagePath);
         } catch (\Exception $e) {
-            $this->logger->error('DownloadImages: Can not retrieve image, skipping.', ['exception' => $e]);
+            $this->logger->error('DownloadImages: Can not retrieve image, skipping.', ['exception_type' => $e::class]);
 
             return false;
         }
