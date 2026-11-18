@@ -113,6 +113,95 @@ class ContentProxyTest extends TestCase
         $this->assertTrue($entry->isNotParsed());
     }
 
+    public function testWithGrabyExceptionStoresFetchingErrorMessage(): void
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $graby = $this->getMockBuilder(Graby::class)
+            ->onlyMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $url = 'https://test-user:test-password@example.com/article?access_token=test-query';
+        $graby->expects($this->once())
+            ->method('fetchContent')
+            ->willThrowException(new \RuntimeException('transport failed for ' . $url));
+
+        $handler = new TestHandler();
+        $logger = new Logger('test', [$handler]);
+        $proxy = new ContentProxy($graby, $tagger, $this->getRuleBasedIgnoreOriginProcessorMock(), $this->getValidator(), $logger, $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, $url);
+
+        $this->assertSame($this->fetchingErrorMessage, $entry->getContent());
+        $this->assertTrue($entry->isNotParsed());
+        $this->assertTrue($handler->hasWarningThatContains('Error while fetching entry content.'));
+        $this->assertSame(['exception_type' => \RuntimeException::class], $handler->getRecords()[0]['context']);
+    }
+
+    /**
+     * @dataProvider fetchFailures
+     */
+    public function testPreservesSuppliedHtmlOnFetchFailure(bool $fetchThrows): void
+    {
+        $graby = $this->getMockBuilder(Graby::class)
+            ->onlyMethods(['fetchContent'])
+            ->getMock();
+        $fetch = $graby->expects($this->once())->method('fetchContent');
+        if ($fetchThrows) {
+            $fetch->willThrowException(new \RuntimeException('transport failed'));
+        } else {
+            $fetch->willReturn(['html' => $this->fetchingErrorMessage]);
+        }
+
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $this->getRuleBasedIgnoreOriginProcessorMock(), $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $entry->setNotParsed(true);
+        $proxy->updateEntry($entry, 'https://example.com/article', [
+            'html' => '<p>Supplied article</p><script>alert(1)</script>',
+            'title' => 'Supplied title',
+        ]);
+
+        $this->assertSame('Supplied title', $entry->getTitle());
+        $this->assertStringContainsString('Supplied article', $entry->getContent());
+        $this->assertStringNotContainsString('<script>', $entry->getContent());
+        $this->assertFalse($entry->isNotParsed());
+    }
+
+    public function fetchFailures(): iterable
+    {
+        yield 'fetch throws' => [true];
+        yield 'fetch returns error' => [false];
+    }
+
+    /**
+     * @dataProvider storedFetchingErrorSuffixes
+     */
+    public function testKeepsStoredFetchingErrorUnparsed(string $suffix): void
+    {
+        $graby = $this->getMockBuilder(Graby::class)
+            ->onlyMethods(['fetchContent', 'setContentAsPrefetched'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $graby->expects($this->never())->method('setContentAsPrefetched');
+        $graby->expects($this->once())->method('fetchContent')
+            ->willReturn(['html' => $this->fetchingErrorMessage]);
+
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $this->getRuleBasedIgnoreOriginProcessorMock(), $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = (new Entry(new User()))->setNotParsed(true);
+        $proxy->updateEntry($entry, 'https://example.com/article', ['html' => $this->fetchingErrorMessage . $suffix]);
+
+        $this->assertSame($this->fetchingErrorMessage, $entry->getContent());
+        $this->assertTrue($entry->isNotParsed());
+    }
+
+    public function storedFetchingErrorSuffixes(): iterable
+    {
+        yield 'placeholder' => [''];
+        yield 'placeholder with a description' => ['<p><i>But we found a short description: </i></p>Short description'];
+    }
+
     public function testWithEmptyContentButOG(): void
     {
         $tagger = $this->getTaggerMock();
@@ -817,6 +906,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('Page unavailable', $entry->getTitle());
         $this->assertSame('404', $entry->getHttpStatus());
         $this->assertSame('text/html', $entry->getMimetype());
+        $this->assertTrue($entry->isNotParsed());
     }
 
     public function testFetchFailurePreservesProvidedContent(): void
