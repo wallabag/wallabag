@@ -205,9 +205,6 @@ menu:
         unread: Ongelezen
         ignore_origin_instance_rules: Globaal negeer-oorsprongsregels
         quickstart: Snelstart
-        theme_toggle_auto: Thema automatisch
-        theme_toggle_dark: Donker thema
-        theme_toggle_light: Licht thema
         with_annotations: Met aantekeningen
 security:
     login:
@@ -249,6 +246,11 @@ flashes:
             rabbit_enabled_not_installed: RabbitMQ is ingeschakeld voor het afhandelen van asynchroon importeren, maar het lijkt erop dat <u> we er geen verbinding mee kunnen maken </u>. Controleer de RabbitMQ-configuratie.
             redis_enabled_not_installed: Redis is ingeschakeld voor het afhandelen van asynchroon importeren, maar het lijkt erop dat <u> we er geen verbinding mee kunnen maken </u>. Controleer de Redis-configuratie.
     entry:
+    action:
+        delete: Verwijder
+        set_as_read: Markeer als gelezen
+        set_as_unread: Markeer als ongelezen
+        star: Wissel met/zonder ster
         notice:
             entry_reloaded_failed: Artikelen opnieuw geladen maar ophalen van inhoud mislukt
             entry_saved_failed: Artikel opgeslagen maar ophalen van inhoud is mislukt
@@ -627,17 +629,10 @@ entry:
             share_email_label: E-mailadres
             share_content: Deel
             add_a_tag: Voeg label toe
-            delete: Verwijder
             re_fetch_content: Opnieuw ophalen van inhoud
             view_original_article: Origineel artikel
-            set_as_starred: Wissel met/zonder ster
-            set_as_unread: Markeer als ongelezen
-            set_as_read: Markeer als gelezen
             back_to_homepage: Terug
             back_to_top: Terug naar boven
-            theme_toggle_auto: Automatisch
-            theme_toggle_dark: Donker
-            theme_toggle_light: Licht
             theme_toggle: Schakel tussen thema's
     metadata:
         added_on: Toegevoegd op
@@ -739,3 +734,9 @@ ignore_origin_instance_rule:
         delete: Verwijder
         save: Opslaan
         rule_label: Regel
+
+theme:
+    action:
+        toggle_auto: Thema automatisch
+        toggle_dark: Donker thema
+        toggle_light: Licht thema

@@ -180,9 +180,6 @@ menu:
         search: 搜尋
         users_management: 使用者管理
         site_credentials: 網站憑證
-        theme_toggle_light: 淺色主題
-        theme_toggle_dark: 深色主題
-        theme_toggle_auto: 根據系統設定自動設定主題
         developer: 用戶端 API 管理
         config: 設置
         unread: 未讀
@@ -223,6 +220,11 @@ footer:
         about: 關於
     stats: 自 %user_creation% 以來，你已閱讀 %nb_archives% 篇文章。這大約是 %per_day% 篇一天！
 entry:
+    action:
+        delete: 刪除
+        set_as_read: 標記為已讀
+        set_as_unread: 標記為未讀
+        star: 變更收藏狀態
     list:
         show_same_domain: 顯示同一域名的文章
         export_title: 匯出
@@ -254,16 +256,11 @@ entry:
         page_title: 儲存新條目
     view:
         left_menu:
-            theme_toggle_dark: 深色
-            delete: 刪除
-            theme_toggle_light: 淺色
-            set_as_unread: 標記為未讀
             export: 匯出
             print: 列印
             add_a_tag: 添加標籤
             share_content: 分享
             back_to_homepage: 返回
-            set_as_read: 標記為已讀
             share_email_label: 電子郵件
             problem:
                 description: 這篇文章出問題了嗎？
@@ -272,9 +269,7 @@ entry:
             public_link: 公開連結
             theme_toggle: 變更主題
             back_to_top: 回到頂端
-            set_as_starred: 變更收藏狀態
             re_fetch_content: 再次擷取內容
-            theme_toggle_auto: 自動
             view_original_article: 原文連結
         edit_title: 編輯標題
         annotations_on_the_entry: '{0} 沒有註釋|{1}有 1 個註釋|]1,Inf[ 有 %count% 個註釋'
@@ -721,3 +716,9 @@ error:
     page_title: 出現錯誤
 export:
     unknown: 不明
+
+theme:
+    action:
+        toggle_auto: 根據系統設定自動設定主題
+        toggle_dark: 深色主題
+        toggle_light: 淺色主題

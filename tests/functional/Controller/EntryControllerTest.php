@@ -732,7 +732,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->request('GET', '/view/' . $entry->getId());
 
-        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.set_as_read')->form());
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.action.set_as_read')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
@@ -758,7 +758,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->request('GET', '/view/' . $entry->getId());
 
-        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.set_as_starred')->form());
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.action.star')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
@@ -823,7 +823,7 @@ class EntryControllerTest extends WallabagTestCase
         $crawler = $client->request('GET', '/view/' . $content->getId());
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.delete')->form());
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.action.delete')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
@@ -851,7 +851,7 @@ class EntryControllerTest extends WallabagTestCase
         $crawler = $client->request('GET', '/view/' . $content->getId());
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.delete')->form());
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.action.delete')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringEndsWith('/archive/list', $client->getResponse()->headers->get('Location'));
@@ -1417,7 +1417,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->request('GET', '/view/' . $content->getId());
 
-        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.delete')->form());
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.action.delete')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
@@ -1442,7 +1442,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->request('GET', '/view/' . $entry->getId());
 
-        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.set_as_read')->form());
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.action.set_as_read')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('/unread/list', $client->getResponse()->headers->get('location'));
@@ -1466,7 +1466,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->request('GET', '/view/' . $entry->getId());
 
-        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.set_as_read')->form());
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.action.set_as_read')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('/view/' . $entry->getId(), $client->getResponse()->headers->get('location'));

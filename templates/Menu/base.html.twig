@@ -1,0 +1,127 @@
+{% extends '@KnpMenu/menu.html.twig' %}
+
+{% set options = options|merge({
+    currentClass: '',
+    ancestorClass: '',
+    firstClass: '',
+    lastClass: '',
+}) %}
+
+{% block label %}
+    {% if item.extra('icon') %}
+        {{ block('icon') }}
+        <span>{{ parent() }}</span>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block linkElement %}
+    {{ block('control') }}
+{% endblock %}
+
+{% block spanElement %}
+    {% if item.extra('kind') in ['button', 'form', 'group'] %}
+        {{ block('control') }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block icon %}
+    <i class="{{ block('icon_classes')|trim }}">{{ item.extra('icon') }}</i>
+{% endblock %}
+
+{% block icon_classes %}material-icons{% endblock %}
+
+{% block control_classes %}{% endblock %}
+
+{% block form_classes %}{% endblock %}
+
+{% block control %}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+
+    {% set control_attributes = item.linkAttributes %}
+    {% set control_classes = (item.linkAttribute('class') ~ ' ' ~ block('control_classes'))|trim %}
+
+    {% if control_classes is not empty %}
+        {% set control_attributes = control_attributes|merge({class: control_classes}) %}
+    {% endif %}
+
+    {% if control_attributes.title is defined %}
+        {% set control_attributes = control_attributes|merge({
+            title: control_attributes.title|trans(item.extra('translation_params', {}), item.extra('translation_domain', 'messages')),
+        }) %}
+    {% endif %}
+
+    {% if item.extra('confirmation') %}
+        {% set confirmation = item.extra('confirmation')|trans|e('js') %}
+        {% set control_attributes = control_attributes|merge({onclick: "return confirm('" ~ confirmation ~ "')"}) %}
+    {% endif %}
+
+    {% if item.extra('kind') == 'form' %}
+        {% set form_classes = block('form_classes')|trim %}
+        <form action="{{ item.uri }}" method="post"{% if form_classes %} class="{{ form_classes }}"{% endif %}>
+            <input type="hidden" name="token" value="{{ csrf_token(item.extra('csrf_token_id')) }}"/>
+
+            <button type="submit"{{ knp_menu.attributes(control_attributes) }}>{{ block('label') }}</button>
+        </form>
+    {% elseif item.extra('kind') in ['button', 'group'] %}
+        <button type="button"{{ knp_menu.attributes(control_attributes) }}>{{ block('label') }}</button>
+    {% elseif item.uri is not empty %}
+        <a href="{{ item.uri }}"{{ knp_menu.attributes(control_attributes) }}>{{ block('label') }}</a>
+    {% else %}
+        <span{{ knp_menu.attributes(item.labelAttributes) }}>{{ block('label') }}</span>
+    {% endif %}
+{% endblock %}
+
+{% block children %}
+    {% set pending_separator = null %}
+    {% set rendered = false %}
+
+    {% if options.depth is not null %}
+        {% set options = options|merge({depth: options.depth - 1}) %}
+    {% endif %}
+
+    {% if options.matchingDepth is not null and options.matchingDepth > 0 %}
+        {% set options = options|merge({matchingDepth: options.matchingDepth - 1}) %}
+    {% endif %}
+
+    {% set children = item.children|filter(child => child.displayed and (child.extra('kind') != 'group' or (child.hasChildren and child.displayChildren))) %}
+
+    {% for child in children %}
+        {% if child.extra('kind') == 'separator' %}
+            {% if rendered %}
+                {% set pending_separator = child %}
+            {% endif %}
+        {% else %}
+            {% if pending_separator %}
+                {% with {item: pending_separator} %}
+                    {{ block('item') }}
+                {% endwith %}
+
+                {% set pending_separator = null %}
+            {% endif %}
+
+            {% with {item: child} %}
+                {{ block('item') }}
+            {% endwith %}
+
+            {% set rendered = true %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block item %}
+    {% if item.extra('kind') == 'separator' %}
+        {{ block('separator') }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block separator %}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+
+    <li{{ knp_menu.attributes(item.attributes|merge({class: (item.attribute('class') ~ ' divider')|trim})) }}></li>
+{% endblock %}

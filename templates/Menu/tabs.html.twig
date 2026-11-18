@@ -1,0 +1,18 @@
+{% extends 'Menu/base.html.twig' %}
+
+{% block item %}
+    {% if item.displayed %}
+        {% import 'knp_menu.html.twig' as knp_menu %}
+
+        {% set classes = ('tab col s12 m6 l3 ' ~ item.attribute('class'))|trim %}
+        <li{{ knp_menu.attributes(item.attributes|merge({class: classes})) }}>
+            {{ block('linkElement') }}
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block control_classes %}
+    {% if item.parent.extra('activate_first') and item.actsLikeFirst %}
+        active
+    {% endif %}
+{% endblock %}

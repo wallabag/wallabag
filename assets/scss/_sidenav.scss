@@ -12,8 +12,9 @@
       background: initial;
     }
 
-    & button > i.material-icons.theme-toggle-icon,
-    & > a > i.material-icons.theme-toggle-icon {
+    & button.theme-toggle-icon > i.material-icons,
+    & > a.theme-toggle-icon > i.material-icons {
+      font-size: 1rem;
       float: none;
       margin-left: 0;
     }

@@ -12,16 +12,12 @@ use Twig\TwigFilter;
 use Twig\TwigFunction;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
-use Wallabag\Repository\AnnotationRepository;
 use Wallabag\Repository\EntryRepository;
-use Wallabag\Repository\TagRepository;
 
 class WallabagExtension extends AbstractExtension implements GlobalsInterface
 {
     public function __construct(
         private readonly EntryRepository $entryRepository,
-        private readonly AnnotationRepository $annotationRepository,
-        private readonly TagRepository $tagRepository,
         private readonly TokenStorageInterface $tokenStorage,
         private $lifeTime,
         private readonly TranslatorInterface $translator,
@@ -47,8 +43,6 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('count_entries', $this->countEntries(...)),
-            new TwigFunction('count_tags', $this->countTags(...)),
             new TwigFunction('display_stats', $this->displayStats(...)),
             new TwigFunction('asset_file_exists', $this->assetFileExists(...)),
             new TwigFunction('theme_class', $this->themeClass(...)),
@@ -86,53 +80,6 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
     public function removeSchemeAndWww($url)
     {
         return $this->removeWww($this->removeScheme($url));
-    }
-
-    /**
-     * Return number of entries depending of the type (unread, archive, starred or all).
-     *
-     * @param string $type Type of entries to count
-     *
-     * @return int
-     */
-    public function countEntries($type)
-    {
-        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
-
-        if (!$user instanceof User) {
-            return 0;
-        }
-
-        $qb = match ($type) {
-            'starred' => $this->entryRepository->getCountBuilderForStarredByUser($user->getId())->select('COUNT(e.id)'),
-            'archive' => $this->entryRepository->getCountBuilderForArchiveByUser($user->getId())->select('COUNT(e.id)'),
-            'unread' => $this->entryRepository->getCountBuilderForUnreadByUser($user->getId())->select('COUNT(e.id)'),
-            'annotated' => $this->annotationRepository->getCountBuilderByUser($user->getId())->select('COUNT(DISTINCT e.entry)'),
-            'all' => $this->entryRepository->getCountBuilderForAllByUser($user->getId())->select('COUNT(e.id)'),
-            default => throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type)),
-        };
-
-        $query = $qb->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($this->lifeTime);
-
-        return $query->getSingleScalarResult();
-    }
-
-    /**
-     * Return number of tags.
-     *
-     * @return int
-     */
-    public function countTags()
-    {
-        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
-
-        if (!$user instanceof User) {
-            return 0;
-        }
-
-        return $this->tagRepository->countAllTags($user->getId());
     }
 
     /**

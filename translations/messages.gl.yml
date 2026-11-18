@@ -77,6 +77,11 @@ about:
         who_behind_wallabag: Quen está detrás de wallabag
     page_title: Sobre
 entry:
+    action:
+        delete: Eliminar
+        set_as_read: Marcar como lido
+        set_as_unread: Marcar como non lido
+        star: Poñer estrela
     metadata:
         published_on: Publicado o
         tags: Etiquetas
@@ -116,9 +121,6 @@ entry:
             problem:
                 description: Non se mostra correctamente o artigo?
                 label: Problemas?
-            theme_toggle_auto: Automático
-            theme_toggle_dark: Escuro
-            theme_toggle_light: Claro
             theme_toggle: Cambiar decorado
             print: Imprimir
             export: Exportar
@@ -127,12 +129,8 @@ entry:
             share_email_label: Email
             share_content: Compartir
             add_a_tag: Engadir etiqueta
-            delete: Eliminar
             re_fetch_content: Volver a obter contido
             view_original_article: Artigo orixinal
-            set_as_starred: Poñer estrela
-            set_as_unread: Marcar como non lido
-            set_as_read: Marcar como lido
             back_to_homepage: Atrás
             back_to_top: Ir arriba
     filters:
@@ -386,9 +384,6 @@ menu:
         search: Buscar
         add_new_entry: Engadir nova entrada
     left:
-        theme_toggle_auto: Decorado automático
-        theme_toggle_dark: Decorado escuro
-        theme_toggle_light: Decorado claro
         quickstart: Inicio rápido
         ignore_origin_instance_rules: Ignorar globalmente as regras de orixe
         site_credentials: Credenciais da web
@@ -745,3 +740,9 @@ user:
 captcha:
     label: Comprobación de seguridade
     help: Escribe os caracteres que se mostran na imaxe. Ao actualizar a páxina a imaxe invalida a resposta anterior.
+
+theme:
+    action:
+        toggle_auto: Decorado automático
+        toggle_dark: Decorado escuro
+        toggle_light: Decorado claro

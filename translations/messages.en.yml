@@ -38,9 +38,6 @@ menu:
         site_credentials: Site credentials
         ignore_origin_instance_rules: 'Global ignore origin rules'
         quickstart: "Quickstart"
-        theme_toggle_light: "Light theme"
-        theme_toggle_dark: "Dark theme"
-        theme_toggle_auto: "Automatic theme"
     top:
         add_new_entry: Add a new entry
         search: Search
@@ -235,6 +232,12 @@ config:
             enable: Enable
             qrcode_label: QR code
 entry:
+    action:
+        delete: Delete
+        set_as_read: Mark as read
+        set_as_unread: Mark as unread
+        star: Star
+        unstar: Unstar
     default_title: Title of the entry
     page_titles:
         unread: Unread entries
@@ -295,12 +298,8 @@ entry:
         left_menu:
             back_to_top: Back to top
             back_to_homepage: Back
-            set_as_read: Mark as read
-            set_as_unread: Mark as unread
-            set_as_starred: Toggle starred
             view_original_article: Original article
             re_fetch_content: Re-fetch content
-            delete: Delete
             add_a_tag: Add a tag
             share_content: Share
             share_email_label: Email
@@ -309,9 +308,6 @@ entry:
             export: Export
             print: Print
             theme_toggle: Theme toggle
-            theme_toggle_light: Light
-            theme_toggle_dark: Dark
-            theme_toggle_auto: Automatic
             problem:
                 label: Problems?
                 description: Does this article appear wrong?
@@ -745,3 +741,9 @@ flashes:
             added: 'Global ignore origin rule added'
             updated: 'Global ignore origin rule updated'
             deleted: 'Global ignore origin rule deleted'
+
+theme:
+    action:
+        toggle_auto: "Automatic theme"
+        toggle_dark: "Dark theme"
+        toggle_light: "Light theme"

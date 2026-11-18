@@ -3,6 +3,7 @@
 {% block title %}{{ 'menu.left.internal_settings'|trans }}{% endblock %}
 
 {% block content %}
+    {% set sortedSections = sections|craue_sortSections %}
     <div class="row">
         <div class="col s12">
             <div class="card-panel settings">
@@ -11,14 +12,12 @@
 
                     <div class="row">
                         <div class="div_tabs col s12">
-                            <ul class="tabs" data-controller="materialize--tabs">
-                                {% for section in sections|craue_sortSections %}
-                                    <li class="tab col s12 m6 l3"><a href="#set-{{ section }}">{{ section|trans({}, 'CraueConfigBundle') }}</a></li>
-                                {% endfor %}
-                            </ul>
+                            {{ knp_menu_render(knp_menu_get('wallabag_internal_settings_tabs', [], {sortedSections: sortedSections}), {
+                                template: 'Menu/tabs.html.twig',
+                            }) }}
                         </div>
 
-                        {% for section in sections|craue_sortSections %}
+                        {% for section in sortedSections %}
                             <div id="set-{{ section }}" class="col s12">
                                 {% for setting in form.settings %}
                                     {% if setting.vars.value.section == section %}
@@ -33,13 +32,13 @@
                                 {% endfor %}
                             </div>
                         {% endfor %}
-                </div>
+                    </div>
 
-                <button class="btn waves-effect waves-light" type="submit" name="action">
-                    {{ 'modify_settings'|trans({}, 'CraueConfigBundle') }}
-                </button>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                        {{ 'modify_settings'|trans({}, 'CraueConfigBundle') }}
+                    </button>
 
-                {{ form_widget(form._token) }}
+                    {{ form_widget(form._token) }}
             </div>
         </div>
     </div>

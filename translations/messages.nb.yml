@@ -28,9 +28,6 @@ menu:
         about: Om
         search: Søk
         save_link: Lagre en lenke
-        theme_toggle_auto: Automatisk drakt
-        theme_toggle_light: Lys drakt
-        theme_toggle_dark: Mørk drakt
         quickstart: Hurtigstart
         users_management: Brukerstyring
         developer: API-klientstyring
@@ -234,6 +231,11 @@ config:
             variables_available_description: 'Følgende variabler og operatorer kan brukes til å lage ignorer opprinnelse regler:'
 flashes:
     entry:
+    action:
+        delete: Slett
+        set_as_read: Marker som lest
+        set_as_unread: Marker som ulest
+        star: Veksle stjernemerking
         notice:
             entry_deleted: Oppføring slettet
             entry_unstarred: Stjernemerking av oppføring fjernet
@@ -639,10 +641,6 @@ entry:
             theme_toggle: Veksle drakt
             re_fetch_content: Hent innhold igjen
             view_original_article: Opprinnelig artikkel
-            set_as_starred: Veksle stjernemerking
-            theme_toggle_auto: Automatisk
-            theme_toggle_dark: Mørk
-            theme_toggle_light: Lys
             print: Skriv ut
             export: Eksporter
             delete_public_link: slett offentlig lenke
@@ -650,9 +648,6 @@ entry:
             share_email_label: E-post
             share_content: Del
             add_a_tag: Legg til et stikkord
-            delete: Slett
-            set_as_unread: Marker som ulest
-            set_as_read: Marker som lest
             back_to_homepage: Tilbake
             back_to_top: Tilbake til toppen
         annotations_on_the_entry: '{0} Ingen anføringer |{1} Én anføring|]1,Inf[ %count% anføringer'
@@ -746,3 +741,9 @@ export:
 captcha:
     label: Sikkerhetssjekk
     help: Skriv inn tegnene som vises i bildet. Hvis du oppdaterer bildet, blir det forrige svaret ugyldig.
+
+theme:
+    action:
+        toggle_auto: Automatisk drakt
+        toggle_dark: Mørk drakt
+        toggle_light: Lys drakt

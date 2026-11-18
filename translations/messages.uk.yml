@@ -32,9 +32,6 @@ menu:
         users_management: Керування користувачами
         site_credentials: Облікові записи сайтів
         quickstart: Швидкий старт
-        theme_toggle_auto: Автоматичний вибір оформлення
-        theme_toggle_dark: Темне оформлення
-        theme_toggle_light: Світле оформлення
         with_annotations: З анотаціями
     top:
         add_new_entry: Додати новий запис
@@ -213,6 +210,11 @@ config:
                 equal_to: Дорівнює…
                 matches: 'Тест шо <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Приклад: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
 entry:
+    action:
+        delete: Видалити
+        set_as_read: Позначити прочитаною
+        set_as_unread: Позначити непрочитаною
+        star: У/із закладок
     default_title: Заголовок статті
     page_titles:
         unread: Непрочитані статті
@@ -273,12 +275,8 @@ entry:
         left_menu:
             back_to_top: Назад догори
             back_to_homepage: Назад
-            set_as_read: Позначити прочитаною
-            set_as_unread: Позначити непрочитаною
-            set_as_starred: У/із закладок
             view_original_article: Оригінальна стаття
             re_fetch_content: Завантажити ще раз
-            delete: Видалити
             add_a_tag: Додай тег
             share_content: Поділитись
             share_email_label: Електронна пошта
@@ -290,9 +288,6 @@ entry:
                 label: Виникли проблеми?
                 description: Стаття виглядає неправильно?
             theme_toggle: Змінити тему
-            theme_toggle_light: Освітлення
-            theme_toggle_dark: Темно
-            theme_toggle_auto: Автоматично
         edit_title: Редагувати заголовок
         original_article: оригінальна
         annotations_on_the_entry: '{0} Немає анотацій|{1} Одна аннотація|]1,Inf[ %count% аннотації(ій)'
@@ -632,3 +627,9 @@ ignore_origin_instance_rule:
         delete: Видалити
         delete_confirm: Впевнені?
         back_to_list: Назад до списку
+
+theme:
+    action:
+        toggle_auto: Автоматичний вибір оформлення
+        toggle_dark: Темне оформлення
+        toggle_light: Світле оформлення

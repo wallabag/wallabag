@@ -10,10 +10,7 @@
 
                 <div class="row">
                     <div class="tabs-container col s12">
-                        <ul class="tabs" data-controller="materialize--tabs">
-                            <li class="tab col s12 m6 l3"><a class="active" href="#set1">{{ 'howto.tab_menu.add_link'|trans }}</a></li>
-                            <li class="tab col s12 m6 l3"><a href="#set2">{{ 'howto.tab_menu.shortcuts'|trans }}</a></li>
-                        </ul>
+                        {{ knp_menu_render('wallabag_howto_tabs', {template: 'Menu/tabs.html.twig'}) }}
                     </div>
 
                     <div id="set1" class="col s12">
@@ -176,6 +173,7 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
 
             </div>
         </div>

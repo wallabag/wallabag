@@ -33,9 +33,6 @@ menu:
         site_credentials: サイトの認証情報
         quickstart: はじめに
         ignore_origin_instance_rules: グローバル転送元無視ルール
-        theme_toggle_auto: テーマを自動切換
-        theme_toggle_dark: ダークテーマ
-        theme_toggle_light: ライトテーマ
         with_annotations: 注釈付きのアイテム
     top:
         add_new_entry: 新しい記事を追加
@@ -225,6 +222,11 @@ config:
             ignore_origin_rules_definition_title: “転送元無視ルール” とは?
             title: よくある質問
 entry:
+    action:
+        delete: 削除
+        set_as_read: 既読にする
+        set_as_unread: 未読にする
+        star: スター有無の切り替え
     page_titles:
         unread: 未読記事
         starred: スター付きの記事
@@ -283,8 +285,6 @@ entry:
     view:
         left_menu:
             back_to_top: トップへ戻る
-            set_as_read: 既読にする
-            set_as_unread: 未読にする
             view_original_article: オリジナルの記事
             re_fetch_content: コンテンツを再取得
             add_a_tag: タグを追加
@@ -297,12 +297,7 @@ entry:
             public_link: 公開リンク
             export: エクスポート
             share_email_label: 電子メール
-            delete: 削除
-            set_as_starred: スター有無の切り替え
             back_to_homepage: 戻る
-            theme_toggle_auto: 自動
-            theme_toggle_dark: ダーク
-            theme_toggle_light: ライト
             theme_toggle: テーマの切替
         edit_title: タイトルを編集
         annotations_on_the_entry: '{0} 注釈はありません|{1} 1 注釈|]1,Inf[ %count% 注釈'
@@ -739,3 +734,9 @@ site_credential:
     edit_site_credential: 既存の認証情報を編集
     new_site_credential: 認証情報を作成
     page_title: サイト認証情報管理
+
+theme:
+    action:
+        toggle_auto: テーマを自動切換
+        toggle_dark: ダークテーマ
+        toggle_light: ライトテーマ

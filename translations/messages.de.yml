@@ -33,9 +33,6 @@ menu:
         site_credentials: Zugangsdaten
         quickstart: Schnellstart
         ignore_origin_instance_rules: Globale Regeln fürs Ignorieren des Ursprungs
-        theme_toggle_auto: Automatisches Design
-        theme_toggle_dark: Dunkles Design
-        theme_toggle_light: Helles Design
         with_annotations: Mit Anmerkungen
         back_to_homepage: Zurück zur Homepage
     top:
@@ -235,6 +232,11 @@ config:
         token_reset: Token erneut generieren
         token_label: Feedtoken
 entry:
+    action:
+        delete: Löschen
+        set_as_read: Als gelesen markieren
+        set_as_unread: Als ungelesen markieren
+        star: Favorisieren
     default_title: Titel des Eintrags
     page_titles:
         unread: Ungelesene Einträge
@@ -295,12 +297,8 @@ entry:
         left_menu:
             back_to_top: Nach oben
             back_to_homepage: Zurück
-            set_as_read: Als gelesen markieren
-            set_as_unread: Als ungelesen markieren
-            set_as_starred: Favorisieren
             view_original_article: Originalartikel
             re_fetch_content: Inhalt neu laden
-            delete: Löschen
             add_a_tag: Tag hinzufügen
             share_content: Teilen
             share_email_label: E-Mail
@@ -311,9 +309,6 @@ entry:
             problem:
                 label: Probleme?
                 description: Erscheint dieser Artikel falsch?
-            theme_toggle_auto: Automatisch
-            theme_toggle_dark: Dunkel
-            theme_toggle_light: Hell
             theme_toggle: Design umschalten
         edit_title: Titel ändern
         original_article: Originalartikel
@@ -752,3 +747,9 @@ ignore_origin_instance_rule:
 captcha:
     label: Sicherheitsprüfung
     help: Geben Sie die im Bild angezeigten Schriftzeichen ein. Durch das Aktualisieren des Bildes wird die vorherige Antwort ungültig.
+
+theme:
+    action:
+        toggle_auto: Automatisches Design
+        toggle_dark: Dunkles Design
+        toggle_light: Helles Design

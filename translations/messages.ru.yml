@@ -33,9 +33,6 @@ menu:
         site_credentials: Реквизиты сайта
         ignore_origin_instance_rules: Глобальные правила игнорирования источника
         quickstart: Быстрый старт
-        theme_toggle_auto: Выбирать тему автоматически
-        theme_toggle_dark: Темная тема
-        theme_toggle_light: Светлая тема
         with_annotations: С аннотациями
     top:
         add_new_entry: 'Добавить новую запись'
@@ -213,6 +210,11 @@ config:
         token_label: Токен ленты
         description: Новостные ленты Atom, предоставляемые wallabag, позволяют читать сохранённые статьи при помощи предпочитаемой вами Atom-читалки. Сначала вам нужно сгенерировать токен.
 entry:
+    action:
+        delete: 'Удалить'
+        set_as_read: 'Пометить, как прочитанное'
+        set_as_unread: 'Пометить, как не прочитанное'
+        star: 'Пометить звездочкой'
     default_title: 'Название записи'
     page_titles:
         unread: 'Непрочитанные записи'
@@ -269,12 +271,8 @@ entry:
         left_menu:
             back_to_top: 'Наверх'
             back_to_homepage: 'Назад'
-            set_as_read: 'Пометить, как прочитанное'
-            set_as_unread: 'Пометить, как не прочитанное'
-            set_as_starred: 'Пометить звездочкой'
             view_original_article: 'Оригинальная статья'
             re_fetch_content: 'Перезагрузить содержимое'
-            delete: 'Удалить'
             add_a_tag: 'Добавить тег'
             share_content: 'Поделиться'
             share_email_label: 'Email'
@@ -285,9 +283,6 @@ entry:
             problem:
                 label: 'Проблемы?'
                 description: 'Что-то не так с записью?'
-            theme_toggle_auto: Авто
-            theme_toggle_dark: Темная
-            theme_toggle_light: Светлая
             theme_toggle: Выбор темы
         edit_title: 'Изменить название'
         original_article: 'оригинал'
@@ -701,3 +696,9 @@ ignore_origin_instance_rule:
     edit_ignore_origin_instance_rule: Редактировать существующее правило игнорирования источника
     new_ignore_origin_instance_rule: Создать глобальное правило игнорирования источника
     page_title: Глобальные правила игнорирования источника
+
+theme:
+    action:
+        toggle_auto: Выбирать тему автоматически
+        toggle_dark: Темная тема
+        toggle_light: Светлая тема

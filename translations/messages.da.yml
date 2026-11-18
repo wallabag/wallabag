@@ -63,6 +63,10 @@ config:
         new_password_label: 'Ny adgangskode'
         repeat_new_password_label: 'Gentag adgangskode'
 entry:
+    action:
+        delete: 'Slet'
+        set_as_read: 'Marker som læst'
+        star: 'Marker som favorit'
     list:
         reading_time: 'estimeret læsetid'
         reading_time_minutes: 'estimeret læsetid: %readingTime% min'
@@ -97,10 +101,7 @@ entry:
     view:
         left_menu:
             back_to_homepage: 'Tilbage'
-            set_as_read: 'Marker som læst'
-            set_as_starred: 'Marker som favorit'
             view_original_article: 'Originalartikel'
-            delete: 'Slet'
             add_a_tag: 'Tliføj et tag'
             share_content: 'Deling'
             problem:

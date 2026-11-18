@@ -1,4 +1,9 @@
 entry:
+    action:
+        delete: Odstranit
+        set_as_read: Označit jako přečtené
+        set_as_unread: Označit jako nepřečtené
+        star: Přepnout označení s hvězdičkou
     filters:
         action:
             filter: Filtrovat
@@ -31,26 +36,19 @@ entry:
         left_menu:
             share_content: Sdílet
             add_a_tag: Přidat štítek
-            set_as_unread: Označit jako nepřečtené
-            set_as_read: Označit jako přečtené
             theme_toggle: Přepnout motiv
             print: Vytisknout
             export: Export
             delete_public_link: odstranit veřejný odkaz
             public_link: veřejný odkaz
             share_email_label: E-mail
-            delete: Odstranit
             re_fetch_content: Znovu načíst obsah
             view_original_article: Původní článek
-            set_as_starred: Přepnout označení s hvězdičkou
             back_to_homepage: Zpět
             back_to_top: Zpět na začátek
             problem:
                 description: Zobrazuje se tento článek špatně?
                 label: Problémy?
-            theme_toggle_auto: Automatický
-            theme_toggle_dark: Tmavý
-            theme_toggle_light: Světlý
         provided_by: Poskytuje
         published_by: Zveřejnil
         published_at: Datum zveřejnění
@@ -129,9 +127,6 @@ menu:
         logout: Odhlásit se
         import: Import
         developer: Správa API klientů
-        theme_toggle_auto: Automatický motiv
-        theme_toggle_dark: Tmavý motiv
-        theme_toggle_light: Světlý motiv
         quickstart: Rychlé spuštění
         ignore_origin_instance_rules: Globální pravidla ignorování původu
         site_credentials: Přihlašovací údaje pro stránku
@@ -746,3 +741,9 @@ ignore_origin_instance_rule:
 captcha:
     label: Bezpečnostní kontrola
     help: Zadejte znaky zobrazené na obrázku. Znovunačtení obrázku zneplatní předchozí odpověď.
+
+theme:
+    action:
+        toggle_auto: Automatický motiv
+        toggle_dark: Tmavý motiv
+        toggle_light: Světlý motiv

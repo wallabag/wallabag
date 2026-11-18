@@ -382,6 +382,11 @@ flashes:
             ignore_origin_rules_updated: தோற்ற விதி புதுப்பிக்கப்பட்டது
             otp_code_invalid: தவறான இரண்டு காரணி அங்கீகாரக் குறியீடு
     entry:
+    action:
+        delete: அழி
+        set_as_read: படித்தபடி குறி
+        set_as_unread: படிக்காத எனக் குறிக்கவும்
+        star: டோகல் நடித்தார்
         notice:
             entry_already_saved: நுழைவு ஏற்கனவே %தேதியில் சேமிக்கப்பட்டது %
             entry_saved: நுழைவு சேமிக்கப்பட்டது
@@ -459,9 +464,6 @@ menu:
         site_credentials: தள நற்சான்றிதழ்கள்
         ignore_origin_instance_rules: உலகளாவிய புறக்கணிப்பு தோற்றம் விதிகள்
         quickstart: குயிக்ச்டார்ட்
-        theme_toggle_light: ஒளி கருப்பொருள்
-        theme_toggle_dark: இருண்ட கருப்பொருள்
-        theme_toggle_auto: தானியங்கி கருப்பொருள்
     top:
         add_new_entry: புதிய நுழைவைச் சேர்க்கவும்
         search: தேடல்
@@ -539,12 +541,8 @@ entry:
         left_menu:
             back_to_top: மீண்டும் மேலே
             back_to_homepage: பின்
-            set_as_read: படித்தபடி குறி
-            set_as_unread: படிக்காத எனக் குறிக்கவும்
-            set_as_starred: டோகல் நடித்தார்
             view_original_article: அசல் கட்டுரை
             re_fetch_content: உள்ளடக்கத்தை மீண்டும் பெறவும்
-            delete: அழி
             add_a_tag: ஒரு குறிச்சொல்லைச் சேர்க்கவும்
             share_content: பங்கு
             share_email_label: மின்னஞ்சல்
@@ -553,9 +551,6 @@ entry:
             export: ஏற்றுமதி
             print: அச்சிடுக
             theme_toggle: கருப்பொருள் மாற்று
-            theme_toggle_light: ஒளி
-            theme_toggle_dark: இருண்ட
-            theme_toggle_auto: தானியங்கி
             problem:
                 label: சிக்கல்கள்?
                 description: இந்த கட்டுரை தவறாகத் தோன்றுகிறதா?
@@ -733,3 +728,9 @@ site_credential:
         back_to_list: பட்டியலுக்குத் திரும்பு
 error:
     page_title: பிழை ஏற்பட்டது
+
+theme:
+    action:
+        toggle_auto: தானியங்கி கருப்பொருள்
+        toggle_dark: இருண்ட கருப்பொருள்
+        toggle_light: ஒளி கருப்பொருள்

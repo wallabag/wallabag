@@ -33,9 +33,6 @@ menu:
         site_credentials: Site bilgileri
         quickstart: Hızlı başlangıç
         ignore_origin_instance_rules: Genel orijinal kaynağı yok say kuralları
-        theme_toggle_auto: Otomatik tema
-        theme_toggle_dark: Koyu renk tema
-        theme_toggle_light: Açık renk tema
         with_annotations: Açıklama metinleriyle
     top:
         add_new_entry: Yeni bir makale ekle
@@ -226,6 +223,11 @@ config:
         token_label: Akış belirteci
         description: wallabag tarafından sağlanan Atom akışları, kaydettiğiniz makaleleri favori Atom okuyucunuzla okumanızı sağlar. Önce bir belirteç (token) oluşturmanız gerekir.
 entry:
+    action:
+        delete: Sil
+        set_as_read: Okundu olarak işaretle
+        set_as_unread: Okunmadı olarak işaretle
+        star: Favorilere ekle/çıkar
     default_title: Makalenin başlığı
     list:
         number_on_the_page: '{0} Herhangi bir makale yok.|{1} Burada bir adet makale var.|]1,Inf[ Burada %count% adet makale var.'
@@ -274,12 +276,8 @@ entry:
     view:
         left_menu:
             back_to_homepage: Geri
-            set_as_read: Okundu olarak işaretle
-            set_as_unread: Okunmadı olarak işaretle
-            set_as_starred: Favorilere ekle/çıkar
             view_original_article: Orijinal makale
             re_fetch_content: İçeriği yenile
-            delete: Sil
             add_a_tag: Bir etiket ekle
             share_content: Paylaş
             share_email_label: E-posta
@@ -291,9 +289,6 @@ entry:
             public_link: herkese açık bağlantı
             delete_public_link: herkese açık bağlantıyı sil
             print: Yazdır
-            theme_toggle_auto: Otomatik
-            theme_toggle_dark: Koyu renk
-            theme_toggle_light: Açık renk
             theme_toggle: Tema değiştir
         edit_title: Başlığı düzenle
         original_article: orijinal
@@ -743,3 +738,9 @@ ignore_origin_instance_rule:
 captcha:
     label: Güvenlik denetimi
     help: Resimde gösterilen karakterleri girin. Resmi yenilediğinizde önceki cevap geçersiz olur.
+
+theme:
+    action:
+        toggle_auto: Otomatik tema
+        toggle_dark: Koyu renk tema
+        toggle_light: Açık renk tema
