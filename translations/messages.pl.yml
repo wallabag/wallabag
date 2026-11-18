@@ -236,7 +236,8 @@ entry:
         delete: Usuń
         set_as_read: Oznacz jako przeczytane
         set_as_unread: Oznacz jako nieprzeczytane
-        star: Przełącz wyróżnienie
+        star: Wyróżnij
+        unstar: Usuń wyróżnienie
     default_title: Tytuł wpisu
     page_titles:
         unread: Nieprzeczytane wpisy
@@ -636,7 +637,7 @@ user:
         placeholder: Filtruj po nazwie użytkownika lub adresie e-mail
 site_credential:
     page_title: Zarządzanie poświadczeniami strony
-    new_site_credential: Stwórz nowe poświadczenie
+    new_site_credential: Stwórz poświadczenie
     edit_site_credential: Edytuj istniejące poświadczenie
     description: Tutaj możesz zarządzać wszystkim poświadczeniami wymaganymi przez strony (stwórz, edytuj i usuń ), takie jak paywall, autentykacja, itp.
     list:
