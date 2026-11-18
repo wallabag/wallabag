@@ -1,0 +1,602 @@
+<?php
+
+namespace Wallabag\Tests\Unit\HttpClient;
+
+use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpClient\Exception\TransportException;
+use Symfony\Component\HttpClient\MockHttpClient;
+use Symfony\Component\HttpClient\NoPrivateNetworkHttpClient;
+use Symfony\Component\HttpClient\Response\AsyncResponse;
+use Symfony\Component\HttpClient\Response\MockResponse;
+use Symfony\Component\HttpClient\ScopingHttpClient;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Contracts\HttpClient\ResponseInterface;
+use Symfony\Contracts\HttpClient\ResponseStreamInterface;
+use Wallabag\HttpClient\HostnameDenyList;
+use Wallabag\HttpClient\HostnameDenyListHttpClient;
+
+class HostnameDenyListHttpClientTest extends TestCase
+{
+    public function testBlockedInitialRequestNeverInvokesInnerClient(): void
+    {
+        $innerClient = new MockHttpClient();
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['example.com']));
+
+        try {
+            $client->request('GET', 'https://user:secret@example.com/private');
+            $this->fail('The blocked request should throw a transport exception.');
+        } catch (TransportException $exception) {
+            $this->assertSame('Host "example.com" is blocked by WALLABAG_FETCH_BLOCKED_HOSTS.', $exception->getMessage());
+        }
+
+        $this->assertSame(0, $innerClient->getRequestsCount());
+    }
+
+    public function testUrlPortsAreIgnoredWhenMatching(): void
+    {
+        $innerClient = new MockHttpClient();
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['example.com']));
+
+        $this->expectException(TransportException::class);
+
+        $client->request('GET', 'https://example.com:8443/private');
+    }
+
+    public function testAllowedRequestRetainsCallerOptions(): void
+    {
+        $innerClient = new MockHttpClient(function (string $method, string $url, array $options): MockResponse {
+            $this->assertSame('POST', $method);
+            $this->assertSame('https://allowed.example/path', $url);
+            $this->assertSame('value', $options['user_data']);
+            $this->assertContains('X-Test: preserved', $options['headers']);
+
+            return new MockResponse('allowed');
+        });
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+
+        $response = $client->request('POST', 'https://allowed.example/path', [
+            'headers' => ['X-Test' => 'preserved'],
+            'user_data' => 'value',
+        ]);
+
+        $this->assertSame('allowed', $response->getContent());
+    }
+
+    public function testEmptyConfigurationDelegatesWithoutNormalizingArguments(): void
+    {
+        $response = new MockResponse('transparent');
+        $innerClient = $this->createMock(HttpClientInterface::class);
+        $innerClient->expects($this->once())
+            ->method('request')
+            ->with('GET', '/relative', ['extra' => 'untouched'])
+            ->willReturn($response)
+        ;
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList([]));
+
+        $this->assertSame($response, $client->request('GET', '/relative', ['extra' => 'untouched']));
+    }
+
+    public function testBlocksRedirectBeforeInvokingRedirectedRequest(): void
+    {
+        $innerClient = new MockHttpClient([
+            new MockResponse('', ['http_code' => 302, 'redirect_url' => 'https://blocked.example/next']),
+            new MockResponse('must not be requested'),
+        ]);
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+
+        $response = $client->request('GET', 'https://allowed.example/start');
+
+        $this->assertSame(1, $innerClient->getRequestsCount());
+
+        try {
+            $response->getHeaders(false);
+            $this->fail('The blocked redirect should throw a transport exception.');
+        } catch (TransportException $exception) {
+            $this->assertSame('Host "blocked.example" is blocked by WALLABAG_FETCH_BLOCKED_HOSTS.', $exception->getMessage());
+        }
+
+        $this->assertSame(1, $innerClient->getRequestsCount());
+    }
+
+    public function testActivePolicyDoesNotConsumeTheResponseDuringRequest(): void
+    {
+        $response = $this->createMock(ResponseInterface::class);
+        $response->expects($this->never())->method('getStatusCode');
+        $response->expects($this->never())->method('getHeaders');
+        $response->expects($this->never())->method('getInfo');
+        $response->expects($this->once())->method('cancel');
+        $innerClient = $this->createMock(HttpClientInterface::class);
+        $innerClient->expects($this->once())->method('request')->willReturn($response);
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+
+        $decoratedResponse = $client->request('GET', 'https://allowed.example/start');
+
+        $this->assertInstanceOf(AsyncResponse::class, $decoratedResponse);
+
+        $decoratedResponse->cancel();
+    }
+
+    /**
+     * @dataProvider blockedRedirectDestinations
+     */
+    public function testChecksRedirectsWithThePrivateNetworkGuardEnabled(string $redirectUrl, string $expectedMessage): void
+    {
+        $transport = new MockHttpClient(new MockResponse('', ['http_code' => 302, 'redirect_url' => $redirectUrl]));
+        $client = new HostnameDenyListHttpClient(new NoPrivateNetworkHttpClient($transport), new HostnameDenyList(['blocked.example']));
+
+        $response = $client->request('GET', 'https://allowed.example/start', ['resolve' => ['allowed.example' => '8.8.8.8']]);
+        try {
+            $response->getStatusCode();
+            $this->fail('The redirect destination should be blocked.');
+        } catch (TransportException $exception) {
+            $this->assertStringContainsString($expectedMessage, $exception->getMessage());
+        }
+        $this->assertSame(1, $transport->getRequestsCount());
+    }
+
+    public function blockedRedirectDestinations(): iterable
+    {
+        yield 'hostname policy' => ['https://blocked.example', 'Host "blocked.example" is blocked by WALLABAG_FETCH_BLOCKED_HOSTS.'];
+        yield 'private-network policy' => ['https://127.0.0.1', 'Host "127.0.0.1" is blocked'];
+    }
+
+    public function testFollowsAllowedRedirectChain(): void
+    {
+        $innerClient = new MockHttpClient([
+            new MockResponse('', ['http_code' => 302, 'redirect_url' => 'https://allowed.example/two']),
+            new MockResponse('', ['http_code' => 301, 'redirect_url' => 'https://allowed.example/three']),
+            new MockResponse('done'),
+        ]);
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+
+        $response = $client->request('GET', 'https://allowed.example/one');
+
+        $this->assertSame('done', $response->getContent());
+        $this->assertSame(3, $innerClient->getRequestsCount());
+        $this->assertSame(2, $response->getInfo('redirect_count'));
+    }
+
+    public function testFollowsTheTransportResolvedRelativeRedirectUrl(): void
+    {
+        $requestCount = 0;
+        $innerClient = new MockHttpClient(function (string $method, string $url) use (&$requestCount): MockResponse {
+            ++$requestCount;
+
+            if (1 === $requestCount) {
+                $this->assertSame('https://allowed.example/path/start', $url);
+
+                return new MockResponse('', [
+                    'http_code' => 302,
+                    'response_headers' => ['Location: ../result'],
+                    'redirect_url' => 'https://allowed.example/result',
+                ]);
+            }
+
+            $this->assertSame('https://allowed.example/result', $url);
+
+            return new MockResponse('done');
+        });
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+
+        $response = $client->request('GET', 'https://allowed.example/path/start');
+
+        $this->assertSame('done', $response->getContent());
+    }
+
+    /**
+     * @dataProvider queryOptions
+     */
+    public function testAppliesQueryOptionsOnlyToTheInitialRequest(bool $useDefaults): void
+    {
+        $innerClient = new MockHttpClient([
+            $first = new MockResponse('', ['http_code' => 302, 'redirect_url' => 'https://allowed.example/next?source=redirect']),
+            $second = new MockResponse('', ['http_code' => 302, 'redirect_url' => 'https://allowed.example/final']),
+            $third = new MockResponse('done'),
+        ]);
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+        $options = ['base_uri' => 'https://allowed.example', 'query' => ['source' => 'request', 'extra' => 'initial']];
+        if ($useDefaults) {
+            $client = $client->withOptions($options);
+            $options = [];
+        }
+
+        $this->assertSame('done', $client->request('GET', '/start', $options)->getContent());
+        $this->assertSame('https://allowed.example/start?source=request&extra=initial', $first->getRequestUrl());
+        $this->assertSame('https://allowed.example/next?source=redirect', $second->getRequestUrl());
+        $this->assertSame('https://allowed.example/final', $third->getRequestUrl());
+    }
+
+    public function queryOptions(): iterable
+    {
+        yield 'request options' => [false];
+        yield 'client defaults' => [true];
+    }
+
+    public function testHonorsRedirectLimit(): void
+    {
+        $innerClient = new MockHttpClient([
+            new MockResponse('', ['http_code' => 302, 'redirect_url' => 'https://allowed.example/two']),
+            new MockResponse('stopped', ['http_code' => 302, 'redirect_url' => 'https://allowed.example/three']),
+            new MockResponse('must not be requested'),
+        ]);
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+
+        $response = $client->request('GET', 'https://allowed.example/one', ['max_redirects' => 1]);
+
+        $this->assertSame('stopped', $response->getContent(false));
+        $this->assertSame(302, $response->getStatusCode());
+        $this->assertSame(2, $innerClient->getRequestsCount());
+        $this->assertSame(1, $response->getInfo('redirect_count'));
+    }
+
+    public function testLeavesRedirectsUntouchedWhenFollowingIsDisabled(): void
+    {
+        $innerClient = new MockHttpClient([
+            new MockResponse('stopped', ['http_code' => 302, 'redirect_url' => 'https://blocked.example/secret']),
+            new MockResponse('must not be requested'),
+        ]);
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+
+        $response = $client->request('GET', 'https://allowed.example/start', ['max_redirects' => 0]);
+
+        $this->assertSame('stopped', $response->getContent(false));
+        $this->assertSame(302, $response->getStatusCode());
+        $this->assertSame(1, $innerClient->getRequestsCount());
+    }
+
+    /**
+     * @dataProvider redirectsThatDropTheRequestBody
+     */
+    public function testDropsRequestBodyAndContentHeaders(int $statusCode, string $initialMethod, string $redirectMethod): void
+    {
+        $requestCount = 0;
+        $innerClient = new MockHttpClient(function (string $method, string $url, array $options) use (&$requestCount, $statusCode, $initialMethod, $redirectMethod): MockResponse {
+            ++$requestCount;
+
+            if (1 === $requestCount) {
+                $this->assertSame($initialMethod, $method);
+
+                return new MockResponse('', ['http_code' => $statusCode, 'redirect_url' => 'https://allowed.example/result']);
+            }
+
+            $this->assertSame($redirectMethod, $method);
+            $this->assertSame('', $options['body']);
+            $this->assertNotContains('Content-Type: application/json', $options['headers']);
+            $this->assertStringNotContainsString('Content-Length:', implode("\n", $options['headers']));
+            $this->assertStringNotContainsString('Transfer-Encoding:', implode("\n", $options['headers']));
+
+            return new MockResponse('converted');
+        });
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+
+        $response = $client->withOptions([
+            'json' => ['key' => 'value'],
+            'headers' => ['Transfer-Encoding' => 'identity'],
+        ])->request($initialMethod, 'https://allowed.example/submit');
+
+        $this->assertSame('converted', $response->getContent());
+    }
+
+    public function redirectsThatDropTheRequestBody(): iterable
+    {
+        yield '301 POST to GET' => [301, 'POST', 'GET'];
+        yield '302 POST to GET' => [302, 'POST', 'GET'];
+        yield '303 PUT to GET' => [303, 'PUT', 'GET'];
+        yield '303 HEAD remains HEAD' => [303, 'HEAD', 'HEAD'];
+    }
+
+    /**
+     * @dataProvider redirectStatusCodesThatPreserveTheRequest
+     */
+    public function testPreservesMethodAndBodyForTemporaryRedirects(int $statusCode): void
+    {
+        $requestCount = 0;
+        $innerClient = new MockHttpClient(function (string $method, string $url, array $options) use (&$requestCount, $statusCode): MockResponse {
+            ++$requestCount;
+
+            if (1 === $requestCount) {
+                return new MockResponse('', ['http_code' => $statusCode, 'redirect_url' => 'https://allowed.example/result']);
+            }
+
+            $this->assertSame('POST', $method);
+            $this->assertSame('payload', $options['body']);
+            $this->assertContains('Content-Type: text/plain', $options['headers']);
+
+            return new MockResponse('preserved');
+        });
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+
+        $response = $client->request('POST', 'https://allowed.example/submit', [
+            'body' => 'payload',
+            'headers' => ['Content-Type' => 'text/plain'],
+        ]);
+
+        $this->assertSame('preserved', $response->getContent());
+    }
+
+    public function redirectStatusCodesThatPreserveTheRequest(): iterable
+    {
+        yield '307' => [307];
+        yield '308' => [308];
+    }
+
+    /**
+     * @dataProvider redirectStatusCodesThatPreserveTheRequest
+     */
+    public function testReplaysASeekableBodyFromItsOriginalOffset(int $statusCode): void
+    {
+        $body = fopen('php://temp', 'w+');
+        fwrite($body, 'prefix:payload');
+        fseek($body, 7);
+        $responses = [
+            new MockResponse('', ['http_code' => $statusCode, 'redirect_url' => 'https://allowed.example/next']),
+            new MockResponse('', ['http_code' => $statusCode, 'redirect_url' => 'https://allowed.example/final']),
+            new MockResponse('done'),
+        ];
+
+        $innerClient = new MockHttpClient(function (string $method, string $url, array $options) use (&$responses): MockResponse {
+            $this->assertSame('POST', $method);
+            $this->assertSame('pay', $options['body'](3));
+            $this->assertSame('load', $options['body'](4));
+            $this->assertSame('', $options['body'](4));
+
+            return array_shift($responses);
+        });
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+
+        try {
+            $this->assertSame('done', $client->request('POST', 'https://allowed.example/start', ['body' => $body])->getContent());
+            $this->assertSame(3, $innerClient->getRequestsCount());
+        } finally {
+            fclose($body);
+        }
+    }
+
+    public function testOneShotBodyFailsBeforeDispatchingBodyPreservingRedirect(): void
+    {
+        $innerClient = new MockHttpClient(function (string $method, string $url, array $options): MockResponse {
+            $this->assertSame('payload', $options['body'](128));
+
+            return new MockResponse('', ['http_code' => 307, 'redirect_url' => 'https://allowed.example/next']);
+        });
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+        $body = static function (): \Generator {
+            yield 'payload';
+        };
+
+        $response = $client->request('POST', 'https://allowed.example/start', ['body' => $body]);
+        try {
+            $response->getContent();
+            $this->fail('The body cannot be replayed.');
+        } catch (TransportException $exception) {
+            $this->assertSame('Cannot replay the request body for an HTTP redirect.', $exception->getMessage());
+        }
+        $this->assertSame(1, $innerClient->getRequestsCount());
+    }
+
+    /**
+     * @dataProvider redirectOrigins
+     */
+    public function testForwardsSensitiveHeadersOnlyToTheInitialOrigin(string $initialUrl, string $redirectUrl, bool $sameOrigin): void
+    {
+        $innerClient = new MockHttpClient([
+            $first = new MockResponse('', ['http_code' => 302, 'redirect_url' => $redirectUrl]),
+            $second = new MockResponse('done'),
+        ]);
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+        $response = $client->withOptions([
+            'auth_bearer' => 'test-token',
+            'headers' => [
+                'Cookie' => 'session=test',
+                'Host' => 'allowed.example',
+                'X-Safe' => 'retained',
+            ],
+        ])->request('GET', $initialUrl);
+
+        $this->assertSame('done', $response->getContent());
+        $this->assertContains('Authorization: Bearer test-token', $first->getRequestOptions()['headers']);
+        $headers = $second->getRequestOptions()['headers'];
+        $this->assertSame($sameOrigin, \in_array('Authorization: Bearer test-token', $headers, true));
+        $this->assertSame($sameOrigin, \in_array('Cookie: session=test', $headers, true));
+        $this->assertSame($sameOrigin, \in_array('Host: allowed.example', $headers, true));
+        $this->assertContains('X-Safe: retained', $headers);
+    }
+
+    public function redirectOrigins(): iterable
+    {
+        yield 'host changes' => ['https://allowed.example/start', 'https://other.example/result', false];
+        yield 'scheme changes' => ['https://allowed.example/start', 'http://allowed.example:443/result', false];
+        yield 'port changes' => ['https://allowed.example/start', 'https://allowed.example:8443/result', false];
+        yield 'equivalent default port' => ['https://allowed.example/start', 'https://allowed.example:443/result', true];
+        yield 'same nondefault port' => ['https://allowed.example:8443/start', 'https://allowed.example:8443/result', true];
+    }
+
+    public function testRestoresSensitiveHeadersOnlyForTheInitialOrigin(): void
+    {
+        $requestCount = 0;
+        $innerClient = new MockHttpClient(function (string $method, string $url, array $options) use (&$requestCount): MockResponse {
+            ++$requestCount;
+            $headers = implode("\n", $options['headers']);
+
+            if (1 === $requestCount) {
+                return new MockResponse('', ['http_code' => 302, 'redirect_url' => 'https://allowed.example:8443/result']);
+            }
+
+            if (2 === $requestCount) {
+                $this->assertStringNotContainsString('Authorization:', $headers);
+                $this->assertStringNotContainsString('Cookie:', $headers);
+
+                return new MockResponse('', ['http_code' => 302, 'redirect_url' => 'https://allowed.example/final']);
+            }
+
+            $this->assertStringContainsString('Authorization: Bearer secret', $headers);
+            $this->assertStringContainsString('Cookie: session=secret', $headers);
+
+            return new MockResponse('done');
+        });
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+
+        $response = $client->request('GET', 'https://allowed.example/start', [
+            'headers' => [
+                'Authorization' => 'Bearer secret',
+                'Cookie' => 'session=secret',
+            ],
+        ]);
+
+        $this->assertSame('done', $response->getContent());
+    }
+
+    public function testPreservesProgressCallbacksAcrossRedirects(): void
+    {
+        $progressCalls = 0;
+        $innerClient = new MockHttpClient([
+            new MockResponse('', ['http_code' => 302, 'redirect_url' => 'https://allowed.example/result']),
+            new MockResponse('done'),
+        ]);
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+
+        $response = $client->request('GET', 'https://allowed.example/start', [
+            'on_progress' => static function () use (&$progressCalls): void {
+                ++$progressCalls;
+            },
+        ]);
+
+        $this->assertSame('done', $response->getContent());
+        $this->assertGreaterThan(1, $progressCalls);
+    }
+
+    public function testCarriesRemainingMaxDurationAcrossRedirects(): void
+    {
+        $requestCount = 0;
+        $innerClient = new MockHttpClient(function (string $method, string $url, array $options) use (&$requestCount): MockResponse {
+            ++$requestCount;
+
+            if (1 === $requestCount) {
+                $this->assertSame(1.0, $options['max_duration']);
+
+                return new MockResponse('', [
+                    'http_code' => 302,
+                    'redirect_url' => 'https://allowed.example/result',
+                    'total_time' => 0.75,
+                ]);
+            }
+
+            $this->assertSame(0.25, $options['max_duration']);
+
+            return new MockResponse('done');
+        });
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+
+        $response = $client->request('GET', 'https://allowed.example/start', ['max_duration' => 1]);
+
+        $this->assertSame('done', $response->getContent());
+    }
+
+    public function testStreamsDecoratedResponses(): void
+    {
+        $innerClient = new MockHttpClient(new MockResponse(['one', 'two']));
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+        $response = $client->request('GET', 'https://allowed.example/stream');
+        $content = '';
+
+        foreach ($client->stream($response) as $chunk) {
+            if (!$chunk->isFirst() && !$chunk->isLast()) {
+                $content .= $chunk->getContent();
+            }
+        }
+
+        $this->assertSame('onetwo', $content);
+    }
+
+    public function testStreamsRedirectingResponsesWithoutSharingState(): void
+    {
+        $innerClient = new MockHttpClient([
+            new MockResponse('', ['http_code' => 302, 'redirect_url' => 'https://allowed.example/one-final']),
+            new MockResponse('', ['http_code' => 302, 'redirect_url' => 'https://allowed.example/two-final']),
+            new MockResponse('one'),
+            new MockResponse('two'),
+        ]);
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+        $firstResponse = $client->request('GET', 'https://allowed.example/one', ['max_redirects' => 1]);
+        $secondResponse = $client->request('GET', 'https://allowed.example/two', ['max_redirects' => 1]);
+        $content = [
+            spl_object_id($firstResponse) => '',
+            spl_object_id($secondResponse) => '',
+        ];
+
+        foreach ($client->stream([$firstResponse, $secondResponse]) as $response => $chunk) {
+            if (!$chunk->isFirst() && !$chunk->isLast()) {
+                $content[spl_object_id($response)] .= $chunk->getContent();
+            }
+        }
+
+        $this->assertSame('one', $content[spl_object_id($firstResponse)]);
+        $this->assertSame('two', $content[spl_object_id($secondResponse)]);
+        $this->assertSame(1, $firstResponse->getInfo('redirect_count'));
+        $this->assertSame(1, $secondResponse->getInfo('redirect_count'));
+    }
+
+    public function testActivePolicyRejectsUndecoratedResponsesWhenStreaming(): void
+    {
+        $client = new HostnameDenyListHttpClient(new MockHttpClient(), new HostnameDenyList(['blocked.example']));
+
+        $this->expectException(\TypeError::class);
+
+        $client->stream(new MockResponse());
+    }
+
+    public function testEmptyConfigurationDelegatesStreaming(): void
+    {
+        $response = $this->createMock(ResponseInterface::class);
+        $stream = $this->createMock(ResponseStreamInterface::class);
+        $innerClient = $this->createMock(HttpClientInterface::class);
+        $innerClient->expects($this->once())
+            ->method('stream')
+            ->with($response, 0.5)
+            ->willReturn($stream)
+        ;
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList([]));
+
+        $this->assertSame($stream, $client->stream($response, 0.5));
+    }
+
+    public function testWithOptionsPreservesDefaultsAndPolicy(): void
+    {
+        $innerClient = new MockHttpClient(function (string $method, string $url, array $options): MockResponse {
+            $this->assertContains('X-Default: retained', $options['headers']);
+
+            return new MockResponse('configured');
+        });
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+        $configuredClient = $client->withOptions(['headers' => ['X-Default' => 'retained']]);
+
+        $this->assertSame('configured', $configuredClient->request('GET', 'https://allowed.example')->getContent());
+
+        $this->expectException(TransportException::class);
+        $configuredClient->request('GET', 'https://blocked.example');
+    }
+
+    public function testResetIsDelegatedToTheInnerClient(): void
+    {
+        $innerClient = new MockHttpClient(new MockResponse('done'));
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+
+        $client->request('GET', 'https://allowed.example');
+        $this->assertSame(1, $innerClient->getRequestsCount());
+
+        $client->reset();
+
+        $this->assertSame(0, $innerClient->getRequestsCount());
+    }
+
+    public function testLoggerIsDelegatedToTheInnerClient(): void
+    {
+        $logger = $this->createMock(LoggerInterface::class);
+        $innerClient = $this->createMock(ScopingHttpClient::class);
+        $innerClient->expects($this->once())->method('setLogger')->with($logger);
+        $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
+
+        $client->setLogger($logger);
+    }
+}
