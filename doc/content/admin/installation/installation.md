@@ -140,6 +140,16 @@ image (`wallabag/wallabag`) with port `80` already set.
 
 [![Deploy to ZopDay](https://zop.dev/deploytozopday-inkhard.svg)](https://zop.dev/zopday/app/deploy?image=wallabag/wallabag&port=80&name=wallabag&utm_source=github&utm_medium=one_click&utm_content=wallabag)
 
+## Installation on Simafri
+
+Simafri has a step-by-step guide for running the official wallabag Docker
+image on its managed VPS, with MariaDB, Redis and HTTPS through a reverse
+proxy, from the first login to backups and upgrades. You keep root access to
+the server, while Simafri handles its system updates, monitoring and
+encrypted nightly backups kept off the machine.
+
+[Install wallabag on Simafri](https://www.simafri.com/en/guides/self-host-wallabag/)
+
 ## Installation on Synology
 
 The SynoCommunity provides a package to install wallabag on your Synology NAS.
