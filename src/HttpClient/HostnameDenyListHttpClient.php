@@ -20,6 +20,7 @@ final class HostnameDenyListHttpClient implements HttpClientInterface, LoggerAwa
     use HttpClientTrait;
 
     private array $defaultOptions = self::OPTIONS_DEFAULTS;
+    private ?LoggerInterface $logger = null;
 
     public function __construct(
         private HttpClientInterface $client,
@@ -98,6 +99,8 @@ final class HostnameDenyListHttpClient implements HttpClientInterface, LoggerAwa
 
     public function setLogger(LoggerInterface $logger): void
     {
+        $this->logger = $logger;
+
         if ($this->client instanceof LoggerAwareInterface) {
             $this->client->setLogger($logger);
         }
@@ -141,7 +144,7 @@ final class HostnameDenyListHttpClient implements HttpClientInterface, LoggerAwa
                 return;
             }
 
-            $this->assertUrlIsAllowed($redirectUrl);
+            $this->assertUrlIsAllowed($redirectUrl, isRedirect: true);
             $sameOrigin = $initialOrigin === self::getOrigin($redirectUrl);
 
             if (self::shouldDropBodyForRedirect($method, $statusCode)) {
@@ -211,13 +214,18 @@ final class HostnameDenyListHttpClient implements HttpClientInterface, LoggerAwa
         return [$scheme, strtolower($parts['host']), $parts['port'] ?? ('https' === $scheme ? 443 : 80)];
     }
 
-    private function assertUrlIsAllowed(string $url): void
+    private function assertUrlIsAllowed(string $url, bool $isRedirect = false): void
     {
         $hostname = parse_url($url, \PHP_URL_HOST);
 
         if (!\is_string($hostname) || null === $blockedHostname = $this->denyList->getBlockedHostname($hostname)) {
             return;
         }
+
+        $this->logger?->warning('Blocked HTTP request to denied hostname.', [
+            'hostname' => $blockedHostname,
+            'phase' => $isRedirect ? 'redirect' : 'initial',
+        ]);
 
         throw new TransportException(\sprintf('Host "%s" is blocked by WALLABAG_FETCH_BLOCKED_HOSTS.', $blockedHostname));
     }
