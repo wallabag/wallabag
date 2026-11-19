@@ -54,18 +54,30 @@ class PocketCsvImport extends AbstractImport
         }
 
         $entries = [];
+        // Pocket's later exports add a cursor column before tags, so read columns by header name
+        $columns = ['title' => 0, 'url' => 1, 'time_added' => 2, 'tags' => 3, 'status' => 4];
+        $firstRow = true;
         $handle = fopen($this->filepath, 'r');
         while (false !== ($data = fgetcsv($handle, 10240, ',', '"', ''))) {
-            if ('title' === $data[0]) {
-                continue;
+            if ($firstRow) {
+                $firstRow = false;
+                $data[0] = preg_replace('/^\xEF\xBB\xBF/', '', (string) $data[0]);
+                $header = array_flip(array_map(static fn ($name) => strtolower(trim((string) $name)), $data));
+
+                if (isset($header['title'], $header['url'], $header['time_added'], $header['tags'], $header['status'])) {
+                    $columns = $header;
+
+                    continue;
+                }
             }
 
+            $value = static fn (string $column) => isset($columns[$column]) ? ($data[$columns[$column]] ?? '') : '';
             $entries[] = [
-                'url' => $data[1],
-                'title' => $data[0],
-                'is_archived' => 'archive' === $data[4],
-                'created_at' => $data[2],
-                'tags' => $data[3],
+                'url' => $value('url'),
+                'title' => $value('title'),
+                'is_archived' => 'archive' === $value('status'),
+                'created_at' => $value('time_added'),
+                'tags' => $value('tags'),
             ];
         }
         fclose($handle);

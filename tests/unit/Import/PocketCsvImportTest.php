@@ -184,6 +184,24 @@ class PocketCsvImportTest extends TestCase
         $this->assertNotEmpty($redisMock->lpop('pocket_csv'));
     }
 
+    public function testImportReadsColumnsByHeader(): void
+    {
+        $pocketCsvImport = $this->getPocketCsvImport();
+        $pocketCsvImport->setFilepath(__DIR__ . '/../../fixtures/Import/pocket-with-cursor.csv');
+
+        $factory = new RedisMockFactory();
+        $redisMock = $factory->getAdapter(Client::class, true);
+        $pocketCsvImport->setProducer(new Producer(new RedisQueue($redisMock, 'pocket_csv')));
+
+        $this->assertTrue($pocketCsvImport->import());
+
+        $entries = array_map(static fn () => json_decode($redisMock->lpop('pocket_csv'), true), range(1, 3));
+        usort($entries, static fn ($a, $b) => strcmp($a['url'], $b['url']));
+        $this->assertSame(['reading|tech', false], [$entries[0]['tags'], $entries[0]['is_archived']]);
+        $this->assertSame(['Title', 'https://example.net/'], [$entries[1]['title'], $entries[1]['url']]);
+        $this->assertSame(['tech', true], [$entries[2]['tags'], $entries[2]['is_archived']]);
+    }
+
     public function testImportBadFile(): void
     {
         $pocketCsvImport = $this->getPocketCsvImport();
