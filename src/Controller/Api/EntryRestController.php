@@ -541,7 +541,7 @@ class EntryRestController extends WallabagRestController
      *     @OA\Parameter(
      *         name="urls",
      *         in="query",
-     *         description="Urls (as an array) to create. A JSON array of URL strings, e.g. [""https://wallabag.org/"", ""https://example.com/""]",
+     *         description="Urls (as an array) to create. A JSON array of URL strings, e.g. [""https://wallabag.org/"", ""https://example.com/""]. It can also be sent in the request body.",
      *         required=true,
      *         @OA\Schema(type="string", example="[""https://wallabag.org/"", ""https://example.com/""]")
      *     ),
@@ -563,7 +563,11 @@ class EntryRestController extends WallabagRestController
     #[IsGranted('CREATE_ENTRIES')]
     public function postEntriesListAction(Request $request, EntryRepository $entryRepository, EventDispatcherInterface $eventDispatcher, ContentProxy $contentProxy)
     {
-        $urls = json_decode($request->query->get('urls', '[]'));
+        $urls = $request->request->all()['urls'] ?? $request->query->get('urls', '[]');
+
+        if (\is_string($urls)) {
+            $urls = json_decode($urls);
+        }
 
         if (!\is_array($urls)) {
             throw new BadRequestHttpException('urls must be a JSON array of non-empty strings');
