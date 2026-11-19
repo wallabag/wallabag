@@ -750,15 +750,23 @@ feeds:
     action:
         add: Add feed
         back_to_list: Back to subscriptions
+        dismiss: Dismiss
         edit: Edit feed
         fetch: Refresh
         items: View articles
+        purge: Clear articles
+    alert:
+        confirm_purge: Dismiss all pending articles in this feed?
     empty: You have no feed subscriptions.
     flash:
+        already_processed: This article has already been processed.
         created: Feed subscription added.
         created_refresh_error: Feed subscription added, but the first refresh failed.
+        dismissed: Article dismissed.
         fetch_error: Could not refresh the feed. Check its address and try again.
         fetched: Feed refreshed.
+        no_pending_articles: No pending articles to dismiss.
+        purged: Pending articles dismissed.
         updated: Feed subscription updated.
     items_empty: No articles are waiting in this feed.
     last_fetch: 'Last successful refresh: %date%'

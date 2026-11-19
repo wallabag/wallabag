@@ -37,4 +37,15 @@ class FeedItemRepository extends ServiceEntityRepository
             'id' => 'DESC',
         ]);
     }
+
+    public function dismissPending(FeedUrl $feed): int
+    {
+        return (int) $this->createQueryBuilder('item')
+            ->update()
+            ->set('item.isTrashed', ':trashed')->setParameter('trashed', true)
+            ->where('item.feed = :feed')->setParameter('feed', $feed)
+            ->andWhere('item.isTrashed = false')
+            ->getQuery()
+            ->execute();
+    }
 }

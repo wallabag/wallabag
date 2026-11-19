@@ -44,6 +44,7 @@ class FeedSubscriptionVoterTest extends TestCase
         yield 'edit' => ['EDIT'];
         yield 'list articles' => ['LIST_ITEMS'];
         yield 'refresh' => ['REFRESH'];
+        yield 'purge articles' => ['PURGE_ITEMS'];
     }
 
     private function token(?User $user): TokenInterface

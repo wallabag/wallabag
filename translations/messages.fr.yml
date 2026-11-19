@@ -745,15 +745,23 @@ feeds:
     action:
         add: Ajouter un flux
         back_to_list: Retour aux abonnements
+        dismiss: Ignorer
         edit: Modifier le flux
         fetch: Actualiser
         items: Voir les articles
+        purge: Vider le flux
+    alert:
+        confirm_purge: Ignorer tous les articles en attente de ce flux ?
     empty: Vous n'êtes abonné à aucun flux.
     flash:
+        already_processed: Cet article a déjà été traité.
         created: Abonnement ajouté.
         created_refresh_error: "Abonnement ajouté, mais la première actualisation a échoué."
+        dismissed: Article ignoré.
         fetch_error: Impossible d'actualiser le flux. Vérifiez son adresse et réessayez.
         fetched: Flux actualisé.
+        no_pending_articles: Aucun article en attente à ignorer.
+        purged: Articles en attente ignorés.
         updated: Abonnement mis à jour.
     items_empty: Aucun article en attente dans ce flux.
     last_fetch: 'Dernière actualisation réussie : %date%'
