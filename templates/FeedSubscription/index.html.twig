@@ -19,6 +19,13 @@
                         <h2 class="card-title feed-subscription-title">{{ feed.title }}</h2>
                         <p><a href="{{ feed.url }}" rel="noreferrer" class="feed-url">{{ feed.url }}</a></p>
                     </div>
+                    <div class="card-action">
+                        {% if is_granted('EDIT', feed) %}
+                            <a class="waves-effect btn-flat feed-action" href="{{ path('edit_feed', {id: feed.id}) }}">
+                                <i class="material-icons left" aria-hidden="true">edit</i>{{ 'feeds.action.edit'|trans }}
+                            </a>
+                        {% endif %}
+                    </div>
                 </article>
             {% else %}
                 <p>{{ 'feeds.empty'|trans }}</p>

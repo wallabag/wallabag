@@ -750,9 +750,11 @@ feeds:
     action:
         add: Add feed
         back_to_list: Back to subscriptions
+        edit: Edit feed
     empty: You have no feed subscriptions.
     flash:
         created: Feed subscription added.
+        updated: Feed subscription updated.
     page_title: Feed subscriptions
 theme:
     action:
