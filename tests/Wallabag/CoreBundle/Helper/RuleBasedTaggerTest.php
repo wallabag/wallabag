@@ -8,6 +8,9 @@ use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use RulerZ\RulerZ;
+use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\ConstraintViolationList;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -23,6 +26,7 @@ class RuleBasedTaggerTest extends TestCase
     private $tagRepository;
     private $entryRepository;
     private $tagger;
+    private $validator;
     private $logger;
     private $handler;
 
@@ -35,7 +39,16 @@ class RuleBasedTaggerTest extends TestCase
         $this->handler = new TestHandler();
         $this->logger->pushHandler($this->handler);
 
-        $this->tagger = new RuleBasedTagger($this->rulerz, $this->tagRepository, $this->entryRepository, $this->logger);
+        $this->validator = $this->createMock(ValidatorInterface::class);
+        $this->validator->method('validate')->willReturnCallback(static function ($rule) {
+            if ('invalid rule' !== $rule->getRule()) {
+                return new ConstraintViolationList();
+            }
+
+            return new ConstraintViolationList([new ConstraintViolation('invalid', null, [], $rule, 'rule', $rule->getRule())]);
+        });
+
+        $this->tagger = new RuleBasedTagger($this->rulerz, $this->tagRepository, $this->entryRepository, $this->logger, $this->validator);
     }
 
     public function testTagWithNoRule()
@@ -47,6 +60,28 @@ class RuleBasedTaggerTest extends TestCase
         $this->assertTrue($entry->getTags()->isEmpty());
         $records = $this->handler->getRecords();
         $this->assertCount(0, $records);
+    }
+
+    public function testTagIgnoresInvalidStoredRule()
+    {
+        $user = $this->getUser([
+            $this->getTaggingRule('invalid rule', ['foo']),
+            $this->getTaggingRule('rule as string', ['bar']),
+        ]);
+        $entry = new Entry($user);
+
+        $this->rulerz
+            ->expects($this->once())
+            ->method('satisfies')
+            ->with($this->anything(), 'rule as string')
+            ->willReturn(true);
+
+        $this->tagger->tag($entry);
+
+        $this->assertCount(1, $entry->getTags());
+        $this->assertSame('bar', $entry->getTags()[0]->getLabel());
+        $records = $this->handler->getRecords();
+        $this->assertSame('Ignoring invalid tagging rule.', $records[0]['message']);
     }
 
     public function testTagWithNoMatchingRule()

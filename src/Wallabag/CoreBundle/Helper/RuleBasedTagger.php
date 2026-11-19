@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Psr\Log\LoggerInterface;
 use RulerZ\RulerZ;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Entity\TaggingRule;
@@ -17,13 +18,15 @@ class RuleBasedTagger
     private $tagRepository;
     private $entryRepository;
     private $logger;
+    private $validator;
 
-    public function __construct(RulerZ $rulerz, TagRepository $tagRepository, EntryRepository $entryRepository, LoggerInterface $logger)
+    public function __construct(RulerZ $rulerz, TagRepository $tagRepository, EntryRepository $entryRepository, LoggerInterface $logger, ValidatorInterface $validator)
     {
         $this->rulerz = $rulerz;
         $this->tagRepository = $tagRepository;
         $this->entryRepository = $entryRepository;
         $this->logger = $logger;
+        $this->validator = $validator;
     }
 
     /**
@@ -124,7 +127,19 @@ class RuleBasedTagger
      */
     private function getRulesForUser(User $user)
     {
-        return $user->getConfig()->getTaggingRules();
+        $rules = [];
+
+        foreach ($user->getConfig()->getTaggingRules() as $rule) {
+            if (0 < \count($this->validator->validate($rule))) {
+                $this->logger->warning('Ignoring invalid tagging rule.', ['rule' => $rule->getRule()]);
+
+                continue;
+            }
+
+            $rules[] = $rule;
+        }
+
+        return $rules;
     }
 
     /**
