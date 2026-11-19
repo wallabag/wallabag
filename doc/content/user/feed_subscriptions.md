@@ -9,3 +9,5 @@ Manual subscriptions collect articles for you to save or dismiss. Clearing a fee
 Enable automatic imports to save new articles directly in wallabag. Items already waiting when you switch modes stay pending. The link to those articles disappears once you have processed them all. Each refresh collects up to ten new articles. It keeps the most recent 200 records and any articles that are still published in the feed.
 
 Use **Refresh** to check a subscription immediately. Wallabag shows the last successful refresh and flags a feed if it has not refreshed successfully for two days.
+
+An administrator can also schedule regular refreshes for all subscriptions with [`wallabag:fetch-rss`]({{< relref "/admin/console_commands.md" >}}).
