@@ -1,0 +1,28 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ 'feeds.page_title'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col s12">
+            {% if is_granted('ROLE_USER') %}
+                <p>
+                    <a class="btn waves-effect waves-light" href="{{ path('new_feed') }}">
+                        <i class="material-icons left" aria-hidden="true">add</i>{{ 'feeds.action.add'|trans }}
+                    </a>
+                </p>
+            {% endif %}
+
+            {% for feed in feeds %}
+                <article class="card">
+                    <div class="card-content">
+                        <h2 class="card-title feed-subscription-title">{{ feed.title }}</h2>
+                        <p><a href="{{ feed.url }}" rel="noreferrer" class="feed-url">{{ feed.url }}</a></p>
+                    </div>
+                </article>
+            {% else %}
+                <p>{{ 'feeds.empty'|trans }}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

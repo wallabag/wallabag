@@ -104,6 +104,16 @@ class MainMenuBuilder
             ]);
         }
 
+        if ($this->authorization->isGranted('ROLE_USER')) {
+            $menu->addChild('feeds', [
+                'route' => 'all_import_feed',
+                'label' => 'feeds.page_title',
+                'attributes' => ['class' => 'bold'],
+                'linkAttributes' => ['class' => 'waves-effect'],
+                'extras' => ['routes' => ['new_feed']],
+            ]);
+        }
+
         return $menu;
     }
 

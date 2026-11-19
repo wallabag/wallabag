@@ -35,7 +35,7 @@ class MainMenuBuilderTest extends TestCase
         $this->assertSame($expected, array_keys($menu->getChildren()));
 
         foreach ($menu->getChildren() as $item) {
-            $this->assertSame(0, $item->getExtra('counter'));
+            $this->assertSame('feeds' === $item->getName() ? null : 0, $item->getExtra('counter'));
         }
     }
 
@@ -73,5 +73,6 @@ class MainMenuBuilderTest extends TestCase
         yield 'none' => [[], []];
         yield 'tags only' => [['LIST_TAGS'], ['tags']];
         yield 'entries only' => [['LIST_ENTRIES'], ['unread', 'starred', 'archive', 'annotated', 'all']];
+        yield 'signed-in user' => [['ROLE_USER'], ['feeds']];
     }
 }
