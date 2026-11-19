@@ -6,6 +6,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
+use Wallabag\Helper\FeedUrlValidator;
 
 class HttpUrlWithoutCredentialsValidator extends ConstraintValidator
 {
@@ -23,21 +24,8 @@ class HttpUrlWithoutCredentialsValidator extends ConstraintValidator
             throw new UnexpectedValueException($value, 'string');
         }
 
-        if (!$this->isValid($value)) {
+        if (!FeedUrlValidator::isValid($value)) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
-    }
-
-    private function isValid(string $url): bool
-    {
-        if (!filter_var($url, \FILTER_VALIDATE_URL)) {
-            return false;
-        }
-
-        $parts = parse_url($url);
-
-        return \in_array(strtolower($parts['scheme'] ?? ''), ['http', 'https'], true)
-            && !isset($parts['user'])
-            && !isset($parts['pass']);
     }
 }

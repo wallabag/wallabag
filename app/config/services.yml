@@ -352,3 +352,13 @@ services:
         public: false
         tags:
             - { name: pagerfanta.view, alias: default_wallabag }
+
+    wallabag.feed_http_client:
+        class: Symfony\Contracts\HttpClient\HttpClientInterface
+        factory: ['Symfony\Component\HttpClient\HttpClient', 'create']
+        public: false
+
+    Wallabag\Helper\FeedReader:
+        arguments:
+            $userAgent: '%env(WALLABAG_USER_AGENT)%'
+            $client: '@wallabag.feed_http_client'
