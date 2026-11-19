@@ -26,8 +26,9 @@
                             <p>{{ 'feeds.stale'|trans }}</p>
                         {% endif %}
                     </div>
+                    {% set has_article_actions = not feed.automatic or pendingFeeds[feed.id] is defined %}
                     <div class="card-action">
-                        {% if is_granted('LIST_ITEMS', feed) %}
+                        {% if has_article_actions and is_granted('LIST_ITEMS', feed) %}
                             <a class="waves-effect btn-flat feed-action" href="{{ path('display_feed_items', {id: feed.id}) }}">
                                 <i class="material-icons left" aria-hidden="true">list</i>{{ 'feeds.action.items'|trans }}
                             </a>
@@ -45,7 +46,7 @@
                                 </button>
                             </form>
                         {% endif %}
-                        {% if is_granted('PURGE_ITEMS', feed) %}
+                        {% if has_article_actions and is_granted('PURGE_ITEMS', feed) %}
                             <form class="inline-block" action="{{ path('purge_feed', {id: feed.id}) }}" method="post" onsubmit="return confirm('{{ 'feeds.alert.confirm_purge'|trans|escape('js') }}')">
                                 <input type="hidden" name="token" value="{{ csrf_token('feed-purge-' ~ feed.id) }}">
                                 <button class="waves-effect btn-flat feed-action" type="submit">

@@ -319,6 +319,33 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         self::assertNotNull($em->find(FeedUrl::class, $foreign->getId()));
     }
 
+    public function testAutomaticSubscriptionShowsItsArticleLinkUntilTheLastPendingItemIsDismissed(): void
+    {
+        $this->logInAs('admin');
+        $em = $this->getEntityManager();
+        $owner = $this->getLoggedInUser();
+        $feed = (new FeedUrl($owner))->setTitle('Switchable')->setUrl('https://example.org/first');
+        $manual = (new FeedUrl($owner))->setTitle('Manual')->setUrl('https://example.org/other');
+        $item = new FeedItem($feed, 'https://example.org/article', 'An article');
+        $em->persist($feed);
+        $em->persist($manual);
+        $em->persist($item);
+        $em->flush();
+
+        $client = $this->getTestClient();
+        $crawler = $client->request('GET', '/atom/edit/' . $feed->getId());
+        $client->submit($crawler->filter('#feed_save')->form(), ['feed[automatic]' => '1']);
+        $crawler = $client->followRedirect();
+        $items = '/atom/items/' . $feed->getId();
+        self::assertCount(1, $crawler->filter(\sprintf('main a[href="%s"]', $items)));
+
+        $crawler = $client->request('GET', $items);
+        $this->submitAction($crawler, '/atom/item/delete/' . $item->getId());
+        $crawler = $client->request('GET', '/atom/list');
+        self::assertCount(0, $crawler->filter(\sprintf('main a[href="%s"]', $items)));
+        self::assertCount(1, $crawler->filter(\sprintf('main a[href="/atom/items/%d"]', $manual->getId())));
+    }
+
     public function testRejectedImportLeavesTheArticlePending(): void
     {
         $this->logInAs('admin');
