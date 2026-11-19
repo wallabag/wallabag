@@ -362,3 +362,7 @@ services:
         arguments:
             $userAgent: '%env(WALLABAG_USER_AGENT)%'
             $client: '@wallabag.feed_http_client'
+
+    Wallabag\Helper\FeedFetcher:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_feeds_producer'

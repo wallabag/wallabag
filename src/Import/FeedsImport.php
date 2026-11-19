@@ -2,21 +2,30 @@
 
 namespace Wallabag\Import;
 
+use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
 use Wallabag\Helper\FeedUrlValidator;
 
 class FeedsImport extends AbstractImport
 {
-    public function importItem(User $user, string $url, ?string $title): void
+    public function importItem(User $user, string $url, ?string $title, ?ProducerInterface $producer = null): void
     {
         $previousUser = $this->user;
+        $previousProducer = $this->producer;
         $this->setUser($user);
+        $this->producer = $producer;
+        $entry = ['url' => $url, 'title' => $title];
 
         try {
-            $this->parseEntries([['url' => $url, 'title' => $title]]);
+            if (null !== $producer) {
+                $this->parseEntriesForProducer([$entry]);
+            } else {
+                $this->parseEntries([$entry]);
+            }
         } finally {
             $this->user = $previousUser;
+            $this->producer = $previousProducer;
         }
     }
 

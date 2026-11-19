@@ -78,7 +78,12 @@ bin/console rabbitmq:consumer --env=prod import_chrome -w
 
 # for URL list import
 bin/console rabbitmq:consumer --env=prod import_url_list -w
+
+# for automatic feed imports
+bin/console rabbitmq:consumer --env=prod import_feeds -w
 ```
+
+When RabbitMQ is enabled, it handles new articles from automatic feed subscriptions. Manual article saves run synchronously.
 
 Install Redis for asynchronous tasks
 ------------------------------------

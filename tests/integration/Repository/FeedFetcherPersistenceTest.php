@@ -2,7 +2,9 @@
 
 namespace Wallabag\Tests\Integration\Repository;
 
+use Craue\ConfigBundle\Util\Config;
 use Laminas\Feed\Reader\Entry\EntryInterface;
+use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\FeedItem;
 use Wallabag\Entity\FeedUrl;
@@ -29,7 +31,7 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
         $reader = $this->createMock(FeedReader::class);
         $reader->method('read')->willReturn($entries);
         $items = $em->getRepository(FeedItem::class);
-        $fetcher = new FeedFetcher($em, $items, $reader, static::getContainer()->get(FeedsImport::class));
+        $fetcher = $this->createFetcher($reader);
 
         self::assertSame(10, $fetcher->fetch($feed));
         self::assertCount(10, $items->findPending($feed));
@@ -52,12 +54,26 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
         $reader->method('read')->willReturn([$this->entry($url)]);
         static::getContainer()->set(ContentProxy::class, $this->createMock(ContentProxy::class));
         $items = $em->getRepository(FeedItem::class);
-        $fetcher = new FeedFetcher($em, $items, $reader, static::getContainer()->get(FeedsImport::class));
+        $fetcher = $this->createFetcher($reader);
 
         self::assertSame(1, $fetcher->fetch($feed));
         self::assertSame(0, $fetcher->fetch($feed));
         self::assertNotNull($em->getRepository(Entry::class)->findOneBy(['user' => $owner, 'url' => $url]));
         self::assertCount(0, $items->findPending($feed));
+    }
+
+    private function createFetcher(FeedReader $reader): FeedFetcher
+    {
+        $em = $this->getEntityManager();
+
+        return new FeedFetcher(
+            $em,
+            $em->getRepository(FeedItem::class),
+            $reader,
+            static::getContainer()->get(FeedsImport::class),
+            $this->createMock(Config::class),
+            $this->createMock(ProducerInterface::class),
+        );
     }
 
     private function entry(string $url): EntryInterface

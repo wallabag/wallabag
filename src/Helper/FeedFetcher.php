@@ -2,7 +2,9 @@
 
 namespace Wallabag\Helper;
 
+use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
+use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Wallabag\Entity\FeedItem;
 use Wallabag\Entity\FeedUrl;
 use Wallabag\Import\FeedsImport;
@@ -18,6 +20,8 @@ class FeedFetcher
         private readonly FeedItemRepository $items,
         private readonly FeedReader $reader,
         private readonly FeedsImport $import,
+        private readonly Config $config,
+        private readonly ProducerInterface $rabbitMqProducer,
     ) {
     }
 
@@ -53,9 +57,10 @@ class FeedFetcher
         }
 
         $automatic = $feed->isAutomatic();
+        $producer = $automatic && $this->config->get('import_with_rabbitmq') ? $this->rabbitMqProducer : null;
         foreach ($new as $item) {
             if ($automatic) {
-                $this->import->importItem($feed->getUser(), $item->getUrl(), $item->getTitle());
+                $this->import->importItem($feed->getUser(), $item->getUrl(), $item->getTitle(), $producer);
                 $item->dismiss();
             }
             $this->entityManager->persist($item);

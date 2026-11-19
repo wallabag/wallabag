@@ -324,6 +324,13 @@ old_sound_rabbit_mq:
             exchange_options:
                 name: 'wallabag.import.url_list'
                 type: topic
+        import_feeds:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.feeds'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.feeds'
     consumers:
         import_readability:
             connection: default
@@ -450,6 +457,15 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.url_list'
             callback: wallabag.consumer.amqp.url_list
+            qos_options: {prefetch_count: "%env(int:WALLABAG_RABBITMQ_PREFETCH_COUNT)%"}
+        import_feeds:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.feeds'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.feeds'
+            callback: wallabag.consumer.amqp.feeds
             qos_options: {prefetch_count: "%env(int:WALLABAG_RABBITMQ_PREFETCH_COUNT)%"}
 
 fos_js_routing:
