@@ -3,6 +3,7 @@
 namespace Wallabag\Tests\Unit\Helper;
 
 use Laminas\Feed\Reader\Exception\ExceptionInterface as ReaderException;
+use Laminas\Feed\Reader\Feed\AbstractFeed;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
@@ -42,6 +43,28 @@ class FeedReaderTest extends TestCase
         $reader = new FeedReader('wallabag', new MockHttpClient([$redirect, new MockResponse($page)]));
 
         self::assertSame('https://8.8.8.8:8443/blog/atom', $reader->resolve('https://8.8.8.8/'));
+    }
+
+    public function testReadsArticlesAndRecordsTheFinalFeedUrl(): void
+    {
+        $url = 'https://8.8.8.8/feed.xml';
+        $redirect = new MockResponse('', ['http_code' => 302, 'redirect_url' => $url]);
+        $rss = <<<'XML'
+            <rss version="2.0"><channel>
+                <title>Example</title>
+                <item><title>Article</title><link>https://example.org/article</link></item>
+            </channel></rss>
+            XML;
+        $reader = new FeedReader('wallabag', new MockHttpClient([$redirect, new MockResponse($rss)]));
+
+        $feed = $reader->read('https://8.8.8.8/');
+
+        self::assertInstanceOf(AbstractFeed::class, $feed);
+        self::assertSame($url, $feed->getOriginalSourceUri());
+        $articles = iterator_to_array($feed, false);
+        self::assertCount(1, $articles);
+        self::assertSame('Article', $articles[0]->getTitle());
+        self::assertSame('https://example.org/article', $articles[0]->getLink());
     }
 
     public function testRejectsUnsupportedUrlWithoutSendingARequest(): void

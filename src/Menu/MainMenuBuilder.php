@@ -110,7 +110,7 @@ class MainMenuBuilder
                 'label' => 'feeds.page_title',
                 'attributes' => ['class' => 'bold'],
                 'linkAttributes' => ['class' => 'waves-effect'],
-                'extras' => ['routes' => ['new_feed', 'edit_feed']],
+                'extras' => ['routes' => ['new_feed', 'edit_feed', 'display_feed_items']],
             ]);
         }
 

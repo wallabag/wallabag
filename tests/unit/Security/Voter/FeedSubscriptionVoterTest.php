@@ -42,6 +42,8 @@ class FeedSubscriptionVoterTest extends TestCase
     public function permissions(): iterable
     {
         yield 'edit' => ['EDIT'];
+        yield 'list articles' => ['LIST_ITEMS'];
+        yield 'refresh' => ['REFRESH'];
     }
 
     private function token(?User $user): TokenInterface

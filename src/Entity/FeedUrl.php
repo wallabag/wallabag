@@ -28,6 +28,9 @@ class FeedUrl
     #[HttpUrlWithoutCredentials]
     private string $url = '';
 
+    #[ORM\Column(name: 'updated_at', type: 'datetime', nullable: true)]
+    private ?\DateTime $updatedAt = null;
+
     public function __construct(User $user)
     {
         $this->user = $user;
@@ -65,5 +68,15 @@ class FeedUrl
         $this->url = $url;
 
         return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    public function markRefreshed(): void
+    {
+        $this->updatedAt = new \DateTime();
     }
 }

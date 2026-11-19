@@ -746,11 +746,19 @@ feeds:
         add: Ajouter un flux
         back_to_list: Retour aux abonnements
         edit: Modifier le flux
+        fetch: Actualiser
+        items: Voir les articles
     empty: Vous n'êtes abonné à aucun flux.
     flash:
         created: Abonnement ajouté.
+        created_refresh_error: "Abonnement ajouté, mais la première actualisation a échoué."
+        fetch_error: Impossible d'actualiser le flux. Vérifiez son adresse et réessayez.
+        fetched: Flux actualisé.
         updated: Abonnement mis à jour.
+    items_empty: Aucun article en attente dans ce flux.
+    last_fetch: 'Dernière actualisation réussie : %date%'
     page_title: Abonnements aux flux
+    stale: Ce flux n'a pas été actualisé avec succès depuis deux jours.
 theme:
     action:
         toggle_auto: "Thème automatique"
