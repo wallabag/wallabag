@@ -223,3 +223,8 @@ footer {
 .feed-action.btn-flat {
   color: inherit;
 }
+
+.card .card-action a.feed-action {
+  color: inherit !important;
+  margin-right: 0 !important;
+}

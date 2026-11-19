@@ -745,9 +745,11 @@ feeds:
     action:
         add: Ajouter un flux
         back_to_list: Retour aux abonnements
+        edit: Modifier le flux
     empty: Vous n'êtes abonné à aucun flux.
     flash:
         created: Abonnement ajouté.
+        updated: Abonnement mis à jour.
     page_title: Abonnements aux flux
 theme:
     action:

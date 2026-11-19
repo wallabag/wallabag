@@ -48,4 +48,24 @@ class FeedSubscriptionController extends AbstractController
             'title' => 'feeds.action.add',
         ]);
     }
+
+    #[Route(path: '/atom/edit/{id}', name: 'edit_feed', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
+    #[IsGranted('EDIT', subject: 'feed')]
+    public function edit(Request $request, FeedUrl $feed): Response
+    {
+        $form = $this->createForm(FeedUrlType::class, $feed)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->flush();
+            $this->addFlash('notice', 'feeds.flash.updated');
+
+            return $this->redirectToRoute('all_import_feed');
+        }
+
+        return $this->render('FeedSubscription/form.html.twig', [
+            'form' => $form->createView(),
+            'title' => 'feeds.action.edit',
+        ]);
+    }
 }

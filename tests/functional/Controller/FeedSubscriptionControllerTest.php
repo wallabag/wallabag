@@ -63,4 +63,30 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         yield 'blank URL' => ['Invalid feed', '', 'This value should not be blank.'];
         yield 'blank title' => ['', 'https://example.org/feed', 'This value should not be blank.'];
     }
+
+    public function testEditsOnlyOwnSubscription(): void
+    {
+        $this->logInAs('admin');
+        $em = $this->getEntityManager();
+        $bob = $em->getRepository(User::class)->findOneBy(['username' => 'bob']);
+        $own = (new FeedUrl($this->getLoggedInUser()))->setTitle('Original title')->setUrl('https://example.org/feed');
+        $foreign = (new FeedUrl($bob))->setTitle('Foreign feed')->setUrl('https://example.org/bob');
+        $em->persist($own);
+        $em->persist($foreign);
+        $em->flush();
+
+        $client = $this->getTestClient();
+        $client->request('GET', '/atom/edit/' . $foreign->getId());
+        self::assertSame(404, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->request('GET', '/atom/list');
+        $editPath = '/atom/edit/' . $own->getId();
+        self::assertCount(1, $crawler->filter('main .card-action a[href="' . $editPath . '"]'));
+        self::assertCount(0, $crawler->filter('main .card-action a[href="/atom/edit/' . $foreign->getId() . '"]'));
+        $crawler = $client->request('GET', $editPath);
+        $client->submit($crawler->filter('#feed_save')->form(), ['feed[title]' => 'Updated title']);
+        self::assertTrue($client->getResponse()->isRedirect('/atom/list'));
+        self::assertStringContainsString('feeds.flash.updated', $client->followRedirect()->filter('[data-controller="materialize--toast"]')->text());
+        self::assertSame('Updated title', $this->getEntityManager()->find(FeedUrl::class, $own->getId())->getTitle());
+    }
 }
