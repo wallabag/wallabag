@@ -2,8 +2,11 @@
 
 namespace Wallabag\Tests\Functional\Controller;
 
+use Laminas\Feed\Reader\Exception\RuntimeException;
+use PHPUnit\Framework\MockObject\MockObject;
 use Wallabag\Entity\FeedUrl;
 use Wallabag\Entity\User;
+use Wallabag\Helper\FeedReader;
 use Wallabag\Tests\Functional\WallabagTestCase;
 
 class FeedSubscriptionControllerTest extends WallabagTestCase
@@ -24,6 +27,8 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         $em->persist((new FeedUrl($bob))->setTitle('Private feed')->setUrl('https://example.org/private'));
         $em->flush();
 
+        $this->mockReader()->expects(self::once())->method('resolve')
+            ->with('https://example.org/feed')->willReturn('https://example.org/discovered');
         $client = $this->getTestClient();
         $crawler = $client->request('GET', '/atom/new');
         $client->submit($crawler->filter('#feed_save')->form(), [
@@ -36,6 +41,7 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         self::assertSame(['feeds.flash.created'], $crawler->filter('[data-controller="materialize--toast"]')->each(static fn ($toast) => $toast->text()));
         self::assertCount(1, $crawler->filter('main .card .card-title'));
         self::assertStringContainsString('Example feed', $crawler->filter('main')->text());
+        self::assertCount(1, $crawler->filter('a[href="https://example.org/discovered"]'));
         self::assertStringNotContainsString('Private feed', $crawler->filter('main')->text());
     }
 
@@ -88,5 +94,48 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         self::assertTrue($client->getResponse()->isRedirect('/atom/list'));
         self::assertStringContainsString('feeds.flash.updated', $client->followRedirect()->filter('[data-controller="materialize--toast"]')->text());
         self::assertSame('Updated title', $this->getEntityManager()->find(FeedUrl::class, $own->getId())->getTitle());
+    }
+
+    public function testEditingDiscoverableWebsiteStoresTheFeedUrl(): void
+    {
+        $this->logInAs('admin');
+        $em = $this->getEntityManager();
+        $feed = (new FeedUrl($this->getLoggedInUser()))->setTitle('Original')->setUrl('https://example.org/original.xml');
+        $em->persist($feed);
+        $em->flush();
+
+        $this->mockReader()->expects(self::once())->method('resolve')
+            ->with('https://example.org/blog')->willReturn('https://example.org/blog/rss.xml');
+        $client = $this->getTestClient();
+        $crawler = $client->request('GET', '/atom/edit/' . $feed->getId());
+        $client->submit($crawler->filter('#feed_save')->form(), ['feed[url]' => 'https://example.org/blog']);
+
+        self::assertTrue($client->getResponse()->isRedirect('/atom/list'));
+        self::assertSame('https://example.org/blog/rss.xml', $this->getEntityManager()->find(FeedUrl::class, $feed->getId())->getUrl());
+    }
+
+    public function testKeepsSubmittedUrlWhenDiscoveryFails(): void
+    {
+        $this->logInAs('admin');
+        $this->mockReader()->expects(self::once())->method('resolve')->willThrowException(new RuntimeException('No feed found'));
+        $client = $this->getTestClient();
+        $crawler = $client->request('GET', '/atom/new');
+        $client->submit($crawler->filter('#feed_save')->form(), [
+            'feed[title]' => 'Unavailable feed',
+            'feed[url]' => 'https://example.org/missing',
+        ]);
+
+        self::assertTrue($client->getResponse()->isRedirect('/atom/list'));
+        self::assertNotNull($this->getEntityManager()->getRepository(FeedUrl::class)->findOneBy(['url' => 'https://example.org/missing']));
+    }
+
+    private function mockReader(): FeedReader&MockObject
+    {
+        $reader = $this->createMock(FeedReader::class);
+        $client = $this->getTestClient();
+        $client->disableReboot();
+        $client->getContainer()->set(FeedReader::class, $reader);
+
+        return $reader;
     }
 }
