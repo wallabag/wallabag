@@ -3,6 +3,7 @@
 namespace Wallabag\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Wallabag\Entity\FeedItem;
 use Wallabag\Entity\FeedUrl;
@@ -64,6 +65,15 @@ class FeedItemRepository extends ServiceEntityRepository
             ->getScalarResult();
 
         return array_map('intval', array_column($rows, 'feedId'));
+    }
+
+    public function getPendingCountBuilder(User $user): QueryBuilder
+    {
+        return $this->createQueryBuilder('item')
+            ->select('COUNT(DISTINCT item.urlHash)')
+            ->join('item.feed', 'feed')
+            ->where('feed.user = :user')->setParameter('user', $user)
+            ->andWhere('item.isTrashed = false');
     }
 
     /** @param list<string> $currentHashes */

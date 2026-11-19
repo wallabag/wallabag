@@ -2,6 +2,7 @@
 
 namespace Wallabag\Menu;
 
+use Doctrine\ORM\QueryBuilder;
 use Knp\Menu\Attribute\AsMenuBuilder;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
@@ -10,6 +11,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Wallabag\Entity\User;
 use Wallabag\Repository\AnnotationRepository;
 use Wallabag\Repository\EntryRepository;
+use Wallabag\Repository\FeedItemRepository;
 use Wallabag\Repository\TagRepository;
 
 class MainMenuBuilder
@@ -22,6 +24,7 @@ class MainMenuBuilder
         private readonly AnnotationRepository $annotationRepository,
         private readonly TagRepository $tagRepository,
         private readonly int $lifeTime,
+        private readonly FeedItemRepository $feedItemRepository,
     ) {
     }
 
@@ -110,7 +113,10 @@ class MainMenuBuilder
                 'label' => 'feeds.page_title',
                 'attributes' => ['class' => 'bold'],
                 'linkAttributes' => ['class' => 'waves-effect'],
-                'extras' => ['routes' => ['new_feed', 'edit_feed', 'display_feed_items']],
+                'extras' => [
+                    'counter' => $this->countPendingFeedItems(),
+                    'routes' => ['new_feed', 'edit_feed', 'display_feed_items'],
+                ],
             ]);
         }
 
@@ -134,11 +140,7 @@ class MainMenuBuilder
             default => throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type)),
         };
 
-        $query = $qb->getQuery();
-        $query->useQueryCache(true);
-        $query->enableResultCache($this->lifeTime);
-
-        return (int) $query->getSingleScalarResult();
+        return $this->count($qb);
     }
 
     private function countTags(): int
@@ -150,5 +152,21 @@ class MainMenuBuilder
         }
 
         return (int) $this->tagRepository->countAllTags($user->getId());
+    }
+
+    private function countPendingFeedItems(): int
+    {
+        $user = $this->tokenStorage->getToken()?->getUser();
+
+        return $user instanceof User ? $this->count($this->feedItemRepository->getPendingCountBuilder($user)) : 0;
+    }
+
+    private function count(QueryBuilder $builder): int
+    {
+        $query = $builder->getQuery();
+        $query->useQueryCache(true);
+        $query->enableResultCache($this->lifeTime);
+
+        return (int) $query->getSingleScalarResult();
     }
 }

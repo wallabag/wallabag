@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Wallabag\Menu\MainMenuBuilder;
 use Wallabag\Repository\AnnotationRepository;
 use Wallabag\Repository\EntryRepository;
+use Wallabag\Repository\FeedItemRepository;
 use Wallabag\Repository\TagRepository;
 
 class MainMenuBuilderTest extends TestCase
@@ -28,14 +29,15 @@ class MainMenuBuilderTest extends TestCase
             $this->createMock(EntryRepository::class),
             $this->createMock(AnnotationRepository::class),
             $this->createMock(TagRepository::class),
-            60
+            60,
+            $this->createMock(FeedItemRepository::class),
         );
 
         $menu = $builder->createMenu([]);
         $this->assertSame($expected, array_keys($menu->getChildren()));
 
         foreach ($menu->getChildren() as $item) {
-            $this->assertSame('feeds' === $item->getName() ? null : 0, $item->getExtra('counter'));
+            $this->assertSame(0, $item->getExtra('counter'));
         }
     }
 
@@ -52,6 +54,7 @@ class MainMenuBuilderTest extends TestCase
             $this->createMock(AnnotationRepository::class),
             $this->createMock(TagRepository::class),
             0,
+            $this->createMock(FeedItemRepository::class),
         );
         $menu = $builder->createMenu([]);
         $stack = new RequestStack();
