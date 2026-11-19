@@ -2,6 +2,8 @@
 
 namespace Wallabag\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\Validator\HttpUrlWithoutCredentials;
@@ -15,7 +17,7 @@ class FeedUrl
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'feeds')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private User $user;
 
@@ -31,9 +33,14 @@ class FeedUrl
     #[ORM\Column(name: 'updated_at', type: 'datetime', nullable: true)]
     private ?\DateTime $updatedAt = null;
 
+    /** @var Collection<int, FeedItem> */
+    #[ORM\OneToMany(targetEntity: FeedItem::class, mappedBy: 'feed', cascade: ['remove'])]
+    private Collection $items;
+
     public function __construct(User $user)
     {
         $this->user = $user;
+        $this->items = new ArrayCollection();
     }
 
     public function getId(): ?int

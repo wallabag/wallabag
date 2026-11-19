@@ -12,7 +12,7 @@ class FeedSubscriptionVoter extends Voter
     protected function supports(string $attribute, $subject): bool
     {
         return $subject instanceof FeedUrl
-            && \in_array($attribute, ['EDIT', 'LIST_ITEMS', 'REFRESH', 'PURGE_ITEMS'], true);
+            && \in_array($attribute, ['EDIT', 'LIST_ITEMS', 'REFRESH', 'PURGE_ITEMS', 'DELETE'], true);
     }
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool

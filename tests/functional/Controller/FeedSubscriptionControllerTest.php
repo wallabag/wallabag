@@ -352,6 +352,32 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         self::assertSame($entries[0]->getId(), $savedId);
     }
 
+    public function testDeletingSubscriptionRemovesHistoryAndRespectsOwnership(): void
+    {
+        $this->logInAs('admin');
+        $em = $this->getEntityManager();
+        $bob = $em->getRepository(User::class)->findOneBy(['username' => 'bob']);
+        $feed = (new FeedUrl($this->getLoggedInUser()))->setTitle('My feed')->setUrl('https://example.org/feed');
+        $foreign = (new FeedUrl($bob))->setTitle('Private feed')->setUrl('https://example.org/bob');
+        $item = new FeedItem($feed, 'https://example.org/article');
+        $em->persist($feed);
+        $em->persist($foreign);
+        $em->persist($item);
+        $em->flush();
+
+        $client = $this->getTestClient();
+        $client->request('POST', '/atom/delete/' . $foreign->getId(), ['token' => 'invalid']);
+        self::assertSame(404, $client->getResponse()->getStatusCode());
+        $crawler = $client->request('GET', '/atom/list');
+        $this->submitAction($crawler, '/atom/delete/' . $feed->getId());
+        self::assertTrue($client->getResponse()->isRedirect('/atom/list'));
+        self::assertStringContainsString('feeds.flash.deleted', $client->followRedirect()->filter('[data-controller="materialize--toast"]')->text());
+        $em = $this->getEntityManager();
+        self::assertNull($em->find(FeedUrl::class, $feed->getId()));
+        self::assertNull($em->find(FeedItem::class, $item->getId()));
+        self::assertNotNull($em->find(FeedUrl::class, $foreign->getId()));
+    }
+
     public function testRejectedImportLeavesTheArticlePending(): void
     {
         $this->logInAs('admin');
@@ -415,6 +441,7 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         yield 'purge' => ['purge', false, 'POST'];
         yield 'item/delete' => ['item/delete', true, 'POST'];
         yield 'item/save' => ['item/save', true, 'POST'];
+        yield 'delete' => ['delete', false, 'POST'];
     }
 
     private function submitAction(Crawler $crawler, string $path): void

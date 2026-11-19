@@ -750,6 +750,7 @@ feeds:
     action:
         add: Add feed
         back_to_list: Back to subscriptions
+        delete: Delete feed
         dismiss: Dismiss
         edit: Edit feed
         fetch: Refresh
@@ -759,12 +760,14 @@ feeds:
         show_card_view: Show card view
         show_list_view: Show list view
     alert:
+        confirm_delete: Delete this feed subscription and its article history?
         confirm_purge: Dismiss all pending articles in this feed?
     empty: You have no feed subscriptions.
     flash:
         already_processed: This article has already been processed.
         created: Feed subscription added.
         created_refresh_error: Feed subscription added, but the first refresh failed.
+        deleted: Feed subscription deleted.
         dismissed: Article dismissed.
         fetch_error: Could not refresh the feed. Check its address and try again.
         fetched: Feed refreshed.

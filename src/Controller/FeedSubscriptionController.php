@@ -98,6 +98,23 @@ class FeedSubscriptionController extends AbstractController
         return $this->redirectToRoute('display_feed_items', ['id' => $feed->getId()]);
     }
 
+    #[Route(path: '/atom/delete/{id}', name: 'delete_feed', requirements: ['id' => '\d+'], methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    #[IsGranted('DELETE', subject: 'feed')]
+    public function delete(Request $request, FeedUrl $feed): Response
+    {
+        $token = $request->request->all()['token'] ?? null;
+        if (!\is_string($token) || !$this->isCsrfTokenValid('feed-delete-' . $feed->getId(), $token)) {
+            throw new BadRequestHttpException('Invalid CSRF token.');
+        }
+
+        $this->entityManager->remove($feed);
+        $this->entityManager->flush();
+        $this->addFlash('notice', 'feeds.flash.deleted');
+
+        return $this->redirectToRoute('all_import_feed');
+    }
+
     private function resolveFeedUrl(FeedUrl $feed): void
     {
         try {
