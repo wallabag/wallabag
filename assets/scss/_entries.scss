@@ -266,6 +266,11 @@ footer {
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
   min-height: 50px;
+
+  .card-action {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 .feed-list-body {

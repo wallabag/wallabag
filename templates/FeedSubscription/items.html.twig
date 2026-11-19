@@ -42,6 +42,16 @@
                                         {% endif %}
                                     </div>
                                 </div>
+                                <div class="card-action">
+                                    {% if is_granted('DISMISS', item) %}
+                                        <form action="{{ path('delete_item', {id: item.id}) }}" method="post">
+                                            <input type="hidden" name="token" value="{{ csrf_token('feed-delete-item-' ~ item.id) }}">
+                                            <button class="waves-effect btn-flat feed-action" type="submit">
+                                                <i class="material-icons left" aria-hidden="true">close</i>{{ 'feeds.action.dismiss'|trans }}
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                </div>
                             </article>
                         </li>
                     {% endfor %}

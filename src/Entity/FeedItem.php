@@ -52,6 +52,16 @@ class FeedItem
         return $this->url;
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getFeed(): FeedUrl
+    {
+        return $this->feed;
+    }
+
     public function getTitle(): ?string
     {
         return $this->title;
@@ -65,5 +75,17 @@ class FeedItem
     public function getPublishedAt(): ?\DateTime
     {
         return $this->publishedAt;
+    }
+
+    public function dismiss(): void
+    {
+        $this->isTrashed = true;
+        $this->title = null;
+        $this->image = null;
+    }
+
+    public function isTrashed(): bool
+    {
+        return $this->isTrashed;
     }
 }

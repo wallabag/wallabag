@@ -238,8 +238,62 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         self::assertSame(0, $this->getLoggedInUser()->getConfig()->getListMode());
     }
 
+    public function testDismissAndPurgeRetainCollectedHistory(): void
+    {
+        $this->logInAs('admin');
+        $em = $this->getEntityManager();
+        $this->getLoggedInUser()->getConfig()->setListMode(1);
+        $feed = (new FeedUrl($this->getLoggedInUser()))->setTitle('History')->setUrl('https://example.org/feed');
+        $publishedAt = new \DateTime('2026-11-19 12:00:00');
+        $image = 'https://example.org/cover.jpg';
+        $first = new FeedItem($feed, 'https://example.org/dismissed', 'Dismissed article', $publishedAt, $image);
+        $second = new FeedItem($feed, 'https://example.org/purged', 'Purged article', $publishedAt, $image);
+        $em->persist($feed);
+        $em->persist($first);
+        $em->persist($second);
+        $em->flush();
+
+        $entry = $this->createMock(EntryInterface::class);
+        $entry->method('getLink')->willReturn($first->getUrl());
+        $this->mockReader()->expects(self::once())->method('read')
+            ->willReturn(['url' => $feed->getUrl(), 'entries' => [$entry]]);
+
+        $client = $this->getTestClient();
+        $crawler = $client->request('GET', '/atom/items/' . $feed->getId());
+        $dismiss = $crawler->filter('form[action="/atom/item/delete/' . $first->getId() . '"] button')->form();
+        $client->submit($dismiss);
+        $crawler = $client->followRedirect();
+        self::assertStringContainsString('feeds.flash.dismissed', $crawler->filter('[data-controller="materialize--toast"]')->text());
+        self::assertCount(1, $crawler->filter('main .feed-list-row'));
+        self::assertStringContainsString('Purged article', $crawler->filter('main .feed-list-row')->text());
+
+        $client->submit($dismiss);
+        self::assertStringContainsString('feeds.flash.already_processed', $client->followRedirect()->filter('[data-controller="materialize--toast"]')->text());
+
+        $crawler = $client->request('GET', '/atom/list');
+        $purge = $crawler->filter('form[action="/atom/purge/' . $feed->getId() . '"] button')->form();
+        $client->submit($purge);
+        self::assertStringContainsString('feeds.flash.purged', $client->followRedirect()->filter('[data-controller="materialize--toast"]')->text());
+        $client->submit($purge);
+        $crawler = $client->followRedirect();
+        self::assertStringContainsString('feeds.flash.no_pending_articles', $crawler->filter('[data-controller="materialize--toast"]')->text());
+        $this->submitAction($crawler, '/atom/fetch/' . $feed->getId());
+        self::assertCount(0, $client->followRedirect()->filter('main .feed-list-row'));
+
+        $em = $this->getEntityManager();
+        $em->clear();
+        $history = $em->getRepository(FeedItem::class)->findBy(['feed' => $feed], ['id' => 'ASC']);
+        self::assertSame([$first->getUrl(), $second->getUrl()], array_map(static fn (FeedItem $item): string => $item->getUrl(), $history));
+        foreach ($history as $item) {
+            self::assertTrue($item->isTrashed());
+            self::assertSame($publishedAt->getTimestamp(), $item->getPublishedAt()?->getTimestamp());
+            self::assertNull($item->getTitle());
+            self::assertNull($item->getImage());
+        }
+    }
+
     /** @dataProvider protectedFeedRoutes */
-    public function testProtectedFeedRoutesHideForeignResources(string $route, string $method): void
+    public function testProtectedFeedRoutesHideForeignResources(string $route, bool $isItem, string $method): void
     {
         $this->logInAs('admin');
         $em = $this->getEntityManager();
@@ -250,13 +304,13 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         $em->persist($item);
         $em->flush();
 
-        $id = $feed->getId();
+        $id = $isItem ? $item->getId() : $feed->getId();
         $client = $this->getTestClient();
         $client->request($method, '/atom/' . $route . '/' . $id);
 
         self::assertSame(404, $client->getResponse()->getStatusCode());
         self::assertNotNull($this->getEntityManager()->find(FeedUrl::class, $feed->getId()));
-        self::assertSame(1, $this->getEntityManager()->getRepository(FeedItem::class)->count(['feed' => $feed]));
+        self::assertFalse($this->getEntityManager()->find(FeedItem::class, $item->getId())->isTrashed());
 
         if ('POST' === $method && 'edit' !== $route) {
             $this->logInAs('bob');
@@ -264,15 +318,22 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
 
             self::assertSame(400, $client->getResponse()->getStatusCode());
             self::assertNotNull($this->getEntityManager()->find(FeedUrl::class, $feed->getId()));
-            self::assertSame(1, $this->getEntityManager()->getRepository(FeedItem::class)->count(['feed' => $feed]));
+            self::assertFalse($this->getEntityManager()->find(FeedItem::class, $item->getId())->isTrashed());
         }
     }
 
     public function protectedFeedRoutes(): iterable
     {
-        yield 'edit' => ['edit', 'POST'];
-        yield 'items' => ['items', 'GET'];
-        yield 'fetch' => ['fetch', 'POST'];
+        yield 'edit' => ['edit', false, 'POST'];
+        yield 'items' => ['items', false, 'GET'];
+        yield 'fetch' => ['fetch', false, 'POST'];
+        yield 'purge' => ['purge', false, 'POST'];
+        yield 'item/delete' => ['item/delete', true, 'POST'];
+    }
+
+    private function submitAction(\Symfony\Component\DomCrawler\Crawler $crawler, string $path): void
+    {
+        $this->getTestClient()->submit($crawler->filter(\sprintf('form[action="%s"] button', $path))->form());
     }
 
     private function mockReader(): FeedReader&MockObject

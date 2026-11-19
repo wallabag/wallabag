@@ -44,6 +44,14 @@
                                 </button>
                             </form>
                         {% endif %}
+                        {% if is_granted('PURGE_ITEMS', feed) %}
+                            <form class="inline-block" action="{{ path('purge_feed', {id: feed.id}) }}" method="post" onsubmit="return confirm('{{ 'feeds.alert.confirm_purge'|trans|escape('js') }}')">
+                                <input type="hidden" name="token" value="{{ csrf_token('feed-purge-' ~ feed.id) }}">
+                                <button class="waves-effect btn-flat feed-action" type="submit">
+                                    <i class="material-icons left" aria-hidden="true">delete_sweep</i>{{ 'feeds.action.purge'|trans }}
+                                </button>
+                            </form>
+                        {% endif %}
                     </div>
                 </article>
             {% else %}
