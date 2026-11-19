@@ -741,6 +741,14 @@ ignore_origin_instance_rule:
 captcha:
     help: Entrez les caractères indiqués dans l'image. Rafraichir l'image invalide la réponse précédente.
 
+feeds:
+    action:
+        add: Ajouter un flux
+        back_to_list: Retour aux abonnements
+    empty: Vous n'êtes abonné à aucun flux.
+    flash:
+        created: Abonnement ajouté.
+    page_title: Abonnements aux flux
 theme:
     action:
         toggle_auto: "Thème automatique"

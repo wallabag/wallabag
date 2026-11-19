@@ -746,6 +746,14 @@ flashes:
             updated: 'Global ignore origin rule updated'
             deleted: 'Global ignore origin rule deleted'
 
+feeds:
+    action:
+        add: Add feed
+        back_to_list: Back to subscriptions
+    empty: You have no feed subscriptions.
+    flash:
+        created: Feed subscription added.
+    page_title: Feed subscriptions
 theme:
     action:
         toggle_auto: "Automatic theme"
