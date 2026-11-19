@@ -92,3 +92,8 @@ services:
         class: Wallabag\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\Import\UrlListImport'
+
+    wallabag.consumer.amqp.feeds:
+        class: Wallabag\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: '@Wallabag\Import\FeedsImport'

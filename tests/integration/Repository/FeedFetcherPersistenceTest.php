@@ -2,8 +2,10 @@
 
 namespace Wallabag\Tests\Integration\Repository;
 
+use Craue\ConfigBundle\Util\Config;
 use Laminas\Feed\Reader\Entry\EntryInterface;
 use Laminas\Feed\Reader\Exception\ExceptionInterface as ReaderException;
+use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
@@ -197,7 +199,14 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
     {
         $em = $this->getEntityManager();
 
-        return new FeedFetcher($em, $em->getRepository(FeedItem::class), $reader, static::getContainer()->get(FeedsImport::class));
+        return new FeedFetcher(
+            $em,
+            $em->getRepository(FeedItem::class),
+            $reader,
+            static::getContainer()->get(FeedsImport::class),
+            $this->createMock(Config::class),
+            $this->createMock(ProducerInterface::class),
+        );
     }
 
     private function entry(string $url): EntryInterface&MockObject
