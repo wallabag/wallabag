@@ -164,14 +164,19 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         $this->logInAs('admin');
         $feed = (new FeedUrl($this->getLoggedInUser()))->setTitle('My feed')->setUrl('https://example.org/feed');
         $em = $this->getEntityManager();
+        $this->getLoggedInUser()->getConfig()->setDisplayThumbnails(true);
         $em->persist($feed);
         $em->flush();
 
         $entry = $this->createMock(EntryInterface::class);
         $entry->method('getLink')->willReturn('https://example.org/story');
         $entry->method('getTitle')->willReturn('Collected story');
+        $entry->method('getDateCreated')->willReturn(new \DateTime('2025-01-02T12:00:00+00:00'));
+        $entry->method('getEnclosure')->willReturn((object) ['href' => 'https://example.org/cover.jpg']);
+        $withoutImage = $this->createMock(EntryInterface::class);
+        $withoutImage->method('getLink')->willReturn('https://example.org/text-only');
         $this->mockReader()->expects(self::once())->method('read')->with($feed->getUrl())
-            ->willReturn(['url' => $feed->getUrl(), 'entries' => [$entry]]);
+            ->willReturn(['url' => $feed->getUrl(), 'entries' => [$entry, $withoutImage]]);
 
         $client = $this->getTestClient();
         $refresh = '/atom/fetch/' . $feed->getId();
@@ -188,6 +193,9 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         $crawler = $client->followRedirect();
         self::assertStringContainsString('feeds.flash.fetched', $crawler->filter('[data-controller="materialize--toast"]')->text());
         self::assertStringContainsString('Collected story', $crawler->filter('main')->text());
+        self::assertCount(2, $crawler->filter('main .entry-card'));
+        self::assertCount(1, $crawler->filter('main .entry-card img[src="https://example.org/cover.jpg"]'));
+        self::assertSame('2025-01-02', $crawler->filter('main .entry-card time')->text());
     }
 
     /** @dataProvider protectedFeedRoutes */

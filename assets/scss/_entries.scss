@@ -236,3 +236,13 @@ footer {
   color: inherit !important;
   margin-right: 0 !important;
 }
+
+.feed-preview {
+  display: block;
+  height: 100%;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
+}

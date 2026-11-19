@@ -56,4 +56,14 @@ class FeedItem
     {
         return $this->title;
     }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function getPublishedAt(): ?\DateTime
+    {
+        return $this->publishedAt;
+    }
 }

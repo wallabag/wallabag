@@ -13,13 +13,29 @@
             {% if items is empty %}
                 <p>{{ 'feeds.items_empty'|trans }}</p>
             {% else %}
-                <ul class="collection">
+                <ol class="entries row entries-row">
                     {% for item in items %}
-                        <li class="collection-item">
-                            <a class="feed-url" href="{{ item.url }}" rel="noreferrer">{{ item.title ?: item.url }}</a>
+                        <li class="s12">
+                            <article class="card entry-card">
+                                <div class="card-body">
+                                    {% if item.image and app.user.config.displayThumbnails %}
+                                        <div class="card-image">
+                                            <a class="feed-preview" href="{{ item.url }}" rel="noreferrer" tabindex="-1" aria-hidden="true">
+                                                <img class="responsive-img" src="{{ item.image }}" alt="" loading="lazy" referrerpolicy="no-referrer">
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                    <div class="card-content">
+                                        <a class="card-title feed-url" href="{{ item.url }}" rel="noreferrer">{{ item.title ?: item.url }}</a>
+                                        {% if item.publishedAt %}
+                                            <time class="grey-text" datetime="{{ item.publishedAt|date('c') }}">{{ item.publishedAt|date('Y-m-d') }}</time>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </article>
                         </li>
                     {% endfor %}
-                </ul>
+                </ol>
             {% endif %}
         </div>
     </div>
