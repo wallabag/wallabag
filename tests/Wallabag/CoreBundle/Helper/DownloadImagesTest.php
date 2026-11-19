@@ -304,6 +304,22 @@ class DownloadImagesTest extends TestCase
         $this->assertFalse($res);
     }
 
+    public function testProcessSingleImageWithSvgOutsideSvgNamespace()
+    {
+        $svg = '<svg xmlns="http://www.w3.org/1999/xhtml"><form action="javascript:alert(1)"><button>x</button></form></svg>';
+
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/svg+xml'], $svg));
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $res = $download->processSingleImage(123, 'evil.svg', self::PUBLIC_HTTP_BASE . '/gallery/evil.svg');
+
+        $this->assertFalse($res);
+    }
+
     public function testFollowRedirection()
     {
         $httpMockClient = new HttpMockClient();
