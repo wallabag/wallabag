@@ -31,8 +31,16 @@
                                     </div>
                                 </div>
                                 <div class="card-action">
+                                    {% if is_granted('SAVE', item) %}
+                                        <form class="inline-block" action="{{ path('save_item', {id: item.id}) }}" method="post">
+                                            <input type="hidden" name="token" value="{{ csrf_token('feed-save-item-' ~ item.id) }}">
+                                            <button class="waves-effect btn-flat feed-action" type="submit">
+                                                <i class="material-icons left" aria-hidden="true">save</i>{{ 'feeds.action.save_article'|trans }}
+                                            </button>
+                                        </form>
+                                    {% endif %}
                                     {% if is_granted('DISMISS', item) %}
-                                        <form action="{{ path('delete_item', {id: item.id}) }}" method="post">
+                                        <form class="inline-block" action="{{ path('delete_item', {id: item.id}) }}" method="post">
                                             <input type="hidden" name="token" value="{{ csrf_token('feed-delete-item-' ~ item.id) }}">
                                             <button class="waves-effect btn-flat feed-action" type="submit">
                                                 <i class="material-icons left" aria-hidden="true">close</i>{{ 'feeds.action.dismiss'|trans }}

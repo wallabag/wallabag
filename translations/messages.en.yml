@@ -755,6 +755,7 @@ feeds:
         fetch: Refresh
         items: View articles
         purge: Clear articles
+        save_article: Save article
     alert:
         confirm_purge: Dismiss all pending articles in this feed?
     empty: You have no feed subscriptions.
@@ -767,6 +768,8 @@ feeds:
         fetched: Feed refreshed.
         no_pending_articles: No pending articles to dismiss.
         purged: Pending articles dismissed.
+        save_error: Could not save the article. It is still pending.
+        saved: Article is available in wallabag.
         updated: Feed subscription updated.
     items_empty: No articles are waiting in this feed.
     last_fetch: 'Last successful refresh: %date%'

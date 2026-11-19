@@ -750,6 +750,7 @@ feeds:
         fetch: Actualiser
         items: Voir les articles
         purge: Vider le flux
+        save_article: Enregistrer l'article
     alert:
         confirm_purge: Ignorer tous les articles en attente de ce flux ?
     empty: Vous n'êtes abonné à aucun flux.
@@ -762,6 +763,8 @@ feeds:
         fetched: Flux actualisé.
         no_pending_articles: Aucun article en attente à ignorer.
         purged: Articles en attente ignorés.
+        save_error: "Impossible d'enregistrer l'article. Il est toujours en attente."
+        saved: Article disponible dans wallabag.
         updated: Abonnement mis à jour.
     items_empty: Aucun article en attente dans ce flux.
     last_fetch: 'Dernière actualisation réussie : %date%'
