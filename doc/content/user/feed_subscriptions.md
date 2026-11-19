@@ -11,3 +11,5 @@ Enable automatic imports to save new articles directly in wallabag. Automatic re
 Wallabag keeps the most recent 200 records and any articles that are still published in the feed.
 
 Use **Refresh** to check a subscription immediately. Wallabag shows the last successful refresh and flags a feed if it has not refreshed successfully for two days.
+
+An administrator can also schedule regular refreshes for all subscriptions with [`wallabag:fetch-rss`]({{< relref "/admin/console_commands.md" >}}).
