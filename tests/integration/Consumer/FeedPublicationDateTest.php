@@ -17,7 +17,8 @@ use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
 class FeedPublicationDateTest extends WallabagKernelTestCase
 {
-    public function testRabbitMqImportsTheFeedPublicationDateAndAcceptsOlderMessages(): void
+    /** @dataProvider transports */
+    public function testQueuedImportPreservesTheFeedPublicationDateAndAcceptsOlderMessages(string $transport): void
     {
         $em = $this->getEntityManager();
         $owner = $this->getUser('admin');
@@ -37,8 +38,13 @@ class FeedPublicationDateTest extends WallabagKernelTestCase
         $reader = $this->createMock(FeedReader::class);
         $reader->method('read')->willReturn(['url' => $feed->getUrl(), 'entries' => [$dated, $legacy]]);
         $config = $this->createMock(Config::class);
-        $config->method('get')->with('import_with_rabbitmq')->willReturn('1');
+        $config->method('get')->willReturnMap([
+            ['import_with_rabbitmq', 'amqp' === $transport ? '1' : '0'],
+            ['import_with_redis', 'redis' === $transport ? '1' : '0'],
+        ]);
         $producer = $this->createMock(ProducerInterface::class);
+        $unusedProducer = $this->createMock(ProducerInterface::class);
+        $unusedProducer->expects(self::never())->method('publish');
         /** @var list<string> $messages */
         $messages = [];
         $producer->expects(self::exactly(2))->method('publish')->willReturnCallback(static function (string $body) use (&$messages): void {
@@ -58,7 +64,8 @@ class FeedPublicationDateTest extends WallabagKernelTestCase
             $reader,
             $container->get(FeedsImport::class),
             $config,
-            $producer,
+            'amqp' === $transport ? $producer : $unusedProducer,
+            'redis' === $transport ? $producer : $unusedProducer,
         );
 
         self::assertSame(2, $fetcher->fetch($feed));
@@ -67,12 +74,15 @@ class FeedPublicationDateTest extends WallabagKernelTestCase
         self::assertSame($publishedAt->getTimestamp(), $decoded['published_at']);
         self::assertArrayNotHasKey('published_at', json_decode($messages[1], true, flags: \JSON_THROW_ON_ERROR));
 
-        $consumer = $container->get('wallabag.consumer.amqp.feeds');
+        $consumer = $container->get('wallabag.consumer.' . $transport . '.feeds');
+        $consume = 'amqp' === $transport
+            ? static fn (string $message) => $consumer->execute(new AMQPMessage($message))
+            : static fn (string $message) => $consumer->manage($message);
         foreach ($messages as $message) {
-            self::assertTrue($consumer->execute(new AMQPMessage($message)));
+            self::assertTrue($consume($message));
         }
         $decoded['published_at'] = $scrapedDate->getTimestamp();
-        self::assertTrue($consumer->execute(new AMQPMessage(json_encode($decoded, \JSON_THROW_ON_ERROR))));
+        self::assertTrue($consume(json_encode($decoded, \JSON_THROW_ON_ERROR)));
 
         $repository = $em->getRepository(Entry::class);
         $datedEntry = $repository->findOneBy(['user' => $owner->getId(), 'url' => $datedUrl]);
@@ -80,5 +90,11 @@ class FeedPublicationDateTest extends WallabagKernelTestCase
         self::assertNotSame($publishedAt->getTimestamp(), $datedEntry->getCreatedAt()->getTimestamp());
         $legacyEntry = $repository->findOneBy(['user' => $owner->getId(), 'url' => $legacyUrl]);
         self::assertSame($scrapedDate->getTimestamp(), $legacyEntry->getPublishedAt()->getTimestamp());
+    }
+
+    public function transports(): iterable
+    {
+        yield 'RabbitMQ' => ['amqp'];
+        yield 'Redis' => ['redis'];
     }
 }

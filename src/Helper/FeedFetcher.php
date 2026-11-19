@@ -22,6 +22,7 @@ class FeedFetcher
         private readonly FeedsImport $import,
         private readonly Config $config,
         private readonly ProducerInterface $rabbitMqProducer,
+        private readonly ProducerInterface $redisProducer,
     ) {
     }
 
@@ -58,7 +59,14 @@ class FeedFetcher
             $known[$hash] = true;
         }
 
-        $producer = $automatic && $this->config->get('import_with_rabbitmq') ? $this->rabbitMqProducer : null;
+        $producer = null;
+        if ($automatic) {
+            $producer = match (true) {
+                (bool) $this->config->get('import_with_rabbitmq') => $this->rabbitMqProducer,
+                (bool) $this->config->get('import_with_redis') => $this->redisProducer,
+                default => null,
+            };
+        }
         foreach ($new as $item) {
             if ($automatic) {
                 $this->import->importItem($feed->getUser(), $item->getUrl(), $item->getTitle(), $item->getPublishedAt(), $producer);
