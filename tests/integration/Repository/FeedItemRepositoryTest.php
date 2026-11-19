@@ -62,4 +62,28 @@ class FeedItemRepositoryTest extends WallabagKernelTestCase
         self::assertNotNull($em->find(FeedItem::class, $newest->getId()));
         self::assertNotNull($em->find(FeedItem::class, $otherArticle->getId()));
     }
+
+    public function testCountsDistinctPendingUrlsForEachOwner(): void
+    {
+        $em = $this->getEntityManager();
+        $owner = $this->getUser('admin');
+        $bob = $this->getUser('bob');
+        $first = (new FeedUrl($owner))->setTitle('First')->setUrl('https://example.org/first');
+        $second = (new FeedUrl($owner))->setTitle('Second')->setUrl('https://example.org/second');
+        $foreign = (new FeedUrl($bob))->setTitle('Private')->setUrl('https://example.org/private');
+        $dismissed = new FeedItem($second, 'https://example.org/dismissed');
+        $dismissed->dismiss();
+        $em->persist($first);
+        $em->persist($second);
+        $em->persist($foreign);
+        $em->persist(new FeedItem($first, 'https://example.org/shared'));
+        $em->persist(new FeedItem($second, 'https://example.org/shared'));
+        $em->persist($dismissed);
+        $em->persist(new FeedItem($foreign, 'https://example.org/foreign'));
+        $em->flush();
+
+        $items = $em->getRepository(FeedItem::class);
+        self::assertSame(1, $items->countPending($owner));
+        self::assertSame(1, $items->countPending($bob));
+    }
 }

@@ -177,6 +177,7 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         self::assertStringContainsString('feeds.flash.fetched', $crawler->filter('[data-controller="materialize--toast"]')->text());
         self::assertStringContainsString('Collected story', $crawler->filter('main')->text());
         self::assertCount(2, $crawler->filter('main .entry-card'));
+        self::assertSame('2', $crawler->filter('#slide-out a[href="/atom/list"] .items-number')->text());
         self::assertCount(1, $crawler->filter('main .entry-card img[src="https://example.org/cover.jpg"]'));
         self::assertSame('2025-01-02', $crawler->filter('main .entry-card time')->text());
     }

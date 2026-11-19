@@ -64,6 +64,17 @@ class FeedItemRepository extends ServiceEntityRepository
         return array_map('intval', array_column($rows, 'feedId'));
     }
 
+    public function countPending(User $user): int
+    {
+        return (int) $this->createQueryBuilder('item')
+            ->select('COUNT(DISTINCT item.urlHash)')
+            ->join('item.feed', 'feed')
+            ->where('feed.user = :user')->setParameter('user', $user)
+            ->andWhere('item.isTrashed = false')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     /** @param list<string> $currentHashes */
     public function prune(FeedUrl $feed, array $currentHashes, int $kept): int
     {
