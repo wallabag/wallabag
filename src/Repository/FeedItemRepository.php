@@ -6,6 +6,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Wallabag\Entity\FeedItem;
 use Wallabag\Entity\FeedUrl;
+use Wallabag\Entity\User;
 
 /**
  * @extends ServiceEntityRepository<FeedItem>
@@ -49,6 +50,20 @@ class FeedItemRepository extends ServiceEntityRepository
             ->andWhere('item.isTrashed = false')
             ->getQuery()
             ->execute();
+    }
+
+    /** @return list<int> */
+    public function findPendingFeedIds(User $user): array
+    {
+        $rows = $this->createQueryBuilder('item')
+            ->select('DISTINCT IDENTITY(item.feed) AS feedId')
+            ->join('item.feed', 'feed')
+            ->where('feed.user = :user')->setParameter('user', $user)
+            ->andWhere('item.isTrashed = false')
+            ->getQuery()
+            ->getScalarResult();
+
+        return array_map('intval', array_column($rows, 'feedId'));
     }
 
     /** @param list<string> $currentHashes */

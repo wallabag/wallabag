@@ -14,6 +14,7 @@ use Wallabag\Entity\FeedUrl;
 use Wallabag\Form\Type\FeedUrlType;
 use Wallabag\Helper\FeedFetcher;
 use Wallabag\Helper\FeedReader;
+use Wallabag\Repository\FeedItemRepository;
 
 class FeedSubscriptionController extends AbstractController
 {
@@ -26,13 +27,16 @@ class FeedSubscriptionController extends AbstractController
 
     #[Route(path: '/atom/list', name: 'all_import_feed', methods: ['GET'])]
     #[IsGranted('ROLE_USER')]
-    public function index(): Response
+    public function index(FeedItemRepository $items): Response
     {
+        $user = $this->getUser() ?? throw $this->createAccessDeniedException();
+
         return $this->render('FeedSubscription/index.html.twig', [
             'feeds' => $this->entityManager->getRepository(FeedUrl::class)->findBy(
-                ['user' => $this->getUser()],
+                ['user' => $user],
                 ['id' => 'ASC']
             ),
+            'pendingFeeds' => array_fill_keys($items->findPendingFeedIds($user), true),
         ]);
     }
 
