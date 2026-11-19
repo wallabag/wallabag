@@ -50,4 +50,32 @@ class FeedItemRepository extends ServiceEntityRepository
             ->getQuery()
             ->execute();
     }
+
+    /** @param list<string> $currentHashes */
+    public function prune(FeedUrl $feed, array $currentHashes, int $kept): int
+    {
+        $cutoff = $this->createQueryBuilder('item')
+            ->select('item.id')
+            ->where('item.feed = :feed')->setParameter('feed', $feed)
+            ->orderBy('item.id', 'DESC')
+            ->setFirstResult($kept)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if (null === $cutoff) {
+            return 0;
+        }
+
+        $query = $this->createQueryBuilder('item')
+            ->delete()
+            ->where('item.feed = :feed')->setParameter('feed', $feed)
+            ->andWhere('item.id <= :cutoff')->setParameter('cutoff', $cutoff['id']);
+
+        if ([] !== $currentHashes) {
+            $query->andWhere('item.urlHash NOT IN (:current)')->setParameter('current', $currentHashes);
+        }
+
+        return (int) $query->getQuery()->execute();
+    }
 }
