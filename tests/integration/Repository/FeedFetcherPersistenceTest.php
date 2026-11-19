@@ -3,10 +3,13 @@
 namespace Wallabag\Tests\Integration\Repository;
 
 use Laminas\Feed\Reader\Entry\EntryInterface;
+use Wallabag\Entity\Entry;
 use Wallabag\Entity\FeedItem;
 use Wallabag\Entity\FeedUrl;
+use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\FeedFetcher;
 use Wallabag\Helper\FeedReader;
+use Wallabag\Import\FeedsImport;
 use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
 class FeedFetcherPersistenceTest extends WallabagKernelTestCase
@@ -26,7 +29,7 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
         $reader = $this->createMock(FeedReader::class);
         $reader->method('read')->willReturn($entries);
         $items = $em->getRepository(FeedItem::class);
-        $fetcher = new FeedFetcher($em, $items, $reader);
+        $fetcher = new FeedFetcher($em, $items, $reader, static::getContainer()->get(FeedsImport::class));
 
         self::assertSame(10, $fetcher->fetch($feed));
         self::assertCount(10, $items->findPending($feed));
@@ -34,6 +37,27 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
         self::assertSame(0, $fetcher->fetch($feed));
         self::assertCount(11, $items->findPending($feed));
         self::assertNotNull($feed->getUpdatedAt());
+    }
+
+    public function testAutomaticCollectionSavesArticleBeforeRecordingItsHistory(): void
+    {
+        $em = $this->getEntityManager();
+        $owner = $this->getUser('admin');
+        $feed = (new FeedUrl($owner))->setTitle('Automatic collection')->setUrl('https://example.org/automatic')->setAutomatic(true);
+        $em->persist($feed);
+        $em->flush();
+
+        $url = 'https://example.org/automatic-article';
+        $reader = $this->createMock(FeedReader::class);
+        $reader->method('read')->willReturn([$this->entry($url)]);
+        static::getContainer()->set(ContentProxy::class, $this->createMock(ContentProxy::class));
+        $items = $em->getRepository(FeedItem::class);
+        $fetcher = new FeedFetcher($em, $items, $reader, static::getContainer()->get(FeedsImport::class));
+
+        self::assertSame(1, $fetcher->fetch($feed));
+        self::assertSame(0, $fetcher->fetch($feed));
+        self::assertNotNull($em->getRepository(Entry::class)->findOneBy(['user' => $owner, 'url' => $url]));
+        self::assertCount(0, $items->findPending($feed));
     }
 
     private function entry(string $url): EntryInterface

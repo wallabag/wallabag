@@ -181,6 +181,31 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         self::assertSame('2025-01-02', $crawler->filter('main .entry-card time')->text());
     }
 
+    public function testRefreshingAnAutomaticSubscriptionSavesTheArticleAndReturnsToTheList(): void
+    {
+        $this->logInAs('admin');
+        $owner = $this->getLoggedInUser();
+        $feed = (new FeedUrl($owner))->setTitle('Automatic feed')->setUrl('https://example.org/feed')->setAutomatic(true);
+        $em = $this->getEntityManager();
+        $em->persist($feed);
+        $em->flush();
+
+        $url = 'https://example.org/automatic-article';
+        $entry = $this->createMock(EntryInterface::class);
+        $entry->method('getLink')->willReturn($url);
+        $this->mockReader()->expects(self::once())->method('read')->with($feed->getUrl())->willReturn([$entry]);
+        $client = $this->getTestClient();
+        $client->getContainer()->set(ContentProxy::class, $this->createMock(ContentProxy::class));
+
+        $crawler = $client->request('GET', '/atom/list');
+        $this->submitAction($crawler, '/atom/fetch/' . $feed->getId());
+
+        self::assertTrue($client->getResponse()->isRedirect('/atom/list'));
+        $crawler = $client->followRedirect();
+        self::assertSame('feeds.flash.fetched', $crawler->filter('[data-controller="materialize--toast"]')->text());
+        self::assertNotNull($this->getEntityManager()->getRepository(Entry::class)->findOneBy(['url' => $url, 'user' => $owner]));
+    }
+
     public function testDismissAndPurgeRetainCollectedHistory(): void
     {
         $this->logInAs('admin');

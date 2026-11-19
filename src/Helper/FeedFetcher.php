@@ -5,6 +5,7 @@ namespace Wallabag\Helper;
 use Doctrine\ORM\EntityManagerInterface;
 use Wallabag\Entity\FeedItem;
 use Wallabag\Entity\FeedUrl;
+use Wallabag\Import\FeedsImport;
 use Wallabag\Repository\FeedItemRepository;
 
 class FeedFetcher
@@ -16,6 +17,7 @@ class FeedFetcher
         private readonly EntityManagerInterface $entityManager,
         private readonly FeedItemRepository $items,
         private readonly FeedReader $reader,
+        private readonly FeedsImport $import,
     ) {
     }
 
@@ -50,10 +52,21 @@ class FeedFetcher
             $known[$hash] = true;
         }
 
+        $automatic = $feed->isAutomatic();
         foreach ($new as $item) {
+            if ($automatic) {
+                $this->import->importItem($feed->getUser(), $item->getUrl(), $item->getTitle());
+                $item->dismiss();
+            }
             $this->entityManager->persist($item);
+
+            if ($automatic) {
+                $this->entityManager->flush();
+            }
         }
-        $this->entityManager->flush();
+        if (!$automatic && [] !== $new) {
+            $this->entityManager->flush();
+        }
         $this->items->prune($feed, array_keys($current), self::ITEMS_KEPT);
         $feed->markRefreshed();
         $this->entityManager->flush();

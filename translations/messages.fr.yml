@@ -755,6 +755,7 @@ feeds:
     alert:
         confirm_delete: Supprimer cet abonnement et son historique d'articles ?
         confirm_purge: Ignorer tous les articles en attente de ce flux ?
+    automatic_mode: Automatique
     empty: Vous n'êtes abonné à aucun flux.
     flash:
         already_processed: Cet article a déjà été traité.
@@ -770,7 +771,10 @@ feeds:
         saved: Article disponible dans wallabag.
         updated: Abonnement mis à jour.
     items_empty: Aucun article en attente dans ce flux.
+    label:
+        automatic: Importer automatiquement les nouveaux articles
     last_fetch: 'Dernière actualisation réussie : %date%'
+    manual_mode: Manuel
     page_title: Abonnements aux flux
     stale: Ce flux n'a pas été actualisé avec succès depuis deux jours.
 theme:
