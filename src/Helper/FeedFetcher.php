@@ -10,6 +10,7 @@ use Wallabag\Repository\FeedItemRepository;
 class FeedFetcher
 {
     private const ITEMS_LIMIT = 10;
+    private const ITEMS_KEPT = 200;
 
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
@@ -21,6 +22,7 @@ class FeedFetcher
     public function fetch(FeedUrl $feed): int
     {
         $known = array_fill_keys($this->items->findKnownHashes($feed), true);
+        $current = [];
         $new = [];
 
         foreach ($this->reader->read($feed->getUrl()) as $entry) {
@@ -30,7 +32,8 @@ class FeedFetcher
             }
 
             $hash = hash('sha256', $url);
-            if (isset($known[$hash])) {
+            $current[$hash] = true;
+            if (\count($new) >= self::ITEMS_LIMIT || isset($known[$hash])) {
                 continue;
             }
 
@@ -45,15 +48,13 @@ class FeedFetcher
                 \is_string($image) && FeedUrlValidator::isValid($image) ? $image : null,
             );
             $known[$hash] = true;
-
-            if (\count($new) === self::ITEMS_LIMIT) {
-                break;
-            }
         }
 
         foreach ($new as $item) {
             $this->entityManager->persist($item);
         }
+        $this->entityManager->flush();
+        $this->items->prune($feed, array_keys($current), self::ITEMS_KEPT);
         $feed->markRefreshed();
         $this->entityManager->flush();
 
