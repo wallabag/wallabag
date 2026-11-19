@@ -82,6 +82,7 @@ entry:
         set_as_read: Marcar como lido
         set_as_unread: Marcar como non lido
         star: Poñer estrela
+        unstar: Retirar estrela
     metadata:
         published_on: Publicado o
         tags: Etiquetas
@@ -483,6 +484,10 @@ import:
         how_to: Selecciona o ficheiro de copia de apoio dos marcadores e preme no botón inferior para importalo. Ten en conta que o proceso podería demorarse xa que deben procesarse todos os artigos.
         description: Con este asistente vas importar os teus marcadores desde Pocket (usando a exportación CSV). Só tes que ir a https://getpocket.com/export e exportar un ficheiro. Descargarás un ficheiro ZIP (tipo «pocket.zip»). Extrae o ficheiro CSV que contén, ten nome «part_000000.csv».
         page_title: Importar > CSV desde Pocket
+    url_list:
+        page_title: Importar > lista con URL
+        description: O xestor vai importar un ficheiro de texto plano que conteña un URL por liña. Vai ignorar as liñas baleiras, que comecen cun "#" e as que non sexan un enderezo web (que comecen con "http://" ou "https://").
+        how_to: Selecciona o ficheiro de texto e preme no botón inferior para importalo. Ten en conta que o proceso pode demorarse xa que hai que obter todos os artigos.
 export:
     unknown: Descoñecido
     footer_template: <div style="text-align:center;"><p>Creado por wallabag con %method%</p><p>Abre <a href="https://github.com/wallabag/wallabag/issues">unha incidencia</a> se tes problemas para visualizar este E-Book no teu dispositivo.</p></div>
