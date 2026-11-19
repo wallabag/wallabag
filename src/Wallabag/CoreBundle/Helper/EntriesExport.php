@@ -22,23 +22,29 @@ class EntriesExport
     private $logoPath;
     private $translator;
     private $tokenStorage;
+    private $contentCleaner;
+    private $imageLocator;
     private $title = '';
     private $entries = [];
     private $author = 'wallabag';
     private $language = '';
 
     /**
-     * @param TranslatorInterface   $translator   Translator service
-     * @param string                $wallabagUrl  Wallabag instance url
-     * @param string                $logoPath     Path to the logo FROM THE BUNDLE SCOPE
-     * @param TokenStorageInterface $tokenStorage Needed to retrieve the current user
+     * @param TranslatorInterface   $translator     Translator service
+     * @param string                $wallabagUrl    Wallabag instance url
+     * @param string                $logoPath       Path to the logo FROM THE BUNDLE SCOPE
+     * @param TokenStorageInterface $tokenStorage   Needed to retrieve the current user
+     * @param EpubContentCleaner    $contentCleaner Cleans the content of the entries for the EPUB
+     * @param InstanceImageLocator  $imageLocator   Finds the images stored by wallabag
      */
-    public function __construct(TranslatorInterface $translator, $wallabagUrl, $logoPath, TokenStorageInterface $tokenStorage)
+    public function __construct(TranslatorInterface $translator, $wallabagUrl, $logoPath, TokenStorageInterface $tokenStorage, EpubContentCleaner $contentCleaner, InstanceImageLocator $imageLocator)
     {
         $this->translator = $translator;
         $this->wallabagUrl = $wallabagUrl;
         $this->logoPath = $logoPath;
         $this->tokenStorage = $tokenStorage;
+        $this->contentCleaner = $contentCleaner;
+        $this->imageLocator = $imageLocator;
     }
 
     /**
@@ -189,8 +195,9 @@ class EntriesExport
              * Front page
              * Set if there's only one entry in the given set
              */
-            if (1 === $entryCount && null !== $entry->getPreviewPicture()) {
-                $book->setCoverImage($entry->getPreviewPicture());
+            $coverImage = 1 === $entryCount ? $this->imageLocator->locate($entry->getPreviewPicture()) : null;
+            if (null !== $coverImage) {
+                $book->setCoverImage('cover.' . $coverImage['extension'], file_get_contents($coverImage['path']), $coverImage['mimetype']);
             }
 
             foreach ($entry->getTags() as $tag) {
@@ -222,11 +229,11 @@ class EntriesExport
                 '<dt>' . $this->escapeXml($this->translator->trans('entry.metadata.address')) . '</dt><dd><a href="' . $this->escapeXml($entry->getUrl()) . '">' . $this->escapeXml($entry->getUrl()) . '</a></dd>' .
                 '</dl>' .
                 $bookEnd;
-            $book->addChapter("Entry {$i} of {$entryCount}", "{$filename}_cover.html", $titlepage, true, EPub::EXTERNAL_REF_ADD);
-            $chapter = $content_start . $entry->getContent() . $bookEnd;
+            $book->addChapter("Entry {$i} of {$entryCount}", "{$filename}_cover.html", $titlepage, true, EPub::EXTERNAL_REF_IGNORE);
+            $chapter = $content_start . $this->contentCleaner->clean($book, $entry->getContent()) . $bookEnd;
 
             $entryIds[] = $entry->getId();
-            $book->addChapter($this->escapeXml($entry->getTitle()), "{$filename}.html", $chapter, true, EPub::EXTERNAL_REF_ADD);
+            $book->addChapter($this->escapeXml($entry->getTitle()), "{$filename}.html", $chapter, true, EPub::EXTERNAL_REF_IGNORE);
         }
 
         $book->addChapter('Notices', 'Cover2.html', $content_start . $this->getExportInformation('PHPePub') . $bookEnd);
