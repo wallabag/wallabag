@@ -750,6 +750,7 @@ feeds:
         fetch: Actualiser
         items: Voir les articles
         purge: Vider le flux
+        save_article: Enregistrer l'article
         show_card_view: Afficher en cartes
         show_list_view: Afficher en liste
     alert:
@@ -764,6 +765,8 @@ feeds:
         fetched: Flux actualisé.
         no_pending_articles: Aucun article en attente à ignorer.
         purged: Articles en attente ignorés.
+        save_error: "Impossible d'enregistrer l'article. Il est toujours en attente."
+        saved: Article disponible dans wallabag.
         updated: Abonnement mis à jour.
     items_empty: Aucun article en attente dans ce flux.
     last_fetch: 'Dernière actualisation réussie : %date%'

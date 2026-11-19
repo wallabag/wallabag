@@ -40,7 +40,7 @@ class FeedFetcher
                 $feed,
                 $url,
                 $entry->getTitle(),
-                null === $date ? null : \DateTime::createFromInterface($date),
+                null === $date ? null : (new \DateTime())->setTimestamp($date->getTimestamp()),
                 $this->getEnclosureImage((array) $entry->getEnclosure()),
             );
             $known[$hash] = true;

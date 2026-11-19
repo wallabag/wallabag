@@ -43,6 +43,7 @@ class FeedItemVoterTest extends TestCase
     public function permissions(): iterable
     {
         yield 'dismiss' => ['DISMISS'];
+        yield 'save' => ['SAVE'];
     }
 
     private function token(?User $user): TokenInterface

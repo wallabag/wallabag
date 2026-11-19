@@ -4,12 +4,16 @@ namespace Wallabag\Tests\Functional\Controller;
 
 use Laminas\Feed\Reader\Entry\EntryInterface;
 use PHPUnit\Framework\MockObject\MockObject;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Wallabag\Entity\Config;
+use Wallabag\Entity\Entry;
 use Wallabag\Entity\FeedItem;
 use Wallabag\Entity\FeedUrl;
 use Wallabag\Entity\User;
+use Wallabag\Event\EntrySavedEvent;
+use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\FeedReader;
 use Wallabag\Tests\Functional\WallabagTestCase;
 
@@ -292,6 +296,87 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         }
     }
 
+    /** @dataProvider viewModes */
+    public function testSavingFeedArticlePreservesItsTitleAndSkipsDuplicates(int $mode, string $itemSelector): void
+    {
+        $this->logInAs('admin');
+        $em = $this->getEntityManager();
+        $owner = $this->getLoggedInUser();
+        $owner->getConfig()->setListMode($mode);
+        $feed = (new FeedUrl($owner))->setTitle('Reading')->setUrl('https://example.org/reading');
+        $otherFeed = (new FeedUrl($owner))->setTitle('Other source')->setUrl('https://example.org/other');
+        $publishedAt = new \DateTime('2020-06-01 12:00:00');
+        $first = new FeedItem($feed, 'https://example.org/story', 'Title from feed', $publishedAt);
+        $duplicate = new FeedItem($otherFeed, $first->getUrl(), 'Same story', new \DateTime('2021-01-01 12:00:00'));
+        $em->persist($feed);
+        $em->persist($otherFeed);
+        $em->persist($first);
+        $em->persist($duplicate);
+        $em->flush();
+
+        $client = $this->getTestClient();
+        $client->disableReboot();
+        $content = $this->createMock(ContentProxy::class);
+        $content->expects(self::once())->method('updateEntry')->willReturnCallback(static function (Entry $entry): void {
+            $entry->setPublishedAt(new \DateTime('2021-06-01 12:00:00'));
+
+            throw new \RuntimeException('Article unavailable');
+        });
+        $client->getContainer()->set(ContentProxy::class, $content);
+        $savedId = null;
+        $client->getContainer()->get('event_dispatcher')->addListener(EntrySavedEvent::NAME, static function (EntrySavedEvent $event) use (&$savedId): void {
+            $savedId = $event->getEntry()->getId();
+        });
+
+        $crawler = $client->request('GET', '/atom/items/' . $feed->getId());
+        $save = $crawler->filter('form[action="/atom/item/save/' . $first->getId() . '"] button')->form();
+        $client->submit($save);
+        $crawler = $client->followRedirect();
+        self::assertStringContainsString('feeds.flash.saved', $crawler->filter('[data-controller="materialize--toast"]')->text());
+        self::assertCount(0, $crawler->filter($itemSelector));
+
+        $client->submit($save);
+        self::assertStringContainsString('feeds.flash.already_processed', $client->followRedirect()->filter('[data-controller="materialize--toast"]')->text());
+
+        $crawler = $client->request('GET', '/atom/items/' . $otherFeed->getId());
+        $this->submitAction($crawler, '/atom/item/save/' . $duplicate->getId());
+        $crawler = $client->followRedirect();
+        self::assertStringContainsString('feeds.flash.saved', $crawler->filter('[data-controller="materialize--toast"]')->text());
+        self::assertCount(0, $crawler->filter($itemSelector));
+
+        $entries = $em->getRepository(Entry::class)->findBy(['url' => $first->getUrl(), 'user' => $owner]);
+        self::assertCount(1, $entries);
+        self::assertSame('Title from feed', $entries[0]->getTitle());
+        self::assertSame($publishedAt->getTimestamp(), $entries[0]->getPublishedAt()->getTimestamp());
+        self::assertNotSame($publishedAt->getTimestamp(), $entries[0]->getCreatedAt()->getTimestamp());
+        self::assertSame($entries[0]->getId(), $savedId);
+    }
+
+    public function testRejectedImportLeavesTheArticlePending(): void
+    {
+        $this->logInAs('admin');
+        $em = $this->getEntityManager();
+        $feed = (new FeedUrl($this->getLoggedInUser()))->setTitle('Reading')->setUrl('https://example.org/feed');
+        $item = new FeedItem($feed, 'ftp://example.org/article');
+        $em->persist($feed);
+        $em->persist($item);
+        $em->flush();
+
+        $client = $this->getTestClient();
+        $crawler = $client->request('GET', '/atom/items/' . $feed->getId());
+        $this->submitAction($crawler, '/atom/item/save/' . $item->getId());
+        $crawler = $client->followRedirect();
+        self::assertSame('feeds.flash.save_error', $crawler->filter('[data-controller="materialize--toast"]')->text());
+        self::assertCount(1, $crawler->filter('main .entry-card'));
+        self::assertFalse($this->getEntityManager()->find(FeedItem::class, $item->getId())->isTrashed());
+    }
+
+    public function viewModes(): iterable
+    {
+        yield 'cards' => [0, 'main .entry-card'];
+        yield 'list' => [1, 'main .feed-list-row'];
+    }
+
     /** @dataProvider protectedFeedRoutes */
     public function testProtectedFeedRoutesHideForeignResources(string $route, bool $isItem, string $method): void
     {
@@ -329,9 +414,10 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         yield 'fetch' => ['fetch', false, 'POST'];
         yield 'purge' => ['purge', false, 'POST'];
         yield 'item/delete' => ['item/delete', true, 'POST'];
+        yield 'item/save' => ['item/save', true, 'POST'];
     }
 
-    private function submitAction(\Symfony\Component\DomCrawler\Crawler $crawler, string $path): void
+    private function submitAction(Crawler $crawler, string $path): void
     {
         $this->getTestClient()->submit($crawler->filter(\sprintf('form[action="%s"] button', $path))->form());
     }

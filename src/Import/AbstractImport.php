@@ -213,5 +213,8 @@ abstract class AbstractImport implements LoggerAwareInterface
         }
     }
 
-    abstract protected function prepareEntryForImport(array $importedEntry): array;
+    protected function prepareEntryForImport(array $importedEntry): array
+    {
+        return $importedEntry;
+    }
 }

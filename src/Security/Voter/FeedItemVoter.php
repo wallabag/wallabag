@@ -12,7 +12,7 @@ class FeedItemVoter extends Voter
     protected function supports(string $attribute, $subject): bool
     {
         return $subject instanceof FeedItem
-            && \in_array($attribute, ['DISMISS'], true);
+            && \in_array($attribute, ['DISMISS', 'SAVE'], true);
     }
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool

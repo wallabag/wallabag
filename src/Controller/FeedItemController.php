@@ -10,6 +10,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\Entity\FeedItem;
 use Wallabag\Entity\FeedUrl;
+use Wallabag\Import\FeedsImport;
 use Wallabag\Repository\FeedItemRepository;
 
 class FeedItemController extends AbstractController
@@ -62,6 +63,31 @@ class FeedItemController extends AbstractController
             $item->dismiss();
             $this->entityManager->flush();
             $this->addFlash('notice', 'feeds.flash.dismissed');
+        }
+
+        return $this->redirectToRoute('display_feed_items', ['id' => $feed->getId()]);
+    }
+
+    #[Route(path: '/atom/item/save/{id}', name: 'save_item', requirements: ['id' => '\d+'], methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    #[IsGranted('SAVE', subject: 'item')]
+    public function saveItem(Request $request, FeedItem $item, FeedsImport $import): Response
+    {
+        $feed = $item->getFeed();
+        $token = $request->request->all()['token'] ?? null;
+        if (!\is_string($token) || !$this->isCsrfTokenValid('feed-save-item-' . $item->getId(), $token)) {
+            throw new BadRequestHttpException('Invalid CSRF token.');
+        }
+
+        if ($item->isTrashed()) {
+            $this->addFlash('notice', 'feeds.flash.already_processed');
+        } elseif (!$import->validateEntry(['url' => $item->getUrl()])) {
+            $this->addFlash('notice', 'feeds.flash.save_error');
+        } else {
+            $import->importItem($feed->getUser(), $item->getUrl(), $item->getTitle(), $item->getPublishedAt());
+            $item->dismiss();
+            $this->entityManager->flush();
+            $this->addFlash('notice', 'feeds.flash.saved');
         }
 
         return $this->redirectToRoute('display_feed_items', ['id' => $feed->getId()]);
