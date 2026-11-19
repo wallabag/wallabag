@@ -745,6 +745,7 @@ feeds:
     action:
         add: Ajouter un flux
         back_to_list: Retour aux abonnements
+        delete: Supprimer le flux
         dismiss: Ignorer
         edit: Modifier le flux
         fetch: Actualiser
@@ -752,12 +753,14 @@ feeds:
         purge: Vider le flux
         save_article: Enregistrer l'article
     alert:
+        confirm_delete: Supprimer cet abonnement et son historique d'articles ?
         confirm_purge: Ignorer tous les articles en attente de ce flux ?
     empty: Vous n'êtes abonné à aucun flux.
     flash:
         already_processed: Cet article a déjà été traité.
         created: Abonnement ajouté.
         created_refresh_error: "Abonnement ajouté, mais la première actualisation a échoué."
+        deleted: Abonnement supprimé.
         dismissed: Article ignoré.
         fetch_error: Impossible d'actualiser le flux. Vérifiez son adresse et réessayez.
         fetched: Flux actualisé.

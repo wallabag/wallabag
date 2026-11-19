@@ -164,12 +164,17 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     #[ORM\Column(type: 'boolean')]
     private $emailTwoFactor = false;
 
+    /** @var Collection<int, FeedUrl> */
+    #[ORM\OneToMany(targetEntity: FeedUrl::class, mappedBy: 'user', cascade: ['remove'])]
+    private Collection $feeds;
+
     public function __construct()
     {
         parent::__construct();
         $this->entries = new ArrayCollection();
         $this->siteCredentials = new ArrayCollection();
         $this->clients = new ArrayCollection();
+        $this->feeds = new ArrayCollection();
         $this->roles = ['ROLE_USER'];
     }
 

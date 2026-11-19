@@ -52,6 +52,14 @@
                                 </button>
                             </form>
                         {% endif %}
+                        {% if is_granted('DELETE', feed) %}
+                            <form class="inline-block" action="{{ path('delete_feed', {id: feed.id}) }}" method="post" onsubmit="return confirm('{{ 'feeds.alert.confirm_delete'|trans|escape('js') }}')">
+                                <input type="hidden" name="token" value="{{ csrf_token('feed-delete-' ~ feed.id) }}">
+                                <button class="waves-effect btn-flat feed-action" type="submit">
+                                    <i class="material-icons left" aria-hidden="true">delete</i>{{ 'feeds.action.delete'|trans }}
+                                </button>
+                            </form>
+                        {% endif %}
                     </div>
                 </article>
             {% else %}

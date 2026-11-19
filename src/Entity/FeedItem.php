@@ -15,7 +15,7 @@ class FeedItem
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: FeedUrl::class)]
+    #[ORM\ManyToOne(targetEntity: FeedUrl::class, inversedBy: 'items')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private FeedUrl $feed;
 
