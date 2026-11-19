@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.6.18](https://github.com/wallabag/wallabag/tree/2.6.18)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.17...2.6.18)
+
+This is a security release. After upgrading, clear the cache (`var/cache`) and review the tagging rules of your users.
+
+### Security fixes
+
+* Validate the imported tagging rules, and ignore the invalid rules already stored, see [GHSA-2cfc-5mg3-74jc](https://github.com/wallabag/wallabag/security/advisories/GHSA-2cfc-5mg3-74jc)
+* Only link to http(s) URLs on the public share page, see [GHSA-52xm-74j7-7j7f](https://github.com/wallabag/wallabag/security/advisories/GHSA-52xm-74j7-7j7f)
+* Do not let the EPUB export read files or fetch URLs found in the content of an entry, see [GHSA-gr83-54pj-xch4](https://github.com/wallabag/wallabag/security/advisories/GHSA-gr83-54pj-xch4)
+* Update `enshrined/svg-sanitize` to reject SVG images with a root outside the SVG namespace, see [GHSA-rvg4-ph3q-9x5g](https://github.com/wallabag/wallabag/security/advisories/GHSA-rvg4-ph3q-9x5g)
+
+### Changes
+
+* The EPUB export does not embed remote images anymore, they stay as links. Images stored by wallabag are still embedded.
+
 ## [2.6.17](https://github.com/wallabag/wallabag/tree/2.6.17)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.16...2.6.17)
 
