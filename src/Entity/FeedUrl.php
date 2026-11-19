@@ -33,6 +33,9 @@ class FeedUrl
     #[ORM\Column(name: 'updated_at', type: 'datetime', nullable: true)]
     private ?\DateTime $updatedAt = null;
 
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    private bool $automatic = false;
+
     /** @var Collection<int, FeedItem> */
     #[ORM\OneToMany(targetEntity: FeedItem::class, mappedBy: 'feed', cascade: ['remove'])]
     private Collection $items;
@@ -85,5 +88,17 @@ class FeedUrl
     public function markRefreshed(): void
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    public function isAutomatic(): bool
+    {
+        return $this->automatic;
+    }
+
+    public function setAutomatic(bool $automatic): self
+    {
+        $this->automatic = $automatic;
+
+        return $this;
     }
 }

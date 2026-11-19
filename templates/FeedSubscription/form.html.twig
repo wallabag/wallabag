@@ -20,6 +20,13 @@
                                 {{ form_errors(form.url) }}
                                 {{ form_widget(form.url) }}
                             </div>
+                            <div class="col s12">
+                                {{ form_errors(form.automatic) }}
+                                <label for="{{ form.automatic.vars.id }}">
+                                    {{ form_widget(form.automatic) }}
+                                    <span>{{ form.automatic.vars.label|trans }}</span>
+                                </label>
+                            </div>
                         </div>
                         {{ form_widget(form.save, {attr: {class: 'btn waves-effect waves-light'}}) }}
                         <a class="waves-effect btn-flat feed-action" href="{{ path('all_import_feed') }}">{{ 'feeds.action.back_to_list'|trans }}</a>

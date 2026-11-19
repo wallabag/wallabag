@@ -5,6 +5,7 @@ namespace Wallabag\Helper;
 use Doctrine\ORM\EntityManagerInterface;
 use Wallabag\Entity\FeedItem;
 use Wallabag\Entity\FeedUrl;
+use Wallabag\Import\FeedsImport;
 use Wallabag\Repository\FeedItemRepository;
 
 class FeedFetcher
@@ -16,6 +17,7 @@ class FeedFetcher
         private readonly EntityManagerInterface $entityManager,
         private readonly FeedItemRepository $items,
         private readonly FeedReader $reader,
+        private readonly FeedsImport $import,
     ) {
     }
 
@@ -24,6 +26,8 @@ class FeedFetcher
         $known = array_fill_keys($this->items->findKnownHashes($feed), true);
         $current = [];
         $new = [];
+        $automatic = $feed->isAutomatic();
+        $validEntries = 0;
 
         $result = $this->reader->read($feed->getUrl());
         foreach ($result['entries'] as $entry) {
@@ -34,7 +38,8 @@ class FeedFetcher
 
             $hash = hash('sha256', $url);
             $current[$hash] = true;
-            if (\count($new) >= self::ITEMS_LIMIT || isset($known[$hash])) {
+            $limitReached = $automatic ? ++$validEntries > self::ITEMS_LIMIT : \count($new) >= self::ITEMS_LIMIT;
+            if ($limitReached || isset($known[$hash])) {
                 continue;
             }
 
@@ -50,9 +55,19 @@ class FeedFetcher
         }
 
         foreach ($new as $item) {
+            if ($automatic) {
+                $this->import->importItem($feed->getUser(), $item->getUrl(), $item->getTitle(), $item->getPublishedAt());
+                $item->dismiss();
+            }
             $this->entityManager->persist($item);
+
+            if ($automatic) {
+                $this->entityManager->flush();
+            }
         }
-        $this->entityManager->flush();
+        if (!$automatic && [] !== $new) {
+            $this->entityManager->flush();
+        }
         if ($result['url'] === $feed->getUrl()) {
             $this->items->prune($feed, array_keys($current), self::ITEMS_KEPT);
         } else {

@@ -17,6 +17,7 @@
                 <article class="card">
                     <div class="card-content">
                         <h2 class="card-title feed-subscription-title">{{ feed.title }}</h2>
+                        <span class="grey-text">{{ (feed.automatic ? 'feeds.automatic_mode' : 'feeds.manual_mode')|trans }}</span>
                         <p><a href="{{ feed.url }}" rel="noreferrer" class="feed-url">{{ feed.url }}</a></p>
                         {% if feed.updatedAt %}
                             <p>{{ 'feeds.last_fetch'|trans({'%date%': feed.updatedAt|date('Y-m-d H:i')}) }}</p>

@@ -762,6 +762,7 @@ feeds:
     alert:
         confirm_delete: Delete this feed subscription and its article history?
         confirm_purge: Dismiss all pending articles in this feed?
+    automatic_mode: Automatic
     empty: You have no feed subscriptions.
     flash:
         already_processed: This article has already been processed.
@@ -777,7 +778,10 @@ feeds:
         saved: Article is available in wallabag.
         updated: Feed subscription updated.
     items_empty: No articles are waiting in this feed.
+    label:
+        automatic: Import new articles automatically
     last_fetch: 'Last successful refresh: %date%'
+    manual_mode: Manual
     page_title: Feed subscriptions
     stale: This feed has not refreshed successfully in the last two days.
 theme:

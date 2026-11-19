@@ -95,6 +95,10 @@ class FeedSubscriptionController extends AbstractController
 
         $this->addFlash('notice', $this->refresh($feed) ? 'feeds.flash.fetched' : 'feeds.flash.fetch_error');
 
+        if ($feed->isAutomatic()) {
+            return $this->redirectToRoute('all_import_feed');
+        }
+
         return $this->redirectToRoute('display_feed_items', ['id' => $feed->getId()]);
     }
 
@@ -130,7 +134,7 @@ class FeedSubscriptionController extends AbstractController
             $this->fetcher->fetch($feed);
 
             return true;
-        } catch (ReaderException|HttpClientException) {
+        } catch (\Exception) {
             return false;
         }
     }

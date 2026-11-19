@@ -7,10 +7,13 @@ use Laminas\Feed\Reader\Exception\ExceptionInterface as ReaderException;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
+use Wallabag\Entity\Entry;
 use Wallabag\Entity\FeedItem;
 use Wallabag\Entity\FeedUrl;
+use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\FeedFetcher;
 use Wallabag\Helper\FeedReader;
+use Wallabag\Import\FeedsImport;
 use Wallabag\Tests\Integration\WallabagKernelTestCase;
 
 class FeedFetcherPersistenceTest extends WallabagKernelTestCase
@@ -50,7 +53,7 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
             new MockResponse($page), new MockResponse($rss),
         ]));
         $items = $em->getRepository(FeedItem::class);
-        $fetcher = new FeedFetcher($em, $items, $reader);
+        $fetcher = $this->createFetcher($reader);
 
         try {
             $fetcher->fetch($feed);
@@ -99,7 +102,7 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
         $reader->method('read')->willReturn(['url' => $feed->getUrl(), 'entries' => $entries]);
         $items = $em->getRepository(FeedItem::class);
 
-        self::assertSame(\count($cases), (new FeedFetcher($em, $items, $reader))->fetch($feed));
+        self::assertSame(\count($cases), $this->createFetcher($reader)->fetch($feed));
         foreach ($cases as $index => [$enclosure, $isImage]) {
             self::assertSame(1, $items->count([
                 'feed' => $feed,
@@ -124,7 +127,7 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
         $reader = $this->createMock(FeedReader::class);
         $reader->method('read')->willReturn(['url' => $feed->getUrl(), 'entries' => $entries]);
         $items = $em->getRepository(FeedItem::class);
-        $fetcher = new FeedFetcher($em, $items, $reader);
+        $fetcher = $this->createFetcher($reader);
 
         self::assertSame(10, $fetcher->fetch($feed));
         self::assertCount(10, $items->findPending($feed));
@@ -132,6 +135,69 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
         self::assertSame(0, $fetcher->fetch($feed));
         self::assertCount(11, $items->findPending($feed));
         self::assertNotNull($feed->getUpdatedAt());
+    }
+
+    public function testAutomaticCollectionStaysWithinTheFirstTenValidEntries(): void
+    {
+        $em = $this->getEntityManager();
+        $owner = $this->getUser('admin');
+        $feed = (new FeedUrl($owner))->setTitle('Automatic collection')->setUrl('https://example.org/automatic')->setAutomatic(true);
+        $articleUrl = 'https://example.org/article/';
+        $older = new FeedItem($feed, $articleUrl . '12');
+        $older->dismiss();
+        $em->persist($feed);
+        $em->persist($older);
+        for ($index = 0; $index < 200; ++$index) {
+            $item = new FeedItem($feed, 'https://example.org/obsolete/' . $index);
+            $item->dismiss();
+            $em->persist($item);
+        }
+        $em->flush();
+
+        $publishedAt = new \DateTime('2020-05-01T14:00:00+02:00');
+        $first = $this->entry($articleUrl . '1');
+        $first->method('getDateCreated')->willReturn($publishedAt);
+        $entries = [$this->entry('ftp://example.org/invalid'), $first, $first];
+        for ($index = 2; $index <= 12; ++$index) {
+            $entries[] = $this->entry($articleUrl . $index);
+        }
+        $reader = $this->createMock(FeedReader::class);
+        $reader->method('read')->willReturnCallback(static function (string $url) use (&$entries): array {
+            return ['url' => $url, 'entries' => $entries];
+        });
+        $scrapedDate = new \DateTime('2021-01-01 12:00:00');
+        $content = $this->createMock(ContentProxy::class);
+        $content->method('updateEntry')->willReturnCallback(static function (Entry $entry) use ($scrapedDate): void {
+            $entry->setPublishedAt($scrapedDate);
+        });
+        static::getContainer()->set(ContentProxy::class, $content);
+        $items = $em->getRepository(FeedItem::class);
+        $fetcher = $this->createFetcher($reader);
+
+        self::assertSame(9, $fetcher->fetch($feed));
+        self::assertSame(0, $fetcher->fetch($feed));
+        array_unshift($entries, $this->entry($articleUrl . 'new'));
+        self::assertSame(1, $fetcher->fetch($feed));
+        self::assertSame(0, $fetcher->fetch($feed));
+
+        $entriesRepository = $em->getRepository(Entry::class);
+        $em->clear();
+        $saved = $entriesRepository->findOneBy(['user' => $owner->getId(), 'url' => $articleUrl . '1']);
+        self::assertSame($publishedAt->getTimestamp(), $saved->getPublishedAt()->getTimestamp());
+        self::assertNotSame($publishedAt->getTimestamp(), $saved->getCreatedAt()->getTimestamp());
+        $undated = $entriesRepository->findOneBy(['user' => $owner->getId(), 'url' => $articleUrl . '2']);
+        self::assertSame($scrapedDate->getTimestamp(), $undated->getPublishedAt()->getTimestamp());
+        self::assertNull($entriesRepository->findOneBy(['user' => $owner->getId(), 'url' => $articleUrl . '10']));
+        self::assertNotNull($entriesRepository->findOneBy(['user' => $owner->getId(), 'url' => $articleUrl . 'new']));
+        self::assertNotNull($items->find($older->getId()));
+        self::assertCount(0, $items->findPending($feed));
+    }
+
+    private function createFetcher(FeedReader $reader): FeedFetcher
+    {
+        $em = $this->getEntityManager();
+
+        return new FeedFetcher($em, $em->getRepository(FeedItem::class), $reader, static::getContainer()->get(FeedsImport::class));
     }
 
     private function entry(string $url): EntryInterface&MockObject
