@@ -18,12 +18,31 @@
                     <div class="card-content">
                         <h2 class="card-title feed-subscription-title">{{ feed.title }}</h2>
                         <p><a href="{{ feed.url }}" rel="noreferrer" class="feed-url">{{ feed.url }}</a></p>
+                        {% if feed.updatedAt %}
+                            <p>{{ 'feeds.last_fetch'|trans({'%date%': feed.updatedAt|date('Y-m-d H:i')}) }}</p>
+                        {% endif %}
+                        {% if not feed.updatedAt or feed.updatedAt < date('-2 days') %}
+                            <p>{{ 'feeds.stale'|trans }}</p>
+                        {% endif %}
                     </div>
                     <div class="card-action">
+                        {% if is_granted('LIST_ITEMS', feed) %}
+                            <a class="waves-effect btn-flat feed-action" href="{{ path('display_feed_items', {id: feed.id}) }}">
+                                <i class="material-icons left" aria-hidden="true">list</i>{{ 'feeds.action.items'|trans }}
+                            </a>
+                        {% endif %}
                         {% if is_granted('EDIT', feed) %}
                             <a class="waves-effect btn-flat feed-action" href="{{ path('edit_feed', {id: feed.id}) }}">
                                 <i class="material-icons left" aria-hidden="true">edit</i>{{ 'feeds.action.edit'|trans }}
                             </a>
+                        {% endif %}
+                        {% if is_granted('REFRESH', feed) %}
+                            <form class="inline-block" action="{{ path('fetch_feed', {id: feed.id}) }}" method="post">
+                                <input type="hidden" name="token" value="{{ csrf_token('feed-fetch-' ~ feed.id) }}">
+                                <button class="waves-effect btn-flat feed-action" type="submit">
+                                    <i class="material-icons left" aria-hidden="true">refresh</i>{{ 'feeds.action.fetch'|trans }}
+                                </button>
+                            </form>
                         {% endif %}
                     </div>
                 </article>

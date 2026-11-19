@@ -2,8 +2,11 @@
 
 namespace Wallabag\Tests\Functional\Controller;
 
-use Laminas\Feed\Reader\Exception\RuntimeException;
+use Laminas\Feed\Reader\Entry\EntryInterface;
 use PHPUnit\Framework\MockObject\MockObject;
+use Symfony\Component\HttpClient\MockHttpClient;
+use Symfony\Component\HttpClient\Response\MockResponse;
+use Wallabag\Entity\FeedItem;
 use Wallabag\Entity\FeedUrl;
 use Wallabag\Entity\User;
 use Wallabag\Helper\FeedReader;
@@ -27,8 +30,8 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         $em->persist((new FeedUrl($bob))->setTitle('Private feed')->setUrl('https://example.org/private'));
         $em->flush();
 
-        $this->mockReader()->expects(self::once())->method('resolve')
-            ->with('https://example.org/feed')->willReturn('https://example.org/discovered');
+        $this->mockReader()->expects(self::once())->method('read')
+            ->with('https://example.org/feed')->willReturn(['url' => 'https://example.org/discovered', 'entries' => []]);
         $client = $this->getTestClient();
         $crawler = $client->request('GET', '/atom/new');
         $client->submit($crawler->filter('#feed_save')->form(), [
@@ -104,7 +107,9 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         $em->persist($feed);
         $em->flush();
 
-        $this->mockReader()->expects(self::once())->method('resolve')
+        $reader = $this->mockReader();
+        $reader->expects(self::never())->method('read');
+        $reader->expects(self::once())->method('resolve')
             ->with('https://example.org/blog')->willReturn('https://example.org/blog/rss.xml');
         $client = $this->getTestClient();
         $crawler = $client->request('GET', '/atom/edit/' . $feed->getId());
@@ -114,19 +119,112 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         self::assertSame('https://example.org/blog/rss.xml', $this->getEntityManager()->find(FeedUrl::class, $feed->getId())->getUrl());
     }
 
-    public function testKeepsSubmittedUrlWhenDiscoveryFails(): void
+    public function testRefreshRecoversAnInitiallyUnavailableWebsite(): void
     {
         $this->logInAs('admin');
-        $this->mockReader()->expects(self::once())->method('resolve')->willThrowException(new RuntimeException('No feed found'));
+        $websiteUrl = 'https://8.8.8.8/blog';
+        $feedUrl = 'https://8.8.8.8/rss';
+        $page = '<html><head><link rel="alternate" type="application/rss+xml" href="/rss"></head></html>';
+        $rss = '<rss version="2.0"><channel><title>Example</title><item><title>Recovered story</title><link>https://example.org/story</link></item></channel></rss>';
+        $http = new MockHttpClient([
+            new MockResponse('', ['http_code' => 503]),
+            new MockResponse($page),
+            new MockResponse($rss),
+        ]);
         $client = $this->getTestClient();
+        $client->disableReboot();
+        $client->getContainer()->set(FeedReader::class, new FeedReader('wallabag-test', $http));
         $crawler = $client->request('GET', '/atom/new');
         $client->submit($crawler->filter('#feed_save')->form(), [
             'feed[title]' => 'Unavailable feed',
-            'feed[url]' => 'https://example.org/missing',
+            'feed[url]' => $websiteUrl,
         ]);
 
         self::assertTrue($client->getResponse()->isRedirect('/atom/list'));
-        self::assertNotNull($this->getEntityManager()->getRepository(FeedUrl::class)->findOneBy(['url' => 'https://example.org/missing']));
+        $em = $this->getEntityManager();
+        $feed = $em->getRepository(FeedUrl::class)->findOneBy(['url' => $websiteUrl]);
+        self::assertNotNull($feed);
+        self::assertNull($feed->getUpdatedAt());
+        self::assertSame(1, $http->getRequestsCount());
+        $id = $feed->getId();
+        $crawler = $client->followRedirect();
+        self::assertSame(['feeds.flash.created_refresh_error'], $crawler->filter('[data-controller="materialize--toast"]')->each(static fn ($toast) => $toast->text()));
+
+        $client->submit($crawler->filter('form[action="/atom/fetch/' . $id . '"] button')->form());
+        $crawler = $client->followRedirect();
+        self::assertStringContainsString('Recovered story', $crawler->filter('main')->text());
+        self::assertSame(3, $http->getRequestsCount());
+        $em->clear();
+        self::assertSame($feedUrl, $em->find(FeedUrl::class, $id)->getUrl());
+        self::assertNotNull($em->find(FeedUrl::class, $id)->getUpdatedAt());
+    }
+
+    public function testRefreshUsesProtectedPostAndShowsCollectedArticles(): void
+    {
+        $this->logInAs('admin');
+        $feed = (new FeedUrl($this->getLoggedInUser()))->setTitle('My feed')->setUrl('https://example.org/feed');
+        $em = $this->getEntityManager();
+        $em->persist($feed);
+        $em->flush();
+
+        $entry = $this->createMock(EntryInterface::class);
+        $entry->method('getLink')->willReturn('https://example.org/story');
+        $entry->method('getTitle')->willReturn('Collected story');
+        $this->mockReader()->expects(self::once())->method('read')->with($feed->getUrl())
+            ->willReturn(['url' => $feed->getUrl(), 'entries' => [$entry]]);
+
+        $client = $this->getTestClient();
+        $refresh = '/atom/fetch/' . $feed->getId();
+        $client->request('GET', $refresh);
+        self::assertSame(405, $client->getResponse()->getStatusCode());
+        foreach ([[], ['token' => 'invalid'], ['token' => ['unexpected']]] as $post) {
+            $client->request('POST', $refresh, $post);
+            self::assertSame(400, $client->getResponse()->getStatusCode());
+        }
+
+        $crawler = $client->request('GET', '/atom/list');
+        $client->submit($crawler->filter(\sprintf('form[action="%s"] button', $refresh))->form());
+        self::assertTrue($client->getResponse()->isRedirect('/atom/items/' . $feed->getId()));
+        $crawler = $client->followRedirect();
+        self::assertStringContainsString('feeds.flash.fetched', $crawler->filter('[data-controller="materialize--toast"]')->text());
+        self::assertStringContainsString('Collected story', $crawler->filter('main')->text());
+    }
+
+    /** @dataProvider protectedFeedRoutes */
+    public function testProtectedFeedRoutesHideForeignResources(string $route, string $method): void
+    {
+        $this->logInAs('admin');
+        $em = $this->getEntityManager();
+        $bob = $em->getRepository(User::class)->findOneBy(['username' => 'bob']);
+        $feed = (new FeedUrl($bob))->setTitle('Private feed')->setUrl('https://example.org/feed');
+        $em->persist($feed);
+        $item = new FeedItem($feed, 'https://example.org/article');
+        $em->persist($item);
+        $em->flush();
+
+        $id = $feed->getId();
+        $client = $this->getTestClient();
+        $client->request($method, '/atom/' . $route . '/' . $id);
+
+        self::assertSame(404, $client->getResponse()->getStatusCode());
+        self::assertNotNull($this->getEntityManager()->find(FeedUrl::class, $feed->getId()));
+        self::assertSame(1, $this->getEntityManager()->getRepository(FeedItem::class)->count(['feed' => $feed]));
+
+        if ('POST' === $method && 'edit' !== $route) {
+            $this->logInAs('bob');
+            $client->request('POST', '/atom/' . $route . '/' . $id, ['token' => ['unexpected']]);
+
+            self::assertSame(400, $client->getResponse()->getStatusCode());
+            self::assertNotNull($this->getEntityManager()->find(FeedUrl::class, $feed->getId()));
+            self::assertSame(1, $this->getEntityManager()->getRepository(FeedItem::class)->count(['feed' => $feed]));
+        }
+    }
+
+    public function protectedFeedRoutes(): iterable
+    {
+        yield 'edit' => ['edit', 'POST'];
+        yield 'items' => ['items', 'GET'];
+        yield 'fetch' => ['fetch', 'POST'];
     }
 
     private function mockReader(): FeedReader&MockObject

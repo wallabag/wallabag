@@ -4,6 +4,7 @@ namespace Wallabag\Helper;
 
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\Psr7\UriResolver;
+use Laminas\Feed\Reader\Entry\EntryInterface;
 use Laminas\Feed\Reader\Exception\ExceptionInterface as ReaderException;
 use Laminas\Feed\Reader\Exception\RuntimeException;
 use Laminas\Feed\Reader\Feed\AbstractFeed;
@@ -23,18 +24,31 @@ class FeedReader
 
     public function resolve(string $url): string
     {
+        return $this->read($url)['url'];
+    }
+
+    /** @return array{url: string, entries: iterable<EntryInterface>} */
+    public function read(string $url): array
+    {
         $response = $this->request($url);
         $body = $response->getContent();
+        $effectiveUrl = $response->getInfo('url') ?: $url;
 
         try {
-            $this->parse($body);
-
-            return $url;
+            $feed = $this->parse($body);
         } catch (ReaderException $failure) {
+            $candidate = $this->discover($body, $effectiveUrl);
+            if (null === $candidate || $candidate === $url || $candidate === $effectiveUrl) {
+                throw $failure;
+            }
+            $url = $candidate;
+            $response = $this->request($url);
+            $feed = $this->parse($response->getContent());
             $effectiveUrl = $response->getInfo('url') ?: $url;
-
-            return $this->discover($body, $effectiveUrl) ?? throw $failure;
         }
+        $feed->setOriginalSourceUri($effectiveUrl);
+
+        return ['url' => $url, 'entries' => $feed];
     }
 
     private function request(string $url): ResponseInterface

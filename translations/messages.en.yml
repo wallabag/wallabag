@@ -751,11 +751,19 @@ feeds:
         add: Add feed
         back_to_list: Back to subscriptions
         edit: Edit feed
+        fetch: Refresh
+        items: View articles
     empty: You have no feed subscriptions.
     flash:
         created: Feed subscription added.
+        created_refresh_error: Feed subscription added, but the first refresh failed.
+        fetch_error: Could not refresh the feed. Check its address and try again.
+        fetched: Feed refreshed.
         updated: Feed subscription updated.
+    items_empty: No articles are waiting in this feed.
+    last_fetch: 'Last successful refresh: %date%'
     page_title: Feed subscriptions
+    stale: This feed has not refreshed successfully in the last two days.
 theme:
     action:
         toggle_auto: "Automatic theme"

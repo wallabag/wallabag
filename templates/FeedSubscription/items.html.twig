@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ feed.title }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col s12">
+            <div class="feed-items-toolbar">
+                {% if is_granted('ROLE_USER') %}
+                    <a class="waves-effect btn-flat feed-action" href="{{ path('all_import_feed') }}">{{ 'feeds.action.back_to_list'|trans }}</a>
+                {% endif %}
+            </div>
+            {% if items is empty %}
+                <p>{{ 'feeds.items_empty'|trans }}</p>
+            {% else %}
+                <ul class="collection">
+                    {% for item in items %}
+                        <li class="collection-item">
+                            <a class="feed-url" href="{{ item.url }}" rel="noreferrer">{{ item.title ?: item.url }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

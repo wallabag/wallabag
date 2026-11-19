@@ -7,10 +7,12 @@ use Laminas\Feed\Reader\Exception\ExceptionInterface as ReaderException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface as HttpClientException;
 use Wallabag\Entity\FeedUrl;
 use Wallabag\Form\Type\FeedUrlType;
+use Wallabag\Helper\FeedFetcher;
 use Wallabag\Helper\FeedReader;
 
 class FeedSubscriptionController extends AbstractController
@@ -18,6 +20,7 @@ class FeedSubscriptionController extends AbstractController
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly FeedReader $reader,
+        private readonly FeedFetcher $fetcher,
     ) {
     }
 
@@ -41,10 +44,11 @@ class FeedSubscriptionController extends AbstractController
         $form = $this->createForm(FeedUrlType::class, $feed)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->resolveFeedUrl($feed);
             $this->entityManager->persist($feed);
             $this->entityManager->flush();
-            $this->addFlash('notice', 'feeds.flash.created');
+            $this->addFlash('notice', $this->refresh($feed)
+                ? 'feeds.flash.created'
+                : 'feeds.flash.created_refresh_error');
 
             return $this->redirectToRoute('all_import_feed');
         }
@@ -79,12 +83,38 @@ class FeedSubscriptionController extends AbstractController
         ]);
     }
 
+    #[Route(path: '/atom/fetch/{id}', name: 'fetch_feed', requirements: ['id' => '\d+'], methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    #[IsGranted('REFRESH', subject: 'feed')]
+    public function fetch(Request $request, FeedUrl $feed): Response
+    {
+        $token = $request->request->all()['token'] ?? null;
+        if (!\is_string($token) || !$this->isCsrfTokenValid('feed-fetch-' . $feed->getId(), $token)) {
+            throw new BadRequestHttpException('Invalid CSRF token.');
+        }
+
+        $this->addFlash('notice', $this->refresh($feed) ? 'feeds.flash.fetched' : 'feeds.flash.fetch_error');
+
+        return $this->redirectToRoute('display_feed_items', ['id' => $feed->getId()]);
+    }
+
     private function resolveFeedUrl(FeedUrl $feed): void
     {
         try {
             $feed->setUrl($this->reader->resolve($feed->getUrl()));
         } catch (ReaderException|HttpClientException) {
             // Keep the submitted URL so the user can retry a temporarily unavailable feed.
+        }
+    }
+
+    private function refresh(FeedUrl $feed): bool
+    {
+        try {
+            $this->fetcher->fetch($feed);
+
+            return true;
+        } catch (ReaderException|HttpClientException) {
+            return false;
         }
     }
 }

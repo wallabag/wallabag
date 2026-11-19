@@ -216,6 +216,14 @@ footer {
   margin-top: 0;
 }
 
+.feed-items-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block: 1rem;
+}
+
 .feed-url {
   overflow-wrap: anywhere;
 }
