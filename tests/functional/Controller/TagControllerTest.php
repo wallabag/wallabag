@@ -41,6 +41,55 @@ class TagControllerTest extends WallabagTestCase
         $this->assertStringContainsString('(1)', $tagText);
     }
 
+    public function testListTagLabelsRequiresLogin(): void
+    {
+        $client = $this->getTestClient();
+
+        $client->request('GET', '/tag/labels');
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertStringContainsString('login', $client->getResponse()->headers->get('location'));
+    }
+
+    public function testListTagLabels(): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $client->request('GET', '/tag/labels');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame('application/json', $client->getResponse()->headers->get('Content-Type'));
+
+        $labels = json_decode((string) $client->getResponse()->getContent(), true);
+
+        // only the tags of the logged in user are returned, sorted by label
+        $this->assertSame(['bar', 'baz', 'foo'], $labels);
+    }
+
+    public function testTagInputsSuggestExistingTags(): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $entry = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findByUrlAndUserId('http://0.0.0.0/entry2', $this->getLoggedInUserId());
+
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $input = $crawler->filter('form[name=tag] input[name="tag[label]"]');
+        $this->assertSame('tag-autocomplete', $input->attr('data-controller'));
+        $this->assertSame('/tag/labels', $input->attr('data-tag-autocomplete-url-value'));
+
+        $crawler = $client->request('GET', '/unread/list');
+
+        $input = $crawler->filter('input.mass-action-tags-input');
+        $this->assertSame('tag-autocomplete', $input->attr('data-controller'));
+        $this->assertSame('/tag/labels', $input->attr('data-tag-autocomplete-url-value'));
+    }
+
     public function testAddTagToEntry(): void
     {
         $this->logInAs('admin');
