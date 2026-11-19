@@ -366,3 +366,4 @@ services:
     Wallabag\Helper\FeedFetcher:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_feeds_producer'
+            $redisProducer: '@wallabag.producer.redis.feeds'

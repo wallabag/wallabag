@@ -73,6 +73,7 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
             static::getContainer()->get(FeedsImport::class),
             $this->createMock(Config::class),
             $this->createMock(ProducerInterface::class),
+            $this->createMock(ProducerInterface::class),
         );
     }
 

@@ -27,11 +27,13 @@ class FeedFetcherTest extends TestCase
     private EntityManagerInterface&MockObject $entityManager;
     private FeedUrl $feed;
     private ProducerInterface&MockObject $rabbit;
+    private ProducerInterface&MockObject $redis;
 
     protected function setUp(): void
     {
         $this->entityManager = $this->createMock(EntityManagerInterface::class);
         $this->rabbit = $this->createMock(ProducerInterface::class);
+        $this->redis = $this->createMock(ProducerInterface::class);
         $user = $this->createMock(User::class);
         $user->method('getId')->willReturn(42);
         $this->feed = (new FeedUrl($user))->setUrl('https://example.org/feed')->setAutomatic(true);
@@ -53,21 +55,48 @@ class FeedFetcherTest extends TestCase
     public function testPublishFailureDoesNotRecordTheItemOrMarkRefreshSuccessful(): void
     {
         $this->rabbit->expects(self::once())->method('publish')->willThrowException(new \RuntimeException('Broker unavailable'));
+        $this->redis->expects(self::never())->method('publish');
         $this->entityManager->expects(self::never())->method('persist');
         $this->entityManager->expects(self::never())->method('flush');
 
         $this->expectExceptionMessage('Broker unavailable');
         try {
-            $this->createFetcher()->fetch($this->feed);
+            $this->createFetcher(true, true)->fetch($this->feed);
         } finally {
             self::assertNull($this->feed->getUpdatedAt());
         }
     }
 
-    private function createFetcher(): FeedFetcher
+    /** @dataProvider processingModes */
+    public function testSelectsConfiguredTransport(bool $rabbit, bool $redis, ?string $expected): void
+    {
+        $producer = match ($expected) {
+            'rabbitmq' => $this->rabbit,
+            'redis' => $this->redis,
+            default => null,
+        };
+        $import = $this->createMock(FeedsImport::class);
+        $import->expects(self::once())->method('importItem')
+            ->with($this->feed->getUser(), self::ARTICLE_URL, 'Example', $producer);
+
+        self::assertSame(1, $this->createFetcher($rabbit, $redis, $import)->fetch($this->feed));
+    }
+
+    public function processingModes(): iterable
+    {
+        yield 'synchronous' => [false, false, null];
+        yield 'RabbitMQ' => [true, false, 'rabbitmq'];
+        yield 'Redis' => [false, true, 'redis'];
+        yield 'RabbitMQ takes precedence' => [true, true, 'rabbitmq'];
+    }
+
+    private function createFetcher(bool $rabbit = true, bool $redis = false, ?FeedsImport $import = null): FeedFetcher
     {
         $config = $this->createMock(Config::class);
-        $config->method('get')->with('import_with_rabbitmq')->willReturn('1');
+        $config->method('get')->willReturnMap([
+            ['import_with_rabbitmq', $rabbit ? '1' : '0'],
+            ['import_with_redis', $redis ? '1' : '0'],
+        ]);
         $entry = $this->createMock(EntryInterface::class);
         $entry->method('getLink')->willReturn(self::ARTICLE_URL);
         $entry->method('getTitle')->willReturn('Example');
@@ -79,7 +108,7 @@ class FeedFetcherTest extends TestCase
             $this->entityManager,
             $items,
             $reader,
-            new FeedsImport(
+            $import ?? new FeedsImport(
                 $this->entityManager,
                 $this->createMock(ContentProxy::class),
                 $this->createMock(TagsAssigner::class),
@@ -88,6 +117,7 @@ class FeedFetcherTest extends TestCase
             ),
             $config,
             $this->rabbit,
+            $this->redis,
         );
     }
 }
