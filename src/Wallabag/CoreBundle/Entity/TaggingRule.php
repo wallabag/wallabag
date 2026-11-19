@@ -33,6 +33,11 @@ class TaggingRule implements RuleInterface
      *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
+     * @Assert\Regex(
+     *  pattern="/[\x00-\x08\x0A-\x1F\x7F]|\?>/",
+     *  match=false,
+     *  message="The rule can not contain control characters or the ?> sequence."
+     * )
      * @RulerZAssert\ValidRule(
      *  allowed_variables={"title", "url", "isArchived", "isStared", "content", "language", "mimetype", "readingTime", "domainName"},
      *  allowed_operators={">", "<", ">=", "<=", "=", "is", "!=", "and", "not", "or", "matches", "notmatches"}

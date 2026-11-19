@@ -66,7 +66,7 @@ class ConfigController extends AbstractController
     /**
      * @Route("/config", name="config")
      */
-    public function indexAction(Request $request, Config $craueConfig, TaggingRuleRepository $taggingRuleRepository, IgnoreOriginUserRuleRepository $ignoreOriginUserRuleRepository, UserRepository $userRepository)
+    public function indexAction(Request $request, Config $craueConfig, TaggingRuleRepository $taggingRuleRepository, IgnoreOriginUserRuleRepository $ignoreOriginUserRuleRepository, UserRepository $userRepository, ValidatorInterface $validator)
     {
         $config = $this->getConfig();
         $user = $this->getUser();
@@ -184,17 +184,41 @@ class ConfigController extends AbstractController
                 $content = json_decode(file_get_contents($file->getPathname()), true);
 
                 if (\is_array($content)) {
+                    $taggingRules = [];
+
                     foreach ($content as $rule) {
+                        // imported rules must go through the same validation as the ones created from the form,
+                        // otherwise they are compiled to PHP and executed without any check
+                        if (!\is_array($rule) || !isset($rule['rule'], $rule['tags']) || !\is_string($rule['rule']) || !\is_array($rule['tags']) || \count($rule['tags']) !== \count(array_filter($rule['tags'], 'is_string'))) {
+                            $taggingRules = [];
+
+                            break;
+                        }
+
                         $taggingRule = new TaggingRule();
                         $taggingRule->setRule($rule['rule']);
                         $taggingRule->setTags($rule['tags']);
                         $taggingRule->setConfig($config);
+
+                        if (0 < \count($validator->validate($taggingRule))) {
+                            $taggingRules = [];
+
+                            break;
+                        }
+
+                        $taggingRules[] = $taggingRule;
+                    }
+
+                    // nothing is imported if one rule is invalid
+                    foreach ($taggingRules as $taggingRule) {
                         $this->entityManager->persist($taggingRule);
                     }
 
                     $this->entityManager->flush();
 
-                    $message = 'flashes.config.notice.tagging_rules_imported';
+                    if ([] !== $taggingRules) {
+                        $message = 'flashes.config.notice.tagging_rules_imported';
+                    }
                 }
             }
 
