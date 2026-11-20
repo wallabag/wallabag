@@ -6,6 +6,9 @@ use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use RulerZ\RulerZ;
+use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\ConstraintViolationList;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Wallabag\Entity\Config;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\IgnoreOriginInstanceRule;
@@ -18,6 +21,7 @@ class RuleBasedIgnoreOriginProcessorTest extends TestCase
 {
     private $rulerz;
     private $processor;
+    private $validator;
     private $ignoreOriginInstanceRuleRepository;
     private $logger;
     private $handler;
@@ -30,7 +34,16 @@ class RuleBasedIgnoreOriginProcessorTest extends TestCase
         $this->handler = new TestHandler();
         $this->logger->pushHandler($this->handler);
 
-        $this->processor = new RuleBasedIgnoreOriginProcessor($this->rulerz, $this->logger, $this->ignoreOriginInstanceRuleRepository);
+        $this->validator = $this->createMock(ValidatorInterface::class);
+        $this->validator->method('validate')->willReturnCallback(static function ($rule) {
+            if ('invalid rule' !== $rule->getRule()) {
+                return new ConstraintViolationList();
+            }
+
+            return new ConstraintViolationList([new ConstraintViolation('invalid', null, [], $rule, 'rule', $rule->getRule())]);
+        });
+
+        $this->processor = new RuleBasedIgnoreOriginProcessor($this->rulerz, $this->logger, $this->ignoreOriginInstanceRuleRepository, $this->validator);
     }
 
     public function testProcessWithNoRule(): void
@@ -73,6 +86,26 @@ class RuleBasedIgnoreOriginProcessorTest extends TestCase
         $result = $this->processor->process($entry);
 
         $this->assertFalse($result);
+    }
+
+    public function testProcessIgnoresInvalidStoredRule(): void
+    {
+        $user = $this->getUser([$this->getIgnoreOriginUserRule('invalid rule')]);
+        $entry = new Entry($user);
+        $entry->setUrl('http://example.com/hello-world');
+
+        $this->ignoreOriginInstanceRuleRepository
+            ->expects($this->once())
+            ->method('findAll')
+            ->willReturn([]);
+
+        $this->rulerz
+            ->expects($this->never())
+            ->method('satisfies');
+
+        $this->assertFalse($this->processor->process($entry));
+        $records = $this->handler->getRecords();
+        $this->assertSame('Ignoring invalid ignore origin rule.', $records[0]['message']);
     }
 
     public function testProcessWithAMatchingRule(): void

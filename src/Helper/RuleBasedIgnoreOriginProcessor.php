@@ -4,6 +4,7 @@ namespace Wallabag\Helper;
 
 use Psr\Log\LoggerInterface;
 use RulerZ\RulerZ;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Wallabag\Entity\Entry;
 use Wallabag\Repository\IgnoreOriginInstanceRuleRepository;
 
@@ -13,6 +14,7 @@ class RuleBasedIgnoreOriginProcessor
         protected RulerZ $rulerz,
         protected LoggerInterface $logger,
         protected IgnoreOriginInstanceRuleRepository $ignoreOriginInstanceRuleRepository,
+        protected ValidatorInterface $validator,
     ) {
     }
 
@@ -32,6 +34,12 @@ class RuleBasedIgnoreOriginProcessor
         $parsed_url['_all'] = $url;
 
         foreach ($rules as $rule) {
+            if (0 < \count($this->validator->validate($rule))) {
+                $this->logger->warning('Ignoring invalid ignore origin rule.', ['rule' => $rule->getRule()]);
+
+                continue;
+            }
+
             if ($this->rulerz->satisfies($parsed_url, $rule->getRule())) {
                 $this->logger->info('Origin url matching ignore rule.', [
                     'rule' => $rule->getRule(),
