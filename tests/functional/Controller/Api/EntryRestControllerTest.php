@@ -3,10 +3,12 @@
 namespace Wallabag\Tests\Functional\Controller\Api;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Graby\Graby;
 use Symfony\Component\DependencyInjection\Container;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
 use Wallabag\Helper\ContentProxy;
+use Wallabag\HttpClient\HostnameDenyList;
 
 class EntryRestControllerTest extends WallabagApiTestCase
 {
@@ -844,6 +846,54 @@ class EntryRestControllerTest extends WallabagApiTestCase
                 $em->flush();
             }
         }
+    }
+
+    public function testPostEntryWithBlockedHostnameStoresFetchingErrorMessage(): void
+    {
+        /** @var Container $container */
+        $container = $this->client->getContainer();
+        $container->set(HostnameDenyList::class, new HostnameDenyList(['medium.com']));
+
+        try {
+            $this->client->request('POST', '/api/entries.json', [
+                'url' => 'https://medium.com/article',
+            ]);
+
+            $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+            $content = json_decode($this->client->getResponse()->getContent(), true);
+            $this->assertSame($container->getParameter('wallabag.fetching_error_message'), $content['content']);
+            $entry = $container->get(EntityManagerInterface::class)->getReference(Entry::class, $content['id']);
+            $this->assertTrue($entry->isNotParsed());
+        } finally {
+            if (isset($content['id'])) {
+                $em = $this->client->getContainer()->get(EntityManagerInterface::class);
+                $entry = $em->getReference(Entry::class, $content['id']);
+                $em->remove($entry);
+                $em->flush();
+            }
+        }
+    }
+
+    public function testPostEntryKeepsSuppliedContentWhenFetchingFails(): void
+    {
+        $container = $this->client->getContainer();
+        $graby = $this->getMockBuilder(Graby::class)
+            ->onlyMethods(['fetchContent'])
+            ->getMock();
+        $graby->expects($this->once())->method('fetchContent')
+            ->willThrowException(new \RuntimeException('Fetching failed'));
+        $container->set(Graby::class, $graby);
+
+        $this->client->request('POST', '/api/entries.json', [
+            'url' => 'https://example.com/supplied-article',
+            'content' => '<p>Supplied article</p>',
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+        $this->assertStringContainsString('Supplied article', $content['content']);
+        $entry = $container->get(EntityManagerInterface::class)->getReference(Entry::class, $content['id']);
+        $this->assertFalse($entry->isNotParsed());
     }
 
     public function testPostArchivedAndStarredEntry(): void
