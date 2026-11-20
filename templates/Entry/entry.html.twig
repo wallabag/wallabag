@@ -93,7 +93,7 @@
             data-annotations-destroy-url-value="{{ path('annotations_delete_annotation', {'annotation': 'idAnnotation'}) }}"
             data-annotations-search-url-value="{{ path('annotations_get_annotations', {'entry': entry.id}) }}"
         >
-            {{ entry.content|raw }}
+            {{ entry.content|removeDataAttributes|raw }}
         </article>
 
         {{ knp_menu_render(knp_menu_get('wallabag_fab', [], {entry: entry, redirect: current_path}), {
