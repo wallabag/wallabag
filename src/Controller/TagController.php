@@ -8,6 +8,7 @@ use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -130,6 +131,16 @@ class TagController extends AbstractController
             'renameForms' => $renameForms,
             'nbEntriesUntagged' => $nbEntriesUntagged,
         ]);
+    }
+
+    /**
+     * Returns the labels of the tags of the current user, used to suggest existing tags while typing.
+     */
+    #[Route(path: '/tag/labels', name: 'tag_labels', methods: ['GET'])]
+    #[IsGranted('LIST_TAGS')]
+    public function listTagLabelsAction(TagRepository $tagRepository): JsonResponse
+    {
+        return new JsonResponse($tagRepository->findAllLabelsByUser($this->getUser()->getId()));
     }
 
     /**
