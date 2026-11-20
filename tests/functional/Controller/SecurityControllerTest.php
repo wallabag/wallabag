@@ -115,4 +115,25 @@ class SecurityControllerTest extends WallabagTestCase
 
         $this->assertCount(0, $crawler->filter('input[name="fos_user_registration[captcha]"]'));
     }
+
+    public function testRegistrationWithTakenUsernameAndEmailShowsEachErrorOnce(): void
+    {
+        $client = $this->getTestClient();
+        $crawler = $client->request('GET', '/register/');
+
+        $form = $crawler->filter('button[type=submit]')->form([
+            'fos_user_registration[email]' => 'bigboss@wallabag.org',
+            'fos_user_registration[username]' => 'admin',
+            'fos_user_registration[plainPassword][first]' => 'mypassword',
+            'fos_user_registration[plainPassword][second]' => 'mypassword',
+        ]);
+
+        $client->submit($form);
+
+        $content = $client->getResponse()->getContent();
+        $this->assertFalse($client->getResponse()->isRedirect());
+        $this->assertSame(1, substr_count($content, 'fos_user.username.already_used'));
+        $this->assertSame(1, substr_count($content, 'fos_user.email.already_used'));
+        $this->assertStringNotContainsString('This value is already used.', $content);
+    }
 }
