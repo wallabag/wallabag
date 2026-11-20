@@ -318,6 +318,20 @@ class DownloadImagesTest extends TestCase
         $this->assertFalse($res);
     }
 
+    public function testProcessSingleImageWithSvgOutsideSvgNamespace(): void
+    {
+        $svg = '<svg xmlns="http://www.w3.org/1999/xhtml"><form action="javascript:alert(1)"><button>x</button></form></svg>';
+        $mockHttpClient = new MockHttpClient([new MockResponse($svg, ['response_headers' => ['Content-Type: image/svg+xml']])]);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $res = $download->processSingleImage(123, 'evil.svg', 'http://imgur.com/gallery/evil.svg');
+
+        $this->assertFalse($res);
+    }
+
     public function testRemoveImages(): void
     {
         $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']])]);

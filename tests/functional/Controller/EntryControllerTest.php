@@ -1296,6 +1296,50 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(2, $crawler->filter($this->entryDataTestAttribute));
     }
 
+    public static function dataForSharedEntryUrl(): array
+    {
+        return [
+            'http' => ['http://example.com/article', true],
+            'https' => ['https://example.com/article', true],
+            'uppercase scheme' => ['HTTPS://example.com/article', true],
+            'javascript' => ['javascript://example.com/%0Aalert(document.domain)', false],
+            'javascript mixed case' => ['JaVaScRiPt:alert(document.domain)', false],
+            'javascript with leading space' => [' javascript:alert(document.domain)', false],
+            'data' => ['data:text/html,<script>alert(document.domain)</script>', false],
+        ];
+    }
+
+    /**
+     * @dataProvider dataForSharedEntryUrl
+     */
+    public function testSharedEntryOnlyLinksToHttpUrls(string $url, bool $isLinked): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $client->getContainer()->get(Config::class)->set('share_public', 1);
+
+        $content = new Entry($this->getLoggedInUser());
+        $content->setUrl($url);
+        $content->generateUid();
+        $this->getEntityManager()->persist($content);
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->request('GET', '/share/' . $content->getUid());
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $link = $crawler->filter('header a.tool');
+
+        if ($isLinked) {
+            $this->assertCount(1, $link);
+            $this->assertSame($url, $link->attr('href'));
+        } else {
+            // the url is never used as a link target
+            $this->assertCount(0, $crawler->filter('header a'));
+        }
+    }
+
     public function testShareEntryPublicly(): void
     {
         $this->logInAs('admin');
