@@ -46,11 +46,20 @@ fi
 rm -rf var/cache/*
 git fetch origin
 git fetch --tags
-# Latest stable release: skip pre-releases (alpha, beta, rc)
-TAG=$(git tag --list --sort=-version:refname | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1)
+# Latest stable release of the current minor series (2.6.x): skip pre-releases and other minor/major versions
+CURRENT=$(git describe --tags --abbrev=0 2>/dev/null || true)
+SERIES=$(echo "$CURRENT" | grep -oE '^[0-9]+\.[0-9]+' || true)
+if [ -z "$SERIES" ]; then
+    echo "Can not detect the current wallabag version. Aborting."
+    exit 4
+fi
+TAG=$(git tag --list --sort=-version:refname | grep -E "^${SERIES//./\\.}\.[0-9]+$" | head -n 1)
 if [ -z "$TAG" ]; then
-    echo "Can not find the latest release tag. Aborting."
+    echo "Can not find the latest $SERIES release tag. Aborting."
     exit 3
+fi
+if [ "$(git tag --list --sort=-version:refname | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1)" != "$TAG" ]; then
+    echo "A newer wallabag series exists, it needs a manual upgrade (see https://doc.wallabag.org/en/admin/upgrade.html). Updating within $SERIES only."
 fi
 git checkout $TAG --force
 SYMFONY_ENV=$ENV $COMPOSER_COMMAND install --no-dev -o --prefer-dist
