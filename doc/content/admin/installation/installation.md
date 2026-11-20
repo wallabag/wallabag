@@ -158,6 +158,13 @@ database, HTTPS, and an optional custom domain. It creates the
 
 [Install wallabag on Podway](https://podway.io/start?app=wallabag&ref=docs-wallabag)
 
+## Installation on PikaPods
+
+PikaPods provides managed wallabag hosting with tested automatic updates and
+free SSL on your own domain.
+
+[![Run on PikaPods](https://www.pikapods.com/static/run-button.svg)](https://www.pikapods.com/apps/wallabag)
+
 ## Installation on Synology
 
 The SynoCommunity provides a package to install wallabag on your Synology NAS.
