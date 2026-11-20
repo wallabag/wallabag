@@ -231,6 +231,19 @@ config:
             variables_available_description: 'Følgende variabler og operatorer kan brukes til å lage ignorer opprinnelse regler:'
 flashes:
     entry:
+        notice:
+            entry_saved: Oppføring lagret
+            entry_saved_failed: Oppføring lagret, men henting av innhold mislyktes
+            entry_already_saved: Oppføring allerede lagret den %date%
+            entry_updated: Oppføring oppdatert
+            entry_reloaded: Oppføring lastet inn på nytt
+            entry_reloaded_failed: Oppføring lastet inn på nytt, men henting av innhold mislyktes
+            entry_archived: Oppføring arkivert
+            entry_unarchived: Oppføring fjernet fra arkivet
+            entry_starred: Oppføring stjernemerket
+            entry_unstarred: Stjernemerking fjernet fra oppføring
+            entry_deleted: Oppføring slettet
+            no_random_entry: Ingen artikkel med disse kriteriene ble funnet
     action:
         delete: Slett
         set_as_read: Marker som lest
@@ -484,6 +497,10 @@ import:
         page_title: Importer > Pocket CSV
         description: Denne importøren vil importere alle Pocket-bokmerkene dine (via CSV-eksport). Bare gå til https://getpocket.com/export og eksporter filen. En ZIP-fil vil bli lastet ned (f.eks. «pocket.zip»). Pakk den ut, så får du en CSV-fil kalt «part_000000.csv».
         how_to: Vennligst velg sikkerhetskopifilen for bokmerker og klikk på knappen nedenfor for å importere den. Merk at prosessen kan ta lang tid, ettersom alle artiklene vil bli hentet inn.
+    url_list:
+        page_title: Importer > URL-liste
+        description: Denne importfunksjonen importerer en ren tekstfil med én URL per linje. Tomme linjer, linjer som starter med «#» og linjer som ikke er URLer (som starter med «http://» eller «https://»), blir ignorert.
+        how_to: Velg tekstfilen din og klikk på knappen nedenfor for å importere den. Merk at prosessen kan ta lang tid siden alle artiklene må hentes.
 tag:
     new:
         placeholder: Du kan legge til flere stikkord, delt med komma.
@@ -735,6 +752,12 @@ entry:
     default_title: Tittel for oppføringen
     public:
         shared_by_wallabag: Denne artikkelen er blitt delt av %username% med <a href='%wallabag_instance%'>wallabag</a>
+    action:
+        delete: Slett
+        set_as_read: Merk som lest
+        set_as_unread: Merk som ulest
+        star: Stjerne
+        unstar: Fjern stjerne
 export:
     unknown: Ukjent
     footer_template: <div style="text-align:center;"><p>Laget av wallabag med %method%</p><p>Åpne <a href="https://github.com/wallabag/wallabag/issues">en ny sak</a> dersom du har problemer med visning av denne e-boken på din enhet .</p></div>
