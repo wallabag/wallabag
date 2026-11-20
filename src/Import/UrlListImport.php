@@ -9,7 +9,7 @@ use Wallabag\Entity\Entry;
  *
  * Empty lines and lines starting with "#" are ignored, as well as lines which aren't HTTP(S) URLs.
  */
-class UrlListImport extends AbstractImport
+class UrlListImport extends AbstractFileImport
 {
     protected $filepath;
 

@@ -4,7 +4,7 @@ namespace Wallabag\Import;
 
 use Wallabag\Entity\Entry;
 
-abstract class WallabagImport extends AbstractImport
+abstract class WallabagImport extends AbstractFileImport
 {
     protected $filepath;
     // untitled in all languages from v1
