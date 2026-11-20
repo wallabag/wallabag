@@ -282,7 +282,7 @@ class ExportControllerTest extends WallabagTestCase
         $this->assertStringContainsString($contentInDB[0]['content'], $csv[1]);
         $this->assertStringContainsString($contentInDB[0]['mimetype'], $csv[1]);
         $this->assertStringContainsString($contentInDB[0]['language'], $csv[1]);
-        $this->assertStringContainsString($contentInDB[0]['createdAt']->format('d/m/Y h:i:s'), $csv[1]);
+        $this->assertStringContainsString($contentInDB[0]['createdAt']->format('d/m/Y H:i:s'), $csv[1]);
 
         foreach ($contentInDB[0]['tags'] as $tag) {
             $this->assertStringContainsString($tag['label'], $csv[1]);

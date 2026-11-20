@@ -368,7 +368,7 @@ class EntriesExport
                     implode(', ', $entry->getTags()->toArray()),
                     $entry->getMimetype(),
                     $entry->getLanguage(),
-                    $entry->getCreatedAt()->format('d/m/Y h:i:s'),
+                    $entry->getCreatedAt()->format('d/m/Y H:i:s'),
                 ],
                 $delimiter,
                 $enclosure,
