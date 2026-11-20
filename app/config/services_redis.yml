@@ -228,3 +228,19 @@ services:
         class: Wallabag\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\Import\UrlListImport'
+
+    # feeds
+    wallabag.queue.redis.feeds:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.feeds"
+
+    wallabag.producer.redis.feeds:
+        class: Wallabag\Redis\Producer
+        arguments:
+            - "@wallabag.queue.redis.feeds"
+
+    wallabag.consumer.redis.feeds:
+        class: Wallabag\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@Wallabag\Import\FeedsImport'

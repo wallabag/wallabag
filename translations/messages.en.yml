@@ -746,6 +746,42 @@ flashes:
             updated: 'Global ignore origin rule updated'
             deleted: 'Global ignore origin rule deleted'
 
+feeds:
+    action:
+        add: Add feed
+        back_to_list: Back to subscriptions
+        delete: Delete feed
+        dismiss: Dismiss
+        edit: Edit feed
+        fetch: Refresh
+        items: View articles
+        purge: Clear articles
+        save_article: Save article
+    alert:
+        confirm_delete: Delete this feed subscription and its article history?
+        confirm_purge: Dismiss all pending articles in this feed?
+    automatic_mode: Automatic
+    empty: You have no feed subscriptions.
+    flash:
+        already_processed: This article has already been processed.
+        created: Feed subscription added.
+        created_refresh_error: Feed subscription added, but the first refresh failed.
+        deleted: Feed subscription deleted.
+        dismissed: Article dismissed.
+        fetch_error: Could not refresh the feed. Check its address and try again.
+        fetched: Feed refreshed.
+        no_pending_articles: No pending articles to dismiss.
+        purged: Pending articles dismissed.
+        save_error: Could not save the article. It is still pending.
+        saved: Article is available in wallabag.
+        updated: Feed subscription updated.
+    items_empty: No articles are waiting in this feed.
+    label:
+        automatic: Import new articles automatically
+    last_fetch: 'Last successful refresh: %date%'
+    manual_mode: Manual
+    page_title: Feed subscriptions
+    stale: This feed has not refreshed successfully in the last two days.
 theme:
     action:
         toggle_auto: "Automatic theme"

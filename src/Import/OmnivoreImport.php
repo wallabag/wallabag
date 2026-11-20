@@ -4,7 +4,7 @@ namespace Wallabag\Import;
 
 use Wallabag\Entity\Entry;
 
-class OmnivoreImport extends AbstractImport
+class OmnivoreImport extends AbstractFileImport
 {
     private $filepath;
 

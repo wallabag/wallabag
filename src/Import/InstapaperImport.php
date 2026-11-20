@@ -4,7 +4,7 @@ namespace Wallabag\Import;
 
 use Wallabag\Entity\Entry;
 
-class InstapaperImport extends AbstractImport
+class InstapaperImport extends AbstractFileImport
 {
     private $filepath;
 

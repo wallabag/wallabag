@@ -211,3 +211,30 @@ footer {
     }
   }
 }
+
+.feed-subscription-title {
+  margin-top: 0;
+}
+
+.feed-url {
+  overflow-wrap: anywhere;
+}
+
+.feed-action.btn-flat {
+  color: inherit;
+}
+
+.card .card-action a.feed-action {
+  color: inherit !important;
+  margin-right: 0 !important;
+}
+
+.feed-preview {
+  display: block;
+  height: 100%;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
+}

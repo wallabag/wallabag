@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Wallabag\Entity\User;
 use Wallabag\Repository\AnnotationRepository;
 use Wallabag\Repository\EntryRepository;
+use Wallabag\Repository\FeedItemRepository;
 use Wallabag\Repository\TagRepository;
 
 class MainMenuBuilder
@@ -22,6 +23,7 @@ class MainMenuBuilder
         private readonly AnnotationRepository $annotationRepository,
         private readonly TagRepository $tagRepository,
         private readonly int $lifeTime,
+        private readonly FeedItemRepository $feedItemRepository,
     ) {
     }
 
@@ -104,6 +106,19 @@ class MainMenuBuilder
             ]);
         }
 
+        if ($this->authorization->isGranted('ROLE_USER')) {
+            $menu->addChild('feeds', [
+                'route' => 'all_import_feed',
+                'label' => 'feeds.page_title',
+                'attributes' => ['class' => 'bold'],
+                'linkAttributes' => ['class' => 'waves-effect'],
+                'extras' => [
+                    'counter' => $this->countPendingFeedItems(),
+                    'routes' => ['new_feed', 'edit_feed', 'display_feed_items'],
+                ],
+            ]);
+        }
+
         return $menu;
     }
 
@@ -140,5 +155,12 @@ class MainMenuBuilder
         }
 
         return (int) $this->tagRepository->countAllTags($user->getId());
+    }
+
+    private function countPendingFeedItems(): int
+    {
+        $user = $this->tokenStorage->getToken()?->getUser();
+
+        return $user instanceof User ? $this->feedItemRepository->countPending($user) : 0;
     }
 }
