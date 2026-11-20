@@ -6,7 +6,7 @@ use Symfony\Component\DomCrawler\Crawler;
 use Wallabag\Entity\Entry;
 use Wallabag\Event\EntrySavedEvent;
 
-abstract class HtmlImport extends AbstractImport
+abstract class HtmlImport extends AbstractFileImport
 {
     protected $filepath;
 

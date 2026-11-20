@@ -4,6 +4,7 @@ namespace Wallabag\Import;
 
 use Doctrine\ORM\EntityManagerInterface;
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
+use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wallabag\Entity\Entry;
@@ -12,7 +13,7 @@ use Wallabag\Event\EntrySavedEvent;
 use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\TagsAssigner;
 
-abstract class AbstractImport implements ImportInterface
+abstract class AbstractImport implements LoggerAwareInterface
 {
     protected $producer;
     protected $user;
@@ -143,9 +144,7 @@ abstract class AbstractImport implements ImportInterface
         $entryToBeFlushed = [];
 
         foreach ($entries as $importedEntry) {
-            if ($this->markAsRead) {
-                $importedEntry = $this->setEntryAsRead($importedEntry);
-            }
+            $importedEntry = $this->prepareEntryForImport($importedEntry);
 
             if (false === $this->validateEntry($importedEntry)) {
                 continue;
@@ -206,9 +205,7 @@ abstract class AbstractImport implements ImportInterface
             // set userId for the producer (it won't know which user is connected)
             $importedEntry['userId'] = $this->user->getId();
 
-            if ($this->markAsRead) {
-                $importedEntry = $this->setEntryAsRead($importedEntry);
-            }
+            $importedEntry = $this->prepareEntryForImport($importedEntry);
 
             ++$this->queuedEntries;
 
@@ -216,11 +213,5 @@ abstract class AbstractImport implements ImportInterface
         }
     }
 
-    /**
-     * Set current imported entry to archived / read.
-     * Implementation is different across all imports.
-     *
-     * @return array
-     */
-    abstract protected function setEntryAsRead(array $importedEntry);
+    abstract protected function prepareEntryForImport(array $importedEntry): array;
 }
