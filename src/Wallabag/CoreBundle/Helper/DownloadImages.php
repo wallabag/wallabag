@@ -232,6 +232,36 @@ class DownloadImages
     }
 
     /**
+     * Download a remote image and re-create it in memory, without storing it.
+     *
+     * @return array{content: string, extension: string, mimetype: string}|null
+     */
+    public function fetchImage(?string $imageUrl): ?array
+    {
+        if (null === $imageUrl) {
+            return null;
+        }
+
+        try {
+            $im = imagecreatefromstring((string) $this->client->get($imageUrl)->getBody());
+        } catch (\Exception $e) {
+            $this->logger->error('DownloadImages: Can not retrieve image, skipping.', ['exception' => $e]);
+
+            return null;
+        }
+
+        if (false === $im) {
+            return null;
+        }
+
+        ob_start();
+        imagejpeg($im, null, self::REGENERATE_PICTURES_QUALITY);
+        imagedestroy($im);
+
+        return ['content' => (string) ob_get_clean(), 'extension' => 'jpg', 'mimetype' => 'image/jpeg'];
+    }
+
+    /**
      * Remove all images for the given entry id.
      *
      * @param int $entryId ID of the entry
