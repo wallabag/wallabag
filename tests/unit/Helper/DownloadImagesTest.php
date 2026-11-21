@@ -146,6 +146,40 @@ class DownloadImagesTest extends TestCase
         $this->assertFalse($res, 'Absolute image can not be determined, so it will not be replaced');
     }
 
+    public function testProcessHtmlWithUnparsableImageUrl(): void
+    {
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']])]);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+
+        $html = '<div><img src="//:0" /></div>';
+        $res = $download->processHtml(123, $html, 'https://example.com/article');
+
+        $this->assertSame($html, $res, 'Image url can not be parsed, so it will not be replaced');
+        $this->assertTrue($logHandler->hasErrorThatContains('DownloadImages: Can not parse the url'));
+    }
+
+    public function testProcessHtmlWithUnparsableAndValidImageUrls(): void
+    {
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']])]);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+
+        $html = '<div><img src="//:0" /><img src="https://example.com/image.png" /></div>';
+        $res = $download->processHtml(123, $html, 'https://example.com/article');
+
+        $this->assertStringContainsString('<img src="//:0"', $res, 'Unparsable image is left untouched');
+        $this->assertStringNotContainsString('https://example.com/image.png', $res, 'Valid image is replaced');
+        $this->assertStringContainsString('http://wallabag.io/assets/images/9/b/9b0ead26/', $res, 'Valid image is saved locally');
+        $this->assertTrue($logHandler->hasErrorThatContains('DownloadImages: Can not parse the url'));
+    }
+
     public function testProcessRealImage(): void
     {
         $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/image-no-content-type.jpg'))]);
@@ -280,6 +314,20 @@ class DownloadImagesTest extends TestCase
 
         $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processSingleImage(123, 'modal-content.svg', 'http://imgur.com/gallery/WxtWY');
+
+        $this->assertFalse($res);
+    }
+
+    public function testProcessSingleImageWithSvgOutsideSvgNamespace(): void
+    {
+        $svg = '<svg xmlns="http://www.w3.org/1999/xhtml"><form action="javascript:alert(1)"><button>x</button></form></svg>';
+        $mockHttpClient = new MockHttpClient([new MockResponse($svg, ['response_headers' => ['Content-Type: image/svg+xml']])]);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $res = $download->processSingleImage(123, 'evil.svg', 'http://imgur.com/gallery/evil.svg');
 
         $this->assertFalse($res);
     }

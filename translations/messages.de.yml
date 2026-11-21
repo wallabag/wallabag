@@ -237,6 +237,7 @@ entry:
         set_as_read: Als gelesen markieren
         set_as_unread: Als ungelesen markieren
         star: Favorisieren
+        unstar: Aus Favoriten entfernen
     default_title: Titel des Eintrags
     page_titles:
         unread: Ungelesene Einträge
@@ -555,6 +556,10 @@ import:
         page_title: Aus Pocket CSV importieren
         description: Dieses Tool importiert deine Pocket Lesezeichen (aus CSV Export). Gehe zu https://getpocket.com/export, dann exportiere die Datei, die du als ZIP-Datei (z.B. "pocket.zip") herunterladen kannst. Entpacke diese, um das CSV File mit dem Namen "part_000000.csv" zu erhalten.
         how_to: Wähle bitte die Datei mit dem Lesezeichen Backup aus und klicke unten um sie zu importieren. Beachte, dass es sehr lange dauern kann, bis alle Artikel übertragen sind.
+    url_list:
+        page_title: Aus URL Liste importieren
+        description: Dieses Tool importiert eine reine Textdatei, die je Zeile eine URL enthält. Zeilen die leer sind, mit einem "#" beginnen oder keine Webadresse (beginnen mit "http://" oder "https://") sind, werden ignoriert.
+        how_to: Bitte wähle deine Textdatei aus und klicke den nachfolgenden Button zum Importieren. Beachte, dass dieser Prozess eine lange Zeit in Anspruch nehmen kann, da alle Artikel geladen werden müssen.
 developer:
     page_title: API-Client-Verwaltung
     welcome_message: Willkomen zur wallabag API

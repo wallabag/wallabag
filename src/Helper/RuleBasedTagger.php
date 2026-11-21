@@ -2,9 +2,9 @@
 
 namespace Wallabag\Helper;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Psr\Log\LoggerInterface;
 use RulerZ\RulerZ;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
 use Wallabag\Entity\TaggingRule;
@@ -19,6 +19,7 @@ class RuleBasedTagger
         private readonly TagRepository $tagRepository,
         private readonly EntryRepository $entryRepository,
         private readonly LoggerInterface $logger,
+        private readonly ValidatorInterface $validator,
     ) {
     }
 
@@ -116,11 +117,23 @@ class RuleBasedTagger
     /**
      * Retrieves the tagging rules for a given user.
      *
-     * @return ArrayCollection<TaggingRule>
+     * @return list<TaggingRule>
      */
     private function getRulesForUser(User $user)
     {
-        return $user->getConfig()->getTaggingRules();
+        $rules = [];
+
+        foreach ($user->getConfig()->getTaggingRules() as $rule) {
+            if (0 < \count($this->validator->validate($rule))) {
+                $this->logger->warning('Ignoring invalid tagging rule.', ['rule' => $rule->getRule()]);
+
+                continue;
+            }
+
+            $rules[] = $rule;
+        }
+
+        return $rules;
     }
 
     /**

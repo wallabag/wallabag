@@ -90,7 +90,14 @@ docker run \
 
 The default username and password are `wallabag:wallabag`. For more information, see [wallabag on Docker Hub](https://hub.docker.com/r/wallabag/wallabag/).
 
-## Installation on Cloudron
+## Third-party installation options
+
+The wallabag development team does not endorse or recommend any of the third-party
+providers listed below. This list is provided for information only, to help you
+find available options for installing wallabag. Inclusion does not imply a
+partnership with wallabag.
+
+### Cloudron
 
 Cloudron provides an easy way to install webapps on your server with a
 focus on sysadmin automation and keeping apps updated. wallabag is
@@ -99,7 +106,7 @@ store.
 
 [Install wallabag on your Cloudron](https://cloudron.io/store/org.wallabag.cloudronapp2.html)
 
-## Installation on YunoHost
+### YunoHost
 
 YunoHost provides an easy way to install webapps on your server with a
 focus on sysadmin automation and keeping apps updated. wallabag is
@@ -108,14 +115,14 @@ official repository.
 
 [![Install wallabag with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=wallabag2)
 
-## Installation on alwaysdata
+### alwaysdata
 
 alwaysdata's Marketplace allows to easily install wallabag (and many other
 applications) on a Public or Private Cloud.
 
 [Install wallabag on alwaysdata](https://www.alwaysdata.com/en/marketplace/wallabag/)
 
-## Installation on Pethost
+### Pethost
 
 Pethost has a one-click template that runs the wallabag Docker image with
 a persistent volume and HTTPS. It asks for a password and creates the
@@ -123,7 +130,7 @@ a persistent volume and HTTPS. It asks for a password and creates the
 
 [Install wallabag on Pethost](https://pethost.dev/templates/wallabag/)
 
-## Installation on Hostim
+### Hostim
 
 Hostim has a one-click template that runs the wallabag Docker image with a
 managed PostgreSQL database, a persistent volume for downloaded images, and
@@ -132,7 +139,7 @@ sign-ups off.
 
 [Install wallabag on Hostim](https://hostim.dev/docs/templates/wallabag/)
 
-## Installation on ZopDay
+### ZopDay
 
 ZopDay lets you deploy Docker-based applications to managed infrastructure or
 to your own AWS/GCP account. The deploy link pre-fills the wallabag Docker
@@ -140,7 +147,7 @@ image (`wallabag/wallabag`) with port `80` already set.
 
 [![Deploy to ZopDay](https://zop.dev/deploytozopday-inkhard.svg)](https://zop.dev/zopday/app/deploy?image=wallabag/wallabag&port=80&name=wallabag&utm_source=github&utm_medium=one_click&utm_content=wallabag)
 
-## Installation on Simafri
+### Simafri
 
 Simafri has a step-by-step guide for running the official wallabag Docker
 image on its managed VPS, with MariaDB, Redis and HTTPS through a reverse
@@ -150,7 +157,7 @@ encrypted nightly backups kept off the machine.
 
 [Install wallabag on Simafri](https://www.simafri.com/en/guides/self-host-wallabag/)
 
-## Installation on Podway
+### Podway
 
 Podway runs wallabag on its own small machine with a PostgreSQL 16
 database, HTTPS, and an optional custom domain. It creates the
@@ -158,7 +165,14 @@ database, HTTPS, and an optional custom domain. It creates the
 
 [Install wallabag on Podway](https://podway.io/start?app=wallabag&ref=docs-wallabag)
 
-## Installation on Synology
+### PikaPods
+
+PikaPods provides managed wallabag hosting with tested automatic updates and
+free SSL on your own domain.
+
+[![Run on PikaPods](https://www.pikapods.com/static/run-button.svg)](https://www.pikapods.com/apps/wallabag)
+
+### Synology
 
 The SynoCommunity provides a package to install wallabag on your Synology NAS.
 

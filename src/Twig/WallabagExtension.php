@@ -4,6 +4,7 @@ namespace Wallabag\Twig;
 
 use GuzzleHttp\Psr7\Query;
 use GuzzleHttp\Psr7\Uri;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
@@ -37,6 +38,7 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
             new TwigFilter('removeWww', $this->removeWww(...)),
             new TwigFilter('removeScheme', $this->removeScheme(...)),
             new TwigFilter('removeSchemeAndWww', $this->removeSchemeAndWww(...)),
+            new TwigFilter('removeDataAttributes', $this->removeDataAttributes(...)),
         ];
     }
 
@@ -57,6 +59,27 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
         $query['body'] = $entry->getUrl();
 
         return (string) $uri->withQuery(Query::build($query, \PHP_QUERY_RFC3986));
+    }
+
+    public function removeDataAttributes(?string $html): string
+    {
+        if (null === $html || false === stripos($html, 'data-')) {
+            return (string) $html;
+        }
+
+        $crawler = new Crawler('<!DOCTYPE html><html><body>' . $html . '</body></html>');
+
+        foreach ($crawler->filterXPath('//*') as $element) {
+            \assert($element instanceof \DOMElement);
+
+            foreach (iterator_to_array($element->attributes) as $attribute) {
+                if (str_starts_with($attribute->name, 'data-')) {
+                    $element->removeAttributeNode($attribute);
+                }
+            }
+        }
+
+        return $crawler->filterXPath('//body')->html();
     }
 
     public function removeWww($url)

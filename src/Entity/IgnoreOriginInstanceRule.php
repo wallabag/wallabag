@@ -33,6 +33,7 @@ class IgnoreOriginInstanceRule implements IgnoreOriginRuleInterface, RuleInterfa
     #[ORM\Column(name: 'rule', type: 'string', nullable: false)]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
+    #[Assert\Regex(pattern: '/[\x00-\x08\x0A-\x1F\x7F]|\?>/', match: false, message: 'The rule can not contain control characters or the ?> sequence.')]
     private $rule;
 
     /**

@@ -334,7 +334,14 @@ class DownloadImages
             return $url;
         }
 
-        $base = new Uri($base);
+        try {
+            $base = new Uri($base);
+            $uri = new Uri($url);
+        } catch (\InvalidArgumentException) {
+            $this->logger->error('DownloadImages: Can not parse the url', ['base' => $base, 'url' => $url]);
+
+            return false;
+        }
 
         // in case the url has no scheme & host
         if ('' === $base->getAuthority() || '' === $base->getScheme()) {
@@ -343,7 +350,7 @@ class DownloadImages
             return false;
         }
 
-        return (string) UriResolver::resolve($base, new Uri($url));
+        return (string) UriResolver::resolve($base, $uri);
     }
 
     /**

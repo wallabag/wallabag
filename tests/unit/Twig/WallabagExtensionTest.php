@@ -13,6 +13,25 @@ use Wallabag\Twig\WallabagExtension;
 
 class WallabagExtensionTest extends TestCase
 {
+    public static function dataForRemoveDataAttributes(): iterable
+    {
+        yield 'controller attributes' => ['<div data-controller="annotations" data-annotations-search-url-value="http://example.org/c"><p>text</p></div>', '<div><p>text</p></div>'];
+        yield 'greater than sign in a value' => ['<div title="a>b" data-controller="annotations">text</div>', '<div title="a>b">text</div>'];
+        yield 'no space after a quoted value' => ['<div class="a"data-controller="annotations">text</div>', '<div class="a">text</div>'];
+        yield 'slash as separator' => ['<div/data-controller="annotations">text</div>', '<div>text</div>'];
+        yield 'uppercase and single quotes' => ["<div DATA-Controller='annotations'>text</div>", '<div>text</div>'];
+        yield 'no content' => [null, ''];
+        yield 'text is kept' => ['<p>data-foo="bar" and a &lt; b</p>', '<p>data-foo="bar" and a &lt; b</p>'];
+    }
+
+    /**
+     * @dataProvider dataForRemoveDataAttributes
+     */
+    public function testRemoveDataAttributes(?string $html, string $expected): void
+    {
+        $this->assertSame($expected, $this->createExtension()->removeDataAttributes($html));
+    }
+
     public function testRemoveWww(): void
     {
         $extension = $this->createExtension();

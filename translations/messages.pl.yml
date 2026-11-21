@@ -556,6 +556,10 @@ import:
         description: Ten importer zaimportuje wszystkie zakładki Pocket (poprzez eksport CSV). Po prostu przejdź do https://getpocket.com/export, a następnie wyeksportuj plik. Zostanie pobrany plik ZIP (taki jak „pocket.zip”). Wypakuj go, otrzymasz plik CSV o nazwie „part_000000.csv”.
         page_title: Importuj > Pocket CSV
         how_to: Wybierz plik kopii zapasowej zakładek i kliknij przycisk poniżej, aby go zaimportować. Należy pamiętać, że proces ten może potrwać długo, ponieważ wszystkie artykuły muszą zostać pobrane.
+    url_list:
+        page_title: Importuj > lista adresów URL
+        description: Ten importer wczytuje plik tekstowy zawierający jeden adres URL w każdym wierszu. Puste wiersze, wiersze rozpoczynające się od znaku „#” oraz wiersze, które nie są adresami internetowymi (niezaczynające się od „http://” lub „https://”), są pomijane.
+        how_to: Wybierz plik tekstowy i kliknij poniższy przycisk, aby go zaimportować. Pamiętaj, że proces ten może potrwać długo, ponieważ konieczne jest pobranie wszystkich artykułów.
 developer:
     page_title: Zarządzanie klientami API
     welcome_message: Witaj w API wallabag

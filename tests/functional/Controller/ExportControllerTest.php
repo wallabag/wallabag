@@ -157,6 +157,46 @@ class ExportControllerTest extends WallabagTestCase
         $em->flush();
     }
 
+    public function testEpubExportDoesNotEmbedReferencedFiles(): void
+    {
+        $secretFilename = tempnam(sys_get_temp_dir(), 'wallabag-secret-');
+        file_put_contents($secretFilename, 'WALLABAG-SECRET-MARKER');
+        $imageFilename = tempnam(sys_get_temp_dir(), 'wallabag-image-');
+        file_put_contents($imageFilename, $this->getOnePixelPng());
+
+        $baseUrl = $_ENV['WALLABAG_BASE_URL'];
+        $files = $this->exportToEpub(
+            '<link href="' . $secretFilename . '"/><img src="' . $imageFilename . '"/><img src="' . $baseUrl . '/assets/images/../../img/appicon/apple-touch-icon-152.png"/>',
+            $imageFilename
+        );
+
+        unlink($secretFilename);
+        unlink($imageFilename);
+
+        foreach ($files as $name => $data) {
+            $this->assertStringNotContainsString('OEBPS/images/', $name);
+            $this->assertStringNotContainsString('WALLABAG-SECRET-MARKER', $data);
+        }
+    }
+
+    public function testEpubExportEmbedsImagesStoredByWallabag(): void
+    {
+        $folder = $this->getTestClient()->getContainer()->getParameter('kernel.project_dir') . '/web/assets/images/test-export';
+        if (!is_dir($folder)) {
+            mkdir($folder, 0777, true);
+        }
+        file_put_contents($folder . '/image.png', $this->getOnePixelPng());
+
+        $imageUrl = $_ENV['WALLABAG_BASE_URL'] . '/assets/images/test-export/image.png';
+        $files = $this->exportToEpub('<img src="' . $imageUrl . '" srcset="' . $imageUrl . ' 2x"/>', $imageUrl);
+
+        unlink($folder . '/image.png');
+        rmdir($folder);
+
+        $this->assertArrayHasKey('OEBPS/images/cover.png', $files);
+        $this->assertCount(2, preg_grep('#^OEBPS/images/#', array_keys($files)));
+    }
+
     public function testPdfExport(): void
     {
         $this->logInAs('admin');
@@ -564,5 +604,50 @@ class ExportControllerTest extends WallabagTestCase
         $transliterator = \Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;', \Transliterator::FORWARD);
 
         return preg_replace('/[^A-Za-z0-9\- \']/', '', $transliterator->transliterate($title));
+    }
+
+    private function exportToEpub(string $content, ?string $previewPicture = null): array
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $user = $client->getContainer()->get(EntityManagerInterface::class)->getRepository(User::class)->findOneByUserName('admin');
+
+        $entry = new Entry($user);
+        $entry->setUrl('http://example.com/article');
+        $entry->setTitle('article');
+        $entry->setContent($content);
+        $entry->setPreviewPicture($previewPicture);
+        $entry->setLanguage('en');
+        $entry->setDomainName('example.com');
+        $entry->setMimetype('text/html');
+        $entry->setCreatedAt(new \DateTimeImmutable());
+
+        $response = $client->getContainer()
+            ->get(EntriesExport::class)
+            ->setEntries($entry)
+            ->updateTitle('entry')
+            ->updateAuthor('entry')
+            ->exportAs('epub');
+
+        $epubFilename = tempnam(sys_get_temp_dir(), 'wallabag-epub-');
+        file_put_contents($epubFilename, $response->getContent());
+
+        $zip = new \ZipArchive();
+        $zip->open($epubFilename);
+
+        $files = [];
+        for ($i = 0; $i < $zip->numFiles; ++$i) {
+            $files[$zip->getNameIndex($i)] = $zip->getFromIndex($i);
+        }
+
+        $zip->close();
+        unlink($epubFilename);
+
+        return $files;
+    }
+
+    private function getOnePixelPng(): string
+    {
+        return base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', true);
     }
 }
