@@ -109,7 +109,9 @@ abstract class HtmlImport extends AbstractImport
         $entry->setUrl($data['url']);
         $entry->updateArchived($data['is_archived']);
         $createdAt = new \DateTime();
-        $createdAt->setTimestamp($data['created_at']);
+        if (is_numeric($data['created_at'])) {
+            $createdAt->setTimestamp((int) $data['created_at']);
+        }
         $entry->setCreatedAt($createdAt);
 
         // update entry with content (in case fetching failed, the given entry will be return)
