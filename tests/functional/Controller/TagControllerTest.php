@@ -72,16 +72,21 @@ class TagControllerTest extends WallabagTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $entry = $client->getContainer()
-            ->get(EntityManagerInterface::class)
-            ->getRepository(Entry::class)
-            ->findByUrlAndUserId('http://0.0.0.0/entry2', $this->getLoggedInUserId());
+        $tag = new Tag();
+        $tag->setLabel($this->tagName);
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://0.0.0.0/tag-autocomplete');
+        $entry->addTag($tag);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
 
         $crawler = $client->request('GET', '/view/' . $entry->getId());
 
         $input = $crawler->filter('form[name=tag] input[name="tag[label]"]');
         $this->assertSame('tag-autocomplete', $input->attr('data-controller'));
         $this->assertSame('/tag/labels', $input->attr('data-tag-autocomplete-url-value'));
+        $this->assertSame([$this->tagName], json_decode($input->attr('data-tag-autocomplete-excluded-value'), true));
 
         $crawler = $client->request('GET', '/unread/list');
 

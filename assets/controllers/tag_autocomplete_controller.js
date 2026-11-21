@@ -9,9 +9,10 @@ let datalistCounter = 0;
  *
  * Suggestions are provided through a native <datalist>: each option holds the whole input value
  * with the tag being typed completed, so picking one keeps the tags typed before it.
+ * Tags listed in the excluded value (the tags the entry already has) are never suggested.
  */
 export default class extends Controller {
-  static values = { url: String };
+  static values = { url: String, excluded: { type: Array, default: [] } };
 
   connect() {
     datalistCounter += 1;
@@ -62,11 +63,18 @@ export default class extends Controller {
     }
 
     const typedLabels = previousTags.split(',').map((label) => label.trim().toLowerCase());
+    const excludedLabels = this.excludedValue.map((label) => label.toLowerCase());
     // keep what was typed so far untouched, the browser only shows the options matching it
     const optionPrefix = value.slice(0, value.length - currentTag.trimStart().length);
 
     const options = this.labels
-      .filter((label) => label.startsWith(term) && label !== term && !typedLabels.includes(label))
+      .filter(
+        (label) =>
+          label.startsWith(term) &&
+          label !== term &&
+          !typedLabels.includes(label) &&
+          !excludedLabels.includes(label)
+      )
       .slice(0, MAX_SUGGESTIONS)
       .map((label) => {
         const option = document.createElement('option');
