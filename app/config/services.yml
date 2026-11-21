@@ -264,8 +264,14 @@ services:
         arguments:
             $enabled: '@=service(''craue_config'').get(''download_images_enabled'')'
 
+    wallabag.download_images.client:
+        class: Symfony\Component\HttpClient\NoPrivateNetworkHttpClient
+        arguments:
+            - '@download_images.client'
+
     Wallabag\Helper\DownloadImages:
         arguments:
+            $client: '@wallabag.download_images.client'
             $baseFolder: "%kernel.project_dir%/web/assets/images"
 
     Wallabag\Command\InstallCommand:
