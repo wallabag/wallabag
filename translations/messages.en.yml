@@ -753,6 +753,8 @@ feeds:
         edit: Edit feed
         fetch: Refresh
         items: View articles
+        show_card_view: Show card view
+        show_list_view: Show list view
     empty: You have no feed subscriptions.
     flash:
         created: Feed subscription added.

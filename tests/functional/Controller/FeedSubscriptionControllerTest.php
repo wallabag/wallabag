@@ -6,6 +6,7 @@ use Laminas\Feed\Reader\Entry\EntryInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
+use Wallabag\Entity\Config;
 use Wallabag\Entity\FeedItem;
 use Wallabag\Entity\FeedUrl;
 use Wallabag\Entity\User;
@@ -196,6 +197,45 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         self::assertCount(2, $crawler->filter('main .entry-card'));
         self::assertCount(1, $crawler->filter('main .entry-card img[src="https://example.org/cover.jpg"]'));
         self::assertSame('2025-01-02', $crawler->filter('main .entry-card time')->text());
+    }
+
+    public function testSwitchesBetweenCardAndListViewsUsingTheGlobalPreference(): void
+    {
+        $this->logInAs('admin');
+        $em = $this->getEntityManager();
+        $user = $this->getLoggedInUser();
+        $user->getConfig()->setListMode(0)->setDisplayThumbnails(true)->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
+        $feed = (new FeedUrl($user))->setTitle('Reading')->setUrl('https://example.org/feed');
+        $em->persist($feed);
+        $em->persist(new FeedItem($feed, 'https://example.org/story', 'Story', new \DateTime('2025-01-02T12:00:00+00:00'), 'https://example.org/cover.jpg'));
+        $em->persist(new FeedItem($feed, 'https://example.org/text-only'));
+        $em->flush();
+
+        $client = $this->getTestClient();
+        $path = '/atom/items/' . $feed->getId();
+        $toolbar = 'main .feed-items-toolbar';
+        $switch = $toolbar . ' form[action^="/config/view-mode"] button';
+        $client->request('POST', '/config/view-mode', ['token' => 'invalid']);
+        self::assertSame(400, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->request('GET', $path);
+        self::assertCount(2, $crawler->filter('main .entry-card'));
+        self::assertCount(1, $crawler->filter($toolbar . ' a[href="/atom/list"]'));
+        self::assertSame('feeds.action.show_list_view', $crawler->filter($switch)->attr('aria-label'));
+        $client->submit($crawler->filter($switch)->form());
+        self::assertTrue($client->getResponse()->isRedirect($path));
+
+        $crawler = $client->followRedirect();
+        self::assertCount(2, $crawler->filter('main .collection .feed-list-row'));
+        self::assertCount(0, $crawler->filter('main .entry-card'));
+        self::assertCount(1, $crawler->filter('main .feed-list-image img[src="https://example.org/cover.jpg"]'));
+        self::assertCount(1, $crawler->filter('main .feed-list-row time[datetime]'));
+        self::assertSame('feeds.action.show_card_view', $crawler->filter($switch)->attr('aria-label'));
+        self::assertSame(1, $this->getLoggedInUser()->getConfig()->getListMode());
+
+        $client->submit($crawler->filter($switch)->form());
+        self::assertCount(2, $client->followRedirect()->filter('main .entry-card'));
+        self::assertSame(0, $this->getLoggedInUser()->getConfig()->getListMode());
     }
 
     /** @dataProvider protectedFeedRoutes */

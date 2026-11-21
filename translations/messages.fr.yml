@@ -748,6 +748,8 @@ feeds:
         edit: Modifier le flux
         fetch: Actualiser
         items: Voir les articles
+        show_card_view: Afficher en cartes
+        show_list_view: Afficher en liste
     empty: Vous n'êtes abonné à aucun flux.
     flash:
         created: Abonnement ajouté.

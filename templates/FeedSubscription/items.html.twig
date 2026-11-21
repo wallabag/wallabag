@@ -3,30 +3,40 @@
 {% block title %}{{ feed.title }}{% endblock %}
 
 {% block content %}
+    {% set list_mode = app.user.config.listMode == 1 %}
     <div class="row">
         <div class="col s12">
             <div class="feed-items-toolbar">
                 {% if is_granted('ROLE_USER') %}
                     <a class="waves-effect btn-flat feed-action" href="{{ path('all_import_feed') }}">{{ 'feeds.action.back_to_list'|trans }}</a>
                 {% endif %}
+                {% if items is not empty and is_granted('EDIT_CONFIG') %}
+                    {% set switch_label = (list_mode ? 'feeds.action.show_card_view' : 'feeds.action.show_list_view')|trans %}
+                    <form action="{{ path('switch_view_mode', {redirect: app.request.requesturi}) }}" method="post" class="inline-block">
+                        <input type="hidden" name="token" value="{{ csrf_token('switch-view-mode') }}">
+                        <button type="submit" class="btn-link" aria-label="{{ switch_label }}" title="{{ switch_label }}">
+                            <i class="material-icons" aria-hidden="true">{{ list_mode ? 'view_module' : 'view_list' }}</i>
+                        </button>
+                    </form>
+                {% endif %}
             </div>
             {% if items is empty %}
                 <p>{{ 'feeds.items_empty'|trans }}</p>
             {% else %}
-                <ol class="entries row entries-row">
+                <ol class="entries {{ list_mode ? 'collection' : 'row entries-row' }}">
                     {% for item in items %}
-                        <li class="s12">
-                            <article class="card entry-card">
-                                <div class="card-body">
+                        <li class="{{ list_mode ? 'collection-item feed-list-row' : 's12' }}">
+                            <article class="{{ list_mode ? 'feed-list-item' : 'card entry-card' }}">
+                                <div class="{{ list_mode ? 'feed-list-body' : 'card-body' }}">
                                     {% if item.image and app.user.config.displayThumbnails %}
-                                        <div class="card-image">
+                                        <div class="{{ list_mode ? 'feed-list-image' : 'card-image' }}">
                                             <a class="feed-preview" href="{{ item.url }}" rel="noreferrer" tabindex="-1" aria-hidden="true">
                                                 <img class="responsive-img" src="{{ item.image }}" alt="" loading="lazy" referrerpolicy="no-referrer">
                                             </a>
                                         </div>
                                     {% endif %}
-                                    <div class="card-content">
-                                        <a class="card-title feed-url" href="{{ item.url }}" rel="noreferrer">{{ item.title ?: item.url }}</a>
+                                    <div class="{{ list_mode ? 'feed-list-content' : 'card-content' }}">
+                                        <a class="feed-url{% if not list_mode %} card-title{% endif %}" href="{{ item.url }}" rel="noreferrer">{{ item.title ?: item.url }}</a>
                                         {% if item.publishedAt %}
                                             <time class="grey-text" datetime="{{ item.publishedAt|date('c') }}">{{ item.publishedAt|date('Y-m-d') }}</time>
                                         {% endif %}
