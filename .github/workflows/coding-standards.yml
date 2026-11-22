@@ -88,7 +88,7 @@ jobs:
 
       - name: "Run Biome"
         if: always() && steps.yarn-install.outcome == 'success'
-        run: "yarn lint:js"
+        run: make lint-js
 
       - name: "Run Stylelint"
         if: always() && steps.yarn-install.outcome == 'success'

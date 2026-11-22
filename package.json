@@ -102,7 +102,7 @@
     "build:dev": "encore dev",
     "watch": "encore dev --watch",
     "build:prod": "encore production --progress",
-    "lint:js": "biome check assets",
+    "lint:js": "biome check .",
     "lint:scss": "stylelint assets/scss/*.scss assets/scss/**/*.scss"
   }
 }
