@@ -123,4 +123,6 @@ Run `make lint-yaml` to validate tracked application and repository YAML.
 
 Run `make lint-container` to validate the Symfony service containers for `dev`, `test`, and `prod`.
 
+Run `make lint-compose` to validate `compose.yaml` without starting containers or loading local service environment files.
+
 To rebuild frontend assets automatically while developing run `make dev-watch`.

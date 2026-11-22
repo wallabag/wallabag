@@ -127,10 +127,13 @@ lint-container: ## Validate the Symfony service container in each environment
 	@$(PHP) bin/console lint:container --env=test --no-debug
 	@$(PHP) bin/console lint:container --env=prod --no-debug
 
+lint-compose: ## Validate the Compose model without resolving local service env files
+	@docker compose -f compose.yaml config --quiet --no-env-resolution
+
 lint-translations: ## Validate YAML translation files
 	@$(PHP) bin/console lint:yaml translations -v
 
-lint: composer-validate composer-normalize composer-dependency-analyser check-cs phpstan check-twig-cs lint-twig lint-js lint-scss lint-yaml lint-container lint-translations ## Run all coding standards and linting checks
+lint: composer-validate composer-normalize composer-dependency-analyser check-cs phpstan check-twig-cs lint-twig lint-js lint-scss lint-yaml lint-container lint-translations lint-compose ## Run all coding standards and linting checks
 
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
 ifndef VERSION
@@ -141,6 +144,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup check-cs fix-cs phpstan phpstan-baseline check-twig-cs fix-twig-cs lint-twig composer-validate composer-normalize composer-dependency-analyser lint-js lint-scss lint-yaml lint-container lint-translations lint
+.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup check-cs fix-cs phpstan phpstan-baseline check-twig-cs fix-twig-cs lint-twig composer-validate composer-normalize composer-dependency-analyser lint-js lint-scss lint-yaml lint-container lint-translations lint-compose lint
 
 .DEFAULT_GOAL := install

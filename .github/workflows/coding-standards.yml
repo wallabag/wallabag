@@ -19,6 +19,7 @@ jobs:
 
     steps:
       - name: "Checkout"
+        id: checkout
         uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
 
       - name: "Install PHP"
@@ -101,3 +102,9 @@ jobs:
       - name: "Run Stylelint"
         if: always() && steps.yarn-install.outcome == 'success'
         run: make lint-scss
+
+      - name: "Validate Compose model"
+        if: always() && steps.checkout.outcome == 'success'
+        run: |
+          docker compose version
+          make lint-compose
