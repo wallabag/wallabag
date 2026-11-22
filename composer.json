@@ -196,7 +196,8 @@
         "symfony/process": "^5.4.47",
         "symfony/var-dumper": "^5.4.48",
         "symfony/web-profiler-bundle": "^5.4.48",
-        "symfony/web-server-bundle": "^4.4.44"
+        "symfony/web-server-bundle": "^4.4.44",
+        "vincentlanglet/twig-cs-fixer": "4.1.2"
     },
     "replace": {
         "symfony/polyfill-php54": "*",

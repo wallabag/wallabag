@@ -48,6 +48,7 @@ $config
         'symfony/templating',
         'symfony/var-dumper',
         'twig/string-extra',
+        'vincentlanglet/twig-cs-fixer',
     ], [ErrorType::UNUSED_DEPENDENCY])
     ->ignoreErrorsOnPackages([
         'monolog/monolog',

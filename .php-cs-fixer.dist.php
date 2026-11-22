@@ -72,6 +72,7 @@ return $config
             ->in(__DIR__)
             ->append([
                 __FILE__,
+                __DIR__ . '/.twig-cs-fixer.dist.php',
                 __DIR__ . '/bin/console',
                 __DIR__ . '/web/app.php',
                 __DIR__ . '/web/app_dev.php',
