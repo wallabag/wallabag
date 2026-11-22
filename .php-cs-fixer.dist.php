@@ -47,13 +47,22 @@ return $config
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
+            ->ignoreVCSIgnored(true)
             ->exclude([
+                'app/build',
                 'node_modules',
                 'vendor',
                 'var',
                 'web',
             ])
             ->in(__DIR__)
+            ->append([
+                __FILE__,
+                __DIR__ . '/bin/console',
+                __DIR__ . '/web/app.php',
+                __DIR__ . '/web/app_dev.php',
+                __DIR__ . '/web/index.php',
+            ])
     )
     ->setCacheFile('.php-cs-fixer.cache')
 ;
