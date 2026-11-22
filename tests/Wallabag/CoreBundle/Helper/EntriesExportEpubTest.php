@@ -7,6 +7,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Helper\DownloadImages;
 use Wallabag\CoreBundle\Helper\EntriesExport;
 use Wallabag\CoreBundle\Helper\EpubContentCleaner;
 use Wallabag\CoreBundle\Helper\InstanceImageLocator;
@@ -45,7 +46,8 @@ class EntriesExportEpubTest extends TestCase
             '',
             $tokenStorage,
             $cleaner,
-            $this->createMock(InstanceImageLocator::class)
+            $this->createMock(InstanceImageLocator::class),
+            $this->createMock(DownloadImages::class)
         );
 
         $response = $export->setEntries([$entry])->exportAs('epub');

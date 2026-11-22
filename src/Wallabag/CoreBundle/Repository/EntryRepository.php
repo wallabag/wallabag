@@ -281,7 +281,6 @@ class EntryRepository extends ServiceEntityRepository
         }
 
         $qb = $this->createQueryBuilder('e')
-            ->leftJoin('e.tags', 't')
             ->where('e.user = :userId')->setParameter('userId', $userId);
 
         if ('metadata' === $detail) {
@@ -358,6 +357,29 @@ class EntryRepository extends ServiceEntityRepository
         $pagerAdapter = new DoctrineORMAdapter($qb, true, false);
 
         return new Pagerfanta($pagerAdapter);
+    }
+
+    /**
+     * @param iterable<Entry> $entries
+     * @param string[]        $associations
+     */
+    public function preloadTagsAndAnnotations(iterable $entries, array $associations = ['tags', 'annotations'])
+    {
+        $entries = \is_array($entries) ? $entries : iterator_to_array($entries);
+
+        if (empty($entries)) {
+            return;
+        }
+
+        foreach ($associations as $association) {
+            $this->createQueryBuilder('e')
+                ->select('PARTIAL e.{id}', 'j')
+                ->leftJoin('e.' . $association, 'j')
+                ->where('e IN (:entries)')
+                ->setParameter('entries', $entries)
+                ->getQuery()
+                ->getResult();
+        }
     }
 
     /**

@@ -150,6 +150,8 @@ class FeedController extends AbstractController
             }
         }
 
+        $this->entryRepository->preloadTagsAndAnnotations($entries->getCurrentPageResults(), ['tags']);
+
         return $this->render(
             '@WallabagCore/Entry/entries.xml.twig',
             [
@@ -232,6 +234,8 @@ class FeedController extends AbstractController
                 return $this->redirect($url . '/' . $entries->getNbPages());
             }
         }
+
+        $this->entryRepository->preloadTagsAndAnnotations($entries->getCurrentPageResults(), ['tags']);
 
         return $this->render('@WallabagCore/Entry/entries.xml.twig', [
             'type' => $type,
