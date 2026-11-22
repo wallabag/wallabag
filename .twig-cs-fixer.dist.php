@@ -4,6 +4,7 @@ use TwigCsFixer\Config\Config;
 use TwigCsFixer\File\Finder;
 use TwigCsFixer\Rules\Delimiter\BlockNameSpacingRule;
 use TwigCsFixer\Rules\Punctuation\TrailingCommaMultiLineRule;
+use TwigCsFixer\Rules\Punctuation\TrailingCommaSingleLineRule;
 use TwigCsFixer\Ruleset\Ruleset;
 use TwigCsFixer\Standard\Twig;
 
@@ -14,6 +15,7 @@ $ruleset
     ->addStandard(new Twig())
     ->addRule(new BlockNameSpacingRule())
     ->addRule(new TrailingCommaMultiLineRule())
+    ->addRule(new TrailingCommaSingleLineRule())
 ;
 
 return (new Config())
