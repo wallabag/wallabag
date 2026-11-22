@@ -4,7 +4,6 @@ export default {
   customSyntax: 'postcss-scss',
   plugins: ['stylelint-scss'],
   rules: {
-    'block-no-redundant-nested-style-rules': null,
     // Preserve the existing color function spellings and compiled browser syntax.
     'color-function-alias-notation': null,
     'declaration-property-value-keyword-no-deprecated': null,
