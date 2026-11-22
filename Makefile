@@ -97,6 +97,9 @@ phpstan-baseline: ## Generate PHPStan baseline
 check-twig-cs: ## Check Twig coding standards
 	@$(PHP_NO_XDEBUG) bin/twig-cs-fixer lint --no-cache
 
+fix-twig-cs: ## Format Twig templates
+	@$(PHP_NO_XDEBUG) bin/twig-cs-fixer fix --no-cache
+
 composer-validate: ## Validate composer.json
 	@$(COMPOSER) validate
 
@@ -126,6 +129,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup check-cs fix-cs phpstan phpstan-baseline check-twig-cs composer-validate composer-normalize composer-dependency-analyser lint-js lint-scss lint-translations lint
+.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup check-cs fix-cs phpstan phpstan-baseline check-twig-cs fix-twig-cs composer-validate composer-normalize composer-dependency-analyser lint-js lint-scss lint-translations lint
 
 .DEFAULT_GOAL := install

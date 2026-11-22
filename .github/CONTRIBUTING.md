@@ -109,6 +109,8 @@ To run the PHP formatter run `make fix-cs`.
 
 To check Twig style, run `make check-twig-cs`.
 
+To format Twig templates, run `make fix-twig-cs`.
+
 To run the PHPStan static analysis run `make phpstan`.
 
 To run the JS linter run `make lint-js`.
