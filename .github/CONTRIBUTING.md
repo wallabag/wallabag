@@ -107,6 +107,8 @@ To run the tests locally run `make test`. You can also narrow a run to specific 
 
 To run the PHP formatter run `make fix-cs`.
 
+To check Twig style, run `make check-twig-cs`.
+
 To run the PHPStan static analysis run `make phpstan`.
 
 To run the JS linter run `make lint-js`.

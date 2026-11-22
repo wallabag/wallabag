@@ -74,9 +74,9 @@ jobs:
         if: always() && steps.test-cache.outcome == 'success'
         run: "php bin/phpstan analyse --no-progress --error-format=checkstyle | cs2pr"
 
-      - name: "Run TwigCS"
+      - name: "Run Twig CS Fixer"
         if: always() && steps.composer-install.outcome == 'success'
-        run: "php bin/twigcs --severity=error --display=blocking --reporter checkstyle app/ src/ | cs2pr"
+        run: php bin/twig-cs-fixer lint --no-cache --report=github
 
       - name: "Run ergebnis/composer-normalize"
         if: always() && steps.composer-install.outcome == 'success'

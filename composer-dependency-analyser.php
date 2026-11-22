@@ -19,7 +19,6 @@ $config
         'egulias/email-validator',
         'ergebnis/composer-normalize',
         'friendsofphp/php-cs-fixer',
-        'friendsoftwig/twigcs',
         'j0k3r/graby-site-config',
         'j0k3r/php-readability',
         'laminas/laminas-code',

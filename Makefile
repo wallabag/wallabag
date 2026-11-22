@@ -94,8 +94,8 @@ phpstan: ## Run PHPStan
 phpstan-baseline: ## Generate PHPStan baseline
 	@$(PHP_NO_XDEBUG) bin/phpstan analyse --generate-baseline
 
-twigcs: ## Run TwigCS linter on Twig templates
-	@$(PHP_NO_XDEBUG) bin/twigcs --severity=error --display=blocking app/ src/
+check-twig-cs: ## Check Twig coding standards
+	@$(PHP_NO_XDEBUG) bin/twig-cs-fixer lint --no-cache
 
 composer-validate: ## Validate composer.json
 	@$(COMPOSER) validate
@@ -115,7 +115,7 @@ lint-scss: ## Run Stylelint
 lint-translations: ## Validate YAML translation files
 	@$(PHP) bin/console lint:yaml translations -v
 
-lint: composer-validate composer-normalize composer-dependency-analyser check-cs phpstan twigcs lint-js lint-scss lint-translations ## Run all coding standards and linting checks
+lint: composer-validate composer-normalize composer-dependency-analyser check-cs phpstan check-twig-cs lint-js lint-scss lint-translations ## Run all coding standards and linting checks
 
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
 ifndef VERSION
@@ -126,6 +126,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup check-cs fix-cs phpstan phpstan-baseline twigcs composer-validate composer-normalize composer-dependency-analyser lint-js lint-scss lint-translations lint
+.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup check-cs fix-cs phpstan phpstan-baseline check-twig-cs composer-validate composer-normalize composer-dependency-analyser lint-js lint-scss lint-translations lint
 
 .DEFAULT_GOAL := install
