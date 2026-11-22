@@ -335,6 +335,20 @@ class DownloadImagesTest extends TestCase
         $this->assertStringContainsString($this->assetPathFor(self::PUBLIC_HTTPS_BASE . '/unnamed.png', 'png'), $res, "Fetch client didn't follow the HTTP redirection");
     }
 
+    public function testFetchImageRecreatesTheImageWithoutStoringIt()
+    {
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
+
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test_fetch', 'http://wallabag.io/', new Logger('test', [new TestHandler()]));
+        $image = $download->fetchImage(self::PUBLIC_HTTP_BASE . '/cover.png');
+
+        $this->assertSame('jpg', $image['extension']);
+        $this->assertSame('image/jpeg', $image['mimetype']);
+        $this->assertNotFalse(imagecreatefromstring($image['content']));
+        $this->assertSame([], glob(sys_get_temp_dir() . '/wallabag_test_fetch/*/*/*/*'));
+    }
+
     private function assetUrlFor(string $absolutePath, string $extension): string
     {
         return self::ENTRY_ASSET_PREFIX . hash('crc32', $absolutePath) . '.' . $extension;

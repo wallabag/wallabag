@@ -24,6 +24,7 @@ class EntriesExport
     private $tokenStorage;
     private $contentCleaner;
     private $imageLocator;
+    private $downloadImages;
     private $title = '';
     private $entries = [];
     private $author = 'wallabag';
@@ -36,8 +37,9 @@ class EntriesExport
      * @param TokenStorageInterface $tokenStorage   Needed to retrieve the current user
      * @param EpubContentCleaner    $contentCleaner Cleans the content of the entries for the EPUB
      * @param InstanceImageLocator  $imageLocator   Finds the images stored by wallabag
+     * @param DownloadImages        $downloadImages Downloads the cover when it is not stored by wallabag
      */
-    public function __construct(TranslatorInterface $translator, $wallabagUrl, $logoPath, TokenStorageInterface $tokenStorage, EpubContentCleaner $contentCleaner, InstanceImageLocator $imageLocator)
+    public function __construct(TranslatorInterface $translator, $wallabagUrl, $logoPath, TokenStorageInterface $tokenStorage, EpubContentCleaner $contentCleaner, InstanceImageLocator $imageLocator, DownloadImages $downloadImages)
     {
         $this->translator = $translator;
         $this->wallabagUrl = $wallabagUrl;
@@ -45,6 +47,7 @@ class EntriesExport
         $this->tokenStorage = $tokenStorage;
         $this->contentCleaner = $contentCleaner;
         $this->imageLocator = $imageLocator;
+        $this->downloadImages = $downloadImages;
     }
 
     /**
@@ -195,9 +198,9 @@ class EntriesExport
              * Front page
              * Set if there's only one entry in the given set
              */
-            $coverImage = 1 === $entryCount ? $this->imageLocator->locate($entry->getPreviewPicture()) : null;
+            $coverImage = 1 === $entryCount ? $this->getCoverImage($entry->getPreviewPicture()) : null;
             if (null !== $coverImage) {
-                $book->setCoverImage('cover.' . $coverImage['extension'], file_get_contents($coverImage['path']), $coverImage['mimetype']);
+                $book->setCoverImage('cover.' . $coverImage['extension'], $coverImage['content'], $coverImage['mimetype']);
             }
 
             foreach ($entry->getTags() as $tag) {
@@ -546,5 +549,18 @@ class EntriesExport
         $transliterator = \Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;', \Transliterator::FORWARD);
 
         return preg_replace('/[^A-Za-z0-9\- \']/', '', $transliterator->transliterate($this->title));
+    }
+
+    /**
+     * @return array{content: string, extension: string, mimetype: string}|null
+     */
+    private function getCoverImage(?string $previewPicture): ?array
+    {
+        $localImage = $this->imageLocator->locate($previewPicture);
+        if (null !== $localImage) {
+            return ['content' => file_get_contents($localImage['path']), 'extension' => $localImage['extension'], 'mimetype' => $localImage['mimetype']];
+        }
+
+        return $this->downloadImages->fetchImage($previewPicture);
     }
 }
