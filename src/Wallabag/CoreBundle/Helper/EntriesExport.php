@@ -233,7 +233,11 @@ class EntriesExport
             $chapter = $content_start . $this->contentCleaner->clean($book, $entry->getContent()) . $bookEnd;
 
             $entryIds[] = $entry->getId();
-            $book->addChapter($this->escapeXml($entry->getTitle()), "{$filename}.html", $chapter, true, EPub::EXTERNAL_REF_IGNORE);
+            try {
+                $book->addChapter($this->escapeXml($entry->getTitle()), "{$filename}.html", $chapter, true, EPub::EXTERNAL_REF_IGNORE);
+            } catch (\Error $e) {
+                $book->addChapter($this->escapeXml($entry->getTitle()), "{$filename}.html", $chapter, false, EPub::EXTERNAL_REF_IGNORE);
+            }
         }
 
         $book->addChapter('Notices', 'Cover2.html', $content_start . $this->getExportInformation('PHPePub') . $bookEnd);
