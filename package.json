@@ -103,6 +103,6 @@
     "watch": "encore dev --watch",
     "build:prod": "encore production --progress",
     "lint:js": "biome check --error-on-warnings .",
-    "lint:scss": "stylelint \"assets/**/*.scss\""
+    "lint:scss": "stylelint \"assets/**/*.scss\" --max-warnings 0"
   }
 }
