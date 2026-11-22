@@ -34,6 +34,7 @@ use Wallabag\Form\Type\TaggingRuleImportType;
 use Wallabag\Form\Type\TaggingRuleType;
 use Wallabag\Form\Type\UserInformationType;
 use Wallabag\Helper\Redirect;
+use Wallabag\MailImport\MailImportSettings;
 use Wallabag\Repository\AnnotationRepository;
 use Wallabag\Repository\ConfigRepository;
 use Wallabag\Repository\EntryRepository;
@@ -59,7 +60,7 @@ class ConfigController extends AbstractController
 
     #[Route(path: '/config', name: 'config', methods: ['GET', 'POST'])]
     #[IsGranted('EDIT_CONFIG')]
-    public function indexAction(Request $request, Config $craueConfig, TaggingRuleRepository $taggingRuleRepository, IgnoreOriginUserRuleRepository $ignoreOriginUserRuleRepository, UserRepository $userRepository, ValidatorInterface $validator)
+    public function indexAction(Request $request, Config $craueConfig, TaggingRuleRepository $taggingRuleRepository, IgnoreOriginUserRuleRepository $ignoreOriginUserRuleRepository, UserRepository $userRepository, ValidatorInterface $validator, MailImportSettings $mailImportSettings)
     {
         $config = $this->getConfig();
         $user = $this->getUser();
@@ -265,6 +266,11 @@ class ConfigController extends AbstractController
             'feed' => [
                 'username' => $user->getUsername(),
                 'token' => $config->getFeedToken(),
+            ],
+            'mail_import' => [
+                'enabled' => $mailImportSettings->isEnabled(),
+                'max_links' => $mailImportSettings->getMaxLinks(),
+                'address' => $mailImportSettings->isEnabled() && $config->getMailImportToken() ? $mailImportSettings->getUserAddress($config->getMailImportToken()) : null,
             ],
             'enabled_users' => $userRepository->getSumEnabledUsers(),
         ]);
@@ -497,6 +503,32 @@ class ConfigController extends AbstractController
         );
 
         return $this->redirect($this->generateUrl('config') . '#set2');
+    }
+
+    #[Route(path: '/generate-mail-import-token', name: 'generate_mail_import_token', methods: ['POST'])]
+    #[IsGranted('EDIT_CONFIG')]
+    public function generateMailImportTokenAction(Request $request, MailImportSettings $mailImportSettings): RedirectResponse
+    {
+        if (!$mailImportSettings->isEnabled()) {
+            throw $this->createNotFoundException('Saving articles by email is disabled.');
+        }
+
+        if (!$this->isCsrfTokenValid('generate-mail-import-token', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
+        $config = $this->getConfig();
+        $config->setMailImportToken(bin2hex(random_bytes(10)));
+
+        $this->entityManager->persist($config);
+        $this->entityManager->flush();
+
+        $this->addFlash(
+            'notice',
+            'flashes.config.notice.mail_import_token_updated',
+        );
+
+        return $this->redirect($this->generateUrl('config') . '#set8');
     }
 
     /**

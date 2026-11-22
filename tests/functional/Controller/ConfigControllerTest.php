@@ -15,6 +15,7 @@ use Wallabag\Entity\Tag;
 use Wallabag\Entity\TaggingRule;
 use Wallabag\Entity\User;
 use Wallabag\Enum\HomepageTarget;
+use Wallabag\MailImport\MailImportSettings;
 use Wallabag\Tests\Functional\WallabagTestCase;
 
 class ConfigControllerTest extends WallabagTestCase
@@ -378,6 +379,30 @@ class ConfigControllerTest extends WallabagTestCase
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('config.form_feed.token_create', $body[0]);
+    }
+
+    public function testMailImportAddress(): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $client->disableReboot();
+        $client->getContainer()->set(MailImportSettings::class, new MailImportSettings('wallabag@example.org', 'imaps://user:secret@imap.example.org', 10));
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertCount(1, $crawler->filter('a[href="#set8"]'));
+        $this->assertStringContainsString('config.form_mail_import.no_address', $crawler->filter('#set8')->text());
+
+        $client->submit($crawler->selectButton('config.form_mail_import.address_create')->form());
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $token = $this->getEntityManager()->getRepository(User::class)->findOneByUsername('admin')->getConfig()->getMailImportToken();
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{20}$/', $token);
+
+        $crawler = $client->followRedirect();
+
+        $this->assertStringContainsString('wallabag+' . $token . '@example.org', $crawler->filter('#set8')->text());
     }
 
     public function testFeedUpdate(): void

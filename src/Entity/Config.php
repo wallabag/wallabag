@@ -14,6 +14,7 @@ use Wallabag\Repository\ConfigRepository;
  */
 #[ORM\Table(name: '`config`')]
 #[ORM\Index(columns: ['feed_token'])]
+#[ORM\UniqueConstraint(name: 'mail_import_token', columns: ['mail_import_token'])]
 #[ORM\Entity(repositoryClass: ConfigRepository::class)]
 class Config
 {
@@ -53,6 +54,12 @@ class Config
     #[ORM\Column(name: 'feed_token', type: 'string', nullable: true)]
     #[Groups(['config_api'])]
     private $feedToken;
+
+    /**
+     * @var string|null
+     */
+    #[ORM\Column(name: 'mail_import_token', type: 'string', length: 32, nullable: true)]
+    private $mailImportToken;
 
     /**
      * @var int|null
@@ -281,6 +288,18 @@ class Config
     public function getFeedLimit()
     {
         return $this->feedLimit;
+    }
+
+    public function setMailImportToken(?string $mailImportToken): self
+    {
+        $this->mailImportToken = $mailImportToken;
+
+        return $this;
+    }
+
+    public function getMailImportToken(): ?string
+    {
+        return $this->mailImportToken;
     }
 
     /**
