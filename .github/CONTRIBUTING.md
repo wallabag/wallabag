@@ -121,4 +121,6 @@ To run the SCSS linter run `make lint-scss`.
 
 Run `make lint-yaml` to validate tracked application and repository YAML.
 
+Run `make lint-container` to validate the Symfony service containers for `dev`, `test`, and `prod`.
+
 To rebuild frontend assets automatically while developing run `make dev-watch`.

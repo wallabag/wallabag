@@ -122,10 +122,15 @@ lint-yaml: ## Check tracked application and repository YAML
 	@set -o pipefail; git ls-files -z -- 'app/config/*.yml' 'app/config/*.yaml' '.github/*.yml' '.github/*.yaml' doc/hugo.yaml codecov.yml \
 		| xargs -0 -r $(PHP) bin/console lint:yaml -v
 
+lint-container: ## Validate the Symfony service container in each environment
+	@$(PHP) bin/console lint:container --env=dev --no-debug
+	@$(PHP) bin/console lint:container --env=test --no-debug
+	@$(PHP) bin/console lint:container --env=prod --no-debug
+
 lint-translations: ## Validate YAML translation files
 	@$(PHP) bin/console lint:yaml translations -v
 
-lint: composer-validate composer-normalize composer-dependency-analyser check-cs phpstan check-twig-cs lint-twig lint-js lint-scss lint-yaml lint-translations ## Run all coding standards and linting checks
+lint: composer-validate composer-normalize composer-dependency-analyser check-cs phpstan check-twig-cs lint-twig lint-js lint-scss lint-yaml lint-container lint-translations ## Run all coding standards and linting checks
 
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
 ifndef VERSION
@@ -136,6 +141,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup check-cs fix-cs phpstan phpstan-baseline check-twig-cs fix-twig-cs lint-twig composer-validate composer-normalize composer-dependency-analyser lint-js lint-scss lint-yaml lint-translations lint
+.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup check-cs fix-cs phpstan phpstan-baseline check-twig-cs fix-twig-cs lint-twig composer-validate composer-normalize composer-dependency-analyser lint-js lint-scss lint-yaml lint-container lint-translations lint
 
 .DEFAULT_GOAL := install
