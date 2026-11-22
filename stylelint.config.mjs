@@ -11,8 +11,11 @@ export default {
     'at-rule-no-unknown': null,
     // Sass nesting and deliberate overrides make these checks unsuitable for the current cascade.
     'no-duplicate-selectors': null,
-    'font-family-no-missing-generic-family-keyword': null,
     'no-descending-specificity': null,
+    'font-family-no-missing-generic-family-keyword': [
+      true,
+      { ignoreFontFamilies: ['Georgia', 'Material Icons', 'icomoon'] },
+    ],
     'scss/at-rule-no-unknown': true,
     'media-feature-range-notation': null,
     'selector-class-pattern': null,
