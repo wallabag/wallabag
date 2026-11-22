@@ -78,6 +78,10 @@ jobs:
         if: always() && steps.composer-install.outcome == 'success'
         run: php bin/twig-cs-fixer lint --no-cache --report=github
 
+      - name: "Validate Twig syntax"
+        if: always() && steps.composer-install.outcome == 'success'
+        run: make lint-twig
+
       - name: "Run ergebnis/composer-normalize"
         if: always() && steps.composer-install.outcome == 'success'
         run: "composer normalize --dry-run --no-check-lock"
