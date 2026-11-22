@@ -52,7 +52,7 @@ jobs:
 
       - name: "Install dependencies with Yarn"
         id: yarn-install
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: "Run Composer validate"
         if: always() && steps.composer-install.outcome == 'success'
