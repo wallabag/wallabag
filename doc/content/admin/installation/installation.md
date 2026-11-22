@@ -39,33 +39,41 @@ If you're installing wallabag behind Squid as a reverse proxy, make sure to upda
 
 ## On shared hosting
 
-We provide a package with all dependencies inside. The default
-configuration uses MySQL for the database. Configure the environment variables
-documented on the [Parameters]({{< relref "../parameters.md" >}}) page before
-running the installer. If you are upgrading an older deployment that still has
-`app/config/parameters.yml`, wallabag will keep reading it with a deprecation
-warning until wallabag 3.0.
-
-We have already created a user: the login and password are `wallabag`.
-
-With this package, wallabag doesn't check for mandatory extensions used
-in the application (these checks are made during `composer install`
-when you have a dedicated web server, see above).
-
-Execute this command to download and extract the latest package:
+We provide a package with all dependencies inside. Execute this command to
+download and extract the latest package:
 
 ```bash
 wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 ```
 
-You will find the [md5 hash of the latest package on our website](https://wallabag.org/#download).
+You will find the [SHA-256 checksum of the latest package on our website](https://wallabag.org/#download).
+
+To upgrade an existing installation, don't follow the steps below: follow the
+[upgrade guide for shared hosting]({{< relref "../upgrade/#upgrade-on-a-shared-hosting" >}}).
+
+For a fresh install, the package doesn't contain any database or account. Copy
+`.env.prod.example` to `.env.local` and set your values: at least `APP_SECRET`,
+a long random string, `WALLABAG_BASE_URL`, `DATABASE_URL` and
+`WALLABAG_FROM_EMAIL`. See [Parameters]({{< relref "../parameters.md" >}}) for
+the full list.
+
+Then run the installer, only for a fresh install: it initializes the database
+and asks for the login and password of the first account.
+
+```bash
+php bin/console wallabag:install --env=prod
+```
+
+If an error occurs at this step due to bad settings, clear the cache with
+`php bin/console cache:clear --env=prod` before you run the installer again.
+
+With this package, wallabag doesn't check for mandatory extensions used
+in the application (these checks are made during `composer install`
+when you have a dedicated web server, see above).
 
 The static package requires each command to be appended by `--env=prod` as the static package is only usable as a prod environment (dev environment is not supported and won't work at all).
 
 Now, read the next step to create your virtual host.
-
-You must create your first user by using the command `php bin/console wallabag:install --env=prod`
-If an error occurs at this step due to bad settings, you must clear the cache with `php bin/console cache:clear --env=prod` before you try again the previous command.
 
 Then you can access your wallabag.
 
