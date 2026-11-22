@@ -6,7 +6,7 @@ export default {
   rules: {
     // Preserve the existing color function spellings and compiled browser syntax.
     'color-function-alias-notation': null,
-    'declaration-property-value-keyword-no-deprecated': null,
+    'declaration-property-value-keyword-no-deprecated': [true, { ignoreKeywords: ['break-word'] }],
     'property-no-deprecated': null,
     'at-rule-no-unknown': null,
     // Sass nesting and deliberate overrides make these checks unsuitable for the current cascade.
