@@ -119,4 +119,6 @@ To run the JS linter run `make lint-js`.
 
 To run the SCSS linter run `make lint-scss`.
 
+Run `make lint-yaml` to validate tracked application and repository YAML.
+
 To rebuild frontend assets automatically while developing run `make dev-watch`.

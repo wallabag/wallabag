@@ -82,6 +82,10 @@ jobs:
         if: always() && steps.composer-install.outcome == 'success'
         run: make lint-twig
 
+      - name: "Validate repository YAML"
+        if: always() && steps.composer-install.outcome == 'success'
+        run: make lint-yaml
+
       - name: "Run ergebnis/composer-normalize"
         if: always() && steps.composer-install.outcome == 'success'
         run: "composer normalize --dry-run --no-check-lock"
