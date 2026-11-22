@@ -120,7 +120,7 @@ class WallabagV2ControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.liberation.fr/planete/2015/10/26/refugies-l-ue-va-creer-100-000-places-d-accueil-dans-les-balkans_1408867',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertInstanceOf(Entry::class, $content);
@@ -139,7 +139,7 @@ class WallabagV2ControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.mediapart.fr/',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertInstanceOf(Entry::class, $content);

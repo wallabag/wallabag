@@ -31,7 +31,7 @@ class CleanDownloadedImagesCommand extends Command
                 'dry-run',
                 null,
                 InputOption::VALUE_NONE,
-                'Do not remove images, just dump counters'
+                'Do not remove images, just dump counters',
             );
     }
 

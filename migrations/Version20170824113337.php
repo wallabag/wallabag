@@ -30,7 +30,7 @@ class Version20170824113337 extends WallabagMigration
             'UPDATE ' . $this->getTable('entry') . ' SET starred_at = updated_at WHERE is_starred = :is_starred',
             [
                 'is_starred' => true,
-            ]
+            ],
         );
     }
 

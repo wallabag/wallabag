@@ -30,7 +30,7 @@ final class Version20260331213851 extends WallabagMigration
 
         $this->addSql(
             'UPDATE ' . $this->getTable('config') . ' SET default_homepage = :defaultHomepage WHERE default_homepage IS NULL',
-            ['defaultHomepage' => HomepageTarget::Unread->value]
+            ['defaultHomepage' => HomepageTarget::Unread->value],
         );
 
         $notNullTable = clone $nullableTable;

@@ -31,7 +31,7 @@ class Version20161001072726 extends WallabagMigration
                     "SELECT CONSTRAINT_NAME
                     FROM information_schema.key_column_usage
                     WHERE TABLE_NAME = '" . $this->getTable('entry_tag', WallabagMigration::UN_ESCAPED_TABLE) . "' AND CONSTRAINT_NAME LIKE 'FK_%'
-                    AND TABLE_SCHEMA = '" . $this->connection->getDatabase() . "'"
+                    AND TABLE_SCHEMA = '" . $this->connection->getDatabase() . "'",
                 );
 
                 foreach ($query->fetchAllAssociative() as $fk) {
@@ -48,7 +48,7 @@ class Version20161001072726 extends WallabagMigration
                     JOIN   pg_namespace n ON n.oid = c.connamespace
                     WHERE  contype = 'f'
                     AND    conrelid::regclass::text = '" . $this->getTable('entry_tag', WallabagMigration::UN_ESCAPED_TABLE) . "'
-                    AND    n.nspname = 'public';"
+                    AND    n.nspname = 'public';",
                 );
 
                 foreach ($query->fetchAllAssociative() as $fk) {
@@ -70,7 +70,7 @@ class Version20161001072726 extends WallabagMigration
                     WHERE TABLE_NAME = '" . $this->getTable('annotation', WallabagMigration::UN_ESCAPED_TABLE) . "'
                     AND CONSTRAINT_NAME LIKE 'FK_%'
                     AND COLUMN_NAME = 'entry_id'
-                    AND TABLE_SCHEMA = '" . $this->connection->getDatabase() . "'"
+                    AND TABLE_SCHEMA = '" . $this->connection->getDatabase() . "'",
                 );
 
                 foreach ($query->fetchAllAssociative() as $fk) {
@@ -88,7 +88,7 @@ class Version20161001072726 extends WallabagMigration
                     WHERE  contype = 'f'
                     AND    conrelid::regclass::text = '" . $this->getTable('annotation', WallabagMigration::UN_ESCAPED_TABLE) . "'
                     AND    n.nspname = 'public'
-                    AND    pg_get_constraintdef(c.oid) LIKE '%entry_id%';"
+                    AND    pg_get_constraintdef(c.oid) LIKE '%entry_id%';",
                 );
 
                 foreach ($query->fetchAllAssociative() as $fk) {

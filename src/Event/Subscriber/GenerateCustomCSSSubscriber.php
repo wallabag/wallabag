@@ -39,7 +39,7 @@ class GenerateCustomCSSSubscriber implements EventSubscriberInterface
                         font-size: ' . $config->getFontsize() . 'em;
                         line-height: ' . $config->getLineHeight() . 'em;
                     }
-                    ;'
+                    ;',
         )->getCss();
 
         $config->setCustomCSS($css);

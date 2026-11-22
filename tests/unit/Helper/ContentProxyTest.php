@@ -540,7 +540,7 @@ class ContentProxyTest extends TestCase
             ->method('validate')
             ->will($this->onConsecutiveCalls(
                 new ConstraintViolationList(),
-                new ConstraintViolationList([new ConstraintViolation('oops', 'oops', [], 'oops', 'url', 'https://')])
+                new ConstraintViolationList([new ConstraintViolation('oops', 'oops', [], 'oops', 'url', 'https://')]),
             ));
 
         $graby = $this->getMockBuilder(Graby::class)
@@ -605,7 +605,7 @@ class ContentProxyTest extends TestCase
                     'cache-control' => 'no-cache',
                     'content-type' => 'text/html',
                 ],
-            ]
+            ],
         );
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
@@ -649,7 +649,7 @@ class ContentProxyTest extends TestCase
                 'headers' => [
                     'content-type' => 'text/html',
                 ],
-            ]
+            ],
         );
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
@@ -689,7 +689,7 @@ class ContentProxyTest extends TestCase
                 'headers' => [
                     'content-type' => 'text/html',
                 ],
-            ]
+            ],
         );
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
@@ -730,7 +730,7 @@ class ContentProxyTest extends TestCase
                 'headers' => [
                     'content-type' => 'text/html',
                 ],
-            ]
+            ],
         );
 
         $this->assertCount(0, $entry->getTags());
@@ -778,7 +778,7 @@ class ContentProxyTest extends TestCase
                 'headers' => [
                     'content-type' => 'text/html',
                 ],
-            ]
+            ],
         );
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
@@ -834,7 +834,7 @@ class ContentProxyTest extends TestCase
                 'headers' => [
                     'content-type' => 'text/html',
                 ],
-            ]
+            ],
         );
 
         $content = <<<'CONTENT'
@@ -1352,7 +1352,7 @@ class ContentProxyTest extends TestCase
                 ],
                 'language' => '',
             ],
-            true
+            true,
         );
 
         $this->assertSame($expected_entry_url, $entry->getUrl());

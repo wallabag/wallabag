@@ -273,7 +273,7 @@ class EntriesExport
                 'Content-type' => 'application/epub+zip',
                 'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.epub"',
                 'Content-Transfer-Encoding' => 'binary',
-            ]
+            ],
         );
     }
 
@@ -352,7 +352,7 @@ class EntriesExport
                 'Content-type' => 'application/pdf',
                 'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.pdf"',
                 'Content-Transfer-Encoding' => 'binary',
-            ]
+            ],
         );
     }
 
@@ -382,7 +382,7 @@ class EntriesExport
                 ],
                 $delimiter,
                 $enclosure,
-                ''
+                '',
             );
         }
 
@@ -397,7 +397,7 @@ class EntriesExport
                 'Content-type' => 'application/csv',
                 'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.csv"',
                 'Content-Transfer-Encoding' => 'UTF-8',
-            ]
+            ],
         );
     }
 
@@ -413,7 +413,7 @@ class EntriesExport
                 'Content-type' => 'application/json',
                 'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.json"',
                 'Content-Transfer-Encoding' => 'UTF-8',
-            ]
+            ],
         );
     }
 
@@ -429,7 +429,7 @@ class EntriesExport
                 'Content-type' => 'application/xml',
                 'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.xml"',
                 'Content-Transfer-Encoding' => 'UTF-8',
-            ]
+            ],
         );
     }
 
@@ -454,7 +454,7 @@ class EntriesExport
                 'Content-type' => 'text/plain',
                 'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.txt"',
                 'Content-Transfer-Encoding' => 'UTF-8',
-            ]
+            ],
         );
     }
 
@@ -478,7 +478,7 @@ class EntriesExport
                 'Content-type' => 'text/markdown',
                 'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.md"',
                 'Content-Transfer-Encoding' => 'UTF-8',
-            ]
+            ],
         );
     }
 
@@ -496,7 +496,7 @@ class EntriesExport
         return $serializer->serialize(
             $this->entries,
             $format,
-            SerializationContext::create()->setGroups(['entries_for_user'])
+            SerializationContext::create()->setGroups(['entries_for_user']),
         );
     }
 

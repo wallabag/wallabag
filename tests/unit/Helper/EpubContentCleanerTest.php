@@ -15,7 +15,7 @@ class EpubContentCleanerTest extends TestCase
 
         $this->assertSame(
             '<p>a<br/>b' . "\u{a0}" . 'c</p><hr/>',
-            $cleaner->clean($this->createMock(EPub::class), '<!-- comment --><p>a<br>b&nbsp;c<hr></p>')
+            $cleaner->clean($this->createMock(EPub::class), '<!-- comment --><p>a<br>b&nbsp;c<hr></p>'),
         );
     }
 
@@ -36,7 +36,7 @@ class EpubContentCleanerTest extends TestCase
 
         $result = (new EpubContentCleaner($locator))->clean(
             $book,
-            '<img src="http://wallabag.example/assets/images/image.png" srcset="http://wallabag.example/assets/images/image.png 2x"/>'
+            '<img src="http://wallabag.example/assets/images/image.png" srcset="http://wallabag.example/assets/images/image.png 2x"/>',
         );
 
         unlink($imageFilename);

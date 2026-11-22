@@ -45,7 +45,7 @@ class RedisWorkerCommand extends Command
         $worker = new QueueWorker(
             $this->container->get('wallabag.queue.redis.' . $serviceName),
             $this->container->get('wallabag.consumer.redis.' . $serviceName),
-            (int) $input->getOption('maxIterations')
+            (int) $input->getOption('maxIterations'),
         );
 
         $worker->start();

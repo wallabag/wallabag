@@ -140,7 +140,7 @@ class AppKernel extends Kernel
         trigger_deprecation(
             'wallabag/wallabag',
             '2.x',
-            'Loading configuration from "app/config/parameters.yml" is deprecated and will be removed in wallabag 3.0. Configure wallabag with environment variables instead.'
+            'Loading configuration from "app/config/parameters.yml" is deprecated and will be removed in wallabag 3.0. Configure wallabag with environment variables instead.',
         );
     }
 
@@ -238,7 +238,7 @@ class AppKernel extends Kernel
                 'env(DATABASE_URL)',
                 str_starts_with($databasePath, '/')
                     ? 'sqlite://' . $databasePath
-                    : 'sqlite:///' . ltrim($databasePath, '/')
+                    : 'sqlite:///' . ltrim($databasePath, '/'),
             );
 
             return;

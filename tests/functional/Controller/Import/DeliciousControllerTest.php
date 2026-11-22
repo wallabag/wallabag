@@ -116,7 +116,7 @@ class DeliciousControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://feross.org/spoofmac/',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
@@ -158,7 +158,7 @@ class DeliciousControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://stackoverflow.com/review/',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertInstanceOf(Entry::class, $content1);
@@ -168,7 +168,7 @@ class DeliciousControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://addyosmani.com/basket.js/',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertInstanceOf(Entry::class, $content2);

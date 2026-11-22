@@ -22,7 +22,7 @@ class StaticController extends AbstractController
             'Static/howto.html.twig',
             [
                 'addonsUrl' => $this->addonsUrl,
-            ]
+            ],
         );
     }
 
@@ -35,7 +35,7 @@ class StaticController extends AbstractController
             [
                 'version' => $this->version,
                 'paypal_url' => $this->paypalUrl,
-            ]
+            ],
         );
     }
 
@@ -44,7 +44,7 @@ class StaticController extends AbstractController
     public function quickstartAction()
     {
         return $this->render(
-            'Static/quickstart.html.twig'
+            'Static/quickstart.html.twig',
         );
     }
 }

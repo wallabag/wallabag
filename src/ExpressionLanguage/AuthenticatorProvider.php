@@ -32,7 +32,7 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
             static function (): void {
                 throw new \Exception('Not supported');
             },
-            fn (array $arguments, $uri) => $this->requestHtmlFunctionClient->request('GET', $uri)->getContent()
+            fn (array $arguments, $uri) => $this->requestHtmlFunctionClient->request('GET', $uri)->getContent(),
         );
     }
 
@@ -51,7 +51,7 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
                 }
 
                 return $matches[1];
-            }
+            },
         );
     }
 
@@ -76,7 +76,7 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
                 }
 
                 return (string) $crawler->first()->attr('value');
-            }
+            },
         );
     }
 }

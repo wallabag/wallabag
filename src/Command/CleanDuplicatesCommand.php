@@ -41,7 +41,7 @@ class CleanDuplicatesCommand extends Command
             ->addArgument(
                 'username',
                 InputArgument::OPTIONAL,
-                'User to clean'
+                'User to clean',
             );
     }
 

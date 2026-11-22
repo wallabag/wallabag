@@ -34,12 +34,12 @@ class ExportCommand extends Command
             ->addArgument(
                 'username',
                 InputArgument::REQUIRED,
-                'User from which to export entries'
+                'User from which to export entries',
             )
             ->addArgument(
                 'filepath',
                 InputArgument::OPTIONAL,
-                'Path of the exported file'
+                'Path of the exported file',
             )
         ;
     }

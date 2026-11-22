@@ -32,7 +32,7 @@ class ShowUserCommand extends Command
             ->addArgument(
                 'username',
                 InputArgument::REQUIRED,
-                'User to show details for'
+                'User to show details for',
             );
     }
 

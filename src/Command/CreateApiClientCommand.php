@@ -35,28 +35,28 @@ class CreateApiClientCommand extends Command
             ->addArgument(
                 'username',
                 InputArgument::REQUIRED,
-                'User to create a client for'
+                'User to create a client for',
             )
             ->addOption(
                 'display-name',
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Display name of the client',
-                'Default client'
+                'Default client',
             )
             ->addOption(
                 'grant-types',
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Comma-separated list of allowed grant types (' . implode(', ', self::ALLOWED_GRANT_TYPES) . ')',
-                implode(',', self::ALLOWED_GRANT_TYPES)
+                implode(',', self::ALLOWED_GRANT_TYPES),
             )
             ->addOption(
                 'format',
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Output format (text, env, json)',
-                'text'
+                'text',
             );
     }
 
@@ -89,7 +89,7 @@ class CreateApiClientCommand extends Command
             $io->error(\sprintf(
                 'Invalid grant type(s): %s. Allowed values are: %s.',
                 implode(', ', $invalidGrantTypes),
-                implode(', ', self::ALLOWED_GRANT_TYPES)
+                implode(', ', self::ALLOWED_GRANT_TYPES),
             ));
 
             return 1;

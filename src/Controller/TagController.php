@@ -61,7 +61,7 @@ class TagController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->tagsAssigner->assignTagsToEntry(
                 $entry,
-                $form->get('label')->getData()
+                $form->get('label')->getData(),
             );
 
             $this->entityManager->persist($entry);
@@ -69,7 +69,7 @@ class TagController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'flashes.tag.notice.tag_added'
+                'flashes.tag.notice.tag_added',
             );
 
             return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
@@ -148,7 +148,7 @@ class TagController extends AbstractController
 
         $entriesByTag = $entryRepository->findAllByTagId(
             $this->getUser()->getId(),
-            $tag->getId()
+            $tag->getId(),
         );
 
         $pagerAdapter = new ArrayAdapter($entriesByTag);
@@ -206,14 +206,14 @@ class TagController extends AbstractController
 
             $entries = $entryRepository->findAllByTagId(
                 $this->getUser()->getId(),
-                $tag->getId()
+                $tag->getId(),
             );
 
             foreach ($entries as $entry) {
                 $this->tagsAssigner->assignTagsToEntry(
                     $entry,
                     $newTag->getLabel(),
-                    [$newTag]
+                    [$newTag],
                 );
                 $entry->removeTag($tag);
             }
@@ -222,7 +222,7 @@ class TagController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'flashes.tag.notice.tag_renamed'
+                'flashes.tag.notice.tag_renamed',
             );
         }
 
@@ -252,7 +252,7 @@ class TagController extends AbstractController
         foreach ($entries as $entry) {
             $this->tagsAssigner->assignTagsToEntry(
                 $entry,
-                $filter
+                $filter,
             );
 
             // check to avoid duplicate tags creation

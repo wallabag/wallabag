@@ -148,7 +148,7 @@ class AppKernelDeprecationTest extends KernelTestCase
             self::bootKernel();
             self::assertSame(
                 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2',
-                self::getContainer()->getParameter('env(WALLABAG_USER_AGENT)')
+                self::getContainer()->getParameter('env(WALLABAG_USER_AGENT)'),
             );
         } finally {
             self::ensureKernelShutdown();
@@ -300,7 +300,7 @@ parameters:
     redis_password: ~
 YAML,
             str_replace("'", "''", $sqlitePath),
-            $includeUserAgent ? "    wallabag_user_agent: 'Legacy test user agent'" : ''
+            $includeUserAgent ? "    wallabag_user_agent: 'Legacy test user agent'" : '',
         );
     }
 }

@@ -105,8 +105,8 @@ class EntryRepository extends ServiceEntityRepository
                         ->createQueryBuilder('e2')
                         ->select('e2.domainName')
                         ->where('e2.id = :entryId')->setParameter('entryId', $entryId)
-                        ->getDQL()
-                )
+                        ->getDQL(),
+                ),
             );
     }
 
@@ -327,7 +327,7 @@ class EntryRepository extends ServiceEntityRepository
                         ->select($entryAlias . '.id')
                         ->leftJoin($entryAlias . '.tags', $tagAlias)
                         ->where($tagAlias . '.label = :label' . $i)
-                        ->getDQL()
+                        ->getDQL(),
                 ));
 
                 // bound parameter to the main query builder
@@ -503,7 +503,7 @@ class EntryRepository extends ServiceEntityRepository
     {
         return $this->findByHashedUrlAndUserId(
             UrlHasher::hashUrl($url),
-            $userId
+            $userId,
         );
     }
 
@@ -566,8 +566,8 @@ class EntryRepository extends ServiceEntityRepository
                     ->andWhere(
                         $qb->expr()->orX(
                             $qb->expr()->in('e.hashedUrl', $hashedUrls),
-                            $qb->expr()->in('e.hashedGivenUrl', $hashedUrls)
-                        )
+                            $qb->expr()->in('e.hashedGivenUrl', $hashedUrls),
+                        ),
                     )
                     ->getQuery()
                     ->getResult();

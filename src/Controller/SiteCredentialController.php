@@ -72,7 +72,7 @@ class SiteCredentialController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                $this->translator->trans('flashes.site_credential.notice.added', ['%host%' => $credential->getHost()])
+                $this->translator->trans('flashes.site_credential.notice.added', ['%host%' => $credential->getHost()]),
             );
 
             return $this->redirectToRoute('site_credentials_index');
@@ -108,7 +108,7 @@ class SiteCredentialController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                $this->translator->trans('flashes.site_credential.notice.updated', ['%host%' => $siteCredential->getHost()])
+                $this->translator->trans('flashes.site_credential.notice.updated', ['%host%' => $siteCredential->getHost()]),
             );
 
             return $this->redirectToRoute('site_credentials_index');
@@ -138,7 +138,7 @@ class SiteCredentialController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash(
                 'notice',
-                $this->translator->trans('flashes.site_credential.notice.deleted', ['%host%' => $siteCredential->getHost()])
+                $this->translator->trans('flashes.site_credential.notice.deleted', ['%host%' => $siteCredential->getHost()]),
             );
 
             $this->entityManager->remove($siteCredential);

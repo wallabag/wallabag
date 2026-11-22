@@ -36,7 +36,7 @@ final class Version20230728093912 extends WallabagMigration
             [
                 'isNotParsed' => true,
                 'content' => str_replace("\n", '', addslashes($this->fetchingErrorMessage)) . '%',
-            ]
+            ],
         );
     }
 

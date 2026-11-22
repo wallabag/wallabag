@@ -86,7 +86,7 @@ class ContentProxy
                 if ($title) {
                     $fetchedContent['title'] = $this->sanitizeContentTitle(
                         $title,
-                        $fetchedContent['headers']['content-type'] ?? ''
+                        $fetchedContent['headers']['content-type'] ?? '',
                     );
                 }
 
@@ -123,7 +123,7 @@ class ContentProxy
 
         $errors = $this->validator->validate(
             $value,
-            new LocaleConstraint(['canonicalize' => true])
+            new LocaleConstraint(['canonicalize' => true]),
         );
 
         if (0 === \count($errors)) {
@@ -146,7 +146,7 @@ class ContentProxy
     {
         $errors = $this->validator->validate(
             $value,
-            new UrlConstraint()
+            new UrlConstraint(),
         );
 
         if (0 === \count($errors)) {

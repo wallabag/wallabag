@@ -24,7 +24,7 @@ class Version20170719231144 extends WallabagMigration
             'SELECT LOWER(label) AS lower_label
             FROM   ' . $this->getTable('tag') . '
             GROUP BY LOWER(label)
-            HAVING COUNT(*) > 1'
+            HAVING COUNT(*) > 1',
         );
 
         foreach ($dupTags->fetchAllAssociative() as $duplicates) {
@@ -38,7 +38,7 @@ class Version20170719231144 extends WallabagMigration
                 ORDER BY id ASC',
                 [
                     'label' => $label,
-                ]
+                ],
             );
 
             $first = true;
@@ -66,19 +66,19 @@ class Version20170719231144 extends WallabagMigration
                            SELECT entry_id
                            FROM (SELECT * FROM ' . $this->getTable('entry_tag') . ') AS _entry_tag
                            WHERE tag_id = ' . $newId . '
-                        )'
+                        )',
                 );
 
                 // Delete links to unused tags
                 $this->addSql(
                     'DELETE FROM ' . $this->getTable('entry_tag') . '
-                    WHERE tag_id IN (' . implode(',', $ids) . ')'
+                    WHERE tag_id IN (' . implode(',', $ids) . ')',
                 );
 
                 // Delete unused tags
                 $this->addSql(
                     'DELETE FROM ' . $this->getTable('tag') . '
-                    WHERE id IN (' . implode(',', $ids) . ')'
+                    WHERE id IN (' . implode(',', $ids) . ')',
                 );
             }
         }
@@ -86,7 +86,7 @@ class Version20170719231144 extends WallabagMigration
         // Iterate over all tags to lowercase them
         $this->addSql(
             'UPDATE ' . $this->getTable('tag') . '
-            SET label = LOWER(label)'
+            SET label = LOWER(label)',
         );
     }
 

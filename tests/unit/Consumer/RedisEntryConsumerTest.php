@@ -132,7 +132,7 @@ JSON;
             $import,
             $dispatcher,
             new TokenStorage(),
-            new HttpBrowser()
+            new HttpBrowser(),
         );
 
         $res = $consumer->manage($body);
@@ -188,7 +188,7 @@ JSON;
             $import,
             $dispatcher,
             new TokenStorage(),
-            new HttpBrowser()
+            new HttpBrowser(),
         );
 
         $res = $consumer->manage($body);
@@ -254,7 +254,7 @@ JSON;
             $import,
             $dispatcher,
             new TokenStorage(),
-            new HttpBrowser()
+            new HttpBrowser(),
         );
 
         $res = $consumer->manage($body);

@@ -120,7 +120,7 @@ class ElcuratorControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://devblog.lexik.fr/git/qualite-de-code-integration-de-php-git-hooks-dans-symfony2-2842',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertInstanceOf(Entry::class, $content);

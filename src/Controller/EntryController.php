@@ -90,7 +90,7 @@ class EntryController extends AbstractController
                         $v = trim($v);
 
                         return '' !== $v;
-                    }
+                    },
                 );
 
                 foreach ($labels as $label) {
@@ -201,7 +201,7 @@ class EntryController extends AbstractController
             if (false !== $existingEntry) {
                 $this->addFlash(
                     'notice',
-                    $translator->trans('flashes.entry.notice.entry_already_saved', ['%date%' => $existingEntry->getCreatedAt()->format('d-m-Y')])
+                    $translator->trans('flashes.entry.notice.entry_already_saved', ['%date%' => $existingEntry->getCreatedAt()->format('d-m-Y')]),
                 );
 
                 return $this->redirect($this->generateUrl('view', ['id' => $existingEntry->getId()]));
@@ -277,7 +277,7 @@ class EntryController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'flashes.entry.notice.entry_updated'
+                'flashes.entry.notice.entry_updated',
             );
 
             return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
@@ -409,7 +409,7 @@ class EntryController extends AbstractController
     {
         return $this->render(
             'Entry/entry.html.twig',
-            ['entry' => $entry]
+            ['entry' => $entry],
         );
     }
 
@@ -469,7 +469,7 @@ class EntryController extends AbstractController
 
         $this->addFlash(
             'notice',
-            $message
+            $message,
         );
 
         $redirectUrl = $this->redirectHelper->to($request->query->get('redirect'));
@@ -502,7 +502,7 @@ class EntryController extends AbstractController
 
         $this->addFlash(
             'notice',
-            $message
+            $message,
         );
 
         $redirectUrl = $this->redirectHelper->to($request->query->get('redirect'));
@@ -527,7 +527,7 @@ class EntryController extends AbstractController
         // to avoid redirecting to the deleted entry. Ugh.
         $url = $this->generateUrl(
             'view',
-            ['id' => $entry->getId()]
+            ['id' => $entry->getId()],
         );
 
         // entry deleted, dispatch event about it!
@@ -538,7 +538,7 @@ class EntryController extends AbstractController
 
         $this->addFlash(
             'notice',
-            'flashes.entry.notice.entry_deleted'
+            'flashes.entry.notice.entry_deleted',
         );
 
         // don't redirect user to the deleted entry (check that the referer doesn't end with the same url)
@@ -618,7 +618,7 @@ class EntryController extends AbstractController
 
         return $this->render(
             'Entry/share.html.twig',
-            ['entry' => $entry]
+            ['entry' => $entry],
         );
     }
 
@@ -717,7 +717,7 @@ class EntryController extends AbstractController
                 'currentPage' => $page,
                 'searchTerm' => $searchTerm,
                 'isFiltered' => $form->isSubmitted(),
-            ]
+            ],
         );
     }
 

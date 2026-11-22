@@ -168,7 +168,7 @@ class ExportControllerTest extends WallabagTestCase
         $baseUrl = $_ENV['WALLABAG_BASE_URL'];
         $files = $this->exportToEpub(
             '<link href="' . $secretFilename . '"/><img src="' . $imageFilename . '"/><img src="' . $baseUrl . '/assets/images/../../img/appicon/apple-touch-icon-152.png"/>',
-            $imageFilename
+            $imageFilename,
         );
 
         unlink($secretFilename);
@@ -495,7 +495,7 @@ class ExportControllerTest extends WallabagTestCase
         $content = json_decode((string) $client->getResponse()->getContent(), true);
         $this->assertEqualsCanonicalizing(
             $sameDomainEntryIds,
-            array_column($content, 'id')
+            array_column($content, 'id'),
         );
         $this->assertNotContains($otherDomainEntryId, array_column($content, 'id'));
 
@@ -554,7 +554,7 @@ class ExportControllerTest extends WallabagTestCase
         $content = json_decode((string) $client->getResponse()->getContent(), true);
         $this->assertEqualsCanonicalizing(
             array_map(static fn (string $key): int => $entryIds[$key], $expectedKeys),
-            array_column($content, 'id')
+            array_column($content, 'id'),
         );
 
         $cleanupEm = $client->getContainer()->get(EntityManagerInterface::class);

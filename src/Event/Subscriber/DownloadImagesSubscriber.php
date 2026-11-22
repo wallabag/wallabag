@@ -88,7 +88,7 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
         return $this->downloadImages->processHtml(
             $entry->getId(),
             $entry->getContent(),
-            $entry->getUrl()
+            $entry->getUrl(),
         );
     }
 
@@ -104,7 +104,7 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
         return $this->downloadImages->processSingleImage(
             $entry->getId(),
             $entry->getPreviewPicture(),
-            $entry->getUrl()
+            $entry->getUrl(),
         );
     }
 }

@@ -117,7 +117,7 @@ class WallabagV1ControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'http://www.framablog.org/index.php/post/2014/02/05/Framabag-service-libre-gratuit-interview-developpeur',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
@@ -162,7 +162,7 @@ class WallabagV1ControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'http://gilbert.pellegrom.me/recreating-the-square-slider',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertInstanceOf(Entry::class, $content1);
@@ -173,7 +173,7 @@ class WallabagV1ControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.wallabag.org/features/',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertInstanceOf(Entry::class, $content2);

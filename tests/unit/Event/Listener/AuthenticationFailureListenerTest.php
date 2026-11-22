@@ -36,7 +36,7 @@ class AuthenticationFailureListenerTest extends TestCase
 
         $this->listener = new AuthenticationFailureListener(
             $this->requestStack,
-            $logger
+            $logger,
         );
 
         $this->dispatcher = new EventDispatcher();

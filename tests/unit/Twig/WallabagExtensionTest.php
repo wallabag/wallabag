@@ -68,7 +68,7 @@ class WallabagExtensionTest extends TestCase
     {
         $functionNames = array_map(
             static fn (TwigFunction $function): string => $function->getName(),
-            $this->createExtension()->getFunctions()
+            $this->createExtension()->getFunctions(),
         );
 
         $this->assertContains('generate_article_reporting_url', $functionNames);
@@ -84,7 +84,7 @@ class WallabagExtensionTest extends TestCase
 
         $this->assertSame(
             $expectedUrl,
-            $this->createExtension($reportingUrl)->generateArticleReportingUrl($entry)
+            $this->createExtension($reportingUrl)->generateArticleReportingUrl($entry),
         );
     }
 

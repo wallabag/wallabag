@@ -348,7 +348,7 @@ class EntryRestController extends WallabagRestController
                 $domainName,
                 $isNotParsed,
                 $httpStatus,
-                $hasAnnotations
+                $hasAnnotations,
             );
         } catch (\Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
@@ -376,8 +376,8 @@ class EntryRestController extends WallabagRestController
                     'detail' => $detail,
                     'annotations' => $hasAnnotations,
                 ],
-                true
-            )
+                true,
+            ),
         );
 
         return $this->sendResponse($paginatedCollection);
@@ -536,7 +536,7 @@ class EntryRestController extends WallabagRestController
         foreach ($urls as $key => $url) {
             $entry = $entryRepository->findByUrlAndUserId(
                 $url,
-                $this->getUser()->getId()
+                $this->getUser()->getId(),
             );
 
             $results[$key]['url'] = $url;
@@ -616,7 +616,7 @@ class EntryRestController extends WallabagRestController
         foreach ($urls as $key => $url) {
             $entry = $entryRepository->findByUrlAndUserId(
                 $url,
-                $this->getUser()->getId()
+                $this->getUser()->getId(),
             );
 
             $results[$key]['url'] = $url;
@@ -791,7 +791,7 @@ class EntryRestController extends WallabagRestController
 
         $entry = $entryRepository->findByUrlAndUserId(
             $url,
-            $this->getUser()->getId()
+            $this->getUser()->getId(),
         );
 
         if (false === $entry) {
@@ -814,7 +814,7 @@ class EntryRestController extends WallabagRestController
                     // faking the open graph preview picture
                     'image' => !empty($data['picture']) ? $data['picture'] : $entry->getPreviewPicture(),
                     'authors' => isset($data['authors']) && \is_string($data['authors']) ? explode(',', $data['authors']) : $entry->getPublishedBy(),
-                ]
+                ],
             );
         } catch (\Exception $e) {
             $logger->error('Error while saving an entry', [
@@ -966,7 +966,7 @@ class EntryRestController extends WallabagRestController
                     [
                         'html' => $data['content'],
                     ],
-                    true
+                    true,
                 );
             } catch (\Exception $e) {
                 $logger->error('Error while saving an entry', [
@@ -1267,7 +1267,7 @@ class EntryRestController extends WallabagRestController
         foreach ($list as $key => $element) {
             $entry = $entryRepository->findByUrlAndUserId(
                 $element->url,
-                $this->getUser()->getId()
+                $this->getUser()->getId(),
             );
 
             $results[$key]['url'] = $element->url;
@@ -1333,7 +1333,7 @@ class EntryRestController extends WallabagRestController
         foreach ($list as $key => $element) {
             $entry = $entryRepository->findByUrlAndUserId(
                 $element->url,
-                $this->getUser()->getId()
+                $this->getUser()->getId(),
             );
 
             $results[$key]['url'] = $element->url;

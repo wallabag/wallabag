@@ -65,7 +65,7 @@ class UrlCommand extends Command
         $token = new UsernamePasswordToken(
             $entityUser,
             'main',
-            $entityUser->getRoles()
+            $entityUser->getRoles(),
         );
 
         $this->tokenStorage->setToken($token);
@@ -106,7 +106,7 @@ class UrlCommand extends Command
             $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 $tags,
-                $this->entityManager->getUnitOfWork()->getScheduledEntityInsertions()
+                $this->entityManager->getUnitOfWork()->getScheduledEntityInsertions(),
             );
         }
 

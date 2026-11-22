@@ -51,6 +51,10 @@ return $config
         // 'psr_autoloading' => true,
         'strict_comparison' => true,
         'strict_param' => true,
+        'trailing_comma_in_multiline' => [
+            'after_heredoc' => true,
+            'elements' => ['arguments', 'array_destructuring', 'arrays', 'match', 'parameters'],
+        ],
         'concat_space' => [
             'spacing' => 'one',
         ],
@@ -72,7 +76,7 @@ return $config
                 __DIR__ . '/web/app.php',
                 __DIR__ . '/web/app_dev.php',
                 __DIR__ . '/web/index.php',
-            ])
+            ]),
     )
     ->setCacheFile('.php-cs-fixer.cache')
 ;

@@ -34,7 +34,7 @@ class FeedSubscriptionController extends AbstractController
         return $this->render('FeedSubscription/index.html.twig', [
             'feeds' => $this->entityManager->getRepository(FeedUrl::class)->findBy(
                 ['user' => $user],
-                ['id' => 'ASC']
+                ['id' => 'ASC'],
             ),
             'pendingFeeds' => array_fill_keys($items->findPendingFeedIds($user), true),
         ]);

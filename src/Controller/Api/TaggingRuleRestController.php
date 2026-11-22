@@ -33,7 +33,7 @@ class TaggingRuleRestController extends WallabagRestController
         $data = SerializerBuilder::create()->build()->serialize(
             $this->getUser()->getConfig()->getTaggingRules(),
             'json',
-            SerializationContext::create()->setGroups(['export_tagging_rule'])
+            SerializationContext::create()->setGroups(['export_tagging_rule']),
         );
 
         return new Response(
@@ -43,7 +43,7 @@ class TaggingRuleRestController extends WallabagRestController
                 'Content-type' => 'application/json',
                 'Content-Disposition' => 'attachment; filename="tagging_rules_' . $this->getUser()->getUsername() . '.json"',
                 'Content-Transfer-Encoding' => 'UTF-8',
-            ]
+            ],
         );
     }
 }

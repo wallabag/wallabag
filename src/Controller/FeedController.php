@@ -108,20 +108,20 @@ class FeedController extends AbstractController
                 'token' => $user->getConfig()->getFeedToken(),
                 'slug' => $tag->getSlug(),
             ],
-            UrlGeneratorInterface::ABSOLUTE_URL
+            UrlGeneratorInterface::ABSOLUTE_URL,
         );
 
         $entriesByTag = $this->entryRepository->findAllByTagId(
             $user->getId(),
             $tag->getId(),
-            $sorts[$sort]
+            $sorts[$sort],
         );
 
         $pagerAdapter = new ArrayAdapter($entriesByTag);
 
         $entries = $preparePagerForEntries->prepare(
             $pagerAdapter,
-            $user
+            $user,
         );
 
         $perPage = $user->getConfig()->getFeedLimit() ?: $this->feedLimit;
@@ -146,7 +146,7 @@ class FeedController extends AbstractController
                 'tag' => $tag->getSlug(),
                 'updated' => $this->prepareFeedUpdatedDate($entries, $sort),
             ],
-            new Response('', 200, ['Content-Type' => 'application/atom+xml'])
+            new Response('', 200, ['Content-Type' => 'application/atom+xml']),
         );
     }
 
@@ -198,7 +198,7 @@ class FeedController extends AbstractController
                 'username' => $user->getUsername(),
                 'token' => $user->getConfig()->getFeedToken(),
             ],
-            UrlGeneratorInterface::ABSOLUTE_URL
+            UrlGeneratorInterface::ABSOLUTE_URL,
         );
 
         try {

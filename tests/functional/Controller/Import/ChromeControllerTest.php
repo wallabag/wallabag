@@ -119,7 +119,7 @@ class ChromeControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.20minutes.fr/sport/3256363-20220321-tournoi-vi-nations-trophee-gagne-xv-france-fini-fond-seine',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertInstanceOf(Entry::class, $content);

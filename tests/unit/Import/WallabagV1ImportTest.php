@@ -269,7 +269,7 @@ class WallabagV1ImportTest extends TestCase
             $dispatcher,
             $logger,
             $this->fetchingErrorMessageTitle,
-            $this->fetchingErrorMessage
+            $this->fetchingErrorMessage,
         );
 
         if (false === $unsetUser) {

@@ -63,7 +63,7 @@ class InstallCommand extends Command
                 'reset',
                 null,
                 InputOption::VALUE_NONE,
-                'Reset current database'
+                'Reset current database',
             )
         ;
     }
@@ -391,7 +391,7 @@ class InstallCommand extends Command
             [
                 '--no-debug' => true,
                 '--env' => $this->defaultInput->getOption('env') ?: 'dev',
-            ]
+            ],
         );
 
         if ($this->defaultInput->getOption('no-interaction')) {

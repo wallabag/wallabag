@@ -116,7 +116,7 @@ class ReadabilityControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.20minutes.fr/bordeaux/2120479-20170823-bordeaux-poche-chocolatine-association-traduit-etudiants-etrangers-mots-sud-ouest',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
@@ -161,7 +161,7 @@ class ReadabilityControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://blog.travis-ci.com/2016-07-28-what-we-learned-from-analyzing-2-million-travis-builds/',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertInstanceOf(Entry::class, $content1);
@@ -172,7 +172,7 @@ class ReadabilityControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://facebook.github.io/graphql/October2016/',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertInstanceOf(Entry::class, $content2);

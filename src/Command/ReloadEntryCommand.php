@@ -41,7 +41,7 @@ class ReloadEntryCommand extends Command
                 'only-not-parsed',
                 null,
                 InputOption::VALUE_NONE,
-                'Only reload entries which have `is_not_parsed` set to `true`'
+                'Only reload entries which have `is_not_parsed` set to `true`',
             );
     }
 
@@ -78,8 +78,8 @@ class ReloadEntryCommand extends Command
         $io->note(
             \sprintf(
                 "You're going to reload %s entries. Depending on the number of entry to reload, this could be a very long process.",
-                $nbEntries
-            )
+                $nbEntries,
+            ),
         );
 
         if (!$io->confirm('Are you sure you want to proceed?')) {

@@ -62,8 +62,8 @@ class ListUserCommand extends Command
                 '%s/%s%s user(s) displayed.',
                 \count($users),
                 $nbUsers,
-                null === $input->getArgument('search') ? '' : ' (filtered)'
-            )
+                null === $input->getArgument('search') ? '' : ' (filtered)',
+            ),
         );
 
         return 0;

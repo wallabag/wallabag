@@ -167,7 +167,7 @@ class LoginFormAuthenticatorTest extends TestCase
                     'password' => 'unkn0wn',
                     'security' => 'c506c1b8bc',
                     'action' => 'login_user',
-                ])
+                ]),
             )
         ;
 

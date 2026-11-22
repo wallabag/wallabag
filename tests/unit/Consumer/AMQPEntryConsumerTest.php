@@ -133,7 +133,7 @@ JSON;
             $import,
             $dispatcher,
             new TokenStorage(),
-            new HttpBrowser()
+            new HttpBrowser(),
         );
 
         $message = new AMQPMessage($body);
@@ -189,7 +189,7 @@ JSON;
             $import,
             $dispatcher,
             new TokenStorage(),
-            new HttpBrowser()
+            new HttpBrowser(),
         );
 
         $message = new AMQPMessage($body);
@@ -257,7 +257,7 @@ JSON;
             $import,
             $dispatcher,
             new TokenStorage(),
-            new HttpBrowser()
+            new HttpBrowser(),
         );
 
         $message = new AMQPMessage($body);

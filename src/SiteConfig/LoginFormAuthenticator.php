@@ -109,7 +109,7 @@ class LoginFormAuthenticator
                     substr((string) $fieldValue, 2),
                     [
                         'config' => $siteConfig,
-                    ]
+                    ],
                 );
             }
 

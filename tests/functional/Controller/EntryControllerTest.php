@@ -547,11 +547,11 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(1, $reportingLink);
         $this->assertSame(
             'mailto:siteconfig@wallabag.org?subject=Wrong%20display%20in%20wallabag&body=http%3A%2F%2Fexample.com%2Ffoo%3Fbar%3Dbaz%26qux%3Dquux',
-            $reportingLink->attr('href')
+            $reportingLink->attr('href'),
         );
         $this->assertStringContainsString(
             'href="mailto:siteconfig@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body=http%3A%2F%2Fexample.com%2Ffoo%3Fbar%3Dbaz%26qux%3Dquux"',
-            $client->getResponse()->getContent()
+            $client->getResponse()->getContent(),
         );
     }
 

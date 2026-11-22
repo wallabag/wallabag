@@ -50,7 +50,7 @@ class DeveloperController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                $translator->trans('flashes.developer.notice.client_created', ['%name%' => $client->getName()])
+                $translator->trans('flashes.developer.notice.client_created', ['%name%' => $client->getName()]),
             );
 
             return $this->render('Developer/client_parameters.html.twig', [
@@ -86,7 +86,7 @@ class DeveloperController extends AbstractController
 
         $this->addFlash(
             'notice',
-            $translator->trans('flashes.developer.notice.client_deleted', ['%name%' => $client->getName()])
+            $translator->trans('flashes.developer.notice.client_deleted', ['%name%' => $client->getName()]),
         );
 
         return $this->redirect($this->generateUrl('developer'));

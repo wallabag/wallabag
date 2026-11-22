@@ -187,7 +187,7 @@ class UserRestController extends WallabagRestController
         $json = $this->serializer->serialize(
             $user,
             'json',
-            SerializationContext::create()->setGroups([$group])
+            SerializationContext::create()->setGroups([$group]),
         );
 
         return (new JsonResponse())

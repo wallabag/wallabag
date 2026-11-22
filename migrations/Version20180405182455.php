@@ -30,7 +30,7 @@ class Version20180405182455 extends WallabagMigration
             'UPDATE ' . $this->getTable('entry') . ' SET archived_at = updated_at WHERE is_archived = :is_archived',
             [
                 'is_archived' => true,
-            ]
+            ],
         );
     }
 

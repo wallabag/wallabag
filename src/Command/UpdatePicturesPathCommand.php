@@ -30,7 +30,7 @@ class UpdatePicturesPathCommand extends Command
             ->addArgument(
                 'old-url',
                 InputArgument::REQUIRED,
-                'URL to replace'
+                'URL to replace',
             );
     }
 

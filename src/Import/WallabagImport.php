@@ -113,7 +113,7 @@ abstract class WallabagImport extends AbstractFileImport
             $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 $data['tags'],
-                $this->em->getUnitOfWork()->getScheduledEntityInsertions()
+                $this->em->getUnitOfWork()->getScheduledEntityInsertions(),
             );
         }
 

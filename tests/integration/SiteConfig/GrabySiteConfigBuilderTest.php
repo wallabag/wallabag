@@ -76,7 +76,7 @@ class GrabySiteConfigBuilderTest extends WallabagKernelTestCase
             $grabyConfigBuilderMock,
             $tokenStorage,
             static::getContainer()->get(SiteCredentialRepository::class),
-            $logger
+            $logger,
         );
 
         $config = $builder->buildForHost($host);

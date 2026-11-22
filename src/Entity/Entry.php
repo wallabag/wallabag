@@ -861,9 +861,9 @@ class Entry
             $publishedBy = array_values(array_filter(
                 array_map(
                     static fn ($author) => \is_scalar($author) ? trim((string) $author) : '',
-                    $publishedBy
+                    $publishedBy,
                 ),
-                static fn ($author) => '' !== $author
+                static fn ($author) => '' !== $author,
             ));
         }
 

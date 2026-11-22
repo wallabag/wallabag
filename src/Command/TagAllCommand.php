@@ -33,7 +33,7 @@ class TagAllCommand extends Command
             ->addArgument(
                 'username',
                 InputArgument::REQUIRED,
-                'User to tag entries for.'
+                'User to tag entries for.',
             )
         ;
     }
