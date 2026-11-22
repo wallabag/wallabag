@@ -97,7 +97,8 @@ class ImportCommand extends Command
         $token = new UsernamePasswordToken(
             $entityUser,
             'main',
-            $entityUser->getRoles());
+            $entityUser->getRoles()
+        );
 
         $this->tokenStorage->setToken($token);
         $user = $this->tokenStorage->getToken()->getUser();

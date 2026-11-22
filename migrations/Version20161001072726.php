@@ -27,8 +27,8 @@ class Version20161001072726 extends WallabagMigration
         // remove all FK from entry_tag
         switch (true) {
             case $platform instanceof MySQLPlatform:
-                $query = $this->connection->executeQuery("
-                    SELECT CONSTRAINT_NAME
+                $query = $this->connection->executeQuery(
+                    "SELECT CONSTRAINT_NAME
                     FROM information_schema.key_column_usage
                     WHERE TABLE_NAME = '" . $this->getTable('entry_tag', WallabagMigration::UN_ESCAPED_TABLE) . "' AND CONSTRAINT_NAME LIKE 'FK_%'
                     AND TABLE_SCHEMA = '" . $this->connection->getDatabase() . "'"
@@ -40,8 +40,8 @@ class Version20161001072726 extends WallabagMigration
                 break;
             case $platform instanceof PostgreSQLPlatform:
                 // http://dba.stackexchange.com/questions/36979/retrieving-all-pk-and-fk
-                $query = $this->connection->executeQuery("
-                    SELECT conrelid::regclass AS table_from
+                $query = $this->connection->executeQuery(
+                    "SELECT conrelid::regclass AS table_from
                           ,conname
                           ,pg_get_constraintdef(c.oid)
                     FROM   pg_constraint c
@@ -64,8 +64,8 @@ class Version20161001072726 extends WallabagMigration
 
         switch (true) {
             case $platform instanceof MySQLPlatform:
-                $query = $this->connection->executeQuery("
-                    SELECT CONSTRAINT_NAME
+                $query = $this->connection->executeQuery(
+                    "SELECT CONSTRAINT_NAME
                     FROM information_schema.key_column_usage
                     WHERE TABLE_NAME = '" . $this->getTable('annotation', WallabagMigration::UN_ESCAPED_TABLE) . "'
                     AND CONSTRAINT_NAME LIKE 'FK_%'
@@ -79,8 +79,8 @@ class Version20161001072726 extends WallabagMigration
                 break;
             case $platform instanceof PostgreSQLPlatform:
                 // http://dba.stackexchange.com/questions/36979/retrieving-all-pk-and-fk
-                $query = $this->connection->executeQuery("
-                    SELECT conrelid::regclass AS table_from
+                $query = $this->connection->executeQuery(
+                    "SELECT conrelid::regclass AS table_from
                           ,conname
                           ,pg_get_constraintdef(c.oid)
                     FROM   pg_constraint c

@@ -20,8 +20,8 @@ class Version20170719231144 extends WallabagMigration
         }
 
         // Find tags which need to be merged
-        $dupTags = $this->connection->executeQuery('
-            SELECT LOWER(label) AS lower_label
+        $dupTags = $this->connection->executeQuery(
+            'SELECT LOWER(label) AS lower_label
             FROM   ' . $this->getTable('tag') . '
             GROUP BY LOWER(label)
             HAVING COUNT(*) > 1'
@@ -31,8 +31,8 @@ class Version20170719231144 extends WallabagMigration
             $label = $duplicates['lower_label'];
 
             // Retrieve all duplicate tags for a given tag
-            $tags = $this->connection->executeQuery('
-                SELECT id
+            $tags = $this->connection->executeQuery(
+                'SELECT id
                 FROM   ' . $this->getTable('tag') . '
                 WHERE  LOWER(label) = :label
                 ORDER BY id ASC',
@@ -58,8 +58,8 @@ class Version20170719231144 extends WallabagMigration
             // Just in case...
             if (\count($ids) > 0) {
                 // Merge tags
-                $this->addSql('
-                    UPDATE ' . $this->getTable('entry_tag') . '
+                $this->addSql(
+                    'UPDATE ' . $this->getTable('entry_tag') . '
                     SET    tag_id = ' . $newId . '
                     WHERE  tag_id IN (' . implode(',', $ids) . ')
                         AND entry_id NOT IN (
@@ -70,22 +70,22 @@ class Version20170719231144 extends WallabagMigration
                 );
 
                 // Delete links to unused tags
-                $this->addSql('
-                    DELETE FROM ' . $this->getTable('entry_tag') . '
+                $this->addSql(
+                    'DELETE FROM ' . $this->getTable('entry_tag') . '
                     WHERE tag_id IN (' . implode(',', $ids) . ')'
                 );
 
                 // Delete unused tags
-                $this->addSql('
-                    DELETE FROM ' . $this->getTable('tag') . '
+                $this->addSql(
+                    'DELETE FROM ' . $this->getTable('tag') . '
                     WHERE id IN (' . implode(',', $ids) . ')'
                 );
             }
         }
 
         // Iterate over all tags to lowercase them
-        $this->addSql('
-            UPDATE ' . $this->getTable('tag') . '
+        $this->addSql(
+            'UPDATE ' . $this->getTable('tag') . '
             SET label = LOWER(label)'
         );
     }

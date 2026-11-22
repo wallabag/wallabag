@@ -22,6 +22,10 @@ return $config
             'mute_deprecation_error' => false,
         ],
         'heredoc_to_nowdoc' => true,
+        'method_argument_space' => [
+            'after_heredoc' => true,
+            'on_multiline' => 'ensure_fully_multiline',
+        ],
         'no_extra_blank_lines' => [
             'tokens' => [
                 'break',

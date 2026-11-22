@@ -84,12 +84,14 @@ class EntryController extends AbstractController
             $action = 'tag';
 
             if (isset($values['tags'])) {
-                $labels = array_filter(explode(',', (string) $values['tags']),
+                $labels = array_filter(
+                    explode(',', (string) $values['tags']),
                     static function ($v) {
                         $v = trim($v);
 
                         return '' !== $v;
-                    });
+                    }
+                );
 
                 foreach ($labels as $label) {
                     $remove = false;
@@ -708,7 +710,8 @@ class EntryController extends AbstractController
         }
 
         return $this->render(
-            'Entry/entries.html.twig', [
+            'Entry/entries.html.twig',
+            [
                 'form' => $form->createView(),
                 'entries' => $entries,
                 'currentPage' => $page,

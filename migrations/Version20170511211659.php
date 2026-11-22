@@ -24,14 +24,16 @@ class Version20170511211659 extends WallabagMigration
                 $userTableName = $this->getTable('user', true);
                 $entryTableName = $this->getTable('entry', true);
 
-                $this->addSql(<<<EOD
+                $this->addSql(
+                    <<<EOD
 CREATE TEMPORARY TABLE __temp__wallabag_annotation AS
     SELECT id, user_id, entry_id, text, created_at, updated_at, quote, ranges
     FROM {$annotationTableName}
 EOD
                 );
                 $this->addSql('DROP TABLE ' . $annotationTableName);
-                $this->addSql(<<<EOD
+                $this->addSql(
+                    <<<EOD
 CREATE TABLE {$annotationTableName}
 (
     id INTEGER PRIMARY KEY NOT NULL,
@@ -50,7 +52,8 @@ CREATE INDEX IDX_A7AED006BA364942 ON {$annotationTableName} (entry_id);
 EOD
                 );
 
-                $this->addSql(<<<EOD
+                $this->addSql(
+                    <<<EOD
 INSERT INTO {$annotationTableName} (id, user_id, entry_id, text, created_at, updated_at, quote, ranges)
 SELECT id, user_id, entry_id, text, created_at, updated_at, quote, ranges
 FROM __temp__wallabag_annotation;
