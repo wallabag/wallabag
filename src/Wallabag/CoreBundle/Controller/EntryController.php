@@ -700,6 +700,8 @@ class EntryController extends AbstractController
             }
         }
 
+        $this->entryRepository->preloadTagsAndAnnotations($entries->getCurrentPageResults(), ['tags']);
+
         return $this->render(
             '@WallabagCore/Entry/entries.html.twig', [
                 'form' => $form->createView(),

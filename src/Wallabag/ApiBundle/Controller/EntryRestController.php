@@ -328,6 +328,8 @@ class EntryRestController extends WallabagRestController
         $pager->setMaxPerPage($perPage);
         $pager->setCurrentPage($page);
 
+        $entryRepository->preloadTagsAndAnnotations($pager->getCurrentPageResults());
+
         $pagerfantaFactory = new PagerfantaFactory('page', 'perPage');
         $paginatedCollection = $pagerfantaFactory->createRepresentation(
             $pager,
