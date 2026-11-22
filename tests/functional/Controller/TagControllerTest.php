@@ -115,6 +115,7 @@ class TagControllerTest extends WallabagTestCase
             ->find($entry->getId());
 
         $tags = $newEntry->getTags()->toArray();
+
         foreach ($tags as $key => $tag) {
             $tags[$key] = $tag->getLabel();
         }
@@ -302,11 +303,13 @@ class TagControllerTest extends WallabagTestCase
         $tags = [];
 
         $tagsFromEntry = $freshEntry->getTags()->toArray();
+
         foreach ($tagsFromEntry as $key => $item) {
             $tags[$key] = $item->getLabel();
         }
 
         $tagsFromEntry2 = $freshEntry2->getTags()->toArray();
+
         foreach ($tagsFromEntry2 as $key => $item) {
             $tags[$key] = $item->getLabel();
         }
@@ -362,6 +365,7 @@ class TagControllerTest extends WallabagTestCase
         $tags = [];
 
         $tagsFromEntry = $freshEntry->getTags()->toArray();
+
         foreach ($tagsFromEntry as $key => $item) {
             $tags[$key] = $item->getLabel();
         }
@@ -418,6 +422,7 @@ class TagControllerTest extends WallabagTestCase
         $tags = [];
 
         $tagsFromEntry = $freshEntry->getTags()->toArray();
+
         foreach ($tagsFromEntry as $key => $item) {
             $tags[$key] = $item->getLabel();
         }
@@ -546,6 +551,7 @@ class TagControllerTest extends WallabagTestCase
             ->find($entry->getId());
 
         $tags = $newEntry->getTags()->toArray();
+
         foreach ($tags as $key => $tag) {
             $tags[$key] = $tag->getLabel();
         }

@@ -187,6 +187,7 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         $refresh = '/atom/fetch/' . $feed->getId();
         $client->request('GET', $refresh);
         self::assertSame(405, $client->getResponse()->getStatusCode());
+
         foreach ([[], ['token' => 'invalid'], ['token' => ['unexpected']]] as $post) {
             $client->request('POST', $refresh, $post);
             self::assertSame(400, $client->getResponse()->getStatusCode());
@@ -314,6 +315,7 @@ class FeedSubscriptionControllerTest extends WallabagTestCase
         $em->clear();
         $history = $em->getRepository(FeedItem::class)->findBy(['feed' => $feed], ['id' => 'ASC']);
         self::assertSame([$first->getUrl(), $second->getUrl()], array_map(static fn (FeedItem $item): string => $item->getUrl(), $history));
+
         foreach ($history as $item) {
             self::assertTrue($item->isTrashed());
             self::assertSame($publishedAt->getTimestamp(), $item->getPublishedAt()?->getTimestamp());

@@ -117,6 +117,7 @@ class EntriesExport
         $this->author = $this->entries[0]->getDomainName();
 
         $publishedBy = $this->entries[0]->getPublishedBy();
+
         if (!empty($publishedBy)) {
             $this->author = implode(', ', $publishedBy);
         }
@@ -134,6 +135,7 @@ class EntriesExport
     public function exportAs($format)
     {
         $functionName = 'produce' . ucfirst($format);
+
         if (method_exists($this, $functionName)) {
             return $this->$functionName();
         }
@@ -207,6 +209,7 @@ class EntriesExport
              * Set if there's only one entry in the given set
              */
             $coverImage = 1 === $entryCount ? $this->imageLocator->locate($entry->getPreviewPicture()) : null;
+
             if (null !== $coverImage) {
                 $book->setCoverImage('cover.' . $coverImage['extension'], file_get_contents($coverImage['path']), $coverImage['mimetype']);
             }
@@ -218,12 +221,14 @@ class EntriesExport
 
             $publishedBy = $entry->getPublishedBy();
             $authors = $this->translator->trans('export.unknown');
+
             if (!empty($publishedBy)) {
                 $authors = implode(',', $publishedBy);
             }
 
             $publishedAt = $entry->getPublishedAt();
             $publishedDate = $this->translator->trans('export.unknown');
+
             if (!empty($publishedAt)) {
                 $publishedDate = $entry->getPublishedAt()->format('Y-m-d');
             }
@@ -297,6 +302,7 @@ class EntriesExport
 
             $publishedBy = $entry->getPublishedBy();
             $authors = $this->translator->trans('export.unknown');
+
             if (!empty($publishedBy)) {
                 $authors = implode(',', $publishedBy);
             }
@@ -430,6 +436,7 @@ class EntriesExport
     {
         $content = '';
         $bar = str_repeat('=', 100);
+
         foreach ($this->entries as $entry) {
             $content .= "\n\n" . $bar . "\n\n" . $entry->getTitle() . "\n\n" . $bar . "\n\n";
             $html = new Html2Text($entry->getContent(), ['do_links' => 'none', 'width' => 100]);
@@ -455,6 +462,7 @@ class EntriesExport
         $content = '';
         $converter = new HtmlConverter();
         $converter->getConfig()->setOption('strip_tags', true);
+
         foreach ($this->entries as $entry) {
             $content .= $converter->convert('<h1>' . $entry->getTitle() . '</h1>' . $entry->getContent());
         }

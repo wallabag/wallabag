@@ -1734,6 +1734,7 @@ class EntryControllerTest extends WallabagTestCase
         $entry = new Entry($user);
         $entry->setUrl('http://0.0.0.0/search-in-annotations');
         $entry->setTitle('An entry without the term');
+
         foreach (['search-tag-1', 'search-tag-2'] as $label) {
             $tag = (new Tag())->setLabel($label);
             $this->getEntityManager()->persist($tag);

@@ -152,6 +152,7 @@ class HostnameDenyListHttpClientTest extends TestCase
         $client = new HostnameDenyListHttpClient(new NoPrivateNetworkHttpClient($transport), new HostnameDenyList(['blocked.example']));
 
         $response = $client->request('GET', 'https://allowed.example/start', ['resolve' => ['allowed.example' => '8.8.8.8']]);
+
         try {
             $response->getStatusCode();
             $this->fail('The redirect destination should be blocked.');
@@ -222,6 +223,7 @@ class HostnameDenyListHttpClientTest extends TestCase
         ]);
         $client = new HostnameDenyListHttpClient($innerClient, new HostnameDenyList(['blocked.example']));
         $options = ['base_uri' => 'https://allowed.example', 'query' => ['source' => 'request', 'extra' => 'initial']];
+
         if ($useDefaults) {
             $client = $client->withOptions($options);
             $options = [];
@@ -392,6 +394,7 @@ class HostnameDenyListHttpClientTest extends TestCase
         };
 
         $response = $client->request('POST', 'https://allowed.example/start', ['body' => $body]);
+
         try {
             $response->getContent();
             $this->fail('The body cannot be replayed.');

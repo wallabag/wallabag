@@ -156,6 +156,7 @@ class FeedController extends AbstractController
 
         if (isset($currentPageResults[0])) {
             $firstEntry = $currentPageResults[0];
+
             if ('created' === $sort) {
                 return $firstEntry->getCreatedAt();
             }

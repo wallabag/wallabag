@@ -52,6 +52,7 @@ class OpdsController extends AbstractController
         $token = $user->getConfig()->getFeedToken();
 
         $shelves = [];
+
         foreach (self::SHELVES as $type) {
             $shelves[] = [
                 'type' => $type,

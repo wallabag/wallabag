@@ -57,6 +57,7 @@ class CleanDownloadedImagesCommand extends Command
             ->in($baseFolder);
 
         $existingPaths = [];
+
         foreach ($finder as $file) {
             $existingPaths[] = $file->getFilename();
         }
@@ -69,6 +70,7 @@ class CleanDownloadedImagesCommand extends Command
 
         // retrieve _valid_ folders from existing entries
         $validPaths = [];
+
         foreach ($entries as $entry) {
             $path = $this->downloadImages->getRelativePath($entry['id']);
 

@@ -58,6 +58,7 @@ class PocketCsvImport extends AbstractFileImport
         $columns = ['title' => 0, 'url' => 1, 'time_added' => 2, 'tags' => 3, 'status' => 4];
         $firstRow = true;
         $handle = fopen($this->filepath, 'r');
+
         while (false !== ($data = fgetcsv($handle, 10240, ',', '"', ''))) {
             if ($firstRow) {
                 $firstRow = false;

@@ -64,6 +64,7 @@ class TagRepository extends ServiceEntityRepository
             ->getArrayResult();
 
         $tags = [];
+
         foreach ($ids as $id) {
             $tags[] = $this->find($id);
         }
@@ -128,6 +129,7 @@ class TagRepository extends ServiceEntityRepository
             ->getArrayResult();
 
         $tags = [];
+
         foreach ($ids as $id) {
             $tags[] = $this->find($id);
         }
@@ -160,6 +162,7 @@ class TagRepository extends ServiceEntityRepository
             ->getArrayResult();
 
         $tags = [];
+
         foreach ($ids as $id) {
             $tags[] = $this->find($id);
         }

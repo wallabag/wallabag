@@ -42,13 +42,16 @@ class UpdatePicturesPathCommand extends Command
         $query = $this->entryRepository->createQueryBuilder('e')->getQuery();
         $io->text('Retrieve existing entries');
         $i = 1;
+
         foreach ($query->toIterable() as $entry) {
             $content = $entry->getContent();
+
             if (null !== $content) {
                 $entry->setContent(str_replace($oldUrl, $this->wallabagUrl, $content));
             }
 
             $previewPicture = $entry->getPreviewPicture();
+
             if (null !== $previewPicture) {
                 $entry->setPreviewPicture(str_replace($oldUrl, $this->wallabagUrl, $previewPicture));
             }

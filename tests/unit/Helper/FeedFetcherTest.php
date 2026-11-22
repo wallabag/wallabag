@@ -60,6 +60,7 @@ class FeedFetcherTest extends TestCase
         $this->entityManager->expects(self::never())->method('flush');
 
         $this->expectExceptionMessage('Broker unavailable');
+
         try {
             $this->createFetcher(true, true)->fetch($this->feed);
         } finally {

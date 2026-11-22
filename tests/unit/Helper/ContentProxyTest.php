@@ -149,6 +149,7 @@ class ContentProxyTest extends TestCase
             ->onlyMethods(['fetchContent'])
             ->getMock();
         $fetch = $graby->expects($this->once())->method('fetchContent');
+
         if ($fetchThrows) {
             $fetch->willThrowException(new \RuntimeException('transport failed'));
         } else {
@@ -1367,6 +1368,7 @@ class ContentProxyTest extends TestCase
     private function strToHex($string)
     {
         $hex = '';
+
         for ($i = 0; $i < \strlen((string) $string); ++$i) {
             $ord = \ord($string[$i]);
             $hexCode = dechex($ord);
@@ -1386,6 +1388,7 @@ class ContentProxyTest extends TestCase
     private function hexToStr($hex)
     {
         $string = '';
+
         for ($i = 0; $i < \strlen((string) $hex) - 1; $i += 2) {
             $string .= \chr(hexdec($hex[$i] . $hex[$i + 1]));
         }

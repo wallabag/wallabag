@@ -41,6 +41,7 @@ final class PrivateNetworkResponse implements ResponseInterface, StreamableInter
         // Calling getStatusCode() or getHeaders() on the inner AsyncResponse here drains the stream.
         $this->statusCode = $this->response->getInfo('http_code');
         $this->headers = [];
+
         foreach ($this->response->getInfo('response_headers') as $line) {
             if (str_starts_with($line, 'HTTP/')) {
                 $this->headers = [];

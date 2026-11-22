@@ -44,6 +44,7 @@ class ListUserCommand extends Command
             ->getSumUsers();
 
         $rows = [];
+
         foreach ($users as $user) {
             $rows[] = [
                 $user->getUsername(),

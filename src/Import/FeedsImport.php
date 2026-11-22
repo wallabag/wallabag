@@ -16,6 +16,7 @@ class FeedsImport extends AbstractImport
         $this->setUser($user);
         $this->producer = $producer;
         $entry = ['url' => $url, 'title' => $title];
+
         if (null !== $publishedAt) {
             $entry['published_at'] = $publishedAt->getTimestamp();
         }
@@ -43,6 +44,7 @@ class FeedsImport extends AbstractImport
     {
         $url = $importedEntry['url'];
         $repository = $this->em->getRepository(Entry::class);
+
         if (false !== $repository->findByUrlAndUserId($url, $this->user->getId())) {
             ++$this->skippedEntries;
 
@@ -54,6 +56,7 @@ class FeedsImport extends AbstractImport
         $entry->setTitle($importedEntry['title'] ?? null);
         $this->fetchContent($entry, $url, ['url' => $url, 'title' => $entry->getTitle()]);
         $publishedAt = $importedEntry['published_at'] ?? null;
+
         if (\is_int($publishedAt)) {
             $entry->setPublishedAt((new \DateTime())->setTimestamp($publishedAt));
         }

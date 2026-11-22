@@ -10,6 +10,9 @@ return $config
         'array_syntax' => [
             'syntax' => 'short',
         ],
+        'blank_line_before_statement' => [
+            'statements' => ['do', 'for', 'foreach', 'if', 'return', 'switch', 'try', 'while'],
+        ],
         'combine_consecutive_unsets' => true,
         'error_suppression' => [
             // Keep the notices emitted by the legacy web entry points visible.

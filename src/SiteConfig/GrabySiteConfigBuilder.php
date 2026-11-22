@@ -26,6 +26,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
 
         // required by credentials below
         $host = strtolower($host);
+
         if (str_starts_with($host, 'www.')) {
             $host = substr($host, 4);
         }
@@ -94,6 +95,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
         }
 
         $extraFields = [];
+
         foreach ($extraFieldsStrings as $extraField) {
             if (!str_contains((string) $extraField, '=')) {
                 continue;

@@ -101,6 +101,7 @@ class UrlCommand extends Command
         $this->entityManager->persist($entry);
 
         $tags = explode(',', (string) $input->getArgument('tags'));
+
         if (\count($tags) > 1) {
             $this->tagsAssigner->assignTagsToEntry(
                 $entry,

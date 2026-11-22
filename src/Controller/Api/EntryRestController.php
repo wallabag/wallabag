@@ -95,17 +95,20 @@ class EntryRestController extends WallabagRestController
 
         $hashedUrls = $request->query->all('hashed_urls');
         $hashedUrl = $request->query->get('hashed_url', '');
+
         if (!empty($hashedUrl)) {
             $hashedUrls[] = $hashedUrl;
         }
 
         $urls = $request->query->all('urls');
         $url = $request->query->get('url', '');
+
         if (!empty($url)) {
             $urls[] = $url;
         }
 
         $urlHashMap = [];
+
         foreach ($urls as $urlToHash) {
             $urlHash = UrlHasher::hashUrl($urlToHash);
             $hashedUrls[] = $urlHash;
@@ -118,8 +121,10 @@ class EntryRestController extends WallabagRestController
 
         $results = array_fill_keys($hashedUrls, null);
         $res = $entryRepository->findByUserIdAndBatchHashedUrls($this->getUser()->getId(), $hashedUrls);
+
         foreach ($res as $e) {
             $_hashedUrl = array_keys($hashedUrls, 'blah', true);
+
             if ([] !== array_keys($hashedUrls, $e['hashedUrl'], true)) {
                 $_hashedUrl = $e['hashedUrl'];
             } elseif ([] !== array_keys($hashedUrls, $e['hashedGivenUrl'], true)) {
@@ -602,6 +607,7 @@ class EntryRestController extends WallabagRestController
         }
 
         $results = [];
+
         if (empty($urls)) {
             return $this->sendResponse($results);
         }
@@ -828,8 +834,10 @@ class EntryRestController extends WallabagRestController
         }
 
         $errors = $validator->validate($entry);
+
         if (\count($errors) > 0) {
             $errorsString = '';
+
             foreach ($errors as $error) {
                 $errorsString .= $error->getMessage() . "\n";
             }
@@ -1071,6 +1079,7 @@ class EntryRestController extends WallabagRestController
     public function deleteEntriesAction(Entry $entry, Request $request, EventDispatcherInterface $eventDispatcher)
     {
         $expect = $request->query->get('expect', 'entry');
+
         if (!\in_array($expect, ['id', 'entry'], true)) {
             throw new BadRequestHttpException(\sprintf("expect: 'id' or 'entry' expected, %s given", $expect));
         }
@@ -1078,6 +1087,7 @@ class EntryRestController extends WallabagRestController
         $response = $this->sendResponse([
             'id' => $entry->getId(),
         ]);
+
         // We clone $entry to keep id in returned object
         if ('entry' === $expect) {
             $e = clone $entry;
@@ -1163,6 +1173,7 @@ class EntryRestController extends WallabagRestController
     public function postEntriesTagsAction(Request $request, Entry $entry, TagsAssigner $tagsAssigner)
     {
         $tags = $request->request->get('tags', '');
+
         if (!empty($tags)) {
             $tagsAssigner->assignTagsToEntry($entry, $tags);
         }
@@ -1266,6 +1277,7 @@ class EntryRestController extends WallabagRestController
 
             if (false !== $entry && !(empty($tags)) && $this->authorizationChecker->isGranted('UNTAG', $entry)) {
                 $tags = explode(',', $tags);
+
                 foreach ($tags as $label) {
                     $label = trim($label);
 
@@ -1347,6 +1359,7 @@ class EntryRestController extends WallabagRestController
     private function replaceUrlHashes(array $results, array $urlHashMap)
     {
         $newResults = [];
+
         foreach ($results as $hash => $res) {
             if (isset($urlHashMap[$hash])) {
                 $newResults[$urlHashMap[$hash]] = $res;
@@ -1446,6 +1459,7 @@ class EntryRestController extends WallabagRestController
             if ($isPatch || null === $data['tags'] || [] === $data['tags']) {
                 $entry->removeAllTags();
             }
+
             if (null !== $data['tags'] && [] !== $data['tags']) {
                 $tagsAssigner->assignTagsToEntry($entry, $data['tags']);
             }

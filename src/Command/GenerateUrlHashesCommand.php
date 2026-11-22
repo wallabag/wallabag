@@ -70,6 +70,7 @@ class GenerateUrlHashesCommand extends Command
         $entries = $this->entryRepository->findByEmptyHashedUrlAndUserId($user->getId());
 
         $i = 1;
+
         foreach ($entries as $entry) {
             $entry->setHashedUrl(UrlHasher::hashUrl($entry->getUrl()));
             $this->entityManager->persist($entry);

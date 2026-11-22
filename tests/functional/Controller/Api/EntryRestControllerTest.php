@@ -385,6 +385,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         // Check pagination links contain the filter
         $this->assertArrayHasKey('_links', $content);
+
         foreach (['self', 'first', 'last'] as $link) {
             $this->assertArrayHasKey('href', $content['_links'][$link]);
             $this->assertStringContainsString('annotations=1', $content['_links'][$link]['href']);
@@ -413,6 +414,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         foreach ($content['_embedded']['items'] as $item) {
             $this->assertNotContains($item['url'], $entriesWithAnnotations, 'Entry with annotations should NOT be in the results');
+
             if (\in_array($item['url'], $entriesWithoutAnnotations, true)) {
                 $this->assertEmpty($item['annotations'], 'Entry with URL ' . $item['url'] . ' should not have annotations');
             }
@@ -425,6 +427,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         // Check pagination links contain the filter
         $this->assertArrayHasKey('_links', $content);
+
         foreach (['self', 'first', 'last'] as $link) {
             $this->assertArrayHasKey('href', $content['_links'][$link]);
             $this->assertStringContainsString('annotations=0', $content['_links'][$link]['href']);
@@ -1140,6 +1143,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         }
 
         $tags = [];
+
         foreach ($entry->getTags() as $tag) {
             $tags[] = ['id' => $tag->getId(), 'label' => $tag->getLabel(), 'slug' => $tag->getSlug()];
         }
@@ -1179,6 +1183,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             ->find($entry->getId());
 
         $tagsInDB = [];
+
         foreach ($entryDB->getTags()->toArray() as $tag) {
             $tagsInDB[$tag->getId()] = $tag->getLabel();
         }

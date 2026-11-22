@@ -75,6 +75,7 @@ class EntryController extends AbstractController
         $tagsToRemove = [];
 
         $action = 'toggle-read';
+
         if (isset($values['toggle-star'])) {
             $action = 'toggle-star';
         } elseif (isset($values['delete'])) {
@@ -89,13 +90,16 @@ class EntryController extends AbstractController
 
                         return '' !== $v;
                     });
+
                 foreach ($labels as $label) {
                     $remove = false;
+
                     if (str_starts_with($label, '-')) {
                         $label = substr($label, 1);
                         $remove = true;
                     }
                     $tag = $tagRepository->findOneByLabel($label);
+
                     if ($remove) {
                         if (null !== $tag) {
                             $tagsToRemove[] = $tag;
@@ -128,6 +132,7 @@ class EntryController extends AbstractController
                     foreach ($tagsToAdd as $tag) {
                         $entry->addTag($tag);
                     }
+
                     foreach ($tagsToRemove as $tag) {
                         $entry->removeTag($tag);
                     }
@@ -455,6 +460,7 @@ class EntryController extends AbstractController
         $this->entityManager->flush();
 
         $message = 'flashes.entry.notice.entry_unarchived';
+
         if ($entry->isArchived()) {
             $message = 'flashes.entry.notice.entry_archived';
         }
@@ -487,6 +493,7 @@ class EntryController extends AbstractController
         $this->entityManager->flush();
 
         $message = 'flashes.entry.notice.entry_unstarred';
+
         if ($entry->isStarred()) {
             $message = 'flashes.entry.notice.entry_starred';
         }

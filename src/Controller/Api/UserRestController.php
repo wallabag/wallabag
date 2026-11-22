@@ -205,6 +205,7 @@ class UserRestController extends WallabagRestController
     private function translateErrors($errors)
     {
         $translatedErrors = [];
+
         foreach ($errors as $error) {
             $translatedErrors[] = $this->translator->trans($error);
         }

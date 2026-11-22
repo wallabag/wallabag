@@ -48,6 +48,7 @@ final class HostnameDenyListHttpClient implements HttpClientInterface, LoggerAwa
         $options['max_redirects'] = 0;
         $body = $options['body'] ?? '';
         $rewindBody = null;
+
         if (\is_resource($body) && stream_get_meta_data($body)['seekable'] && false !== $offset = ftell($body)) {
             $rewindBody = static fn (): bool => \is_resource($body) && 0 === @fseek($body, $offset);
             // Read through the PHP stream so each transport request sees the rewound position.
@@ -87,6 +88,7 @@ final class HostnameDenyListHttpClient implements HttpClientInterface, LoggerAwa
     public function withOptions(array $options): self
     {
         $clone = clone $this;
+
         if ($this->denyList->isEmpty()) {
             $clone->client = $this->client->withOptions($options);
         } else {
@@ -154,17 +156,20 @@ final class HostnameDenyListHttpClient implements HttpClientInterface, LoggerAwa
             } elseif (!\is_string($options['body'] ?? '')) {
                 // Stop any remaining reads on the previous request before reusing its stream.
                 $context->getResponse()->cancel();
+
                 if (null === $rewindBody || !$rewindBody()) {
                     throw new TransportException('Cannot replay the request body for an HTTP redirect.');
                 }
             }
 
             $headersToRemove = $contentHeadersToRemove;
+
             if (!$sameOrigin) {
                 $headersToRemove = array_merge($headersToRemove, ['host', 'authorization', 'cookie']);
             }
             $options['headers'] = self::removeHeaders($initialHeaders, $headersToRemove) + array_fill_keys($headersToRemove, []);
             $options['json'] = $options['auth_basic'] = $options['auth_bearer'] = null;
+
             if (null !== $authNtlm) {
                 $options['auth_ntlm'] = $sameOrigin ? $authNtlm : null;
             }
@@ -207,6 +212,7 @@ final class HostnameDenyListHttpClient implements HttpClientInterface, LoggerAwa
     {
         $parts = parse_url($url);
         $scheme = strtolower($parts['scheme'] ?? '');
+
         if (!isset($parts['host']) || !\in_array($scheme, ['http', 'https'], true)) {
             throw new TransportException('Expected an absolute HTTP request URL.');
         }

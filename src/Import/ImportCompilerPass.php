@@ -21,6 +21,7 @@ class ImportCompilerPass implements CompilerPassInterface
         $taggedServices = $container->findTaggedServiceIds(
             'wallabag.import'
         );
+
         foreach ($taggedServices as $id => $tagAttributes) {
             foreach ($tagAttributes as $attributes) {
                 $definition->addMethodCall(

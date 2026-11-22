@@ -59,6 +59,7 @@ class FeedReaderTest extends TestCase
         $client = new MockHttpClient([new MockResponse($page), new MockResponse($page)]);
 
         $this->expectException(ReaderException::class);
+
         try {
             (new FeedReader('wallabag', $client))->read('https://8.8.8.8/');
         } finally {
@@ -72,6 +73,7 @@ class FeedReaderTest extends TestCase
         $client = new MockHttpClient(new MockResponse($page, ['http_code' => 404]));
 
         $this->expectException(ClientExceptionInterface::class);
+
         try {
             (new FeedReader('wallabag', $client))->read('https://8.8.8.8/');
         } finally {
@@ -109,6 +111,7 @@ class FeedReaderTest extends TestCase
         $reader = new FeedReader('wallabag', $client);
 
         $this->expectException(\InvalidArgumentException::class);
+
         try {
             $reader->resolve('ftp://example.org/feed');
         } finally {

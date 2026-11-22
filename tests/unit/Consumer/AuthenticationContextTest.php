@@ -25,6 +25,7 @@ class AuthenticationContextTest extends TestCase
     public function testMessagesResolveTheirOwnersCredentialsWithoutSharingSessions(): void
     {
         $users = [];
+
         foreach ([42, 43] as $id) {
             $user = $this->getMockBuilder(User::class)->disableOriginalConstructor()->getMock();
             $user->method('getId')->willReturn($id);
@@ -58,6 +59,7 @@ class AuthenticationContextTest extends TestCase
             return new Entry($users[$entry['userId']]);
         });
         $consumer = new RedisEntryConsumer($em, $repository, $import, new EventDispatcher(), $storage, $browser);
+
         foreach ([42, 42, 43] as $id) {
             self::assertTrue($consumer->manage(json_encode(['userId' => $id, 'url' => 'https://example.org/article'])));
             self::assertNull($storage->getToken());
@@ -83,6 +85,7 @@ class AuthenticationContextTest extends TestCase
         $consumer = new RedisEntryConsumer($em, $repository, $import, new EventDispatcher(), $storage, new HttpBrowser());
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('simulated extraction failure');
+
         try {
             $consumer->manage(json_encode(['userId' => 1, 'url' => 'https://example.org/article']));
         } finally {

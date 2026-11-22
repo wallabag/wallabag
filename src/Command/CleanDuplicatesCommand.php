@@ -81,6 +81,7 @@ class CleanDuplicatesCommand extends Command
 
         $duplicatesCount = 0;
         $urls = [];
+
         foreach ($entries as $entry) {
             $url = $this->similarUrl($entry['url']);
 

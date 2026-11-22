@@ -81,6 +81,7 @@ class LoginFormAuthenticator
     protected function getHttpHeaders(SiteConfig $siteConfig): array
     {
         $headers = [];
+
         foreach ($siteConfig->getHttpHeaders() as $headerName => $headerValue) {
             $headers["HTTP_$headerName"] = $headerValue;
         }

@@ -182,6 +182,7 @@ class ExportControllerTest extends WallabagTestCase
     public function testEpubExportEmbedsImagesStoredByWallabag(): void
     {
         $folder = $this->getTestClient()->getContainer()->getParameter('kernel.project_dir') . '/web/assets/images/test-export';
+
         if (!is_dir($folder)) {
             mkdir($folder, 0777, true);
         }
@@ -457,6 +458,7 @@ class ExportControllerTest extends WallabagTestCase
         $em->persist($reference);
 
         $sameDomainEntries = [];
+
         foreach (['first', 'second'] as $name) {
             $entry = new Entry($user);
             $entry->setUrl('http://same-domain-export.test/' . $name);
@@ -497,6 +499,7 @@ class ExportControllerTest extends WallabagTestCase
         $this->assertNotContains($otherDomainEntryId, array_column($content, 'id'));
 
         $cleanupEm = $client->getContainer()->get(EntityManagerInterface::class);
+
         foreach ([$referenceId, ...$sameDomainEntryIds, $otherDomainEntryId] as $entryId) {
             $cleanupEm->remove($cleanupEm->find(Entry::class, $entryId));
         }
@@ -514,6 +517,7 @@ class ExportControllerTest extends WallabagTestCase
         $user = $em->getRepository(User::class)->findOneBy(['username' => 'admin']);
 
         $entries = [];
+
         foreach ([
             'starred-unread' => ['starred' => true, 'archived' => false],
             'starred-archive' => ['starred' => true, 'archived' => true],
@@ -553,6 +557,7 @@ class ExportControllerTest extends WallabagTestCase
         );
 
         $cleanupEm = $client->getContainer()->get(EntityManagerInterface::class);
+
         foreach ($entryIds as $entryId) {
             $cleanupEm->remove($cleanupEm->find(Entry::class, $entryId));
         }
@@ -636,6 +641,7 @@ class ExportControllerTest extends WallabagTestCase
         $zip->open($epubFilename);
 
         $files = [];
+
         for ($i = 0; $i < $zip->numFiles; ++$i) {
             $files[$zip->getNameIndex($i)] = $zip->getFromIndex($i);
         }

@@ -73,6 +73,7 @@ class CreateApiClientCommand extends Command
         }
 
         $format = (string) $input->getOption('format');
+
         if (!\in_array($format, ['text', 'env', 'json'], true)) {
             $io->error(\sprintf('Unknown format "%s". Use text, env, or json.', $format));
 
@@ -81,6 +82,7 @@ class CreateApiClientCommand extends Command
 
         $grantTypes = array_filter(array_map('trim', explode(',', (string) $input->getOption('grant-types'))));
         $invalidGrantTypes = array_diff($grantTypes, self::ALLOWED_GRANT_TYPES);
+
         if (!empty($invalidGrantTypes)) {
             $io->error(\sprintf(
                 'Invalid grant type(s): %s. Allowed values are: %s.',

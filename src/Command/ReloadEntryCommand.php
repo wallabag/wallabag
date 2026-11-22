@@ -50,6 +50,7 @@ class ReloadEntryCommand extends Command
 
         $onlyNotParsed = (bool) $input->getOption('only-not-parsed');
         $userId = null;
+
         if ($username = $input->getArgument('username')) {
             try {
                 $userId = $this->userRepository
@@ -66,6 +67,7 @@ class ReloadEntryCommand extends Command
         $entryIds = $this->entryRepository->$methodName($userId);
 
         $nbEntries = \count($entryIds);
+
         if (!$nbEntries) {
             $io->success('No entry to reload.');
 
@@ -86,6 +88,7 @@ class ReloadEntryCommand extends Command
         $progressBar = $io->createProgressBar($nbEntries);
 
         $progressBar->start();
+
         foreach ($entryIds as $entryId) {
             $entry = $this->entryRepository->find($entryId);
 

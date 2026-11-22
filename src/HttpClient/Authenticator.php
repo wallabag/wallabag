@@ -32,6 +32,7 @@ class Authenticator implements LoggerAwareInterface
     public function loginIfRequired(string $url): bool
     {
         $config = $this->buildSiteConfig(new Uri($url));
+
         if (false === $config || !$config->requiresLogin()) {
             $this->logger->debug('loginIfRequired> will not require login');
 
@@ -52,6 +53,7 @@ class Authenticator implements LoggerAwareInterface
     public function loginIfRequested(ResponseInterface $response): bool
     {
         $config = $this->buildSiteConfig(new Uri($response->getInfo('url')));
+
         if (false === $config || !$config->requiresLogin()) {
             $this->logger->debug('loginIfRequested> will not require login');
 

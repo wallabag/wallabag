@@ -51,6 +51,7 @@ class InstapaperImport extends AbstractFileImport
 
         $entries = [];
         $handle = fopen($this->filepath, 'r');
+
         while (false !== ($data = fgetcsv($handle, 10240, ',', '"', ''))) {
             if ('URL' === $data[0]) {
                 continue;
@@ -70,6 +71,7 @@ class InstapaperImport extends AbstractFileImport
 
             if (!empty($data[5])) {
                 $parsedTags = json_decode($data[5], true);
+
                 if (\is_array($parsedTags)) {
                     $tags = array_merge($tags, $parsedTags);
                 }

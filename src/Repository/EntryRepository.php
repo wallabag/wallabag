@@ -409,6 +409,7 @@ class EntryRepository extends ServiceEntityRepository
             ->getResult();
 
         $languages = [];
+
         foreach ($results as $result) {
             $languages[$result['language']] = $result['language'];
         }

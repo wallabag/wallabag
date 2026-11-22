@@ -121,6 +121,7 @@ class TagController extends AbstractController
         $nbEntriesUntagged = $entryRepository->countUntaggedEntriesByUser($this->getUser()->getId());
 
         $renameForms = [];
+
         foreach ($allTagsWithNbEntries as $tagWithNbEntries) {
             $renameForms[$tagWithNbEntries['tag']->getId()] = $this->createForm(RenameTagType::class, new Tag())->createView();
         }
@@ -207,6 +208,7 @@ class TagController extends AbstractController
                 $this->getUser()->getId(),
                 $tag->getId()
             );
+
             foreach ($entries as $entry) {
                 $this->tagsAssigner->assignTagsToEntry(
                     $entry,

@@ -247,6 +247,7 @@ class AppKernelDeprecationTest extends KernelTestCase
             if ($values['env_exists']) {
                 $_ENV[$name] = $values['env'];
             }
+
             if ($values['server_exists']) {
                 $_SERVER[$name] = $values['server'];
             }
