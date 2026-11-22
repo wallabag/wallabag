@@ -169,6 +169,7 @@
         "wallabag/phpepub": "^4.0.10",
         "wallabag/rulerz": "dev-master",
         "wallabag/rulerz-bundle": "dev-master",
+        "webklex/php-imap": "^6.2",
         "willdurand/hateoas": "^3.12",
         "willdurand/hateoas-bundle": "^2.7"
     },

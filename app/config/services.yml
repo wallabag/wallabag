@@ -49,7 +49,7 @@ services:
 
     Wallabag\:
         resource: '../../src/*'
-        exclude: ['../../src/{Consumer,Controller,Entity,DataFixtures,Redis}', '../../src/Event/*Event.php', '../../src/HttpClient/PrivateNetworkResponse.php']
+        exclude: ['../../src/{Consumer,Controller,Entity,DataFixtures,Redis}', '../../src/Event/*Event.php', '../../src/HttpClient/PrivateNetworkResponse.php', '../../src/MailImport/MailMessage.php']
 
     Wallabag\HttpClient\WallabagClient:
         lazy: true
@@ -303,6 +303,12 @@ services:
         arguments:
             $client: '@wallabag.download_images.client'
             $baseFolder: "%kernel.project_dir%/web/assets/images"
+
+    Wallabag\MailImport\MailImportSettings:
+        arguments:
+            $address: '%env(WALLABAG_MAIL_IMPORT_ADDRESS)%'
+            $dsn: '%env(WALLABAG_MAIL_IMPORT_DSN)%'
+            $maxLinks: '%env(int:WALLABAG_MAIL_IMPORT_MAX_LINKS)%'
 
     Wallabag\Command\InstallCommand:
         arguments:
