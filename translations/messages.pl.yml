@@ -62,7 +62,7 @@ config:
         new_user: Dodaj użytkownika
         reset: Zresetuj obszar
         ignore_origin: Zasady ignorowania pochodzenia
-        feed: Źródła
+        feed: Kanały
         article_display: Wyświetlanie artykułów
     form:
         save: Zapisz
@@ -196,12 +196,12 @@ config:
             starred: Wyróżnione
             unread: Nieprzeczytane
             opds: Katalog OPDS (czytniki e-booków)
-        feed_links: Linki do aktualności
+        feed_links: Linki do kanałów
         token_revoke: Anuluj token
         token_reset: Stwórz ponownie token
         token_create: Stwórz swój token
         no_token: Brak tokena
-        token_label: Token listy
+        token_label: Token kanału
     form_ignore_origin_rules:
         faq:
             title: FAQ
@@ -758,3 +758,41 @@ theme:
         toggle_auto: Automatyczny motyw
         toggle_dark: Ciemny motyw
         toggle_light: Jasny motyw
+feeds:
+    action:
+        add: Dodaj kanał
+        back_to_list: Wróć do subskrypcji
+        delete: Usuń kanał
+        dismiss: Odrzuć
+        edit: Edytuj kanał
+        fetch: Odśwież
+        items: Zobacz artykuły
+        purge: Wyczyść artykuły
+        save_article: Zapisz artykuł
+        show_card_view: Pokaż widok kart
+        show_list_view: Pokaż widok listy
+    alert:
+        confirm_delete: Usunąć tę subskrypcję kanału oraz historię jej artykułów?
+        confirm_purge: Odrzucić wszystkie oczekujące artykuły w tym kanale?
+    automatic_mode: Automatyczny
+    empty: Nie masz żadnych subskrypcji kanałów.
+    flash:
+        already_processed: Ten artykuł został już przetworzony.
+        created: Subskrypcja kanału została dodana.
+        created_refresh_error: Subskrypcja kanału została dodana, ale pierwsze odświeżenie zakończyło się niepowodzeniem.
+        deleted: Subskrypcja kanału została usunięta.
+        dismissed: Artykuł odrzucony.
+        fetch_error: Nie udało się odświeżyć kanału. Sprawdź jego adres i spróbuj ponownie.
+        fetched: Odświeżono kanał.
+        no_pending_articles: Brak oczekujących artykułów do odrzucenia.
+        purged: Oczekujące artykuły odrzucone.
+        save_error: Nie udało się zapisać artykułu. Nadal jest oczekujący.
+        saved: Artykuł jest dostępny w wallabag.
+        updated: Subskrypcja kanału została zaktualizowana.
+    items_empty: W tym kanale nie ma oczekujących artykułów.
+    label:
+        automatic: Automatycznie importuj nowe artykuły
+    last_fetch: 'Ostatnie udane odświeżenie: %date%'
+    manual_mode: Ręczny
+    page_title: Subskrypcje kanałów
+    stale: Ten kanał nie został pomyślnie odświeżony w ciągu ostatnich dwóch dni.
