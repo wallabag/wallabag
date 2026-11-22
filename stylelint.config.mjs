@@ -5,10 +5,12 @@ export default {
   plugins: ['stylelint-scss'],
   rules: {
     'block-no-redundant-nested-style-rules': null,
+    // Preserve the existing color function spellings and compiled browser syntax.
     'color-function-alias-notation': null,
     'declaration-property-value-keyword-no-deprecated': null,
     'property-no-deprecated': null,
     'at-rule-no-unknown': null,
+    // Sass nesting and deliberate overrides make these checks unsuitable for the current cascade.
     'no-duplicate-selectors': null,
     'font-family-no-missing-generic-family-keyword': null,
     'no-descending-specificity': null,

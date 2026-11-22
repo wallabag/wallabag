@@ -92,4 +92,4 @@ jobs:
 
       - name: "Run Stylelint"
         if: always() && steps.yarn-install.outcome == 'success'
-        run: "yarn lint:scss"
+        run: make lint-scss
