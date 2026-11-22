@@ -80,6 +80,14 @@ class DownloadImagesTest extends TestCase
         $this->assertSame('DownloadImages: Can not retrieve image, skipping.', $records[2]['message']);
     }
 
+    public function testProcessSingleImageSkipsRedirectToPrivateNetwork(): void
+    {
+        $client = new NoPrivateNetworkHttpClient(new MockHttpClient(new MockResponse('', ['http_code' => 302, 'redirect_url' => 'http://127.0.0.1/image.jpg'])));
+        $download = new DownloadImages($client, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', new Logger('test'));
+
+        $this->assertFalse($download->processSingleImage(123, 'https://example.com/image.jpg', 'https://example.com/article'));
+    }
+
     public function singleImage()
     {
         return [
