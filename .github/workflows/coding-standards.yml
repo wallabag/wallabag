@@ -27,7 +27,7 @@ jobs:
         with:
           coverage: "none"
           php-version: "8.2"
-          tools: cs2pr, pecl
+          tools: pecl
           extensions: pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
         env:
@@ -64,7 +64,7 @@ jobs:
 
       - name: "Run PHP CS Fixer"
         if: always() && steps.composer-install.outcome == 'success'
-        run: "bin/php-cs-fixer fix --verbose --dry-run --format=checkstyle | cs2pr"
+        run: php bin/php-cs-fixer fix --verbose --dry-run
 
       - name: "Generate test cache for PHPStan"
         id: test-cache
@@ -73,7 +73,7 @@ jobs:
 
       - name: "Run PHPStan"
         if: always() && steps.test-cache.outcome == 'success'
-        run: "php bin/phpstan analyse --no-progress --error-format=checkstyle | cs2pr"
+        run: php bin/phpstan analyse --no-progress
 
       - name: "Run Twig CS Fixer"
         if: always() && steps.composer-install.outcome == 'success'
