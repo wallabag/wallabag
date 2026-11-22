@@ -108,3 +108,26 @@ jobs:
         run: |
           docker compose version
           make lint-compose
+
+      - name: "Install Actionlint"
+        id: actionlint-install
+        if: always() && steps.checkout.outcome == 'success'
+        env:
+          ACTIONLINT_VERSION: 1.7.12
+          ACTIONLINT_SHA256: 8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
+        run: |
+          archive="$RUNNER_TEMP/actionlint.tar.gz"
+          bin_dir="$RUNNER_TEMP/wallabag-lint-bin"
+          curl --fail --silent --show-error --location --retry 3 \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" \
+            --output "$archive"
+          printf '%s  %s\n' "$ACTIONLINT_SHA256" "$archive" | sha256sum --check -
+          mkdir -p "$bin_dir"
+          tar -xzf "$archive" -C "$bin_dir" actionlint
+          printf '%s\n' "$bin_dir" >> "$GITHUB_PATH"
+
+      - name: "Validate GitHub Actions workflows"
+        if: always() && steps.actionlint-install.outcome == 'success'
+        run: |
+          actionlint -version
+          make lint-actions

@@ -125,4 +125,6 @@ Run `make lint-container` to validate the Symfony service containers for `dev`, 
 
 Run `make lint-compose` to validate `compose.yaml` without starting containers or loading local service environment files.
 
+Run `make lint-actions` with Actionlint 1.7.12 on `PATH`. CI installs the release archive after checking its SHA-256 digest.
+
 To rebuild frontend assets automatically while developing run `make dev-watch`.
