@@ -12,6 +12,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 class ExportControllerTest extends WallabagTestCase
 {
     private $adminEntry;
+
     private $bobEntry;
 
     public function testLogin(): void

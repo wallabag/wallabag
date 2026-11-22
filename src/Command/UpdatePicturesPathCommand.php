@@ -13,6 +13,7 @@ use Wallabag\Repository\EntryRepository;
 class UpdatePicturesPathCommand extends Command
 {
     protected static $defaultName = 'wallabag:update-pictures-path';
+
     protected static $defaultDescription = 'Update the path of the pictures for each entry when you changed your wallabag instance URL.';
 
     public function __construct(

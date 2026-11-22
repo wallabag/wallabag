@@ -16,11 +16,17 @@ use Wallabag\Helper\TagsAssigner;
 abstract class AbstractImport implements LoggerAwareInterface
 {
     protected $producer;
+
     protected $user;
+
     protected $markAsRead;
+
     protected $disableContentUpdate = false;
+
     protected $skippedEntries = 0;
+
     protected $importedEntries = 0;
+
     protected $queuedEntries = 0;
 
     public function __construct(

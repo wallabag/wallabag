@@ -33,6 +33,7 @@ use Wallabag\Repository\UserRepository;
 class ImportCommand extends Command
 {
     protected static $defaultName = 'wallabag:import';
+
     protected static $defaultDescription = 'Import entries from a JSON export';
 
     public function __construct(

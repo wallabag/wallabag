@@ -13,6 +13,7 @@ use Wallabag\Security\Voter\TaggingRuleVoter;
 class TaggingRuleVoterTest extends TestCase
 {
     private $token;
+
     private $taggingRuleVoter;
 
     protected function setUp(): void

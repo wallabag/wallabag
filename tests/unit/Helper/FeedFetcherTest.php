@@ -25,8 +25,11 @@ class FeedFetcherTest extends TestCase
     private const ARTICLE_URL = 'https://example.org/article';
 
     private EntityManagerInterface&MockObject $entityManager;
+
     private FeedUrl $feed;
+
     private ProducerInterface&MockObject $rabbit;
+
     private ProducerInterface&MockObject $redis;
 
     protected function setUp(): void

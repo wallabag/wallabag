@@ -16,6 +16,7 @@ use Wallabag\Repository\UserRepository;
 class TagAllCommand extends Command
 {
     protected static $defaultName = 'wallabag:tag:all';
+
     protected static $defaultDescription = 'Tag all entries using the tagging rules.';
 
     public function __construct(

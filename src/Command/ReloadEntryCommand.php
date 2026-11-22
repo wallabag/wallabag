@@ -19,6 +19,7 @@ use Wallabag\Repository\UserRepository;
 class ReloadEntryCommand extends Command
 {
     protected static $defaultName = 'wallabag:entry:reload';
+
     protected static $defaultDescription = 'Reload entries';
 
     public function __construct(

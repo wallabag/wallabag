@@ -14,6 +14,7 @@ use Wallabag\Repository\EntryRepository;
 class CleanDownloadedImagesCommand extends Command
 {
     protected static $defaultName = 'wallabag:clean-downloaded-images';
+
     protected static $defaultDescription = 'Cleans downloaded images which are no more associated to an entry';
 
     public function __construct(

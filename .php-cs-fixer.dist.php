@@ -13,6 +13,9 @@ return $config
         'blank_line_before_statement' => [
             'statements' => ['do', 'for', 'foreach', 'if', 'return', 'switch', 'try', 'while'],
         ],
+        'class_attributes_separation' => [
+            'elements' => ['const' => 'none', 'method' => 'one', 'property' => 'one'],
+        ],
         'combine_consecutive_unsets' => true,
         'error_suppression' => [
             // Keep the notices emitted by the legacy web entry points visible.

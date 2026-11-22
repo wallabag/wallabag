@@ -20,9 +20,13 @@ use Wallabag\Entity\User;
 class EntriesExport
 {
     private $title = '';
+
     private $entries = [];
+
     private $author = 'wallabag';
+
     private $language = '';
+
     private ?User $user = null;
 
     /**

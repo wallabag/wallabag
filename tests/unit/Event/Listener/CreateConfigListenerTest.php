@@ -17,10 +17,15 @@ use Wallabag\Event\Listener\CreateConfigListener;
 class CreateConfigListenerTest extends TestCase
 {
     private $em;
+
     private $listener;
+
     private $dispatcher;
+
     private $request;
+
     private $response;
+
     private $requestStack;
 
     protected function setUp(): void

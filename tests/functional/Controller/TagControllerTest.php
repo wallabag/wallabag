@@ -14,6 +14,7 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 class TagControllerTest extends WallabagTestCase
 {
     public $tagName = 'opensource';
+
     public $caseTagName = 'OpenSource';
 
     public function testList(): void

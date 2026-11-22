@@ -15,6 +15,7 @@ use Wallabag\Repository\UserRepository;
 class ExportCommand extends Command
 {
     protected static $defaultName = 'wallabag:export';
+
     protected static $defaultDescription = 'Export all entries for an user';
 
     public function __construct(

@@ -20,9 +20,13 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 class EntryControllerTest extends WallabagTestCase
 {
     public const AN_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE = 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment';
+
     public $downloadImagesEnabled = false;
+
     public $url = 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment';
+
     public $wrongUrl = 'wallabagIsAwesome';
+
     private $entryDataTestAttribute = '[data-test="entry"]';
 
     /**

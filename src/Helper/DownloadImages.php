@@ -16,7 +16,9 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class DownloadImages
 {
     public const REGENERATE_PICTURES_QUALITY = 80;
+
     private $mimeTypes;
+
     private $wallabagUrl;
 
     public function __construct(

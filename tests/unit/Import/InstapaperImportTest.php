@@ -22,10 +22,15 @@ use Wallabag\Repository\EntryRepository;
 class InstapaperImportTest extends TestCase
 {
     protected $user;
+
     protected $em;
+
     protected $logHandler;
+
     protected $contentProxy;
+
     protected $tagsAssigner;
+
     protected $uow;
 
     public function testInit(): void

@@ -13,6 +13,7 @@ use Wallabag\Security\Voter\IgnoreOriginUserRuleVoter;
 class IgnoreOriginUserRuleVoterTest extends TestCase
 {
     private $token;
+
     private $ignoreOriginUserRuleVoter;
 
     protected function setUp(): void

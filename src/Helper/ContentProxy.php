@@ -20,6 +20,7 @@ class ContentProxy
     private const FETCHING_ERROR_DESCRIPTION_PREFIX = '<p><i>But we found a short description: </i></p>';
 
     protected $mimeTypes;
+
     protected $eventDispatcher;
 
     public function __construct(

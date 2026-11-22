@@ -13,6 +13,7 @@ use Wallabag\Repository\UserRepository;
 class ListUserCommand extends Command
 {
     protected static $defaultName = 'wallabag:user:list';
+
     protected static $defaultDescription = 'List all users';
 
     public function __construct(

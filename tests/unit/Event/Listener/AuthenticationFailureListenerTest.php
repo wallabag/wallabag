@@ -16,8 +16,11 @@ use Wallabag\Event\Listener\AuthenticationFailureListener;
 class AuthenticationFailureListenerTest extends TestCase
 {
     private $requestStack;
+
     private $logHandler;
+
     private $listener;
+
     private $dispatcher;
 
     protected function setUp(): void

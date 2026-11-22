@@ -20,6 +20,7 @@ final class HostnameDenyListHttpClient implements HttpClientInterface, LoggerAwa
     use HttpClientTrait;
 
     private array $defaultOptions = self::OPTIONS_DEFAULTS;
+
     private ?LoggerInterface $logger = null;
 
     public function __construct(

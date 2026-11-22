@@ -14,6 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class RedisWorkerCommand extends Command
 {
     protected static $defaultName = 'wallabag:import:redis-worker';
+
     protected static $defaultDescription = 'Launch Redis worker';
 
     public function __construct(

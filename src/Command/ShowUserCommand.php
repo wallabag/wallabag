@@ -14,6 +14,7 @@ use Wallabag\Repository\UserRepository;
 class ShowUserCommand extends Command
 {
     protected static $defaultName = 'wallabag:user:show';
+
     protected static $defaultDescription = 'Show user details';
 
     protected SymfonyStyle $io;

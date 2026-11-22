@@ -16,6 +16,7 @@ use Wallabag\Repository\UserRepository;
 class GenerateUrlHashesCommand extends Command
 {
     protected static $defaultName = 'wallabag:generate-hashed-urls';
+
     protected static $defaultDescription = 'Generates hashed urls for each entry';
 
     protected OutputInterface $output;

@@ -5,6 +5,7 @@ namespace Wallabag\HttpClient;
 final class HostnameDenyList
 {
     private array $hostnames = [];
+
     private array $subtrees = [];
 
     public function __construct(array $hostnames = [])

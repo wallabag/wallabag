@@ -21,9 +21,13 @@ use Wallabag\Repository\EntryRepository;
 class FirefoxImportTest extends TestCase
 {
     protected $user;
+
     protected $em;
+
     protected $logHandler;
+
     protected $contentProxy;
+
     protected $tagsAssigner;
 
     public function testInit(): void

@@ -16,7 +16,9 @@ use Wallabag\Repository\UserRepository;
 class CreateApiClientCommand extends Command
 {
     private const ALLOWED_GRANT_TYPES = ['token', 'authorization_code', 'password', 'refresh_token'];
+
     protected static $defaultName = 'wallabag:api-client:create';
+
     protected static $defaultDescription = 'Create an OAuth API client for an existing user';
 
     public function __construct(

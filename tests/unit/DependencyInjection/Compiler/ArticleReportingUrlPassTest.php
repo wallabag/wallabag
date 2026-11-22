@@ -12,9 +12,13 @@ class ArticleReportingUrlPassTest extends TestCase
     private const DEFAULT_REPORTING_URL = 'mailto:siteconfig@wallabag.org?subject=Wrong%20display%20in%20wallabag';
 
     private bool $hadEnvValue;
+
     private bool $hadServerValue;
+
     private ?string $envValue = null;
+
     private ?string $serverValue = null;
+
     private string|false $processEnvValue;
 
     protected function setUp(): void

@@ -12,6 +12,7 @@ use Wallabag\Helper\ContentProxy;
 class EntryOptionalFieldsTest extends WallabagApiTestCase
 {
     private $createdEntryIds = [];
+
     private $createdTagIds = [];
 
     protected function tearDown(): void

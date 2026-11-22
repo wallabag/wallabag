@@ -13,7 +13,9 @@ use Wallabag\Security\Voter\TagVoter;
 class TagVoterTest extends TestCase
 {
     private $security;
+
     private $token;
+
     private $tagVoter;
 
     protected function setUp(): void

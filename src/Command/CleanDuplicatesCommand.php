@@ -18,9 +18,11 @@ use Wallabag\Repository\UserRepository;
 class CleanDuplicatesCommand extends Command
 {
     protected static $defaultName = 'wallabag:clean-duplicates';
+
     protected static $defaultDescription = 'Cleans the database for duplicates';
 
     protected SymfonyStyle $io;
+
     protected int $duplicates = 0;
 
     public function __construct(

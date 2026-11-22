@@ -23,11 +23,17 @@ use Wallabag\Repository\TagRepository;
 class RuleBasedTaggerTest extends TestCase
 {
     private $rulerz;
+
     private $tagRepository;
+
     private $entryRepository;
+
     private $tagger;
+
     private $validator;
+
     private $logger;
+
     private $handler;
 
     protected function setUp(): void

@@ -11,7 +11,9 @@ abstract class WallabagMigration extends AbstractMigration
     public const UN_ESCAPED_TABLE = true;
 
     protected string $tablePrefix;
+
     protected array $defaultIgnoreOriginInstanceRules;
+
     protected string $fetchingErrorMessage;
 
     // because there are declared as abstract in `AbstractMigration` we need to delarer here too

@@ -12,8 +12,11 @@ use Wallabag\Security\Voter\EntryVoter;
 class EntryVoterTest extends TestCase
 {
     private $token;
+
     private $user;
+
     private $entry;
+
     private $entryVoter;
 
     protected function setUp(): void

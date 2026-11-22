@@ -17,6 +17,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 final class PrivateNetworkResponse implements ResponseInterface, StreamableInterface
 {
     private ?int $statusCode = null;
+
     private array $headers = [];
 
     public function __construct(private readonly AsyncResponse $response)
