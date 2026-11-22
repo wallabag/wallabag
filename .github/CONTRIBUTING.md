@@ -127,4 +127,6 @@ Run `make lint-compose` to validate `compose.yaml` without starting containers o
 
 Run `make lint-actions` with Actionlint 1.7.12 on `PATH`. CI installs the release archive after checking its SHA-256 digest.
 
+Run `make lint-translations` to validate translation catalogs.
+
 To rebuild frontend assets automatically while developing run `make dev-watch`.

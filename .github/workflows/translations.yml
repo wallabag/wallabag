@@ -41,4 +41,4 @@ jobs:
           composer-options: "--optimize-autoloader --prefer-dist"
 
       - name: "Validate translations"
-        run: "php bin/console lint:yaml translations -v"
+        run: make lint-translations
