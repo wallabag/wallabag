@@ -11,6 +11,10 @@ return $config
             'syntax' => 'short',
         ],
         'combine_consecutive_unsets' => true,
+        'error_suppression' => [
+            // Keep the notices emitted by the legacy web entry points visible.
+            'mute_deprecation_error' => false,
+        ],
         'heredoc_to_nowdoc' => true,
         'no_extra_blank_lines' => [
             'tokens' => [
