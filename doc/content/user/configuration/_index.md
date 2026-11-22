@@ -11,6 +11,7 @@ On this page you can see several tabs:
 
 * [Settings]({{< relref "settings.md" >}})
 * [Feeds]({{< relref "rss.md" >}})
+* [Save by email]({{< relref "mail_import.md" >}}) (only when your administrator enabled it)
 * [User information]({{< relref "user_information.md" >}})
 * [Password]({{< relref "password.md" >}})
 * [Tagging rules]({{< relref "tagging_rules.md" >}})
