@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Wallabag\Menu\MainMenuBuilder;
 use Wallabag\Repository\AnnotationRepository;
 use Wallabag\Repository\EntryRepository;
+use Wallabag\Repository\FeedItemRepository;
 use Wallabag\Repository\TagRepository;
 
 class MainMenuBuilderTest extends TestCase
@@ -28,7 +29,8 @@ class MainMenuBuilderTest extends TestCase
             $this->createMock(EntryRepository::class),
             $this->createMock(AnnotationRepository::class),
             $this->createMock(TagRepository::class),
-            60
+            60,
+            $this->createMock(FeedItemRepository::class),
         );
 
         $menu = $builder->createMenu([]);
@@ -52,6 +54,7 @@ class MainMenuBuilderTest extends TestCase
             $this->createMock(AnnotationRepository::class),
             $this->createMock(TagRepository::class),
             0,
+            $this->createMock(FeedItemRepository::class),
         );
         $menu = $builder->createMenu([]);
         $stack = new RequestStack();
@@ -73,5 +76,6 @@ class MainMenuBuilderTest extends TestCase
         yield 'none' => [[], []];
         yield 'tags only' => [['LIST_TAGS'], ['tags']];
         yield 'entries only' => [['LIST_ENTRIES'], ['unread', 'starred', 'archive', 'annotated', 'all']];
+        yield 'signed-in user' => [['ROLE_USER'], ['feeds']];
     }
 }

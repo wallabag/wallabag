@@ -4,7 +4,7 @@ namespace Wallabag\Import;
 
 use Wallabag\Entity\Entry;
 
-class PocketCsvImport extends AbstractImport
+class PocketCsvImport extends AbstractFileImport
 {
     protected $filepath;
 

@@ -93,6 +93,7 @@
         "knplabs/knp-menu": "^3.8",
         "knplabs/knp-menu-bundle": ">=3.6 <3.7",
         "laminas/laminas-code": "^4.16",
+        "laminas/laminas-feed": "^2.26.3",
         "lcobucci/jwt": "^4.3",
         "league/html-to-markdown": "^5.1.1",
         "mgargano/simplehtmldom": "^1.5",
