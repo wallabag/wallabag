@@ -129,13 +129,13 @@ class DownloadImages
 
         try {
             $res = $this->client->request(Request::METHOD_GET, $absolutePath);
+            $ext = $this->getExtensionFromResponse($res, $imagePath);
         } catch (\Exception $e) {
             $this->logger->error('DownloadImages: Can not retrieve image, skipping.', ['exception' => $e]);
 
             return false;
         }
 
-        $ext = $this->getExtensionFromResponse($res, $imagePath);
         if (false === $ext) {
             return false;
         }
