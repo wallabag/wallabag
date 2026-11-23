@@ -23,6 +23,7 @@ use Symfony\Component\Mime\MimeTypes;
 class DownloadImages
 {
     public const REGENERATE_PICTURES_QUALITY = 80;
+    public const MAX_FETCHED_IMAGE_SIZE = 10485760;
 
     private $client;
     private $baseFolder;
@@ -236,18 +237,61 @@ class DownloadImages
      *
      * @return array{content: string, extension: string, mimetype: string}|null
      */
-    public function fetchImage(?string $imageUrl): ?array
+    public function fetchImage(?string $imageUrl, ?string $baseUrl = null): ?array
     {
-        if (null === $imageUrl) {
+        if (null === $imageUrl || '' === trim($imageUrl)) {
+            return null;
+        }
+
+        $absoluteUrl = null === $baseUrl ? $imageUrl : $this->getAbsoluteLink($baseUrl, $imageUrl);
+
+        if (false === $absoluteUrl) {
             return null;
         }
 
         try {
-            $im = imagecreatefromstring((string) $this->client->get($imageUrl)->getBody());
+            $response = $this->client->get($absoluteUrl);
         } catch (\Exception $e) {
             $this->logger->error('DownloadImages: Can not retrieve image, skipping.', ['exception' => $e]);
 
             return null;
+        }
+
+        $body = (string) $response->getBody();
+
+        if (\strlen($body) > self::MAX_FETCHED_IMAGE_SIZE) {
+            $this->logger->error('DownloadImages: Image is too big, skipping.', ['url' => $absoluteUrl]);
+
+            return null;
+        }
+
+        $extension = $this->getExtensionFromResponse($response, $absoluteUrl);
+
+        if (false === $extension) {
+            return null;
+        }
+
+        if ('svg' === $extension) {
+            try {
+                $sanitizer = new Sanitizer();
+                $sanitizer->minify(true);
+                $sanitizer->removeRemoteReferences(true);
+                $cleanSvg = $sanitizer->sanitize($body);
+            } catch (\Exception $e) {
+                return null;
+            }
+
+            if (false === $cleanSvg || false === strpos($cleanSvg, '<svg ')) {
+                return null;
+            }
+
+            return ['content' => $cleanSvg, 'extension' => 'svg', 'mimetype' => 'image/svg+xml'];
+        }
+
+        try {
+            $im = imagecreatefromstring($body);
+        } catch (\Exception $e) {
+            $im = false;
         }
 
         if (false === $im) {
@@ -255,10 +299,28 @@ class DownloadImages
         }
 
         ob_start();
-        imagejpeg($im, null, self::REGENERATE_PICTURES_QUALITY);
+        switch ($extension) {
+            case 'gif':
+                imagegif($im);
+                $result = ['extension' => 'gif', 'mimetype' => 'image/gif'];
+                break;
+            case 'png':
+                imagealphablending($im, false);
+                imagesavealpha($im, true);
+                imagepng($im, null, (int) ceil(self::REGENERATE_PICTURES_QUALITY / 100 * 9));
+                $result = ['extension' => 'png', 'mimetype' => 'image/png'];
+                break;
+            case 'webp':
+                imagewebp($im, null, self::REGENERATE_PICTURES_QUALITY);
+                $result = ['extension' => 'webp', 'mimetype' => 'image/webp'];
+                break;
+            default:
+                imagejpeg($im, null, self::REGENERATE_PICTURES_QUALITY);
+                $result = ['extension' => 'jpg', 'mimetype' => 'image/jpeg'];
+        }
         imagedestroy($im);
 
-        return ['content' => (string) ob_get_clean(), 'extension' => 'jpg', 'mimetype' => 'image/jpeg'];
+        return ['content' => (string) ob_get_clean()] + $result;
     }
 
     /**

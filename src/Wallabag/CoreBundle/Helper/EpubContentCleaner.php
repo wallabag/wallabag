@@ -6,18 +6,23 @@ use PHPePub\Core\EPub;
 
 class EpubContentCleaner
 {
-    private $imageLocator;
+    public const MAX_REMOTE_IMAGES = 100;
 
-    public function __construct(InstanceImageLocator $imageLocator)
+    private $imageLocator;
+    private $downloadImages;
+
+    public function __construct(InstanceImageLocator $imageLocator, DownloadImages $downloadImages)
     {
         $this->imageLocator = $imageLocator;
+        $this->downloadImages = $downloadImages;
     }
 
     /**
-     * Return the content as XHTML, with the images stored by wallabag added to the book.
-     * Nothing is fetched: other references are left untouched.
+     * Return the content as XHTML, with the images added to the book: the ones stored by wallabag,
+     * then the remote ones, downloaded with the protection against requests to private networks.
+     * The other references are left untouched.
      */
-    public function clean(EPub $book, ?string $content): string
+    public function clean(EPub $book, ?string $content, ?string $baseUrl = null): string
     {
         $document = new \DOMDocument();
         $previousErrors = libxml_use_internal_errors(true);
@@ -32,12 +37,40 @@ class EpubContentCleaner
             $comment->parentNode->removeChild($comment);
         }
 
+        $remoteImages = [];
+        $remoteImagesTried = 0;
+
         foreach ($xpath->query('.//img', $body) as $image) {
             \assert($image instanceof \DOMElement);
 
             $localImage = $this->imageLocator->locate($image->getAttribute('src'));
 
             if (null === $localImage) {
+                $source = trim($image->getAttribute('src'));
+
+                if ('' === $source || 0 === stripos($source, 'data:')) {
+                    continue;
+                }
+
+                if (!\array_key_exists($source, $remoteImages)) {
+                    if (self::MAX_REMOTE_IMAGES <= $remoteImagesTried) {
+                        continue;
+                    }
+
+                    ++$remoteImagesTried;
+                    $remoteImages[$source] = $this->downloadImages->fetchImage($source, $baseUrl);
+
+                    if (null !== $remoteImages[$source]) {
+                        $remoteImages[$source]['fileName'] = 'images/' . sha1($source) . '.' . $remoteImages[$source]['extension'];
+                        $book->addFile($remoteImages[$source]['fileName'], 'image-' . sha1($source), $remoteImages[$source]['content'], $remoteImages[$source]['mimetype']);
+                    }
+                }
+
+                if (null !== $remoteImages[$source]) {
+                    $image->setAttribute('src', $remoteImages[$source]['fileName']);
+                    $image->removeAttribute('srcset');
+                }
+
                 continue;
             }
 

@@ -233,7 +233,7 @@ class EntriesExport
                 '</dl>' .
                 $bookEnd;
             $book->addChapter("Entry {$i} of {$entryCount}", "{$filename}_cover.html", $titlepage, true, EPub::EXTERNAL_REF_IGNORE);
-            $chapter = $content_start . $this->contentCleaner->clean($book, $entry->getContent()) . $bookEnd;
+            $chapter = $content_start . $this->contentCleaner->clean($book, $entry->getContent(), $entry->getUrl()) . $bookEnd;
 
             $entryIds[] = $entry->getId();
             try {

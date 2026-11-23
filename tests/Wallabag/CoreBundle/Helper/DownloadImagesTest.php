@@ -343,10 +343,32 @@ class DownloadImagesTest extends TestCase
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test_fetch', 'http://wallabag.io/', new Logger('test', [new TestHandler()]));
         $image = $download->fetchImage(self::PUBLIC_HTTP_BASE . '/cover.png');
 
-        $this->assertSame('jpg', $image['extension']);
-        $this->assertSame('image/jpeg', $image['mimetype']);
+        $this->assertSame('png', $image['extension']);
+        $this->assertSame('image/png', $image['mimetype']);
         $this->assertNotFalse(imagecreatefromstring($image['content']));
         $this->assertSame([], glob(sys_get_temp_dir() . '/wallabag_test_fetch/*/*/*/*'));
+    }
+
+    public function testFetchImageResolvesRelativeUrlsFromTheBaseUrl()
+    {
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
+
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test_fetch', 'http://wallabag.io/', new Logger('test', [new TestHandler()]));
+        $image = $download->fetchImage('/images/cover.png', self::PUBLIC_HTTP_BASE . '/article');
+
+        $this->assertSame('png', $image['extension']);
+        $this->assertSame(self::PUBLIC_HTTP_BASE . '/images/cover.png', (string) $httpMockClient->getLastRequest()->getUri());
+    }
+
+    public function testFetchImageSkipsAnythingThatIsNotAnImage()
+    {
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'text/html'], '<html></html>'));
+
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test_fetch', 'http://wallabag.io/', new Logger('test', [new TestHandler()]));
+
+        $this->assertNull($download->fetchImage(self::PUBLIC_HTTP_BASE . '/page'));
     }
 
     private function assetUrlFor(string $absolutePath, string $extension): string
