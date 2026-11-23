@@ -134,6 +134,9 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');
         $this->assertCount(1, $tags);
 
+        $this->assertCount(1, $content->getAnnotations());
+        $this->assertSame('my annotation', $content->getAnnotations()[0]->getText());
+
         $content = $client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)

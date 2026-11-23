@@ -2,6 +2,7 @@
 
 namespace Wallabag\ImportBundle\Import;
 
+use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Entry;
 
 abstract class WallabagImport extends AbstractImport
@@ -128,6 +129,14 @@ abstract class WallabagImport extends AbstractImport
                 $data['tags'],
                 $this->em->getUnitOfWork()->getScheduledEntityInsertions()
             );
+        }
+
+        foreach ($data['annotations'] ?? [] as $importedAnnotation) {
+            $annotation = new Annotation($this->user);
+            $annotation->setText($importedAnnotation['text'] ?? '');
+            $annotation->setQuote($importedAnnotation['quote'] ?? null);
+            $annotation->setRanges($importedAnnotation['ranges'] ?? []);
+            $annotation->setEntry($entry);
         }
 
         if (isset($importedEntry['preview_picture'])) {

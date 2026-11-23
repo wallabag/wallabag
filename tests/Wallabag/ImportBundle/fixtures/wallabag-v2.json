@@ -31,7 +31,23 @@
     "language": "",
     "reading_time": 4,
     "domain_name": "www.liberation.fr",
-    "tags": []
+    "tags": [],
+    "annotations": [
+      {
+        "user": "admin",
+        "annotator_schema_version": "v1.0",
+        "text": "my annotation",
+        "quote": "places d'accueil",
+        "ranges": [
+          {
+            "start": "/div[1]/p[1]",
+            "startOffset": "10",
+            "end": "/div[1]/p[1]",
+            "endOffset": "26"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "21",
