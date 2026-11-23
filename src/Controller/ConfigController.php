@@ -531,6 +531,28 @@ class ConfigController extends AbstractController
         return $this->redirect($this->generateUrl('config') . '#set8');
     }
 
+    #[Route(path: '/revoke-mail-import-token', name: 'revoke_mail_import_token', methods: ['POST'])]
+    #[IsGranted('EDIT_CONFIG')]
+    public function revokeMailImportTokenAction(Request $request): RedirectResponse
+    {
+        if (!$this->isCsrfTokenValid('revoke-mail-import-token', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
+        $config = $this->getConfig();
+        $config->setMailImportToken(null);
+
+        $this->entityManager->persist($config);
+        $this->entityManager->flush();
+
+        $this->addFlash(
+            'notice',
+            'flashes.config.notice.mail_import_token_revoked',
+        );
+
+        return $this->redirect($this->generateUrl('config') . '#set8');
+    }
+
     /**
      * Deletes a tagging rule and redirect to the config homepage.
      *

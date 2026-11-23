@@ -266,6 +266,12 @@
 
                                                 <button type="submit" class="btn-link">{{ 'config.form_mail_import.address_reset'|trans }}</button>
                                             </form>
+                                            –
+                                            <form action="{{ path('revoke_mail_import_token') }}" method="post" class="inline-block">
+                                                <input type="hidden" name="token" value="{{ csrf_token('revoke-mail-import-token') }}"/>
+
+                                                <button type="submit" class="btn-link">{{ 'config.form_mail_import.address_revoke'|trans }}</button>
+                                            </form>
                                         {% else %}
                                             <em>{{ 'config.form_mail_import.no_address'|trans }}</em>
                                             –

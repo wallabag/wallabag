@@ -403,6 +403,13 @@ class ConfigControllerTest extends WallabagTestCase
         $crawler = $client->followRedirect();
 
         $this->assertStringContainsString('wallabag+' . $token . '@example.org', $crawler->filter('#set8')->text());
+
+        $client->submit($crawler->selectButton('config.form_mail_import.address_revoke')->form());
+        $crawler = $client->followRedirect();
+
+        $this->assertStringContainsString('config.form_mail_import.no_address', $crawler->filter('#set8')->text());
+        $this->getEntityManager()->clear();
+        $this->assertNull($this->getEntityManager()->getRepository(User::class)->findOneByUsername('admin')->getConfig()->getMailImportToken());
     }
 
     public function testFeedUpdate(): void

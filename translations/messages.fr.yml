@@ -123,6 +123,7 @@ config:
         no_address: "Aucune adresse"
         address_create: "Créez votre adresse"
         address_reset: "Réinitialisez votre adresse"
+        address_revoke: "Supprimer l’adresse"
         copy: "Copier"
         howto_label: "Comment ça marche"
         howto:
@@ -676,6 +677,7 @@ flashes:
             feed_token_updated: "Jeton des flux mis à jour"
             feed_token_revoked: 'Jeton des flux supprimé'
             mail_import_token_updated: "Adresse email privée créée"
+            mail_import_token_revoked: "Adresse email privée supprimée"
             annotations_reset: "Annotations supprimées"
             tags_reset: "Étiquettes supprimées"
             entries_reset: "Articles supprimés"
