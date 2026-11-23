@@ -17,7 +17,7 @@ During this documentation, we assume the release is `$LAST_WALLABAG_RELEASE` (li
 #### Create a new release on GitHub
 
 - [Create the new release on GitHub](https://github.com/wallabag/wallabag/releases/new) by targeting the `master` branch or any appropriate branch (for instance backports).
-- Update [website](https://github.com/wallabag/website) to change MD5 sum and create the release blog post (based on the changelog).
+- Create the release blog post on the [website](https://github.com/wallabag/website) (based on the changelog). The release workflow rebuilds the website, which updates the download section and `releases.json`.
 - Update Dockerfile https://github.com/wallabag/docker (and create a new tag)
 - Put the next patch version suffixed with `-dev` in `app/config/wallabag.yml` (`wallabag.version`)
 - Drink a :beer:!

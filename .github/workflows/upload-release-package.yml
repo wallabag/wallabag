@@ -62,3 +62,8 @@ jobs:
         with:
           upload_url: ${{ github.event.release.upload_url }}
           asset_path: /tmp/wllbg-release/wallabag-${{ github.event.release.tag_name }}.tar.gz.minisig
+
+      - name: Rebuild the website to update releases.json
+        env:
+          NETLIFY_WEBSITE_BUILD_HOOK: ${{ secrets.NETLIFY_WEBSITE_BUILD_HOOK }}
+        run: curl -sSf -X POST -d '{}' "$NETLIFY_WEBSITE_BUILD_HOOK"
