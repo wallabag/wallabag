@@ -7,12 +7,14 @@ class MessageParser
     /**
      * @param string[] $recipients
      */
-    public function getToken(string $importAddress, array $recipients): ?string
+    public function getToken(string $importAddress, array $recipients, string $rawHeader = ''): ?string
     {
         [$local, $domain] = explode('@', $importAddress, 2) + ['', ''];
         $pattern = '/^' . preg_quote($local, '/') . '\+([a-z0-9]+)@' . preg_quote($domain, '/') . '$/iD';
 
-        foreach ($recipients as $recipient) {
+        preg_match_all('/^(?:Delivered-To|X-Original-To):\s*<?([^\s>]+)/mi', (string) preg_replace('/\r?\n[ \t]+/', ' ', $rawHeader), $matches);
+
+        foreach (array_merge($recipients, $matches[1]) as $recipient) {
             if (preg_match($pattern, trim($recipient), $match)) {
                 return strtolower($match[1]);
             }

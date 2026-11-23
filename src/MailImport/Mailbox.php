@@ -10,6 +10,8 @@ use Webklex\PHPIMAP\Message;
 
 class Mailbox
 {
+    public const REJECTED_FOLDER = 'wallabag-rejected';
+
     private ?Client $client = null;
 
     private string $folder = 'INBOX';
@@ -57,26 +59,50 @@ class Mailbox
     public function open(): void
     {
         $dsn = self::parseDsn($this->settings->getDsn());
-        $this->folder = $dsn['folder'];
         $this->client = (new ClientManager())->make($dsn['config']);
         $this->client->connect();
+
+        $folder = $this->client->getFolderByPath($dsn['folder'], false, true);
+
+        if (null === $folder) {
+            throw new \RuntimeException(\sprintf('The "%s" folder does not exist.', $dsn['folder']));
+        }
+        $this->folder = $folder->path;
+
+        if (null === $this->client->getFolderByPath(self::REJECTED_FOLDER, false, true)) {
+            $this->client->createFolder(self::REJECTED_FOLDER, false);
+        }
+
         $this->client->openFolder($this->folder);
     }
 
     /**
-     * @return iterable<MailMessage>
+     * @return string[]
      */
-    public function getMessages(int $limit): iterable
+    public function getFolders(): array
+    {
+        return array_map(static fn ($folder) => $folder->path, $this->getClient()->getFolders(false)->all());
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getUids(int $limit): array
     {
         $client = $this->getClient();
+        $client->openFolder($this->folder);
         $uids = array_map('intval', $client->getConnection()->search(['UNDELETED'], IMAP::ST_UID)->validatedData());
         sort($uids);
 
-        $query = $client->getFolderByPath($this->folder)->query()->leaveUnread();
+        return \array_slice($uids, 0, $limit);
+    }
 
-        foreach (\array_slice($uids, 0, $limit) as $uid) {
-            yield self::createMailMessage($query->getMessageByUid($uid));
-        }
+    public function fetch(int $uid): MailMessage
+    {
+        $client = $this->getClient();
+        $client->openFolder($this->folder);
+
+        return self::createMailMessage($client->getFolderByPath($this->folder)->query()->leaveUnread()->getMessageByUid($uid));
     }
 
     public static function createMailMessage(Message $message): MailMessage
@@ -86,12 +112,37 @@ class Mailbox
             array_merge($message->getTo()->all(), $message->getCc()->all()),
         );
 
-        return new MailMessage((int) $message->getUid(), $recipients, $message->getTextBody(), $message->getHTMLBody());
+        return new MailMessage((int) $message->getUid(), $recipients, (string) $message->getHeader()?->raw, $message->getTextBody(), $message->getHTMLBody());
     }
 
     public function delete(int $uid): void
     {
-        $this->getClient()->getConnection()->store(['\Deleted'], $uid, null, '+', true, IMAP::ST_UID)->validatedData();
+        $client = $this->getClient();
+        $client->openFolder($this->folder);
+        $client->getConnection()->store(['\\Deleted'], $uid, null, '+', true, IMAP::ST_UID)->validatedData();
+    }
+
+    public function reject(int $uid): void
+    {
+        $client = $this->getClient();
+        $client->openFolder($this->folder);
+        $client->getConnection()->copyMessage(self::REJECTED_FOLDER, $uid, null, IMAP::ST_UID)->validatedData();
+        $this->delete($uid);
+    }
+
+    public function purgeRejected(int $days): void
+    {
+        $client = $this->getClient();
+        $client->openFolder(self::REJECTED_FOLDER);
+        $connection = $client->getConnection();
+
+        $uids = $connection->search(['BEFORE', date('d-M-Y', strtotime(\sprintf('-%d days', $days)))], IMAP::ST_UID)->validatedData();
+
+        foreach ($uids as $uid) {
+            $connection->store(['\\Deleted'], (int) $uid, null, '+', true, IMAP::ST_UID)->validatedData();
+        }
+
+        $client->expunge();
     }
 
     public function close(): void
@@ -101,6 +152,7 @@ class Mailbox
         }
 
         try {
+            $this->client->openFolder($this->folder);
             $this->client->expunge();
         } finally {
             $this->client->disconnect();

@@ -21,7 +21,10 @@ each email in the account of its recipient. The feature is disabled by default.
   deleted from it.
 - Emails sent to `wallabag+anything@example.org` must reach this mailbox.
   Most providers support this "subaddressing", otherwise use a catch-all
-  address on a dedicated domain.
+  address on a dedicated domain. The private address is read from the `To` and
+  `Cc` headers, then from `Delivered-To` and `X-Original-To`, so emails sent
+  in Bcc work when your mail server adds one of them.
+- The PHP extensions `zip` and `fileinfo`, required by the IMAP library.
 - The database migrations must be up to date
   (`bin/console doctrine:migrations:migrate --env=prod`).
 
@@ -50,6 +53,15 @@ Special characters in the user and the password must be URL-encoded
 (`@` becomes `%40`). The port defaults to `993` with `imaps` and `143` with
 `imap`, the folder to `INBOX`.
 
+## Check the configuration
+
+```console
+bin/console wallabag:import:mail --check --env=prod
+```
+
+The command connects to the mailbox, lists its folders and tells you what
+is wrong when it fails (unreachable host, wrong credentials, missing folder).
+
 ## Run the import periodically
 
 Add a cron job, for example every 5 minutes:
@@ -58,12 +70,29 @@ Add a cron job, for example every 5 minutes:
 */5 * * * * cd /var/www/wallabag && php bin/console wallabag:import:mail --env=prod
 ```
 
-Each run reads at most 50 emails, the oldest first, and deletes them from the
-mailbox, including the ones sent to an unknown or revoked address. An email
-that could not be processed (website down, database error…) is kept, and the
-next run tries again. The command then exits with a non-zero status.
+Each run reads at most 50 emails, the oldest first, the next ones are read
+on the following run. Change it with `--limit`. Two imports never run at the
+same time.
+
+The command prints nothing when no article was saved, so a cron setup sending
+the output by email stays quiet. Errors are always printed, and the command
+exits with a non-zero status.
+
+## What happens to the emails
+
+- Processed email: deleted from the mailbox.
+- Email for an unknown or revoked address, or for a disabled user: moved to
+  the `wallabag-rejected` folder (created automatically) and deleted after
+  30 days.
+- Email that could not be read or saved (database error, invalid message…): kept in the
+  mailbox, the next run tries again. The other emails are still processed.
+
+When a website cannot be fetched, wallabag saves the link as an entry without
+content, like when you add it from the interface, and deletes the email. The
+entry can be reloaded later from wallabag: the command does not retry it.
 
 ## Security
 
 Anyone who knows a private address can add links to the account of its owner.
-Users can regenerate it at any time: the old one stops working.
+Users can regenerate or revoke it at any time: the old one stops working and
+the emails sent to it are moved to `wallabag-rejected`.

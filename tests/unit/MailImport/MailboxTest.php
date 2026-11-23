@@ -36,6 +36,7 @@ class MailboxTest extends TestCase
     public function testMailMessageFromMultipartEmail(): void
     {
         $raw = implode("\r\n", [
+            'Delivered-To: wallabag+abc123@example.org',
             'From: Someone <someone@example.com>',
             'To: Reader <reader@example.com>',
             'Cc: wallabag+abc123@example.org',
@@ -71,6 +72,7 @@ class MailboxTest extends TestCase
         self::assertSame(['reader@example.com', 'wallabag+abc123@example.org'], $message->recipients);
         self::assertSame('café https://example.org/article?x=1&y=2', trim($message->text));
         self::assertStringContainsString('https://example.org/article?x=1&amp;y=2', $message->html);
+        self::assertStringContainsString('Delivered-To: wallabag+abc123@example.org', $message->rawHeader);
         self::assertStringNotContainsString('attachment', $message->text);
     }
 }

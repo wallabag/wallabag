@@ -27,14 +27,60 @@ class MailCommandTest extends WallabagKernelTestCase
         parent::tearDown();
     }
 
+    public function testDisabledImportDoesNothing(): void
+    {
+        $mailbox = $this->createMock(Mailbox::class);
+        $mailbox->expects($this->never())->method('open');
+
+        $this->assertSame(0, $this->runCommand($mailbox, '')->getStatusCode());
+    }
+
+    public function testCheckFailsWhenDisabled(): void
+    {
+        $this->assertSame(1, $this->runCommand($this->createMock(Mailbox::class), '', ['--check' => true])->getStatusCode());
+    }
+
+    public function testCheckListsFolders(): void
+    {
+        $mailbox = $this->createMock(Mailbox::class);
+        $mailbox->expects($this->once())->method('open');
+        $mailbox->method('getFolders')->willReturn(['INBOX', Mailbox::REJECTED_FOLDER]);
+        $mailbox->expects($this->never())->method('getUids');
+
+        $tester = $this->runCommand($mailbox, 'wallabag@example.org', ['--check' => true]);
+
+        $this->assertSame(0, $tester->getStatusCode());
+        $this->assertStringContainsString(Mailbox::REJECTED_FOLDER, $tester->getDisplay());
+        $this->assertStringContainsString('wallabag+<token>@example.org', $tester->getDisplay());
+    }
+
+    /**
+     * @dataProvider provideInvalidLimits
+     */
+    public function testInvalidLimit(string $limit): void
+    {
+        $mailbox = $this->createMock(Mailbox::class);
+        $mailbox->expects($this->never())->method('open');
+
+        $this->assertSame(1, $this->runCommand($mailbox, 'wallabag@example.org', ['--limit' => $limit])->getStatusCode());
+    }
+
+    public static function provideInvalidLimits(): iterable
+    {
+        yield ['0'];
+        yield ['-1'];
+    }
+
     public function testLinksAreSavedForTheRecipient(): void
     {
         $this->setToken('admin', 'abc123');
 
         $mailbox = $this->createMailbox([
-            new MailMessage(1, ['wallabag+ABC123@example.org'], "http://0.0.0.0/entry1\n" . self::NEW_URL . "\n" . self::NEW_URL . "\nhttps://example.org/mail-import/over-limit", ''),
+            1 => new MailMessage(1, ['wallabag+ABC123@example.org'], '', "http://0.0.0.0/entry1\n" . self::NEW_URL . "\n" . self::NEW_URL . "\nhttps://example.org/mail-import/over-limit", ''),
         ]);
         $mailbox->expects($this->once())->method('delete')->with(1);
+        $mailbox->expects($this->never())->method('reject');
+        $mailbox->expects($this->once())->method('purgeRejected')->with(30);
         $mailbox->expects($this->once())->method('close');
 
         $tester = $this->runCommand($mailbox, 'wallabag@example.org', [], 2);
@@ -47,43 +93,71 @@ class MailCommandTest extends WallabagKernelTestCase
         $this->assertSame('admin', $entries[0]->getUser()->getUsername());
     }
 
-    public function testUnknownAddressesAreDeleted(): void
-    {
-        $mailbox = $this->createMailbox([
-            new MailMessage(1, ['wallabag+unknown@example.org'], self::NEW_URL, ''),
-            new MailMessage(2, ['someone@example.org'], self::NEW_URL, ''),
-        ]);
-        $mailbox->expects($this->exactly(2))->method('delete');
-
-        $this->assertSame(0, $this->runCommand($mailbox, 'wallabag@example.org')->getStatusCode());
-        $this->assertNull($this->getEntityManager()->getRepository(Entry::class)->findOneBy(['url' => self::NEW_URL]));
-    }
-
-    public function testFailedMessageIsKeptWithoutBlockingTheNextOnes(): void
+    public function testRecipientFoundInDeliveryHeaders(): void
     {
         $this->setToken('admin', 'abc123');
 
         $mailbox = $this->createMailbox([
-            new MailMessage(1, ['wallabag+abc123@example.org'], 'https://example.org/mail-import/broken', ''),
-            new MailMessage(2, ['wallabag+abc123@example.org'], self::NEW_URL, ''),
+            1 => new MailMessage(1, ['reader@example.com'], "Delivered-To: wallabag+abc123@example.org\r\n", self::NEW_URL, ''),
         ]);
-        $mailbox->expects($this->once())->method('delete')->with(2);
+        $mailbox->expects($this->never())->method('reject');
+
+        $this->runCommand($mailbox, 'wallabag@example.org');
+
+        $this->assertNotNull($this->getEntityManager()->getRepository(Entry::class)->findOneBy(['url' => self::NEW_URL]));
+    }
+
+    public function testUnknownAddressesAreRejected(): void
+    {
+        $mailbox = $this->createMailbox([
+            1 => new MailMessage(1, ['wallabag+unknown@example.org'], '', self::NEW_URL, ''),
+            2 => new MailMessage(2, ['someone@example.org'], '', self::NEW_URL, ''),
+        ]);
+        $mailbox->expects($this->exactly(2))->method('reject');
+        $mailbox->expects($this->never())->method('delete');
+
+        $tester = $this->runCommand($mailbox, 'wallabag@example.org');
+
+        $this->assertSame(0, $tester->getStatusCode());
+        $this->assertStringNotContainsString('article(s) saved', $tester->getDisplay());
+        $this->assertNull($this->getEntityManager()->getRepository(Entry::class)->findOneBy(['url' => self::NEW_URL]));
+    }
+
+    public function testFailedMessagesAreKeptWithoutBlockingTheNextOnes(): void
+    {
+        $this->setToken('admin', 'abc123');
+
+        $mailbox = $this->createMailbox([
+            1 => new MailMessage(1, ['wallabag+abc123@example.org'], '', 'https://example.org/mail-import/broken', ''),
+            2 => new \RuntimeException('Unable to parse the message'),
+            3 => new MailMessage(3, ['wallabag+abc123@example.org'], '', self::NEW_URL, ''),
+        ]);
+        $mailbox->expects($this->once())->method('delete')->with(3);
+        $mailbox->expects($this->never())->method('reject');
 
         $tester = $this->runCommand($mailbox, 'wallabag@example.org');
 
         $this->assertSame(1, $tester->getStatusCode());
         $this->assertStringContainsString('Unable to import message 1', $tester->getDisplay());
+        $this->assertStringContainsString('Unable to import message 2', $tester->getDisplay());
         $this->assertNotNull($this->getEntityManager()->getRepository(Entry::class)->findOneBy(['url' => self::NEW_URL]));
     }
 
     /**
-     * @param MailMessage[] $messages
+     * @param array<int, MailMessage|\Throwable> $messages
      */
     private function createMailbox(array $messages): MockObject&Mailbox
     {
         $mailbox = $this->createMock(Mailbox::class);
         $mailbox->expects($this->once())->method('open');
-        $mailbox->method('getMessages')->willReturn($messages);
+        $mailbox->method('getUids')->willReturn(array_keys($messages));
+        $mailbox->method('fetch')->willReturnCallback(static function (int $uid) use ($messages): MailMessage {
+            if ($messages[$uid] instanceof \Throwable) {
+                throw $messages[$uid];
+            }
+
+            return $messages[$uid];
+        });
 
         return $mailbox;
     }

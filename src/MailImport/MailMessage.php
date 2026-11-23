@@ -10,6 +10,7 @@ class MailMessage
     public function __construct(
         public readonly int $uid,
         public readonly array $recipients,
+        public readonly string $rawHeader,
         public readonly string $text,
         public readonly string $html,
     ) {

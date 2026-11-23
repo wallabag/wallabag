@@ -15,6 +15,15 @@ class MessageParserTest extends TestCase
         self::assertNull($parser->getToken('wallabag@example.org', ['wallabag@example.org', 'wallabag+abc123@example.com', 'other+abc123@example.org']));
     }
 
+    public function testTokenFromDeliveryHeaders(): void
+    {
+        $parser = new MessageParser();
+        $headers = "Delivered-To: reader@example.com\r\nX-Original-To: <wallabag+abc123@example.org>\r\n";
+
+        self::assertSame('abc123', $parser->getToken('wallabag@example.org', ['newsletter@example.com'], $headers));
+        self::assertNull($parser->getToken('wallabag@example.org', ['newsletter@example.com'], "Delivered-To: reader@example.com\r\n"));
+    }
+
     public function testUrlsFromText(): void
     {
         $text = "(https://example.org/a?x=1&y=2#top).\nhttps://example.org/a?x=1&y=2#top\nhttps://example.org/wiki/Test_(example)\nnot-a-url";

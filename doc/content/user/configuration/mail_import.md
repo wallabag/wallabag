@@ -14,11 +14,13 @@ To save an article, send an email to this address with the link in the body:
 - you can put several links, each one becomes an article (up to 10 per
   email by default);
 - the subject and the attachments are ignored;
-- when the email has both a text and an HTML version, the text version is read;
+- the text version of the email is read first, the links of the HTML version
+  are used only when the text contains no link;
 - a link already saved in your account is not added again.
 
 Articles show up after a few minutes: wallabag reads the emails periodically.
 
 Keep this address private: anyone who knows it can add articles to your
-account. If needed, click **Regenerate your address**: the old one stops
-working.
+account. If needed, click **Regenerate your address** to get a new one, or
+**Revoke the address** to turn the feature off for your account: the old
+address stops working.
