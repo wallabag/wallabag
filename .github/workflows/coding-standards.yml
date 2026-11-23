@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       APP_ENV: dev
+      APP_DEBUG: 1
       DATABASE_URL: mysql://root:root@127.0.0.1:3306/wallabag?charset=utf8mb4
 
     steps:
