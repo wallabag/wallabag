@@ -118,15 +118,15 @@ class InstapaperControllerTest extends WallabagCoreTestCase
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
-                'https://www.theguardian.com/global-development/ng-interactive/2025/dec/22/childbirth-under-attack-how-women-and-babies-became-targets-in-conflicts-around-the-world',
+                'https://arxiv.org/abs/1706.03762',
                 $this->getLoggedInUserId()
             );
 
         $this->assertInstanceOf(Entry::class, $content);
 
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.theguardian.com is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.theguardian.com is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.theguardian.com is ok');
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://arxiv.org is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://arxiv.org is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for https://arxiv.org is ok');
         $this->assertContains('foot', $content->getTagsLabel(), 'It includes the "foot" tag');
         $this->assertCount(1, $content->getTags());
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
