@@ -6,8 +6,8 @@ weight: 7
 ## Environment-first configuration
 
 wallabag is configured with environment variables. The committed `.env` file
-only sets `APP_ENV=prod`: every other variable has a default value, except
-`APP_SECRET`.
+holds the default values for production. Only `APP_SECRET` has no default
+value.
 
 - For production, export the variables through your web server, PHP-FPM pool,
   systemd unit, or container runtime. If you can't, copy `.env.prod.example`
@@ -207,7 +207,10 @@ the application cache after changing it.
 ## Legacy mapping for upgraded installs
 
 If an upgraded installation still has `app/config/parameters.yml`, wallabag maps
-the legacy keys below to the new environment-variable interface at boot time.
+the legacy keys below to the new environment-variable interface at boot time,
+in the `prod` environment only.
+Their values override the `.env` files, but real environment variables still
+take precedence.
 
 | Legacy key | Environment variable |
 | ---------- | -------------------- |
