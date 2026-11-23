@@ -5,14 +5,19 @@ weight: 7
 
 ## Environment-first configuration
 
-wallabag is configured with environment variables.
+wallabag is configured with environment variables. The committed `.env` file
+only sets `APP_ENV=prod`: every other variable has a default value, except
+`APP_SECRET`.
 
-- For local development, put overrides in `.env.local`.
+- For production, export the variables through your web server, PHP-FPM pool,
+  systemd unit, or container runtime. If you can't, copy `.env.prod.example`
+  to `.env.local` and set your values, starting with `APP_SECRET`. Real
+  environment variables always take precedence over `.env.local`.
+- For local development, copy `.env.dev.example` to `.env.local`. It sets
+  `APP_ENV=dev`. `make dev-setup` does it for you.
 - For tests, put overrides in `.env.test.local`.
 - For Docker-based local development, copy `docker/php/env.example` to
   `docker/php/env` for Docker-specific overrides.
-- For production, export the variables through your web server, PHP-FPM pool,
-  systemd unit, or container runtime.
 
 Keep `DATABASE_URL` in `.env.local` and `.env.test.local` so development and
 test can choose different databases, even when you run wallabag in Docker.
@@ -33,9 +38,9 @@ After changing configuration in production, clear the cache with
 
 | Name | Description | Default |
 | -----|-------------|---------|
-| APP_ENV | Symfony environment | `dev` |
+| APP_ENV | Symfony environment | `prod` |
 | APP_DEBUG | Symfony debug flag | `1` in dev, `0` in prod |
-| APP_SECRET | Secret used for security-related operations | `ch4n63m31fy0uc4n` in `.env`, set your own value in production |
+| APP_SECRET | Secret used for security-related operations | none, required |
 
 ## Application variables
 

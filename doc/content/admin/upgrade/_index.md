@@ -34,7 +34,7 @@ Back up your database, your `app/config/parameters.yml` file and your `data/` fo
 
 -   **PHP 8.2 or later is required**. PHP 7.4, 8.0 and 8.1 are no longer supported.
 -   **wallabag is now configured with environment variables**. Your `app/config/parameters.yml` file is still read, so you can keep it for now, but it is deprecated and will be removed in wallabag 3.0. See [Parameters]({{< relref "../parameters.md" >}}) for the list of variables and how each legacy key maps to them. The `rss_limit` key is no longer used.
--   **The front controller is now `web/index.php`**. `web/app.php` still works but is deprecated. If you switch your web server configuration to `web/index.php`, set `APP_ENV=prod` (in your web server environment or in `.env.local`), otherwise wallabag starts in the `dev` environment.
+-   **The front controller is now `web/index.php`**. `web/app.php` still works but is deprecated.
 -   **Built assets moved from `web/wallassets/` to `web/build/`**. Update your web server configuration if it references `wallassets`.
 -   Pages and API endpoints you are not allowed to access now return a 404 error instead of a 403 error.
 -   Public registration is disabled by default (`WALLABAG_REGISTRATION_ENABLED=0`). If you keep `parameters.yml`, your `fosuser_registration` value is still used.

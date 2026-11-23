@@ -15,6 +15,7 @@ jobs:
     name: "CS Fixer, PHPStan & TwigCS"
     runs-on: ubuntu-latest
     env:
+      APP_ENV: dev
       DATABASE_URL: mysql://root:root@127.0.0.1:3306/wallabag?charset=utf8mb4
 
     steps:

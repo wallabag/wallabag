@@ -51,6 +51,7 @@ dev-docker-down: ## Stop the Docker dev stack
 
 dev-setup: ## Install wallabag for development
 	@[ -n "$(COMPOSER)" ] || { echo "composer command not found and ./composer.phar is missing." >&2; exit 1; }
+	@[ -f .env.local ] || cp .env.dev.example .env.local
 	@$(COMPOSER) install
 	@$(YARN) install
 	@$(YARN) build:dev

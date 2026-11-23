@@ -37,5 +37,10 @@ fi
 TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
 
 git checkout $TAG
+
+if [ ! -f .env.local ]; then
+    sed "s/^APP_SECRET=.*/APP_SECRET=$(php -r 'echo bin2hex(random_bytes(16));')/" .env.prod.example > .env.local
+fi
+
 APP_ENV=$ENV $COMPOSER_COMMAND install --no-dev -o --prefer-dist
 php bin/console wallabag:install --env=$ENV

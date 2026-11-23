@@ -47,7 +47,8 @@ Run wallabag
 ------------
 
 1.  Fork and clone the project
-2.  Copy `docker/php/env.example` to `docker/php/env`
+2.  Copy `docker/php/env.example` to `docker/php/env`, and `.env.dev.example`
+    to `.env.local`
 3.  Adjust any Docker-specific overrides you need
 4.  If you are not using SQLite, uncomment the matching database service in
     `compose.yaml`, uncomment the matching `depends_on` line in the `php`
