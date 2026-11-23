@@ -45,6 +45,8 @@ You'll also need the following extensions. Some of these may already be activate
 -   php-bcmath
 -   php-intl
 -   php-fpm
+-   php-zip
+-   php-fileinfo
 
 wallabag uses PDO to connect to the database, so you'll need one of the following:
 

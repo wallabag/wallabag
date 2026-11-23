@@ -60,6 +60,7 @@ config:
         rules: Règles d'étiquetage
         new_user: Créer un compte
         feed: "Flux"
+        mail_import: 'Sauvegarde par email'
         ignore_origin: "Règles d'omission d'origine"
         reset: "Réinitialisation"
         article_display: Affichage de l'article
@@ -116,6 +117,19 @@ config:
             archive: "Lus"
             all: "Tous"
         feed_limit: "Nombre d’articles dans le flux"
+    form_mail_import:
+        description: "Sauvegardez un article en envoyant son lien à votre adresse email privée."
+        address_label: "Votre adresse privée"
+        no_address: "Aucune adresse"
+        address_create: "Créez votre adresse"
+        address_reset: "Réinitialisez votre adresse"
+        address_revoke: "Supprimer l’adresse"
+        copy: "Copier"
+        howto_label: "Comment ça marche"
+        howto:
+            links: "Mettez un ou plusieurs liens dans le corps de l’email : chaque lien devient un article (%max_links% au maximum par email)."
+            ignored: "L’objet et les pièces jointes sont ignorés. Un lien déjà sauvegardé n’est pas ajouté une deuxième fois."
+            private: "Gardez cette adresse pour vous : toute personne qui la connaît peut ajouter des articles à votre compte. Réinitialisez-la si besoin."
     form_user:
         two_factor_description: Activer l’authentification à deux facteurs signifie que vous allez recevoir un code par courriel à chaque nouvelle connexion non approuvée.
         name_label: Nom
@@ -662,6 +676,8 @@ flashes:
             tagging_rules_deleted: "Règle supprimée"
             feed_token_updated: "Jeton des flux mis à jour"
             feed_token_revoked: 'Jeton des flux supprimé'
+            mail_import_token_updated: "Adresse email privée créée"
+            mail_import_token_revoked: "Adresse email privée supprimée"
             annotations_reset: "Annotations supprimées"
             tags_reset: "Étiquettes supprimées"
             entries_reset: "Articles supprimés"

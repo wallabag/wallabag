@@ -37,6 +37,7 @@ Custom to wallabag:
  - `wallabag:export`: Exports all entries for a user. You can choose the output path of the file.
  - `wallabag:generate-hashed-urls`: Generates hashed URLs for each entry.
  - `wallabag:import`: Imports entries in different formats to a user account.
+ - `wallabag:import:mail`: Saves the links of the emails sent to the private addresses, see [Save articles by email]({{< relref "mail_import.md" >}}).
  - `wallabag:import:redis-worker`: Useful if you use Redis.
  - `wallabag:install`: (re)Installs wallabag.
  - `wallabag:tag:all`: Tags all entries for a user using their tagging rules.

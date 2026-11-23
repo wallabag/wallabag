@@ -48,6 +48,7 @@
         "ext-ctype": "*",
         "ext-curl": "*",
         "ext-dom": "*",
+        "ext-fileinfo": "*",
         "ext-filter": "*",
         "ext-gd": "*",
         "ext-hash": "*",
@@ -63,6 +64,7 @@
         "ext-tidy": "*",
         "ext-tokenizer": "*",
         "ext-xml": "*",
+        "ext-zip": "*",
         "babdev/pagerfanta-bundle": "^4.5",
         "craue/config-bundle": "^3.0.0",
         "defuse/php-encryption": "^2.4",
@@ -169,6 +171,7 @@
         "wallabag/phpepub": "^4.0.10",
         "wallabag/rulerz": "dev-master",
         "wallabag/rulerz-bundle": "dev-master",
+        "webklex/php-imap": "^6.2",
         "willdurand/hateoas": "^3.12",
         "willdurand/hateoas-bundle": "^2.7"
     },

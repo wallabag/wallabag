@@ -66,6 +66,9 @@ After changing configuration in production, clear the cache with
 | WALLABAG_TABLE_PREFIX | Prefix added to wallabag database tables | `wallabag_` |
 | WALLABAG_SITE_CONFIG_FOLDERS | Optional comma-separated list of extra graby site-config folders | empty |
 | WALLABAG_ARTICLE_REPORTING_URL | Destination used to report display problems with an article | `mailto:siteconfig@wallabag.org?subject=Wrong%20display%20in%20wallabag` |
+| WALLABAG_MAIL_IMPORT_ADDRESS | Address of the mailbox used to [save articles by email]({{< relref "mail_import.md" >}}) | empty |
+| WALLABAG_MAIL_IMPORT_DSN | IMAP connection to this mailbox, like `imaps://user:password@imap.example.org:993/INBOX` | empty |
+| WALLABAG_MAIL_IMPORT_MAX_LINKS | Maximum number of links saved from a single email | `10` |
 | SENTRY_DSN | Optional Sentry DSN used to report application errors | empty |
 
 ### Compromised-password protection
