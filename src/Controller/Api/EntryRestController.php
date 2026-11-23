@@ -485,7 +485,7 @@ class EntryRestController extends WallabagRestController
      *     @OA\Parameter(
      *         name="urls",
      *         in="query",
-     *         description="Urls (as an array) to delete. A JSON array of urls [{'url': 'http://...'}, {'url': 'http://...'}]",
+     *         description="Urls (as an array) to delete. A JSON array of URL strings, e.g. [""https://wallabag.org/"", ""https://example.com/""]. It can also be sent in the request body.",
      *         required=true,
      *         @OA\Schema(type="string")
      *     ),
@@ -501,7 +501,11 @@ class EntryRestController extends WallabagRestController
     #[IsGranted('DELETE_ENTRIES')]
     public function deleteEntriesListAction(Request $request, EntryRepository $entryRepository, EventDispatcherInterface $eventDispatcher)
     {
-        $urls = json_decode($request->query->get('urls', '[]'));
+        $urls = $request->request->all()['urls'] ?? $request->query->get('urls', '[]');
+
+        if (\is_string($urls)) {
+            $urls = json_decode($urls);
+        }
 
         if (empty($urls)) {
             return $this->sendResponse([]);
