@@ -1594,6 +1594,41 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame('http://0.0.0.0/entry2', $content[1]['url']);
     }
 
+    public function testPostEntriesListActionWithUrlsInBody(): void
+    {
+        $list = [
+            'http://0.0.0.0/entry-from-body1',
+            'http://0.0.0.0/entry-from-body2',
+        ];
+
+        $this->client->request('POST', '/api/entries/lists', ['urls' => json_encode($list)]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertCount(2, $content);
+        $this->assertIsInt($content[0]['entry']);
+        $this->assertSame('http://0.0.0.0/entry-from-body1', $content[0]['url']);
+        $this->assertIsInt($content[1]['entry']);
+        $this->assertSame('http://0.0.0.0/entry-from-body2', $content[1]['url']);
+    }
+
+    public function testPostEntriesListActionWithUrlsInJsonBody(): void
+    {
+        $this->client->request('POST', '/api/entries/lists', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode([
+            'urls' => ['http://0.0.0.0/entry-from-json-body'],
+        ]));
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertCount(1, $content);
+        $this->assertIsInt($content[0]['entry']);
+        $this->assertSame('http://0.0.0.0/entry-from-json-body', $content[0]['url']);
+    }
+
     public function testPostEntriesListActionWithNoUrls(): void
     {
         $this->client->request('POST', '/api/entries/lists?urls=' . json_encode([]));
