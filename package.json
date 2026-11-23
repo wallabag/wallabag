@@ -58,7 +58,7 @@
     "css-loader": "^7.1.5",
     "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^2.10.2",
-    "postcss": "^8.5.32",
+    "postcss": "^8.5.33",
     "postcss-loader": "^8.2.1",
     "postcss-scss": "^4.0.9",
     "regenerator-runtime": "^0.14.1",
