@@ -14,66 +14,40 @@ class AppKernelDeprecationTest extends KernelTestCase
 {
     use ExpectDeprecationTrait;
 
-    public function testLoadsEnvironmentFallbacksWhenLegacyParametersAreMissing(): void
+    public function testDoesNotOverrideEnvironmentVariablesOutsideProd(): void
     {
         $filesystem = new Filesystem();
         $legacyParametersPath = $this->getLegacyParametersPath();
         $cachePath = $this->getTestCachePath();
-        $backupPath = $legacyParametersPath . '.bak';
-        $hasLegacyParameters = is_file($legacyParametersPath);
+        $originalParameters = is_file($legacyParametersPath) ? file_get_contents($legacyParametersPath) : null;
 
-        if ($hasLegacyParameters && file_exists($backupPath)) {
-            throw new \RuntimeException('Cannot back up app/config/parameters.yml: parameters.yml.bak already exists.');
+        if (false === $originalParameters) {
+            throw new \RuntimeException('Unable to read the existing app/config/parameters.yml file.');
         }
 
+        $originalEnvironment = [$_SERVER, $_ENV];
+        $databaseUrl = $_SERVER['DATABASE_URL'] ?? null;
+        $_SERVER['WALLABAG_USER_AGENT'] = $_ENV['WALLABAG_USER_AGENT'] = 'Default user agent';
         self::ensureKernelShutdown();
 
         try {
-            if ($hasLegacyParameters) {
-                $filesystem->rename($legacyParametersPath, $backupPath);
-            }
+            $filesystem->dumpFile($legacyParametersPath, $this->renderLegacyParametersFile($this->getTemporaryDatabasePath()));
             $filesystem->remove($cachePath);
 
             self::bootKernel();
 
-            $container = self::getContainer();
-            $expectedFallbacks = [
-                'DEFAULT_LOCALE' => 'en',
-                'WALLABAG_BASE_URL' => 'http://127.0.0.1:8000',
-                'MAILER_DSN' => 'smtp://127.0.0.1',
-                'WALLABAG_REGISTRATION_ENABLED' => '0',
-                'WALLABAG_CAPTCHA_ENABLED' => '0',
-                'WALLABAG_CONFIRMATION_ENABLED' => '1',
-                'WALLABAG_FROM_EMAIL' => 'wallabag@example.com',
-                'WALLABAG_SERVER_NAME' => 'Your wallabag instance',
-                'WALLABAG_TWOFACTOR_SENDER' => 'no-reply@wallabag.org',
-                'WALLABAG_RABBITMQ_PREFETCH_COUNT' => '10',
-                'SENTRY_DSN' => '',
-                'WALLABAG_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2',
-                'WALLABAG_OAUTH_ACCESS_TOKEN_LIFETIME' => '3600',
-                'WALLABAG_OAUTH_REFRESH_TOKEN_LIFETIME' => '1209600',
-                'WALLABAG_TABLE_PREFIX' => 'wallabag_',
-                'DATABASE_URL' => 'sqlite:///' . $this->getProjectRoot() . '/data/db/wallabag.sqlite',
-                'REDIS_URL' => 'redis://127.0.0.1:6379',
-                'RABBITMQ_URL' => 'amqp://guest:guest@127.0.0.1:5672',
-            ];
-
-            foreach ($expectedFallbacks as $name => $value) {
-                self::assertSame($value, $container->getParameter('env(' . $name . ')'), $name);
-            }
-            self::assertFalse($container->hasParameter('env(APP_SECRET)'));
+            self::assertSame('Default user agent', $_SERVER['WALLABAG_USER_AGENT']);
+            self::assertSame($databaseUrl, $_SERVER['DATABASE_URL'] ?? null);
+            self::assertSame('test-secret', self::getContainer()->getParameter('kernel.secret'));
         } finally {
             self::ensureKernelShutdown();
-
-            if ($hasLegacyParameters && is_file($backupPath)) {
-                $filesystem->rename($backupPath, $legacyParametersPath);
-            }
-
+            $this->restoreLegacyParameters($originalParameters);
             $filesystem->remove($cachePath);
+            [$_SERVER, $_ENV] = $originalEnvironment;
         }
     }
 
-    public function testTriggersDeprecationWhenLegacyParametersAreLoaded(): void
+    public function testOverridesDotenvVariablesWithLegacyParametersInProd(): void
     {
         if (!\extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped('This test requires the pdo_sqlite extension because it boots the kernel with a temporary SQLite legacy parameters file.');
@@ -81,45 +55,38 @@ class AppKernelDeprecationTest extends KernelTestCase
 
         $filesystem = new Filesystem();
         $legacyParametersPath = $this->getLegacyParametersPath();
-        $cachePath = $this->getTestCachePath();
-        $sqlitePath = $this->getTemporaryDatabasePath();
         $originalParameters = is_file($legacyParametersPath) ? file_get_contents($legacyParametersPath) : null;
 
         if (false === $originalParameters) {
             throw new \RuntimeException('Unable to read the existing app/config/parameters.yml file.');
         }
 
-        $originalEnvironment = $this->unsetEnvironmentVariables(['APP_SECRET', 'SENTRY_DSN', 'WALLABAG_USER_AGENT']);
-        self::ensureKernelShutdown();
+        $originalEnvironment = [$_SERVER, $_ENV];
+        $_SERVER['SENTRY_DSN'] = $_ENV['SENTRY_DSN'] = 'real-sentry-dsn';
+        $_SERVER['SYMFONY_DOTENV_VARS'] = $_ENV['SYMFONY_DOTENV_VARS'] = implode(',', array_merge(array_diff(explode(',', $_SERVER['SYMFONY_DOTENV_VARS'] ?? ''), ['SENTRY_DSN']), ['APP_SECRET', 'DATABASE_URL']));
+        $_SERVER['APP_SECRET'] = $_ENV['APP_SECRET'] = 'dotenv-secret';
+        $kernel = null;
 
         try {
-            $filesystem->remove($sqlitePath);
-            $filesystem->dumpFile($legacyParametersPath, $this->renderLegacyParametersFile($sqlitePath));
-            $filesystem->remove($cachePath);
+            $filesystem->dumpFile($legacyParametersPath, $this->renderLegacyParametersFile('%kernel.project_dir%/var/legacy-parameters-deprecation-test.sqlite'));
+            $filesystem->remove($this->getProdCachePath());
 
             $this->expectDeprecation('Since wallabag/wallabag 2.x: Loading configuration from "app/config/parameters.yml" is deprecated and will be removed in wallabag 3.0. Configure wallabag with environment variables instead.');
 
-            self::bootKernel();
-            $container = self::getContainer();
-            self::assertSame('test-secret', $container->getParameter('env(APP_SECRET)'));
-            self::assertSame('legacy-sentry-dsn', $container->getParameter('env(SENTRY_DSN)'));
-            self::assertSame('Legacy test user agent', $container->getParameter('env(WALLABAG_USER_AGENT)'));
-            self::ensureKernelShutdown();
+            $kernel = $this->bootProdKernel();
+            self::assertSame('test-secret', $kernel->getContainer()->getParameter('kernel.secret'));
+            self::assertSame('Legacy test user agent', $_SERVER['WALLABAG_USER_AGENT']);
+            self::assertSame('sqlite:///' . $this->getTemporaryDatabasePath(), $_SERVER['DATABASE_URL']);
+            self::assertSame('real-sentry-dsn', $_SERVER['SENTRY_DSN']);
         } finally {
-            self::ensureKernelShutdown();
-
-            if (null === $originalParameters) {
-                $filesystem->remove($legacyParametersPath);
-            } else {
-                $filesystem->dumpFile($legacyParametersPath, $originalParameters);
-            }
-
-            $filesystem->remove([$cachePath, $sqlitePath]);
-            $this->restoreEnvironmentVariables($originalEnvironment);
+            $kernel?->shutdown();
+            $this->restoreLegacyParameters($originalParameters);
+            $filesystem->remove($this->getProdCachePath());
+            [$_SERVER, $_ENV] = $originalEnvironment;
         }
     }
 
-    public function testFillsMissingLegacyUserAgentFromEnvironmentFallback(): void
+    public function testKeepsTheEnvironmentVariablesMissingFromLegacyParameters(): void
     {
         if (!\extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped('This test requires the pdo_sqlite extension because it boots the kernel with a temporary SQLite legacy parameters file.');
@@ -127,40 +94,29 @@ class AppKernelDeprecationTest extends KernelTestCase
 
         $filesystem = new Filesystem();
         $legacyParametersPath = $this->getLegacyParametersPath();
-        $cachePath = $this->getTestCachePath();
-        $sqlitePath = $this->getTemporaryDatabasePath();
         $originalParameters = is_file($legacyParametersPath) ? file_get_contents($legacyParametersPath) : null;
 
         if (false === $originalParameters) {
             throw new \RuntimeException('Unable to read the existing app/config/parameters.yml file.');
         }
 
-        $originalEnvironment = $this->unsetEnvironmentVariables(['WALLABAG_USER_AGENT']);
-        self::ensureKernelShutdown();
+        $originalEnvironment = [$_SERVER, $_ENV];
+        $_SERVER['WALLABAG_USER_AGENT'] = $_ENV['WALLABAG_USER_AGENT'] = 'Default user agent';
+        $kernel = null;
 
         try {
-            $filesystem->remove($sqlitePath);
-            $filesystem->dumpFile($legacyParametersPath, $this->renderLegacyParametersFile($sqlitePath, false));
-            $filesystem->remove($cachePath);
+            $filesystem->dumpFile($legacyParametersPath, $this->renderLegacyParametersFile($this->getTemporaryDatabasePath(), false));
+            $filesystem->remove($this->getProdCachePath());
 
             $this->expectDeprecation('Since wallabag/wallabag 2.x: Loading configuration from "app/config/parameters.yml" is deprecated and will be removed in wallabag 3.0. Configure wallabag with environment variables instead.');
 
-            self::bootKernel();
-            self::assertSame(
-                'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2',
-                self::getContainer()->getParameter('env(WALLABAG_USER_AGENT)'),
-            );
+            $kernel = $this->bootProdKernel();
+            self::assertSame('Default user agent', $_SERVER['WALLABAG_USER_AGENT']);
         } finally {
-            self::ensureKernelShutdown();
-
-            if (null === $originalParameters) {
-                $filesystem->remove($legacyParametersPath);
-            } else {
-                $filesystem->dumpFile($legacyParametersPath, $originalParameters);
-            }
-
-            $filesystem->remove([$cachePath, $sqlitePath]);
-            $this->restoreEnvironmentVariables($originalEnvironment);
+            $kernel?->shutdown();
+            $this->restoreLegacyParameters($originalParameters);
+            $filesystem->remove($this->getProdCachePath());
+            [$_SERVER, $_ENV] = $originalEnvironment;
         }
     }
 
@@ -214,6 +170,33 @@ class AppKernelDeprecationTest extends KernelTestCase
     private function getTestCachePath(): string
     {
         return $this->getProjectRoot() . '/var/cache/test';
+    }
+
+    private function getProdCachePath(): string
+    {
+        return $this->getProjectRoot() . '/var/cache/legacy-parameters-test';
+    }
+
+    private function bootProdKernel(): \AppKernel
+    {
+        $kernel = new class('prod', false) extends \AppKernel {
+            public function getCacheDir(): string
+            {
+                return $this->getProjectDir() . '/var/cache/legacy-parameters-test';
+            }
+        };
+        $kernel->boot();
+
+        return $kernel;
+    }
+
+    private function restoreLegacyParameters(?string $originalParameters): void
+    {
+        if (null === $originalParameters) {
+            (new Filesystem())->remove($this->getLegacyParametersPath());
+        } else {
+            (new Filesystem())->dumpFile($this->getLegacyParametersPath(), $originalParameters);
+        }
     }
 
     private function getTemporaryDatabasePath(): string

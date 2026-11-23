@@ -18,9 +18,13 @@ Now, read the next step to create your virtual host, then
 access your wallabag.
 
 {{< callout type="info" >}}
-wallabag is configured with environment variables. For local development, put
-overrides in `.env.local`. For production, export the variables through your
-web server, PHP-FPM, or container runtime. See
+wallabag is configured with environment variables. For production, export the
+variables through your web server, PHP-FPM, or container runtime, or copy
+`.env.prod.example` to `.env.local` and set your values: at least
+`APP_SECRET`, a long random string (wallabag doesn't start with an empty one),
+`WALLABAG_BASE_URL`, the URL of your instance, and `WALLABAG_FROM_EMAIL`, the
+sender of the emails. `make install` creates this `.env.local` file with a
+random `APP_SECRET` if it doesn't exist. See
 [Parameters]({{< relref "../parameters.md" >}}) for the full list.
 {{< /callout >}}
 

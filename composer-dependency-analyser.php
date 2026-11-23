@@ -51,6 +51,7 @@ $config
     ], [ErrorType::UNUSED_DEPENDENCY])
     ->ignoreErrorsOnPackages([
         'monolog/monolog',
+        'symfony/dotenv',
         'symfony/filesystem',
     ], [ErrorType::PROD_DEPENDENCY_ONLY_IN_DEV])
     ->ignoreErrorsOnPackages([

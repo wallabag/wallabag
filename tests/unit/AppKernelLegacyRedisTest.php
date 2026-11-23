@@ -20,12 +20,9 @@ class AppKernelLegacyRedisTest extends TestCase
         $container->setParameter('redis_path', 'unix' === $scheme ? '/run/redis/redis.sock' : null);
         $container->setParameter('redis_password', $password);
 
-        $method = new \ReflectionMethod(\AppKernel::class, 'defineLegacyRedisUrlFallback');
+        $method = new \ReflectionMethod(\AppKernel::class, 'getLegacyRedisUrl');
         $method->setAccessible(true);
-        $method->invoke(new \AppKernel('test', false), $container);
-
-        // getParameter() would return the env placeholder, all() gives the default value
-        $parameters = Parameters::create($container->getParameterBag()->all()['env(REDIS_URL)']);
+        $parameters = Parameters::create($method->invoke(new \AppKernel('test', false), $container));
 
         $this->assertSame($scheme, $parameters->scheme);
         $this->assertSame($password, $parameters->password);

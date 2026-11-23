@@ -31,8 +31,11 @@ use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
 use Symfony\Bundle\WebServerBundle\WebServerBundle;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\WebpackEncoreBundle\WebpackEncoreBundle;
 use Twig\Extra\TwigExtraBundle\TwigExtraBundle;
@@ -103,30 +106,35 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
-        $loader->load($this->getProjectDir() . '/app/config/env_fallback.yml');
-
-        $legacyParametersLoaded = $this->loadLegacyParametersIfPresent($loader);
-
         $loader->load(function (ContainerBuilder $container): void {
             // $container->setParameter('container.autowiring.strict_mode', true);
             // $container->setParameter('container.dumper.inline_class_loader', true);
             $container->addObjectResource($this);
         });
 
-        $loader->load(function (ContainerBuilder $container) use ($legacyParametersLoaded): void {
-            if (!$legacyParametersLoaded) {
-                return;
-            }
-
+        if (null !== $this->getLegacyParametersPath()) {
             $this->triggerLegacyParametersDeprecationIfNeeded();
-            $this->defineLegacyEnvFallbacks($container);
-        });
+        }
 
         $loader->load($this->getProjectDir() . '/app/config/config_' . $this->getEnvironment() . '.yml');
 
         if ('dev' === $this->getEnvironment()) {
             $loader->load($this->getProjectDir() . '/app/config/services_dev.yml');
         }
+    }
+
+    protected function initializeContainer(): void
+    {
+        $legacyParametersPath = $this->getLegacyParametersPath();
+
+        if (null !== $legacyParametersPath) {
+            $container = new ContainerBuilder(new ParameterBag(array_filter($this->getKernelParameters(), static fn ($value): bool => !is_string($value) || !str_contains($value, '%env('))));
+            (new YamlFileLoader($container, new FileLocator()))->load($legacyParametersPath);
+            $container->getParameterBag()->resolve();
+            $this->overrideEnvVars($this->getLegacyEnvVars($container));
+        }
+
+        parent::initializeContainer();
     }
 
     protected function build(ContainerBuilder $container): void
@@ -144,104 +152,121 @@ class AppKernel extends Kernel
         );
     }
 
-    private function loadLegacyParametersIfPresent(LoaderInterface $loader): bool
+    private function getLegacyParametersPath(): ?string
     {
         $legacyParametersPath = $this->getProjectDir() . '/app/config/parameters.yml';
 
-        if (!is_file($legacyParametersPath)) {
-            return false;
+        if ('prod' !== $this->getEnvironment() || !is_file($legacyParametersPath)) {
+            return null;
         }
 
-        $loader->load($legacyParametersPath);
-
-        return true;
+        return $legacyParametersPath;
     }
 
-    private function defineLegacyEnvFallbacks(ContainerBuilder $container): void
+    /**
+     * @param array<string, string> $envVars
+     */
+    private function overrideEnvVars(array $envVars): void
     {
-        $this->defineLegacySimpleEnvFallbacks($container);
-        $this->defineLegacyDatabaseUrlFallback($container);
-        $this->defineLegacyRedisUrlFallback($container);
-        $this->defineLegacyRabbitMqUrlFallback($container);
+        $dotenvVars = explode(',', $_SERVER['SYMFONY_DOTENV_VARS'] ?? $_ENV['SYMFONY_DOTENV_VARS'] ?? '');
+
+        foreach ($envVars as $name => $value) {
+            $isRealEnvVar = (isset($_SERVER[$name]) || isset($_ENV[$name]) || false !== getenv($name)) && !in_array($name, $dotenvVars, true);
+
+            if (!$isRealEnvVar) {
+                $_SERVER[$name] = $_ENV[$name] = $value;
+            }
+        }
     }
 
-    private function defineLegacySimpleEnvFallbacks(ContainerBuilder $container): void
+    /**
+     * @return array<string, string>
+     */
+    private function getLegacyEnvVars(ContainerBuilder $container): array
     {
+        return array_merge($this->getLegacySimpleEnvVars($container), [
+            'DATABASE_URL' => $this->getLegacyDatabaseUrl($container),
+            'REDIS_URL' => $this->getLegacyRedisUrl($container),
+            'RABBITMQ_URL' => $this->getLegacyRabbitMqUrl($container),
+        ]);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function getLegacySimpleEnvVars(ContainerBuilder $container): array
+    {
+        $envVars = [];
+
         if ($container->hasParameter('secret')) {
-            $container->setParameter('env(APP_SECRET)', (string) $container->getParameter('secret'));
+            $envVars['APP_SECRET'] = (string) $container->getParameter('secret');
         }
 
         if ($container->hasParameter('locale')) {
-            $container->setParameter('env(DEFAULT_LOCALE)', (string) $container->getParameter('locale'));
+            $envVars['DEFAULT_LOCALE'] = (string) $container->getParameter('locale');
         }
 
         if ($container->hasParameter('domain_name')) {
-            $container->setParameter('env(WALLABAG_BASE_URL)', (string) $container->getParameter('domain_name'));
+            $envVars['WALLABAG_BASE_URL'] = (string) $container->getParameter('domain_name');
         }
 
         if ($container->hasParameter('mailer_dsn')) {
-            $container->setParameter('env(MAILER_DSN)', (string) $container->getParameter('mailer_dsn'));
+            $envVars['MAILER_DSN'] = (string) $container->getParameter('mailer_dsn');
         }
 
         if ($container->hasParameter('fosuser_registration')) {
-            $container->setParameter('env(WALLABAG_REGISTRATION_ENABLED)', (bool) $container->getParameter('fosuser_registration') ? '1' : '0');
+            $envVars['WALLABAG_REGISTRATION_ENABLED'] = (bool) $container->getParameter('fosuser_registration') ? '1' : '0';
         }
 
         if ($container->hasParameter('fosuser_confirmation')) {
-            $container->setParameter('env(WALLABAG_CONFIRMATION_ENABLED)', (bool) $container->getParameter('fosuser_confirmation') ? '1' : '0');
+            $envVars['WALLABAG_CONFIRMATION_ENABLED'] = (bool) $container->getParameter('fosuser_confirmation') ? '1' : '0';
         }
 
         if ($container->hasParameter('from_email')) {
-            $container->setParameter('env(WALLABAG_FROM_EMAIL)', (string) $container->getParameter('from_email'));
+            $envVars['WALLABAG_FROM_EMAIL'] = (string) $container->getParameter('from_email');
         }
 
         if ($container->hasParameter('server_name')) {
-            $container->setParameter('env(WALLABAG_SERVER_NAME)', (string) $container->getParameter('server_name'));
+            $envVars['WALLABAG_SERVER_NAME'] = (string) $container->getParameter('server_name');
         }
 
         if ($container->hasParameter('twofactor_sender')) {
-            $container->setParameter('env(WALLABAG_TWOFACTOR_SENDER)', (string) $container->getParameter('twofactor_sender'));
+            $envVars['WALLABAG_TWOFACTOR_SENDER'] = (string) $container->getParameter('twofactor_sender');
         }
 
         if ($container->hasParameter('rabbitmq_prefetch_count')) {
-            $container->setParameter('env(WALLABAG_RABBITMQ_PREFETCH_COUNT)', (string) $container->getParameter('rabbitmq_prefetch_count'));
+            $envVars['WALLABAG_RABBITMQ_PREFETCH_COUNT'] = (string) $container->getParameter('rabbitmq_prefetch_count');
         }
 
         if ($container->hasParameter('sentry_dsn')) {
-            $container->setParameter('env(SENTRY_DSN)', (string) $container->getParameter('sentry_dsn'));
+            $envVars['SENTRY_DSN'] = (string) $container->getParameter('sentry_dsn');
         }
 
         if ($container->hasParameter('wallabag_user_agent')) {
-            $container->setParameter('env(WALLABAG_USER_AGENT)', (string) $container->getParameter('wallabag_user_agent'));
+            $envVars['WALLABAG_USER_AGENT'] = (string) $container->getParameter('wallabag_user_agent');
         }
 
         if ($container->hasParameter('fos_oauth_server_access_token_lifetime')) {
-            $container->setParameter('env(WALLABAG_OAUTH_ACCESS_TOKEN_LIFETIME)', (string) $container->getParameter('fos_oauth_server_access_token_lifetime'));
+            $envVars['WALLABAG_OAUTH_ACCESS_TOKEN_LIFETIME'] = (string) $container->getParameter('fos_oauth_server_access_token_lifetime');
         }
 
         if ($container->hasParameter('fos_oauth_server_refresh_token_lifetime')) {
-            $container->setParameter('env(WALLABAG_OAUTH_REFRESH_TOKEN_LIFETIME)', (string) $container->getParameter('fos_oauth_server_refresh_token_lifetime'));
+            $envVars['WALLABAG_OAUTH_REFRESH_TOKEN_LIFETIME'] = (string) $container->getParameter('fos_oauth_server_refresh_token_lifetime');
         }
 
         if ($container->hasParameter('database_table_prefix')) {
-            $container->setParameter('env(WALLABAG_TABLE_PREFIX)', (string) $container->getParameter('database_table_prefix'));
+            $envVars['WALLABAG_TABLE_PREFIX'] = (string) $container->getParameter('database_table_prefix');
         }
+
+        return $envVars;
     }
 
-    private function defineLegacyDatabaseUrlFallback(ContainerBuilder $container): void
+    private function getLegacyDatabaseUrl(ContainerBuilder $container): string
     {
         $databaseParameters = $this->normalizeLegacyDatabaseParameters($container);
 
         if ('sqlite' === $databaseParameters['scheme']) {
-            $databasePath = '' !== $databaseParameters['path'] ? $databaseParameters['path'] : $databaseParameters['name'];
-            $container->setParameter(
-                'env(DATABASE_URL)',
-                str_starts_with($databasePath, '/')
-                    ? 'sqlite://' . $databasePath
-                    : 'sqlite:///' . ltrim($databasePath, '/'),
-            );
-
-            return;
+            return 'sqlite:///' . ('' !== $databaseParameters['path'] ? $databaseParameters['path'] : $databaseParameters['name']);
         }
 
         $url = $databaseParameters['scheme'] . '://';
@@ -278,7 +303,7 @@ class AppKernel extends Kernel
             $url .= '?' . http_build_query($query, '', '&', \PHP_QUERY_RFC3986);
         }
 
-        $container->setParameter('env(DATABASE_URL)', $url);
+        return $url;
     }
 
     private function normalizeLegacyDatabaseParameters(ContainerBuilder $container): array
@@ -303,7 +328,7 @@ class AppKernel extends Kernel
         ];
     }
 
-    private function defineLegacyRedisUrlFallback(ContainerBuilder $container): void
+    private function getLegacyRedisUrl(ContainerBuilder $container): string
     {
         $scheme = (string) $container->getParameter('redis_scheme');
         $host = (string) $container->getParameter('redis_host');
@@ -318,9 +343,7 @@ class AppKernel extends Kernel
                 $url .= '?password=' . rawurlencode($password);
             }
 
-            $container->setParameter('env(REDIS_URL)', $url);
-
-            return;
+            return $url;
         }
 
         $url = $scheme . '://' . $host;
@@ -338,10 +361,10 @@ class AppKernel extends Kernel
             $url .= '?password=' . rawurlencode($password);
         }
 
-        $container->setParameter('env(REDIS_URL)', $url);
+        return $url;
     }
 
-    private function defineLegacyRabbitMqUrlFallback(ContainerBuilder $container): void
+    private function getLegacyRabbitMqUrl(ContainerBuilder $container): string
     {
         $host = (string) $container->getParameter('rabbitmq_host');
         $port = (string) $container->getParameter('rabbitmq_port');
@@ -366,6 +389,6 @@ class AppKernel extends Kernel
             $url .= ':' . $port;
         }
 
-        $container->setParameter('env(RABBITMQ_URL)', $url);
+        return $url;
     }
 }
