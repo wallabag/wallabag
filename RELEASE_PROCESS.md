@@ -22,6 +22,14 @@ During this documentation, we assume the release is `$LAST_WALLABAG_RELEASE` (li
 - Put the next patch version suffixed with `-dev` in `app/config/wallabag.yml` (`wallabag.version`)
 - Drink a :beer:!
 
+### Package signature
+
+The release workflow signs the package with [minisign](https://jedisct1.github.io/minisign/) and uploads `wallabag-$LAST_WALLABAG_RELEASE.tar.gz.minisig` next to it. The secret key is stored in the `MINISIGN_SECRET_KEY` secret of the repository, without password. Anyone can check a package with the public key:
+
+```bash
+minisign -V -P RWQT4s5qtqdNSaZOi9peL3i+pP/KMMzpk/c9XJd84ZIpxFWaGqYOlwy+ -m wallabag-$LAST_WALLABAG_RELEASE.tar.gz
+```
+
 ### Target PHP version
 `composer.lock` is _always_ built for a particular version, by default the one it is generated (with `composer update`).
 
