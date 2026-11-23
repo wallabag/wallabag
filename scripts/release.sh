@@ -16,7 +16,6 @@ cd "$TMP_FOLDER"/"$RELEASE_FOLDER"/"$VERSION" && yarn install --non-interactive
 cd "$TMP_FOLDER"/"$RELEASE_FOLDER"/"$VERSION" && yarn run --non-interactive build:prod
 cd "$TMP_FOLDER"/"$RELEASE_FOLDER"/"$VERSION" && APP_ENV="$ENV" COMPOSER_MEMORY_LIMIT=-1 composer install -n --no-dev
 cd "$TMP_FOLDER"/"$RELEASE_FOLDER"/"$VERSION" && APP_ENV="$ENV" php bin/console assets:install --env="$ENV" --symlink --relative
-cd "$TMP_FOLDER"/"$RELEASE_FOLDER"/"$VERSION" && printf '\nAPP_ENV=%s\n' "$ENV" >> .env
 cd "$TMP_FOLDER"/"$RELEASE_FOLDER" && tar czf "$VERSION".tar.gz \
     --exclude="$VERSION/var/cache/*" --exclude="$VERSION/var/logs/*" --exclude="$VERSION/var/sessions/*" \
     --exclude="$VERSION/data/db/wallabag.sqlite" --exclude=".git" --exclude="$VERSION/.github" --exclude="$VERSION/node_modules" \
