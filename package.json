@@ -52,7 +52,7 @@
     "@biomejs/biome": "^2.6.8",
     "@codecov/webpack-plugin": "^2",
     "@symfony/webpack-encore": "^6.0.0",
-    "autoprefixer": "^10.6.2",
+    "autoprefixer": "^10.7.0",
     "babel-loader": "^10.1.1",
     "core-js": "^3.51.0",
     "css-loader": "^7.1.5",
