@@ -76,9 +76,11 @@ class Mailbox
      */
     public function check(): array
     {
-        [$client] = $this->connect();
+        [$client, $folder] = $this->connect();
 
         try {
+            $folder->examine();
+
             return array_values(array_map(static fn (Folder $folder) => $folder->path, $client->getFolders(false)->all()));
         } finally {
             $client->disconnect();
