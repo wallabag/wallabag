@@ -758,3 +758,41 @@ theme:
         toggle_auto: Automatisches Design
         toggle_dark: Dunkles Design
         toggle_light: Helles Design
+feeds:
+    action:
+        add: Feed hinzufügen
+        delete: Feed löschen
+        dismiss: Ablehnen
+        edit: Feed bearbeiten
+        fetch: Neuladen
+        items: Artikel lesen
+        purge: Artikel entfernen
+        save_article: Artikel speichern
+        show_card_view: Als Karten anzeigen
+        show_list_view: Als Liste anzeigen
+        back_to_list: Zurück zur den Abonnements
+    alert:
+        confirm_delete: Dieses Feed Abonnement und seinen Artikelverlauf löschen?
+        confirm_purge: Alle ausstehenden Artikel in diesem Feed löschen?
+    automatic_mode: Automatisch
+    empty: Du hast keine Feeds abonniert.
+    flash:
+        already_processed: Dieser Artikel wurde bereits verarbeitet.
+        created: Feed Abonnement hinzugefügt.
+        created_refresh_error: Feed Abonnement hinzugefügt, die erste Aktualisierung ist jedoch fehlgeschlagen.
+        deleted: Feed-Abonnement gelöscht.
+        dismissed: Artikel gelöscht.
+        fetch_error: Der Feed konnte nicht aktualisiert werden.. Überprüfe die Adresse und versuche es erneut.
+        fetched: Feed aktualisiert.
+        no_pending_articles: Keine Artikel zum Löschen vorhanden.
+        purged: Ausstehende Artikel wurden entfernt.
+        save_error: Der Artikel konnte nicht gespeichert werden. Er ist noch in der Warteschleife.
+        saved: Der Artikel ist in wallabag vorhanden.
+        updated: Feed-Abonnement aktualisiert.
+    items_empty: In diesem Feed warten keine Artikel.
+    label:
+        automatic: Neue Artikel automatisch importieren
+    last_fetch: 'Letzte erfolgreiche Aktualisierung: %date%'
+    manual_mode: Manuell
+    page_title: Feed-Abonnements
+    stale: Dieser Feed konnte in den letzten zwei Tagen nicht erfolgreich aktualisiert werden.
