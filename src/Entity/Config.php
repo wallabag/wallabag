@@ -14,7 +14,7 @@ use Wallabag\Repository\ConfigRepository;
  */
 #[ORM\Table(name: '`config`')]
 #[ORM\Index(columns: ['feed_token'])]
-#[ORM\UniqueConstraint(name: 'mail_import_token', columns: ['mail_import_token'])]
+#[ORM\UniqueConstraint(columns: ['mail_import_token'])]
 #[ORM\Entity(repositoryClass: ConfigRepository::class)]
 class Config
 {

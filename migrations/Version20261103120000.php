@@ -17,13 +17,13 @@ final class Version20261103120000 extends WallabagMigration
             'length' => 32,
             'notnull' => false,
         ]);
-        $configTable->addUniqueIndex(['mail_import_token'], 'mail_import_token');
+        $configTable->addUniqueIndex(['mail_import_token'], $this->getUniqueIndexName('config', 'mail_import_token'));
     }
 
     public function down(Schema $schema): void
     {
         $configTable = $schema->getTable($this->getTable('config'));
-        $configTable->dropIndex('mail_import_token');
+        $configTable->dropIndex($this->getUniqueIndexName('config', 'mail_import_token'));
         $configTable->dropColumn('mail_import_token');
     }
 }
