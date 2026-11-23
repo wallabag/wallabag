@@ -246,10 +246,14 @@ class ExportControllerTest extends WallabagTestCase
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
+
+        $entry = $em->getRepository(Entry::class)->findByUrlAndUserId('http://0.0.0.0/entry6', $this->getLoggedInUserId());
+        $entry->setCreatedAt(new \DateTimeImmutable('2016-02-25 17:38:12'));
+        $em->flush();
 
         // to be sure results are the same
-        $contentInDB = $client->getContainer()
-            ->get(EntityManagerInterface::class)
+        $contentInDB = $em
             ->getRepository(Entry::class)
             ->createQueryBuilder('e')
             ->select('e, t')
@@ -282,7 +286,7 @@ class ExportControllerTest extends WallabagTestCase
         $this->assertStringContainsString($contentInDB[0]['content'], $csv[1]);
         $this->assertStringContainsString($contentInDB[0]['mimetype'], $csv[1]);
         $this->assertStringContainsString($contentInDB[0]['language'], $csv[1]);
-        $this->assertStringContainsString($contentInDB[0]['createdAt']->format('d/m/Y h:i:s'), $csv[1]);
+        $this->assertStringContainsString('25/02/2016 17:38:12', $csv[1]);
 
         foreach ($contentInDB[0]['tags'] as $tag) {
             $this->assertStringContainsString($tag['label'], $csv[1]);
