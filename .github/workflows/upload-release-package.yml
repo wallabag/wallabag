@@ -6,8 +6,7 @@ on:
       - created
 
 permissions:
-  # The packaged tarball is uploaded to the release with this token.
-  contents: write
+  contents: read
 
 jobs:
   build:
@@ -21,6 +20,8 @@ jobs:
     steps:
       - name: "Checkout"
         uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: "Install PHP"
         uses: "shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962" # 2.40.0
@@ -37,32 +38,82 @@ jobs:
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: ".nvmrc"
+          package-manager-cache: false
 
       - name: Create the package
-        run: make release VERSION=${{ github.event.release.tag_name }}
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: make release VERSION="$TAG"
 
-      - name: Upload the package to the release
-        uses: shogo82148/actions-upload-release-asset@73f83b114970a3485e1423ecc1fb93d887c9b096 # v1.10.7
+      - name: Keep the package for the signing job
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: /tmp/wllbg-release/wallabag-${{ github.event.release.tag_name }}.tar.gz
+          name: package
+          path: /tmp/wllbg-release/wallabag-${{ github.event.release.tag_name }}.tar.gz
+          if-no-files-found: error
+          retention-days: 7
+
+  sign:
+    runs-on: ubuntu-latest
+    needs: build
+
+    permissions:
+      # The package and its signature are uploaded to the release with this token.
+      contents: write
+
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      TAG: ${{ github.event.release.tag_name }}
+      MINISIGN_PUBLIC_KEY: RWQT4s5qtqdNSaZOi9peL3i+pP/KMMzpk/c9XJd84ZIpxFWaGqYOlwy+
+
+    steps:
+      - name: Download the package
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: package
+          path: built
+
+      - name: Install minisign
+        run: sudo apt-get update -q && sudo apt-get install -yq minisign
+
+      - name: Check a package already published by a previous attempt
+        run: |
+          mv "built/wallabag-$TAG.tar.gz" .
+          if gh release view "$TAG" --json assets -q '.assets[].name' | grep -qx "wallabag-$TAG.tar.gz"; then
+            gh release download "$TAG" -p "wallabag-$TAG.tar.gz" -D published
+            if [ "$(sha256sum < "published/wallabag-$TAG.tar.gz")" != "$(sha256sum < "wallabag-$TAG.tar.gz")" ]; then
+              echo "::error::The published wallabag-$TAG.tar.gz is not the package built by this run: delete it from the release, then rerun all jobs."
+              exit 1
+            fi
+            echo "UPLOAD_PACKAGE=0" >> "$GITHUB_ENV"
+          else
+            echo "UPLOAD_PACKAGE=1" >> "$GITHUB_ENV"
+          fi
 
       - name: Sign the package
         env:
           MINISIGN_SECRET_KEY: ${{ secrets.MINISIGN_SECRET_KEY }}
-          TAG: ${{ github.event.release.tag_name }}
         run: |
-          sudo apt-get update -q && sudo apt-get install -yq minisign
           printf '%s\n' "$MINISIGN_SECRET_KEY" > "$RUNNER_TEMP/minisign.key"
-          minisign -S -s "$RUNNER_TEMP/minisign.key" -m "/tmp/wllbg-release/wallabag-$TAG.tar.gz" -t "wallabag $TAG"
+          minisign -S -s "$RUNNER_TEMP/minisign.key" -m "wallabag-$TAG.tar.gz" -t "wallabag $TAG"
           rm "$RUNNER_TEMP/minisign.key"
 
-      - name: Upload the signature to the release
-        uses: shogo82148/actions-upload-release-asset@73f83b114970a3485e1423ecc1fb93d887c9b096 # v1.10.7
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: /tmp/wllbg-release/wallabag-${{ github.event.release.tag_name }}.tar.gz.minisig
+      - name: Check the signature
+        run: minisign -V -P "$MINISIGN_PUBLIC_KEY" -m "wallabag-$TAG.tar.gz"
 
+      - name: Upload the package and its signature to the release
+        run: |
+          if [ 1 = "$UPLOAD_PACKAGE" ]; then
+            gh release upload "$TAG" "wallabag-$TAG.tar.gz"
+          fi
+          gh release upload "$TAG" "wallabag-$TAG.tar.gz.minisig" --clobber
+
+  website:
+    runs-on: ubuntu-latest
+    needs: sign
+
+    steps:
       - name: Rebuild the website to update releases.json
         env:
           NETLIFY_WEBSITE_BUILD_HOOK: ${{ secrets.NETLIFY_WEBSITE_BUILD_HOOK }}
