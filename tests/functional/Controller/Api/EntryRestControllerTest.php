@@ -1669,6 +1669,55 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertEmpty($content);
     }
 
+    public function testDeleteEntriesListActionWithUrlsInBody(): void
+    {
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
+        $em->persist((new Entry($this->user))->setUrl('http://0.0.0.0/entry-to-delete-from-body'));
+
+        $em->flush();
+
+        $this->client = $this->createAuthorizedClient();
+
+        $list = [
+            'http://0.0.0.0/entry-to-delete-from-body',
+            'http://0.0.0.0/test-entry-not-exist',
+        ];
+
+        $this->client->request('DELETE', '/api/entries/list', ['urls' => json_encode($list)]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertTrue($content[0]['entry']);
+        $this->assertSame('http://0.0.0.0/entry-to-delete-from-body', $content[0]['url']);
+
+        $this->assertFalse($content[1]['entry']);
+        $this->assertSame('http://0.0.0.0/test-entry-not-exist', $content[1]['url']);
+    }
+
+    public function testDeleteEntriesListActionWithUrlsInJsonBody(): void
+    {
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
+        $em->persist((new Entry($this->user))->setUrl('http://0.0.0.0/entry-to-delete-from-json-body'));
+
+        $em->flush();
+
+        $this->client = $this->createAuthorizedClient();
+
+        $this->client->request('DELETE', '/api/entries/list', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode([
+            'urls' => ['http://0.0.0.0/entry-to-delete-from-json-body'],
+        ]));
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertCount(1, $content);
+        $this->assertTrue($content[0]['entry']);
+        $this->assertSame('http://0.0.0.0/entry-to-delete-from-json-body', $content[0]['url']);
+    }
+
     public function testLimitBulkAction(): void
     {
         $list = [
