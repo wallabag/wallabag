@@ -36,7 +36,7 @@ Set these environment variables, for example in `.env.local`:
 | -----|-------------|---------|
 | WALLABAG_MAIL_IMPORT_ADDRESS | Address of the dedicated mailbox. The private addresses are built from it | empty |
 | WALLABAG_MAIL_IMPORT_DSN | Connection to the mailbox, see below | empty |
-| WALLABAG_MAIL_IMPORT_MAX_LINKS | Maximum number of links saved from a single email | `10` |
+| WALLABAG_MAIL_IMPORT_MAX_LINKS | Maximum number of links saved from a single email, at least `1` | `10` |
 
 The feature is enabled when both `WALLABAG_MAIL_IMPORT_ADDRESS` and
 `WALLABAG_MAIL_IMPORT_DSN` are set.
@@ -61,6 +61,7 @@ bin/console wallabag:import:mail --check --env=prod
 
 The command connects to the mailbox, lists its folders and tells you what
 is wrong when it fails (unreachable host, wrong credentials, missing folder).
+It does not change anything in the mailbox.
 
 ## Run the import periodically
 
@@ -82,8 +83,8 @@ exits with a non-zero status.
 
 - Processed email: deleted from the mailbox.
 - Email for an unknown or revoked address, or for a disabled user: moved to
-  the `wallabag-rejected` folder (created automatically) and deleted after
-  30 days.
+  the `wallabag-rejected` folder (created automatically) and deleted 30 days
+  after the rejection.
 - Email that could not be read or saved (database error, invalid message…): kept in the
   mailbox, the next run tries again. The other emails are still processed.
 

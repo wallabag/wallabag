@@ -75,6 +75,12 @@ class MailCommand extends Command
             return 0;
         }
 
+        if ($this->settings->getMaxLinks() < 1) {
+            $io->error('WALLABAG_MAIL_IMPORT_MAX_LINKS must be a positive integer.');
+
+            return 1;
+        }
+
         if ($input->getOption('check')) {
             return $this->check($io);
         }
@@ -106,9 +112,7 @@ class MailCommand extends Command
     private function check(SymfonyStyle $io): int
     {
         try {
-            $this->mailbox->open();
-            $folders = $this->mailbox->getFolders();
-            $this->mailbox->close();
+            $folders = $this->mailbox->check();
         } catch (\Throwable $e) {
             $messages = [];
 

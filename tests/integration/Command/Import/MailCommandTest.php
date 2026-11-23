@@ -43,8 +43,8 @@ class MailCommandTest extends WallabagKernelTestCase
     public function testCheckListsFolders(): void
     {
         $mailbox = $this->createMock(Mailbox::class);
-        $mailbox->expects($this->once())->method('open');
-        $mailbox->method('getFolders')->willReturn(['INBOX', Mailbox::REJECTED_FOLDER]);
+        $mailbox->expects($this->never())->method('open');
+        $mailbox->expects($this->once())->method('check')->willReturn(['INBOX', Mailbox::REJECTED_FOLDER]);
         $mailbox->expects($this->never())->method('getUids');
 
         $tester = $this->runCommand($mailbox, 'wallabag@example.org', ['--check' => true]);
@@ -52,6 +52,14 @@ class MailCommandTest extends WallabagKernelTestCase
         $this->assertSame(0, $tester->getStatusCode());
         $this->assertStringContainsString(Mailbox::REJECTED_FOLDER, $tester->getDisplay());
         $this->assertStringContainsString('wallabag+<token>@example.org', $tester->getDisplay());
+    }
+
+    public function testInvalidMaxLinks(): void
+    {
+        $mailbox = $this->createMock(Mailbox::class);
+        $mailbox->expects($this->never())->method('open');
+
+        $this->assertSame(1, $this->runCommand($mailbox, 'wallabag@example.org', [], 0)->getStatusCode());
     }
 
     /**

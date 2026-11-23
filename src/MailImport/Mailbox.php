@@ -5,6 +5,7 @@ namespace Wallabag\MailImport;
 use Webklex\PHPIMAP\Address;
 use Webklex\PHPIMAP\Client;
 use Webklex\PHPIMAP\ClientManager;
+use Webklex\PHPIMAP\Folder;
 use Webklex\PHPIMAP\IMAP;
 use Webklex\PHPIMAP\Message;
 
@@ -13,6 +14,8 @@ class Mailbox
     public const REJECTED_FOLDER = 'wallabag-rejected';
 
     private ?Client $client = null;
+
+    private ?Folder $source = null;
 
     private string $folder = 'INBOX';
 
@@ -58,16 +61,8 @@ class Mailbox
 
     public function open(): void
     {
-        $dsn = self::parseDsn($this->settings->getDsn());
-        $this->client = (new ClientManager())->make($dsn['config']);
-        $this->client->connect();
-
-        $folder = $this->client->getFolderByPath($dsn['folder'], false, true);
-
-        if (null === $folder) {
-            throw new \RuntimeException(\sprintf('The "%s" folder does not exist.', $dsn['folder']));
-        }
-        $this->folder = $folder->path;
+        [$this->client, $this->source] = $this->connect();
+        $this->folder = $this->source->path;
 
         if (null === $this->client->getFolderByPath(self::REJECTED_FOLDER, false, true)) {
             $this->client->createFolder(self::REJECTED_FOLDER, false);
@@ -79,9 +74,15 @@ class Mailbox
     /**
      * @return string[]
      */
-    public function getFolders(): array
+    public function check(): array
     {
-        return array_map(static fn ($folder) => $folder->path, $this->getClient()->getFolders(false)->all());
+        [$client] = $this->connect();
+
+        try {
+            return array_values(array_map(static fn (Folder $folder) => $folder->path, $client->getFolders(false)->all()));
+        } finally {
+            $client->disconnect();
+        }
     }
 
     /**
@@ -102,7 +103,7 @@ class Mailbox
         $client = $this->getClient();
         $client->openFolder($this->folder);
 
-        return self::createMailMessage($client->getFolderByPath($this->folder)->query()->leaveUnread()->getMessageByUid($uid));
+        return self::createMailMessage($this->source->query()->leaveUnread()->getMessageByUid($uid));
     }
 
     public static function createMailMessage(Message $message): MailMessage
@@ -126,7 +127,10 @@ class Mailbox
     {
         $client = $this->getClient();
         $client->openFolder($this->folder);
-        $client->getConnection()->copyMessage(self::REJECTED_FOLDER, $uid, null, IMAP::ST_UID)->validatedData();
+        $message = $this->source->query()->leaveUnread()->getMessageByUid($uid);
+        $raw = rtrim((string) $message->getHeader()?->raw) . "\r\n\r\n" . $message->getRawBody();
+
+        $client->getFolderByPath(self::REJECTED_FOLDER, false, true)->appendMessage($raw, null, date('d-M-Y H:i:s O'));
         $this->delete($uid);
     }
 
@@ -158,6 +162,26 @@ class Mailbox
             $this->client->disconnect();
             $this->client = null;
         }
+    }
+
+    /**
+     * @return array{Client, Folder}
+     */
+    private function connect(): array
+    {
+        $dsn = self::parseDsn($this->settings->getDsn());
+        $client = (new ClientManager())->make($dsn['config']);
+        $client->connect();
+
+        $folder = $client->getFolderByPath($dsn['folder'], false, true);
+
+        if (null === $folder) {
+            $client->disconnect();
+
+            throw new \RuntimeException(\sprintf('The "%s" folder does not exist.', $dsn['folder']));
+        }
+
+        return [$client, $folder];
     }
 
     private function getClient(): Client
