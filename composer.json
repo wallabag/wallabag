@@ -177,7 +177,6 @@
         "doctrine/doctrine-fixtures-bundle": "^3.7.1",
         "ergebnis/composer-normalize": "^2.45.0",
         "friendsofphp/php-cs-fixer": "^3.70.2",
-        "friendsoftwig/twigcs": "^6.5",
         "m6web/redis-mock": "^5.6",
         "php-http/mock-client": "^1.6.1",
         "phpstan/extension-installer": "^1.4.3",
@@ -196,7 +195,8 @@
         "symfony/process": "^5.4.47",
         "symfony/var-dumper": "^5.4.48",
         "symfony/web-profiler-bundle": "^5.4.48",
-        "symfony/web-server-bundle": "^4.4.44"
+        "symfony/web-server-bundle": "^4.4.44",
+        "vincentlanglet/twig-cs-fixer": "4.1.2"
     },
     "replace": {
         "symfony/polyfill-php54": "*",

@@ -63,6 +63,7 @@ class OpdsControllerTest extends WallabagTestCase
         $xpath = $this->xpath($content);
 
         $this->assertSame(1, $xpath->query('/a:feed')->length);
+
         // Element contract: each entry carries exactly one epub acquisition link with a type attribute.
         foreach ($xpath->query('//a:entry') as $entry) {
             $links = $xpath->query('a:link[@rel="http://opds-spec.org/acquisition" and @type="application/epub+zip"]', $entry);

@@ -13,7 +13,9 @@ use Wallabag\Security\Voter\IgnoreOriginInstanceRuleVoter;
 class IgnoreOriginInstanceRuleVoterTest extends TestCase
 {
     private $security;
+
     private $token;
+
     private $ignoreOriginInstanceRuleVoter;
 
     protected function setUp(): void

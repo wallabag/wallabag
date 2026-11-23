@@ -35,8 +35,10 @@ class FeedFetcher
         $validEntries = 0;
 
         $result = $this->reader->read($feed->getUrl());
+
         foreach ($result['entries'] as $entry) {
             $url = $entry->getLink();
+
             if (!\is_string($url) || !FeedUrlValidator::isValid($url)) {
                 continue;
             }
@@ -44,6 +46,7 @@ class FeedFetcher
             $hash = hash('sha256', $url);
             $current[$hash] = true;
             $limitReached = $automatic ? ++$validEntries > self::ITEMS_LIMIT : \count($new) >= self::ITEMS_LIMIT;
+
             if ($limitReached || isset($known[$hash])) {
                 continue;
             }
@@ -60,6 +63,7 @@ class FeedFetcher
         }
 
         $producer = null;
+
         if ($automatic) {
             $producer = match (true) {
                 (bool) $this->config->get('import_with_rabbitmq') => $this->rabbitMqProducer,
@@ -67,6 +71,7 @@ class FeedFetcher
                 default => null,
             };
         }
+
         foreach ($new as $item) {
             if ($automatic) {
                 $this->import->importItem($feed->getUser(), $item->getUrl(), $item->getTitle(), $item->getPublishedAt(), $producer);
@@ -78,9 +83,11 @@ class FeedFetcher
                 $this->entityManager->flush();
             }
         }
+
         if (!$automatic && [] !== $new) {
             $this->entityManager->flush();
         }
+
         if ($result['url'] === $feed->getUrl()) {
             $this->items->prune($feed, array_keys($current), self::ITEMS_KEPT);
         } else {
@@ -96,14 +103,17 @@ class FeedFetcher
     private function getEnclosureImage(array $enclosure): ?string
     {
         $url = $enclosure['url'] ?? $enclosure['href'] ?? null;
+
         if (!\is_string($url) || !FeedUrlValidator::isValid($url)) {
             return null;
         }
 
         $type = strtolower(trim(explode(';', $enclosure['type'] ?? '', 2)[0]));
+
         if (str_starts_with($type, 'image/')) {
             return $url;
         }
+
         if ('' !== $type && 'application/octet-stream' !== $type) {
             return null;
         }

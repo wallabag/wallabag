@@ -7,6 +7,7 @@ use Wallabag\Entity\Entry;
 abstract class WallabagImport extends AbstractFileImport
 {
     protected $filepath;
+
     // untitled in all languages from v1
     protected $untitled = [
         'Untitled',
@@ -112,7 +113,7 @@ abstract class WallabagImport extends AbstractFileImport
             $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 $data['tags'],
-                $this->em->getUnitOfWork()->getScheduledEntityInsertions()
+                $this->em->getUnitOfWork()->getScheduledEntityInsertions(),
             );
         }
 

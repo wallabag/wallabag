@@ -30,7 +30,7 @@ class Version20161024212538 extends WallabagMigration
             ['user_id'],
             ['id'],
             ['onDelete' => 'CASCADE'],
-            $this->constraintName
+            $this->constraintName,
         );
     }
 

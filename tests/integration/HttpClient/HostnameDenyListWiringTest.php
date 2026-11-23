@@ -82,6 +82,7 @@ class HostnameDenyListWiringTest extends WallabagKernelTestCase
     public function testPsr18ClientPreservesTheAllowedResponse(bool $redirect, int $status): void
     {
         $responses = [];
+
         if ($redirect) {
             $responses[] = new MockResponse('', [
                 'http_code' => 302,

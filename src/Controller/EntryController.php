@@ -75,6 +75,7 @@ class EntryController extends AbstractController
         $tagsToRemove = [];
 
         $action = 'toggle-read';
+
         if (isset($values['toggle-star'])) {
             $action = 'toggle-star';
         } elseif (isset($values['delete'])) {
@@ -83,19 +84,24 @@ class EntryController extends AbstractController
             $action = 'tag';
 
             if (isset($values['tags'])) {
-                $labels = array_filter(explode(',', (string) $values['tags']),
+                $labels = array_filter(
+                    explode(',', (string) $values['tags']),
                     static function ($v) {
                         $v = trim($v);
 
                         return '' !== $v;
-                    });
+                    },
+                );
+
                 foreach ($labels as $label) {
                     $remove = false;
+
                     if (str_starts_with($label, '-')) {
                         $label = substr($label, 1);
                         $remove = true;
                     }
                     $tag = $tagRepository->findOneByLabel($label);
+
                     if ($remove) {
                         if (null !== $tag) {
                             $tagsToRemove[] = $tag;
@@ -128,6 +134,7 @@ class EntryController extends AbstractController
                     foreach ($tagsToAdd as $tag) {
                         $entry->addTag($tag);
                     }
+
                     foreach ($tagsToRemove as $tag) {
                         $entry->removeTag($tag);
                     }
@@ -194,7 +201,7 @@ class EntryController extends AbstractController
             if (false !== $existingEntry) {
                 $this->addFlash(
                     'notice',
-                    $translator->trans('flashes.entry.notice.entry_already_saved', ['%date%' => $existingEntry->getCreatedAt()->format('d-m-Y')])
+                    $translator->trans('flashes.entry.notice.entry_already_saved', ['%date%' => $existingEntry->getCreatedAt()->format('d-m-Y')]),
                 );
 
                 return $this->redirect($this->generateUrl('view', ['id' => $existingEntry->getId()]));
@@ -270,7 +277,7 @@ class EntryController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'flashes.entry.notice.entry_updated'
+                'flashes.entry.notice.entry_updated',
             );
 
             return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
@@ -402,7 +409,7 @@ class EntryController extends AbstractController
     {
         return $this->render(
             'Entry/entry.html.twig',
-            ['entry' => $entry]
+            ['entry' => $entry],
         );
     }
 
@@ -455,13 +462,14 @@ class EntryController extends AbstractController
         $this->entityManager->flush();
 
         $message = 'flashes.entry.notice.entry_unarchived';
+
         if ($entry->isArchived()) {
             $message = 'flashes.entry.notice.entry_archived';
         }
 
         $this->addFlash(
             'notice',
-            $message
+            $message,
         );
 
         $redirectUrl = $this->redirectHelper->to($request->query->get('redirect'));
@@ -487,13 +495,14 @@ class EntryController extends AbstractController
         $this->entityManager->flush();
 
         $message = 'flashes.entry.notice.entry_unstarred';
+
         if ($entry->isStarred()) {
             $message = 'flashes.entry.notice.entry_starred';
         }
 
         $this->addFlash(
             'notice',
-            $message
+            $message,
         );
 
         $redirectUrl = $this->redirectHelper->to($request->query->get('redirect'));
@@ -518,7 +527,7 @@ class EntryController extends AbstractController
         // to avoid redirecting to the deleted entry. Ugh.
         $url = $this->generateUrl(
             'view',
-            ['id' => $entry->getId()]
+            ['id' => $entry->getId()],
         );
 
         // entry deleted, dispatch event about it!
@@ -529,7 +538,7 @@ class EntryController extends AbstractController
 
         $this->addFlash(
             'notice',
-            'flashes.entry.notice.entry_deleted'
+            'flashes.entry.notice.entry_deleted',
         );
 
         // don't redirect user to the deleted entry (check that the referer doesn't end with the same url)
@@ -609,7 +618,7 @@ class EntryController extends AbstractController
 
         return $this->render(
             'Entry/share.html.twig',
-            ['entry' => $entry]
+            ['entry' => $entry],
         );
     }
 
@@ -701,13 +710,14 @@ class EntryController extends AbstractController
         }
 
         return $this->render(
-            'Entry/entries.html.twig', [
+            'Entry/entries.html.twig',
+            [
                 'form' => $form->createView(),
                 'entries' => $entries,
                 'currentPage' => $page,
                 'searchTerm' => $searchTerm,
                 'isFiltered' => $form->isSubmitted(),
-            ]
+            ],
         );
     }
 

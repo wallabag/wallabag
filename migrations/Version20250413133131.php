@@ -33,7 +33,7 @@ final class Version20250413133131 extends WallabagMigration
             [
                 'googleAuthenticator' => true,
                 'emptyString' => '',
-            ]
+            ],
         );
     }
 

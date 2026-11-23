@@ -16,7 +16,7 @@ class JavaScriptOnlyLinkTest extends TestCase
         self::assertMatchesRegularExpression(
             '/\\shref\\s*=/i',
             $anchor,
-            \sprintf('Anchor without href in %s: %s', $path, $anchor)
+            \sprintf('Anchor without href in %s: %s', $path, $anchor),
         );
     }
 
@@ -28,7 +28,7 @@ class JavaScriptOnlyLinkTest extends TestCase
         self::assertDoesNotMatchRegularExpression(
             '/\\shref\\s*=\\s*(["\\\'])#\\1/i',
             $anchor,
-            \sprintf('Fake fragment link in %s: %s', $path, $anchor)
+            \sprintf('Fake fragment link in %s: %s', $path, $anchor),
         );
     }
 
@@ -41,7 +41,7 @@ class JavaScriptOnlyLinkTest extends TestCase
             self::assertMatchesRegularExpression(
                 '/\\shref\\s*=\\s*(["\\\'])javascript:/i',
                 $anchor,
-                \sprintf('Intentional bookmarklet JavaScript link missing in %s: %s', $path, $anchor)
+                \sprintf('Intentional bookmarklet JavaScript link missing in %s: %s', $path, $anchor),
             );
 
             return;
@@ -50,7 +50,7 @@ class JavaScriptOnlyLinkTest extends TestCase
         self::assertDoesNotMatchRegularExpression(
             '/\\shref\\s*=\\s*(["\\\'])javascript:/i',
             $anchor,
-            \sprintf('JavaScript link in %s: %s', $path, $anchor)
+            \sprintf('JavaScript link in %s: %s', $path, $anchor),
         );
     }
 
@@ -58,7 +58,7 @@ class JavaScriptOnlyLinkTest extends TestCase
     {
         $projectDirectory = \dirname(__DIR__, 3);
         $templates = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($projectDirectory . '/templates', \FilesystemIterator::SKIP_DOTS)
+            new \RecursiveDirectoryIterator($projectDirectory . '/templates', \FilesystemIterator::SKIP_DOTS),
         );
 
         foreach ($templates as $template) {

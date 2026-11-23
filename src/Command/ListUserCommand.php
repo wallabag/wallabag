@@ -13,6 +13,7 @@ use Wallabag\Repository\UserRepository;
 class ListUserCommand extends Command
 {
     protected static $defaultName = 'wallabag:user:list';
+
     protected static $defaultDescription = 'List all users';
 
     public function __construct(
@@ -44,6 +45,7 @@ class ListUserCommand extends Command
             ->getSumUsers();
 
         $rows = [];
+
         foreach ($users as $user) {
             $rows[] = [
                 $user->getUsername(),
@@ -60,8 +62,8 @@ class ListUserCommand extends Command
                 '%s/%s%s user(s) displayed.',
                 \count($users),
                 $nbUsers,
-                null === $input->getArgument('search') ? '' : ' (filtered)'
-            )
+                null === $input->getArgument('search') ? '' : ' (filtered)',
+            ),
         );
 
         return 0;

@@ -94,8 +94,14 @@ phpstan: ## Run PHPStan
 phpstan-baseline: ## Generate PHPStan baseline
 	@$(PHP_NO_XDEBUG) bin/phpstan analyse --generate-baseline
 
-twigcs: ## Run TwigCS linter on Twig templates
-	@$(PHP_NO_XDEBUG) bin/twigcs --severity=error --display=blocking app/ src/
+check-twig-cs: ## Check Twig coding standards
+	@$(PHP_NO_XDEBUG) bin/twig-cs-fixer lint --no-cache
+
+fix-twig-cs: ## Format Twig templates
+	@$(PHP_NO_XDEBUG) bin/twig-cs-fixer fix --no-cache
+
+lint-twig: ## Check Twig syntax with wallabag's Twig environment
+	@$(PHP) bin/console lint:twig --env=test --no-debug templates/
 
 composer-validate: ## Validate composer.json
 	@$(COMPOSER) validate
@@ -112,10 +118,25 @@ lint-js: ## Run Biome
 lint-scss: ## Run Stylelint
 	@$(YARN) lint:scss
 
+lint-yaml: ## Check tracked application and repository YAML
+	@set -o pipefail; git ls-files -z -- 'app/config/*.yml' 'app/config/*.yaml' '.github/*.yml' '.github/*.yaml' doc/hugo.yaml codecov.yml \
+		| xargs -0 -r $(PHP) bin/console lint:yaml -v
+
+lint-container: ## Validate the Symfony service container in each environment
+	@$(PHP) bin/console lint:container --env=dev --no-debug
+	@$(PHP) bin/console lint:container --env=test --no-debug
+	@$(PHP) bin/console lint:container --env=prod --no-debug
+
+lint-compose: ## Validate the Compose model without resolving local service env files
+	@docker compose -f compose.yaml config --quiet --no-env-resolution
+
+lint-actions: ## Validate GitHub Actions workflows
+	@actionlint -shellcheck= -pyflakes=
+
 lint-translations: ## Validate YAML translation files
 	@$(PHP) bin/console lint:yaml translations -v
 
-lint: composer-validate composer-normalize composer-dependency-analyser check-cs phpstan twigcs lint-js lint-scss lint-translations ## Run all coding standards and linting checks
+lint: composer-validate composer-normalize composer-dependency-analyser check-cs phpstan check-twig-cs lint-twig lint-js lint-scss lint-yaml lint-container lint-translations lint-compose lint-actions ## Run all coding standards and linting checks
 
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
 ifndef VERSION
@@ -126,6 +147,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup check-cs fix-cs phpstan phpstan-baseline twigcs composer-validate composer-normalize composer-dependency-analyser lint-js lint-scss lint-translations lint
+.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup check-cs fix-cs phpstan phpstan-baseline check-twig-cs fix-twig-cs lint-twig composer-validate composer-normalize composer-dependency-analyser lint-js lint-scss lint-yaml lint-container lint-translations lint-compose lint-actions lint
 
 .DEFAULT_GOAL := install

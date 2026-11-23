@@ -19,6 +19,7 @@ jobs:
 
     steps:
       - name: "Checkout"
+        id: checkout
         uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
 
       - name: "Install PHP"
@@ -26,7 +27,7 @@ jobs:
         with:
           coverage: "none"
           php-version: "8.2"
-          tools: cs2pr, pecl
+          tools: pecl
           extensions: pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
         env:
@@ -51,7 +52,7 @@ jobs:
 
       - name: "Install dependencies with Yarn"
         id: yarn-install
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: "Run Composer validate"
         if: always() && steps.composer-install.outcome == 'success'
@@ -63,7 +64,7 @@ jobs:
 
       - name: "Run PHP CS Fixer"
         if: always() && steps.composer-install.outcome == 'success'
-        run: "bin/php-cs-fixer fix --verbose --dry-run --format=checkstyle | cs2pr"
+        run: php bin/php-cs-fixer fix --verbose --dry-run
 
       - name: "Generate test cache for PHPStan"
         id: test-cache
@@ -72,11 +73,23 @@ jobs:
 
       - name: "Run PHPStan"
         if: always() && steps.test-cache.outcome == 'success'
-        run: "php bin/phpstan analyse --no-progress --error-format=checkstyle | cs2pr"
+        run: php bin/phpstan analyse --no-progress
 
-      - name: "Run TwigCS"
+      - name: "Run Twig CS Fixer"
         if: always() && steps.composer-install.outcome == 'success'
-        run: "php bin/twigcs --severity=error --display=blocking --reporter checkstyle app/ src/ | cs2pr"
+        run: php bin/twig-cs-fixer lint --no-cache --report=github
+
+      - name: "Validate Twig syntax"
+        if: always() && steps.composer-install.outcome == 'success'
+        run: make lint-twig
+
+      - name: "Validate repository YAML"
+        if: always() && steps.composer-install.outcome == 'success'
+        run: make lint-yaml
+
+      - name: "Validate Symfony service containers"
+        if: always() && steps.composer-install.outcome == 'success'
+        run: make lint-container
 
       - name: "Run ergebnis/composer-normalize"
         if: always() && steps.composer-install.outcome == 'success'
@@ -84,8 +97,37 @@ jobs:
 
       - name: "Run Biome"
         if: always() && steps.yarn-install.outcome == 'success'
-        run: "yarn lint:js"
+        run: make lint-js
 
       - name: "Run Stylelint"
         if: always() && steps.yarn-install.outcome == 'success'
-        run: "yarn lint:scss"
+        run: make lint-scss
+
+      - name: "Validate Compose model"
+        if: always() && steps.checkout.outcome == 'success'
+        run: |
+          docker compose version
+          make lint-compose
+
+      - name: "Install Actionlint"
+        id: actionlint-install
+        if: always() && steps.checkout.outcome == 'success'
+        env:
+          ACTIONLINT_VERSION: 1.7.12
+          ACTIONLINT_SHA256: 8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
+        run: |
+          archive="$RUNNER_TEMP/actionlint.tar.gz"
+          bin_dir="$RUNNER_TEMP/wallabag-lint-bin"
+          curl --fail --silent --show-error --location --retry 3 \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" \
+            --output "$archive"
+          printf '%s  %s\n' "$ACTIONLINT_SHA256" "$archive" | sha256sum --check -
+          mkdir -p "$bin_dir"
+          tar -xzf "$archive" -C "$bin_dir" actionlint
+          printf '%s\n' "$bin_dir" >> "$GITHUB_PATH"
+
+      - name: "Validate GitHub Actions workflows"
+        if: always() && steps.actionlint-install.outcome == 'success'
+        run: |
+          actionlint -version
+          make lint-actions

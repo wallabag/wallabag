@@ -19,7 +19,6 @@ $config
         'egulias/email-validator',
         'ergebnis/composer-normalize',
         'friendsofphp/php-cs-fixer',
-        'friendsoftwig/twigcs',
         'j0k3r/graby-site-config',
         'j0k3r/php-readability',
         'laminas/laminas-code',
@@ -48,6 +47,7 @@ $config
         'symfony/templating',
         'symfony/var-dumper',
         'twig/string-extra',
+        'vincentlanglet/twig-cs-fixer',
     ], [ErrorType::UNUSED_DEPENDENCY])
     ->ignoreErrorsOnPackages([
         'monolog/monolog',

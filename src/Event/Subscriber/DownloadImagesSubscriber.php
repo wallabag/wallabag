@@ -42,6 +42,7 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
         $entry = $event->getEntry();
 
         $html = $this->downloadImages($entry);
+
         if (false !== $html) {
             $this->logger->debug('DownloadImagesSubscriber: updated html.');
 
@@ -50,6 +51,7 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
 
         // update preview picture
         $previewPicture = $this->downloadPreviewImage($entry);
+
         if (false !== $previewPicture) {
             $this->logger->debug('DownloadImagesSubscriber: update preview picture.');
 
@@ -86,7 +88,7 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
         return $this->downloadImages->processHtml(
             $entry->getId(),
             $entry->getContent(),
-            $entry->getUrl()
+            $entry->getUrl(),
         );
     }
 
@@ -102,7 +104,7 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
         return $this->downloadImages->processSingleImage(
             $entry->getId(),
             $entry->getPreviewPicture(),
-            $entry->getUrl()
+            $entry->getUrl(),
         );
     }
 }

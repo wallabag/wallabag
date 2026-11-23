@@ -41,7 +41,7 @@ class SchemaAdapterSubscriber implements EventSubscriber
                 $tagTable->dropIndex($index->getName());
                 $tagTable->addIndex($index->getColumns(), $index->getName(), $index->getFlags(), array_merge(
                     $index->getOptions(),
-                    ['lengths' => [255]]
+                    ['lengths' => [255]],
                 ));
             }
         }

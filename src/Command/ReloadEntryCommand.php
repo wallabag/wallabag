@@ -19,6 +19,7 @@ use Wallabag\Repository\UserRepository;
 class ReloadEntryCommand extends Command
 {
     protected static $defaultName = 'wallabag:entry:reload';
+
     protected static $defaultDescription = 'Reload entries';
 
     public function __construct(
@@ -40,7 +41,7 @@ class ReloadEntryCommand extends Command
                 'only-not-parsed',
                 null,
                 InputOption::VALUE_NONE,
-                'Only reload entries which have `is_not_parsed` set to `true`'
+                'Only reload entries which have `is_not_parsed` set to `true`',
             );
     }
 
@@ -50,6 +51,7 @@ class ReloadEntryCommand extends Command
 
         $onlyNotParsed = (bool) $input->getOption('only-not-parsed');
         $userId = null;
+
         if ($username = $input->getArgument('username')) {
             try {
                 $userId = $this->userRepository
@@ -66,6 +68,7 @@ class ReloadEntryCommand extends Command
         $entryIds = $this->entryRepository->$methodName($userId);
 
         $nbEntries = \count($entryIds);
+
         if (!$nbEntries) {
             $io->success('No entry to reload.');
 
@@ -75,8 +78,8 @@ class ReloadEntryCommand extends Command
         $io->note(
             \sprintf(
                 "You're going to reload %s entries. Depending on the number of entry to reload, this could be a very long process.",
-                $nbEntries
-            )
+                $nbEntries,
+            ),
         );
 
         if (!$io->confirm('Are you sure you want to proceed?')) {
@@ -86,6 +89,7 @@ class ReloadEntryCommand extends Command
         $progressBar = $io->createProgressBar($nbEntries);
 
         $progressBar->start();
+
         foreach ($entryIds as $entryId) {
             $entry = $this->entryRepository->find($entryId);
 

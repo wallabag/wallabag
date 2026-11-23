@@ -10,6 +10,7 @@ class InstanceImageLocatorTest extends TestCase
     private const WALLABAG_URL = 'http://wallabag.example';
 
     private $projectDir;
+
     private $locator;
 
     protected function setUp(): void

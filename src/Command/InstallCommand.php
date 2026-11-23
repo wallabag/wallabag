@@ -28,12 +28,17 @@ use Wallabag\Entity\User;
 class InstallCommand extends Command
 {
     protected static $defaultName = 'wallabag:install';
+
     protected static $defaultDescription = 'wallabag installer.';
 
     private InputInterface $defaultInput;
+
     private SymfonyStyle $io;
+
     private bool $schemaIsNew = true;
+
     private bool $adminUserCreated = false;
+
     private array $functionExists = [
         'curl_exec',
         'curl_multi_init',
@@ -58,7 +63,7 @@ class InstallCommand extends Command
                 'reset',
                 null,
                 InputOption::VALUE_NONE,
-                'Reset current database'
+                'Reset current database',
             )
         ;
     }
@@ -386,7 +391,7 @@ class InstallCommand extends Command
             [
                 '--no-debug' => true,
                 '--env' => $this->defaultInput->getOption('env') ?: 'dev',
-            ]
+            ],
         );
 
         if ($this->defaultInput->getOption('no-interaction')) {

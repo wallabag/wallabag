@@ -53,6 +53,7 @@ abstract class AbstractConsumer
 
         // Website credentials are resolved through the security context.
         $previousToken = $this->tokenStorage->getToken();
+
         // Keep the website session between messages of the same user, never share it with another one.
         if ($this->browserUserId !== $user->getId()) {
             $this->browser->restart();

@@ -54,7 +54,7 @@ class ExportController extends AbstractController
         if ('same_domain' === $category) {
             $entries = $entryRepository->getBuilderForSameDomainByUser(
                 $this->getUser()->getId(),
-                $request->query->getInt('entry')
+                $request->query->getInt('entry'),
             )->getQuery()
              ->getResult();
 
@@ -64,7 +64,7 @@ class ExportController extends AbstractController
 
             $entries = $entryRepository->findAllByTagId(
                 $this->getUser()->getId(),
-                $tag->getId()
+                $tag->getId(),
             );
 
             $title = 'Tag ' . $tag->getLabel();
@@ -75,14 +75,14 @@ class ExportController extends AbstractController
             $entries = $entryRepository->getBuilderForSearchByUser(
                 $this->getUser()->getId(),
                 $searchTerm,
-                $currentRoute
+                $currentRoute,
             )->getQuery()
              ->getResult();
 
             $title = 'Search ' . $searchTerm;
         } elseif ('annotated' === $category) {
             $entries = $entryRepository->getBuilderForAnnotationsByUser(
-                $this->getUser()->getId()
+                $this->getUser()->getId(),
             )->getQuery()
              ->getResult();
 

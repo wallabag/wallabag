@@ -47,6 +47,7 @@ class EpubContentCleaner
         }
 
         $xhtml = '';
+
         foreach ($body->childNodes as $node) {
             $xhtml .= $document->saveXML($node);
         }

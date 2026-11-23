@@ -20,10 +20,15 @@ use Wallabag\Repository\IgnoreOriginInstanceRuleRepository;
 class RuleBasedIgnoreOriginProcessorTest extends TestCase
 {
     private $rulerz;
+
     private $processor;
+
     private $validator;
+
     private $ignoreOriginInstanceRuleRepository;
+
     private $logger;
+
     private $handler;
 
     protected function setUp(): void

@@ -32,6 +32,7 @@ class TagsAssigner
 
         // keeps only Tag entity from the "not yet flushed entities"
         $tagsNotYetFlushed = [];
+
         foreach ($entitiesReady as $entity) {
             if ($entity instanceof Tag) {
                 $tagsNotYetFlushed[$entity->getLabel()] = $entity;

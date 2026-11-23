@@ -99,7 +99,7 @@ abstract class HtmlImport extends AbstractFileImport
         if (\array_key_exists('tags', $data)) {
             $this->tagsAssigner->assignTagsToEntry(
                 $entry,
-                $data['tags']
+                $data['tags'],
             );
         }
 

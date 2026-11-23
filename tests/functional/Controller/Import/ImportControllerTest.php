@@ -41,7 +41,7 @@ class ImportControllerTest extends WallabagTestCase
         $message->setMessageCount(2);
         $channel = $this->createMock(AMQPChannel::class);
         $channel->method('basic_get')->willReturnCallback(
-            static fn (string $queue): ?AMQPMessage => 'wallabag.import.feeds' === $queue ? $message : null
+            static fn (string $queue): ?AMQPMessage => 'wallabag.import.feeds' === $queue ? $message : null,
         );
         $connection = $this->createMock(AMQPStreamConnection::class);
         $connection->method('channel')->willReturn($channel);
@@ -66,7 +66,7 @@ class ImportControllerTest extends WallabagTestCase
         $redis = $this->getMockBuilder(Client::class)->onlyMethods(['executeCommand'])->getMock();
         $redis->method('executeCommand')->willReturnCallback(
             static fn (CommandInterface $command): int => 'LLEN' === $command->getId()
-                && ['wallabag.import.feeds'] === $command->getArguments() ? 4 : 0
+                && ['wallabag.import.feeds'] === $command->getArguments() ? 4 : 0,
         );
         $container->set(Client::class, $redis);
         $config = $container->get(Config::class);

@@ -69,7 +69,7 @@ class DownloadImagesTest extends TestCase
             new NoPrivateNetworkHttpClient(HttpClient::create()),
             sys_get_temp_dir() . '/wallabag_test',
             'http://wallabag.io/',
-            $logger
+            $logger,
         );
 
         $html = '<div><img src="http://169.254.169.254/latest/meta-data/" /></div>';
@@ -142,7 +142,7 @@ class DownloadImagesTest extends TestCase
         $result = $download->processSingleImage(
             123,
             'https://test-user:test-password@blocked.example/image.jpg?access_token=test-query',
-            'https://allowed.example/article'
+            'https://allowed.example/article',
         );
 
         $this->assertFalse($result);
@@ -245,7 +245,7 @@ class DownloadImagesTest extends TestCase
         $res = $download->processSingleImage(
             123,
             'https://cdn.theconversation.com/files/157200/article/width926/gsj2rjp2-1487348607.jpg',
-            'https://theconversation.com/conversation-avec-gerald-bronner-ce-nest-pas-la-post-verite-qui-nous-menace-mais-lextension-de-notre-credulite-73089'
+            'https://theconversation.com/conversation-avec-gerald-bronner-ce-nest-pas-la-post-verite-qui-nous-menace-mais-lextension-de-notre-credulite-73089',
         );
 
         $this->assertStringContainsString('http://wallabag.io/assets/images/9/b/9b0ead26/', $res, 'Content-Type was empty but data is ok for an image');
@@ -320,7 +320,7 @@ class DownloadImagesTest extends TestCase
         $res = $download->processSingleImage(
             123,
             null,
-            'https://framablog.org/2018/06/30/engagement-atypique/'
+            'https://framablog.org/2018/06/30/engagement-atypique/',
         );
         $this->assertFalse($res);
     }

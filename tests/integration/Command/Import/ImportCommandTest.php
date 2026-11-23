@@ -96,6 +96,7 @@ class ImportCommandTest extends WallabagKernelTestCase
     {
         // Entries are flushed by batches of 20
         $entries = [];
+
         for ($i = 1; $i <= 21; ++$i) {
             $entries[] = [
                 'title' => 'Batch entry ' . $i,

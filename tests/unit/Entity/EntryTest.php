@@ -20,6 +20,7 @@ class EntryTest extends TestCase
             'fr_FR' => 'fr-FR',
             'ja' => 'ja',
         ];
+
         foreach ($languages as $entryLang => $lang) {
             $entry->setLanguage($entryLang);
             $this->assertSame($lang, $entry->getHTMLLanguage());

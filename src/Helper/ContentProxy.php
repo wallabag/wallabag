@@ -20,6 +20,7 @@ class ContentProxy
     private const FETCHING_ERROR_DESCRIPTION_PREFIX = '<p><i>But we found a short description: </i></p>';
 
     protected $mimeTypes;
+
     protected $eventDispatcher;
 
     public function __construct(
@@ -50,6 +51,7 @@ class ContentProxy
         $suppliedHtml = trim($content['html'] ?? '');
         $isFetchingError = $suppliedHtml === trim($this->fetchingErrorMessage)
             || str_starts_with($suppliedHtml, ltrim($this->fetchingErrorMessage) . self::FETCHING_ERROR_DESCRIPTION_PREFIX);
+
         if ('' !== $suppliedHtml && !$isFetchingError) {
             $content['html'] = $graby->cleanupHtml($content['html'], $url);
         } else {
@@ -80,10 +82,11 @@ class ContentProxy
             // Keep caller data when Graby reports a fetching error.
             if (null !== $fetchedContent && (empty($content) || ($fetchedContent['html'] ?? null) !== $this->fetchingErrorMessage)) {
                 $title = $content['title'] ?? $fetchedContent['title'] ?? null;
+
                 if ($title) {
                     $fetchedContent['title'] = $this->sanitizeContentTitle(
                         $title,
-                        $fetchedContent['headers']['content-type'] ?? ''
+                        $fetchedContent['headers']['content-type'] ?? '',
                     );
                 }
 
@@ -120,7 +123,7 @@ class ContentProxy
 
         $errors = $this->validator->validate(
             $value,
-            new LocaleConstraint(['canonicalize' => true])
+            new LocaleConstraint(['canonicalize' => true]),
         );
 
         if (0 === \count($errors)) {
@@ -143,7 +146,7 @@ class ContentProxy
     {
         $errors = $this->validator->validate(
             $value,
-            new UrlConstraint()
+            new UrlConstraint(),
         );
 
         if (0 === \count($errors)) {
@@ -187,6 +190,7 @@ class ContentProxy
     public function setEntryDomainName(Entry $entry): void
     {
         $domainName = parse_url($entry->getUrl(), \PHP_URL_HOST);
+
         if (false !== $domainName) {
             $entry->setDomainName($domainName);
         }
@@ -312,6 +316,7 @@ class ContentProxy
         }
 
         $previewPictureUrl = '';
+
         if (!empty($content['image'])) {
             $previewPictureUrl = $content['image'];
         }

@@ -119,7 +119,7 @@ class FirefoxControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.20minutes.fr/sport/4002755-20220928-tarn-lapins-ravagent-terrain-match-rugby-doit-etre-annule',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertInstanceOf(Entry::class, $content);

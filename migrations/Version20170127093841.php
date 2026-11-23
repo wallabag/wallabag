@@ -11,6 +11,7 @@ use Wallabag\Doctrine\WallabagMigration;
 class Version20170127093841 extends WallabagMigration
 {
     private $indexStarredName = 'IDX_entry_starred';
+
     private $indexArchivedName = 'IDX_entry_archived';
 
     public function up(Schema $schema): void

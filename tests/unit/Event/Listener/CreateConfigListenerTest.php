@@ -17,10 +17,15 @@ use Wallabag\Event\Listener\CreateConfigListener;
 class CreateConfigListenerTest extends TestCase
 {
     private $em;
+
     private $listener;
+
     private $dispatcher;
+
     private $request;
+
     private $response;
+
     private $requestStack;
 
     protected function setUp(): void
@@ -41,7 +46,7 @@ class CreateConfigListenerTest extends TestCase
             1,
             1,
             1,
-            $this->requestStack
+            $this->requestStack,
         );
 
         $this->dispatcher = new EventDispatcher();
@@ -59,7 +64,7 @@ class CreateConfigListenerTest extends TestCase
         $event = new FilterUserResponseEvent(
             $user,
             $this->request,
-            $this->response
+            $this->response,
         );
 
         $config = new Config($user);
@@ -76,7 +81,7 @@ class CreateConfigListenerTest extends TestCase
 
         $this->dispatcher->dispatch(
             $event,
-            FOSUserEvents::REGISTRATION_COMPLETED
+            FOSUserEvents::REGISTRATION_COMPLETED,
         );
     }
 }

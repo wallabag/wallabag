@@ -12,7 +12,9 @@ use Wallabag\Security\Voter\MainVoter;
 class MainVoterTest extends TestCase
 {
     private $security;
+
     private $token;
+
     private $mainVoter;
 
     protected function setUp(): void

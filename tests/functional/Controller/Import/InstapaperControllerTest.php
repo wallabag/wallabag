@@ -119,7 +119,7 @@ class InstapaperControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.theguardian.com/global-development/ng-interactive/2025/dec/22/childbirth-under-attack-how-women-and-babies-became-targets-in-conflicts-around-the-world',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertInstanceOf(Entry::class, $content);
@@ -136,7 +136,7 @@ class InstapaperControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.20minutes.fr/high-tech/2077615-20170531-quoi-exactement-tweet-covfefe-donald-trump-persiste-signe',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertContains('foot', $content->getTagsLabel());
@@ -171,7 +171,7 @@ class InstapaperControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://redditblog.com/2016/09/20/amp-and-reactredux/',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertTrue($content1->isArchived());
@@ -181,7 +181,7 @@ class InstapaperControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://medium.com/@the_minh/why-foursquare-swarm-is-still-my-favourite-social-network-e38228493e6c',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertTrue($content2->isArchived());

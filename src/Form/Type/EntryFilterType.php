@@ -96,6 +96,7 @@ class EntryFilterType extends AbstractType
             ->add('domainName', TextFilterType::class, [
                 'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) {
                     $value = $values['value'];
+
                     if (empty($value) || \strlen($value) <= 2) {
                         return false;
                     }
@@ -114,6 +115,7 @@ class EntryFilterType extends AbstractType
             ->add('httpStatus', NumberFilterType::class, [
                 'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) {
                     $value = (int) $values['value'];
+
                     if (false === \array_key_exists($value, Response::$statusTexts)) {
                         return false;
                     }

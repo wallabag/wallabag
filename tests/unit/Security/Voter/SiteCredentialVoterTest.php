@@ -12,7 +12,9 @@ use Wallabag\Security\Voter\SiteCredentialVoter;
 class SiteCredentialVoterTest extends TestCase
 {
     private $user;
+
     private $token;
+
     private $siteCredentialVoter;
 
     protected function setUp(): void

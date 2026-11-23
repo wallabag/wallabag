@@ -60,6 +60,7 @@ final class Version20261119211251 extends WallabagMigration
 
         // Rebuilding the parent table must not cascade into the article history.
         $restoreForeignKeys = (bool) $this->connection->fetchOne('PRAGMA foreign_keys');
+
         if ($restoreForeignKeys) {
             $this->addSql('PRAGMA foreign_keys = OFF');
         }

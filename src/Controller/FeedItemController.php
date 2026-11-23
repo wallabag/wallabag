@@ -36,6 +36,7 @@ class FeedItemController extends AbstractController
     public function purge(Request $request, FeedUrl $feed, FeedItemRepository $items): Response
     {
         $token = $request->request->all()['token'] ?? null;
+
         if (!\is_string($token) || !$this->isCsrfTokenValid('feed-purge-' . $feed->getId(), $token)) {
             throw new BadRequestHttpException('Invalid CSRF token.');
         }
@@ -53,6 +54,7 @@ class FeedItemController extends AbstractController
     {
         $feed = $item->getFeed();
         $token = $request->request->all()['token'] ?? null;
+
         if (!\is_string($token) || !$this->isCsrfTokenValid('feed-delete-item-' . $item->getId(), $token)) {
             throw new BadRequestHttpException('Invalid CSRF token.');
         }
@@ -75,6 +77,7 @@ class FeedItemController extends AbstractController
     {
         $feed = $item->getFeed();
         $token = $request->request->all()['token'] ?? null;
+
         if (!\is_string($token) || !$this->isCsrfTokenValid('feed-save-item-' . $item->getId(), $token)) {
             throw new BadRequestHttpException('Invalid CSRF token.');
         }

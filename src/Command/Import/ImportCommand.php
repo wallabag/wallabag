@@ -33,6 +33,7 @@ use Wallabag\Repository\UserRepository;
 class ImportCommand extends Command
 {
     protected static $defaultName = 'wallabag:import';
+
     protected static $defaultDescription = 'Import entries from a JSON export';
 
     public function __construct(
@@ -96,7 +97,8 @@ class ImportCommand extends Command
         $token = new UsernamePasswordToken(
             $entityUser,
             'main',
-            $entityUser->getRoles());
+            $entityUser->getRoles(),
+        );
 
         $this->tokenStorage->setToken($token);
         $user = $this->tokenStorage->getToken()->getUser();

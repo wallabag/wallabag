@@ -15,8 +15,8 @@ class ArticleReportingUrlPass implements CompilerPassInterface
         $reportingUrl = $container->getParameterBag()->unescapeValue(
             $container->resolveEnvPlaceholders(
                 $container->getParameter('wallabag.article_reporting_url'),
-                true
-            )
+                true,
+            ),
         );
 
         if ('' === $reportingUrl) {
@@ -42,7 +42,7 @@ class ArticleReportingUrlPass implements CompilerPassInterface
 
         $container->setParameter(
             'wallabag.article_reporting_url',
-            $container->getParameterBag()->escapeValue($reportingUrl)
+            $container->getParameterBag()->escapeValue($reportingUrl),
         );
     }
 }

@@ -116,7 +116,7 @@ class OmnivoreControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.lemonde.fr/economie/article/2024/10/29/malgre-la-crise-du-marche-des-montres-breitling-etend-son-reseau-commercial-et-devoile-ses-ambitions_6365425_3234.html',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
@@ -158,7 +158,7 @@ class OmnivoreControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.lemonde.fr/economie/article/2024/10/29/l-union-europeenne-adopte-jusqu-a-35-de-surtaxes-sur-les-voitures-electriques-importees-de-chine_6365258_3234.html',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertInstanceOf(Entry::class, $content1);
@@ -168,7 +168,7 @@ class OmnivoreControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.lemonde.fr/les-decodeurs/article/2024/10/29/presidentielle-americaine-2024-comment-le-calendrier-de-l-election-et-des-affaires-judiciaires-de-trump-s-entremelent_6210916_3211.html',
-                $this->getLoggedInUserId()
+                $this->getLoggedInUserId(),
             );
 
         $this->assertInstanceOf(Entry::class, $content2);

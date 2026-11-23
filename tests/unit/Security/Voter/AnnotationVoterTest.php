@@ -12,6 +12,7 @@ use Wallabag\Security\Voter\AnnotationVoter;
 class AnnotationVoterTest extends TestCase
 {
     private $token;
+
     private $annotationVoter;
 
     protected function setUp(): void

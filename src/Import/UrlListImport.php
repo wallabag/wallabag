@@ -70,6 +70,7 @@ class UrlListImport extends AbstractFileImport
         }
 
         $entries = [];
+
         foreach ($lines as $index => $line) {
             if (0 === $index) {
                 // remove an eventual UTF-8 BOM

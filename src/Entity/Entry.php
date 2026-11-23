@@ -337,6 +337,7 @@ class Entry
     {
         $this->setArchived($isArchived);
         $this->setArchivedAt(null);
+
         if ($this->isArchived()) {
             $this->setArchivedAt(new \DateTime());
         }
@@ -541,6 +542,7 @@ class Entry
     {
         $this->setStarred($isStarred);
         $this->setStarredAt(null);
+
         if ($this->isStarred()) {
             $this->setStarredAt(new \DateTime());
         }
@@ -631,6 +633,7 @@ class Entry
     public function getTagsLabel(): array
     {
         $tags = [];
+
         foreach ($this->tags as $tag) {
             $tags[] = $tag->getLabel();
         }
@@ -644,6 +647,7 @@ class Entry
     public function getSerializedTags()
     {
         $data = [];
+
         foreach ($this->tags as $tag) {
             $data[] = $tag->getLabel();
         }
@@ -857,9 +861,9 @@ class Entry
             $publishedBy = array_values(array_filter(
                 array_map(
                     static fn ($author) => \is_scalar($author) ? trim((string) $author) : '',
-                    $publishedBy
+                    $publishedBy,
                 ),
-                static fn ($author) => '' !== $author
+                static fn ($author) => '' !== $author,
             ));
         }
 

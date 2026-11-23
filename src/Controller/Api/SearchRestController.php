@@ -68,7 +68,7 @@ class SearchRestController extends WallabagRestController
         $qb = $entryRepository->getBuilderForSearchByUser(
             $this->getUser()->getId(),
             $term,
-            null
+            null,
         );
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
@@ -87,8 +87,8 @@ class SearchRestController extends WallabagRestController
                     'page' => $page,
                     'perPage' => $perPage,
                 ],
-                true
-            )
+                true,
+            ),
         );
 
         return $this->sendResponse($paginatedCollection);

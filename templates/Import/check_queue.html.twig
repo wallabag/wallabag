@@ -6,13 +6,13 @@
     <p class="hidden" data-controller="materialize--toast">Messages in queue: {{ nbRabbitMessages }}</p>
 {% endif %}
 
-{% if redisNotInstalled is defined and redisNotInstalled  %}
+{% if redisNotInstalled is defined and redisNotInstalled %}
     <div class="card-panel red darken-1 white-text">
         {{ 'flashes.import.error.redis_enabled_not_installed'|trans|raw }}
     </div>
 {% endif %}
 
-{% if rabbitNotInstalled is defined and rabbitNotInstalled  %}
+{% if rabbitNotInstalled is defined and rabbitNotInstalled %}
     <div class="card-panel red darken-1 white-text">
         {{ 'flashes.import.error.rabbit_enabled_not_installed'|trans|raw }}
     </div>

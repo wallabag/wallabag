@@ -9,9 +9,17 @@
 
   "files": {
     "includes": [
-      "assets/*.js",
-      "assets/controllers/**/*.js",
-      "assets/**/*.css"
+      "assets/**/*.js",
+      "assets/**/*.css",
+      "assets/controllers.json",
+      "biome.jsonc",
+      "package.json",
+      "postcss.config.js",
+      "stylelint.config.mjs",
+      "web/manifest.json",
+      "webpack.config.js",
+      // The application loads its routes from FOSJsRouting at runtime.
+      "!web/js/fos_js_routes.js"
     ]
   },
 

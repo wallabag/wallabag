@@ -13,6 +13,7 @@ use Wallabag\Repository\EntryRepository;
 class UpdatePicturesPathCommand extends Command
 {
     protected static $defaultName = 'wallabag:update-pictures-path';
+
     protected static $defaultDescription = 'Update the path of the pictures for each entry when you changed your wallabag instance URL.';
 
     public function __construct(
@@ -29,7 +30,7 @@ class UpdatePicturesPathCommand extends Command
             ->addArgument(
                 'old-url',
                 InputArgument::REQUIRED,
-                'URL to replace'
+                'URL to replace',
             );
     }
 
@@ -42,13 +43,16 @@ class UpdatePicturesPathCommand extends Command
         $query = $this->entryRepository->createQueryBuilder('e')->getQuery();
         $io->text('Retrieve existing entries');
         $i = 1;
+
         foreach ($query->toIterable() as $entry) {
             $content = $entry->getContent();
+
             if (null !== $content) {
                 $entry->setContent(str_replace($oldUrl, $this->wallabagUrl, $content));
             }
 
             $previewPicture = $entry->getPreviewPicture();
+
             if (null !== $previewPicture) {
                 $entry->setPreviewPicture(str_replace($oldUrl, $this->wallabagUrl, $previewPicture));
             }

@@ -77,7 +77,7 @@ class ConfigController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'flashes.config.notice.config_saved'
+                'flashes.config.notice.config_saved',
             );
 
             return $this->redirect($this->generateUrl('config'));
@@ -112,7 +112,7 @@ class ConfigController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'flashes.config.notice.user_updated'
+                'flashes.config.notice.user_updated',
             );
 
             return $this->redirect($this->generateUrl('config') . '#set3');
@@ -128,7 +128,7 @@ class ConfigController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'flashes.config.notice.feed_updated'
+                'flashes.config.notice.feed_updated',
             );
 
             return $this->redirect($this->generateUrl('config') . '#set2');
@@ -158,7 +158,7 @@ class ConfigController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'flashes.config.notice.tagging_rules_updated'
+                'flashes.config.notice.tagging_rules_updated',
             );
 
             return $this->redirect($this->generateUrl('config') . '#set5');
@@ -246,7 +246,7 @@ class ConfigController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'flashes.config.notice.ignore_origin_rules_updated'
+                'flashes.config.notice.ignore_origin_rules_updated',
             );
 
             return $this->redirect($this->generateUrl('config') . '#set6');
@@ -289,7 +289,7 @@ class ConfigController extends AbstractController
 
         $this->addFlash(
             'notice',
-            'flashes.config.notice.otp_disabled'
+            'flashes.config.notice.otp_disabled',
         );
 
         return $this->redirect($this->generateUrl('config') . '#set3');
@@ -317,7 +317,7 @@ class ConfigController extends AbstractController
 
         $this->addFlash(
             'notice',
-            'flashes.config.notice.otp_enabled'
+            'flashes.config.notice.otp_enabled',
         );
 
         return $this->redirect($this->generateUrl('config') . '#set3');
@@ -345,7 +345,7 @@ class ConfigController extends AbstractController
 
         $this->addFlash(
             'notice',
-            'flashes.config.notice.otp_disabled'
+            'flashes.config.notice.otp_disabled',
         );
 
         return $this->redirect($this->generateUrl('config') . '#set3');
@@ -371,7 +371,7 @@ class ConfigController extends AbstractController
         $backupCodes = (new BackupCodes())->toArray();
         $backupCodesHashed = array_map(
             static fn ($backupCode) => password_hash((string) $backupCode, \PASSWORD_DEFAULT),
-            $backupCodes
+            $backupCodes,
         );
 
         $user->setBackupCodes($backupCodesHashed);
@@ -420,13 +420,13 @@ class ConfigController extends AbstractController
 
         $isValid = $googleAuthenticator->checkCode(
             $user,
-            $request->request->get('_auth_code')
+            $request->request->get('_auth_code'),
         );
 
         if ($isValid) {
             $this->addFlash(
                 'notice',
-                'flashes.config.notice.otp_enabled'
+                'flashes.config.notice.otp_enabled',
             );
             $user->setGoogleAuthenticator(true);
             $this->userManager->updateUser($user);
@@ -437,7 +437,7 @@ class ConfigController extends AbstractController
 
         $this->addFlash(
             'notice',
-            'flashes.config.notice.otp_code_invalid'
+            'flashes.config.notice.otp_code_invalid',
         );
 
         $user->setGoogleAuthenticatorSecret(null);
@@ -468,7 +468,7 @@ class ConfigController extends AbstractController
 
         $this->addFlash(
             'notice',
-            'flashes.config.notice.feed_token_updated'
+            'flashes.config.notice.feed_token_updated',
         );
 
         return $this->redirect($this->generateUrl('config') . '#set2');
@@ -493,7 +493,7 @@ class ConfigController extends AbstractController
 
         $this->addFlash(
             'notice',
-            'flashes.config.notice.feed_token_revoked'
+            'flashes.config.notice.feed_token_revoked',
         );
 
         return $this->redirect($this->generateUrl('config') . '#set2');
@@ -517,7 +517,7 @@ class ConfigController extends AbstractController
 
         $this->addFlash(
             'notice',
-            'flashes.config.notice.tagging_rules_deleted'
+            'flashes.config.notice.tagging_rules_deleted',
         );
 
         return $this->redirect($this->generateUrl('config') . '#set5');
@@ -553,7 +553,7 @@ class ConfigController extends AbstractController
 
         $this->addFlash(
             'notice',
-            'flashes.config.notice.ignore_origin_rules_deleted'
+            'flashes.config.notice.ignore_origin_rules_deleted',
         );
 
         return $this->redirect($this->generateUrl('config') . '#set6');
@@ -620,7 +620,7 @@ class ConfigController extends AbstractController
 
         $this->addFlash(
             'notice',
-            'flashes.config.notice.' . $type . '_reset'
+            'flashes.config.notice.' . $type . '_reset',
         );
 
         return $this->redirect($this->generateUrl('config') . '#set3');
@@ -717,7 +717,7 @@ class ConfigController extends AbstractController
         $data = SerializerBuilder::create()->build()->serialize(
             $this->getUser()->getConfig()->getTaggingRules(),
             'json',
-            SerializationContext::create()->setGroups(['export_tagging_rule'])
+            SerializationContext::create()->setGroups(['export_tagging_rule']),
         );
 
         return new Response(
@@ -727,7 +727,7 @@ class ConfigController extends AbstractController
                 'Content-type' => 'application/json',
                 'Content-Disposition' => 'attachment; filename="tagging_rules_' . $this->getUser()->getUsername() . '.json"',
                 'Content-Transfer-Encoding' => 'UTF-8',
-            ]
+            ],
         );
     }
 

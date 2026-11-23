@@ -30,7 +30,6 @@ class OpdsController extends AbstractController
 {
     private const DIGEST_DEFAULT = 20;
     private const DIGEST_MAX = 50;
-
     private const SHELVES = ['unread', 'starred', 'archive', 'all'];
 
     public function __construct(
@@ -52,6 +51,7 @@ class OpdsController extends AbstractController
         $token = $user->getConfig()->getFeedToken();
 
         $shelves = [];
+
         foreach (self::SHELVES as $type) {
             $shelves[] = [
                 'type' => $type,

@@ -62,7 +62,7 @@ class UserController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                $this->translator->trans('flashes.user.notice.added', ['%username%' => $user->getUsername()])
+                $this->translator->trans('flashes.user.notice.added', ['%username%' => $user->getUsername()]),
             );
 
             return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
@@ -103,7 +103,7 @@ class UserController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                $this->translator->trans('flashes.user.notice.updated', ['%username%' => $user->getUsername()])
+                $this->translator->trans('flashes.user.notice.updated', ['%username%' => $user->getUsername()]),
             );
 
             return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
@@ -129,7 +129,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash(
                 'notice',
-                $this->translator->trans('flashes.user.notice.deleted', ['%username%' => $user->getUsername()])
+                $this->translator->trans('flashes.user.notice.deleted', ['%username%' => $user->getUsername()]),
             );
 
             $this->entityManager->remove($user);

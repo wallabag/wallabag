@@ -135,6 +135,7 @@ class Tag implements \Stringable
     public function getEntriesByUserId($userId)
     {
         $filteredEntries = new ArrayCollection();
+
         foreach ($this->entries as $entry) {
             if ($entry->getUser()->getId() === $userId) {
                 $filteredEntries->add($entry);

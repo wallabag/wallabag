@@ -17,7 +17,7 @@ final class Version20261106070218 extends WallabagMigration
             [
                 'emptyArray' => serialize([]),
                 'emptyAuthor' => serialize(['']),
-            ]
+            ],
         );
     }
 

@@ -187,7 +187,7 @@ class UserRestController extends WallabagRestController
         $json = $this->serializer->serialize(
             $user,
             'json',
-            SerializationContext::create()->setGroups([$group])
+            SerializationContext::create()->setGroups([$group]),
         );
 
         return (new JsonResponse())
@@ -205,6 +205,7 @@ class UserRestController extends WallabagRestController
     private function translateErrors($errors)
     {
         $translatedErrors = [];
+
         foreach ($errors as $error) {
             $translatedErrors[] = $this->translator->trans($error);
         }

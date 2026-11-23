@@ -34,7 +34,7 @@ class FeedSubscriptionController extends AbstractController
         return $this->render('FeedSubscription/index.html.twig', [
             'feeds' => $this->entityManager->getRepository(FeedUrl::class)->findBy(
                 ['user' => $user],
-                ['id' => 'ASC']
+                ['id' => 'ASC'],
             ),
             'pendingFeeds' => array_fill_keys($items->findPendingFeedIds($user), true),
         ]);
@@ -93,6 +93,7 @@ class FeedSubscriptionController extends AbstractController
     public function fetch(Request $request, FeedUrl $feed): Response
     {
         $token = $request->request->all()['token'] ?? null;
+
         if (!\is_string($token) || !$this->isCsrfTokenValid('feed-fetch-' . $feed->getId(), $token)) {
             throw new BadRequestHttpException('Invalid CSRF token.');
         }
@@ -112,6 +113,7 @@ class FeedSubscriptionController extends AbstractController
     public function delete(Request $request, FeedUrl $feed): Response
     {
         $token = $request->request->all()['token'] ?? null;
+
         if (!\is_string($token) || !$this->isCsrfTokenValid('feed-delete-' . $feed->getId(), $token)) {
             throw new BadRequestHttpException('Invalid CSRF token.');
         }

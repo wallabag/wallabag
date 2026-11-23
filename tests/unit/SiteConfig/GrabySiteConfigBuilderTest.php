@@ -64,7 +64,7 @@ class GrabySiteConfigBuilderTest extends TestCase
             $grabyConfigBuilderMock,
             $tokenStorage,
             $siteCrentialRepo,
-            $logger
+            $logger,
         );
 
         $config = $builder->buildForHost('api.example.com');
@@ -123,7 +123,7 @@ class GrabySiteConfigBuilderTest extends TestCase
             $grabyConfigBuilderMock,
             $tokenStorage,
             $siteCrentialRepo,
-            $logger
+            $logger,
         );
 
         $config = $builder->buildForHost('unknown.com');
@@ -182,7 +182,7 @@ class GrabySiteConfigBuilderTest extends TestCase
             $grabyConfigBuilderMock,
             $tokenStorage,
             $siteCrentialRepo,
-            $logger
+            $logger,
         );
 
         $config = $this->builder->buildForHost('www.example.com');
@@ -227,7 +227,7 @@ class GrabySiteConfigBuilderTest extends TestCase
             $grabyConfigBuilderMock,
             $tokenStorage,
             $siteCrentialRepo,
-            $logger
+            $logger,
         );
 
         $config = $builder->buildForHost('unknown.com');

@@ -22,12 +22,19 @@ use Wallabag\Repository\EntryRepository;
 class WallabagV1ImportTest extends TestCase
 {
     protected $user;
+
     protected $em;
+
     protected $logHandler;
+
     protected $contentProxy;
+
     protected $tagsAssigner;
+
     protected $uow;
+
     protected $fetchingErrorMessageTitle = 'No title found';
+
     protected $fetchingErrorMessage = 'wallabag can\'t retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/master/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.';
 
     public function testInit(): void
@@ -262,7 +269,7 @@ class WallabagV1ImportTest extends TestCase
             $dispatcher,
             $logger,
             $this->fetchingErrorMessageTitle,
-            $this->fetchingErrorMessage
+            $this->fetchingErrorMessage,
         );
 
         if (false === $unsetUser) {

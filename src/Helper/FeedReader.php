@@ -38,6 +38,7 @@ class FeedReader
             $feed = $this->parse($body);
         } catch (ReaderException $failure) {
             $candidate = $this->discover($body, $effectiveUrl);
+
             if (null === $candidate || $candidate === $url || $candidate === $effectiveUrl) {
                 throw $failure;
             }
@@ -67,6 +68,7 @@ class FeedReader
     private function parse(string $body): AbstractFeed
     {
         $previous = libxml_use_internal_errors();
+
         try {
             $feed = Reader::importString($body);
         } finally {
@@ -84,15 +86,18 @@ class FeedReader
     private function discover(string $body, string $effectiveUrl): ?string
     {
         $document = new \DOMDocument();
+
         if ('' === $body || !$document->loadHTML($body, \LIBXML_NONET | \LIBXML_NOERROR | \LIBXML_NOWARNING)) {
             return null;
         }
 
         $types = ['application/atom+xml', 'application/rss+xml', 'application/rdf+xml'];
         $links = [];
+
         foreach ($document->getElementsByTagName('link') as $link) {
             $type = strtolower($link->getAttribute('type'));
             $href = trim($link->getAttribute('href'));
+
             if ('alternate' !== strtolower($link->getAttribute('rel')) || '' === $href || !\in_array($type, $types, true) || isset($links[$type])) {
                 continue;
             }
@@ -102,6 +107,7 @@ class FeedReader
             } catch (\InvalidArgumentException) {
                 continue;
             }
+
             if (FeedUrlValidator::isValid($candidate)) {
                 $links[$type] = $candidate;
             }

@@ -60,7 +60,7 @@ class IgnoreOriginInstanceRuleController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                $this->translator->trans('flashes.ignore_origin_instance_rule.notice.added')
+                $this->translator->trans('flashes.ignore_origin_instance_rule.notice.added'),
             );
 
             return $this->redirectToRoute('ignore_origin_instance_rules_index');
@@ -91,7 +91,7 @@ class IgnoreOriginInstanceRuleController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                $this->translator->trans('flashes.ignore_origin_instance_rule.notice.updated')
+                $this->translator->trans('flashes.ignore_origin_instance_rule.notice.updated'),
             );
 
             return $this->redirectToRoute('ignore_origin_instance_rules_index');
@@ -119,7 +119,7 @@ class IgnoreOriginInstanceRuleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash(
                 'notice',
-                $this->translator->trans('flashes.ignore_origin_instance_rule.notice.deleted')
+                $this->translator->trans('flashes.ignore_origin_instance_rule.notice.deleted'),
             );
 
             $this->entityManager->remove($ignoreOriginInstanceRule);

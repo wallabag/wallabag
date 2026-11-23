@@ -65,16 +65,16 @@
                             <div class="row">
                                 {{ form_row(form.config.action_mark_as_read, {
                                     row_attr: {
-                                        class: 'col s11'
-                                    }
+                                        class: 'col s11',
+                                    },
                                 }) }}
                             </div>
 
                             <div class="row">
                                 {{ form_row(form.config.default_homepage, {
                                     row_attr: {
-                                        class: 'col s11'
-                                    }
+                                        class: 'col s11',
+                                    },
                                 }) }}
                                 <div class="input-field col s1">
                                     <button type="button" class="btn-link config-help" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="left" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'config.form_settings.help_default_homepage'|trans }}" aria-label="{{ 'config.form_settings.help_default_homepage'|trans }}">
@@ -86,8 +86,8 @@
                             <div class="row">
                                 {{ form_row(form.config.language, {
                                     row_attr: {
-                                        class: 'col s11'
-                                    }
+                                        class: 'col s11',
+                                    },
                                 }) }}
                                 <div class="input-field col s1">
                                     <button type="button" class="btn-link config-help" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="left" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'config.form_settings.help_language'|trans }}">
@@ -109,12 +109,12 @@
                             <div class="row">
                                 {{ form_row(form.config.font, {
                                     row_attr: {
-                                        class: 'col s5'
+                                        class: 'col s5',
                                     },
                                     attr: {
                                         'data-config-target': 'font',
-                                        'data-action': 'config#updatePreview'
-                                    }
+                                        'data-action': 'config#updatePreview',
+                                    },
                                 }) }}
                                 <div class="input-field col s1">
                                     <button type="button" class="btn-link config-help" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="left" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'config.form_settings.help_font'|trans }}">

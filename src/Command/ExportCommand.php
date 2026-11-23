@@ -15,6 +15,7 @@ use Wallabag\Repository\UserRepository;
 class ExportCommand extends Command
 {
     protected static $defaultName = 'wallabag:export';
+
     protected static $defaultDescription = 'Export all entries for an user';
 
     public function __construct(
@@ -33,12 +34,12 @@ class ExportCommand extends Command
             ->addArgument(
                 'username',
                 InputArgument::REQUIRED,
-                'User from which to export entries'
+                'User from which to export entries',
             )
             ->addArgument(
                 'filepath',
                 InputArgument::OPTIONAL,
-                'Path of the exported file'
+                'Path of the exported file',
             )
         ;
     }

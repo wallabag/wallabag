@@ -4,25 +4,24 @@ export default {
   customSyntax: 'postcss-scss',
   plugins: ['stylelint-scss'],
   rules: {
-    'block-no-redundant-nested-style-rules': null,
+    // Preserve the existing color function spellings and compiled browser syntax.
     'color-function-alias-notation': null,
-    'declaration-property-value-keyword-no-deprecated': null,
-    'property-no-deprecated': null,
+    'declaration-property-value-keyword-no-deprecated': [true, { ignoreKeywords: ['break-word'] }],
+    'property-no-deprecated': [true, { ignoreProperties: ['word-wrap'] }],
     'at-rule-no-unknown': null,
+    // Sass nesting and deliberate overrides make these checks unsuitable for the current cascade.
     'no-duplicate-selectors': null,
-    'font-family-no-missing-generic-family-keyword': null,
     'no-descending-specificity': null,
+    'font-family-no-missing-generic-family-keyword': [
+      true,
+      { ignoreFontFamilies: ['Georgia', 'Material Icons', 'icomoon'] },
+    ],
     'scss/at-rule-no-unknown': true,
-    'media-feature-range-notation': null,
-    'selector-class-pattern': [
+    'media-feature-range-notation': 'prefix',
+    'selector-class-pattern': null,
+    'scss/selector-class-pattern': [
       '^[a-z]([-]?[a-z0-9]+)*(__[a-z0-9]([-]?[a-z0-9]+)*)?(--[a-z0-9]([-]?[a-z0-9]+)*)?$',
-      {
-        /** This option will resolve nested selectors with & interpolation. - https://stylelint.io/user-guide/rules/selector-class-pattern/#resolvenestedselectors-true--false-default-false */
-        resolveNestedSelectors: true,
-        message: function expected(selectorValue) {
-          return `Expected class selector "${selectorValue}" to match BEM CSS pattern https://en.bem.info/methodology/css. Selector validation tool: https://regexr.com/3apms`;
-        },
-      },
+      { resolveNestedSelectors: true },
     ],
   },
 };

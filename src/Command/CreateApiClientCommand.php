@@ -16,7 +16,9 @@ use Wallabag\Repository\UserRepository;
 class CreateApiClientCommand extends Command
 {
     private const ALLOWED_GRANT_TYPES = ['token', 'authorization_code', 'password', 'refresh_token'];
+
     protected static $defaultName = 'wallabag:api-client:create';
+
     protected static $defaultDescription = 'Create an OAuth API client for an existing user';
 
     public function __construct(
@@ -33,28 +35,28 @@ class CreateApiClientCommand extends Command
             ->addArgument(
                 'username',
                 InputArgument::REQUIRED,
-                'User to create a client for'
+                'User to create a client for',
             )
             ->addOption(
                 'display-name',
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Display name of the client',
-                'Default client'
+                'Default client',
             )
             ->addOption(
                 'grant-types',
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Comma-separated list of allowed grant types (' . implode(', ', self::ALLOWED_GRANT_TYPES) . ')',
-                implode(',', self::ALLOWED_GRANT_TYPES)
+                implode(',', self::ALLOWED_GRANT_TYPES),
             )
             ->addOption(
                 'format',
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Output format (text, env, json)',
-                'text'
+                'text',
             );
     }
 
@@ -73,6 +75,7 @@ class CreateApiClientCommand extends Command
         }
 
         $format = (string) $input->getOption('format');
+
         if (!\in_array($format, ['text', 'env', 'json'], true)) {
             $io->error(\sprintf('Unknown format "%s". Use text, env, or json.', $format));
 
@@ -81,11 +84,12 @@ class CreateApiClientCommand extends Command
 
         $grantTypes = array_filter(array_map('trim', explode(',', (string) $input->getOption('grant-types'))));
         $invalidGrantTypes = array_diff($grantTypes, self::ALLOWED_GRANT_TYPES);
+
         if (!empty($invalidGrantTypes)) {
             $io->error(\sprintf(
                 'Invalid grant type(s): %s. Allowed values are: %s.',
                 implode(', ', $invalidGrantTypes),
-                implode(', ', self::ALLOWED_GRANT_TYPES)
+                implode(', ', self::ALLOWED_GRANT_TYPES),
             ));
 
             return 1;

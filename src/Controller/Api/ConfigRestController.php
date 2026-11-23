@@ -33,7 +33,7 @@ class ConfigRestController extends WallabagRestController
         $json = $serializer->serialize(
             $this->getUser()->getConfig(),
             'json',
-            SerializationContext::create()->setGroups(['config_api'])
+            SerializationContext::create()->setGroups(['config_api']),
         );
 
         return (new JsonResponse())

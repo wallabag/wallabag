@@ -57,6 +57,7 @@ class FetchRssCommand extends Command
                         'exception_type' => $error::class,
                     ]);
                     $io->error(\sprintf('Unable to refresh feed #%d (%s).', $feed->getId(), $error::class));
+
                     if (!$this->entityManager->isOpen()) {
                         $stoppedEarly = true;
                         break;
@@ -67,6 +68,7 @@ class FetchRssCommand extends Command
             }
         } finally {
             $this->browser->restart();
+
             foreach ($cookies as $cookie) {
                 $this->browser->getCookieJar()->set($cookie);
             }

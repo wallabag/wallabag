@@ -12,20 +12,25 @@ use Wallabag\Helper\ContentProxy;
 class EntryOptionalFieldsTest extends WallabagApiTestCase
 {
     private $createdEntryIds = [];
+
     private $createdTagIds = [];
 
     protected function tearDown(): void
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
+
         foreach ($this->createdEntryIds as $id) {
             $entry = $em->find(Entry::class, $id);
+
             if (null !== $entry) {
                 $em->remove($entry);
             }
         }
         $em->flush();
+
         foreach ($this->createdTagIds as $id) {
             $tag = $em->find(Tag::class, $id);
+
             if (null !== $tag) {
                 $em->remove($tag);
             }
@@ -42,6 +47,7 @@ class EntryOptionalFieldsTest extends WallabagApiTestCase
         $entry = $this->createPopulatedEntry();
         $expected = $this->snapshot($entry);
         $expected[$field] = null;
+
         if ('title' === $field) {
             $expected[$field] = 'article';
         } elseif ('content' === $field) {
@@ -63,6 +69,7 @@ class EntryOptionalFieldsTest extends WallabagApiTestCase
         $response = json_decode($this->client->getResponse()->getContent(), true);
         $responseField = ['authors' => 'published_by', 'archive' => 'is_archived', 'starred' => 'is_starred', 'public' => 'uid'][$field] ?? $field;
         $expectedValue = $expected[$field];
+
         if ('archive' === $field || 'starred' === $field) {
             $expectedValue = 0;
         }
@@ -77,9 +84,11 @@ class EntryOptionalFieldsTest extends WallabagApiTestCase
                     yield $method . ' ' . $field . ' ' . $label => [$method, $field, $value];
                 }
             }
+
             foreach (['tags', 'authors'] as $field) {
                 yield $method . ' ' . $field . ' empty array' => [$method, $field, []];
             }
+
             foreach (['archive', 'starred', 'public'] as $field) {
                 foreach ([0, '0', false] as $index => $value) {
                     yield $method . ' ' . $field . ' false value ' . $index => [$method, $field, $value];
@@ -95,6 +104,7 @@ class EntryOptionalFieldsTest extends WallabagApiTestCase
     {
         $entry = $this->createPopulatedEntry();
         $expected = $this->snapshot($entry);
+
         if ('PATCH' === $method) {
             $expected['title'] = 'Updated title';
         }
@@ -114,6 +124,7 @@ class EntryOptionalFieldsTest extends WallabagApiTestCase
         $this->mockExtraction($method);
         $this->requestEntry($method, $entry, ['tags' => 'new tag']);
         $this->assertSame('POST' === $method ? ['new tag', 'original tag'] : ['new tag'], $this->reloadSnapshot($entry->getId())['tags']);
+
         if (null === $existingTag) {
             $this->createdTagIds[] = $this->client->getContainer()->get(EntityManagerInterface::class)->getRepository(Tag::class)->findOneByLabel('new tag')->getId();
         }
@@ -208,6 +219,7 @@ class EntryOptionalFieldsTest extends WallabagApiTestCase
         $entry->generateUid();
         $tag = $em->getRepository(Tag::class)->findOneByLabel('original tag');
         $newTag = null === $tag;
+
         if ($newTag) {
             $tag = (new Tag())->setLabel('original tag');
         }
@@ -215,6 +227,7 @@ class EntryOptionalFieldsTest extends WallabagApiTestCase
         $em->persist($entry);
         $em->flush();
         $this->createdEntryIds[] = $entry->getId();
+
         if ($newTag) {
             $this->createdTagIds[] = $tag->getId();
         }
@@ -238,6 +251,7 @@ class EntryOptionalFieldsTest extends WallabagApiTestCase
             ->onlyMethods(['updateEntry'])
             ->getMock();
         $expectation = $proxy->expects('POST' === $method ? $this->once() : $this->never())->method('updateEntry');
+
         if (null !== $callback) {
             $expectation->willReturnCallback($callback);
         }
@@ -253,6 +267,7 @@ class EntryOptionalFieldsTest extends WallabagApiTestCase
         $this->client->request($method, $path, [], [], ['CONTENT_TYPE' => 'application/json'], json_encode((object) $data));
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
         $response = json_decode($this->client->getResponse()->getContent(), true);
+
         if (!\in_array($response['id'], $this->createdEntryIds, true)) {
             $this->createdEntryIds[] = $response['id'];
         }

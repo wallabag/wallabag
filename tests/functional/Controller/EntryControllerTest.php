@@ -20,9 +20,13 @@ use Wallabag\Tests\Functional\WallabagTestCase;
 class EntryControllerTest extends WallabagTestCase
 {
     public const AN_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE = 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment';
+
     public $downloadImagesEnabled = false;
+
     public $url = 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment';
+
     public $wrongUrl = 'wallabagIsAwesome';
+
     private $entryDataTestAttribute = '[data-test="entry"]';
 
     /**
@@ -543,11 +547,11 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(1, $reportingLink);
         $this->assertSame(
             'mailto:siteconfig@wallabag.org?subject=Wrong%20display%20in%20wallabag&body=http%3A%2F%2Fexample.com%2Ffoo%3Fbar%3Dbaz%26qux%3Dquux',
-            $reportingLink->attr('href')
+            $reportingLink->attr('href'),
         );
         $this->assertStringContainsString(
             'href="mailto:siteconfig@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body=http%3A%2F%2Fexample.com%2Ffoo%3Fbar%3Dbaz%26qux%3Dquux"',
-            $client->getResponse()->getContent()
+            $client->getResponse()->getContent(),
         );
     }
 
@@ -1734,6 +1738,7 @@ class EntryControllerTest extends WallabagTestCase
         $entry = new Entry($user);
         $entry->setUrl('http://0.0.0.0/search-in-annotations');
         $entry->setTitle('An entry without the term');
+
         foreach (['search-tag-1', 'search-tag-2'] as $label) {
             $tag = (new Tag())->setLabel($label);
             $this->getEntityManager()->persist($tag);

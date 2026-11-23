@@ -17,6 +17,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 final class PrivateNetworkResponse implements ResponseInterface, StreamableInterface
 {
     private ?int $statusCode = null;
+
     private array $headers = [];
 
     public function __construct(private readonly AsyncResponse $response)
@@ -41,6 +42,7 @@ final class PrivateNetworkResponse implements ResponseInterface, StreamableInter
         // Calling getStatusCode() or getHeaders() on the inner AsyncResponse here drains the stream.
         $this->statusCode = $this->response->getInfo('http_code');
         $this->headers = [];
+
         foreach ($this->response->getInfo('response_headers') as $line) {
             if (str_starts_with($line, 'HTTP/')) {
                 $this->headers = [];

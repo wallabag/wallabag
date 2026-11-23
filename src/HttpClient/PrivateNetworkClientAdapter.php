@@ -55,6 +55,7 @@ final class PrivateNetworkClientAdapter implements HttpClientInterface, LoggerAw
 
         $innerResponses = [];
         $wrappedResponses = new \SplObjectStorage();
+
         foreach ($responses as $response) {
             if (!$response instanceof PrivateNetworkResponse) {
                 throw new \TypeError('Expected a private-network response.');
@@ -68,6 +69,7 @@ final class PrivateNetworkClientAdapter implements HttpClientInterface, LoggerAw
         return new ResponseStream((function () use ($innerResponses, $wrappedResponses, $timeout): \Generator {
             foreach ($this->client->stream($innerResponses, $timeout) as $innerResponse => $chunk) {
                 $response = $wrappedResponses[$innerResponse];
+
                 if (null === $chunk->getError() && $chunk->isFirst()) {
                     $response->captureHeaders();
                 }

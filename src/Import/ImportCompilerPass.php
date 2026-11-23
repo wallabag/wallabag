@@ -15,17 +15,18 @@ class ImportCompilerPass implements CompilerPassInterface
         }
 
         $definition = $container->getDefinition(
-            ImportChain::class
+            ImportChain::class,
         );
 
         $taggedServices = $container->findTaggedServiceIds(
-            'wallabag.import'
+            'wallabag.import',
         );
+
         foreach ($taggedServices as $id => $tagAttributes) {
             foreach ($tagAttributes as $attributes) {
                 $definition->addMethodCall(
                     'addImport',
-                    [new Reference($id), $attributes['alias']]
+                    [new Reference($id), $attributes['alias']],
                 );
             }
         }

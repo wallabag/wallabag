@@ -119,7 +119,7 @@ class DeveloperControllerTest extends WallabagTestCase
 
         $this->assertNull(
             $em->getRepository(Client::class)->find($adminApiClient->getId()),
-            'The client should have been removed'
+            'The client should have been removed',
         );
     }
 

@@ -112,12 +112,13 @@ class OmnivoreImport extends AbstractFileImport
             $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 $data['tags'],
-                $this->em->getUnitOfWork()->getScheduledEntityInsertions()
+                $this->em->getUnitOfWork()->getScheduledEntityInsertions(),
             );
         }
 
         $entry->updateArchived($data['is_archived']);
         $entry->setCreatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:s.u\Z', $data['created_at']));
+
         if (null !== $data['published_at']) {
             $entry->setPublishedAt(\DateTime::createFromFormat('Y-m-d\TH:i:s.u\Z', $data['published_at']));
         }

@@ -20,6 +20,7 @@ class UtilsTest extends TestCase
     {
         $examples = [];
         $finder = (new Finder())->in(__DIR__ . '/../../Tools/samples');
+
         foreach ($finder->getIterator() as $file) {
             preg_match('/-----CONTENT-----\s*(.*?)\s*-----READING_TIME-----\s*(.*)/sx', $file->getContents(), $match);
 

@@ -14,6 +14,7 @@ use Wallabag\Repository\EntryRepository;
 class CleanDownloadedImagesCommand extends Command
 {
     protected static $defaultName = 'wallabag:clean-downloaded-images';
+
     protected static $defaultDescription = 'Cleans downloaded images which are no more associated to an entry';
 
     public function __construct(
@@ -30,7 +31,7 @@ class CleanDownloadedImagesCommand extends Command
                 'dry-run',
                 null,
                 InputOption::VALUE_NONE,
-                'Do not remove images, just dump counters'
+                'Do not remove images, just dump counters',
             );
     }
 
@@ -57,6 +58,7 @@ class CleanDownloadedImagesCommand extends Command
             ->in($baseFolder);
 
         $existingPaths = [];
+
         foreach ($finder as $file) {
             $existingPaths[] = $file->getFilename();
         }
@@ -69,6 +71,7 @@ class CleanDownloadedImagesCommand extends Command
 
         // retrieve _valid_ folders from existing entries
         $validPaths = [];
+
         foreach ($entries as $entry) {
             $path = $this->downloadImages->getRelativePath($entry['id']);
 

@@ -33,6 +33,7 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
         $em->persist($feed);
         $em->persist($oldPending);
         $em->persist($dismissed);
+
         for ($index = 0; $index < 200; ++$index) {
             $item = new FeedItem($feed, 'https://example.org/history/' . $index);
             $item->dismiss();
@@ -95,6 +96,7 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
             [['url' => 'ftp://example.org/photo.jpg', 'type' => 'image/jpeg'], false],
         ];
         $entries = [];
+
         foreach ($cases as $index => [$enclosure]) {
             $entry = $this->entry('https://example.org/article/' . $index);
             $entry->method('getEnclosure')->willReturn((object) $enclosure);
@@ -105,6 +107,7 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
         $items = $em->getRepository(FeedItem::class);
 
         self::assertSame(\count($cases), $this->createFetcher($reader)->fetch($feed));
+
         foreach ($cases as $index => [$enclosure, $isImage]) {
             self::assertSame(1, $items->count([
                 'feed' => $feed,
@@ -122,6 +125,7 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
         $em->flush();
 
         $entries = [$this->entry('https://example.org/1'), $this->entry('ftp://example.org/invalid')];
+
         for ($index = 1; $index <= 11; ++$index) {
             $entries[] = $this->entry('https://example.org/' . $index);
         }
@@ -149,6 +153,7 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
         $older->dismiss();
         $em->persist($feed);
         $em->persist($older);
+
         for ($index = 0; $index < 200; ++$index) {
             $item = new FeedItem($feed, 'https://example.org/obsolete/' . $index);
             $item->dismiss();
@@ -160,6 +165,7 @@ class FeedFetcherPersistenceTest extends WallabagKernelTestCase
         $first = $this->entry($articleUrl . '1');
         $first->method('getDateCreated')->willReturn($publishedAt);
         $entries = [$this->entry('ftp://example.org/invalid'), $first, $first];
+
         for ($index = 2; $index <= 12; ++$index) {
             $entries[] = $this->entry($articleUrl . $index);
         }

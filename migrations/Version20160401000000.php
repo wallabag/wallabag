@@ -92,6 +92,7 @@ ALTER TABLE {$this->getTable('annotation')} ADD CONSTRAINT FK_A7AED006A76ED395 F
 ALTER TABLE {$this->getTable('annotation')} ADD CONSTRAINT FK_A7AED006BA364942 FOREIGN KEY (entry_id) REFERENCES {$this->getTable('entry')} (id);
 SQL
                 ;
+
                 foreach (explode("\n", $sql) as $query) {
                     $this->addSql($query);
                 }
@@ -162,6 +163,7 @@ ALTER TABLE {$this->getTable('annotation')} ADD CONSTRAINT FK_A7AED006A76ED395 F
 ALTER TABLE {$this->getTable('annotation')} ADD CONSTRAINT FK_A7AED006BA364942 FOREIGN KEY (entry_id) REFERENCES {$this->getTable('entry')} (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 SQL
                 ;
+
                 foreach (explode("\n", $sql) as $query) {
                     $this->addSql($query);
                 }

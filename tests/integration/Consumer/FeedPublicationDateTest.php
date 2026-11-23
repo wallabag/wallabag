@@ -78,6 +78,7 @@ class FeedPublicationDateTest extends WallabagKernelTestCase
         $consume = 'amqp' === $transport
             ? static fn (string $message) => $consumer->execute(new AMQPMessage($message))
             : static fn (string $message) => $consumer->manage($message);
+
         foreach ($messages as $message) {
             self::assertTrue($consume($message));
         }

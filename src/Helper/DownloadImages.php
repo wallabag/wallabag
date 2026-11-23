@@ -16,7 +16,9 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class DownloadImages
 {
     public const REGENERATE_PICTURES_QUALITY = 80;
+
     private $mimeTypes;
+
     private $wallabagUrl;
 
     public function __construct(
@@ -80,6 +82,7 @@ class DownloadImages
             }
 
             $html = str_replace($image, $newImage, $html);
+
             // if image contains "&" and we can't find it in the html it might be because it's encoded as &amp; or unicode
             if (false !== stripos($image, '&') && false === stripos($html, $image)) {
                 $imageAmp = str_replace('&', '&amp;', $image);
@@ -121,6 +124,7 @@ class DownloadImages
 
         // build image path
         $absolutePath = $this->getAbsoluteLink($url, $imagePath);
+
         if (false === $absolutePath) {
             $this->logger->error('DownloadImages: Can not determine the absolute path for that image, skipping.');
 

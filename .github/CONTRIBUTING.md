@@ -107,10 +107,26 @@ To run the tests locally run `make test`. You can also narrow a run to specific 
 
 To run the PHP formatter run `make fix-cs`.
 
+To check Twig style, run `make check-twig-cs`.
+
+To format Twig templates, run `make fix-twig-cs`.
+
+To validate Twig syntax with wallabag's extensions, run `make lint-twig`.
+
 To run the PHPStan static analysis run `make phpstan`.
 
 To run the JS linter run `make lint-js`.
 
 To run the SCSS linter run `make lint-scss`.
+
+Run `make lint-yaml` to validate tracked application and repository YAML.
+
+Run `make lint-container` to validate the Symfony service containers for `dev`, `test`, and `prod`.
+
+Run `make lint-compose` to validate `compose.yaml` without starting containers or loading local service environment files.
+
+Run `make lint-actions` with Actionlint 1.7.12 on `PATH`. CI installs the release archive after checking its SHA-256 digest.
+
+Run `make lint-translations` to validate translation catalogs.
 
 To rebuild frontend assets automatically while developing run `make dev-watch`.

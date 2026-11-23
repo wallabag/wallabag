@@ -25,8 +25,11 @@ class FeedFetcherTest extends TestCase
     private const ARTICLE_URL = 'https://example.org/article';
 
     private EntityManagerInterface&MockObject $entityManager;
+
     private FeedUrl $feed;
+
     private ProducerInterface&MockObject $rabbit;
+
     private ProducerInterface&MockObject $redis;
 
     protected function setUp(): void
@@ -45,7 +48,7 @@ class FeedFetcherTest extends TestCase
             return ['url' => self::ARTICLE_URL, 'title' => 'Example', 'userId' => 42] === json_decode($message, true);
         }));
         $this->entityManager->expects(self::once())->method('persist')->with(self::callback(
-            static fn (FeedItem $item): bool => self::ARTICLE_URL === $item->getUrl() && $item->isTrashed()
+            static fn (FeedItem $item): bool => self::ARTICLE_URL === $item->getUrl() && $item->isTrashed(),
         ));
 
         self::assertSame(1, $this->createFetcher()->fetch($this->feed));
@@ -60,6 +63,7 @@ class FeedFetcherTest extends TestCase
         $this->entityManager->expects(self::never())->method('flush');
 
         $this->expectExceptionMessage('Broker unavailable');
+
         try {
             $this->createFetcher(true, true)->fetch($this->feed);
         } finally {
