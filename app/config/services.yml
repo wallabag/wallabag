@@ -49,7 +49,37 @@ services:
 
     Wallabag\:
         resource: '../../src/*'
-        exclude: ['../../src/{Consumer,Controller,Entity,DataFixtures,Redis}', '../../src/Event/*Event.php']
+        exclude: ['../../src/{Consumer,Controller,Entity,DataFixtures,Redis}', '../../src/Event/*Event.php', '../../src/HttpClient/PrivateNetworkResponse.php']
+
+    Wallabag\HttpClient\WallabagClient:
+        lazy: true
+        arguments:
+            $httpClient: '@wallabag.article_fetch.client'
+
+    wallabag.article_fetch.client:
+        class: Wallabag\HttpClient\HostnameDenyListHttpClient
+        arguments:
+            $client: '@Wallabag\HttpClient\PrivateNetworkClientAdapter'
+
+    Wallabag\HttpClient\PrivateNetworkClientAdapter:
+        public: false
+        arguments:
+            $client: '@wallabag.article_fetch.private_network_client'
+
+    wallabag.article_fetch.private_network_client:
+        class: Symfony\Component\HttpClient\NoPrivateNetworkHttpClient
+        arguments:
+            $client: '@Wallabag\HttpClient\HostnameDenyListHttpClient.inner'
+
+    Wallabag\HttpClient\HostnameDenyList:
+        arguments:
+            $hostnames: '%env(csv:WALLABAG_FETCH_BLOCKED_HOSTS)%'
+
+    Wallabag\HttpClient\HostnameDenyListHttpClient:
+        decorates: http_client
+        decoration_priority: 20
+        arguments:
+            $client: '@Wallabag\HttpClient\HostnameDenyListHttpClient.inner'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -264,8 +294,14 @@ services:
         arguments:
             $enabled: '@=service(''craue_config'').get(''download_images_enabled'')'
 
+    wallabag.download_images.client:
+        class: Symfony\Component\HttpClient\NoPrivateNetworkHttpClient
+        arguments:
+            - '@download_images.client'
+
     Wallabag\Helper\DownloadImages:
         arguments:
+            $client: '@wallabag.download_images.client'
             $baseFolder: "%kernel.project_dir%/web/assets/images"
 
     Wallabag\Command\InstallCommand:
@@ -352,3 +388,18 @@ services:
         public: false
         tags:
             - { name: pagerfanta.view, alias: default_wallabag }
+
+    wallabag.feed_http_client:
+        class: Symfony\Contracts\HttpClient\HttpClientInterface
+        factory: ['Symfony\Component\HttpClient\HttpClient', 'create']
+        public: false
+
+    Wallabag\Helper\FeedReader:
+        arguments:
+            $userAgent: '%env(WALLABAG_USER_AGENT)%'
+            $client: '@wallabag.feed_http_client'
+
+    Wallabag\Helper\FeedFetcher:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_feeds_producer'
+            $redisProducer: '@wallabag.producer.redis.feeds'

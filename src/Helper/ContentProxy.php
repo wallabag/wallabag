@@ -17,6 +17,8 @@ use Wallabag\Tools\Utils;
  */
 class ContentProxy
 {
+    private const FETCHING_ERROR_DESCRIPTION_PREFIX = '<p><i>But we found a short description: </i></p>';
+
     protected $mimeTypes;
     protected $eventDispatcher;
 
@@ -45,32 +47,47 @@ class ContentProxy
         // Graby retains prefetched HTML, so keep it local to this entry.
         $graby = clone $this->graby;
         $graby->toggleImgNoReferrer(true);
-        if (!empty($content['html'])) {
-            $graby->setContentAsPrefetched($content['html']);
+        $suppliedHtml = trim($content['html'] ?? '');
+        $isFetchingError = $suppliedHtml === trim($this->fetchingErrorMessage)
+            || str_starts_with($suppliedHtml, ltrim($this->fetchingErrorMessage) . self::FETCHING_ERROR_DESCRIPTION_PREFIX);
+        if ('' !== $suppliedHtml && !$isFetchingError) {
             $content['html'] = $graby->cleanupHtml($content['html'], $url);
+        } else {
+            unset($content['html']);
+        }
+
+        if (!empty($content['html'])) {
+            $graby->setContentAsPrefetched($suppliedHtml);
+            $entry->setNotParsed(false);
         }
 
         if (false === $disableContentUpdate) {
-            $fetchedContent = array_filter($graby->fetchContent($url), static function ($value, $key) {
-                if ('html' === $key) {
-                    return true;
-                }
+            try {
+                $fetchedContent = array_filter($graby->fetchContent($url), static function ($value, $key) {
+                    if ('html' === $key) {
+                        return true;
+                    }
 
-                return $value;
-            }, \ARRAY_FILTER_USE_BOTH);
-
-            $title = $content['title'] ?? $fetchedContent['title'] ?? null;
-            if ($title) {
-                $fetchedContent['title'] = $this->sanitizeContentTitle(
-                    $title,
-                    $fetchedContent['headers']['content-type'] ?? ''
-                );
+                    return $value;
+                }, \ARRAY_FILTER_USE_BOTH);
+            } catch (\Exception $e) {
+                $this->logger->warning('Error while fetching entry content.', [
+                    'exception_type' => $e::class,
+                ]);
+                $fetchedContent = null;
             }
 
-            // when content is imported, we have information in $content
-            // in case fetching content goes bad, we'll keep the imported information instead of overriding them
-            if (empty($content) || $fetchedContent['html'] !== $this->fetchingErrorMessage) {
-                $content = array_merge(array_filter($fetchedContent), array_filter($content));
+            // Keep caller data when Graby reports a fetching error.
+            if (null !== $fetchedContent && (empty($content) || ($fetchedContent['html'] ?? null) !== $this->fetchingErrorMessage)) {
+                $title = $content['title'] ?? $fetchedContent['title'] ?? null;
+                if ($title) {
+                    $fetchedContent['title'] = $this->sanitizeContentTitle(
+                        $title,
+                        $fetchedContent['headers']['content-type'] ?? ''
+                    );
+                }
+
+                $content = array_merge($fetchedContent, array_filter($content));
             }
         }
 
@@ -262,13 +279,12 @@ class ContentProxy
             $entry->setTitle($content['title']);
         }
 
-        if (empty($content['html'])) {
+        if (empty($content['html']) || $this->fetchingErrorMessage === $content['html']) {
             $content['html'] = $this->fetchingErrorMessage;
             $entry->setNotParsed(true);
 
             if (!empty($content['description'])) {
-                $content['html'] .= '<p><i>But we found a short description: </i></p>';
-                $content['html'] .= $content['description'];
+                $content['html'] .= self::FETCHING_ERROR_DESCRIPTION_PREFIX . $content['description'];
             }
         }
 

@@ -4,7 +4,7 @@ namespace Wallabag\Import;
 
 use Wallabag\Entity\Entry;
 
-class PinboardImport extends AbstractImport
+class PinboardImport extends AbstractFileImport
 {
     private $filepath;
 

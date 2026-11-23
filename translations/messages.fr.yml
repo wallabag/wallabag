@@ -741,6 +741,44 @@ ignore_origin_instance_rule:
 captcha:
     help: Entrez les caractères indiqués dans l'image. Rafraichir l'image invalide la réponse précédente.
 
+feeds:
+    action:
+        add: Ajouter un flux
+        back_to_list: Retour aux abonnements
+        delete: Supprimer le flux
+        dismiss: Ignorer
+        edit: Modifier le flux
+        fetch: Actualiser
+        items: Voir les articles
+        purge: Vider le flux
+        save_article: Enregistrer l'article
+        show_card_view: Afficher en cartes
+        show_list_view: Afficher en liste
+    alert:
+        confirm_delete: Supprimer cet abonnement et son historique d'articles ?
+        confirm_purge: Ignorer tous les articles en attente de ce flux ?
+    automatic_mode: Automatique
+    empty: Vous n'êtes abonné à aucun flux.
+    flash:
+        already_processed: Cet article a déjà été traité.
+        created: Abonnement ajouté.
+        created_refresh_error: "Abonnement ajouté, mais la première actualisation a échoué."
+        deleted: Abonnement supprimé.
+        dismissed: Article ignoré.
+        fetch_error: Impossible d'actualiser le flux. Vérifiez son adresse et réessayez.
+        fetched: Flux actualisé.
+        no_pending_articles: Aucun article en attente à ignorer.
+        purged: Articles en attente ignorés.
+        save_error: "Impossible d'enregistrer l'article. Il est toujours en attente."
+        saved: Article disponible dans wallabag.
+        updated: Abonnement mis à jour.
+    items_empty: Aucun article en attente dans ce flux.
+    label:
+        automatic: Importer automatiquement les nouveaux articles
+    last_fetch: 'Dernière actualisation réussie : %date%'
+    manual_mode: Manuel
+    page_title: Abonnements aux flux
+    stale: Ce flux n'a pas été actualisé avec succès depuis deux jours.
 theme:
     action:
         toggle_auto: "Thème automatique"

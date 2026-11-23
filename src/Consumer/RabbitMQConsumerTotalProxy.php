@@ -25,6 +25,7 @@ class RabbitMQConsumerTotalProxy
         private readonly Consumer $pocketCsvConsumer,
         private readonly Consumer $omnivoreConsumer,
         private readonly Consumer $urlListConsumer,
+        private readonly Consumer $feedsConsumer,
     ) {
     }
 
@@ -81,6 +82,9 @@ class RabbitMQConsumerTotalProxy
                 break;
             case 'url_list':
                 $consumer = $this->urlListConsumer;
+                break;
+            case 'feeds':
+                $consumer = $this->feedsConsumer;
                 break;
             default:
                 return 0;

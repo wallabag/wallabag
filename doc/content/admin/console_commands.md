@@ -42,6 +42,7 @@ Custom to wallabag:
  - `wallabag:tag:all`: Tags all entries for a user using their tagging rules.
  - `wallabag:user:show`: Shows the details for a user.
  - `wallabag:user:list`: Lists all existing users.
+ - `wallabag:fetch-rss`: Refreshes feed subscriptions for all users and prints a summary. It exits with code 1 if any refresh fails. See the scheduling example in [Asynchronous]({{< relref "asynchronous.md" >}}).
 
 wallabag:api-client:create
 --------------------------

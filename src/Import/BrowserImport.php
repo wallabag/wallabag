@@ -5,7 +5,7 @@ namespace Wallabag\Import;
 use Wallabag\Entity\Entry;
 use Wallabag\Event\EntrySavedEvent;
 
-abstract class BrowserImport extends AbstractImport
+abstract class BrowserImport extends AbstractFileImport
 {
     protected $filepath;
 

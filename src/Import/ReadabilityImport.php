@@ -4,7 +4,7 @@ namespace Wallabag\Import;
 
 use Wallabag\Entity\Entry;
 
-class ReadabilityImport extends AbstractImport
+class ReadabilityImport extends AbstractFileImport
 {
     private $filepath;
 

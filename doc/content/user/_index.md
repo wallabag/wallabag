@@ -8,4 +8,5 @@ weight: 1
   {{< card link="articles" title="Articles" icon="document-duplicate" >}}
   {{< card link="configuration" title="Configuration" icon="adjustments" >}}
   {{< card link="import" title="Import" icon="upload" >}}
+  {{< card link="feed_subscriptions/" title="Feed subscriptions" icon="rss" >}}
 {{< /cards >}}

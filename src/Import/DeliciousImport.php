@@ -4,7 +4,7 @@ namespace Wallabag\Import;
 
 use Wallabag\Entity\Entry;
 
-class DeliciousImport extends AbstractImport
+class DeliciousImport extends AbstractFileImport
 {
     private $filepath;
 

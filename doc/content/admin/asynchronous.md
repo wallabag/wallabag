@@ -5,6 +5,18 @@ weight: 6
 
 To launch asynchronous tasks (useful for large imports), we can use RabbitMQ or Redis.
 
+Automatic feed subscriptions use the same import settings. With neither transport enabled, wallabag saves articles synchronously. When both are enabled, RabbitMQ takes priority. Manual article saves are always synchronous.
+
+If an enabled transport is unavailable, the refresh reports a failure. Check the worker and retry the refresh. Publishing and recording history are separate operations, so a retry after a failed database write can send a message again. Workers use the usual article deduplication.
+
+### Schedule feed refreshes
+
+Run `php bin/console wallabag:fetch-rss --env=prod` from the wallabag directory. The command reports individual feed errors and continues when the database remains available. For example, to refresh subscriptions every hour with cron:
+
+```cron
+0 * * * * cd /path/to/wallabag && php bin/console wallabag:fetch-rss --env=prod >> var/logs/feed-refresh.log 2>&1
+```
+
 ## Install RabbitMQ for asynchronous tasks
 
 ### Requirements
@@ -78,6 +90,9 @@ bin/console rabbitmq:consumer --env=prod import_chrome -w
 
 # for URL list import
 bin/console rabbitmq:consumer --env=prod import_url_list -w
+
+# for automatic feed imports
+bin/console rabbitmq:consumer --env=prod import_feeds -w
 ```
 
 Install Redis for asynchronous tasks
@@ -148,6 +163,9 @@ bin/console wallabag:import:redis-worker --env=prod chrome -vv >> /path/to/walla
 
 # for URL list import
 bin/console wallabag:import:redis-worker --env=prod url_list -vv >> /path/to/wallabag/var/logs/redis-url_list.log
+
+# for automatic feed imports
+bin/console wallabag:import:redis-worker --env=prod feeds -vv
 ```
 
 If you want to launch the import only for some messages and not all, you
