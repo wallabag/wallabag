@@ -4,6 +4,7 @@ entry:
         set_as_read: Označit jako přečtené
         set_as_unread: Označit jako nepřečtené
         star: Přepnout označení s hvězdičkou
+        unstar: Zrušit označení hvězdičkou
     filters:
         action:
             filter: Filtrovat
@@ -561,6 +562,10 @@ import:
         page_title: Import > Pocket CSV
         description: Tento importér naimportuje všechny vaše záložky z Pocketu (prostřednictvím CSV exportu). Stačí přejít na https://getpocket.com/export a exportovat soubor. Stáhne se ZIP soubor (např. „pocket.zip“). Po rozbalení získáte CSV soubor, nazvaný „part_000000.csv“.
         how_to: Zvolte soubor zálohy záložek a kliknutím na níže uvedené tlačítko jej naimportujte. Pamatujte na to, že tento proces může trvat dlouho, protože je třeba načíst všechny články.
+    url_list:
+        page_title: Import > Seznam URL
+        description: Tento importér naimportuje textový soubor, který obsahuje vždy jednu URL na řádek. Prázdné řádky, řádky začínající na "#" a řádky, které nejsou webové adresy (nezačínají na "http://" nebo "https://"), budou ignorovány.
+        how_to: Vyberte svůj textový soubor a kliknutím na níže uvedené tlačítko jej importujte. Pamatujte na to, že tento proces může trvat dlouho, protože je třeba načíst všechny články.
 flashes:
     config:
         notice:
@@ -747,3 +752,28 @@ theme:
         toggle_auto: Automatický motiv
         toggle_dark: Tmavý motiv
         toggle_light: Světlý motiv
+feeds:
+    stale: Tento kanál nebyl v posledních dvou dnech úspěšně aktualizován.
+    action:
+        add: Přidat kanál
+        back_to_list: Zpět na odběry
+        delete: Smazat kanál
+        dismiss: Zavřít
+        edit: Upravit kanál
+        fetch: Aktualizovat
+        items: Zobrazit články
+        purge: Odstranit články
+        save_article: Uložit článek
+        show_card_view: Zobrazit rozložení v kartách
+        show_list_view: Zobrazit rozložení jako seznam
+    alert:
+        confirm_delete: Odstranit odběr kanálu a jeho historii článků?
+        confirm_purge: Odstranit všechny čekající články v tomto kanále?
+    automatic_mode: Automaticky
+    empty: Neodebíráte žádné kanály.
+    flash:
+        already_processed: Tento článek již byl zpracován.
+        created: Byl přidán odběr kanálu.
+        created_refresh_error: Byl přidán odběr kanálu, první aktualizace ovšem selhala.
+        deleted: Odběr kanálu byl smazán.
+        dismissed: Článek byl zrušen.
