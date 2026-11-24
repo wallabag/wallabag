@@ -76,6 +76,10 @@ services:
         arguments:
             $client: '@Wallabag\HttpClient\HostnameDenyListHttpClient.inner'
 
+    Wallabag\Import\ImportChain:
+        arguments:
+            $disabledImporters: '%env(csv:WALLABAG_DISABLED_IMPORTERS)%'
+
     Wallabag\HttpClient\HostnameDenyList:
         arguments:
             $hostnames: '%env(csv:WALLABAG_FETCH_BLOCKED_HOSTS)%'

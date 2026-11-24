@@ -32,7 +32,7 @@ class ImportController extends AbstractController
      * Display how many messages are queue (both in Redis and RabbitMQ).
      * Only for admins.
      */
-    public function checkQueueAction(AuthorizationCheckerInterface $authorizationChecker, Config $craueConfig)
+    public function checkQueueAction(AuthorizationCheckerInterface $authorizationChecker, Config $craueConfig, ImportChain $importChain)
     {
         $nbRedisMessages = null;
         $nbRabbitMessages = null;
@@ -43,46 +43,26 @@ class ImportController extends AbstractController
             return $this->render('Import/check_queue.html.twig');
         }
 
+        $queues = [...array_keys($importChain->getAll()), 'feeds'];
+
         if ($craueConfig->get('import_with_rabbitmq')) {
             // in case rabbit is activated but not installed
             try {
-                $nbRabbitMessages = $this->rabbitMQConsumerTotalProxy->getTotalMessage('readability')
-                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('wallabag_v1')
-                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('wallabag_v2')
-                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('firefox')
-                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('chrome')
-                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('instapaper')
-                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('pinboard')
-                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('delicious')
-                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('elcurator')
-                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('shaarli')
-                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('pocket_html')
-                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('pocket_csv')
-                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('omnivore')
-                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('url_list')
-                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('feeds')
-                ;
+                $nbRabbitMessages = 0;
+
+                foreach ($queues as $queue) {
+                    $nbRabbitMessages += $this->rabbitMQConsumerTotalProxy->getTotalMessage($queue);
+                }
             } catch (\Exception) {
                 $rabbitNotInstalled = true;
             }
         } elseif ($craueConfig->get('import_with_redis')) {
             try {
-                $nbRedisMessages = $this->redisClient->llen('wallabag.import.readability')
-                    + $this->redisClient->llen('wallabag.import.wallabag_v1')
-                    + $this->redisClient->llen('wallabag.import.wallabag_v2')
-                    + $this->redisClient->llen('wallabag.import.firefox')
-                    + $this->redisClient->llen('wallabag.import.chrome')
-                    + $this->redisClient->llen('wallabag.import.instapaper')
-                    + $this->redisClient->llen('wallabag.import.pinboard')
-                    + $this->redisClient->llen('wallabag.import.delicious')
-                    + $this->redisClient->llen('wallabag.import.elcurator')
-                    + $this->redisClient->llen('wallabag.import.shaarli')
-                    + $this->redisClient->llen('wallabag.import.pocket_html')
-                    + $this->redisClient->llen('wallabag.import.pocket_csv')
-                    + $this->redisClient->llen('wallabag.import.omnivore')
-                    + $this->redisClient->llen('wallabag.import.url_list')
-                    + $this->redisClient->llen('wallabag.import.feeds')
-                ;
+                $nbRedisMessages = 0;
+
+                foreach ($queues as $queue) {
+                    $nbRedisMessages += $this->redisClient->llen('wallabag.import.' . $queue);
+                }
             } catch (\Exception) {
                 $redisNotInstalled = true;
             }

@@ -4,11 +4,24 @@ namespace Wallabag\Import;
 
 class ImportChain
 {
-    private $imports;
+    /** @var array<string, ImportInterface> */
+    private array $imports = [];
 
-    public function __construct()
+    /** @var array<string, ImportInterface> */
+    private array $disabledImports = [];
+
+    /** @var string[] */
+    private array $disabledAliases;
+
+    /**
+     * @param array<string|null> $disabledImporters Aliases of the importers disabled on this instance
+     */
+    public function __construct(array $disabledImporters = [])
     {
-        $this->imports = [];
+        $this->disabledAliases = array_values(array_filter(
+            array_map(static fn ($alias) => trim((string) $alias), $disabledImporters),
+            static fn (string $alias) => '' !== $alias,
+        ));
     }
 
     /**
@@ -18,16 +31,35 @@ class ImportChain
      */
     public function addImport(ImportInterface $import, $alias): void
     {
+        if (\in_array($alias, $this->disabledAliases, true)) {
+            $this->disabledImports[$alias] = $import;
+
+            return;
+        }
+
         $this->imports[$alias] = $import;
     }
 
     /**
-     * Get all imports.
+     * Get all enabled imports.
      *
      * @return array<ImportInterface>
      */
     public function getAll()
     {
         return $this->imports;
+    }
+
+    /**
+     * Get the routes of the disabled imports.
+     *
+     * @return string[]
+     */
+    public function getDisabledRoutes(): array
+    {
+        return array_values(array_map(
+            static fn (ImportInterface $import) => $import->getUrl(),
+            $this->disabledImports,
+        ));
     }
 }
