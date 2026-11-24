@@ -24,7 +24,6 @@ compose.override.yaml
 /vendor/
 
 # Assets and user uploads
-web/uploads/
 /web/bundles/*
 !/web/bundles/.gitkeep
 /web/assets/images/*

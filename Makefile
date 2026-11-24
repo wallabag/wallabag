@@ -37,11 +37,11 @@ $(foreach goal,$(PHPUNIT_PATH_ARGS),$(eval $(goal): FORCE ; @:))
 help: ## Display this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-install: ## Install wallabag with the latest version
-	@./scripts/install.sh $(ENV)
+install: ## Install wallabag with wallabin
+	@echo "Use wallabin to install wallabag: https://doc.wallabag.org/admin/installation/" >&2; exit 1
 
-update: ## Update the wallabag installation to the latest version
-	@./scripts/update.sh $(ENV)
+update: ## Update wallabag with wallabin
+	@echo "Use wallabin to update wallabag: https://doc.wallabag.org/admin/upgrade/" >&2; exit 1
 
 dev-docker-up: ## Start the Docker dev stack
 	@docker compose up -d
@@ -145,9 +145,6 @@ ifndef VERSION
 endif
 	@./scripts/release.sh $(VERSION) $(TMP_FOLDER) $(RELEASE_FOLDER) $(ENV)
 
-deploy: ## Deploy wallabag
-	@bundle exec cap staging deploy
+.PHONY: help install update build test test-unit test-integration test-functional release run dev dev-watch dev-docker-up dev-docker-down dev-setup check-cs fix-cs phpstan phpstan-baseline check-twig-cs fix-twig-cs lint-twig composer-validate composer-normalize composer-dependency-analyser lint-js lint-scss lint-yaml lint-container lint-translations lint-compose lint-actions lint
 
-.PHONY: help install update build test test-unit test-integration test-functional release deploy run dev dev-watch dev-docker-up dev-docker-down dev-setup check-cs fix-cs phpstan phpstan-baseline check-twig-cs fix-twig-cs lint-twig composer-validate composer-normalize composer-dependency-analyser lint-js lint-scss lint-yaml lint-container lint-translations lint-compose lint-actions lint
-
-.DEFAULT_GOAL := install
+.DEFAULT_GOAL := help
