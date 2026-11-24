@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.6.19](https://github.com/wallabag/wallabag/tree/2.6.19)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.18...2.6.19)
+
+### Fixes
+
+* Fix the Pocket HTML import crash when an entry has no date
+* Fix the EPUB export crash on an element too big to be split
+* Fix N+1 queries and slow pagination in the API entries list
+
+### Changes
+
+* The EPUB export downloads the cover when it is not stored by wallabag
+
 ## [2.6.18](https://github.com/wallabag/wallabag/tree/2.6.18)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.17...2.6.18)
 
