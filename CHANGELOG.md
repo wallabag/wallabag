@@ -1,5 +1,67 @@
 # Changelog
 
+## [2.7.0-alpha.2](https://github.com/wallabag/wallabag/tree/2.7.0-alpha.2)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.7.0-alpha.1...2.7.0-alpha.2)
+
+This is an alpha release: **do not use it in production, and back up your database before upgrading**. It comes on top of [2.7.0-alpha.1](https://github.com/wallabag/wallabag/releases/tag/2.7.0-alpha.1): see its changelog below for the other changes of 2.7.0.
+
+### Security fixes
+
+* Validate the imported tagging rules, and ignore the invalid rules already stored, see [GHSA-2cfc-5mg3-74jc](https://github.com/wallabag/wallabag/security/advisories/GHSA-2cfc-5mg3-74jc), in https://github.com/wallabag/wallabag/pull/9210
+* Only link to http(s) URLs on the public share page, see [GHSA-52xm-74j7-7j7f](https://github.com/wallabag/wallabag/security/advisories/GHSA-52xm-74j7-7j7f), in https://github.com/wallabag/wallabag/pull/9210
+* Do not let the EPUB export read files or fetch URLs found in the content of an entry, see [GHSA-gr83-54pj-xch4](https://github.com/wallabag/wallabag/security/advisories/GHSA-gr83-54pj-xch4), in https://github.com/wallabag/wallabag/pull/9210
+* Update `enshrined/svg-sanitize` to reject SVG images with a root outside the SVG namespace, see [GHSA-rvg4-ph3q-9x5g](https://github.com/wallabag/wallabag/security/advisories/GHSA-rvg4-ph3q-9x5g), in https://github.com/wallabag/wallabag/pull/9210
+
+### BC breaks
+
+* The EPUB export does not embed remote images anymore, they stay as links. Images stored by wallabag are still embedded, in https://github.com/wallabag/wallabag/pull/9210
+* The release package does not contain a database or a user anymore: after extracting it, set the environment variables (or `.env.local`) and run `php bin/console wallabag:install --env=prod`, by @nicosomb in https://github.com/wallabag/wallabag/pull/9239
+* Configure wallabag with environment variables: set them in your web server, PHP-FPM or container. If you can't, `.env` now holds the production defaults, and `.env.prod.example` shows what to put in `.env.local`. `APP_SECRET` must not be empty, and `app/config/parameters.yml` is only read in the `prod` environment, by @nicosomb in https://github.com/wallabag/wallabag/pull/9241
+
+### Features
+
+* Add an import for plain text lists of URLs by @officialasishkumar in https://github.com/wallabag/wallabag/pull/9185
+* Make the session, remember me and trusted device cookie names configurable by @nicosomb in https://github.com/wallabag/wallabag/pull/9181
+* Add RSS and Atom feed subscriptions by @yguedidi in https://github.com/wallabag/wallabag/pull/9207
+* Save articles by email by @nicosomb in https://github.com/wallabag/wallabag/pull/9227
+* Add an opt-in hostname deny-list for outgoing fetches by @yguedidi in https://github.com/wallabag/wallabag/pull/8966
+* Sign the release package with minisign by @nicosomb in https://github.com/wallabag/wallabag/pull/9245
+
+### Improvements
+
+* Replace JavaScript-only action links with semantic controls by @yguedidi in https://github.com/wallabag/wallabag/pull/8978
+* Use archive and outbox icons for read status actions by @taljeon in https://github.com/wallabag/wallabag/pull/9004
+* Expose the entry preview picture as an enclosure link in Atom feeds by @officialasishkumar in https://github.com/wallabag/wallabag/pull/9176
+* Strip data attributes from entry content by @nicosomb in https://github.com/wallabag/wallabag/pull/9198
+* The EPUB export downloads the cover when it is not stored by wallabag by @nicosomb in https://github.com/wallabag/wallabag/pull/9221
+* Accept urls in the request body for `POST /api/entries/lists` and `DELETE /api/entries/list` by @dhananjay6561 in https://github.com/wallabag/wallabag/pull/9201 and https://github.com/wallabag/wallabag/pull/9240
+
+### Fixes
+
+* Avoid modifying the entry when retrieving metadata in the API by @isihussain in https://github.com/wallabag/wallabag/pull/9157
+* Fix the active state of the tag menu route by @yguedidi in https://github.com/wallabag/wallabag/pull/9180
+* Return to the archive list after deleting an archived entry by @nicosomb in https://github.com/wallabag/wallabag/pull/9182
+* Preserve the context in article export links by @yguedidi in https://github.com/wallabag/wallabag/pull/9183
+* Read Pocket CSV columns by header name by @jayhemnani9910 in https://github.com/wallabag/wallabag/pull/9197
+* Skip images with an unparsable url when downloading images by @dhananjay6561 in https://github.com/wallabag/wallabag/pull/9200
+* Block private network addresses when downloading images by @nicosomb in https://github.com/wallabag/wallabag/pull/9220
+* Use a 24-hour clock for the creation date in CSV exports by @NotAFlightRisk in https://github.com/wallabag/wallabag/pull/9215
+* Fix the Pocket HTML import crash when an entry has no date by @nicosomb in https://github.com/wallabag/wallabag/pull/9222
+* Fix the EPUB export crash on an element too big to be split by @nicosomb in https://github.com/wallabag/wallabag/pull/9223
+* Fix N+1 queries and slow pagination in the API entries list and in feeds by @nicosomb in https://github.com/wallabag/wallabag/pull/9224
+
+### Documentation
+
+* Add Podway, Simafri and PikaPods to the installation page by @velsa, @simon-vasconcelos-lee and @abhishekpc in https://github.com/wallabag/wallabag/pull/9184, https://github.com/wallabag/wallabag/pull/9195 and https://github.com/wallabag/wallabag/pull/9211
+* Clarify third-party installation options by @j0k3r in https://github.com/wallabag/wallabag/pull/9213
+* Fix the dead link to the package md5 hash by @farisbasha in https://github.com/wallabag/wallabag/pull/9194
+
+### Technical stuff
+
+* Build navigation menus with KnpMenu by @yguedidi in https://github.com/wallabag/wallabag/pull/9192
+* Replace ESLint by Biome by @j0k3r in https://github.com/wallabag/wallabag/pull/9093
+* Expand code style and configuration checks by @yguedidi in https://github.com/wallabag/wallabag/pull/9229
+
 ## [2.7.0-alpha.1](https://github.com/wallabag/wallabag/tree/2.7.0-alpha.1)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.16...2.7.0-alpha.1)
 
@@ -166,6 +228,31 @@ This is an alpha release: **do not use it in production, and back up your databa
 ### Changes
 
 * The EPUB export downloads the cover when it is not stored by wallabag
+
+## [2.6.18](https://github.com/wallabag/wallabag/tree/2.6.18)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.17...2.6.18)
+
+This is a security release. After upgrading, clear the cache (`var/cache`) and review the tagging rules of your users.
+
+### Security fixes
+
+* Validate the imported tagging rules, and ignore the invalid rules already stored, see [GHSA-2cfc-5mg3-74jc](https://github.com/wallabag/wallabag/security/advisories/GHSA-2cfc-5mg3-74jc)
+* Only link to http(s) URLs on the public share page, see [GHSA-52xm-74j7-7j7f](https://github.com/wallabag/wallabag/security/advisories/GHSA-52xm-74j7-7j7f)
+* Do not let the EPUB export read files or fetch URLs found in the content of an entry, see [GHSA-gr83-54pj-xch4](https://github.com/wallabag/wallabag/security/advisories/GHSA-gr83-54pj-xch4)
+* Update `enshrined/svg-sanitize` to reject SVG images with a root outside the SVG namespace, see [GHSA-rvg4-ph3q-9x5g](https://github.com/wallabag/wallabag/security/advisories/GHSA-rvg4-ph3q-9x5g)
+
+### Changes
+
+* The EPUB export does not embed remote images anymore, they stay as links. Images stored by wallabag are still embedded.
+
+## [2.6.17](https://github.com/wallabag/wallabag/tree/2.6.17)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.16...2.6.17)
+
+This release also makes `make update` pick a stable release again, on instances running 2.6.15 or older: they picked 2.7.0-alpha.1 instead.
+
+### Fixes
+
+* Handle Pocket CSV imports in their own controller, with the import upload fixes of 2.6.16
 
 ## [2.6.16](https://github.com/wallabag/wallabag/tree/2.6.16)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.15...2.6.16)

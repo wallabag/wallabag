@@ -4,7 +4,7 @@ parameters:
     env(WALLABAG_MAIL_IMPORT_ADDRESS): ''
     env(WALLABAG_MAIL_IMPORT_DSN): ''
     env(WALLABAG_MAIL_IMPORT_MAX_LINKS): '10'
-    wallabag.version: 2.7.0-alpha.1
+    wallabag.version: 2.7.0-alpha.2
     wallabag.paypal_url: "https://liberapay.com/wallabag/donate"
     wallabag.languages:
         en: 'English'
