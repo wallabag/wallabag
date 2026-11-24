@@ -16,6 +16,13 @@ class UtilsTest extends TestCase
         static::assertSame((float) $expectedCount, Utils::getReadingTime($text), 'Reading time for: ' . $filename);
     }
 
+    public function testReadingTimeWithInvalidUtf8()
+    {
+        $text = str_repeat("word \xff\xfe ", 600);
+
+        static::assertSame(3.0, Utils::getReadingTime($text));
+    }
+
     public function examples()
     {
         $examples = [];
