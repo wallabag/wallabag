@@ -265,6 +265,7 @@ config:
         user_info: Informace o uživateli
         feed: Kanály
         article_display: Zobrazení článku
+        mail_import: Uložení emailem
     form:
         save: Uložit
     otp:
@@ -321,6 +322,19 @@ config:
         token_label: Token kanálu
         description: Informační kanály Atom poskytované wallabagem vám umožní číst vaše uložené články pomocí vaší oblíbené čtečky Atom. Nejprve musíte vygenerovat token.
     page_title: Konfigurace
+    form_mail_import:
+        description: Uložte článek odesláním jeho odkazu na vaši soukromou emailovou adresu.
+        address_label: Vaše soukromá adresa
+        no_address: Žádná adresa
+        address_create: Vytvořte svou adresu
+        address_reset: Obnovte svou adresu
+        address_revoke: Odvolat adresu
+        copy: Kopírovat
+        howto_label: Jak to funguje
+        howto:
+            links: 'Vložte jeden nebo několik odkazů do obsahu emailu: z každého odkazu se stane článek (maximálně %max_links% na email).'
+            ignored: Předmět a přílohy jsou ignorovány. Již uložený odkaz není přidán znovu.
+            private: 'Uchovejte tuto adresu soukromou: každý, kdo ji zná, může do vašeho účtu přidávat články. Obnovte ji, bude-li třeba.'
 security:
     register:
         page_title: Vytvořit účet
@@ -589,6 +603,8 @@ flashes:
             config_saved: Konfigurace byla uložena.
             tagging_rules_reset: Pravidla štítkování byla obnovena
             otp_code_invalid: Neplatný dvoufaktorový autentizační kód
+            mail_import_token_updated: Soukromá emailová adresa byla vytvořena
+            mail_import_token_revoked: Soukromá emailová adresa byla odvolána
     ignore_origin_instance_rule:
         notice:
             deleted: Globální pravidlo ignorování bylo odstraněno
@@ -777,3 +793,4 @@ feeds:
         created_refresh_error: Byl přidán odběr kanálu, první aktualizace ovšem selhala.
         deleted: Odběr kanálu byl smazán.
         dismissed: Článek byl zrušen.
+        fetch_error: Kanál není možné obnovit. Ověřte jeho adresu a zkuste to znovu.
