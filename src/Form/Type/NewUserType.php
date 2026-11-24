@@ -64,6 +64,7 @@ class NewUserType extends AbstractType
         $resolver->setDefaults([
             'captcha_enabled' => false,
             'data_class' => User::class,
+            'validation_groups' => ['Default', User::UNIQUE_VALIDATION_GROUP],
         ]);
         $resolver->setAllowedTypes('captcha_enabled', 'bool');
     }

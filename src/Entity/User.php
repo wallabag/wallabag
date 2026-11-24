@@ -25,12 +25,17 @@ use Wallabag\Repository\UserRepository;
 #[ORM\Table(name: '`user`')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[UniqueEntity('email')]
-#[UniqueEntity('username')]
+// FOSUserBundle already checks uniqueness in its Registration and Profile groups.
+// These constraints cover the forms that validate the Default group only (API and user management),
+// so they live in their own group to avoid a second error on the registration form.
+#[UniqueEntity('email', groups: [User::UNIQUE_VALIDATION_GROUP])]
+#[UniqueEntity('username', groups: [User::UNIQUE_VALIDATION_GROUP])]
 #[XmlRoot('user')]
 class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorInterface, BackupCodeInterface
 {
     use EntityTimestampsTrait;
+
+    public const UNIQUE_VALIDATION_GROUP = 'UserUnique';
 
     /** @Serializer\XmlAttribute */
     /**
