@@ -36,6 +36,7 @@ class EntriesExport
      * @param TokenStorageInterface $tokenStorage   Needed to retrieve the current user
      * @param EpubContentCleaner    $contentCleaner Cleans the content of the entries for the EPUB
      * @param InstanceImageLocator  $imageLocator   Finds the images stored by wallabag
+     * @param DownloadImages        $downloadImages Downloads the cover when it is not stored by wallabag
      */
     public function __construct(
         private readonly TranslatorInterface $translator,
@@ -44,6 +45,7 @@ class EntriesExport
         private readonly TokenStorageInterface $tokenStorage,
         private readonly EpubContentCleaner $contentCleaner,
         private readonly InstanceImageLocator $imageLocator,
+        private readonly DownloadImages $downloadImages,
     ) {
     }
 
@@ -212,10 +214,10 @@ class EntriesExport
              * Front page
              * Set if there's only one entry in the given set
              */
-            $coverImage = 1 === $entryCount ? $this->imageLocator->locate($entry->getPreviewPicture()) : null;
+            $coverImage = 1 === $entryCount ? $this->getCoverImage($entry->getPreviewPicture()) : null;
 
             if (null !== $coverImage) {
-                $book->setCoverImage('cover.' . $coverImage['extension'], file_get_contents($coverImage['path']), $coverImage['mimetype']);
+                $book->setCoverImage('cover.' . $coverImage['extension'], $coverImage['content'], $coverImage['mimetype']);
             }
 
             foreach ($entry->getTags() as $tag) {
@@ -256,7 +258,12 @@ class EntriesExport
             $chapter = $content_start . $this->contentCleaner->clean($book, $entry->getContent()) . $bookEnd;
 
             $entryIds[] = $entry->getId();
-            $book->addChapter($this->escapeXml($entry->getTitle()), "{$filename}.html", $chapter, true, EPub::EXTERNAL_REF_IGNORE);
+
+            try {
+                $book->addChapter($this->escapeXml($entry->getTitle()), "{$filename}.html", $chapter, true, EPub::EXTERNAL_REF_IGNORE);
+            } catch (\Error $e) {
+                $book->addChapter($this->escapeXml($entry->getTitle()), "{$filename}.html", $chapter, false, EPub::EXTERNAL_REF_IGNORE);
+            }
         }
 
         $book->addChapter('Notices', 'Cover2.html', $content_start . $this->getExportInformation('PHPePub') . $bookEnd);
@@ -536,5 +543,19 @@ class EntriesExport
         $transliterator = \Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;', \Transliterator::FORWARD);
 
         return preg_replace('/[^A-Za-z0-9\- \']/', '', $transliterator->transliterate($this->title));
+    }
+
+    /**
+     * @return array{content: string, extension: string, mimetype: string}|null
+     */
+    private function getCoverImage(?string $previewPicture): ?array
+    {
+        $localImage = $this->imageLocator->locate($previewPicture);
+
+        if (null !== $localImage) {
+            return ['content' => file_get_contents($localImage['path']), 'extension' => $localImage['extension'], 'mimetype' => $localImage['mimetype']];
+        }
+
+        return $this->downloadImages->fetchImage($previewPicture);
     }
 }

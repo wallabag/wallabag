@@ -210,6 +210,34 @@ class PocketHtmlImportTest extends TestCase
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
+    public function testImportEntryWithoutDate(): void
+    {
+        $pocketHtmlImport = $this->getPocketHtmlImport(false, 1);
+        $pocketHtmlImport->setFilepath(__DIR__ . '/../../fixtures/Import/pocket_html_no_date.html');
+
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->once())
+            ->method('findByUrlAndUserId')
+            ->willReturn(false);
+
+        $this->em
+            ->expects($this->any())
+            ->method('getRepository')
+            ->willReturn($entryRepo);
+
+        $this->contentProxy
+            ->expects($this->once())
+            ->method('updateEntry');
+
+        $res = $pocketHtmlImport->import();
+
+        $this->assertTrue($res);
+        $this->assertSame(['skipped' => 0, 'imported' => 1, 'queued' => 0], $pocketHtmlImport->getSummary());
+    }
+
     public function testImportUserNotDefined(): void
     {
         $pocketHtmlImport = $this->getPocketHtmlImport(true);

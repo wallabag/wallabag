@@ -154,6 +154,19 @@ This is an alpha release: **do not use it in production, and back up your databa
 * Split PHPUnit suites and add Codecov reporting by @yguedidi in https://github.com/wallabag/wallabag/pull/8702, https://github.com/wallabag/wallabag/pull/8715 and https://github.com/wallabag/wallabag/pull/8718
 * Many deprecation fixes, test and CI improvements, mostly by @yguedidi
 
+## [2.6.19](https://github.com/wallabag/wallabag/tree/2.6.19)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.18...2.6.19)
+
+### Fixes
+
+* Fix the Pocket HTML import crash when an entry has no date
+* Fix the EPUB export crash on an element too big to be split
+* Fix N+1 queries and slow pagination in the API entries list
+
+### Changes
+
+* The EPUB export downloads the cover when it is not stored by wallabag
+
 ## [2.6.16](https://github.com/wallabag/wallabag/tree/2.6.16)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.15...2.6.16)
 
