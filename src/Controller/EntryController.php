@@ -709,6 +709,8 @@ class EntryController extends AbstractController
             }
         }
 
+        $this->entryRepository->preloadTagsAndAnnotations($entries->getCurrentPageResults(), ['tags']);
+
         return $this->render(
             'Entry/entries.html.twig',
             [

@@ -419,4 +419,17 @@ class DownloadImagesTest extends TestCase
         $this->assertFileExists($baseFolder . '/9');
         $this->assertDirectoryDoesNotExist($baseFolder . '/9/b/9b0ead26');
     }
+
+    public function testFetchImageRecreatesTheImageWithoutStoringIt(): void
+    {
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']])]);
+
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test_fetch', 'http://wallabag.io/', new Logger('test', [new TestHandler()]));
+        $image = $download->fetchImage('http://wallabag.io/cover.png');
+
+        $this->assertSame('jpg', $image['extension']);
+        $this->assertSame('image/jpeg', $image['mimetype']);
+        $this->assertNotFalse(imagecreatefromstring($image['content']));
+        $this->assertSame([], glob(sys_get_temp_dir() . '/wallabag_test_fetch/*/*/*/*'));
+    }
 }
