@@ -51,6 +51,11 @@ services:
         resource: '../../src/*'
         exclude: ['../../src/{Consumer,Controller,Entity,DataFixtures,Redis}', '../../src/Event/*Event.php', '../../src/HttpClient/PrivateNetworkResponse.php', '../../src/MailImport/MailMessage.php']
 
+    Wallabag\Helper\UpdateChecker:
+        arguments:
+            $currentVersion: '%wallabag.version%'
+            $enabled: '%env(bool:WALLABAG_UPDATE_CHECK)%'
+
     Wallabag\HttpClient\WallabagClient:
         lazy: true
         arguments:

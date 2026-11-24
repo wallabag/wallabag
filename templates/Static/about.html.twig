@@ -24,7 +24,13 @@
                         <dt>{{ 'about.who_behind_wallabag.project_website'|trans }}</dt>
                         <dd><a href="https://www.wallabag.org">https://www.wallabag.org</a></dd>
                         <dt>{{ 'about.who_behind_wallabag.license'|trans }}: <a href="https://en.wikipedia.org/wiki/MIT_License">MIT</a></dt>
-                        <dt>{{ 'about.who_behind_wallabag.version'|trans }}: {{ version }}</dt>
+                        {% set available_update = wallabag_available_update() %}
+                        <dt>
+                            {{ 'about.who_behind_wallabag.version'|trans }}: {{ version }}
+                            {% if available_update %}
+                                — <strong>{{ 'update.available'|trans({'%version%': available_update.version}) }}</strong> <a href="{{ available_update.url }}">{{ 'update.read_more'|trans }}</a>
+                            {% endif %}
+                        </dt>
                     </div>
 
                     <div id="set2" class="col s12">

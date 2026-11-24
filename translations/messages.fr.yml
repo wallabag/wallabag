@@ -800,3 +800,7 @@ theme:
         toggle_auto: "Thème automatique"
         toggle_dark: "Thème sombre"
         toggle_light: "Thème clair"
+update:
+    available: "wallabag %version% est disponible."
+    security_banner: "wallabag %version% corrige des failles de sécurité : mettez votre instance à jour au plus vite."
+    read_more: "Lire les notes de version"
