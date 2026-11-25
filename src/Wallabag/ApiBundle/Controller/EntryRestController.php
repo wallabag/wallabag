@@ -1297,11 +1297,11 @@ class EntryRestController extends WallabagRestController
             if (false !== $entry && !(empty($tags))) {
                 $tags = explode(',', $tags);
                 foreach ($tags as $label) {
-                    $label = trim($label);
+                    $label = trim(mb_convert_case($label, \MB_CASE_LOWER));
 
                     $tag = $tagRepository->findOneByLabel($label);
 
-                    if (false !== $tag) {
+                    if (null !== $tag) {
                         $entry->removeTag($tag);
                     }
                 }

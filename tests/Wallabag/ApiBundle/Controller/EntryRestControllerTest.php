@@ -1262,6 +1262,56 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertCount(0, $entry->getTags());
     }
 
+    public function testDeleteEntriesTagsListActionWithUnknownTag()
+    {
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
+        $entry = new Entry($em->getReference(User::class, $this->getUserId()));
+        $entry->setUrl('http://0.0.0.0/test-entry-unknown-tag');
+        $entry->addTag((new Tag())->setLabel('known-tag'));
+        $em->persist($entry);
+        $em->flush();
+
+        $em->clear();
+
+        $list = [
+            [
+                'url' => 'http://0.0.0.0/test-entry-unknown-tag',
+                'tags' => 'unknown-tag, known-tag',
+            ],
+        ];
+
+        $this->client->request('DELETE', '/api/entries/tags/list?list=' . json_encode($list));
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $entry = $em->getRepository(Entry::class)->find($entry->getId());
+        $this->assertCount(0, $entry->getTags());
+    }
+
+    public function testDeleteEntriesTagsListActionWithMixedCaseTags()
+    {
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
+        $entry = new Entry($em->getReference(User::class, $this->getUserId()));
+        $entry->setUrl('http://0.0.0.0/test-entry-mixed-case-tags');
+        $entry->addTag((new Tag())->setLabel('mixed-case-tag'));
+        $em->persist($entry);
+        $em->flush();
+
+        $em->clear();
+
+        $list = [
+            [
+                'url' => 'http://0.0.0.0/test-entry-mixed-case-tags',
+                'tags' => 'Mixed-Case-Tag',
+            ],
+        ];
+
+        $this->client->request('DELETE', '/api/entries/tags/list?list=' . json_encode($list));
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $entry = $em->getRepository(Entry::class)->find($entry->getId());
+        $this->assertCount(0, $entry->getTags());
+    }
+
     public function testDeleteEntriesTagsListActionNoList()
     {
         $this->client->request('DELETE', '/api/entries/tags/list?list=' . json_encode([]));
