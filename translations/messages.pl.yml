@@ -64,6 +64,7 @@ config:
         ignore_origin: Zasady ignorowania pochodzenia
         feed: Kanały
         article_display: Wyświetlanie artykułów
+        mail_import: Zapisz przez e-mail
     form:
         save: Zapisz
     form_settings:
@@ -231,6 +232,19 @@ config:
             two_factor_code_description_2: 'Możesz zeskanować ten kod QR za pomocą swojej aplikacji:'
             two_factor_code_description_3: 'Zapisz też te kody zapasowe w bezpiecznym miejscu, możesz ich użyć w przypadku utraty dostępu do aplikacji OTP:'
         page_title: Uwierzytelnianie dwuskładnikowe
+    form_mail_import:
+        description: Zapisz artykuł, wysyłając jego link na swój prywatny adres e-mail.
+        address_label: Twój prywatny adres
+        no_address: Brak adresu
+        address_create: Utwórz swój adres
+        address_reset: Wygeneruj ponownie swój adres
+        address_revoke: Unieważnij adres
+        copy: Kopiuj
+        howto_label: Jak to działa
+        howto:
+            links: 'Umieść jeden lub kilka linków w treści wiadomości e-mail: każdy link stanie się artykułem (maksymalnie %max_links% w jednej wiadomości).'
+            ignored: Temat oraz załączniki są pomijane. Link, który został już zapisany, nie jest dodawany ponownie.
+            private: 'Nie ujawniaj tego adresu: każdy, kto go zna, może dodawać artykuły do Twojego konta. W razie potrzeby wygeneruj nowy.'
 entry:
     action:
         delete: Usuń
@@ -685,6 +699,8 @@ flashes:
             ignore_origin_rules_deleted: Usunięto zasadę ignorowania pochodzenia
             tagging_rules_reset: Reguły tagowania zostały zresetowane
             otp_code_invalid: Nieprawidłowy kod uwierzytelniania dwuskładnikowego
+            mail_import_token_updated: Utworzono prywatny adres e-mail
+            mail_import_token_revoked: Unieważniono prywatny adres e-mail
     entry:
         notice:
             entry_already_saved: Wpis już został dodany %date%
