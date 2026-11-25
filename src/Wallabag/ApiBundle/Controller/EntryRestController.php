@@ -1301,7 +1301,7 @@ class EntryRestController extends WallabagRestController
 
                     $tag = $tagRepository->findOneByLabel($label);
 
-                    if (false !== $tag) {
+                    if (null !== $tag) {
                         $entry->removeTag($tag);
                     }
                 }
