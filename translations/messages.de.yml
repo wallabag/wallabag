@@ -64,6 +64,7 @@ config:
         ignore_origin: Regeln fürs Ignorieren des Ursprungs
         feed: Feeds
         article_display: Artikelanzeige
+        mail_import: Per E-Mail hinzufügen
     form:
         save: Speichern
     form_settings:
@@ -231,6 +232,19 @@ config:
         token_revoke: Das Token widerrufen
         token_reset: Token erneut generieren
         token_label: Feedtoken
+    form_mail_import:
+        description: Speichere einen Artikel, indem du dessen Link an deine persönliche Mailadresse sendest.
+        address_label: Deine persönliche Adresse
+        no_address: Keine Adresse
+        address_create: Erstelle deine Adresse
+        address_reset: Deine Adresse ersetzen
+        address_revoke: Adresse widerrufen
+        copy: Kopieren
+        howto_label: So funktioniert es
+        howto:
+            links: 'Schreibe einen oder mehrere Links in den Textbereich einer E-Mail: Jeder Link wird als ein Artikel aufgenommen (bis zu %max_links% je E-Mail).'
+            ignored: Der Mail-Betreff und die Anhänge werden ignoriert. Ein Link der bereits gespeichert wurde, wird nicht erneut hinzugefügt.
+            private: 'Halte diese Adresse vertraulich: Jeder, der sie kennt, kann Artikel zu deinem Account hinzufügen. Du kannst eine neue Adresse erstellen, falls erforderlich.'
 entry:
     action:
         delete: Löschen
@@ -685,6 +699,8 @@ flashes:
             tagging_rules_imported: Tagging-Regeln importiert
             tagging_rules_reset: Tagging-Regeln wurden zurückgesetzt
             otp_code_invalid: Ungültiger Zwei-Faktor Authentifizierungs-Code
+            mail_import_token_updated: Persönliche E-Mail-Adresse erstellt
+            mail_import_token_revoked: Persönliche E-Mail-Adresse widerrufen
     entry:
         notice:
             entry_already_saved: Eintrag bereits am %date% gespeichert
@@ -787,7 +803,7 @@ feeds:
         no_pending_articles: Keine Artikel zum Löschen vorhanden.
         purged: Ausstehende Artikel wurden entfernt.
         save_error: Der Artikel konnte nicht gespeichert werden. Er ist noch in der Warteschleife.
-        saved: Der Artikel ist in wallabag vorhanden.
+        saved: Artikel in wallabag gespeichert.
         updated: Feed-Abonnement aktualisiert.
     items_empty: In diesem Feed warten keine Artikel.
     label:
