@@ -66,13 +66,13 @@ class ExportController extends AbstractController
         $method = ucfirst($category);
         $methodBuilder = 'getBuilderFor' . $method . 'ByUser';
         $title = $method;
+        $builder = null;
 
         if ('same_domain' === $category) {
-            $entries = $entryRepository->getBuilderForSameDomainByUser(
+            $builder = $entryRepository->getBuilderForSameDomainByUser(
                 $this->getUser()->getId(),
                 $request->get('entry')
-            )->getQuery()
-             ->getResult();
+            );
 
             $title = 'Same domain';
         } elseif ('tag_entries' === $category) {
@@ -88,26 +88,27 @@ class ExportController extends AbstractController
             $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
             $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
 
-            $entries = $entryRepository->getBuilderForSearchByUser(
-                    $this->getUser()->getId(),
-                    $searchTerm,
-                    $currentRoute
-            )->getQuery()
-             ->getResult();
+            $builder = $entryRepository->getBuilderForSearchByUser(
+                $this->getUser()->getId(),
+                $searchTerm,
+                $currentRoute
+            );
 
             $title = 'Search ' . $searchTerm;
         } elseif ('annotated' === $category) {
-            $entries = $entryRepository->getBuilderForAnnotationsByUser(
+            $builder = $entryRepository->getBuilderForAnnotationsByUser(
                 $this->getUser()->getId()
-            )->getQuery()
-             ->getResult();
+            );
 
             $title = 'With annotations';
         } else {
-            $entries = $entryRepository
-                ->$methodBuilder($this->getUser()->getId())
-                ->getQuery()
-                ->getResult();
+            $builder = $entryRepository->$methodBuilder($this->getUser()->getId());
+        }
+
+        if (null !== $builder) {
+            $entries = \in_array($format, ['json', 'csv', 'txt'], true)
+                ? $entryRepository->iterateInBatches($builder)
+                : $builder->getQuery()->getResult();
         }
 
         try {

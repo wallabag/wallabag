@@ -285,7 +285,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         ob_start();
         $crawler = $client->request('GET', '/export/archive.csv');
-        ob_end_clean();
+        $output = ob_get_clean();
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
@@ -294,7 +294,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame('attachment; filename="Archive articles.csv"', $headers->get('content-disposition'));
         $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
-        $csv = str_getcsv($client->getResponse()->getContent(), "\n");
+        $csv = str_getcsv($output, "\n");
 
         $this->assertGreaterThan(1, $csv);
         // +1 for title line
@@ -370,7 +370,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         ob_start();
         $crawler = $client->request('GET', '/export/search.json?search_entry[term]=entry+search&currentRoute=homepage');
-        ob_end_clean();
+        $output = ob_get_clean();
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
@@ -379,7 +379,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame('attachment; filename="Search entry search articles.json"', $headers->get('content-disposition'));
         $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode($output, true);
         $this->assertCount(1, $content);
 
         $this->tearDownForJsonExportFromSearch();
@@ -431,7 +431,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         ob_start();
         $crawler = $client->request('GET', '/export/same_domain.json?entry=1');
-        ob_end_clean();
+        $output = ob_get_clean();
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
@@ -440,7 +440,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame('attachment; filename="Same domain articles.json"', $headers->get('content-disposition'));
         $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode($output, true);
         $this->assertCount(4, $content);
     }
 

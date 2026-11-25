@@ -24,6 +24,41 @@ class EntryRepository extends ServiceEntityRepository
     }
 
     /**
+     * Iterates over the entries matching the given builder, loading them by batches
+     * and detaching them after each batch to keep the memory usage flat.
+     *
+     * @return \Generator<Entry>
+     */
+    public function iterateInBatches(QueryBuilder $queryBuilder, int $batchSize = 50): \Generator
+    {
+        $ids = array_unique(array_column((clone $queryBuilder)->select('e.id')->getQuery()->getScalarResult(), 'id'));
+        $entityManager = $this->getEntityManager();
+
+        foreach (array_chunk($ids, $batchSize) as $batchIds) {
+            $entries = [];
+            foreach ($this->createQueryBuilder('e')->where('e.id IN (:ids)')->setParameter('ids', $batchIds)->getQuery()->getResult() as $entry) {
+                $entries[$entry->getId()] = $entry;
+            }
+
+            $this->createQueryBuilder('e')
+                ->select('PARTIAL e.{id}', 't')
+                ->leftJoin('e.tags', 't')
+                ->where('e IN (:entries)')
+                ->setParameter('entries', array_values($entries))
+                ->getQuery()
+                ->getResult();
+
+            foreach ($batchIds as $id) {
+                if (isset($entries[$id])) {
+                    yield $entries[$id];
+                }
+            }
+
+            $entityManager->clear();
+        }
+    }
+
+    /**
      * Retrieves all entries for a user.
      *
      * @param int $userId
