@@ -67,6 +67,7 @@ class ExportController extends AbstractController
         $methodBuilder = 'getBuilderFor' . $method . 'ByUser';
         $title = $method;
         $builder = null;
+        $entries = [];
 
         if ('same_domain' === $category) {
             $builder = $entryRepository->getBuilderForSameDomainByUser(

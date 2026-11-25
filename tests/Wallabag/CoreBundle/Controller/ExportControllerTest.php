@@ -473,8 +473,8 @@ class ExportControllerTest extends WallabagCoreTestCase
     {
         $em = $this->getEntityManager();
 
-        $em->remove($this->adminEntry);
-        $em->remove($this->bobEntry);
+        $em->remove($em->getReference(Entry::class, $this->adminEntry->getId()));
+        $em->remove($em->getReference(Entry::class, $this->bobEntry->getId()));
 
         $em->flush();
     }
