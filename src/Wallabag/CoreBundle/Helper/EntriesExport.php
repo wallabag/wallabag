@@ -434,7 +434,7 @@ class EntriesExport
 
         if (!\is_array($this->entries)) {
             return new StreamedResponse(function () use ($write) {
-                $write(fopen('php://output', 'wb'));
+                $write(fopen('php://output', 'w'));
             }, 200, $headers);
         }
 
