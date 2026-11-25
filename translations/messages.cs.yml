@@ -794,3 +794,15 @@ feeds:
         deleted: Odběr kanálu byl smazán.
         dismissed: Článek byl zrušen.
         fetch_error: Kanál není možné obnovit. Ověřte jeho adresu a zkuste to znovu.
+        fetched: Kanál byl aktualizován.
+        no_pending_articles: Žádné čekající články k odstranění.
+        purged: Čekající články byly odstraněny.
+        save_error: Článek není možné uložit. Je stále v řežimu "čekající".
+        saved: Článek je k dispozici ve wallabagu.
+        updated: Odběr kanálu byl aktualizován.
+    items_empty: V tomto kanále nečekají žádné články.
+    label:
+        automatic: Importujte nové články automaticky
+    last_fetch: 'Poslední úspěšná aktualizace: %date%'
+    manual_mode: Ručně
+    page_title: Odběry kanálů
