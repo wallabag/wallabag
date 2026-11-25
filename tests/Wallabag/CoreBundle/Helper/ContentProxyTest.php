@@ -1124,6 +1124,15 @@ class ContentProxyTest extends TestCase
                 '1.1.1.1',
                 false,
             ],
+            'youtube oembed url is ignored' => [
+                'https://www.youtube.com/watch?v=SS7z8WsXPMk',
+                null,
+                'https://www.youtube.com/oembed?format=xml&url=https://www.youtube.com/watch?v=SS7z8WsXPMk',
+                'https://www.youtube.com/watch?v=SS7z8WsXPMk',
+                null,
+                'www.youtube.com',
+                false,
+            ],
             'origin already set' => [
                 'http://0.0.0.0',
                 'http://hello',

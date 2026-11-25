@@ -378,6 +378,10 @@ class ContentProxy
             return false;
         }
 
+        if (false !== stripos($parsed_content_url['path'] ?? '', 'oembed') && false === stripos($parsed_entry_url['path'] ?? '', 'oembed')) {
+            return false;
+        }
+
         /**
          * This switch case lets us apply different behaviors according to
          * changing parts of urls.
