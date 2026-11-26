@@ -7,7 +7,9 @@ use Knp\Menu\Attribute\AsMenuBuilder;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Wallabag\Controller\EntryController;
 use Wallabag\Entity\Entry;
 use Wallabag\Twig\WallabagExtension;
 
@@ -19,6 +21,7 @@ class EntryMenuBuilder
         private readonly Config $settings,
         private readonly MenuProviderInterface $menus,
         private readonly WallabagExtension $extension,
+        private readonly RequestStack $requestStack,
     ) {
     }
 
@@ -38,12 +41,12 @@ class EntryMenuBuilder
             'data-controller' => 'materialize--sidenav materialize--collapsible leftbar',
         ]);
 
+        $lastList = $this->requestStack->getSession()->get(EntryController::LAST_ENTRIES_LIST_SESSION_KEY);
         $menu->addChild('back', [
-            'route' => 'homepage',
             'label' => 'entry.view.left_menu.back_to_homepage',
             'attributes' => ['class' => 'border-bottom hide-on-med-and-down'],
             'extras' => ['icon' => 'arrow_back'],
-        ]);
+        ] + (null === $lastList ? ['route' => 'homepage'] : ['uri' => $lastList]));
         $menu->addChild('original', [
             'uri' => $entry->getUrl(),
             'label' => 'entry.view.left_menu.view_original_article',

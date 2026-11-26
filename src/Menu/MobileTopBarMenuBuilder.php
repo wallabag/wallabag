@@ -6,6 +6,8 @@ use Knp\Menu\Attribute\AsMenuBuilder;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Wallabag\Controller\EntryController;
 use Wallabag\Entity\Entry;
 
 class MobileTopBarMenuBuilder
@@ -13,6 +15,7 @@ class MobileTopBarMenuBuilder
     public function __construct(
         private readonly FactoryInterface $factory,
         private readonly MenuProviderInterface $menus,
+        private readonly RequestStack $requestStack,
     ) {
     }
 
@@ -38,12 +41,12 @@ class MobileTopBarMenuBuilder
             'linkAttributes' => ['data-target' => 'slide-out', 'class' => 'sidenav-trigger'],
             'extras' => ['kind' => 'button', 'icon' => 'menu'],
         ]);
+        $lastList = $this->requestStack->getSession()->get(EntryController::LAST_ENTRIES_LIST_SESSION_KEY);
         $left->addChild('back', [
-            'route' => 'homepage',
             'label' => 'menu.left.back_to_homepage',
             'linkAttributes' => ['class' => 'waves-effect'],
             'extras' => ['icon' => 'arrow_back'],
-        ]);
+        ] + (null === $lastList ? ['route' => 'homepage'] : ['uri' => $lastList]));
 
         $right = $menu->addChild('right', ['childrenAttributes' => ['class' => 'right']]);
 

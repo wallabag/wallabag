@@ -6,6 +6,7 @@ use Craue\ConfigBundle\Util\Config;
 use Knp\Menu\MenuFactory;
 use Knp\Menu\Provider\MenuProviderInterface;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
@@ -28,7 +29,7 @@ class EntryMenuBuilderTest extends TestCase
         $provider->method('get')->willReturnCallback(static fn () => $factory->createItem('child'));
         $extension = $this->createMock(WallabagExtension::class);
         $extension->method('generateArticleReportingUrl')->willReturn('mailto:report@example.com');
-        $menu = (new EntryMenuBuilder($factory, $authorization, $settings, $provider, $extension))->createMenu(['entry' => $entry, 'redirect' => '/view/1']);
+        $menu = (new EntryMenuBuilder($factory, $authorization, $settings, $provider, $extension, $this->createMock(RequestStack::class)))->createMenu(['entry' => $entry, 'redirect' => '/view/1']);
 
         foreach (['reload', 'random', 'print'] as $name) {
             $this->assertSame(\in_array($name, $expected, true), null !== $menu->getChild($name), $name);
@@ -53,6 +54,7 @@ class EntryMenuBuilderTest extends TestCase
             $this->createMock(Config::class),
             $this->createMock(MenuProviderInterface::class),
             $this->createMock(WallabagExtension::class),
+            $this->createMock(RequestStack::class),
         );
 
         $this->expectException(\InvalidArgumentException::class);
