@@ -190,7 +190,8 @@ nav {
   }
 
   li > a,
-  li > button {
+  li > button,
+  li > form > button {
     display: flex;
     color: variables.$blue-accent-color;
     padding: 14px 10px;
@@ -200,7 +201,8 @@ nav {
     white-space: initial;
   }
 
-  li > button {
+  li > button,
+  li > form > button {
     font-size: 16px;
     line-height: 22px;
 
