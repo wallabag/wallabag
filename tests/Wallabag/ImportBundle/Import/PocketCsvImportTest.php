@@ -68,6 +68,36 @@ class PocketCsvImportTest extends TestCase
         $this->assertSame(['skipped' => 0, 'imported' => 7, 'queued' => 0], $pocketCsvImport->getSummary());
     }
 
+    public function testImportContinuesWhenFetchingContentThrowsAnError()
+    {
+        $pocketCsvImport = $this->getPocketCsvImport(false, 7);
+        $pocketCsvImport->setFilepath(__DIR__ . '/../fixtures/pocket.csv');
+
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $entryRepo->expects($this->exactly(7))
+            ->method('findByUrlAndUserId')
+            ->willReturn(false);
+
+        $this->em
+            ->expects($this->any())
+            ->method('getRepository')
+            ->willReturn($entryRepo);
+
+        $this->contentProxy
+            ->expects($this->exactly(7))
+            ->method('updateEntry')
+            ->willThrowException(new \TypeError('trim(): Argument #1 ($string) must be of type string, array given'));
+
+        $res = $pocketCsvImport->import();
+
+        $this->assertTrue($res);
+        $this->assertSame(['skipped' => 0, 'imported' => 7, 'queued' => 0], $pocketCsvImport->getSummary());
+        $this->assertTrue($this->logHandler->hasErrorThatContains('Error trying to import an entry.'));
+    }
+
     public function testImportAndMarkAllAsRead()
     {
         $pocketCsvImport = $this->getPocketCsvImport(false, 1);
