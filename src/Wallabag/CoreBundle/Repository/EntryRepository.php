@@ -24,6 +24,42 @@ class EntryRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param string[] $associations
+     *
+     * @return \Generator<Entry>
+     */
+    public function iterateInBatches(QueryBuilder $queryBuilder, array $associations = [], int $batchSize = 50): \Generator
+    {
+        $ids = array_unique(array_column((clone $queryBuilder)->select('e.id')->getQuery()->getScalarResult(), 'id'));
+        $entityManager = $this->getEntityManager();
+
+        foreach (array_chunk($ids, $batchSize) as $batchIds) {
+            $entries = [];
+            foreach ($this->createQueryBuilder('e')->where('e.id IN (:ids)')->setParameter('ids', $batchIds)->getQuery()->getResult() as $entry) {
+                $entries[$entry->getId()] = $entry;
+            }
+
+            $this->preloadTagsAndAnnotations(array_values($entries), $associations);
+
+            foreach ($batchIds as $id) {
+                if (isset($entries[$id])) {
+                    yield $entries[$id];
+                }
+            }
+
+            foreach ($entries as $entry) {
+                if (\in_array('annotations', $associations, true)) {
+                    foreach ($entry->getAnnotations() as $annotation) {
+                        $entityManager->detach($annotation);
+                    }
+                }
+
+                $entityManager->detach($entry);
+            }
+        }
+    }
+
+    /**
      * Retrieves all entries for a user.
      *
      * @param int $userId
@@ -494,11 +530,22 @@ class EntryRepository extends ServiceEntityRepository
      */
     public function findAllByTagId($userId, $tagId, $sort = 'createdAt')
     {
-        return $this->getSortedQueryBuilderByUser($userId, $sort)
-            ->innerJoin('e.tags', 't')
-            ->andWhere('t.id = :tagId')->setParameter('tagId', $tagId)
+        return $this->getBuilderForTagByUser($userId, $tagId, $sort)
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @param int $userId
+     * @param int $tagId
+     *
+     * @return QueryBuilder
+     */
+    public function getBuilderForTagByUser($userId, $tagId, $sort = 'createdAt')
+    {
+        return $this->getSortedQueryBuilderByUser($userId, $sort)
+            ->innerJoin('e.tags', 't')
+            ->andWhere('t.id = :tagId')->setParameter('tagId', $tagId);
     }
 
     /**

@@ -7,6 +7,7 @@ use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use PHPePub\Core\EPub;
 use PHPePub\Core\Structure\OPF\DublinCore;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -53,13 +54,13 @@ class EntriesExport
     /**
      * Define entries.
      *
-     * @param array|Entry $entries An array of entries or one entry
+     * @param iterable|Entry $entries A list of entries or one entry
      *
      * @return EntriesExport
      */
     public function setEntries($entries)
     {
-        if (!\is_array($entries)) {
+        if ($entries instanceof Entry) {
             $this->language = $entries->getLanguage();
             $entries = [$entries];
         }
@@ -399,43 +400,27 @@ class EntriesExport
      */
     private function produceCsv()
     {
-        $delimiter = ';';
-        $enclosure = '"';
-        $handle = fopen('php://memory', 'b+r');
+        return $this->createFileResponse(function ($handle) {
+            fputcsv($handle, ['Title', 'URL', 'Content', 'Tags', 'MIME Type', 'Language', 'Creation date'], ';', '"');
 
-        fputcsv($handle, ['Title', 'URL', 'Content', 'Tags', 'MIME Type', 'Language', 'Creation date'], $delimiter, $enclosure);
-
-        foreach ($this->entries as $entry) {
-            fputcsv(
-                $handle,
-                [
-                    $entry->getTitle(),
-                    $entry->getURL(),
-                    // remove new line to avoid crazy results
-                    str_replace(["\r\n", "\r", "\n"], '', $entry->getContent()),
-                    implode(', ', $entry->getTags()->toArray()),
-                    $entry->getMimetype(),
-                    $entry->getLanguage(),
-                    $entry->getCreatedAt()->format('d/m/Y h:i:s'),
-                ],
-                $delimiter,
-                $enclosure
-            );
-        }
-
-        rewind($handle);
-        $output = stream_get_contents($handle);
-        fclose($handle);
-
-        return Response::create(
-            $output,
-            200,
-            [
-                'Content-type' => 'application/csv',
-                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.csv"',
-                'Content-Transfer-Encoding' => 'UTF-8',
-            ]
-        );
+            foreach ($this->entries as $entry) {
+                fputcsv(
+                    $handle,
+                    [
+                        $entry->getTitle(),
+                        $entry->getURL(),
+                        // remove new line to avoid crazy results
+                        str_replace(["\r\n", "\r", "\n"], '', $entry->getContent()),
+                        implode(', ', $entry->getTags()->toArray()),
+                        $entry->getMimetype(),
+                        $entry->getLanguage(),
+                        $entry->getCreatedAt()->format('d/m/Y h:i:s'),
+                    ],
+                    ';',
+                    '"'
+                );
+            }
+        }, 'application/csv', 'csv');
     }
 
     /**
@@ -445,15 +430,17 @@ class EntriesExport
      */
     private function produceJson()
     {
-        return Response::create(
-            $this->prepareSerializingContent('json'),
-            200,
-            [
-                'Content-type' => 'application/json',
-                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.json"',
-                'Content-Transfer-Encoding' => 'UTF-8',
-            ]
-        );
+        return $this->createFileResponse(function ($handle) {
+            $serializer = SerializerBuilder::create()->build();
+            $separator = '';
+
+            fwrite($handle, '[');
+            foreach ($this->entries as $entry) {
+                fwrite($handle, $separator . $serializer->serialize($entry, 'json', SerializationContext::create()->setGroups(['entries_for_user'])));
+                $separator = ',';
+            }
+            fwrite($handle, ']');
+        }, 'application/json', 'json');
     }
 
     /**
@@ -481,23 +468,45 @@ class EntriesExport
      */
     private function produceTxt()
     {
-        $content = '';
-        $bar = str_repeat('=', 100);
-        foreach ($this->entries as $entry) {
-            $content .= "\n\n" . $bar . "\n\n" . $entry->getTitle() . "\n\n" . $bar . "\n\n";
-            $html = new Html2Text($entry->getContent(), ['do_links' => 'none', 'width' => 100]);
-            $content .= $html->getText();
+        return $this->createFileResponse(function ($handle) {
+            $bar = str_repeat('=', 100);
+
+            foreach ($this->entries as $entry) {
+                $html = new Html2Text($entry->getContent(), ['do_links' => 'none', 'width' => 100]);
+
+                fwrite($handle, "\n\n" . $bar . "\n\n" . $entry->getTitle() . "\n\n" . $bar . "\n\n" . $html->getText());
+            }
+        }, 'text/plain', 'txt');
+    }
+
+    private function createFileResponse(callable $write, string $contentType, string $extension): Response
+    {
+        $headers = [
+            'Content-type' => $contentType,
+            'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.' . $extension . '"',
+            'Content-Transfer-Encoding' => 'UTF-8',
+        ];
+
+        $path = tempnam(sys_get_temp_dir(), 'wallabag_export');
+
+        try {
+            $handle = fopen($path, 'w');
+            $write($handle);
+            fclose($handle);
+        } catch (\Throwable $e) {
+            unlink($path);
+
+            throw $e;
         }
 
-        return Response::create(
-            $content,
-            200,
-            [
-                'Content-type' => 'text/plain',
-                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.txt"',
-                'Content-Transfer-Encoding' => 'UTF-8',
-            ]
-        );
+        if (\is_array($this->entries)) {
+            $content = file_get_contents($path);
+            unlink($path);
+
+            return Response::create($content, 200, $headers);
+        }
+
+        return (new BinaryFileResponse($path, 200, $headers))->deleteFileAfterSend(true);
     }
 
     /**

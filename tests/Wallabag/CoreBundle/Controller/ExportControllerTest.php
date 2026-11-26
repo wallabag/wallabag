@@ -4,6 +4,7 @@ namespace Tests\Wallabag\CoreBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Helper\EntriesExport;
 use Wallabag\UserBundle\Entity\User;
@@ -256,6 +257,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         ob_start();
         $crawler = $client->request('GET', '/export/all.txt');
         ob_end_clean();
+        $output = $client->getInternalResponse()->getContent();
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
@@ -263,6 +265,36 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame('text/plain; charset=UTF-8', $headers->get('content-type'));
         $this->assertSame('attachment; filename="All articles.txt"', $headers->get('content-disposition'));
         $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
+
+        $entry = $this->getEntityManager()->getRepository(Entry::class)->findOneByUser($this->getLoggedInUserId());
+        $this->assertStringContainsString($entry->getTitle(), $output);
+    }
+
+    public function testIterateInBatchesKeepsOrderWithoutDuplicates()
+    {
+        $this->logInAs('admin');
+        $this->getTestClient();
+
+        $repository = $this->getEntityManager()->getRepository(Entry::class);
+        $builder = $repository->getBuilderForAnnotationsByUser($this->getLoggedInUserId());
+        $entries = (clone $builder)->getQuery()->getResult();
+
+        $annotation = new Annotation($entries[0]->getUser());
+        $annotation->setEntry($entries[0]);
+        $annotation->setText('second annotation');
+        $annotation->setQuote('quote');
+        $this->getEntityManager()->persist($annotation);
+        $this->getEntityManager()->flush();
+
+        $ids = [];
+        $annotations = [];
+        foreach ($repository->iterateInBatches($builder, ['annotations'], 1) as $entry) {
+            $ids[] = $entry->getId();
+            $annotations[] = \count($entry->getAnnotations());
+        }
+
+        $this->assertSame(array_map(fn (Entry $entry) => $entry->getId(), $entries), $ids);
+        $this->assertSame(2, $annotations[0]);
     }
 
     public function testCsvExport()
@@ -286,6 +318,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         ob_start();
         $crawler = $client->request('GET', '/export/archive.csv');
         ob_end_clean();
+        $output = $client->getInternalResponse()->getContent();
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
@@ -294,7 +327,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame('attachment; filename="Archive articles.csv"', $headers->get('content-disposition'));
         $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
-        $csv = str_getcsv($client->getResponse()->getContent(), "\n");
+        $csv = str_getcsv($output, "\n");
 
         $this->assertGreaterThan(1, $csv);
         // +1 for title line
@@ -371,6 +404,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         ob_start();
         $crawler = $client->request('GET', '/export/search.json?search_entry[term]=entry+search&currentRoute=homepage');
         ob_end_clean();
+        $output = $client->getInternalResponse()->getContent();
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
@@ -379,7 +413,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame('attachment; filename="Search entry search articles.json"', $headers->get('content-disposition'));
         $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode($output, true);
         $this->assertCount(1, $content);
 
         $this->tearDownForJsonExportFromSearch();
@@ -432,6 +466,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         ob_start();
         $crawler = $client->request('GET', '/export/same_domain.json?entry=1');
         ob_end_clean();
+        $output = $client->getInternalResponse()->getContent();
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
@@ -440,7 +475,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame('attachment; filename="Same domain articles.json"', $headers->get('content-disposition'));
         $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode($output, true);
         $this->assertCount(4, $content);
     }
 
@@ -473,8 +508,8 @@ class ExportControllerTest extends WallabagCoreTestCase
     {
         $em = $this->getEntityManager();
 
-        $em->remove($this->adminEntry);
-        $em->remove($this->bobEntry);
+        $em->remove($em->getReference(Entry::class, $this->adminEntry->getId()));
+        $em->remove($em->getReference(Entry::class, $this->bobEntry->getId()));
 
         $em->flush();
     }
