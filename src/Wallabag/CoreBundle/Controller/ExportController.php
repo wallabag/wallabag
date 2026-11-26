@@ -66,8 +66,6 @@ class ExportController extends AbstractController
         $method = ucfirst($category);
         $methodBuilder = 'getBuilderFor' . $method . 'ByUser';
         $title = $method;
-        $builder = null;
-        $entries = [];
 
         if ('same_domain' === $category) {
             $builder = $entryRepository->getBuilderForSameDomainByUser(
@@ -79,7 +77,7 @@ class ExportController extends AbstractController
         } elseif ('tag_entries' === $category) {
             $tag = $tagRepository->findOneBySlug($request->query->get('tag'));
 
-            $entries = $entryRepository->findAllByTagId(
+            $builder = $entryRepository->getBuilderForTagByUser(
                 $this->getUser()->getId(),
                 $tag->getId()
             );
@@ -106,11 +104,10 @@ class ExportController extends AbstractController
             $builder = $entryRepository->$methodBuilder($this->getUser()->getId());
         }
 
-        if (null !== $builder) {
-            $entries = \in_array($format, ['json', 'csv', 'txt'], true)
-                ? $entryRepository->iterateInBatches($builder)
-                : $builder->getQuery()->getResult();
-        }
+        $associations = ['json' => ['tags', 'annotations'], 'csv' => ['tags'], 'txt' => []];
+        $entries = isset($associations[$format])
+            ? $entryRepository->iterateInBatches($builder, $associations[$format])
+            : $builder->getQuery()->getResult();
 
         try {
             return $entriesExport

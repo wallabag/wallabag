@@ -24,12 +24,11 @@ class EntryRepository extends ServiceEntityRepository
     }
 
     /**
-     * Iterates over the entries matching the given builder, loading them by batches
-     * and detaching them after each batch to keep the memory usage flat.
+     * @param string[] $associations
      *
      * @return \Generator<Entry>
      */
-    public function iterateInBatches(QueryBuilder $queryBuilder, int $batchSize = 50): \Generator
+    public function iterateInBatches(QueryBuilder $queryBuilder, array $associations = [], int $batchSize = 50): \Generator
     {
         $ids = array_unique(array_column((clone $queryBuilder)->select('e.id')->getQuery()->getScalarResult(), 'id'));
         $entityManager = $this->getEntityManager();
@@ -40,13 +39,7 @@ class EntryRepository extends ServiceEntityRepository
                 $entries[$entry->getId()] = $entry;
             }
 
-            $this->createQueryBuilder('e')
-                ->select('PARTIAL e.{id}', 't')
-                ->leftJoin('e.tags', 't')
-                ->where('e IN (:entries)')
-                ->setParameter('entries', array_values($entries))
-                ->getQuery()
-                ->getResult();
+            $this->preloadTagsAndAnnotations(array_values($entries), $associations);
 
             foreach ($batchIds as $id) {
                 if (isset($entries[$id])) {
@@ -54,7 +47,15 @@ class EntryRepository extends ServiceEntityRepository
                 }
             }
 
-            $entityManager->clear();
+            foreach ($entries as $entry) {
+                if (\in_array('annotations', $associations, true)) {
+                    foreach ($entry->getAnnotations() as $annotation) {
+                        $entityManager->detach($annotation);
+                    }
+                }
+
+                $entityManager->detach($entry);
+            }
         }
     }
 
@@ -529,11 +530,22 @@ class EntryRepository extends ServiceEntityRepository
      */
     public function findAllByTagId($userId, $tagId, $sort = 'createdAt')
     {
-        return $this->getSortedQueryBuilderByUser($userId, $sort)
-            ->innerJoin('e.tags', 't')
-            ->andWhere('t.id = :tagId')->setParameter('tagId', $tagId)
+        return $this->getBuilderForTagByUser($userId, $tagId, $sort)
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @param int $userId
+     * @param int $tagId
+     *
+     * @return QueryBuilder
+     */
+    public function getBuilderForTagByUser($userId, $tagId, $sort = 'createdAt')
+    {
+        return $this->getSortedQueryBuilderByUser($userId, $sort)
+            ->innerJoin('e.tags', 't')
+            ->andWhere('t.id = :tagId')->setParameter('tagId', $tagId);
     }
 
     /**

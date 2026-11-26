@@ -7,8 +7,8 @@ use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use PHPePub\Core\EPub;
 use PHPePub\Core\Structure\OPF\DublinCore;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -400,12 +400,8 @@ class EntriesExport
      */
     private function produceCsv()
     {
-        $delimiter = ';';
-        $enclosure = '"';
-        $header = ['Title', 'URL', 'Content', 'Tags', 'MIME Type', 'Language', 'Creation date'];
-
-        $write = function ($handle) use ($delimiter, $enclosure, $header) {
-            fputcsv($handle, $header, $delimiter, $enclosure);
+        return $this->createFileResponse(function ($handle) {
+            fputcsv($handle, ['Title', 'URL', 'Content', 'Tags', 'MIME Type', 'Language', 'Creation date'], ';', '"');
 
             foreach ($this->entries as $entry) {
                 fputcsv(
@@ -420,32 +416,11 @@ class EntriesExport
                         $entry->getLanguage(),
                         $entry->getCreatedAt()->format('d/m/Y h:i:s'),
                     ],
-                    $delimiter,
-                    $enclosure
+                    ';',
+                    '"'
                 );
             }
-        };
-
-        $headers = [
-            'Content-type' => 'application/csv',
-            'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.csv"',
-            'Content-Transfer-Encoding' => 'UTF-8',
-        ];
-
-        if (!\is_array($this->entries)) {
-            return new StreamedResponse(function () use ($write) {
-                $write(fopen('php://output', 'w'));
-            }, 200, $headers);
-        }
-
-        $handle = fopen('php://memory', 'b+r');
-        $write($handle);
-
-        rewind($handle);
-        $output = stream_get_contents($handle);
-        fclose($handle);
-
-        return Response::create($output, 200, $headers);
+        }, 'application/csv', 'csv');
     }
 
     /**
@@ -455,27 +430,17 @@ class EntriesExport
      */
     private function produceJson()
     {
-        $headers = [
-            'Content-type' => 'application/json',
-            'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.json"',
-            'Content-Transfer-Encoding' => 'UTF-8',
-        ];
+        return $this->createFileResponse(function ($handle) {
+            $serializer = SerializerBuilder::create()->build();
+            $separator = '';
 
-        if (!\is_array($this->entries)) {
-            return new StreamedResponse(function () {
-                $serializer = SerializerBuilder::create()->build();
-                $separator = '';
-
-                echo '[';
-                foreach ($this->entries as $entry) {
-                    echo $separator . $serializer->serialize($entry, 'json', SerializationContext::create()->setGroups(['entries_for_user']));
-                    $separator = ',';
-                }
-                echo ']';
-            }, 200, $headers);
-        }
-
-        return Response::create($this->prepareSerializingContent('json'), 200, $headers);
+            fwrite($handle, '[');
+            foreach ($this->entries as $entry) {
+                fwrite($handle, $separator . $serializer->serialize($entry, 'json', SerializationContext::create()->setGroups(['entries_for_user'])));
+                $separator = ',';
+            }
+            fwrite($handle, ']');
+        }, 'application/json', 'json');
     }
 
     /**
@@ -503,33 +468,45 @@ class EntriesExport
      */
     private function produceTxt()
     {
-        $bar = str_repeat('=', 100);
-        $entryText = function (Entry $entry) use ($bar) {
-            $html = new Html2Text($entry->getContent(), ['do_links' => 'none', 'width' => 100]);
+        return $this->createFileResponse(function ($handle) {
+            $bar = str_repeat('=', 100);
 
-            return "\n\n" . $bar . "\n\n" . $entry->getTitle() . "\n\n" . $bar . "\n\n" . $html->getText();
-        };
+            foreach ($this->entries as $entry) {
+                $html = new Html2Text($entry->getContent(), ['do_links' => 'none', 'width' => 100]);
 
+                fwrite($handle, "\n\n" . $bar . "\n\n" . $entry->getTitle() . "\n\n" . $bar . "\n\n" . $html->getText());
+            }
+        }, 'text/plain', 'txt');
+    }
+
+    private function createFileResponse(callable $write, string $contentType, string $extension): Response
+    {
         $headers = [
-            'Content-type' => 'text/plain',
-            'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.txt"',
+            'Content-type' => $contentType,
+            'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.' . $extension . '"',
             'Content-Transfer-Encoding' => 'UTF-8',
         ];
 
-        if (!\is_array($this->entries)) {
-            return new StreamedResponse(function () use ($entryText) {
-                foreach ($this->entries as $entry) {
-                    echo $entryText($entry);
-                }
-            }, 200, $headers);
+        $path = tempnam(sys_get_temp_dir(), 'wallabag_export');
+
+        try {
+            $handle = fopen($path, 'w');
+            $write($handle);
+            fclose($handle);
+        } catch (\Throwable $e) {
+            unlink($path);
+
+            throw $e;
         }
 
-        $content = '';
-        foreach ($this->entries as $entry) {
-            $content .= $entryText($entry);
+        if (\is_array($this->entries)) {
+            $content = file_get_contents($path);
+            unlink($path);
+
+            return Response::create($content, 200, $headers);
         }
 
-        return Response::create($content, 200, $headers);
+        return (new BinaryFileResponse($path, 200, $headers))->deleteFileAfterSend(true);
     }
 
     /**
