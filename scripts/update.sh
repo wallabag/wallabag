@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # You can execute this file to update wallabag
-# eg: `sh update.sh prod`
+# eg: `bash scripts/update.sh prod` from the root folder of wallabag
 
 IGNORE_ROOT_ARG="--ignore-root-warning"
 IGNORE_ROOT=0
@@ -46,11 +46,14 @@ fi
 rm -rf var/cache/*
 git fetch origin
 git fetch --tags
-# Latest stable release: skip pre-releases (alpha, beta, rc)
-TAG=$(git tag --list --sort=-version:refname | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1)
+# Latest stable 2.6.x release: skip pre-releases and newer versions, which need a manual upgrade
+TAG=$(git tag --list --sort=-version:refname | grep -E '^2\.6\.[0-9]+$' | head -n 1)
 if [ -z "$TAG" ]; then
-    echo "Can not find the latest release tag. Aborting."
+    echo "Can not find the latest 2.6 release tag. Aborting."
     exit 3
+fi
+if [ "$(git tag --list --sort=-version:refname | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1)" != "$TAG" ]; then
+    echo "wallabag 2.7 is available, it needs a manual upgrade: see https://github.com/wallabag/wallabin#migrate-from-wallabag-26. Updating to $TAG."
 fi
 git checkout $TAG --force
 SYMFONY_ENV=$ENV $COMPOSER_COMMAND install --no-dev -o --prefer-dist
