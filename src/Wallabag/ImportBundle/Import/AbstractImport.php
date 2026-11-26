@@ -130,7 +130,7 @@ abstract class AbstractImport implements ImportInterface
     {
         try {
             $this->contentProxy->updateEntry($entry, $url, $content, $this->disableContentUpdate);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $this->logger->error('Error trying to import an entry.', [
                 'entry_url' => $url,
                 'error_msg' => $e->getMessage(),
