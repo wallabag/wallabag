@@ -39,15 +39,17 @@ class Annotation
     private $text;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     #[ORM\Column(name: 'created_at', type: 'datetime')]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     #[ORM\Column(name: 'updated_at', type: 'datetime')]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $updatedAt;
 
     /**
@@ -117,9 +119,22 @@ class Annotation
     }
 
     /**
+     * Set created.
+     * Only used when importing data from an other service.
+     *
+     * @return Annotation
+     */
+    public function setCreatedAt(\DateTimeInterface $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
      * Get created.
      *
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getCreatedAt()
     {
@@ -127,9 +142,22 @@ class Annotation
     }
 
     /**
+     * Set updated.
+     * Only used when importing data from an other service.
+     *
+     * @return Annotation
+     */
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
      * Get updated.
      *
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getUpdatedAt()
     {
