@@ -61,6 +61,7 @@ After changing configuration in production, clear the cache with
 | WALLABAG_REMEMBER_ME_COOKIE_NAME | Name of the "remember me" cookie | `REMEMBERME` |
 | WALLABAG_TRUSTED_DEVICE_COOKIE_NAME | Name of the two-factor trusted device cookie | `wllbg_trusted_computer` |
 | WALLABAG_FETCH_BLOCKED_HOSTS | Optional comma-separated hostname deny-list for outgoing fetches | empty |
+| WALLABAG_UPDATE_CHECK | Check once a day on wallabag.org if a new version is available, and show it to the admins | `1` |
 | WALLABAG_OAUTH_ACCESS_TOKEN_LIFETIME | OAuth access-token lifetime in seconds | `3600` |
 | WALLABAG_OAUTH_REFRESH_TOKEN_LIFETIME | OAuth refresh-token lifetime in seconds | `1209600` |
 | WALLABAG_TABLE_PREFIX | Prefix added to wallabag database tables | `wallabag_` |

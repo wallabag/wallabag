@@ -19,6 +19,13 @@
 {% endblock %}
 
 {% block messages %}
+    {% set available_update = wallabag_available_update() %}
+    {% if available_update and available_update.security %}
+        <div class="card-panel red darken-1 white-text">
+            {{ 'update.security_banner'|trans({'%version%': available_update.version}) }}
+            <a class="white-text" href="{{ available_update.url }}"><strong>{{ 'update.read_more'|trans }}</strong></a>
+        </div>
+    {% endif %}
     {% for flash_message in app.session.flashbag.get('notice') %}
         <p class="hidden" data-controller="materialize--toast">{{ flash_message|trans }}</p>
     {% endfor %}
