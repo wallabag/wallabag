@@ -812,3 +812,7 @@ feeds:
     manual_mode: Ręczny
     page_title: Subskrypcje kanałów
     stale: Ten kanał nie został pomyślnie odświeżony w ciągu ostatnich dwóch dni.
+update:
+    available: Dostępna jest wersja %version% wallabag.
+    security_banner: 'wallabag w wersji %version% usuwa luki w zabezpieczeniach: zaktualizuj swoją instancję najszybciej, jak to możliwe.'
+    read_more: Zapoznaj się z informacjami o wydaniu
