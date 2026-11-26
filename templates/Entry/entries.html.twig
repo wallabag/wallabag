@@ -52,23 +52,17 @@
 {% block nav_panel_extra_actions %}
     {% if active_route %}
         <li>
-            <a class="waves-effect" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': active_route}) }}">
-                <i class="material-icons">casino</i>
-            </a>
+            <twig:ui:IconButton icon="casino" :label="'menu.top.random_entry'|trans" :href="path('random_entry', {'type': active_route})" />
         </li>
     {% endif %}
     {% if has_filters %}
-        <li class="button-filters">
-            <button type="button" class="sidenav-trigger" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" data-target="filters">
-                <i class="material-icons">filter_list</i>
-            </button>
+        <li>
+            <twig:ui:IconButton icon="filter_list" :label="'menu.top.filter_entries'|trans" data-action="topbar#openPanel" data-topbar-panel-param="filters" />
         </li>
     {% endif %}
     {% if has_exports %}
-        <li class="button-export">
-            <button type="button" class="sidenav-trigger" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.export'|trans }}" data-target="export">
-                <i class="material-icons">file_download</i>
-            </button>
+        <li>
+            <twig:ui:IconButton icon="file_download" :label="'menu.top.export'|trans" data-action="topbar#openPanel" data-topbar-panel-param="export" />
         </li>
     {% endif %}
 {% endblock %}
@@ -157,18 +151,15 @@
 
     <!-- Export -->
     {% if has_exports %}
-        <div id="export" class="sidenav" data-controller="materialize--sidenav" data-materialize--sidenav-edge-value="right">
-            <h4 class="center">{{ 'entry.list.export_title'|trans }}</h4>
+        <twig:ui:Panel id="export" :title="'entry.list.export_title'|trans">
             {{ knp_menu_render(list_exports) }}
-        </div>
+        </twig:ui:Panel>
     {% endif %}
 
     <!-- Filters -->
     {% if has_filters %}
-    <div id="filters" class="sidenav" data-controller="materialize--sidenav" data-materialize--sidenav-edge-value="right">
+    <twig:ui:Panel id="filters" :title="'entry.filters.title'|trans">
         <form action="{{ path('all') }}">
-
-            <h4 class="center">{{ 'entry.filters.title'|trans }}</h4>
 
             <div class="row">
                 {% if current_route != 'untagged' %}
@@ -294,7 +285,7 @@
             </div>
 
         </form>
-    </div>
+    </twig:ui:Panel>
     {% endif %}
 
 {% endblock %}

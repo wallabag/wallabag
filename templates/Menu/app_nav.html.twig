@@ -1,0 +1,23 @@
+{% extends 'Menu/base.html.twig' %}
+
+{% block root %}
+    {% set options = options|merge({currentClass: 'is-active'}) %}
+
+    <ul class="wb-nav">
+        {{ block('children') }}
+    </ul>
+{% endblock %}
+
+{% block icon %}
+    {{ icon(item.extra('icon')) }}
+{% endblock %}
+
+{% block control_classes %}wb-nav-link{% endblock %}
+
+{% block label %}
+    {{ parent() }}
+
+    {% if item.extra('counter') is not null %}
+        <span class="wb-count">{{ item.extra('counter') }}</span>
+    {% endif %}
+{% endblock %}

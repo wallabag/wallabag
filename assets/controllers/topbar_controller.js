@@ -1,31 +1,42 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-  static targets = ['addUrl', 'addUrlInput', 'search', 'searchInput', 'actions'];
+  static targets = ['addUrl', 'addUrlInput', 'search', 'searchInput'];
 
   showAddUrl() {
-    this.actionsTarget.style.display = 'none';
-    this.addUrlTarget.style.display = 'flex';
-    this.searchTarget.style.display = 'none';
+    this.showActions();
+    this.addUrlTarget.showModal();
     this.addUrlInputTarget.focus();
   }
 
   submittingUrl(e) {
-    e.currentTarget.disabled = true;
+    const button = e.currentTarget.querySelector('button[type="submit"]');
+    if (button) {
+      button.disabled = true;
+    }
     this.addUrlInputTarget.readOnly = true;
     this.addUrlInputTarget.blur();
   }
 
   showSearch() {
-    this.actionsTarget.style.display = 'none';
-    this.addUrlTarget.style.display = 'none';
-    this.searchTarget.style.display = 'flex';
+    this.showActions();
+    this.searchTarget.showModal();
     this.searchInputTarget.focus();
   }
 
   showActions() {
-    this.actionsTarget.style.display = 'flex';
-    this.addUrlTarget.style.display = 'none';
-    this.searchTarget.style.display = 'none';
+    for (const dialog of document.querySelectorAll('dialog[open]')) {
+      dialog.close();
+    }
+  }
+
+  openPanel({ params: { panel } }) {
+    document.getElementById(panel)?.showModal();
+  }
+
+  closeOnBackdrop(e) {
+    if (e.target === e.currentTarget) {
+      e.currentTarget.close();
+    }
   }
 }

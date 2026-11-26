@@ -1,0 +1,23 @@
+{% extends 'Menu/base.html.twig' %}
+
+{% block root %}
+    <details class="wb-account" data-controller="disclosure" data-action="click@window->disclosure#closeOutside keydown.esc@window->disclosure#close">
+        <summary class="wb-account-summary">
+            <span class="wb-avatar" aria-hidden="true">{{ app.user.username|first|upper }}</span>
+            <span class="wb-account-text">
+                <span class="wb-account-name">{{ app.user.username }}</span>
+                <span class="wb-account-sub">{{ 'menu.top.account'|trans }}</span>
+            </span>
+            {{ icon('chevron-up', 18) }}
+        </summary>
+        <ul class="wb-menu">
+            {{ block('children') }}
+        </ul>
+    </details>
+{% endblock %}
+
+{% block icon %}
+    {{ icon(item.extra('icon'), 18) }}
+{% endblock %}
+
+{% block control_classes %}wb-menu-link{% endblock %}

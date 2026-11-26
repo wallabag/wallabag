@@ -1,0 +1,78 @@
+.wb-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 14px;
+  border-top: 1px solid var(--wb-line);
+}
+
+.wb-nav-link,
+.wb-sidebar .wb-nav-link {
+  display: flex;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  box-sizing: border-box;
+  text-align: left;
+  cursor: pointer;
+  align-items: center;
+  gap: 11px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: var(--wb-radius-small);
+  color: var(--wb-ink);
+  font: 400 14px/1 var(--wb-font);
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+
+  &:hover,
+  &:focus {
+    background: var(--wb-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--wb-accent);
+    outline-offset: -2px;
+  }
+
+  &.is-active {
+    background: var(--wb-surface);
+    box-shadow: var(--wb-shadow);
+    font-weight: 600;
+  }
+}
+
+.wb-nav-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wb-count {
+  margin-left: auto;
+  color: var(--wb-muted);
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.wb-nav-link .wb-count,
+.wb-nav-link .items-number {
+  margin-left: auto;
+}
+
+.wb-nav > li.is-active > .wb-nav-link {
+  background: var(--wb-surface);
+  box-shadow: var(--wb-shadow);
+  font-weight: 600;
+}
+
+.wb-nav-link > span:not([class]) {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

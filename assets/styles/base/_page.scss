@@ -1,0 +1,37 @@
+@use "../tokens/variables" as t;
+
+body.wb-app {
+  background: var(--wb-bg);
+  color: var(--wb-ink);
+  font-family: var(--wb-font);
+  -webkit-font-smoothing: antialiased;
+
+  a {
+    color: inherit;
+  }
+
+  #main {
+    padding: 0 16px;
+  }
+
+  main {
+    padding-left: 0;
+  }
+
+  main div#content {
+    padding: 0 0 32px;
+  }
+
+  @media (min-width: t.$desktop) {
+    #main,
+    .wb-footer {
+      padding-left: t.$sidebar-width + 24px;
+      padding-right: 28px;
+    }
+  }
+}
+
+body.wb-drawer-open,
+body:has(dialog.wb-dialog[open]) {
+  overflow: hidden;
+}

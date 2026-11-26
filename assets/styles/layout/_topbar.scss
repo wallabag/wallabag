@@ -1,0 +1,62 @@
+@use "../tokens/variables" as t;
+
+.wb-topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 0 16px;
+}
+
+.wb-icon-btn.wb-menu-toggle {
+  @media (min-width: t.$desktop) {
+    display: none;
+  }
+}
+
+body.wb-app .wb-page-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  font: 700 26px/1.2 var(--wb-font);
+  letter-spacing: -0.02em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media (max-width: 600px) {
+    font-size: 21px;
+  }
+}
+
+.wb-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+  }
+
+  .button-filters,
+  .button-export {
+    display: flex;
+  }
+
+  .sidenav-trigger {
+    display: inline-flex;
+  }
+
+  .wb-toolbar-add .wb-btn {
+    width: 40px;
+    padding: 0;
+  }
+
+  @media (min-width: t.$desktop) {
+    .wb-toolbar-add {
+      display: none;
+    }
+  }
+}
