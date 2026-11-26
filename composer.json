@@ -164,6 +164,7 @@
         "symfony/templating": "^5.4.45",
         "symfony/translation-contracts": "^2.5.4",
         "symfony/twig-bundle": "^5.4.45",
+        "symfony/ux-twig-component": "^2.36",
         "symfony/validator": "^5.4.48",
         "symfony/webpack-encore-bundle": "^1.17.2",
         "tecnickcom/tcpdf": "^6.8.2",
