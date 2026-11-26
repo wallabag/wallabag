@@ -1,0 +1,4 @@
+{% props variant = 'default', size = null, block = false, href = null, type = 'button' %}
+{%- set element = href ? 'a' : 'button' -%}
+{%- set classes = ['wb-btn', variant != 'default' ? 'wb-btn--' ~ variant : null, size ? 'wb-btn--' ~ size : null, block ? 'wb-btn--block' : null]|filter(c => c)|join(' ') -%}
+<{{ element }}{% if href %} href="{{ href }}"{% else %} type="{{ type }}"{% endif %} {{ attributes.defaults({class: classes}) }}>{% block content %}{% endblock %}</{{ element }}>

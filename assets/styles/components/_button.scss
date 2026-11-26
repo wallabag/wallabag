@@ -1,0 +1,79 @@
+.wb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 100%;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid transparent;
+  border-radius: var(--wb-radius-small);
+  background: transparent;
+  color: var(--wb-ink);
+  font: 600 14px/1.25 var(--wb-font);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+
+  &:focus-visible {
+    outline: 2px solid var(--wb-accent);
+    outline-offset: 2px;
+  }
+}
+
+body.wb-app .wb-btn--primary {
+  background: var(--wb-primary-bg);
+  color: var(--wb-primary-ink);
+
+  &:hover,
+  &:focus {
+    background: var(--wb-primary-bg);
+    opacity: 0.88;
+  }
+}
+
+.wb-btn:disabled,
+.wb-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wb-btn--ghost {
+  border-color: var(--wb-line-strong);
+  background: var(--wb-surface);
+
+  &:hover,
+  &:focus {
+    background: var(--wb-hover);
+  }
+}
+
+.wb-btn--small {
+  min-height: 34px;
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+.wb-btn--block {
+  display: flex;
+  width: 100%;
+  height: auto;
+  min-height: 44px;
+  padding-block: 8px;
+  justify-content: flex-start;
+  line-height: 1.25;
+  text-align: left;
+  white-space: normal;
+}
+
+body.wb-app .wb-btn--danger {
+  background: var(--wb-danger);
+  color: var(--wb-danger-ink);
+
+  &:hover,
+  &:focus {
+    background: var(--wb-danger);
+    opacity: 0.88;
+  }
+}

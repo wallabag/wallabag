@@ -1,0 +1,69 @@
+dialog.wb-panel {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: 340px;
+  max-width: 100%;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-left: 1px solid var(--wb-line);
+  background: var(--wb-surface);
+  color: var(--wb-ink);
+  box-shadow: var(--wb-shadow-pop);
+
+  &[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &::backdrop {
+    background: var(--wb-backdrop);
+    backdrop-filter: blur(4px);
+  }
+
+  .wb-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 12px 8px 20px;
+
+    h2 {
+      margin: 0;
+      font: 700 20px/1.25 var(--wb-font);
+    }
+  }
+
+  .wb-panel-body {
+    flex: 1 1 auto;
+    padding: 8px 20px 32px;
+    overflow-y: auto;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li > a,
+    li > button {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      padding: 0 12px;
+      border: 0;
+      border-radius: var(--wb-radius-small);
+      background: transparent;
+      color: var(--wb-ink);
+      font: 500 14px/1 var(--wb-font);
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--wb-hover);
+      }
+    }
+  }
+}

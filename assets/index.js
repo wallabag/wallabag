@@ -15,3 +15,4 @@ import '@fontsource/roboto';
 
 /* Theme style */
 import './scss/index.scss';
+import './styles/index.scss';

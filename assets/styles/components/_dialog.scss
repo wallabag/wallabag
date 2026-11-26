@@ -1,0 +1,62 @@
+dialog.wb-dialog {
+  top: 14vh;
+  width: min(600px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 0;
+  overflow: visible;
+  border: 1px solid var(--wb-line);
+  border-radius: var(--wb-radius);
+  background: var(--wb-surface-raised);
+  color: var(--wb-ink);
+  box-shadow: var(--wb-shadow-pop);
+
+  &::backdrop {
+    background: var(--wb-backdrop);
+    backdrop-filter: blur(4px);
+  }
+
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 10px 10px 10px 18px;
+  }
+
+  .wb-icon {
+    color: var(--wb-muted);
+  }
+
+  input[type="url"]:not(.browser-default),
+  input[type="text"]:not(.browser-default),
+  input[type="search"]:not(.browser-default) {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    height: 48px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+    color: var(--wb-ink);
+    font: 400 18px/48px var(--wb-font);
+
+    &:focus:not([readonly]) {
+      border: 0;
+      box-shadow: none;
+      outline: 0;
+    }
+
+    &::placeholder {
+      color: var(--wb-muted);
+    }
+  }
+
+  .wb-form-error {
+    flex: 1 0 100%;
+    color: var(--wb-danger);
+    font-size: 13px;
+  }
+}

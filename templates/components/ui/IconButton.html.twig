@@ -1,0 +1,4 @@
+{% props icon, label, tone = null, size = 20, filled = false, href = null, as = null, type = 'button' %}
+{%- set element = href ? 'a' : (as ?? 'button') -%}
+{%- set classes = tone ? 'wb-icon-btn wb-icon-btn--' ~ tone : 'wb-icon-btn' -%}
+<{{ element }}{% if href %} href="{{ href }}"{% elseif element == 'button' %} type="{{ type }}"{% endif %} title="{{ label }}"{% if element != 'label' %} aria-label="{{ label }}"{% endif %} {{ attributes.defaults({class: classes}) }}>{{ icon(icon, size, filled) }}{% if element == 'label' %}<span class="wb-sr">{{ label }}</span>{% endif %}</{{ element }}>
