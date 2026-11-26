@@ -22,9 +22,7 @@ class AccountMenuBuilder
     #[AsMenuBuilder(name: 'wallabag_account')]
     public function createMenu(array $options): ItemInterface
     {
-        $menu = $this->factory->createItem('account', [
-            'childrenAttributes' => ['id' => 'dropdown-account', 'class' => 'dropdown-content'],
-        ]);
+        $menu = $this->factory->createItem('account');
 
         if ($this->authorization->isGranted('EDIT_CONFIG')) {
             $menu->addChild('config', ['route' => 'config', 'label' => 'menu.left.config', 'extras' => ['icon' => 'settings']]);

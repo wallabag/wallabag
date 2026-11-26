@@ -37,9 +37,8 @@ class MainMenuBuilder
             $menu->addChild('unread', [
                 'route' => 'unread',
                 'label' => 'menu.left.unread',
-                'attributes' => ['class' => 'bold'],
-                'linkAttributes' => ['class' => 'waves-effect'],
                 'extras' => [
+                    'icon' => 'unread',
                     'counter' => $this->countEntries('unread'),
                     'routes' => [
                         ['route' => 'search', 'query_parameters' => ['currentRoute' => 'unread']],
@@ -50,9 +49,8 @@ class MainMenuBuilder
             $menu->addChild('starred', [
                 'route' => 'starred',
                 'label' => 'menu.left.starred',
-                'attributes' => ['class' => 'bold'],
-                'linkAttributes' => ['class' => 'waves-effect'],
                 'extras' => [
+                    'icon' => 'star',
                     'counter' => $this->countEntries('starred'),
                     'routes' => [
                         ['route' => 'search', 'query_parameters' => ['currentRoute' => 'starred']],
@@ -62,9 +60,8 @@ class MainMenuBuilder
             $menu->addChild('archive', [
                 'route' => 'archive',
                 'label' => 'menu.left.archive',
-                'attributes' => ['class' => 'bold'],
-                'linkAttributes' => ['class' => 'waves-effect'],
                 'extras' => [
+                    'icon' => 'archive',
                     'counter' => $this->countEntries('archive'),
                     'routes' => [
                         ['route' => 'search', 'query_parameters' => ['currentRoute' => 'archive']],
@@ -74,9 +71,8 @@ class MainMenuBuilder
             $menu->addChild('annotated', [
                 'route' => 'annotated',
                 'label' => 'menu.left.with_annotations',
-                'attributes' => ['class' => 'bold'],
-                'linkAttributes' => ['class' => 'waves-effect'],
                 'extras' => [
+                    'icon' => 'annotated',
                     'counter' => $this->countEntries('annotated'),
                     'routes' => [
                         ['route' => 'search', 'query_parameters' => ['currentRoute' => 'annotated']],
@@ -86,9 +82,8 @@ class MainMenuBuilder
             $menu->addChild('all', [
                 'route' => 'all',
                 'label' => 'menu.left.all_articles',
-                'attributes' => ['class' => 'bold'],
-                'linkAttributes' => ['class' => 'waves-effect'],
                 'extras' => [
+                    'icon' => 'all',
                     'counter' => $this->countEntries('all'),
                     'routes' => [
                         ['route' => 'search', 'query_parameters' => ['currentRoute' => 'all']],
@@ -101,9 +96,7 @@ class MainMenuBuilder
             $menu->addChild('tags', [
                 'route' => 'tag',
                 'label' => 'menu.left.tags',
-                'attributes' => ['class' => 'bold'],
-                'linkAttributes' => ['class' => 'waves-effect'],
-                'extras' => ['counter' => $this->countTags()],
+                'extras' => ['icon' => 'tag', 'counter' => $this->countTags()],
             ]);
         }
 
@@ -111,9 +104,8 @@ class MainMenuBuilder
             $menu->addChild('feeds', [
                 'route' => 'all_import_feed',
                 'label' => 'feeds.page_title',
-                'attributes' => ['class' => 'bold'],
-                'linkAttributes' => ['class' => 'waves-effect'],
                 'extras' => [
+                    'icon' => 'feed',
                     'counter' => $this->countPendingFeedItems(),
                     'routes' => ['new_feed', 'edit_feed', 'display_feed_items'],
                 ],

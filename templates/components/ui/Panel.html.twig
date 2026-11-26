@@ -1,0 +1,8 @@
+{% props title %}
+<dialog {{ attributes.defaults({class: 'wb-panel'}) }} data-controller="panel" data-action="click->panel#closeOnBackdrop">
+    <header class="wb-panel-head">
+        <h2>{{ title }}</h2>
+        <twig:ui:IconButton icon="close" label="close" data-action="panel#close" />
+    </header>
+    <div class="wb-panel-body">{% block content %}{% endblock %}</div>
+</dialog>

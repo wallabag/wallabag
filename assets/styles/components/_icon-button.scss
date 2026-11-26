@@ -1,0 +1,34 @@
+.wb-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--wb-radius-small);
+  background: transparent;
+  color: var(--wb-ink);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover,
+  &:focus {
+    background: var(--wb-hover);
+    color: var(--wb-ink);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--wb-accent);
+    outline-offset: 1px;
+  }
+}
+
+.wb-icon-btn--starred {
+  color: var(--wb-star);
+}
+
+.wb-icon-btn--danger:hover,
+.wb-icon-btn--danger:focus {
+  color: var(--wb-danger);
+}

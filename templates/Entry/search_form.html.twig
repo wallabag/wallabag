@@ -1,17 +1,20 @@
-<form class="input-field nav-panel-item nav-panel-search" style="display: none" name="search" method="GET" action="{{ path('search') }}" data-topbar-target="search">
-    {% if form_errors(form) %}
-        <span class="black-text">{{ form_errors(form) }}</span>
-    {% endif %}
-    <button type="submit" class="nav-form-button" aria-label="search"><i class="material-icons search" aria-hidden="true"></i></button>
+<twig:ui:Dialog data-topbar-target="search" data-action="click->topbar#closeOnBackdrop">
+    <form name="search" method="GET" action="{{ path('search') }}">
+        {% if form_errors(form) %}
+            <span class="wb-form-error">{{ form_errors(form) }}</span>
+        {% endif %}
 
-    {% if form_errors(form.term) %}
-        <span class="black-text">{{ form_errors(form.term) }}</span>
-    {% endif %}
+        <input type="hidden" name="currentRoute" value="{{ currentRoute }}" />
 
-    <input type="hidden" name="currentRoute" value="{{ currentRoute }}" />
+        {{ icon('search') }}
+        {{ form_widget(form.term, {'attr': {'autocomplete': 'off', 'placeholder': 'entry.search.placeholder', 'data-topbar-target': 'searchInput'}}) }}
+        <twig:ui:Button variant="primary" type="submit">{{ 'menu.top.search'|trans }}</twig:ui:Button>
+        <twig:ui:IconButton icon="close" label="close" data-action="topbar#showActions" data-shortcuts-target="showActions" />
 
-    {{ form_widget(form.term, {'attr': {'autocomplete': 'off', 'placeholder': 'entry.search.placeholder', 'data-topbar-target': 'searchInput'}}) }}
-    <button type="button" class="nav-form-button nav-panel-close" aria-label="clear" data-action="click->topbar#showActions" data-shortcuts-target="showActions"><i class="material-icons close"></i></button>
+        {% if form_errors(form.term) %}
+            <span class="wb-form-error">{{ form_errors(form.term) }}</span>
+        {% endif %}
 
-    {{ form_rest(form) }}
-</form>
+        {{ form_rest(form) }}
+    </form>
+</twig:ui:Dialog>

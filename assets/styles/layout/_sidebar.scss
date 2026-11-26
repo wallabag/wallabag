@@ -1,0 +1,102 @@
+@use "../tokens/variables" as t;
+
+.wb-sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: t.$sidebar-width;
+  max-width: 85vw;
+  margin: 0;
+  padding: 20px 14px 16px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  background: var(--wb-bg);
+  color: var(--wb-ink);
+  font-family: var(--wb-font);
+
+  @media (max-width: t.$desktop - 1px) {
+    z-index: 1001;
+    border-right: 1px solid var(--wb-line);
+    background: var(--wb-surface);
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+    visibility: hidden;
+
+    .wb-drawer-open & {
+      transform: none;
+      visibility: visible;
+    }
+  }
+
+  li {
+    float: none;
+    line-height: normal;
+    padding: 0;
+    background: none;
+    list-style: none;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.wb-brand,
+.wb-sidebar .wb-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: auto;
+  padding: 2px 8px;
+  color: var(--wb-ink);
+  font: 700 17px/1 var(--wb-font);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+
+  &:hover {
+    background: none;
+  }
+
+  img {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+}
+
+.wb-brand-it {
+  color: var(--wb-accent);
+}
+
+.wb-sidebar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wb-sidebar .wb-btn--primary {
+  min-height: 44px;
+  padding: 8px 14px;
+  line-height: 1.25;
+  color: var(--wb-primary-ink);
+  font-size: 14px;
+}
+
+body.wb-drawer-open::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--wb-backdrop);
+  backdrop-filter: blur(4px);
+}
+
+html.dark-theme .wb-brand img {
+  filter: invert(1);
+}

@@ -1,0 +1,19 @@
+.wb-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 24px;
+  padding: 8px 16px 28px;
+  color: var(--wb-muted);
+  font-size: 12px;
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: var(--wb-muted);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}

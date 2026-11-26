@@ -1,0 +1,12 @@
+.wb-kbd {
+  margin-left: auto;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border: 1px solid var(--wb-line-strong);
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: var(--wb-muted);
+  font: 500 11px/18px var(--wb-font);
+  text-align: center;
+}

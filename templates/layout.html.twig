@@ -31,85 +31,74 @@
     {% endfor %}
 {% endblock %}
 
-{% block body_class %}index{% endblock %}
+{% block body_class %}index wb-app{% endblock %}
 
 {% block menu %}
-    <nav class="cyan darken-1">
-        <ul id="slide-out" class="left-bar sidenav sidenav-fixed" data-controller="materialize--sidenav">
+    <div class="wb-chrome" data-controller="drawer topbar">
+        <aside class="wb-sidebar" id="wb-sidebar" aria-label="wallabag">
             {% block logo %}
-                <li class="logo border-bottom">
-                    {% if is_granted('LIST_ENTRIES') %}
-                        <a title="{{ 'menu.left.back_to_homepage'|trans }}" href="{{ path('homepage') }}">
-                            <img src="{{ asset('img/logo-square.svg') }}" alt="wallabag logo" />
-                        </a>
-                    {% else %}
-                        <img src="{{ asset('img/logo-square.svg') }}" alt="wallabag logo"/>
-                    {% endif %}
-                </li>
+                <a class="wb-brand" title="{{ 'menu.left.back_to_homepage'|trans }}" href="{{ is_granted('LIST_ENTRIES') ? path('homepage') : '#' }}">
+                    <img src="{{ asset('img/logo-square.svg') }}" alt="" width="36" height="36">
+                    <span>wallabag</span>
+                </a>
             {% endblock %}
 
-            {{ knp_menu_render('wallabag_main', {
-                template: 'Menu/navigation_items.html.twig',
-            }) }}
-        </ul>
-        <div class="nav-panels" data-controller="topbar">
-            <div class="nav-panel-item" data-topbar-target="actions">
-                <div class="nav-panel-top">
-                    <button type="button" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></button>
-                    <h1 class="left action">
-                        {% block title %}
-                        {% endblock %}
-                    </h1>
+            {% if is_granted('CREATE_ENTRIES') or is_granted('LIST_ENTRIES') %}
+                <div class="wb-sidebar-actions">
+                    {% if is_granted('CREATE_ENTRIES') %}
+                        <twig:ui:Button variant="primary" :block="true" :href="path('new')" data-action="drawer#close topbar#showAddUrl:prevent:stop">
+                            {{ icon('plus', 18) }}<span>{{ 'menu.top.add_new_entry'|trans }}</span>
+                        </twig:ui:Button>
+                    {% endif %}
+                    {% if is_granted('LIST_ENTRIES') %}
+                        <button type="button" class="wb-nav-link" data-action="drawer#close topbar#showSearch:stop">
+                            {{ icon('search') }}<span class="wb-nav-label">{{ 'menu.top.search'|trans }}</span><kbd class="wb-kbd">s</kbd>
+                        </button>
+                    {% endif %}
                 </div>
-                <ul class="input-field nav-panel-button">
-                    <li class="bold toggle-add-url-container">
-                        <a class="waves-effect toggle-add-url" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" data-action="topbar#showAddUrl:prevent:stop" data-shortcuts-target="showAddUrl">
-                            <i class="material-icons">add</i>
-                        </a>
-                    </li>
-                    <li>
-                        <button type="button" class="waves-effect" data-controller="materialize--tooltip" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.search'|trans }}" data-action="topbar#showSearch:stop" data-shortcuts-target="showSearch">
-                            <i class="material-icons">search</i>
-                        </button>
-                    </li>
-                    {% block nav_panel_extra_actions '' %}
-                    <li class="bold">
-                        <button type="button" class="waves-effect dropdown-trigger" data-controller="materialize--dropdown materialize--tooltip" data-target="dropdown-account" data-materialize--tooltip-position-value="bottom" data-materialize--tooltip-enter-delay-value="50" data-tooltip="{{ 'menu.top.account'|trans }}" id="news_menu">
-                            <i class="material-icons" id="news_link">account_circle</i>
-                        </button>
-                    </li>
-                </ul>
-                {{ knp_menu_render('wallabag_account') }}
+            {% endif %}
 
-            </div>
+            {{ knp_menu_render('wallabag_main', {
+                template: 'Menu/app_nav.html.twig',
+            }) }}
+
+            {{ knp_menu_render('wallabag_account', {
+                template: 'Menu/account.html.twig',
+            }) }}
+        </aside>
+
+        <header class="wb-topbar">
+            <twig:ui:IconButton icon="menu" :size="22" label="menu" class="wb-menu-toggle" aria-controls="wb-sidebar" aria-expanded="false" data-action="drawer#toggle" data-drawer-target="toggle" />
+            <h1 class="wb-page-title">{% block title %}{% endblock %}</h1>
+            <ul class="wb-toolbar">
+                {% if is_granted('LIST_ENTRIES') %}
+                    <li>
+                        <twig:ui:IconButton icon="search" :label="'menu.top.search'|trans" data-action="topbar#showSearch:stop" data-shortcuts-target="showSearch" />
+                    </li>
+                {% endif %}
+                {% block nav_panel_extra_actions '' %}
+                {% if is_granted('CREATE_ENTRIES') %}
+                    <li class="wb-toolbar-add">
+                        <twig:ui:Button variant="primary" :href="path('new')" :title="'menu.top.add_new_entry'|trans" :aria-label="'menu.top.add_new_entry'|trans" data-action="topbar#showAddUrl:prevent:stop" data-shortcuts-target="showAddUrl">{{ icon('plus', 18) }}</twig:ui:Button>
+                    </li>
+                {% endif %}
+            </ul>
             {% if is_granted('LIST_ENTRIES') %}
                 {{ render(controller('Wallabag\\Controller\\EntryController::searchFormAction', {'currentRoute': current_route})) }}
             {% endif %}
             {% if is_granted('CREATE_ENTRIES') %}
                 {{ render(controller('Wallabag\\Controller\\EntryController::addEntryFormAction')) }}
             {% endif %}
-        </div>
-    </nav>
+        </header>
+    </div>
 {% endblock %}
 
 {% block footer %}
-    <footer class="page-footer cyan darken-2">
-        <div class="footer-copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col m12 l8">
-                        <p class="footer-text">
-                            {{ display_stats() }}
-                        </p>
-                    </div>
-                    <div class="col s12 l4">
-                        <p class="footer-text">
-                            {{ 'footer.wallabag.powered_by'|trans }} <a target="_blank" rel="noopener" href="https://wallabag.org" class="grey-text text-lighten-4">wallabag</a> –
-                            <a class="grey-text text-lighten-4" href="{{ path('about') }}">{{ 'footer.wallabag.about'|trans|lower }}</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <footer class="wb-footer">
+        <p>{{ display_stats() }}</p>
+        <p>
+            {{ 'footer.wallabag.powered_by'|trans }} <a target="_blank" rel="noopener" href="https://wallabag.org">wallabag</a> ·
+            <a href="{{ path('about') }}">{{ 'footer.wallabag.about'|trans|lower }}</a>
+        </p>
     </footer>
 {% endblock %}

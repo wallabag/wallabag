@@ -1,0 +1,31 @@
+html.dark-theme {
+  --wb-code-text: #ebe9e4;
+  --wb-code-comment: #a3a09a;
+  --wb-code-keyword: #d291e3;
+  --wb-code-title: #7db1ff;
+  --wb-code-string: #a5cf7a;
+  --wb-code-number: #f0b46c;
+  --wb-code-deletion: #f97066;
+  --wb-bg: #121211;
+  --wb-surface: #1b1b19;
+  --wb-surface-raised: #232321;
+  --wb-line: #2d2c29;
+  --wb-line-strong: #3b3a36;
+  --wb-ink: #ebe9e4;
+  --wb-muted: #a3a09a;
+  --wb-soft: #282725;
+  --wb-hover: #2b2a28;
+  --wb-accent: #e0b27a;
+  --wb-accent-soft: rgb(224 178 122 / 14%);
+  --wb-accent-ink: #121211;
+  --wb-star: #e5b350;
+  --wb-danger-ink: #121211;
+  --wb-danger: #f97066;
+  --wb-warning: #ffb74d;
+  --wb-warning-bg: #2d2516;
+  --wb-primary-bg: #ebe9e4;
+  --wb-primary-ink: #121211;
+  --wb-shadow: 0 1px 2px rgb(0 0 0 / 40%);
+  --wb-shadow-pop: 0 24px 60px rgb(0 0 0 / 55%);
+  --wb-backdrop: rgb(0 0 0 / 55%);
+}
