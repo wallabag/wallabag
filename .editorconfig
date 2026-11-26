@@ -13,6 +13,10 @@ insert_final_newline = true
 indent_style = space
 indent_size = 2
 
+[package.json]
+indent_style = space
+indent_size = 2
+
 [*akefile]
 indent_style = tab
 
