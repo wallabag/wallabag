@@ -4,6 +4,8 @@ namespace Wallabag\Helper;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
+use Laminas\Feed\Reader\Entry\AbstractEntry;
+use Laminas\Feed\Reader\Entry\EntryInterface;
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Wallabag\Entity\FeedItem;
 use Wallabag\Entity\FeedUrl;
@@ -14,6 +16,7 @@ class FeedFetcher
 {
     private const ITEMS_LIMIT = 10;
     private const ITEMS_KEPT = 200;
+    private const MEDIA_NAMESPACE = 'http://search.yahoo.com/mrss/';
 
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
@@ -55,9 +58,9 @@ class FeedFetcher
             $new[] = new FeedItem(
                 $feed,
                 $url,
-                $entry->getTitle(),
+                $this->getTitle($entry),
                 null === $date ? null : (new \DateTime())->setTimestamp($date->getTimestamp()),
-                $this->getEnclosureImage((array) $entry->getEnclosure()),
+                $this->getEnclosureImage((array) $entry->getEnclosure()) ?? $this->getMediaImage($entry),
             );
             $known[$hash] = true;
         }
@@ -97,6 +100,41 @@ class FeedFetcher
         $this->entityManager->flush();
 
         return \count($new);
+    }
+
+    private function getTitle(EntryInterface $entry): ?string
+    {
+        if ($entry->getTitle()) {
+            return $entry->getTitle();
+        }
+
+        $html = preg_replace('#<br\s*/?>|</p>#i', '$0 ', (string) $entry->getDescription());
+        $text = html_entity_decode(strip_tags($html), \ENT_QUOTES | \ENT_HTML5);
+
+        return mb_strimwidth(trim(preg_replace('/\s+/u', ' ', $text)), 0, 100, '…') ?: null;
+    }
+
+    private function getMediaImage(EntryInterface $entry): ?string
+    {
+        if (!$entry instanceof AbstractEntry) {
+            return null;
+        }
+
+        $best = null;
+        $bestWidth = -1;
+
+        foreach ($entry->getElement()->getElementsByTagNameNS(self::MEDIA_NAMESPACE, 'content') as $media) {
+            $image = $this->getEnclosureImage(['url' => $media->getAttribute('url'), 'type' => $media->getAttribute('type')]);
+            $rating = $media->getElementsByTagNameNS(self::MEDIA_NAMESPACE, 'rating')->item(0)?->textContent;
+            $width = (int) $media->getAttribute('width');
+
+            if (null !== $image && 'adult' !== $rating && $width > $bestWidth) {
+                $best = $image;
+                $bestWidth = $width;
+            }
+        }
+
+        return $best;
     }
 
     /** @param array{url?: string, href?: string, type?: string, length?: int|string} $enclosure */
