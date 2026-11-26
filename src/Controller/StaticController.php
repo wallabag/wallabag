@@ -15,7 +15,7 @@ class StaticController extends AbstractController
     }
 
     #[Route(path: '/howto', name: 'howto', methods: ['GET'])]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    #[IsGranted('ROLE_USER')]
     public function howtoAction()
     {
         return $this->render(
@@ -27,7 +27,7 @@ class StaticController extends AbstractController
     }
 
     #[Route(path: '/about', name: 'about', methods: ['GET'])]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    #[IsGranted('ROLE_USER')]
     public function aboutAction()
     {
         return $this->render(
@@ -40,7 +40,7 @@ class StaticController extends AbstractController
     }
 
     #[Route(path: '/quickstart', name: 'quickstart', methods: ['GET'])]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    #[IsGranted('ROLE_USER')]
     public function quickstartAction()
     {
         return $this->render(
