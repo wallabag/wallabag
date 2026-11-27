@@ -366,7 +366,21 @@ config:
         feed: Canles
         settings: Axustes
         article_display: Visualización do artigo
+        mail_import: Gardar por correo
     page_title: Configuración
+    form_mail_import:
+        description: Garda un artigo enviando por correo a súa ligazón ao teu correo privado.
+        address_label: O teu enderezo privado
+        no_address: Sen enderezo
+        address_create: Crea o teu enderezo
+        address_reset: Volver a crear o teu enderezo
+        address_revoke: Revogar o enderezo
+        copy: Copiar
+        howto_label: Como funciona
+        howto:
+            links: 'Engade unha ou varias ligazóns no corpo dun correo electrónico: cada ligazón convértese nun artigo (ata %max_links% por correo).'
+            ignored: O asunto e os anexos van ser ignorados. Se unha ligazón xa está gardada non se vai volver engadir.
+            private: 'Protexe este enderezo privado: calquera que o coñeza pode enviar artigos á túa conta. Volve a crealo se o precisas.'
 footer:
     stats: Desde %user_creation% liches %nb_archives% artigos. Que vén sendo %per_day% ao día!
     wallabag:
@@ -676,6 +690,8 @@ flashes:
             config_saved: Gardouse o axuste.
             tagging_rules_reset: Restablecer regras de etiquetado
             otp_code_invalid: O código de autenticación 2FA non é válido
+            mail_import_token_updated: Creouse un enderezo privado de correo
+            mail_import_token_revoked: Revogouse o enderezo de correo
 error:
     page_title: Houbo un fallo
 ignore_origin_instance_rule:
@@ -751,3 +767,45 @@ theme:
         toggle_auto: Decorado automático
         toggle_dark: Decorado escuro
         toggle_light: Decorado claro
+update:
+    read_more: Ler as notas da versión
+    available: dispoñible a versión %version% de wallabag.
+    security_banner: 'a versión %version% de wallabag soluciona problemas de seguridade: actualiza o máis axiña posible.'
+feeds:
+    action:
+        add: Engadir canle
+        back_to_list: Volver ás subscricións
+        delete: Eliminar canle
+        dismiss: Desbotar
+        edit: Editar canle
+        fetch: Actualizar
+        items: Ver artigos
+        purge: Limpar artigos
+        save_article: Gardar artigo
+        show_card_view: Mostrar como tarxeta
+        show_list_view: Mostrar como lista
+    alert:
+        confirm_delete: Queres eliminar a subscrición a esta canle e o seu historial de artigos?
+        confirm_purge: Desbotar todos os artigos pendentes desta canle?
+    automatic_mode: Automático
+    empty: Non tes subscricións a canles.
+    flash:
+        already_processed: Este artigo xa está procesado.
+        created: Engadiuse a subscrición á canle.
+        created_refresh_error: Engadiuse a subscrición, pero a primeira obtención fallou.
+        deleted: Eliminouse a subscrición á canle.
+        dismissed: Desbotouse o artigo.
+        fetch_error: Non se actualizou a canle. Comproba o seu enderezo e volve intentalo.
+        fetched: Actualizouse a canle.
+        no_pending_articles: Non hai artigos pendentes que desbotar.
+        purged: Desbotáronse os artigos pendentes.
+        save_error: Non se puido gardar o artigo. Está aínda pendente.
+        saved: O artigo está dispoñible en wallabag.
+        updated: Actualizouse a subscrición á canle.
+    items_empty: Non hai artigos agardando nesta canle.
+    label:
+        automatic: Importar automaticamente os novos artigos
+    last_fetch: 'Última actualización correcta: %date%'
+    manual_mode: Manual
+    page_title: Subscricións a canles
+    stale: Non se actualizou correctamente esta canle nos últimos dous días.
