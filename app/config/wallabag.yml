@@ -5,6 +5,7 @@ parameters:
     env(WALLABAG_MAIL_IMPORT_DSN): ''
     env(WALLABAG_MAIL_IMPORT_MAX_LINKS): '10'
     env(WALLABAG_DISABLED_IMPORTERS): ''
+    wallabag.disabled_importers: '%env(csv:WALLABAG_DISABLED_IMPORTERS)%'
     wallabag.version: 2.7.0-alpha.2
     wallabag.paypal_url: "https://liberapay.com/wallabag/donate"
     wallabag.languages:

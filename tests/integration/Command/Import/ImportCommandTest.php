@@ -73,6 +73,24 @@ class ImportCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('already saved', $tester->getDisplay());
     }
 
+    public function testRunImportCommandWithUnknownImporter(): void
+    {
+        $application = $this->createApplication();
+
+        $command = $application->find('wallabag:import');
+
+        $tester = new CommandTester($command);
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Importer "unknown" not found or disabled');
+
+        $tester->execute([
+            'username' => 'admin',
+            'filepath' => static::getContainer()->getParameter('kernel.project_dir') . '/tests/fixtures/Import/wallabag-v2-read.json',
+            '--importer' => 'unknown',
+        ]);
+    }
+
     public function testRunImportCommandWithUserId(): void
     {
         $application = $this->createApplication();

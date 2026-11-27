@@ -49,20 +49,14 @@ class StaticControllerTest extends WallabagTestCase
 
     public function testQuickstartHidesDisabledImporters(): void
     {
-        $_SERVER['WALLABAG_DISABLED_IMPORTERS'] = $_ENV['WALLABAG_DISABLED_IMPORTERS'] = 'pocket_csv';
+        $client = $this->getClientWithReducedImporters();
+        $this->logInAs('admin');
 
-        try {
-            $client = $this->getNewClient();
-            $this->logInAs('admin');
+        $crawler = $client->request('GET', '/quickstart');
 
-            $crawler = $client->request('GET', '/quickstart');
-
-            self::assertResponseIsSuccessful();
-            $this->assertCount(0, $crawler->filter('a[href="/import/pocket_csv"]'));
-            $this->assertCount(1, $crawler->filter('a[href="/import/readability"]'));
-        } finally {
-            unset($_SERVER['WALLABAG_DISABLED_IMPORTERS'], $_ENV['WALLABAG_DISABLED_IMPORTERS']);
-        }
+        self::assertResponseIsSuccessful();
+        $this->assertCount(0, $crawler->filter('a[href="/import/pocket_csv"]'));
+        $this->assertCount(1, $crawler->filter('a[href="/import/readability"]'));
     }
 
     private function mockUpdateChecker(): void
