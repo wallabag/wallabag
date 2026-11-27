@@ -189,3 +189,9 @@ free SSL on your own domain.
 The SynoCommunity provides a package to install wallabag on your Synology NAS.
 
 [Install wallabag with Synology](https://synocommunity.com/package/wallabag)
+
+### Nife
+
+Nife is an application platform for deploying and operating workloads across cloud, edge and private infrastructure from one control plane. wallabag is packaged in Nife's OpenHub one-click catalog and can be deployed in one click.
+
+[Deploy wallabag on Nife](https://launch.nife.io/marketplace/Wallabag?autodeploy=true)
