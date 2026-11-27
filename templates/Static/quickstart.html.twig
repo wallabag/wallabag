@@ -56,9 +56,15 @@
                                     </div>
                                     <div class="card-action">
                                         <ul>
-                                            <li><a href="{{ path('import_pocket_csv') }}">{{ 'quickstart.migrate.pocket'|trans }}</a></li>
-                                            <li><a href="{{ path('import_readability') }}">{{ 'quickstart.migrate.readability'|trans }}</a></li>
-                                            <li><a href="{{ path('import_instapaper') }}">{{ 'quickstart.migrate.instapaper'|trans }}</a></li>
+                                            {% if imports.pocket_csv is defined %}
+                                                <li><a href="{{ path('import_pocket_csv') }}">{{ 'quickstart.migrate.pocket'|trans }}</a></li>
+                                            {% endif %}
+                                            {% if imports.readability is defined %}
+                                                <li><a href="{{ path('import_readability') }}">{{ 'quickstart.migrate.readability'|trans }}</a></li>
+                                            {% endif %}
+                                            {% if imports.instapaper is defined %}
+                                                <li><a href="{{ path('import_instapaper') }}">{{ 'quickstart.migrate.instapaper'|trans }}</a></li>
+                                            {% endif %}
                                             <li><a href="{{ path('import') }}">{{ 'quickstart.more'|trans }}</a></li>
                                         </ul>
                                     </div>

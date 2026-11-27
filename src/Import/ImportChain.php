@@ -51,15 +51,10 @@ class ImportChain
     }
 
     /**
-     * Get the routes of the disabled imports.
-     *
      * @return string[]
      */
-    public function getDisabledRoutes(): array
+    public function getAllAliases(): array
     {
-        return array_values(array_map(
-            static fn (ImportInterface $import) => $import->getUrl(),
-            $this->disabledImports,
-        ));
+        return [...array_keys($this->imports), ...array_keys($this->disabledImports)];
     }
 }

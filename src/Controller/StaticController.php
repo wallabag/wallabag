@@ -4,6 +4,7 @@ namespace Wallabag\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Routing\Annotation\Route;
+use Wallabag\Import\ImportChain;
 
 class StaticController extends AbstractController
 {
@@ -41,10 +42,13 @@ class StaticController extends AbstractController
 
     #[Route(path: '/quickstart', name: 'quickstart', methods: ['GET'])]
     #[IsGranted('ROLE_USER')]
-    public function quickstartAction()
+    public function quickstartAction(ImportChain $importChain)
     {
         return $this->render(
             'Static/quickstart.html.twig',
+            [
+                'imports' => $importChain->getAll(),
+            ],
         );
     }
 }

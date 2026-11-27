@@ -8,8 +8,6 @@ use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Wallabag\Event\Subscriber\DisabledImporterSubscriber;
-use Wallabag\Import\ImportChain;
-use Wallabag\Import\ImportInterface;
 
 class DisabledImporterSubscriberTest extends TestCase
 {
@@ -36,14 +34,7 @@ class DisabledImporterSubscriberTest extends TestCase
 
     private function createSubscriber(): DisabledImporterSubscriber
     {
-        $pinboard = $this->createMock(ImportInterface::class);
-        $pinboard->method('getUrl')->willReturn('import_pinboard');
-
-        $importChain = new ImportChain(['pinboard']);
-        $importChain->addImport($pinboard, 'pinboard');
-        $importChain->addImport($this->createMock(ImportInterface::class), 'delicious');
-
-        return new DisabledImporterSubscriber($importChain);
+        return new DisabledImporterSubscriber([' pinboard']);
     }
 
     private function createEvent(string $route, int $type = HttpKernelInterface::MAIN_REQUEST): ControllerEvent

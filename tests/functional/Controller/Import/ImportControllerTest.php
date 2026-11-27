@@ -109,7 +109,7 @@ class ImportControllerTest extends WallabagTestCase
         }
     }
 
-    public function testRedisTotalIgnoresDisabledImporters(): void
+    public function testRedisTotalIncludesDisabledImporters(): void
     {
         $_SERVER['WALLABAG_DISABLED_IMPORTERS'] = $_ENV['WALLABAG_DISABLED_IMPORTERS'] = 'pinboard';
 
@@ -132,12 +132,38 @@ class ImportControllerTest extends WallabagTestCase
             try {
                 $crawler = $client->request('GET', '/import/');
                 self::assertResponseIsSuccessful();
-                self::assertSame('Messages in queue: 2', $crawler->filter('p[data-controller="materialize--toast"]')->text());
+                self::assertSame('Messages in queue: 12', $crawler->filter('p[data-controller="materialize--toast"]')->text());
             } finally {
                 $config->set('import_with_redis', '0');
             }
         } finally {
             unset($_SERVER['WALLABAG_DISABLED_IMPORTERS'], $_ENV['WALLABAG_DISABLED_IMPORTERS']);
+        }
+    }
+
+    public function testRedisFailureDoesNotDisplayAPartialTotal(): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $container = $client->getContainer();
+        $redis = $this->getMockBuilder(Client::class)->onlyMethods(['executeCommand'])->getMock();
+        $redis->method('executeCommand')->willReturnCallback(
+            static fn (CommandInterface $command): int => match (true) {
+                'LLEN' !== $command->getId() => 0,
+                ['wallabag.import.feeds'] === $command->getArguments() => throw new \RuntimeException('Redis is down'),
+                default => 1,
+            },
+        );
+        $container->set(Client::class, $redis);
+        $config = $container->get(Config::class);
+        $config->set('import_with_redis', '1');
+
+        try {
+            $crawler = $client->request('GET', '/import/');
+            self::assertResponseIsSuccessful();
+            self::assertStringNotContainsString('Messages in queue', $crawler->filter('body')->text());
+        } finally {
+            $config->set('import_with_redis', '0');
         }
     }
 }

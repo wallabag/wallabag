@@ -43,26 +43,30 @@ class ImportController extends AbstractController
             return $this->render('Import/check_queue.html.twig');
         }
 
-        $queues = [...array_keys($importChain->getAll()), 'feeds'];
+        $queues = [...$importChain->getAllAliases(), 'feeds'];
 
         if ($craueConfig->get('import_with_rabbitmq')) {
             // in case rabbit is activated but not installed
             try {
-                $nbRabbitMessages = 0;
+                $total = 0;
 
                 foreach ($queues as $queue) {
-                    $nbRabbitMessages += $this->rabbitMQConsumerTotalProxy->getTotalMessage($queue);
+                    $total += $this->rabbitMQConsumerTotalProxy->getTotalMessage($queue);
                 }
+
+                $nbRabbitMessages = $total;
             } catch (\Exception) {
                 $rabbitNotInstalled = true;
             }
         } elseif ($craueConfig->get('import_with_redis')) {
             try {
-                $nbRedisMessages = 0;
+                $total = 0;
 
                 foreach ($queues as $queue) {
-                    $nbRedisMessages += $this->redisClient->llen('wallabag.import.' . $queue);
+                    $total += $this->redisClient->llen('wallabag.import.' . $queue);
                 }
+
+                $nbRedisMessages = $total;
             } catch (\Exception) {
                 $redisNotInstalled = true;
             }

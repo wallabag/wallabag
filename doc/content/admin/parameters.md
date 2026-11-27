@@ -70,7 +70,7 @@ After changing configuration in production, clear the cache with
 | WALLABAG_MAIL_IMPORT_ADDRESS | Address of the mailbox used to [save articles by email]({{< relref "mail_import.md" >}}) | empty |
 | WALLABAG_MAIL_IMPORT_DSN | IMAP connection to this mailbox, like `imaps://user:password@imap.example.org:993/INBOX` | empty |
 | WALLABAG_MAIL_IMPORT_MAX_LINKS | Maximum number of links saved from a single email | `10` |
-| WALLABAG_DISABLED_IMPORTERS | Comma-separated list of importers to hide and disable, using their aliases (`readability`, `instapaper`, `pinboard`, `delicious`, `omnivore`, `wallabag_v1`, `wallabag_v2`, `elcurator`, `firefox`, `chrome`, `shaarli`, `pocket_html`, `pocket_csv`, `url_list`) | empty |
+| WALLABAG_DISABLED_IMPORTERS | Comma-separated list of importers to hide in the web interface and whose pages return a 404. The `wallabag:import` command can still use them. Use their aliases (`readability`, `instapaper`, `pinboard`, `delicious`, `omnivore`, `wallabag_v1`, `wallabag_v2`, `elcurator`, `firefox`, `chrome`, `shaarli`, `pocket_html`, `pocket_csv`, `url_list`) | empty |
 | SENTRY_DSN | Optional Sentry DSN used to report application errors | empty |
 
 ### Compromised-password protection
