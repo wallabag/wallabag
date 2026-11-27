@@ -14,24 +14,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Wallabag\Entity\User;
-use Wallabag\Import\ChromeImport;
-use Wallabag\Import\DeliciousImport;
-use Wallabag\Import\ElcuratorImport;
-use Wallabag\Import\FirefoxImport;
-use Wallabag\Import\InstapaperImport;
-use Wallabag\Import\OmnivoreImport;
-use Wallabag\Import\PinboardImport;
-use Wallabag\Import\PocketCsvImport;
-use Wallabag\Import\PocketHtmlImport;
-use Wallabag\Import\ReadabilityImport;
-use Wallabag\Import\ShaarliImport;
-use Wallabag\Import\UrlListImport;
-use Wallabag\Import\WallabagV1Import;
-use Wallabag\Import\WallabagV2Import;
+use Wallabag\Import\ImportChain;
 use Wallabag\Repository\UserRepository;
 
 class ImportCommand extends Command
 {
+    private const LEGACY_ALIASES = [
+        'v1' => 'wallabag_v1',
+        'v2' => 'wallabag_v2',
+        'pocket' => 'pocket_html',
+    ];
+
     protected static $defaultName = 'wallabag:import';
 
     protected static $defaultDescription = 'Import entries from a JSON export';
@@ -40,20 +33,7 @@ class ImportCommand extends Command
         private readonly EntityManagerInterface $entityManager,
         private readonly TokenStorageInterface $tokenStorage,
         private readonly UserRepository $userRepository,
-        private readonly WallabagV2Import $wallabagV2Import,
-        private readonly FirefoxImport $firefoxImport,
-        private readonly ChromeImport $chromeImport,
-        private readonly ReadabilityImport $readabilityImport,
-        private readonly InstapaperImport $instapaperImport,
-        private readonly PinboardImport $pinboardImport,
-        private readonly DeliciousImport $deliciousImport,
-        private readonly WallabagV1Import $wallabagV1Import,
-        private readonly ElcuratorImport $elcuratorImport,
-        private readonly ShaarliImport $shaarliImport,
-        private readonly PocketHtmlImport $pocketHtmlImport,
-        private readonly PocketCsvImport $pocketCsvImport,
-        private readonly OmnivoreImport $omnivoreImport,
-        private readonly UrlListImport $urlListImport,
+        private readonly ImportChain $importChain,
     ) {
         parent::__construct();
     }
@@ -63,7 +43,7 @@ class ImportCommand extends Command
         $this
             ->addArgument('username', InputArgument::REQUIRED, 'User to populate')
             ->addArgument('filepath', InputArgument::REQUIRED, 'Path to the JSON file')
-            ->addOption('importer', null, InputOption::VALUE_OPTIONAL, 'The importer to use: v1, v2, instapaper, pinboard, delicious, readability, firefox, chrome, elcurator, shaarli, pocket, pocket_csv or url_list', 'v1')
+            ->addOption('importer', null, InputOption::VALUE_OPTIONAL, 'The alias of the importer to use (v1 and v2 are accepted for wallabag_v1 and wallabag_v2, pocket for pocket_html)', 'wallabag_v1')
             ->addOption('markAsRead', null, InputOption::VALUE_OPTIONAL, 'Mark all entries as read', false)
             ->addOption('useUserId', null, InputOption::VALUE_NONE, 'Use user id instead of username to find account')
             ->addOption('disableContentUpdate', null, InputOption::VALUE_NONE, 'Disable fetching updated content from URL')
@@ -104,22 +84,14 @@ class ImportCommand extends Command
         $user = $this->tokenStorage->getToken()->getUser();
         \assert($user instanceof User);
 
-        $import = match ($input->getOption('importer')) {
-            'v2' => $this->wallabagV2Import,
-            'firefox' => $this->firefoxImport,
-            'chrome' => $this->chromeImport,
-            'readability' => $this->readabilityImport,
-            'instapaper' => $this->instapaperImport,
-            'pinboard' => $this->pinboardImport,
-            'delicious' => $this->deliciousImport,
-            'elcurator' => $this->elcuratorImport,
-            'shaarli' => $this->shaarliImport,
-            'pocket' => $this->pocketHtmlImport,
-            'pocket_csv' => $this->pocketCsvImport,
-            'omnivore' => $this->omnivoreImport,
-            'url_list' => $this->urlListImport,
-            default => $this->wallabagV1Import,
-        };
+        $alias = self::LEGACY_ALIASES[$input->getOption('importer')] ?? $input->getOption('importer');
+        $imports = $this->importChain->getAll();
+
+        if (!isset($imports[$alias])) {
+            throw new Exception(\sprintf('Importer "%s" not found or disabled, available importers: %s', $alias, implode(', ', array_keys($imports))));
+        }
+
+        $import = $imports[$alias];
 
         $import->setMarkAsRead($input->getOption('markAsRead'));
         $import->setDisableContentUpdate($input->getOption('disableContentUpdate'));

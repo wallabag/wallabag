@@ -34,30 +34,24 @@ class ImportControllerTest extends WallabagTestCase
 
     public function testDisabledImportersAreHiddenAndNotFound(): void
     {
-        $_SERVER['WALLABAG_DISABLED_IMPORTERS'] = $_ENV['WALLABAG_DISABLED_IMPORTERS'] = 'pinboard, delicious';
+        $client = $this->getClientWithReducedImporters();
+        $this->logInAs('admin');
 
-        try {
-            $client = $this->getNewClient();
-            $this->logInAs('admin');
+        $crawler = $client->request('GET', '/import/');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(11, $crawler->filter('.card-title')->count());
+        $this->assertCount(0, $crawler->filter('a[href="/import/pinboard"]'));
+        $this->assertCount(0, $crawler->filter('a[href="/import/delicious"]'));
+        $this->assertCount(1, $crawler->filter('a[href="/import/readability"]'));
 
-            $crawler = $client->request('GET', '/import/');
-            $this->assertSame(200, $client->getResponse()->getStatusCode());
-            $this->assertSame(12, $crawler->filter('.card-title')->count());
-            $this->assertCount(0, $crawler->filter('a[href="/import/pinboard"]'));
-            $this->assertCount(0, $crawler->filter('a[href="/import/delicious"]'));
-            $this->assertCount(1, $crawler->filter('a[href="/import/readability"]'));
+        $client->request('GET', '/import/pinboard');
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
 
-            $client->request('GET', '/import/pinboard');
-            $this->assertSame(404, $client->getResponse()->getStatusCode());
+        $client->request('GET', '/import/delicious');
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
 
-            $client->request('GET', '/import/delicious');
-            $this->assertSame(404, $client->getResponse()->getStatusCode());
-
-            $client->request('GET', '/import/readability');
-            $this->assertSame(200, $client->getResponse()->getStatusCode());
-        } finally {
-            unset($_SERVER['WALLABAG_DISABLED_IMPORTERS'], $_ENV['WALLABAG_DISABLED_IMPORTERS']);
-        }
+        $client->request('GET', '/import/readability');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testRabbitMqTotalIncludesFeedImports(): void
@@ -111,33 +105,27 @@ class ImportControllerTest extends WallabagTestCase
 
     public function testRedisTotalIncludesDisabledImporters(): void
     {
-        $_SERVER['WALLABAG_DISABLED_IMPORTERS'] = $_ENV['WALLABAG_DISABLED_IMPORTERS'] = 'pinboard';
+        $client = $this->getClientWithReducedImporters();
+        $this->logInAs('admin');
+        $container = $client->getContainer();
+        $redis = $this->getMockBuilder(Client::class)->onlyMethods(['executeCommand'])->getMock();
+        $redis->method('executeCommand')->willReturnCallback(
+            static fn (CommandInterface $command): int => 'LLEN' !== $command->getId() ? 0 : match ($command->getArguments()) {
+                ['wallabag.import.pinboard'] => 10,
+                ['wallabag.import.readability'] => 2,
+                default => 0,
+            },
+        );
+        $container->set(Client::class, $redis);
+        $config = $container->get(Config::class);
+        $config->set('import_with_redis', '1');
 
         try {
-            $client = $this->getNewClient();
-            $this->logInAs('admin');
-            $container = $client->getContainer();
-            $redis = $this->getMockBuilder(Client::class)->onlyMethods(['executeCommand'])->getMock();
-            $redis->method('executeCommand')->willReturnCallback(
-                static fn (CommandInterface $command): int => 'LLEN' !== $command->getId() ? 0 : match ($command->getArguments()) {
-                    ['wallabag.import.pinboard'] => 10,
-                    ['wallabag.import.readability'] => 2,
-                    default => 0,
-                },
-            );
-            $container->set(Client::class, $redis);
-            $config = $container->get(Config::class);
-            $config->set('import_with_redis', '1');
-
-            try {
-                $crawler = $client->request('GET', '/import/');
-                self::assertResponseIsSuccessful();
-                self::assertSame('Messages in queue: 12', $crawler->filter('p[data-controller="materialize--toast"]')->text());
-            } finally {
-                $config->set('import_with_redis', '0');
-            }
+            $crawler = $client->request('GET', '/import/');
+            self::assertResponseIsSuccessful();
+            self::assertSame('Messages in queue: 12', $crawler->filter('p[data-controller="materialize--toast"]')->text());
         } finally {
-            unset($_SERVER['WALLABAG_DISABLED_IMPORTERS'], $_ENV['WALLABAG_DISABLED_IMPORTERS']);
+            $config->set('import_with_redis', '0');
         }
     }
 

@@ -20,17 +20,4 @@ class ImportChainTest extends TestCase
         $this->assertCount(1, $importChain->getAll());
         $this->assertSame($import, $importChain->getAll()['alias']);
     }
-
-    public function testDisabledImportsAreHidden(): void
-    {
-        $enabled = $this->createMock(ImportInterface::class);
-        $disabled = $this->createMock(ImportInterface::class);
-
-        $importChain = new ImportChain(['disabled', ' ', null]);
-        $importChain->addImport($enabled, 'enabled');
-        $importChain->addImport($disabled, 'disabled');
-
-        $this->assertSame(['enabled' => $enabled], $importChain->getAll());
-        $this->assertSame(['enabled', 'disabled'], $importChain->getAllAliases());
-    }
 }

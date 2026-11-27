@@ -16,6 +16,7 @@ class ImportController extends AbstractController
     public function __construct(
         private readonly RabbitMQConsumerTotalProxy $rabbitMQConsumerTotalProxy,
         private readonly Client $redisClient,
+        private readonly array $importQueues,
     ) {
     }
 
@@ -32,7 +33,7 @@ class ImportController extends AbstractController
      * Display how many messages are queue (both in Redis and RabbitMQ).
      * Only for admins.
      */
-    public function checkQueueAction(AuthorizationCheckerInterface $authorizationChecker, Config $craueConfig, ImportChain $importChain)
+    public function checkQueueAction(AuthorizationCheckerInterface $authorizationChecker, Config $craueConfig)
     {
         $nbRedisMessages = null;
         $nbRabbitMessages = null;
@@ -43,14 +44,12 @@ class ImportController extends AbstractController
             return $this->render('Import/check_queue.html.twig');
         }
 
-        $queues = [...$importChain->getAllAliases(), 'feeds'];
-
         if ($craueConfig->get('import_with_rabbitmq')) {
             // in case rabbit is activated but not installed
             try {
                 $total = 0;
 
-                foreach ($queues as $queue) {
+                foreach ($this->importQueues as $queue) {
                     $total += $this->rabbitMQConsumerTotalProxy->getTotalMessage($queue);
                 }
 
@@ -62,7 +61,7 @@ class ImportController extends AbstractController
             try {
                 $total = 0;
 
-                foreach ($queues as $queue) {
+                foreach ($this->importQueues as $queue) {
                     $total += $this->redisClient->llen('wallabag.import.' . $queue);
                 }
 

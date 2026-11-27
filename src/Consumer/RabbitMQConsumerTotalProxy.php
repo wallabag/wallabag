@@ -2,7 +2,7 @@
 
 namespace Wallabag\Consumer;
 
-use OldSound\RabbitMqBundle\RabbitMq\Consumer;
+use Symfony\Component\DependencyInjection\ServiceLocator;
 
 /**
  * A proxy class only used to count messages in a queue while lazy loading RabbitMQ services.
@@ -11,21 +11,7 @@ use OldSound\RabbitMqBundle\RabbitMq\Consumer;
 class RabbitMQConsumerTotalProxy
 {
     public function __construct(
-        private readonly Consumer $readabilityConsumer,
-        private readonly Consumer $wallabagV1Consumer,
-        private readonly Consumer $wallabagV2Consumer,
-        private readonly Consumer $firefoxConsumer,
-        private readonly Consumer $chromeConsumer,
-        private readonly Consumer $instapaperConsumer,
-        private readonly Consumer $pinboardConsumer,
-        private readonly Consumer $deliciousConsumer,
-        private readonly Consumer $elcuratorConsumer,
-        private readonly Consumer $shaarliConsumer,
-        private readonly Consumer $pocketHtmlConsumer,
-        private readonly Consumer $pocketCsvConsumer,
-        private readonly Consumer $omnivoreConsumer,
-        private readonly Consumer $urlListConsumer,
-        private readonly Consumer $feedsConsumer,
+        private readonly ServiceLocator $consumers,
     ) {
     }
 
@@ -36,59 +22,15 @@ class RabbitMQConsumerTotalProxy
      * which will include the total of *other* messages in the queue.
      * Adding one to that messages will result in the full total message.
      *
-     * @param string $importService The import service related: readability, wallabag_v1 or wallabag_v2
+     * @param string $importService The alias of the import service related
      */
     public function getTotalMessage(string $importService): int
     {
-        switch ($importService) {
-            case 'readability':
-                $consumer = $this->readabilityConsumer;
-                break;
-            case 'wallabag_v1':
-                $consumer = $this->wallabagV1Consumer;
-                break;
-            case 'wallabag_v2':
-                $consumer = $this->wallabagV2Consumer;
-                break;
-            case 'firefox':
-                $consumer = $this->firefoxConsumer;
-                break;
-            case 'chrome':
-                $consumer = $this->chromeConsumer;
-                break;
-            case 'instapaper':
-                $consumer = $this->instapaperConsumer;
-                break;
-            case 'pinboard':
-                $consumer = $this->pinboardConsumer;
-                break;
-            case 'delicious':
-                $consumer = $this->deliciousConsumer;
-                break;
-            case 'elcurator':
-                $consumer = $this->elcuratorConsumer;
-                break;
-            case 'shaarli':
-                $consumer = $this->shaarliConsumer;
-                break;
-            case 'pocket_html':
-                $consumer = $this->pocketHtmlConsumer;
-                break;
-            case 'pocket_csv':
-                $consumer = $this->pocketCsvConsumer;
-                break;
-            case 'omnivore':
-                $consumer = $this->omnivoreConsumer;
-                break;
-            case 'url_list':
-                $consumer = $this->urlListConsumer;
-                break;
-            case 'feeds':
-                $consumer = $this->feedsConsumer;
-                break;
-            default:
-                return 0;
+        if (!$this->consumers->has($importService)) {
+            return 0;
         }
+
+        $consumer = $this->consumers->get($importService);
 
         $message = $consumer->getChannel()->basic_get('wallabag.import.' . $importService);
 

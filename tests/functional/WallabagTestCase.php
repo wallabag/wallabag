@@ -111,6 +111,20 @@ abstract class WallabagTestCase extends WebTestCase
         return $this->getLoggedInUser()->getId();
     }
 
+    protected function getClientWithReducedImporters()
+    {
+        static::ensureKernelShutdown();
+
+        $kernelClass = static::$class;
+        static::$class = ReducedImportersKernel::class;
+
+        try {
+            return $this->getNewClient();
+        } finally {
+            static::$class = $kernelClass;
+        }
+    }
+
     /**
      * Check if Redis is installed.
      * If not, mark test as skip.

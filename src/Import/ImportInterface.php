@@ -63,4 +63,11 @@ interface ImportInterface extends LoggerAwareInterface
      * @param bool $markAsRead
      */
     public function setMarkAsRead($markAsRead): static;
+
+    /**
+     * Set whether articles should be fetched for updated content.
+     *
+     * @param bool $disableContentUpdate
+     */
+    public function setDisableContentUpdate($disableContentUpdate);
 }
