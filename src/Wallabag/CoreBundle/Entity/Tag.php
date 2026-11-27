@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Entity;
 
+use Doctrine\Common\Collections\AbstractLazyCollection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -51,7 +52,7 @@ class Tag
     private $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Entry", mappedBy="tags", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Entry", mappedBy="tags", cascade={"persist"}, fetch="EXTRA_LAZY")
      */
     private $entries;
 
@@ -116,11 +117,14 @@ class Tag
 
     public function removeEntry(Entry $entry)
     {
-        if (!$this->entries->contains($entry)) {
-            return;
+        if (!$this->entries instanceof AbstractLazyCollection || $this->entries->isInitialized()) {
+            if (!$this->entries->contains($entry)) {
+                return;
+            }
+
+            $this->entries->removeElement($entry);
         }
 
-        $this->entries->removeElement($entry);
         $entry->removeTag($this);
     }
 
