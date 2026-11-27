@@ -18,7 +18,7 @@ Notable commands
 From Symfony:
 
  - `assets:install`: May be helpful if assets are missing.
- - `cache:clear`: Should be run after each update (included in make update).
+ - `cache:clear`: Should be run after each update.
  - `doctrine:migrations:status`: Outputs the status of your database migrations.
  - `fos:user:activate`: Manually activates a user.
  - `fos:user:change-password`: Changes a password for a user.

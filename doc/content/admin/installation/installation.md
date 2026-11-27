@@ -5,14 +5,21 @@ weight: 2
 
 ## On a dedicated web server (recommended way)
 
-To install wallabag itself, you must run the following commands:
+Install wallabag with [wallabin](https://github.com/wallabag/wallabin), a single
+file that only needs PHP. It downloads the latest release, checks its
+signature, asks for your configuration, and creates the database and the admin
+user:
 
 ```bash
-git clone https://github.com/wallabag/wallabag.git
-cd wallabag && make install
+curl -L -o wallabin.phar https://wallabag.org/wallabin
+php wallabin.phar install /var/www/wallabag
 ```
 
-If it's your first installation, you can safely answer "yes" when asking to reset the database.
+{{< callout type="warning" >}}
+wallabag 2.7 needs PHP 8.2, 8.3 or 8.4. PHP 8.5 is not supported yet: if it's
+the default version of your server, run wallabin with another one, for example
+`php8.4 wallabin.phar install`.
+{{< /callout >}}
 
 Now, read the next step to create your virtual host, then
 access your wallabag.
@@ -23,8 +30,8 @@ variables through your web server, PHP-FPM, or container runtime, or copy
 `.env.prod.example` to `.env.local` and set your values: at least
 `APP_SECRET`, a long random string (wallabag doesn't start with an empty one),
 `WALLABAG_BASE_URL`, the URL of your instance, and `WALLABAG_FROM_EMAIL`, the
-sender of the emails. `make install` creates this `.env.local` file with a
-random `APP_SECRET` if it doesn't exist. See
+sender of the emails. wallabin creates this `.env.local` file with a random
+`APP_SECRET` if it doesn't exist. See
 [Parameters]({{< relref "../parameters.md" >}}) for the full list.
 {{< /callout >}}
 

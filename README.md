@@ -33,14 +33,12 @@ The source files live in the [`doc/`](doc/) directory of this repository.
 
 Please read [the documentation to see the wallabag requirements](https://doc.wallabag.org/en/admin/installation/requirements.html).
 
-Then you can install wallabag by executing the following commands:
+Then you can install wallabag with [wallabin](https://github.com/wallabag/wallabin):
 
 ```bash
-git clone https://github.com/wallabag/wallabag.git
-cd wallabag && make install
+curl -L -o wallabin.phar https://wallabag.org/wallabin
+php wallabin.phar install
 ```
-
-If your system's default `make` is not GNU make, use `gmake install` instead.
 
 Now, [configure a virtual host](https://doc.wallabag.org/en/admin/installation/virtualhosts.html) to use your wallabag.
 

@@ -20,7 +20,7 @@ cd "$TMP_FOLDER"/"$RELEASE_FOLDER" && tar czf "$VERSION".tar.gz \
     --exclude="$VERSION/var/cache/*" --exclude="$VERSION/var/logs/*" --exclude="$VERSION/var/sessions/*" \
     --exclude="$VERSION/data/db/wallabag.sqlite" --exclude=".git" --exclude="$VERSION/.github" --exclude="$VERSION/node_modules" \
     --exclude="$VERSION/assets" --exclude="$VERSION/doc" --exclude="$VERSION/docker" --exclude="$VERSION/fixtures" --exclude="$VERSION/tests" \
-    --exclude="$VERSION/.composer-auth.json" --exclude="$VERSION/.env.dev.example" --exclude="$VERSION/.env.test" \
+    --exclude="$VERSION/.env.dev.example" --exclude="$VERSION/.env.test" \
     "$VERSION"
 echo "SHA-256 checksum of the package for wallabag $VERSION"
 sha256sum "$VERSION".tar.gz

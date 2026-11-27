@@ -5,6 +5,7 @@ weight: 10
 
 You will find here different ways to upgrade your wallabag:
 
+-   [from 2.7.x to 2.7.y](#upgrading-from-27x-to-27y)
 -   [from 2.6.x to 2.7.x](#upgrading-from-26x-to-27x)
 -   [from 2.5.x to 2.6.x](#upgrading-from-25x-to-26x)
 -   [from 2.3.x to 2.4.x](#upgrading-from-23x-to-24x)
@@ -23,6 +24,18 @@ at the time of each release. Current wallabag releases are configured with
 environment variables instead. See [Parameters]({{< relref "../parameters.md" >}})
 for the current variable list and the legacy-to-env mapping.
 {{< /callout >}}
+
+## Upgrading from 2.7.x to 2.7.y
+
+Update wallabag with [wallabin](https://github.com/wallabag/wallabin). Run it as
+the owner of the files, usually the user of your web server:
+
+```bash
+sudo -u www-data php wallabin.phar update --dir=/var/www/wallabag
+```
+
+wallabin keeps a copy of the previous version: `php wallabin.phar rollback`
+goes back to it.
 
 ## Upgrading from 2.6.x to 2.7.x
 
@@ -44,13 +57,31 @@ Back up your database, your `app/config/parameters.yml` file and your `data/` fo
 -   If you configure wallabag only with environment variables (without `parameters.yml`), `APP_SECRET` is required: it has no default value.
 -   Import files are now stored in `var/import`, outside of the `web` folder. If you upgrade from 2.6.15 or an older version, delete the content of the `web/uploads/import` folder: it may contain files left by previous imports.
 
-### Upgrade on a dedicated web server
+### Before upgrading
+
+Update your instance to the latest 2.6 release with `make update`. Since
+2.6.20, `make update` only installs 2.6.x releases: it never moves your
+instance to 2.7.
+
+{{< callout type="warning" >}}
+On 2.6.19 or an older version, `make update` installs the latest stable
+release, 2.7 included. To stay on 2.6, run instead:
 
 ```bash
-make update
+git fetch --tags && git checkout 2.6.20 --force && make update
+```
+{{< /callout >}}
+
+### Upgrade with wallabin
+
+[wallabin](https://github.com/wallabag/wallabin) migrates a wallabag 2.6 installation to 2.7, whether it was installed with git or with a package. It converts your `app/config/parameters.yml` file to a `.env.local` file, replaces the files, runs the database migrations and keeps a copy of the 2.6 files:
+
+```bash
+curl -L -o wallabin.phar https://wallabag.org/wallabin
+sudo -u www-data php wallabin.phar migrate --dir=/var/www/wallabag
 ```
 
-`make update` checks out the latest release tag of the repository (pre-releases such as alpha or beta versions are skipped), installs the dependencies and runs the database migrations.
+Run it as the owner of the files, usually the user of your web server, with PHP 8.2, 8.3 or 8.4. `php wallabin.phar rollback` goes back to 2.6.
 
 ### Upgrade on a shared hosting
 
