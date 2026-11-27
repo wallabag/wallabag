@@ -56,7 +56,12 @@ class AccountMenuBuilder
         $menu->addChild('howto', ['route' => 'howto', 'label' => 'menu.left.howto', 'extras' => ['icon' => 'live_help']]);
         $menu->addChild('quickstart', ['route' => 'quickstart', 'label' => 'menu.left.quickstart', 'extras' => ['icon' => 'assistant_photo']]);
         $menu->addChild('before_logout', ['extras' => ['kind' => 'separator']]);
-        $menu->addChild('logout', ['route' => 'fos_user_security_logout', 'label' => 'menu.left.logout', 'extras' => ['icon' => 'input']]);
+        $menu->addChild('logout', [
+            'route' => 'fos_user_security_logout',
+            'label' => 'menu.left.logout',
+            'linkAttributes' => ['data-shortcuts-target' => 'logout'],
+            'extras' => ['kind' => 'form', 'icon' => 'input', 'csrf_token_id' => 'logout'],
+        ]);
 
         return $menu;
     }

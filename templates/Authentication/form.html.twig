@@ -31,11 +31,14 @@
         </div>
     </div>
     <div class="card-action center">
-        <a href="{{ path('fos_user_security_logout') }}" class="waves-effect waves-light grey btn">{{ 'security.login.cancel'|trans }}</a>
+        <button type="submit" form="two-factor-logout" data-shortcuts-target="logout" class="waves-effect waves-light grey btn">{{ 'security.login.cancel'|trans }}</button>
         <button class="btn waves-effect waves-light" type="submit" name="send">
             {{ "login"|trans({}, 'SchebTwoFactorBundle') }}
             <i class="material-icons right">send</i>
         </button>
     </div>
+</form>
+<form id="two-factor-logout" action="{{ path('fos_user_security_logout') }}" method="post">
+    <input type="hidden" name="token" value="{{ csrf_token('logout') }}"/>
 </form>
 {% endblock %}

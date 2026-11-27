@@ -18,6 +18,11 @@ doc-api-json:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
+fos_user_security_logout:
+    path: /logout
+    methods: POST
+    defaults: { _controller: 'fos_user.security.controller::logoutAction' }
+
 fos_oauth_server_token:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
 

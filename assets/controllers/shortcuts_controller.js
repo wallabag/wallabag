@@ -10,6 +10,7 @@ export default class extends Controller {
     'showAddUrl',
     'showSearch',
     'showActions',
+    'logout',
   ];
 
   static outlets = ['entries-navigation'];
@@ -47,7 +48,9 @@ export default class extends Controller {
       window.location.href = Routing.generate('howto');
     });
     this.bindShortcut('g l', () => {
-      window.location.href = Routing.generate('fos_user_security_logout');
+      if (this.hasLogoutTarget) {
+        this.logoutTarget.click();
+      }
     });
 
     /* open original article */

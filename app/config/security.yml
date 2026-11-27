@@ -52,8 +52,10 @@ security:
                 domain: ~
 
             logout:
-                path:   /logout
+                path:   fos_user_security_logout
                 target: /
+                csrf_token_generator: security.csrf.token_manager
+                csrf_parameter: token
 
             two_factor:
                 provider: fos_userbundle

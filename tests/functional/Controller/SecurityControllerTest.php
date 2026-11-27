@@ -37,6 +37,35 @@ class SecurityControllerTest extends WallabagTestCase
         $this->assertStringContainsString('config.form_feed.description', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
+    public function testLogoutRouteAcceptsOnlyPost(): void
+    {
+        $route = $this->getTestClient()->getContainer()->get('router')->getRouteCollection()->get('fos_user_security_logout');
+
+        $this->assertNotNull($route);
+        $this->assertSame(['POST'], $route->getMethods());
+    }
+
+    public function testAccountMenuLogsOutWithCsrfToken(): void
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $crawler = $client->request('GET', '/config');
+        $button = $crawler->filter('button[data-shortcuts-target="logout"]');
+
+        $this->assertCount(1, $button);
+        $form = $button->form();
+        $this->assertSame('POST', $form->getMethod());
+        $this->assertNotEmpty($form->getPhpValues()['token']);
+
+        $client->submit($form);
+        $this->assertResponseRedirects();
+        $this->assertSame('/', parse_url($client->getResponse()->headers->get('Location') ?? '', \PHP_URL_PATH));
+
+        $client->request('GET', '/config');
+        $this->assertResponseRedirects();
+        $this->assertSame('/login', parse_url($client->getResponse()->headers->get('Location') ?? '', \PHP_URL_PATH));
+    }
+
     public function testLoginWith2FactorEmail(): void
     {
         $client = $this->getTestClient();
@@ -91,6 +120,31 @@ class SecurityControllerTest extends WallabagTestCase
         $user->setGoogleAuthenticator(false);
         $em->persist($user);
         $em->flush();
+    }
+
+    public function testCancelTwoFactorAuthenticationLogsOutWithCsrfToken(): void
+    {
+        $client = $this->getTestClient();
+        $em = $this->getEntityManager();
+        $user = $em->getRepository(User::class)->findOneByUsername('admin');
+        $user->setGoogleAuthenticatorSecret('26LDIHYGHNELOQEM');
+        $user->setGoogleAuthenticator(true);
+        $em->flush();
+
+        $this->logInAsUsingHttp('admin');
+        $crawler = $client->request('GET', '/2fa');
+        $this->assertSelectorExists('button[form="two-factor-logout"][data-shortcuts-target="logout"]');
+        $form = $crawler->filter('form#two-factor-logout')->form();
+        $this->assertSame('POST', $form->getMethod());
+        $this->assertNotEmpty($form->getPhpValues()['token']);
+
+        $client->submit($form);
+        $this->assertResponseRedirects();
+        $this->assertSame('/', parse_url($client->getResponse()->headers->get('Location') ?? '', \PHP_URL_PATH));
+
+        $client->request('GET', '/config');
+        $this->assertResponseRedirects();
+        $this->assertSame('/login', parse_url($client->getResponse()->headers->get('Location') ?? '', \PHP_URL_PATH));
     }
 
     public function testEnabledRegistration(): void
