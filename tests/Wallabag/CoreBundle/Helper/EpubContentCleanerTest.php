@@ -89,6 +89,49 @@ class EpubContentCleanerTest extends TestCase
         (new EpubContentCleaner($this->createMock(InstanceImageLocator::class), $downloadImages))->clean($this->createMock(EPub::class), '<img src="data:image/png;base64,AAAA"/>');
     }
 
+    public function testCleanStopsDownloadingImagesAfterTheDeadline()
+    {
+        $downloadImages = $this->createMock(DownloadImages::class);
+        $downloadImages->expects($this->never())->method('fetchImage');
+
+        $book = $this->createMock(EPub::class);
+        $book->expects($this->never())->method('addFile');
+
+        $result = (new EpubContentCleaner($this->createMock(InstanceImageLocator::class), $downloadImages))->clean(
+            $book,
+            '<img src="http://example.org/image.png"/>',
+            null,
+            microtime(true) - 1
+        );
+
+        $this->assertSame('<img src="http://example.org/image.png"/>', $result);
+    }
+
+    public function testCleanReusesDownloadedImagesAfterTheDeadline()
+    {
+        $deadline = microtime(true) + 0.2;
+
+        $downloadImages = $this->createMock(DownloadImages::class);
+        $downloadImages->expects($this->once())
+            ->method('fetchImage')
+            ->willReturnCallback(static function () {
+                usleep(300000);
+
+                return ['content' => 'image data', 'extension' => 'png', 'mimetype' => 'image/png'];
+            });
+
+        $fileName = 'images/' . sha1('http://example.org/1.png') . '.png';
+
+        $result = (new EpubContentCleaner($this->createMock(InstanceImageLocator::class), $downloadImages))->clean(
+            $this->createMock(EPub::class),
+            '<img src="http://example.org/1.png"/><img src="http://example.org/2.png"/><img src="http://example.org/1.png"/>',
+            null,
+            $deadline
+        );
+
+        $this->assertSame('<img src="' . $fileName . '"/><img src="http://example.org/2.png"/><img src="' . $fileName . '"/>', $result);
+    }
+
     public function testCleanDownloadsAtMostAGivenNumberOfImages()
     {
         $downloadImages = $this->createMock(DownloadImages::class);

@@ -7,6 +7,7 @@ use PHPePub\Core\EPub;
 class EpubContentCleaner
 {
     public const MAX_REMOTE_IMAGES = 100;
+    public const MAX_REMOTE_IMAGES_DURATION = 15;
 
     private $imageLocator;
     private $downloadImages;
@@ -22,7 +23,7 @@ class EpubContentCleaner
      * then the remote ones, downloaded with the protection against requests to private networks.
      * The other references are left untouched.
      */
-    public function clean(EPub $book, ?string $content, ?string $baseUrl = null): string
+    public function clean(EPub $book, ?string $content, ?string $baseUrl = null, ?float $remoteImagesDeadline = null): string
     {
         $document = new \DOMDocument();
         $previousErrors = libxml_use_internal_errors(true);
@@ -53,7 +54,7 @@ class EpubContentCleaner
                 }
 
                 if (!\array_key_exists($source, $remoteImages)) {
-                    if (self::MAX_REMOTE_IMAGES <= $remoteImagesTried) {
+                    if (self::MAX_REMOTE_IMAGES <= $remoteImagesTried || (null !== $remoteImagesDeadline && microtime(true) >= $remoteImagesDeadline)) {
                         continue;
                     }
 

@@ -190,6 +190,8 @@ class EntriesExport
          * Adding actual entries
          */
 
+        $remoteImagesDeadline = microtime(true) + EpubContentCleaner::MAX_REMOTE_IMAGES_DURATION;
+
         // set tags as subjects
         foreach ($this->entries as $entry) {
             ++$i;
@@ -233,7 +235,7 @@ class EntriesExport
                 '</dl>' .
                 $bookEnd;
             $book->addChapter("Entry {$i} of {$entryCount}", "{$filename}_cover.html", $titlepage, true, EPub::EXTERNAL_REF_IGNORE);
-            $chapter = $content_start . $this->contentCleaner->clean($book, $entry->getContent(), $entry->getUrl()) . $bookEnd;
+            $chapter = $content_start . $this->contentCleaner->clean($book, $entry->getContent(), $entry->getUrl(), $remoteImagesDeadline) . $bookEnd;
 
             $entryIds[] = $entry->getId();
             try {
