@@ -812,3 +812,7 @@ feeds:
     manual_mode: Manuell
     page_title: Feed-Abonnements
     stale: Dieser Feed konnte in den letzten zwei Tagen nicht erfolgreich aktualisiert werden.
+update:
+    available: wallabag %version% ist verfügbar.
+    security_banner: 'wallabag %version% behebt sicherheitsrelevante Fehler: aktualisiere deine Instanz so bald wie möglich.'
+    read_more: Lese die Versionshinweise
