@@ -128,7 +128,7 @@
 
                 <div class="mass-action-tags">
                     <button class="btn cyan darken-1 mass-action-button mass-action-button--tags" type="submit" form="form_mass_action" name="tag" title="{{ 'entry.list.add_tags'|trans }}" data-batch-edit-target="tagAction"><i class="material-icons">label</i></button>
-                    <input type="text" form="form_mass_action" class="mass-action-tags-input" name="tags" placeholder="{{ 'entry.list.mass_action_tags_input_placeholder'|trans }}" data-action="keydown.enter->batch-edit#tagSelection:prevent:stop" />
+                    <input type="text" form="form_mass_action" class="mass-action-tags-input" name="tags" placeholder="{{ 'entry.list.mass_action_tags_input_placeholder'|trans }}" autocomplete="off" data-controller="tag-autocomplete" data-tag-autocomplete-url-value="{{ path('tag_labels') }}" data-action="keydown.enter->batch-edit#tagSelection:prevent:stop focus->tag-autocomplete#load input->tag-autocomplete#suggest" />
                 </div>
             </div>
 

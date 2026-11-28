@@ -90,6 +90,24 @@ class TagRepository extends ServiceEntityRepository
     }
 
     /**
+     * Find the labels of all tags used by a user, sorted alphabetically.
+     *
+     * @param int $userId
+     *
+     * @return string[]
+     */
+    public function findAllLabelsByUser($userId)
+    {
+        $tags = $this->getQueryBuilderByUser($userId)
+            ->select('t.label')
+            ->orderBy('t.label')
+            ->getQuery()
+            ->getArrayResult();
+
+        return array_column($tags, 'label');
+    }
+
+    /**
      * Find all tags per user with nb entries.
      *
      * @param int $userId
