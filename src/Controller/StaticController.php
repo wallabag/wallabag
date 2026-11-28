@@ -3,6 +3,7 @@
 namespace Wallabag\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class StaticController extends AbstractController
@@ -45,6 +46,22 @@ class StaticController extends AbstractController
     {
         return $this->render(
             'Static/quickstart.html.twig',
+        );
+    }
+
+    /**
+     * OpenSearch description, used by browsers to add wallabag as a search engine.
+     *
+     * @see https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md
+     */
+    #[Route(path: '/opensearch.xml', name: 'opensearch', methods: ['GET'], defaults: ['_format' => 'xml'])]
+    #[IsGranted('PUBLIC_ACCESS')]
+    public function openSearchAction()
+    {
+        return $this->render(
+            'Static/opensearch.xml.twig',
+            [],
+            new Response('', 200, ['Content-Type' => 'application/opensearchdescription+xml']),
         );
     }
 }

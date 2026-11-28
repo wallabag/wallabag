@@ -31,6 +31,14 @@ Button ⑤ is for downloading articles from the current view.
 
 Button ⑥ is for showing the account menu.
 
+## Search from your browser
+
+wallabag can be added as a search engine to your browser, to search through your saved entries from the address bar.
+
+When you are on a wallabag page, your browser offers to add it: for example, in Firefox, right-click on the address bar and choose _Add "wallabag"_. In Chromium-based browsers, wallabag appears in the _Inactive shortcuts_ list of the search engine settings, where you can activate it.
+
+Searching from the browser looks for your search terms in the titles, contents, URLs and annotations of all your entries, whether they are unread or archived.
+
 ## Filter modal
 
 ![Filter modal](../../img/user/wallabag_interface_filter.png)

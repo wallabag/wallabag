@@ -3,6 +3,11 @@
 {% set current_route = app.request.attributes.get('_route') %}
 {% set current_route_from_query_params = app.request.query.get('currentRoute') %}
 
+{% block head %}
+    {{ parent() }}
+    <link rel="search" type="application/opensearchdescription+xml" title="wallabag" href="{{ path('opensearch') }}">
+{% endblock %}
+
 {% block css %}
     {{ parent() }}
 
