@@ -241,18 +241,24 @@ wallabag:user:delete
 
 This command deletes a user and all their data, such as their entries, annotations and settings. This cannot be undone.
 
-It asks for confirmation before deleting the user. Use `--no-interaction` (or `-n`) to skip it, for example in scripts.
+It asks for confirmation before deleting the user. Use `--force` to skip it, for example in scripts: when run with `--no-interaction` (or `-n`) but without `--force`, it deletes nothing and exits with an error.
+
+Deleting an admin (a user with the `ROLE_ADMIN` or `ROLE_SUPER_ADMIN` role) also requires `--force-admin`. It does not skip the confirmation, use `--force` for that.
 
 Like deleting a user from the users management page, it does not remove the images downloaded for their entries: run `wallabag:clean-downloaded-images` afterwards to remove them.
 
 Usage:
 
 ```
-wallabag:user:delete <username>
+wallabag:user:delete [--force] [--force-admin] <username>
 ```
 
 Arguments:
  - username: User to delete.
+
+Options:
+ - `--force`: Delete the user without asking for confirmation
+ - `--force-admin`: Allow deleting a user who is an admin
 
 
 wallabag:user:show

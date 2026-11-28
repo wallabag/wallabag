@@ -41,7 +41,7 @@ class DeleteUserCommandTest extends WallabagKernelTestCase
         $this->assertStringContainsString('User "unknown" not found', $tester->getDisplay());
     }
 
-    public function testRunDeleteUserCommandNonInteractive(): void
+    public function testRunDeleteUserCommandNonInteractiveWithoutForce(): void
     {
         [$userId, $entryId] = $this->createUserWithEntry('wallace');
 
@@ -52,6 +52,32 @@ class DeleteUserCommandTest extends WallabagKernelTestCase
         $tester = new CommandTester($command);
         $tester->execute([
             'username' => 'wallace',
+        ], [
+            'interactive' => false,
+        ]);
+
+        $this->assertSame(1, $tester->getStatusCode());
+        $this->assertStringContainsString('User "wallace" has not been deleted.', $tester->getDisplay());
+
+        $em = $this->getEntityManager();
+        $em->clear();
+
+        $this->assertNotNull($em->getRepository(User::class)->find($userId));
+        $this->assertNotNull($em->getRepository(Entry::class)->find($entryId));
+    }
+
+    public function testRunDeleteUserCommandWithForce(): void
+    {
+        [$userId, $entryId] = $this->createUserWithEntry('wallace');
+
+        $application = $this->createApplication();
+
+        $command = $application->find('wallabag:user:delete');
+
+        $tester = new CommandTester($command);
+        $tester->execute([
+            'username' => 'wallace',
+            '--force' => true,
         ], [
             'interactive' => false,
         ]);
@@ -115,10 +141,63 @@ class DeleteUserCommandTest extends WallabagKernelTestCase
         $this->assertNotNull($em->getRepository(Entry::class)->find($entryId));
     }
 
+    public function testRunDeleteUserCommandForAdminWithoutForceAdmin(): void
+    {
+        [$userId] = $this->createUserWithEntry('wallace', ['ROLE_SUPER_ADMIN']);
+
+        $application = $this->createApplication();
+
+        $command = $application->find('wallabag:user:delete');
+
+        $tester = new CommandTester($command);
+        $tester->execute([
+            'username' => 'wallace',
+            '--force' => true,
+        ], [
+            'interactive' => false,
+        ]);
+
+        $this->assertSame(1, $tester->getStatusCode());
+        $this->assertStringContainsString('User "wallace" is an admin', $tester->getDisplay());
+
+        $em = $this->getEntityManager();
+        $em->clear();
+
+        $this->assertNotNull($em->getRepository(User::class)->find($userId));
+    }
+
+    public function testRunDeleteUserCommandForAdminWithForceAdmin(): void
+    {
+        [$userId] = $this->createUserWithEntry('wallace', ['ROLE_SUPER_ADMIN']);
+
+        $application = $this->createApplication();
+
+        $command = $application->find('wallabag:user:delete');
+
+        $tester = new CommandTester($command);
+        $tester->execute([
+            'username' => 'wallace',
+            '--force' => true,
+            '--force-admin' => true,
+        ], [
+            'interactive' => false,
+        ]);
+
+        $this->assertSame(0, $tester->getStatusCode());
+        $this->assertStringContainsString('User "wallace" deleted.', $tester->getDisplay());
+
+        $em = $this->getEntityManager();
+        $em->clear();
+
+        $this->assertNull($em->getRepository(User::class)->find($userId));
+    }
+
     /**
+     * @param string[] $roles
+     *
      * @return array{int, int} The ids of the created user and entry
      */
-    private function createUserWithEntry(string $username): array
+    private function createUserWithEntry(string $username, array $roles = []): array
     {
         $em = $this->getEntityManager();
 
@@ -128,6 +207,7 @@ class DeleteUserCommandTest extends WallabagKernelTestCase
         $user->setUsername($username);
         $user->setPlainPassword($username);
         $user->setEnabled(true);
+        $user->setRoles($roles);
         $em->persist($user);
 
         $config = new Config($user);
