@@ -1051,6 +1051,48 @@ class ContentProxyTest extends TestCase
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
+    /**
+     * @dataProvider dataForProvidedInvalidUTF8Title
+     */
+    public function testProvidedInvalidUTF8TitleRemoveInvalidCharacter(string $fetch): void
+    {
+        $graby = $this->getMockBuilder(Graby::class)
+            ->onlyMethods(['fetchContent'])
+            ->getMock();
+        $fetchContent = $graby->expects('disabled' === $fetch ? $this->never() : $this->once())->method('fetchContent');
+
+        if ('throws' === $fetch) {
+            $fetchContent->willThrowException(new \RuntimeException('transport failed'));
+        } elseif ('error' === $fetch) {
+            $fetchContent->willReturn(['html' => $this->fetchingErrorMessage]);
+        } else {
+            $fetchContent->willReturn([
+                'html' => '<p>Fetched article</p>',
+                'title' => 'Fetched title',
+                'headers' => ['content-type' => 'text/html'],
+            ]);
+        }
+
+        $proxy = new ContentProxy($graby, $this->getTaggerMock(), $this->getRuleBasedIgnoreOriginProcessorMock(), $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+
+        // Title given by an import (e.g. a Pocket CSV export): 'a€b' (61;80;62) in WINDOWS-1252, 80 is an invalid UTF-8 character
+        $proxy->updateEntry($entry, 'https://example.com/article', [
+            'title' => $this->hexToStr('61' . '80' . '62'),
+        ], 'disabled' === $fetch);
+
+        // 'ab' (61;62) because all invalid UTF-8 character (like 80) are removed
+        $this->assertSame('61' . '62', $this->strToHex($entry->getTitle()));
+    }
+
+    public static function dataForProvidedInvalidUTF8Title(): iterable
+    {
+        yield 'content update disabled' => ['disabled'];
+        yield 'fetch throws' => ['throws'];
+        yield 'fetch returns error' => ['error'];
+        yield 'fetch succeeds' => ['success'];
+    }
+
     public function testPdfWithUTF16BETitleConvertToUTF8(): void
     {
         // See http://graphemica.com for more info about the characters

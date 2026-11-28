@@ -280,7 +280,8 @@ class ContentProxy
         $this->setEntryDomainName($entry);
 
         if (!empty($content['title'])) {
-            $entry->setTitle($content['title']);
+            // A title given by the caller (e.g. an import) wins over the fetched one and isn't sanitized yet
+            $entry->setTitle($this->sanitizeUTF8Text($content['title']));
         }
 
         if (empty($content['html']) || $this->fetchingErrorMessage === $content['html']) {
